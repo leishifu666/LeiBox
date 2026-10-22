@@ -1,0 +1,85 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# misc
+/skills
+/prompts
+AGENTS.md
+/PLAN.md
+/COMPONENT-IDEAS.md
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+/skills
+/prompts
+
+# cloudflare / opennext
+.open-next/
+.wrangler/
+.dev.vars*
+cloudflare-env.d.ts
+
+
+# Raw showcase video sources (compressed webm copies live in public/assets/videos)
+/assets-src/
+
+# generated shadcn registry (built by scripts/build-registry.mts on prebuild)
+/public/r/
+
+# Local research captures, archives, logs and host-specific audit helpers
+/docs/research/
+/docs/design-references/
+/docs/qa-localization/
+/scripts/audit-*.cjs
+/scripts/inspect-initial.cjs
+/scripts/import-source.mjs
+/scripts/download-assets.mjs
+/scripts/download-browser-assets.cjs
+/scripts/cache-demo-assets.mjs
+/scripts/cache-avatar.cjs
+/scripts/compare-evidence.cjs
+/scripts/build-behavior-manifest.cjs
+/scripts/extract-dom-styles.cjs
+/scripts/localize-root.cjs
+/scripts/i18n-*.cjs
+/scripts/localize-*.cjs
+*.log

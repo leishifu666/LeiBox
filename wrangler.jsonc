@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "canvas-ui",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2025-12-01",
+  "vars": {
+    // When "true" the Worker refuses signups unless TURNSTILE_SECRET_KEY is set
+    // and the request carries a valid token. Set to "false" only for local work.
+    "TURNSTILE_ENABLED": "true",
+    "ALLOWED_ORIGINS": "https://canvasui.dev,https://www.canvasui.dev",
+    "RESEND_SEGMENT_ID": "137ef7cc-e20d-4993-a193-0ffbac591a2c"
+},
+  "ratelimits": [
+    {
+      "name": "SUBSCRIBE_IP_LIMIT",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 }
+    },
+    {
+      "name": "SUBSCRIBE_GLOBAL_LIMIT",
+      "namespace_id": "1002",
+      "simple": { "limit": 60, "period": 60 }
+    }
+  ],
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
+  }
+}

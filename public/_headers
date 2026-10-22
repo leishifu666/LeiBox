@@ -1,0 +1,8 @@
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable
+
+/assets/*
+  Cache-Control: public,max-age=86400,stale-while-revalidate=604800
+
+/r/*
+  Cache-Control: public,max-age=3600,stale-while-revalidate=86400

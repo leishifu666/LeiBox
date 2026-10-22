@@ -1,0 +1,156 @@
+/** @jsxImportSource preact */
+
+import { useEffect, useRef, useState, useCallback } from "preact/hooks";
+import type { ComponentChildren, JSX } from "preact";
+
+import {
+  createPeel,
+  supportsHtmlInCanvas,
+  type PeelInstance,
+  type PeelOptions,
+} from "./PeelVanilla";
+
+function useSyncExternalStore<T>(
+  subscribe: (onStoreChange: () => void) => () => void,
+  getSnapshot: () => T,
+): T {
+  const [value, setValue] = useState(getSnapshot);
+  useEffect(() => {
+    const unsubscribe = subscribe(() => setValue(getSnapshot()));
+    return unsubscribe;
+  }, [subscribe, getSnapshot]);
+  return value;
+}
+
+export interface PeelProps extends PeelOptions {
+  /** The content that peels away. */
+  children: ComponentChildren;
+  /** The content revealed underneath the peel. */
+  under?: ComponentChildren;
+  className?: string;
+  style?: JSX.CSSProperties;
+}
+
+const emptySubscribe = () => () => {};
+
+export function Peel({
+  children,
+  under,
+  className,
+  style,
+  ...options
+}: PeelProps) {
+  const sourceRef = useRef<HTMLCanvasElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const outputRef = useRef<HTMLCanvasElement>(null);
+  const underRef = useRef<HTMLDivElement>(null);
+  const instanceRef = useRef<PeelInstance | null>(null);
+  const [initialOptions] = useState(options);
+  const [failed, setFailed] = useState(false);
+
+  const supported = useSyncExternalStore(
+    emptySubscribe,
+    supportsHtmlInCanvas,
+  );
+  const native = supported && !failed;
+
+  useEffect(() => {
+    const source = sourceRef.current;
+    const content = contentRef.current;
+    const output = outputRef.current;
+    if (!source || !content || !output) return;
+    instanceRef.current = createPeel(
+      { source, content, output, under: underRef.current ?? undefined },
+      initialOptions,
+    );
+    if (native && !instanceRef.current) setFailed(true);
+    return () => {
+      instanceRef.current?.destroy();
+      instanceRef.current = null;
+    };
+  }, [initialOptions, native]);
+
+  useEffect(() => {
+    instanceRef.current?.setOptions(options);
+  });
+
+  const sourceCallbackRef = useCallback((el: HTMLCanvasElement | null) => {
+    sourceRef.current = el;
+    if (el) el.setAttribute("layoutsubtree", "true");
+  }, []);
+
+  return (
+    <div className={className} style={{ position: "relative", ...style }}>
+      {native ? (
+        <div
+          ref={underRef}
+          style={{
+            position: "absolute",
+            inset: 0,
+            overflow: "hidden",
+            visibility: "hidden",
+          }}
+        >
+          {under}
+        </div>
+      ) : null}
+      <canvas
+        ref={sourceCallbackRef}
+        style={
+          native
+            ? {
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+              }
+            : { display: "none" }
+        }
+      >
+        {native ? (
+          <div
+            ref={contentRef}
+            style={{
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              overflow: "hidden",
+              pointerEvents: "auto",
+            }}
+          >
+            {children}
+          </div>
+        ) : null}
+      </canvas>
+      {!native ? (
+        <div
+          ref={contentRef}
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+          }}
+        >
+          {children}
+        </div>
+      ) : null}
+      <canvas
+        ref={outputRef}
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+        }}
+      />
+    </div>
+  );
+}
+
+export type { PeelInstance, PeelOptions };
+
+export default Peel;
