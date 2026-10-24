@@ -55,11 +55,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leishifu666/canvas-ui-local.git"
+    "url": "git+https://github.com/leishifu666/LeiBox.git"
   },
-  "homepage": "https://github.com/leishifu666/canvas-ui-local#readme",
+  "homepage": "https://github.com/leishifu666/LeiBox#readme",
   "bugs": {
-    "url": "https://github.com/leishifu666/canvas-ui-local/issues"
+    "url": "https://github.com/leishifu666/LeiBox/issues"
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "browserslist": [
