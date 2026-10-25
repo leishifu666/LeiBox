@@ -11,6 +11,7 @@ import { NewsletterSignup } from "@/components/common/newsletter-signup";
 import { SearchButton, SearchDialog } from "@/components/common/site-search";
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { LanguageToggle } from "@/components/common/language-toggle";
+import { ScrollHideHeader } from "@/components/common/scroll-hide-header";
 
 export default function ShellLayout({
   children,
@@ -19,7 +20,7 @@ export default function ShellLayout({
     <div className="flex min-h-svh flex-col">
       <DocsSidebar />
 
-      <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border/40 bg-background/70 pt-5 pb-4 pl-5 pr-[calc(1.25rem+var(--demo-sbw,0px))] backdrop-blur-xl backdrop-saturate-150 [view-transition-name:docs-mobile-header] lg:hidden">
+      <ScrollHideHeader className="sticky top-0 z-40 flex items-center justify-between border-b border-border/40 bg-background/70 pt-5 pb-4 pl-5 pr-[calc(1.25rem+var(--demo-sbw,0px))] backdrop-blur-xl backdrop-saturate-150 [view-transition-name:docs-mobile-header] lg:hidden">
         <Link href="/" aria-label="Canvas UI home">
           <Image
             src="/logo.svg"
@@ -38,16 +39,16 @@ export default function ShellLayout({
           <GitHubStars />
           <DocsMobileNav />
         </div>
-      </div>
+      </ScrollHideHeader>
 
-      <div className="fixed top-4 right-[calc(1rem+var(--demo-sbw,0px))] z-40 hidden items-center gap-2 rounded-full border border-border/60 bg-background/70 p-1.5 backdrop-blur-xl backdrop-saturate-150 [view-transition-name:docs-controls] lg:flex">
+      <ScrollHideHeader className="fixed top-4 right-[calc(1rem+var(--demo-sbw,0px))] z-40 hidden items-center gap-2 rounded-full border border-border/60 bg-background/70 p-1.5 backdrop-blur-xl backdrop-saturate-150 [view-transition-name:docs-controls] lg:flex">
         <LanguageToggle />
         <NewsletterNavButton mode="scroll" className="grid xl:hidden" />
         <NewsletterNavButton />
         <SearchButton />
         <ThemeToggle />
         <GitHubStars />
-      </div>
+      </ScrollHideHeader>
 
       <SearchDialog />
 

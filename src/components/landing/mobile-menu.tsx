@@ -3,7 +3,7 @@
 import { T, useLanguage } from "@/components/common/language-provider";
 
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
@@ -18,10 +18,34 @@ const links = [
 export function MobileMenu() {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        buttonRef.current?.focus({ preventScroll: true });
+      }
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !ref.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [open]);
 
   return (
-    <div className="sm:hidden">
+    <div ref={ref} className="sm:hidden">
       <button
+        ref={buttonRef}
         type="button"
         aria-label={t(open ? "Close menu" : "Open menu")}
         aria-expanded={open}
@@ -45,6 +69,8 @@ export function MobileMenu() {
       </button>
 
       <div
+        inert={!open}
+        aria-hidden={!open}
         className={cn(
           "absolute inset-x-0 top-full border-b border-border/60 bg-background shadow-lg shadow-black/5 transition-[opacity,transform] [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none dark:shadow-black/20",
           open

@@ -7,6 +7,7 @@ import { SiteLogo } from "@/components/common/site-logo";
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { LanguageToggle } from "@/components/common/language-toggle";
 import { T } from "@/components/common/language-provider";
+import { ScrollHideHeader } from "@/components/common/scroll-hide-header";
 
 const links = [
   { href: "/docs", label: "Docs" },
@@ -16,7 +17,8 @@ const links = [
 
 export function Navbar() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
+    <>
+    <ScrollHideHeader className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
       <nav
         aria-label="Main"
         className="mx-auto grid h-14 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8"
@@ -51,7 +53,8 @@ export function Navbar() {
         </div>
       </nav>
 
-      <SearchDialog />
-    </header>
+    </ScrollHideHeader>
+    <SearchDialog />
+    </>
   );
 }
