@@ -15,7 +15,7 @@ import {
 } from "react";
 
 import { cn } from "@/lib/utils";
-import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
 let searchOpen = false;
 let searchTrigger: HTMLElement | null = null;
 const listeners = new Set<() => void>();
@@ -45,11 +45,11 @@ interface SearchEntry {
 }
 
 const ENTRIES: SearchEntry[] = [
-  ...INTERACTION_COMPONENTS.map((component) => ({
+  ...COMPONENT_CATALOG.map((component) => ({
     href: component.href,
     label: component.name,
     section: "Components",
-    hint: component.keywords,
+    hint: component.kind === "interaction" ? component.keywords : component.description,
     suggested: true,
   })),
   {

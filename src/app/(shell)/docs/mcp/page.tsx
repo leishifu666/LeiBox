@@ -6,7 +6,7 @@ import { CodeBlock } from "@/components/docs/code-block";
 import { CopyButton } from "@/components/docs/copy-button";
 import { highlight } from "@/components/docs/highlight";
 import { Footer } from "@/components/landing/footer";
-import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { LEIBOX_SKILL_INSTALL_COMMAND } from "@/lib/leibox-skill";
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ Install the Skill in the AI client you use. Then ask it to search the live LeiBo
 
 Example: ${EXAMPLE}
 
-Current collection: ${COMPONENT_CATALOG.length} components. The Skill fetches /ai/catalog.json for every query, so new published entries are available without reinstalling the Skill.
+Current collection: ${INTERACTION_COMPONENTS.length} components. The Skill fetches /ai/catalog.json for every query, so new published entries are available without reinstalling the Skill.
 
 ${COMMANDS}
 
@@ -52,7 +52,7 @@ export default async function AiIntegrationPage() {
         <blockquote><T>Use LeiBox to find a glass folder component and integrate its React source into my current page.</T></blockquote>
         <p><T>The Skill reads the live catalog every time. Newly published components become searchable without reinstalling it.</T></p>
         <h2><T>The complete collection</T></h2>
-        <p><strong>{COMPONENT_CATALOG.length}</strong> <T>components are currently searchable, with six framework versions where offered.</T></p>
+        <p><strong>{INTERACTION_COMPONENTS.length}</strong> <T>components are currently searchable, with six framework versions where offered.</T></p>
         <ul>
           <li><a href="/ai/catalog.json"><code>/ai/catalog.json</code></a> — <T>Searchable component metadata</T></li>
           <li><a href="/ai/components/glass-folder.json"><code>/ai/components/glass-folder.json</code></a> — <T>Example component detail as JSON</T></li>

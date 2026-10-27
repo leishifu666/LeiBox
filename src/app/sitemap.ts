@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
+import { COMPONENTS } from "@/data/components";
 import { SITE_URL } from "@/lib/site-url";
 
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
+  ...COMPONENTS.map(entry => ({path: entry.href, priority: 0.8})),
   { path: "/docs/animations/collection-layout-morph", priority: 0.8 },
   { path: "/docs/animations/brand-poster-cards", priority: 0.8 },
   { path: "/docs/animations/dot-matrix-trio", priority: 0.8 },

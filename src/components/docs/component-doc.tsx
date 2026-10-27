@@ -13,7 +13,6 @@ import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import type { MotionPackageRef } from "@/lib/doc-asset-types";
 import { getDocAssets } from "@/lib/doc-assets";
 import { MotionPrompt } from "@/components/docs/motion-framework-tabs";
-import { LearningNotice } from "@/components/common/learning-notice";
 import { cn } from "@/lib/utils";
 
 export interface ComponentDocProps {
@@ -101,7 +100,6 @@ export async function ComponentDoc({
         </section>
       ) : null}
 
-      <LearningNotice className="mt-6 border-l-2 border-border pl-4" />
       {beforeInstall}
 
       <section className="mt-8" aria-label="Installation">

@@ -14,6 +14,7 @@ export function PreviewVideo({
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const isImage = /\.(?:png|webp|jpe?g)(?:\?|$)/i.test(src);
 
   useEffect(() => {
     const video = ref.current;
@@ -90,6 +91,10 @@ export function PreviewVideo({
     };
   }, [src]);
 
+  if (isImage) return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt="" loading="lazy" className={className} />
+  );
   return (
     <video
       ref={ref}

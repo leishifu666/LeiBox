@@ -20,6 +20,9 @@ const rawTranslations: Readonly<Record<string, string>> = {
   ...privacyTranslations,
   ...copyrightTranslations,
   ...studyTranslations,
+  "This local demo uses the original effect with LeiBox's selected background.": "本地演示保留原有效果，背景替换为 LeiBox 选定的画面。",
+  "Source code and license are available from the original author.": "源码与许可说明请查看原作者页面。",
+  "Visit original author": "查看原作者",
 };
 const entities: Record<string, string> = { apos: "'", quot: '"', amp: "&", lt: "<", gt: ">", nbsp: " ", lsquo: "‘", rsquo: "’", ldquo: "“", rdquo: "”", middot: "·", larr: "←", rarr: "→", ndash: "–", mdash: "—" };
 export function normalizeCopy(text: string): string {

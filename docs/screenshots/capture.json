@@ -2,8 +2,8 @@
   "captureDate": "2026-10-28",
   "timezone": "Asia/Shanghai",
   "base": "http://127.0.0.1:3000",
-  "baseCommit": "6c12daf22c6ac308440b0dafa04f421e80170cc4",
-  "version": "Working tree after retiring the legacy effect collection and adding learning-use notices.",
+  "baseCommit": "e84cbb6fac917b78575217d8fbd14d805532db9c",
+  "version": "Working tree with nine restored local original effects, selected painting backgrounds and learning-use notices.",
   "viewport": {
     "width": 1440,
     "height": 1100
@@ -17,22 +17,22 @@
       "route": "/",
       "title": "LeiBox — UI inspiration and component collection",
       "filename": "leibox-home.png",
-      "sha256": "e8ebb48008188245c34d512c1932a47887a32a7ba61aaf1feb7ac5dc26341518",
-      "bytes": 318528
+      "sha256": "8bdab920d071c9b48859985b5951e2ba0d20c1ef3ca99979f1a598c1ed2ec6f7",
+      "bytes": 318470
     },
     {
       "route": "/components",
       "title": "Components | LeiBox",
       "filename": "leibox-components.png",
-      "sha256": "1c4dcb0ba70edea5f805e2d23e393fda752b317c0be1aa080f808eab52d7b545",
-      "bytes": 403651
+      "sha256": "7840e8016370f829fdd7c054bba8f51bbbf13d118ec440f41a55693e2c3a8dd0",
+      "bytes": 407722
     },
     {
       "route": "/docs/animations/glass-folder",
       "title": "玻璃文件夹展开 | LeiBox",
       "filename": "leibox-glass-folder.png",
-      "sha256": "9daf9e9029d884b54f0a33acb5399edfb5e586bc9afb36f21ee9c3db7f2eded9",
-      "bytes": 264063
+      "sha256": "967ff5e4c6abe596738e8d42866d01fb24d996a22af20a43c4e5e0d7bfd492c9",
+      "bytes": 275905
     }
   ]
 }

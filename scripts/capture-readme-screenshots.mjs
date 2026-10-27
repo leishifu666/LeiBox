@@ -35,7 +35,7 @@ try {
 const manifest = {
   captureDate: '2026-10-28', timezone: 'Asia/Shanghai', base,
   baseCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
-  version: 'Working tree after retiring the legacy effect collection and adding learning-use notices.',
+  version: 'Working tree with nine restored local original effects, selected painting backgrounds and learning-use notices.',
   viewport: { width: 1440, height: 1100 }, locale: 'zh', theme: 'light', reducedMotion: 'reduce',
   method: 'Direct Playwright screenshots of running pages. No image generation, compositing, DOM substitution or injected screenshot CSS.',
   records,

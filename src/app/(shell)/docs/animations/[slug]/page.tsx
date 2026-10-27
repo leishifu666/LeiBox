@@ -11,7 +11,7 @@ import { interactionTranslations } from "@/lib/i18n/interactions";
 import { DEEP_AGENT_API, DEEP_AGENT_COMPOSER_API } from "@/data/deep-agent.mjs";
 
 type Props = { params: Promise<{ slug: string }> };
-export function generateStaticParams() { return INTERACTION_COMPONENTS.filter(entry=>entry.sourceFile).map(({slug})=>({slug})); }
+export function generateStaticParams() { return INTERACTION_COMPONENTS.filter(entry=>entry.sourceFile&&entry.href.startsWith("/docs/animations/")).map(({slug})=>({slug})); }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const {slug}=await params;
   const entry=INTERACTION_COMPONENTS.find(item=>item.slug===slug&&item.sourceFile);

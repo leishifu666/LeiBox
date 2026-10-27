@@ -1,3 +1,4 @@
+import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { getDocAssets } from "@/lib/doc-assets";
 import { MotionCodeTabs, MotionInstallTabs, MotionUsage } from "@/components/docs/motion-framework-tabs";
 import type { ComponentDocProps } from "@/components/docs/component-doc";
@@ -8,7 +9,7 @@ export async function getMotionDocProps(slug: string): Promise<Pick<ComponentDoc
   const first = packages[0];
   return {
     variants: [],
-    copyContent: { href: slug === "share-invite" || slug === "otp-verification" ? `/docs/components/${slug}` : `/docs/animations/${slug}`, prompt: first.prompt, code: "", codeLabel: "Copy full code bundle", markdown: "", bundleUrl: first.bundleUrl },
+    copyContent: { href: INTERACTION_COMPONENTS.find(entry => entry.slug === slug)!.href, prompt: first.prompt, code: "", codeLabel: "Copy full code bundle", markdown: "", bundleUrl: first.bundleUrl },
     motionPackages: packages,
     installation: <MotionInstallTabs packages={packages} />,
     code: <MotionCodeTabs packages={packages} />,
