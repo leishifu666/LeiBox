@@ -1,13 +1,12 @@
 {
   "captureDate": "2026-10-28",
+  "capturedAt": "2026-10-28T03:46:10.198+08:00",
   "timezone": "Asia/Shanghai",
   "base": "http://127.0.0.1:3000",
-  "baseCommit": "e84cbb6fac917b78575217d8fbd14d805532db9c",
-  "version": "Working tree with nine restored local original effects, selected painting backgrounds and learning-use notices.",
-  "viewport": {
-    "width": 1440,
-    "height": 1100
-  },
+  "baseCommit": "cd044fce9b75e2aa649d213266db1487354d7b33",
+  "workingTreeDirty": true,
+  "buildId": "zH0TuFhfW26rex1UG4woI",
+  "version": "Current locally built working tree. Includes uncommitted local changes; does not represent the deployed website.",
   "locale": "zh",
   "theme": "light",
   "reducedMotion": "reduce",
@@ -15,24 +14,55 @@
   "records": [
     {
       "route": "/",
+      "label": "首页",
+      "state": "首页首屏与组件预览",
       "title": "LeiBox — UI inspiration and component collection",
       "filename": "leibox-home.png",
-      "sha256": "8bdab920d071c9b48859985b5951e2ba0d20c1ef3ca99979f1a598c1ed2ec6f7",
-      "bytes": 318470
+      "viewport": {
+        "width": 1440,
+        "height": 1280
+      },
+      "sha256": "114055a90bd9e9bcee644c867f8a8ba01e6447f94760ce07ca98bd320d78cf24",
+      "bytes": 408625
     },
     {
       "route": "/components",
+      "label": "组件浏览",
+      "state": "当前 39 个组件的列表",
       "title": "Components | LeiBox",
       "filename": "leibox-components.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
       "sha256": "7840e8016370f829fdd7c054bba8f51bbbf13d118ec440f41a55693e2c3a8dd0",
       "bytes": 407722
     },
     {
       "route": "/docs/animations/glass-folder",
+      "label": "玻璃文件夹交互",
+      "state": "键盘打开 My Files 文件夹",
       "title": "玻璃文件夹展开 | LeiBox",
       "filename": "leibox-glass-folder.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
       "sha256": "967ff5e4c6abe596738e8d42866d01fb24d996a22af20a43c4e5e0d7bfd492c9",
       "bytes": 275905
+    },
+    {
+      "route": "/docs/components/glass-object",
+      "label": "玻璃物体与自定义背景",
+      "state": "模型加载完成，使用选定的雪山湖泊背景",
+      "title": "Glass Object | LeiBox",
+      "filename": "leibox-glass-object.png",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "sha256": "6a9555a5253cd766368ea4a7764a937ac2cb9ca72e2f76a3be75fdef3fadfca9",
+      "bytes": 793231
     }
   ]
 }
