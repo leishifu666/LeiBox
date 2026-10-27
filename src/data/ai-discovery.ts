@@ -9,6 +9,12 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "fluid-tooltip": {
+    category: "navigation", useCases: ["侧栏导航提示", "头像提示气泡", "fluid navigation tooltip"],
+    searchTerms: ["流体", "提示", "气泡", "胶囊", "导航", "头像", "logo", "fluid", "tooltip", "sidebar", "hover"],
+    visualTags: ["fluid", "capsule", "navigation"], interactions: ["hover", "focus", "click", "keyboard"],
+    caveat: "默认仅切换本地选中项，通过 onSelect 接入导航；Logo 与提示文字可替换。",
+  },
   "spider-music-player": {
     category: "media", useCases: ["专辑封面连续切换", "趣味音乐播放器", "animated album queue"],
     searchTerms: ["蜘蛛", "蛛丝", "结网", "音乐", "专辑", "封面", "切歌", "队列", "spider", "music", "album", "player", "queue"],

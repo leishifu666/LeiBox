@@ -11,10 +11,8 @@ import { LogoTransitionProvider } from "@/components/common/logo-transition-prov
 import { ComponentEntryTransition } from "@/components/common/component-entry-transition";
 import { SITE_URL } from "@/lib/site-url";
 const DESCRIPTION =
-  "LeiBox is a personal collection of UI inspiration, creative components, and practical design references for people and AI assistants.";
+  "LeiBox is a personal collection of UI inspiration, interaction experiments and design references for learning and research.";
 
-const ORIGIN_TRIAL_TOKEN =
-  process.env.NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN ?? "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,11 +87,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
-      {ORIGIN_TRIAL_TOKEN ? (
-        <head>
-          <meta httpEquiv="origin-trial" content={ORIGIN_TRIAL_TOKEN} />
-        </head>
-      ) : null}
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>
           <ThemeFavicon />

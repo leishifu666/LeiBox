@@ -77,7 +77,7 @@ async function readJson(url) {
 
 function sourceUrl(value, origin) {
   const url = new URL(value, origin);
-  if (!['http:', 'https:'].includes(url.protocol) || ![new URL(origin).origin, 'https://canvasui.dev'].includes(url.origin)) {
+  if (!['http:', 'https:'].includes(url.protocol) || url.origin !== new URL(origin).origin) {
     throw new SkillError('INVALID_SOURCE', 'Component source must be served by LeiBox or its declared upstream provider.');
   }
   return url.href;

@@ -4,7 +4,6 @@ export function optimizedImage(src: string, sizes = "(min-width: 1024px) 340px, 
   const image = (media.images as Record<string, { src: string; srcSet: string }>)[src];
   return image ? { ...image, sizes } : { src };
 }
-export const heroVideo = media.video;
 export function previewPoster(src: string) {
   return (media.previews as Record<string, string>)[src];
 }

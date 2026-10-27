@@ -41,12 +41,6 @@ export function DemoPanelHeader({ icon, title, children }: { icon: ReactNode; ti
   </div>;
 }
 
-export function GlassPreview({ className = "" }: { className?: string }) {
-  // This frame comes from the project's existing Glass demonstration, not a new mock effect.
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src="/landing/panels/glass.webp" alt="" draggable={false} loading="lazy" width={640} height={400} className={className} />;
-}
-
 export function DemoCommand({ command, label = "shadcn CLI", className = "" }: { command: string; label?: string; className?: string }) {
   const split = command.lastIndexOf(" ");
   return <div className={`demo-command ${className}`}>

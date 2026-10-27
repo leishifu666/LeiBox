@@ -1,86 +1,17 @@
 "use client";
-
 import { T as TranslatedText, useLanguage } from "@/components/common/language-provider";
-
-
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { play } from "cuelume";
-import {
-  Check,
-  ChevronDown,
-  FileText,
-  Sparkles,
-  SquareCode,
-} from "lucide-react";
-import {
-  useEffect,
-  useRef,
-  useState,
-  type ComponentType,
-  type SVGProps,
-} from "react";
-
-import type { ApiProp } from "@/components/docs/api-reference";
-import type { CodeAsset, CodeContent, MotionPackageRef } from "@/lib/doc-asset-types";
+import { Check, ChevronDown, FileText, Sparkles, SquareCode } from "lucide-react";
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
+import type { CodeContent, MotionPackageRef } from "@/lib/doc-asset-types";
 import { loadDocAsset } from "@/lib/load-doc-asset";
 import { copyText as writeCopyText } from "@/lib/copy-text";
-import {
-  buildConfiguredJsx,
-  getDemoSnippet,
-} from "@/components/demos/snippet-store";
-import {
-  buildInstallCommand,
-  FRAMEWORK_IDS,
-  MANAGER_IDS,
-} from "@/components/docs/install-tabs";
-import { resolveFramework, useRenderer } from "@/components/docs/renderer";
 import { usePreference } from "@/hooks/use-preference";
 import { cn } from "@/lib/utils";
 import { siteUrl } from "@/lib/site-url";
-
-export interface StandaloneCopyContent {
-  href: string;
-  prompt: string;
-  code: string;
-  codeLabel: string;
-  markdown: string;
-  bundleUrl?: string;
-}
-
-interface CopyMenuProps {
-  title: string;
-  description: string;
-  installItem: string;
-  variants: CodeAsset[];
-  /** WebGPU (vgpu) sources; empty when the component has no WebGPU build. */
-  webgpuVariants?: CodeAsset[];
-  apiReference?: ApiProp[];
-  dependencies?: string[];
-  devDependencies?: string[];
-  /** Dependencies of the WebGPU build (includes vgpu). */
-  webgpuDependencies?: string[];
-  webgpuDevDependencies?: string[];
-  demoSourceUrl?: string;
-  standalone?: StandaloneCopyContent;
-  motionPackages?: MotionPackageRef[];
-}
-
-const LANG_BY_ID: Record<string, string> = {
-  react: "tsx",
-  solid: "tsx",
-  preact: "tsx",
-  vue: "vue",
-  svelte: "svelte",
-  vanilla: "ts",
-};
-
-const DEP_COMMANDS: Record<string, { install: string; dev: string }> = {
-  npm: { install: "npm install", dev: "npm install -D" },
-  pnpm: { install: "pnpm add", dev: "pnpm add -D" },
-  yarn: { install: "yarn add", dev: "yarn add -D" },
-  bun: { install: "bun add", dev: "bun add -d" },
-};
-
+export interface StandaloneCopyContent { href: string; prompt: string; code: string; codeLabel: string; markdown: string; bundleUrl?: string }
+interface CopyMenuProps { title: string; standalone: StandaloneCopyContent; motionPackages?: MotionPackageRef[] }
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 function OpenAiIcon(props: SVGProps<SVGSVGElement>) {
@@ -99,211 +30,24 @@ function ClaudeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-function buildDependencyLines(
-  managerId: string,
-  dependencies: string[],
-  devDependencies: string[],
-) {
-  const commands = DEP_COMMANDS[managerId] ?? DEP_COMMANDS.npm;
-  const lines: string[] = [];
-  if (dependencies.length > 0) {
-    lines.push(`${commands.install} ${dependencies.join(" ")}`);
-  }
-  if (devDependencies.length > 0) {
-    lines.push(`${commands.dev} ${devDependencies.join(" ")}`);
-  }
-  return lines;
-}
 
-function buildPropsTable(apiReference?: ApiProp[]) {
-  if (!apiReference || apiReference.length === 0) return [];
-  return [
-    "## Props",
-    "",
-    "| Property | Type | Default | Description |",
-    "| --- | --- | --- | --- |",
-    ...apiReference.map(
-      (prop) =>
-        `| ${prop.name} | ${prop.type} | ${prop.defaultValue ?? ""} | ${prop.description} |`,
-    ),
-    "",
-  ];
-}
-
-export function CopyMenu({
-  title,
-  description,
-  installItem,
-  variants: webglVariants,
-  webgpuVariants = [],
-  apiReference,
-  dependencies: webglDependencies = [],
-  devDependencies: webglDevDependencies = [],
-  webgpuDependencies = [],
-  webgpuDevDependencies = [],
-  demoSourceUrl,
-  standalone,
-  motionPackages,
-}: CopyMenuProps) {
+export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
   const { t } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
-  const [managerId] = usePreference("pm", "npm", MANAGER_IDS);
-  const [storedFramework] = usePreference("framework", "react", FRAMEWORK_IDS);
-  const [renderer] = useRenderer(webgpuVariants.length > 0);
-  const frameworkId = resolveFramework(storedFramework, renderer);
-  const webgpu = renderer === "webgpu";
-  const variants = webgpu ? webgpuVariants : webglVariants;
-  const dependencies = webgpu ? webgpuDependencies : webglDependencies;
-  const devDependencies = webgpu ? webgpuDevDependencies : webglDevDependencies;
-  const rendererLabel = webgpu ? "WebGPU via vgpu" : "WebGL";
-  const [open, setOpen] = useState(false);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [failedId, setFailedId] = useState<string | null>(null);
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const [storedFramework] = usePreference("framework", "react", ["react", "vue", "svelte", "solid", "preact", "vanilla"]);
+  const motionPackage = motionPackages?.find(pack => pack.framework === storedFramework) ?? motionPackages?.[0];
+  const docsUrl = siteUrl(standalone.href);
+  const aiPrompt = motionPackage?.prompt ?? standalone.prompt ?? `Help me use the ${title} example from LeiBox. Reference: ${docsUrl}`;
+  const [open, setOpen] = useState(false), [copiedId, setCopiedId] = useState<string | null>(null), [failedId, setFailedId] = useState<string | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null), timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     if (!open) return;
-    const onPointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
+    const pointer = (event: PointerEvent) => { if (!rootRef.current?.contains(event.target as Node)) setOpen(false); };
+    const key = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", pointer); document.addEventListener("keydown", key);
+    return () => { document.removeEventListener("pointerdown", pointer); document.removeEventListener("keydown", key); };
   }, [open]);
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const variant =
-    variants.find((entry) => entry.id === frameworkId) ?? variants[0];
-  const motionPackage = motionPackages?.find(pack => pack.framework === storedFramework) ?? motionPackages?.[0];
-  const depLines = buildDependencyLines(
-    managerId,
-    dependencies,
-    devDependencies,
-  );
-  const docsUrl = siteUrl(standalone?.href ?? `/docs/components/${installItem}`);
-
-  const configuredCode = () => {
-    const snippet = getDemoSnippet();
-    if (!snippet) return null;
-    return [
-      `import { ${snippet.component} } from "@/components/canvasui/${snippet.component}";`,
-      "",
-      buildConfiguredJsx(snippet.component, snippet.props),
-      "",
-    ].join("\n");
-  };
-
-  const buildConfiguredSection = () => {
-    const code = configuredCode();
-    if (!code) return [];
-    return [
-      "## Current configuration",
-      "",
-      "The component as configured right now in the docs demo (React syntax; prop values apply to every framework):",
-      "",
-      "```tsx",
-      code.trimEnd(),
-      "```",
-      "",
-    ];
-  };
-
-  const buildPrompt = async () => {
-    const content = await loadDocAsset<CodeContent>(variant.url);
-    return [
-      `# LeiBox reference: ${title} (${variant.label}, ${rendererLabel})`,
-      "",
-      description,
-      "",
-      "Source: Canvas UI by David Haz. License: MIT + Commons Clause. Install from the original provider; this reference does not grant redistribution rights.",
-      "",
-      ...(webgpu
-        ? [
-            "This is the WebGPU build: identical props and behavior, rendered through the vgpu library with WGSL shaders. It needs a browser with WebGPU; without it the component renders the wrapped content unchanged.",
-            "",
-          ]
-        : []),
-      "## Install",
-      "",
-      "```sh",
-      buildInstallCommand(managerId, installItem, frameworkId, renderer),
-      "```",
-      "",
-      `Or copy the standalone source below into your project as ${variant.fileName}.`,
-      "",
-      ...(depLines.length > 0
-        ? [
-            "## Dependencies",
-            "",
-            "The install command above adds these automatically. When copying the source by hand, install them first:",
-            "",
-            "```sh",
-            ...depLines,
-            "```",
-            "",
-          ]
-        : []),
-      ...buildConfiguredSection(),
-      ...buildPropsTable(apiReference),
-      `## ${variant.fileName}`,
-      "",
-      "```" + (LANG_BY_ID[variant.id] ?? "ts"),
-      content.source.trimEnd(),
-      "```",
-      "",
-    ].join("\n");
-  };
-
-  const buildPageMarkdown = async () => {
-    const contents = await Promise.all(variants.map(entry => loadDocAsset<CodeContent>(entry.url)));
-    return [
-      `# ${title}`,
-      "",
-      description,
-      "",
-      docsUrl,
-      "",
-      `Renderer: ${rendererLabel}.`,
-      "",
-      "## Install",
-      "",
-      "```sh",
-      buildInstallCommand(managerId, installItem, frameworkId, renderer),
-      "```",
-      "",
-      ...(depLines.length > 0
-        ? ["## Dependencies", "", "```sh", ...depLines, "```", ""]
-        : []),
-      "## Code",
-      "",
-      ...variants.flatMap((entry, index) => [
-        `### ${entry.fileName}`,
-        "",
-        "```" + (LANG_BY_ID[entry.id] ?? "ts"),
-        contents[index].source.trimEnd(),
-        "```",
-        "",
-      ]),
-      ...buildPropsTable(apiReference),
-    ].join("\n");
-  };
-
-  const aiPrompt = motionPackage ? motionPackage.prompt : standalone
-    ? `Help me use the ${title} example from LeiBox. Reference page: ${docsUrl}. Ask me to paste the complete Copy prompt and source from this page if you cannot access it. Use its actual local files and dependencies; do not invent a registry package or API.`
-    : `Help me use the ${title} component (${variant.label}, ${rendererLabel}). Reference page: ${docsUrl}. The component provider is Canvas UI by David Haz; install from the original provider: ${buildInstallCommand(managerId, installItem, frameworkId, renderer)}. ${configuredCode() ? `Current configuration:\n${configuredCode()}` : ""} If you cannot access this reference page, ask me to paste the complete Copy prompt content; do not invent the API.`;
-
+  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
   const copyText = async (id: string, text: string | Promise<string>) => {
     try {
       await writeCopyText(text);
@@ -321,74 +65,15 @@ export function CopyMenu({
     }, 900);
   };
 
-  const items: {
-    id: string;
-    label: string;
-    icon: IconComponent;
-    action: { copy: () => string | Promise<string> } | { open: string };
-  }[] = [
-    ...(standalone ? [
-      { id: "prompt", label: "Copy prompt", icon: Sparkles, action: { copy: () => motionPackage?.prompt ?? standalone.prompt } },
-      { id: "source", label: motionPackage ? "Copy full code bundle" : standalone.codeLabel, icon: SquareCode as IconComponent, action: { copy: () => {
-        const url = motionPackage?.bundleUrl ?? standalone.bundleUrl;
-        return url ? loadDocAsset<CodeContent>(url).then(data => data.source) : standalone.code;
-      } } },
-      { id: "markdown", label: "Copy page as markdown", icon: FileText, action: { copy: () => {
-        const url = motionPackage?.bundleUrl ?? standalone.bundleUrl;
-        return url ? loadDocAsset<CodeContent>(url).then(data => `${data.source}\n\n## Recreation prompt\n${motionPackage?.prompt ?? standalone.prompt}`) : standalone.markdown;
-      } } },
-    ] : [
-    {
-      id: "prompt",
-      label: "Copy prompt",
-      icon: Sparkles,
-      action: { copy: buildPrompt },
-    },
-    {
-      id: "configured",
-      label: "Copy configured code",
-      icon: SquareCode as IconComponent,
-      action: {
-        copy: () =>
-          configuredCode() ??
-          `import { ${title.replaceAll(" ", "")} } from "@/components/canvasui/${title.replaceAll(" ", "")}";`,
-      },
-    },
-    {
-      id: "markdown",
-      label: "Copy page as markdown",
-      icon: FileText,
-      action: { copy: buildPageMarkdown },
-    },
-    ...(demoSourceUrl
-      ? [
-          {
-            id: "demo",
-            label: "Copy demo source",
-            icon: SquareCode as IconComponent,
-            action: { copy: () => loadDocAsset<CodeContent>(demoSourceUrl).then(data => data.source) },
-          },
-        ]
-      : []),
-    ]),
-    {
-      id: "chatgpt",
-      label: "Open in ChatGPT",
-      icon: OpenAiIcon,
-      action: {
-        open: `https://chatgpt.com/?q=${encodeURIComponent(aiPrompt)}`,
-      },
-    },
-    {
-      id: "claude",
-      label: "Open in Claude",
-      icon: ClaudeIcon,
-      action: {
-        open: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}`,
-      },
-    },
-  ];
 
+  const source = async () => { const url = motionPackage?.bundleUrl ?? standalone.bundleUrl; return url ? (await loadDocAsset<CodeContent>(url)).source : standalone.code; };
+  const items: { id: string; label: string; icon: IconComponent; action: { copy: () => string | Promise<string> } | { open: string } }[] = [
+    { id: "prompt", label: "Copy prompt", icon: Sparkles, action: { copy: () => motionPackage?.prompt ?? standalone.prompt } },
+    { id: "source", label: "Copy full code bundle", icon: SquareCode, action: { copy: source } },
+    { id: "markdown", label: "Copy page as markdown", icon: FileText, action: { copy: async () => (await source()) + "\n\n## Recreation prompt\n" + (motionPackage?.prompt ?? standalone.prompt) } },
+    { id: "chatgpt", label: "Open in ChatGPT", icon: OpenAiIcon, action: { open: `https://chatgpt.com/?q=${encodeURIComponent(aiPrompt)}` } },
+    { id: "claude", label: "Open in Claude", icon: ClaudeIcon, action: { open: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}` } },
+  ];
   const handleSelect = (item: (typeof items)[number]) => {
     if ("copy" in item.action) {
       void copyText(item.id, item.action.copy());

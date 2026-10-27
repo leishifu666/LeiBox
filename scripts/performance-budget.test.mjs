@@ -11,16 +11,17 @@ const index=JSON.parse(await read('public/doc-assets-index.json'));
 const media=JSON.parse(await read('src/data/optimized-media.json'));
 
 test('detail HTML and route data stay below 450 KB without embedding all source versions',async()=>{
- for(const file of ['out/docs/components/asciify.html','out/docs/components/ascii-object.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
+ for(const file of ['out/docs/animations/glass-folder.html','out/docs/animations/spider-music-player.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
   const html=await read(file);
   assert(Buffer.byteLength(html)<450_000,`${file}: ${Buffer.byteLength(html)} bytes`);
   assert(!html.includes('data:font/woff2;base64,'),`${file} embeds a downloadable font`);
  }
- const page='out/docs/components/asciify/__next.!KHNoZWxsKQ/docs/components/asciify/__PAGE__.txt';
- assert((await fs.stat(path.join(root,page))).size<300_000,'Asciify RSC payload exceeds 300 KB');
+ const page='out/docs/animations/glass-folder.txt';
+ assert((await fs.stat(path.join(root,page))).size<300_000,'Component RSC payload exceeds 300 KB');
 });
 
-test('all six frameworks and both renderers retain complete, content-addressed code',async()=>{
+test('project packages retain complete content-addressed code without retired canvas bundles',async()=>{
+ assert.deepEqual(index.canvas,{});
  for(const component of Object.values(index.canvas)){
   assert.equal(component.webgl.length,6);
   assert.equal(component.webgpu.length,6);
@@ -46,27 +47,17 @@ test('all six frameworks and both renderers retain complete, content-addressed c
  }
 });
 
-test('responsive posters and hero video respect byte budgets',async()=>{
+test('responsive project posters respect byte budgets',async()=>{
  const image=media.images['/assets/components/gradient-cover-wall.png'];
  const small=image.srcSet.split(', ')[0].split(' ')[0];
  assert((await fs.stat(path.join(root,'public',small))).size<80_000);
- assert((await fs.stat(path.join(root,'public',media.video.mobile))).size<700_000);
- assert((await fs.stat(path.join(root,'public',media.video.desktop))).size<1_700_000);
+ assert.deepEqual(media.video,{});
  const home=await read('out/index.html');
  assert(!home.includes('src="/assets/fallback-hero.mp4"'));
  assert(!home.includes('href="/assets/hero-background.jpg"'));
 });
 
-test('all card videos have small, deployable WebP posters',async()=>{
- const videos=(await fs.readdir(path.join(root,'public/assets/videos'))).filter(file=>file.endsWith('.webm'));
- for(const file of videos){
-  const url=media.previews[`/assets/videos/${file}`];
-  assert(url,`missing poster for ${file}`);
-  const bytes=await fs.readFile(path.join(root,'public',url));
-  assert(bytes.length>0&&bytes.length<80_000,`${file}: poster exceeds 80 KB`);
-  assert.equal(bytes.toString('ascii',8,12),'WEBP');
- }
-});
+test('retired video assets are not published',async()=>{ assert.deepEqual(media.previews,{}); await assert.rejects(fs.access(path.join(root,'public/assets/videos')), {code:'ENOENT'}); });
 
 test('the guided homepage preview shares the downloadable native engine',async()=>{
  const site=await read('src/lib/motion-core/site-previews/glass-folder.generated.js');

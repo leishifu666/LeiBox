@@ -8,28 +8,16 @@ import { setContactOpen } from "@/components/common/contact-button";
 
 import { Footer } from "@/components/landing/footer";
 import { Reveal } from "@/components/landing/reveal";
-import { DeferredBlaze as Blaze } from "./deferred-blaze";
+import { AmbientParticles } from "./ambient-particles";
 
 export function Cta() {
   return (
     <section aria-labelledby="cta-heading" className="px-2.5 pb-2.5">
       <Reveal>
         <div className="dark relative mx-auto min-h-[72rem] w-full overflow-hidden rounded-2xl bg-[#0a0a0a] sm:min-h-[52rem]">
-          <Blaze
-            style={{ position: "absolute", inset: 0 }}
-            sparkColor={[0.45, 0.65, 1]}
-            smokeColor={[0.2, 0.45, 1]}
-            height={1}
-            distortion={0.6}
-            distortionScale={0.5}
-            layers={4}
-            sparkDensity={1.5}
-            smoke={0.5}
-            sparks={0.5}
-            sparkSize={1.0}
-            glow={1.5}
-          >
-            <div className="flex min-h-full flex-col bg-[#0a0a0a]">
+          <div className="absolute inset-0">
+            <AmbientParticles />
+            <div className="relative flex min-h-full flex-col">
               <div className="flex flex-1 flex-col items-center justify-center px-6 pt-28 pb-20 text-center sm:pt-36 sm:pb-24">
                 <h2
                   id="cta-heading"
@@ -66,7 +54,7 @@ export function Cta() {
 
               <Footer />
             </div>
-          </Blaze>
+          </div>
         </div>
       </Reveal>
     </section>

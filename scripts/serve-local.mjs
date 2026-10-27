@@ -65,4 +65,4 @@ const server=http.createServer(async(req,res)=>{
   res.setHeader('content-length',stat.size);if(req.method==='HEAD')return res.end();fs.createReadStream(file).pipe(res);
  }catch(error){if(!res.headersSent)res.writeHead(500);res.end('Local preview error.');console.error(error.message);}
 });
-server.listen(port,'127.0.0.1',()=>console.log(`Canvas UI local preview: http://127.0.0.1:${port}\nNewsletter is simulated locally. Contact sends only when server mail settings are configured.`));
+server.listen(port,'127.0.0.1',()=>console.log(`LeiBox local preview: http://127.0.0.1:${port}\nNewsletter is simulated locally. Contact sends only when server mail settings are configured.`));

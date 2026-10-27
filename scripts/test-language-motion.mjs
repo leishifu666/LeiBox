@@ -11,7 +11,7 @@ let current;
 async function pageFor(width=1440,options={}){
   const page=await browser.newPage({viewport:{width,height:1000},colorScheme:'light',...options});current=page;
   page.on('pageerror',error=>report.errors.push(error.message));
-  await page.addInitScript(()=>{try{localStorage.setItem('canvasui:locale','zh');localStorage.setItem('theme','light');}catch{/* Standalone demos intentionally sandbox storage. */}});
+  await page.addInitScript(()=>{try{localStorage.setItem('leibox:locale','zh');localStorage.setItem('theme','light');}catch{/* Standalone demos intentionally sandbox storage. */}});
   return page;
 }
 async function ready(page,route='/'){
@@ -42,7 +42,7 @@ try{
     await page.screenshot({path:path.join(output,`${width}-english.png`)});
     await page.locator('[data-language-toggle]:visible').focus();await page.keyboard.press('Enter');
     await clean(page);await expect(page.locator('main h1')).toContainText('装下');
-    assert.equal(await page.evaluate(()=>localStorage.getItem('canvasui:locale')),'zh');
+    assert.equal(await page.evaluate(()=>localStorage.getItem('leibox:locale')),'zh');
     report.widths.push({width,...during,status:'passed'});console.log(JSON.stringify({width,status:'passed'}));await page.close();
   }
   const page=await pageFor();await ready(page,'/components');

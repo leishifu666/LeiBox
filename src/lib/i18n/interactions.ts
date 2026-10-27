@@ -1,4 +1,12 @@
 export const interactionTranslations: Record<string, string> = {
+  "Fluid Tooltip": "流体提示气泡",
+  "Tooltip interaction": "提示交互",
+  "One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.": "黑色胶囊随六个导航入口移动、变宽，通过裁切切换文字；头像使用 LeiBox Logo。",
+  "Hover or focus the icons to move the tooltip. Click to select; arrow keys move focus and Escape closes it.": "悬停或聚焦图标移动提示，点击选中；方向键切换焦点，Escape 收起。",
+  "Selected navigation item; hovering only changes the tooltip.": "当前选中的导航项；悬停只改变提示气泡。",
+  "Called when a different navigation item is selected.": "选中其他导航项时调用。",
+  "Profile tooltip text. Defaults to LeiBox.": "头像对应的提示文字，默认为 LeiBox。",
+  "Profile logo URL. The embedded LeiBox vector is the default and error fallback.": "头像 Logo 图片地址，默认和加载失败时使用内嵌 LeiBox 矢量。",
   "Spider Track Switcher": "蜘蛛牵引切歌",
   "Music interaction": "音乐交互",
   "An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.": "八足蜘蛛结网牵引专辑封面，在队列与播放区之间连续搬运，搭配真实专辑图片和可操作的本地播放控件。",

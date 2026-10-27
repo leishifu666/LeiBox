@@ -13,12 +13,12 @@ const ITEMS = [
   {
     question: "Can I copy every item in LeiBox?",
     answer:
-      "Each item keeps its own source and license. Use copy and installation tools only where that license permits. The current Canvas UI examples retain MIT + Commons Clause and cannot be redistributed as a component library.",
+      "For learning use only. Each item keeps its own source and license. A reference link or free access does not grant permission to redistribute protected code, designs or media.",
   },
   {
     question: "Which browsers are supported?",
     answer:
-      "Components that draw live HTML on canvas rely on an experimental browser capability, available today in Chrome behind a flag. Everywhere else they degrade gracefully: your content renders as regular HTML, and effects like Blaze, Liquid, Laser, Clouds, Bubble, Droplets, Glass, Magnify, Grid, and Ripple keep running as a pure GPU overlay on top of it. The WebGL builds work in every modern browser; the WebGPU builds need a browser with WebGPU (Chrome, Edge, Safari 26, Firefox 141) and show your content unchanged elsewhere.",
+      "Use a current browser with JavaScript enabled. The collection contains DOM, SVG, Canvas and WebGL experiments. Requirements are documented per component; no experimental browser flag is required by the website.",
   },
   {
     question: "Will it slow my site down?",
@@ -28,7 +28,7 @@ const ITEMS = [
   {
     question: "Do I need React?",
     answer:
-      "No. Every component ships in six flavors: React, Solid, Preact, Vue, Svelte, and dependency-free vanilla TypeScript. Same engine and the same options in all of them. Both the WebGL and the WebGPU build ship in all six.",
+      "Most examples offer React, Vue, Svelte, Solid, Preact and TypeScript versions. Check the selected example for its actual frameworks and dependencies.",
   },
   {
     question: "How do updates work?",

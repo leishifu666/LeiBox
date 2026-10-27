@@ -3,6 +3,7 @@
 import { T, useLanguage } from "@/components/common/language-provider";
 import Link from "next/link";
 import { SiteLogo } from "@/components/common/site-logo";
+import { LearningNotice } from "@/components/common/learning-notice";
 
 
 
@@ -80,6 +81,7 @@ export function Footer({
           ))}
         </div>
 
+        <LearningNotice className="border-t border-border/40 py-5" />
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-border/40 py-6">
           <p className="text-[13px] text-muted-foreground">
             © {new Date().getFullYear()}<T> LeiBox. Curated by</T>{" "}

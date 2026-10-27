@@ -1,0 +1,23 @@
+export const studyTranslations: Record<string, string> = {
+  "A personal collection of UI studies, interactive examples and design references.": "个人界面学习、交互实验与设计参考收藏。",
+  "Explore interactive examples": "查看交互实验",
+  "Browse the live examples, inspect the documented behavior, and check the recorded source and permissions before reusing code or media.": "浏览实际运行的示例、查看交互说明，并在复用代码或素材前核对已记录的来源和许可。",
+  "Installation and usage": "安装与使用",
+  "Use the LeiBox Skill to find an example and retrieve the framework package that the selected page actually provides.": "通过 LeiBox Skill 查找示例，获取所选页面实际提供的框架代码包。",
+  "Install the Skill": "安装 Skill",
+  "Use a component package": "使用组件代码包",
+  "Open an example, choose your framework, review its source and license, then copy the complete files and install only the dependencies your project needs.": "打开示例、选择项目框架、核对来源与许可，再复制完整文件，仅安装项目所缺的依赖。",
+  "Downloading source does not install dependencies or prove that your final application works. Verify the rendered result, interaction, keyboard behavior and cleanup in your own project.": "下载源码不等于安装了依赖，也不代表最终应用已经可用。请在自己的项目中验证实际渲染、交互、键盘操作与卸载清理。",
+  "Rendering and previews": "渲染与预览",
+  "The collection uses ordinary DOM and SVG, Canvas 2D, and WebGL according to the example. Read the selected component page for its actual requirements.": "收藏中的示例按需使用普通 DOM 与 SVG、Canvas 2D 和 WebGL，具体要求以所选组件详情页为准。",
+  "Live preview and source": "实时预览与源码",
+  "Preview cards load their interactive example when needed. A thumbnail is a preview of an example; it is not proof that every state or integration is supported.": "预览卡片按需加载对应交互示例。缩略图只展示示例画面，不代表已支持全部状态或接入方式。",
+  "Reduced motion": "减少动态效果",
+  "The website respects the operating system reduced-motion preference. Individual examples may also offer pause, replay or reset controls.": "网站遵循系统的减少动态效果设置，部分示例还提供暂停、重播或重置操作。",
+  "Learning use and permissions": "学习用途与许可",
+  "Use is subject to the original rights holder’s permissions. The learning notice is not a blanket license or a guarantee against claims.": "使用须遵守原权利人的许可。学习用途声明不是统一授权，也不保证不会发生权利争议。",
+  "For learning use only. Each item keeps its own source and license. A reference link or free access does not grant permission to redistribute protected code, designs or media.": "仅供学习使用。各条目遵循各自的来源和许可；提供参考链接或免费访问，不代表取得受保护代码、设计或素材的再分发授权。",
+  "Use a current browser with JavaScript enabled. The collection contains DOM, SVG, Canvas and WebGL experiments. Requirements are documented per component; no experimental browser flag is required by the website.": "请使用启用 JavaScript 的现代浏览器。收藏包含 DOM、SVG、Canvas 和 WebGL 实验，具体要求以组件说明为准；网站本身无需开启实验性浏览器开关。",
+  "Most examples offer React, Vue, Svelte, Solid, Preact and TypeScript versions. Check the selected example for its actual frameworks and dependencies.": "多数示例提供 React、Vue、Svelte、Solid、Preact 和 TypeScript 版本。请查看所选示例实际支持的框架及依赖。",
+  "LeiBox · source and permissions": "LeiBox · 来源与使用说明"
+};

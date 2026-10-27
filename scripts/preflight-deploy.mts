@@ -61,7 +61,7 @@ const siteKey = resolve("NEXT_PUBLIC_TURNSTILE_SITE_KEY");
 
 if (!config.vars?.RESEND_SEGMENT_ID) {
   errors.push(
-    "RESEND_SEGMENT_ID is missing from wrangler.jsonc. Every signup must be assigned to the Canvas UI Newsletter segment.",
+    "RESEND_SEGMENT_ID is missing from wrangler.jsonc. Every signup must be assigned to the LeiBox Newsletter segment.",
   );
 }
 
@@ -83,11 +83,6 @@ if (turnstileRequired) {
   );
 }
 
-if (!resolve("NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN")) {
-  warnings.push(
-    "NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN is not set — html-in-canvas demos will fall back on canvasui.dev.",
-  );
-}
 
 const secrets = workerSecrets();
 if (secrets === null) {

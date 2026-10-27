@@ -1,0 +1,16 @@
+export const copyrightTranslations: Record<string, string> = {
+  "For learning use only.": "仅供学习使用。",
+  "Third-party designs, code and media remain subject to their owners' rights and licenses.": "第三方设计、代码与素材的权利归原权利人所有，使用须遵守其许可。",
+  "Sources and permissions": "来源与使用说明",
+  "Updated October 28, 2026": "更新日期：2026 年 10 月 28 日",
+  "LeiBox is a personal UI study and interaction experiment. It is not an official website of the referenced designers or projects, and does not imply their endorsement.": "LeiBox 是个人界面学习与交互实验项目，不是所参考设计师或项目的官方网站，也不代表获得其背书。",
+  "The learning notice describes this project's purpose. It does not replace a license, transfer copyright, or grant permission to copy, distribute or use third-party material commercially.": "学习用途声明只说明本项目的目的，不代替授权、不转移著作权，也不授予复制、分发或商业使用第三方内容的权利。",
+  "Check each source": "逐项核对来源",
+  "Component pages record available design references, code sources and license information. A public link, an attribution, free access or a rewritten implementation does not by itself prove permission to use protected material.": "组件详情页保留已知的设计参考、代码来源和许可信息。公开链接、署名、免费提供或改写实现，本身都不等于取得受保护内容的使用授权。",
+  "Where permission is unclear, obtain authorization from the rights holder or use independently created, licensed replacements before publishing or redistributing the material.": "许可不明确时，应在公开发布或再次分发前取得权利人授权，或改用独立制作且权利清楚的替代内容。",
+  "Media and trademarks": "图片、媒体与商标",
+  "A component's code license does not necessarily cover its photographs, album covers, fonts, illustrations, trademarks or reference designs. Replace these with material you own or are licensed to use; do not present third-party work as your own.": "组件代码的许可不一定涵盖其中的照片、专辑封面、字体、插画、商标及参考设计。使用时应替换为自己拥有权利或获准使用的素材，不将第三方作品冒称原创。",
+  "Copyright and source notices are retained where applicable to existing code. This page does not relicense third-party work or promise that every use is permitted.": "对于现有代码仍适用的版权和来源声明会予以保留。本页不重新许可第三方作品，也不承诺任何使用方式都已获授权。",
+  "Rights-holder contact": "权利人联系",
+  "If you are a rights holder, please send the affected page URL, your original work or proof of rights, the issue, and a way to contact you. I will review the request and, as appropriate, correct attribution, replace material or remove it.": "如您是相关权利人，请提供涉及页面链接、原始作品或权利证明、具体问题与联系方式。我会核实请求，并根据情况更正署名、替换素材或移除内容。",
+};

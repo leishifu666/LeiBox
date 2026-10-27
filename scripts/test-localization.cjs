@@ -49,7 +49,7 @@ async function run() {
     await language(page, 'en');
     await page.reload({ waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => document.documentElement.lang === 'en');
-    check('English choice survives reload', await page.evaluate(() => localStorage.getItem('canvasui:locale')), 'en');
+    check('English choice survives reload', await page.evaluate(() => localStorage.getItem('leibox:locale')), 'en');
     const secondTab = await context.newPage();
     await secondTab.goto(BASE, { waitUntil: 'domcontentloaded' });
     await secondTab.waitForFunction(() => document.documentElement.lang === 'en');

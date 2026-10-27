@@ -189,7 +189,7 @@ try {
     }
   }
 
-  await page.evaluate(() => localStorage.setItem('canvasui:locale', 'en'));
+  await page.evaluate(() => localStorage.setItem('leibox:locale', 'en'));
   getMode = 'hold';
   await open();
   await state('checking');

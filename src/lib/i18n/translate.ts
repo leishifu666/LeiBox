@@ -1,23 +1,25 @@
 import { commonTranslations } from "./common";
 import { landingTranslations } from "./landing";
 import { docsTranslations } from "./docs";
-import { effectsTranslations } from "./effects";
 import { contactTranslations } from "./contact";
 import { aiTranslations } from "./ai";
 import { interactionTranslations } from "./interactions";
 import { privacyTranslations } from "./privacy";
+import { studyTranslations } from "./study";
+import { copyrightTranslations } from "./copyright";
 
 export type Locale = "zh" | "en";
-export const LOCALE_STORAGE_KEY = "canvasui:locale";
+export const LOCALE_STORAGE_KEY = "leibox:locale";
 const rawTranslations: Readonly<Record<string, string>> = {
   ...commonTranslations,
   ...landingTranslations,
   ...docsTranslations,
-  ...effectsTranslations,
   ...contactTranslations,
   ...aiTranslations,
   ...interactionTranslations,
   ...privacyTranslations,
+  ...copyrightTranslations,
+  ...studyTranslations,
 };
 const entities: Record<string, string> = { apos: "'", quot: '"', amp: "&", lt: "<", gt: ">", nbsp: " ", lsquo: "‘", rsquo: "’", ldquo: "“", rdquo: "”", middot: "·", larr: "←", rarr: "→", ndash: "–", mdash: "—" };
 export function normalizeCopy(text: string): string {

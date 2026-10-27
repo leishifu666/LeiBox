@@ -17,7 +17,7 @@ const STEPS = [
     index: "02",
     title: "Check the source and license",
     body: "Each item keeps its original source and license. Copy or install it only when that license permits.",
-    window: "Canvas UI · install example",
+    window: "LeiBox · source and permissions",
   },
   {
     index: "03",

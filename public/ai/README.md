@@ -2,14 +2,14 @@
 
 面向正在制作或优化网页、应用界面的 Agent。无需用户知道组件名称，先根据页面的具体用途检索并比较少量候选。
 
-当前有 38 个组件；内容版本 revision 为 889bd95389ba3ef6b52259046d37f9adde281ee0a933fe315eea5394f250a074。以后以实时 total/items 为准，不把列表复制进 Skill。
+当前有 30 个组件；内容版本 revision 为 52333701a703207df86aa830f2112a18155820602d46e8a9d6c32c258c554320。以后以实时 total/items 为准，不把列表复制进 Skill。
 
 ## 按需读取
 
 1. GET /ai/search-index.json：先读取紧凑的任务索引，不含源码。
 2. 根据 name、summary、discovery.useCases/searchTerms 匹配需求；按 frameworks、renderers、discovery.category 筛选，结合 visualTags、interactions 和 caveat 比较。
 3. 返回 1–3 个候选，使用 docsPath 或 previewPath 展示效果，说明具体用途与限制。
-4. 仅沿选中项的 detailPath 获取 API、依赖、来源与下载地址。本站条目在 packages[framework].url；上游条目在 install.registryUrls[framework][renderer]。
+4. 仅沿选中项的 detailPath 获取 API、依赖、来源与下载地址。代码包地址在 packages[framework].url。
 5. 用户已要求实现时，下载所需框架的源码，接入项目并验证；仅咨询时只推荐。
 
 所有 / 开头的链接相对于本站 origin。GET 返回静态 JSON；不支持向这些地址附加 query/framework 参数来过滤，需要在客户端筛选，或使用 Skill 自带的查询工具。

@@ -81,7 +81,7 @@ test('recommend respects filters and exclusions, returns no invented fallback, a
   const loading = await invoke(['recommend', '加载反馈', '--category', 'feedback', '--exclude-tag', 'particles', '--limit', '1']);
   assert.equal(loading.items[0].slug, 'ai-generating');
   const gpu = await invoke(['recommend', '粒子', '--framework', 'react', '--renderer', 'webgpu']);
-  assert(gpu.count > 0 && gpu.items.every((item) => item.renderers.includes('webgpu') && item.sourceProvider === 'upstream'));
+  assert.equal(gpu.count, 0, 'retired renderer packages must not be invented as fallback results');
   assert.equal((await invoke(['recommend', '团队邀请', '--category', 'input'])).count, 0);
   assert.equal((await invoke(['recommend', 'zzzz-absent-widget'])).count, 0);
   assert.deepEqual(new Set(requests), new Set(['/ai/search-index.json']));
@@ -100,7 +100,8 @@ test('invalid recommendation arguments and malformed remote index report real er
 test('installed helper searches the complete bilingual collection and reads actual package metadata', async () => {
   const catalog = await invoke(['list']);
   assert(catalog.items.some((item) => item.slug === 'glass-folder'));
-  assert(catalog.items.some((item) => item.slug === 'glass'));
+  assert(catalog.items.every((item) => item.source.kind === 'project-source'));
+  await assert.rejects(invoke(['pull', 'glass']), { code: 'UNKNOWN_SLUG' });
   assert((await invoke(['search', '玻璃', '文件夹'])).items.some((item) => item.slug === 'glass-folder'));
   assert.equal((await invoke(['search', 'ＤＯＴ-ＭＡＴＲＩＸ-ＴＲＩＯ'])).items[0].slug, 'dot-matrix-trio');
   const detail = await invoke(['show', 'dot-matrix-trio', '--framework', 'vue']);
@@ -108,7 +109,7 @@ test('installed helper searches the complete bilingual collection and reads actu
   assert(detail.selectedPackage.url.endsWith('/vue.json'));
 });
 
-test('all 168 generated framework bundles preserve the real files, dependencies and SHA-256 checksums', async () => {
+test('all generated framework bundles preserve the real files, dependencies and SHA-256 checksums', async () => {
   const catalog = JSON.parse(await fs.readFile(path.join(publicRoot, 'ai/catalog.json')));
   let packages = 0;
   for (const item of catalog.items.filter((entry) => entry.source.kind === 'project-source')) {

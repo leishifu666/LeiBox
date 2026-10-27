@@ -10,7 +10,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true}),results=[]
 try{
   for(const width of [375,658,768,1440]){
     const page=await browser.newPage({viewport:{width,height:1000},colorScheme:'light'});
-    await page.addInitScript(()=>{try{localStorage.setItem('canvasui:locale','zh');localStorage.setItem('theme','light');}catch{}});
+    await page.addInitScript(()=>{try{localStorage.setItem('leibox:locale','zh');localStorage.setItem('theme','light');}catch{}});
     await page.goto(base,{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);
     await page.waitForFunction(()=>document.querySelector('[data-hero-actions]').getAnimations().every(animation=>animation.playState==='finished'));
     await page.evaluate(()=>{

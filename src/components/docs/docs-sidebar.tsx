@@ -37,11 +37,7 @@ const EASE = [0.23, 1, 0.32, 1] as const;
 
 const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
 
-const NEW_HREFS = new Set([
-  "/docs/components/ascii-object",
-  "/docs/components/glyph-rain",
-  "/docs/components/liquid-object",
-]);
+const NEW_HREFS = new Set<string>();
 
 function subscribeHover(callback: () => void) {
   const mql = window.matchMedia(HOVER_QUERY);

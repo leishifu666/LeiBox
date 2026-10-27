@@ -1,25 +1,17 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import ts from "typescript";
 import { createHash } from "node:crypto";
 
-import { COMPONENTS } from "../src/data/components.ts";
 import { INTERACTION_COMPONENTS } from "../src/data/interaction-components.ts";
 import { getMotionPackages } from "../src/lib/motion-packages.ts";
 import { interactionTranslations } from "../src/lib/i18n/interactions.ts";
-import { effectsTranslations } from "../src/lib/i18n/effects.ts";
 import { docsTranslations } from "../src/lib/i18n/docs.ts";
 import { AI_DISCOVERY, type Discovery } from "../src/data/ai-discovery.ts";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "public", "ai");
 const frameworks = ["react", "vue", "svelte", "solid", "preact", "vanilla"] as const;
-const renderers = ["webgl", "webgpu"] as const;
-const upstream = "https://canvasui.dev";
-const sourceRepository = "https://github.com/DavidHDev/canvas-ui";
-const sourceRevision = "a04a99b235299ee79a123a16ccb2e6cf9da74b6b";
-const licenseUrl = `${sourceRepository}/blob/${sourceRevision}/LICENSE.md`;
 
 const configuredBase = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 let siteBase = "";
@@ -32,44 +24,8 @@ if (configuredBase) {
 }
 const localLink = (pathname: string) => `${siteBase}${pathname}`;
 const normalize = (text: string) => text.trim().replace(/\s+/g, " ");
-const translations = new Map(Object.entries({ ...docsTranslations, ...effectsTranslations, ...interactionTranslations }).map(([en, zh]) => [normalize(en), zh]));
+const translations = new Map(Object.entries({ ...docsTranslations, ...interactionTranslations }).map(([en, zh]) => [normalize(en), zh]));
 const zh = (text: string) => translations.get(normalize(text)) ?? text;
-type Literal = string | number | boolean | null | Literal[] | { [key: string]: Literal };
-
-// Read metadata literals only. Never execute a page module or copy component source.
-function literal(node: ts.Expression): Literal {
-  if (ts.isStringLiteralLike(node)) return node.text;
-  if (ts.isNumericLiteral(node)) return Number(node.text);
-  if (node.kind === ts.SyntaxKind.TrueKeyword) return true;
-  if (node.kind === ts.SyntaxKind.FalseKeyword) return false;
-  if (node.kind === ts.SyntaxKind.NullKeyword) return null;
-  if (ts.isArrayLiteralExpression(node)) return node.elements.map((entry) => literal(entry as ts.Expression));
-  if (ts.isObjectLiteralExpression(node)) {
-    const result: Record<string, Literal> = {};
-    for (const entry of node.properties) {
-      if (!ts.isPropertyAssignment(entry)) throw new Error("Unsupported metadata object property");
-      const key = ts.isIdentifier(entry.name) || ts.isStringLiteralLike(entry.name) ? entry.name.text : null;
-      if (!key) throw new Error("Unsupported metadata key");
-      result[key] = literal(entry.initializer);
-    }
-    return result;
-  }
-  throw new Error(`Metadata must be a literal, found ${ts.SyntaxKind[node.kind]}`);
-}
-async function namedLiteral(file: string, name: string): Promise<Literal> {
-  const source = ts.createSourceFile(file, await fs.readFile(file, "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
-  for (const statement of source.statements) {
-    if (!ts.isVariableStatement(statement)) continue;
-    for (const declaration of statement.declarationList.declarations) {
-      if (ts.isIdentifier(declaration.name) && declaration.name.text === name && declaration.initializer) return literal(declaration.initializer);
-    }
-  }
-  throw new Error(`${name} metadata not found in ${path.relative(ROOT, file)}`);
-}
-
-type Definition = { base: string; dependencies?: string[]; devDependencies?: string[]; description: string };
-type ApiProp = { name: string; type: string; description: string; defaultValue?: string };
-const definitions = await namedLiteral(path.join(ROOT, "src/lib/registry.ts"), "COMPONENTS") as unknown as Record<string, Definition>;
 await fs.mkdir(path.join(OUT, "components"), { recursive: true });
 await fs.copyFile(path.join(ROOT, "integrations/skills/leibox/SKILL.md"), path.join(OUT, "SKILL.md"));
 type CatalogItem = { slug: string; name: { en: string; zh: string }; description: { en: string; zh: string }; keywords?: string; docsPath: string; detailPath: string; markdownPath: string; previewPath: string; frameworks: readonly string[]; renderers: readonly string[]; source: Record<string, unknown>; distribution: Record<string, unknown>; discovery: Discovery };
@@ -79,107 +35,6 @@ function discovery(slug: string): Discovery {
   return profile;
 }
 const items: CatalogItem[] = [];
-for (const component of COMPONENTS) {
-  const slug = component.href.split("/").pop()!;
-  if (!/^[a-z]+(?:-[a-z]+)*$/.test(slug)) throw new Error(`Invalid catalog slug: ${slug}`);
-  const definition = definitions[slug];
-  if (!definition) throw new Error(`Missing registry metadata for ${slug}`);
-  const api = await namedLiteral(path.join(ROOT, "src/app/(shell)/docs/components", slug, "page.tsx"), "API_REFERENCE") as unknown as ApiProp[];
-  const detailPath = `/ai/components/${slug}.json`;
-  const markdownPath = `/ai/components/${slug}.md`;
-  const entry = {
-    slug,
-    name: { en: component.name, zh: zh(component.name) },
-    description: { en: component.description, zh: zh(component.description) },
-    docsPath: component.href,
-    detailPath,
-    markdownPath,
-    previewPath: component.video,
-    discovery: discovery(slug),
-    frameworks,
-    renderers,
-    source: {
-      kind: "upstream-reference",
-      author: "David Haz",
-      website: `${upstream}${component.href}`,
-      repository: sourceRepository,
-      revision: sourceRevision,
-      license: "MIT + Commons Clause",
-      licenseUrl,
-    },
-    distribution: {
-      canRedistributeSource: false,
-      installFromThisSite: false,
-      installProvider: "upstream",
-      registryNamespace: "@canvas-ui",
-      notice: {
-        en: "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
-        zh: "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。",
-      },
-    },
-  };
-  const detail = {
-    ...entry,
-    apiReference: api.map((prop) => ({ name: prop.name, type: prop.type, ...(prop.defaultValue !== undefined ? { defaultValue: prop.defaultValue } : {}), description: { en: prop.description, zh: zh(prop.description) } })),
-    dependencies: {
-      webgl: { runtime: definition.dependencies ?? [], dev: definition.devDependencies ?? [] },
-      webgpu: { runtime: [...new Set(["vgpu", ...(definition.dependencies ?? [])])], dev: [...new Set(["@webgpu/types", ...(definition.devDependencies ?? [])])] },
-      frameworkNote: "Solid uses solid-js; Preact uses preact. Other framework dependencies follow the target project.",
-    },
-    install: {
-      provider: "upstream",
-      registryUrls: Object.fromEntries(frameworks.map((framework) => [framework, Object.fromEntries(renderers.map((renderer) => [renderer, `${upstream}/r/${slug}-${framework}${renderer === "webgpu" ? "-webgpu" : ""}.json`]))])),
-      commands: Object.fromEntries(frameworks.map((framework) => [framework, Object.fromEntries(renderers.map((renderer) => [renderer, `npx shadcn@latest add @canvas-ui/${slug}-${framework}${renderer === "webgpu" ? "-webgpu" : ""}`]))])),
-      behavior: "Commands are metadata only. This catalog and CLI never execute installation.",
-    },
-    browserNotes: [
-      "WebGPU builds need a browser with WebGPU; verify the current browser support before choosing a renderer.",
-      "HTML-in-Canvas is experimental. Check the component's current upstream browser/fallback documentation. Do not assume DOM capture works in every browser.",
-    ],
-  };
-  await fs.writeFile(path.join(OUT, "components", `${slug}.json`), `${JSON.stringify(detail, null, 2)}\n`);
-  const escapeCell = (value: string) => value.replaceAll("|", "\\|").replaceAll("\n", " ");
-  const markdown = [
-    `# ${entry.name.en} / ${entry.name.zh}`,
-    "",
-    component.description,
-    "",
-    entry.description.zh,
-    "",
-    `Docs: ${localLink(component.href)}`,
-    `Machine-readable detail: ${localLink(detailPath)}`,
-    `Original provider: ${entry.source.website}`,
-    `License: [${entry.source.license}](${licenseUrl})`,
-    "",
-    "## Source and installation",
-    "",
-    entry.distribution.notice.en,
-    "",
-    entry.distribution.notice.zh,
-    "",
-    "Choose the project's actual framework and renderer. Example for React/WebGL, from the upstream provider:",
-    "",
-    "```sh",
-    detail.install.commands.react.webgl,
-    "```",
-    "",
-    "For WebGPU append `-webgpu` to the item name. Available frameworks: React, Vue, Svelte, Solid, Preact, vanilla TypeScript. Commands for each combination are in the JSON detail.",
-    "",
-    "## API metadata",
-    "",
-    "| Property | Type | Default | Description / 说明 |",
-    "| --- | --- | --- | --- |",
-    ...detail.apiReference.map((prop) => `| ${escapeCell(prop.name)} | ${escapeCell(prop.type)} | ${escapeCell(prop.defaultValue ?? "")} | ${escapeCell(prop.description.en)} / ${escapeCell(prop.description.zh)} |`),
-    "",
-    "## Browser notes",
-    "",
-    ...detail.browserNotes.map((note) => `- ${note}`),
-    "",
-  ].join("\n");
-  await fs.writeFile(path.join(OUT, "components", `${slug}.md`), markdown);
-  items.push(entry);
-}
-
 for (const component of INTERACTION_COMPONENTS) {
   const packages = await getMotionPackages(component.slug);
   const detailPath = `/ai/components/${component.slug}.json`;
@@ -226,6 +81,11 @@ for (const component of INTERACTION_COMPONENTS) {
 
 // File-based discovery also installs the standalone helper; no Git checkout is required.
 const skillRoot = path.join(ROOT, "integrations/skills/leibox");
+const currentSlugs = new Set(items.map(item => item.slug));
+for (const file of await fs.readdir(path.join(OUT, "components"))) {
+  const match = file.match(/^([a-z]+(?:-[a-z]+)*)\.(json|md)$/);
+  if (match && !currentSlugs.has(match[1])) await fs.unlink(path.join(OUT, "components", file));
+}
 const skillSource = await fs.readFile(path.join(skillRoot, "SKILL.md"), "utf8");
 const description = skillSource.match(/^description: (.+)$/m)![1];
 const skillFiles = ["SKILL.md", "scripts/leibox.mjs", "agents/openai.yaml"];
@@ -272,9 +132,9 @@ const catalog = {
   links: { searchIndex: "/ai/search-index.json", searchSchema: "/ai/search-index.schema.json", agentGuide: "/ai/README.md", catalog: "/ai/catalog.json", llms: "/llms.txt", docs: "/docs", components: "/components", skill: "/ai/SKILL.md", aiGuide: "/docs/mcp" },
   capabilities: { list: true, bilingualSearch: true, componentMetadata: true, sourceDownload: true, sourceRedistribution: true, perComponentDistribution: true, autoInstall: false },
   classificationPolicy: {
-    supportedKinds: ["upstream-reference", "project-source", "original", "licensed-copy"],
-    currentKind: "mixed",
-    distribution: "Check each entry. Project framework packages are fetched from LeiBox; upstream-reference source is fetched directly from its author.",
+    supportedKinds: ["project-source"],
+    currentKind: "project-source",
+    distribution: "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use.",
   },
   items,
 };
@@ -287,7 +147,7 @@ await fs.writeFile(path.join(OUT, "README.md"), [
   "1. GET /ai/search-index.json：先读取紧凑的任务索引，不含源码。", 
   "2. 根据 name、summary、discovery.useCases/searchTerms 匹配需求；按 frameworks、renderers、discovery.category 筛选，结合 visualTags、interactions 和 caveat 比较。",
   "3. 返回 1–3 个候选，使用 docsPath 或 previewPath 展示效果，说明具体用途与限制。",
-  "4. 仅沿选中项的 detailPath 获取 API、依赖、来源与下载地址。本站条目在 packages[framework].url；上游条目在 install.registryUrls[framework][renderer]。",
+  "4. 仅沿选中项的 detailPath 获取 API、依赖、来源与下载地址。代码包地址在 packages[framework].url。",
   "5. 用户已要求实现时，下载所需框架的源码，接入项目并验证；仅咨询时只推荐。", "",
   "所有 / 开头的链接相对于本站 origin。GET 返回静态 JSON；不支持向这些地址附加 query/framework 参数来过滤，需要在客户端筛选，或使用 Skill 自带的查询工具。", "",
   "## 索引字段", "",
@@ -331,7 +191,6 @@ const llms = [
   "",
   "## Provenance and distribution",
   "",
-  `${INTERACTION_COMPONENTS.length} project component packages are served by LeiBox. The ${COMPONENTS.length} original Canvas UI references are downloaded directly from their author's registry under [MIT + Commons Clause](${licenseUrl}).`,
   "Preserve source notices and design attribution. Availability from this collection is not a claim that all designs and third-party code were authored by LeiBox.",
   "",
 ].join("\n");

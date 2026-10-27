@@ -17,7 +17,7 @@ export const CLI_HELP = {
     'show <slug>': 'Read component API metadata, framework source URLs, dependencies and source provider.',
     help: 'Show this help. --help and -h are also accepted.',
   },
-  examples: ['node scripts/collection-cli.mjs search 玻璃', 'node scripts/collection-cli.mjs show glass'],
+  examples: ['node scripts/collection-cli.mjs search 玻璃', 'node scripts/collection-cli.mjs show glass-folder'],
   exitCodes: { 0: 'Success', 1: 'Catalog/read error', 2: 'Invalid arguments', 3: 'No matching entries or unknown slug' },
   installation: 'This local catalog CLI is read-only. The installed LeiBox Skill includes a standalone helper for downloading the selected source.',
 };
@@ -34,7 +34,7 @@ export async function run(args) {
   if (!['list', 'search', 'show'].includes(command)) throw new CliError('UNKNOWN_COMMAND', `Unknown command: ${command}. Use --help.`, 2);
   if (command === 'list' && values.length) throw new CliError('INVALID_ARGUMENTS', 'list does not accept arguments.', 2);
   if (command === 'search' && !values.join(' ').trim()) throw new CliError('INVALID_ARGUMENTS', 'search requires a non-empty query.', 2);
-  if (command === 'show' && (values.length !== 1 || !/^[a-z]+(?:-[a-z]+)*$/.test(values[0]))) throw new CliError('INVALID_ARGUMENTS', 'show requires a catalog slug, for example glass.', 2);
+  if (command === 'show' && (values.length !== 1 || !/^[a-z]+(?:-[a-z]+)*$/.test(values[0]))) throw new CliError('INVALID_ARGUMENTS', 'show requires a catalog slug, for example glass-folder.', 2);
   const catalog = JSON.parse(await fs.readFile(CATALOG, 'utf8'));
   if (command === 'list') return { schemaVersion: catalog.schemaVersion, count: catalog.items.length, items: catalog.items };
   if (command === 'search') {

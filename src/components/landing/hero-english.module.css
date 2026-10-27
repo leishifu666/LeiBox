@@ -1,5 +1,17 @@
 /* Gemini 3.1 Pro / High; English Hero only. */
 /* 针对英文环境的首屏排版优化 (基于容器宽度的最终方案) */
+:global(html[lang="zh-CN"]) .copy h1[data-hero-title],
+:global(html[lang="zh-CN"]) .copy p[data-hero-description] {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 374px) {
+  :global(html[lang="zh-CN"]) .copy h1[data-hero-title] {
+    font-size: clamp(1.75rem, 9.6vw, 2.25rem);
+  }
+}
+
 :global(html[lang="en"]) .copy {
   /* 建立容器查询，基于内容实际可用宽度(cqw)而非视口(vw) */
   container-type: inline-size;

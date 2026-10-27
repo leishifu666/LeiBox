@@ -22,7 +22,7 @@ export function Hero() {
           style={{ "--enter-index": 0 } as React.CSSProperties}
           className="hero-enter text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.04] font-medium tracking-tighter text-balance"
         ><T>
-          Your box of UI ideas and components.
+          A box of playful components for your pages.
         </T></h1>
 
         <p
@@ -30,9 +30,9 @@ export function Hero() {
           style={{ "--enter-index": 1 } as React.CSSProperties}
           className="hero-enter mt-5 max-w-md text-base leading-7 text-pretty text-muted-foreground"
         ><T>
-          LeiBox is my collection of UI inspiration, interaction details, and
-          useful components. Explore the demos, check the sources, and find
-          ideas for your next interface.
+          LeiBox offers free components for interactions, motion, and visual
+          effects. Try them out, explore the docs and code, and use them in your
+          work according to each item&apos;s source and license.
         </T></p>
 
         <div

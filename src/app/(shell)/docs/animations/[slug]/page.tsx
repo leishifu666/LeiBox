@@ -36,6 +36,12 @@ export default async function MotionPage({params}:Props){
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "fluid-tooltip" ? [
+          {name:"options.active",type:'"today" | "tasks" | "calendar" | "focus" | "settings" | "profile"',defaultValue:'"today"',description:"Selected navigation item; hovering only changes the tooltip."},
+          {name:"options.onSelect",type:"(id: string) => void",description:"Called when a different navigation item is selected."},
+          {name:"options.profileLabel",type:"string",defaultValue:'"LeiBox"',description:"Profile tooltip text. Defaults to LeiBox."},
+          {name:"options.logoSrc",type:"string",description:"Profile logo URL. The embedded LeiBox vector is the default and error fallback."},
+        ] : []),
         ...(slug === "spider-music-player" ? [
           {name:"options.track",type:"number",defaultValue:"0",description:"Initial or updated song index in the local queue."},
           {name:"options.playing",type:"boolean",defaultValue:"true",description:"Control the local playback timer."},

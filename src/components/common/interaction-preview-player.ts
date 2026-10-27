@@ -7,6 +7,23 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'fluid-tooltip') {
+      const ready=()=>{
+        const root=document.querySelector('#fluid-tooltip [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();
+        const style=document.createElement('style');style.textContent='.ft-scene{background:#f4f4f4!important;height:100vh!important}.ft-stage{background:linear-gradient(163deg,#224d6b,#52778c 57%,#a1adb7);border-radius:32px;overflow:hidden;transform:translate(-50%,-50%) scale(calc(var(--ft-fit,1)*.84))!important;box-shadow:0 18px 45px #0002}';root.append(style);
+        const buttons=[...root.querySelectorAll('.ft-trigger')];let current=5,step=0;
+        buttons[current].dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));
+        const announce=()=>{
+          if(Number(root.querySelector('.ft-tooltip').style.opacity)<.999){requestAnimationFrame(announce);return;}
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          const order=[4,3,2,1,0,1,2,3,4,5];
+          later(()=>repeat(()=>{buttons[current].dispatchEvent(new PointerEvent('pointerleave',{pointerType:'mouse'}));current=order[step++%order.length];buttons[current].dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));},510),650);
+        };requestAnimationFrame(announce);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'spider-music-player') {
       const ready=()=>{
         const root=document.querySelector('#spider-player [data-motion-surface]')?.shadowRoot;

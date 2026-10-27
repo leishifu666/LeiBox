@@ -76,7 +76,7 @@ test("exported navigation aliases retain RSC content and MIME headers", async ()
   const headers = await fs.readFile(path.join(out, "_headers"), "utf8");
   for (const [flat, nested] of [
     ["components/__next.!KHNoZWxsKQ.components.__PAGE__.txt", "components/__next.!KHNoZWxsKQ/components/__PAGE__.txt"],
-    ["docs/components/frost/__next.!KHNoZWxsKQ.docs.components.frost.txt", "docs/components/frost/__next.!KHNoZWxsKQ/docs/components/frost.txt"],
+    ["docs/installation/__next.!KHNoZWxsKQ.docs.installation.txt", "docs/installation/__next.!KHNoZWxsKQ/docs/installation.txt"],
   ]) {
     assert.equal(await fs.readFile(path.join(out, flat), "utf8"), await fs.readFile(path.join(out, nested), "utf8"));
     assert.ok(headers.includes(`/${flat}\n  Content-Type: text/x-component; charset=utf-8`));

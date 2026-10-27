@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-const EVENT = "canvasui:pref";
+const EVENT = "leibox:pref";
 
 function readStored(storageKey: string): string | null {
   try {
@@ -26,7 +26,7 @@ export function usePreference<T extends string>(
   fallback: T,
   valid: readonly T[],
 ): [T, (value: T) => void] {
-  const storageKey = `canvasui:${key}`;
+  const storageKey = `leibox:${key}`;
 
   const value = useSyncExternalStore(
     subscribe,

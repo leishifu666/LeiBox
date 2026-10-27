@@ -1,4 +1,5 @@
 import { MOTION_PROMPTS } from "./motion-prompts.mjs";
+import { FLUID_TOOLTIP_PROMPT } from "./fluid-tooltip.mjs";
 import { BRAND_POSTER_CARDS_PROMPT } from "./brand-poster-cards.mjs";
 import { COLLECTION_LAYOUT_PROMPT } from "./collection-layout-morph.mjs";
 import { SPIDER_MUSIC_PLAYER_PROMPT } from "./spider-music-player.mjs";
@@ -19,7 +20,7 @@ import { SAILING_TOC_PROMPT } from "./sailing-toc.mjs";
 import { GLASS_TAB_MENU_PROMPT } from "./glass-tab-menu.mjs";
 import { HAMMERHEAD_CHART_PROMPT } from "./hammerhead-chart.mjs";
 import { EFFORT_SLIDER_PROMPT, DEEP_AGENT_COMPOSER_PROMPT } from "./deep-agent.mjs";
-/** Motion examples are independent of the Canvas UI effect registry. */
+/** Interactive examples and their individual source references. */
 export interface MotionEntry {
   slug: string;
   href: string;
@@ -45,6 +46,15 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug: "fluid-tooltip", href: "/docs/animations/fluid-tooltip", name: "Fluid Tooltip", category: "Tooltip interaction",
+    description: "One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.",
+    keywords: "流体 提示 气泡 胶囊 导航 侧栏 悬浮 Logo LeiBox fluid tooltip capsule navigation sidebar hover profile",
+    preview: "/assets/components/fluid-tooltip.png", sourceFile: "流体提示气泡.html", canvasWidth: 1288, canvasHeight: 1080,
+    instructions: "Hover or focus the icons to move the tooltip. Click to select; arrow keys move focus and Escape closes it.",
+    prompt: FLUID_TOOLTIP_PROMPT, recreatedHtml: true,
+    codeSource: "Independent LeiBox DOM/CSS/GSAP tooltip implementation with an embedded brand mark, Lucide icons and Inter font.",
+  },
   {
     slug: "spider-music-player", href: "/docs/animations/spider-music-player", name: "Spider Track Switcher", category: "Music interaction",
     description: "An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.",

@@ -12,7 +12,6 @@ const ROUTES: { path: string; priority: number }[] = [
   { path: "/docs/animations/notes-text-color", priority: 0.8 },
   { path: "/", priority: 1 },
   { path: "/components", priority: 0.9 },
-  { path: "/celebrate", priority: 0.7 },
   { path: "/docs", priority: 0.9 },
   { path: "/docs/installation", priority: 0.9 },
   { path: "/docs/rendering", priority: 0.8 },
@@ -33,16 +32,8 @@ const ROUTES: { path: string; priority: number }[] = [
   { path: "/docs/animations/bouncy-access", priority: 0.8 },
   { path: "/docs/animations/velocity-drag", priority: 0.8 },
   { path: "/docs/animations/ai-generating", priority: 0.8 },
-  { path: "/docs/components/ascii-object", priority: 0.8 },
-  { path: "/docs/components/asciify", priority: 0.8 },
-  { path: "/docs/components/frost", priority: 0.8 },
-  { path: "/docs/components/glass", priority: 0.8 },
-  { path: "/docs/components/glass-object", priority: 0.8 },
-  { path: "/docs/components/glyph-rain", priority: 0.8 },
-  { path: "/docs/components/particle-object", priority: 0.8 },
-  { path: "/docs/components/particle-scroll", priority: 0.8 },
-  { path: "/docs/components/liquid-object", priority: 0.8 },
   { path: "/privacy", priority: 0.3 },
+  { path: "/copyright", priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

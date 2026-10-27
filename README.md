@@ -1,53 +1,49 @@
 # LeiBox
 
-**装下你的 UI 灵感与组件。**
+**为你的页面，挑一箱好玩的组件。**
 
-雷师傅的 UI 灵感与组件收藏箱，收集值得留下的界面、交互和设计细节。浏览真实演示、查看组件文档、追溯原始来源，为下一个界面找到灵感。
+LeiBox 是雷师傅维护的个人界面学习、交互实验与设计参考收藏。提供中英双语页面、可操作的示例、组件来源记录，以及按需读取的 AI 检索入口；不将所有设计与素材声称为原创。
 
-A personal collection of UI inspiration, interactive components and design references, with Chinese and English interfaces.
+> **仅供学习使用。** 第三方设计、代码、图片、字体、商标等权利归各自权利人所有。本声明不代替授权，也不授予复制、分发或商业使用第三方内容的权利。
 
 [![GitHub Stars](https://img.shields.io/github/stars/leishifu666/LeiBox?style=social)](https://github.com/leishifu666/LeiBox)
-[![在线演示](https://img.shields.io/badge/Website-LeiBox-111111?style=flat)](https://leibox-ui.netlify.app/)
 
-[访问网站](https://leibox-ui.netlify.app/) · [浏览组件](https://leibox-ui.netlify.app/components) · [阅读文档](https://leibox-ui.netlify.app/docs) · [AI 接入](https://leibox-ui.netlify.app/docs/mcp)
+[在线网站](https://leibox-ui.netlify.app/) · [浏览组件](https://leibox-ui.netlify.app/components) · [使用说明](https://leibox-ui.netlify.app/copyright)
 
-## 项目预览
+## 当前项目截图
 
-以下截图来自 [LeiBox 在线站点](https://leibox-ui.netlify.app/)。在线内容持续更新，具体功能以所使用的代码版本为准。
+以下图片由本仓库当前版本在本地实际运行后直接截取，采集日期为 **2026-10-28**。来源、页面路径和视口信息见 [截图记录](docs/screenshots/README.md)。它们展示当前代码，不代表线上部署已同步。图片未经拼接或生成。
 
 ### 首页
 
-![LeiBox 首页：UI 灵感与组件收藏箱](docs/screenshots/leibox-home.png)
+![LeiBox 当前首页实拍](docs/screenshots/leibox-home.png)
 
 ### 组件浏览
 
-![LeiBox 深色主题组件列表：交互动效与设计参考](docs/screenshots/leibox-components.png)
+![LeiBox 当前组件列表实拍](docs/screenshots/leibox-components.png)
 
-### 交互演示
+### 玻璃文件夹交互
 
-![LeiBox 玻璃文件夹演示：展开文件预览与组件文档](docs/screenshots/leibox-glass-folder.png)
+![LeiBox 玻璃文件夹实际打开状态](docs/screenshots/leibox-glass-folder.png)
 
 ## 可以做什么
 
-- **找灵感**：通过组件列表和搜索查看交互效果与设计细节。
-- **看演示**：在浏览器中体验效果，再查看代码示例和参数说明。
-- **切换语言**：默认中文，点击导航中的 **EN / 中** 切换；选择保存在当前浏览器。
-- **选择框架与渲染方式**：上游效果提供 React、Vue、Svelte、Solid、Preact 和原生 JavaScript 示例，以及 WebGL / WebGPU 实现；以具体组件页为准。
-- **追溯来源**：保留组件出处、原作者署名及相关许可。
+- 浏览界面学习与交互实验，体验实际可用的状态。
+- 按组件页面查看支持的框架、依赖、设计参考和代码来源。
+- 通过 LeiBox Skill 检索示例、选择框架并读取本站实际提供的代码包。
+- 在复用前核对原始许可；许可不清楚的素材或设计，应取得授权或换成权利清楚的替代内容。
 
-部分原生 HTML-in-Canvas 效果依赖浏览器实验能力，普通浏览器使用相应降级显示。
+## AI 检索
 
-## 让 AI 使用 LeiBox 组件
-
-```sh
+~~~sh
 npx skills add https://leibox-ui.netlify.app --skill leibox
-```
+~~~
 
-安装后，告诉 AI 你需要什么组件。Skill 会搜索最新的全站目录、选择项目所用框架，并把完整源码拉到项目中；无需克隆本仓库或启动本地服务器。详见 [AI 接入指南](https://leibox-ui.netlify.app/docs/mcp) 和 [Skill 说明](integrations/skills/leibox/SKILL.md)。
+详见 [AI 接入指南](docs/AI-INTEGRATION.md) 与 [Skill](integrations/skills/leibox/SKILL.md)。索引以实际生成的条目为准，不承诺未提供的组件或能力。
 
 ## 本地运行
 
-需要 Node.js 22 或更新版本，推荐 Node.js 24。
+推荐 Node.js 24。
 
 ~~~sh
 git clone https://github.com/leishifu666/LeiBox.git
@@ -57,26 +53,12 @@ npm run build
 npm start
 ~~~
 
-打开 [http://127.0.0.1:3000](http://127.0.0.1:3000)。开发时使用 `npm run dev`。
+打开 [本地网站](http://127.0.0.1:3000/)。项目使用 Next.js 静态导出，开发时使用 npm run dev。
 
-项目使用 Next.js 静态导出；`npm start` 启动仓库提供的本地预览服务。
+## 来源、许可与权利人联系
 
-## 技术栈
+本项目不是所参考作者或项目的官方网站，不代表其授权或背书。修改代码写法、替换背景、免费公开或注明学习用途，均不自动消除已有代码与素材的许可要求。
 
-Next.js · React · TypeScript · Tailwind CSS · WebGL / WebGPU
+已移除旧来源效果库的组件、演示、媒体和公开源码分发入口。网站历史基础代码仍适用的版权及许可声明保留在 [LICENSE.md](LICENSE.md)，不以更换品牌的方式删除。具体范围与剩余注意事项见 [来源与使用说明](COPYRIGHT.md)。
 
-## 支持项目
-
-如果 LeiBox 帮你找到了灵感，欢迎点击本页右上角的 **Star**。
-
-星标徽章展示 GitHub 上的 Star 数量，随数据更新。
-
-发现问题或有组件建议，可以 [提交 Issue](https://github.com/leishifu666/LeiBox/issues)。
-
-## 来源与许可
-
-项目基于 [DavidHDev/canvas-ui](https://github.com/DavidHDev/canvas-ui)，初始导入版本为 `a04a99b235299ee79a123a16ccb2e6cf9da74b6b`，独立维护 LeiBox 的界面与内容。
-
-保留上游署名及 [MIT + Commons Clause 许可](LICENSE.md)。使用、修改或分发前请阅读完整许可；第三方组件、字体与素材遵循各自的许可声明。上游资料见 [README-UPSTREAM.md](README-UPSTREAM.md)。
-
-本地实现与历史取证说明见 [README-LOCAL.md](README-LOCAL.md) 和 [双语说明](docs/LOCALIZATION.md)；其中标注的本地研究材料并不包含在仓库中。
+如您是相关权利人，请发邮件至 leir0491@gmail.com，附涉及页面、原始作品或权利证明、具体问题及联系方式。核实后会按情况更正署名、替换素材或移除内容。

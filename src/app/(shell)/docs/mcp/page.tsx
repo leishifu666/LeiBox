@@ -30,7 +30,8 @@ Current collection: ${COMPONENT_CATALOG.length} components. The Skill fetches /a
 
 ${COMMANDS}
 
-Project source is fetched from LeiBox; Canvas UI reference source is fetched directly from the original provider. Keep source notices and design references. Pull does not overwrite different existing files or run downloaded code.`;
+For learning use only.
+`;
 
 export default async function AiIntegrationPage() {
   const skillSource = await readFile(path.join(process.cwd(), "integrations/skills/leibox/SKILL.md"), "utf8");
@@ -63,7 +64,7 @@ export default async function AiIntegrationPage() {
         <div className="my-6"><CodeBlock source={COMMANDS} fileName="LeiBox Skill" /></div>
         <p><T>Pull downloads the selected framework&apos;s complete file set and checks its content hashes. It preserves different existing files and does not execute code or install dependencies.</T></p>
         <h2><T>Source and distribution</T></h2>
-        <p><T>LeiBox framework packages are downloaded from this website. Canvas UI reference entries are downloaded directly from their original provider. Keep the source notices and each component&apos;s design-reference attribution.</T></p>
+      <p><T>For learning use only.</T></p>
         <details className="my-6 rounded-xl border border-border/60 p-4">
           <summary className="cursor-pointer text-sm font-medium"><T>Read Skill instructions</T></summary>
           <div className="mt-4"><CodeBlock html={skillHtml} source={skillSource} fileName="SKILL.md" /></div>

@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run motion:build && npm run registry && npm run docs:assets && npm run assets:optimize && next dev",
-    "live": "node --experimental-strip-types scripts/build-live-wrappers.mts",
-    "registry": "npm run live && node --experimental-strip-types scripts/build-registry.mts",
+    "registry": "node --experimental-strip-types scripts/build-registry.mts",
     "prebuild": "npm run motion:build && npm run registry && npm run docs:assets && npm run assets:optimize && npm run ai:catalog",
     "docs:assets": "node --experimental-strip-types scripts/build-doc-assets.mts",
     "assets:optimize": "node scripts/optimize-media.mjs",

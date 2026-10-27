@@ -1,0 +1,171 @@
+{
+  "slug": "fluid-tooltip",
+  "name": {
+    "en": "Fluid Tooltip",
+    "zh": "流体提示气泡"
+  },
+  "description": {
+    "en": "One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.",
+    "zh": "黑色胶囊随六个导航入口移动、变宽，通过裁切切换文字；头像使用 LeiBox Logo。"
+  },
+  "keywords": "流体 提示 气泡 胶囊 导航 侧栏 悬浮 Logo LeiBox fluid tooltip capsule navigation sidebar hover profile",
+  "docsPath": "/docs/animations/fluid-tooltip",
+  "detailPath": "/ai/components/fluid-tooltip.json",
+  "markdownPath": "/ai/components/fluid-tooltip.md",
+  "previewPath": "/assets/components/fluid-tooltip.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "侧栏导航提示",
+      "头像提示气泡",
+      "fluid navigation tooltip"
+    ],
+    "searchTerms": [
+      "流体",
+      "提示",
+      "气泡",
+      "胶囊",
+      "导航",
+      "头像",
+      "logo",
+      "fluid",
+      "tooltip",
+      "sidebar",
+      "hover"
+    ],
+    "visualTags": [
+      "fluid",
+      "capsule",
+      "navigation"
+    ],
+    "interactions": [
+      "hover",
+      "focus",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "默认仅切换本地选中项，通过 onSelect 接入导航；Logo 与提示文字可替换。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent LeiBox DOM/CSS/GSAP tooltip implementation with an embedded brand mark, Lucide icons and Inter font.",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/fluid-tooltip/react.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { FluidTooltip } from \"./FluidTooltip\";\n\nexport default function App() {\n  return <FluidTooltip />;\n}",
+      "files": [
+        "FluidTooltip.tsx",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/fluid-tooltip/vue.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport FluidTooltip from \"./FluidTooltip.vue\";\n</script>\n<template><FluidTooltip /></template>",
+      "files": [
+        "FluidTooltip.vue",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/fluid-tooltip/svelte.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport FluidTooltip from \"./FluidTooltip.svelte\";\n</script>\n<FluidTooltip />",
+      "files": [
+        "FluidTooltip.svelte",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/fluid-tooltip/solid.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { FluidTooltip } from \"./FluidTooltip.solid\";\n\nexport default function App() {\n  return <FluidTooltip />;\n}",
+      "files": [
+        "FluidTooltip.solid.tsx",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/fluid-tooltip/preact.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { FluidTooltip } from \"./FluidTooltip.preact\";\n\nexport default function App() {\n  return <FluidTooltip />;\n}",
+      "files": [
+        "FluidTooltip.preact.tsx",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/fluid-tooltip/vanilla.json",
+      "component": "FluidTooltip",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./FluidTooltip\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "FluidTooltip.ts",
+        "FluidTooltipEngine.js",
+        "motion-runtime.ts",
+        "FluidTooltipEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus the icons to move the tooltip. Click to select; arrow keys move focus and Escape closes it.",
+    "zh": "悬停或聚焦图标移动提示，点击选中；方向键切换焦点，Escape 收起。"
+  }
+}

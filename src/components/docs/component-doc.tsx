@@ -4,20 +4,16 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-import { HtmlInCanvasBanner } from "@/components/common/html-in-canvas-banner";
 import { ApiReference, type ApiProp } from "@/components/docs/api-reference";
 import { CodeTabs, type CodeVariant } from "@/components/docs/code-tabs";
 import { CopyMenu, type StandaloneCopyContent } from "@/components/docs/copy-menu";
 import { CopyButton } from "@/components/docs/copy-button";
 import { DependencyTabs } from "@/components/docs/dependency-tabs";
-import { InstallNote, InstallTabs } from "@/components/docs/install-tabs";
-import {
-  getComponentDependencies,
-} from "@/lib/registry";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import type { MotionPackageRef } from "@/lib/doc-asset-types";
 import { getDocAssets } from "@/lib/doc-assets";
 import { MotionPrompt } from "@/components/docs/motion-framework-tabs";
+import { LearningNotice } from "@/components/common/learning-notice";
 import { cn } from "@/lib/utils";
 
 export interface ComponentDocProps {
@@ -66,13 +62,9 @@ export async function ComponentDoc({
   motionPackages,
   requiresHtmlInCanvas = false,
 }: ComponentDocProps) {
-  const { dependencies, devDependencies } =
-    getComponentDependencies(installItem);
-  const webgpuDeps = getComponentDependencies(installItem, "webgpu");
-  const assets = copyContent ? undefined : getDocAssets().canvas[installItem];
-  const webglVariants = assets?.webgl ?? [];
-  const webgpuVariants = assets?.webgpu ?? [];
-  const hasWebGPU = webgpuVariants.length > 0;
+  const dependencies = motionPackages?.[0]?.dependencies ?? [];
+  const devDependencies: string[] = [];
+  const hasWebGPU = false;
 
   return (
     <article className="mx-auto w-full max-w-3xl" data-component-document={installItem}>
@@ -80,21 +72,7 @@ export async function ComponentDoc({
         <h1 className="min-w-0 text-3xl font-semibold tracking-[-0.02em]">
           <TranslatedText>{title}</TranslatedText>
         </h1>
-        <CopyMenu
-          title={title}
-          description={description}
-          installItem={installItem}
-          variants={webglVariants}
-          webgpuVariants={webgpuVariants}
-          apiReference={apiReference}
-          dependencies={dependencies}
-          devDependencies={devDependencies}
-          webgpuDependencies={webgpuDeps.dependencies}
-          webgpuDevDependencies={webgpuDeps.devDependencies}
-          demoSourceUrl={assets?.demoUrl}
-          standalone={copyContent}
-          motionPackages={motionPackages}
-        />
+        {copyContent ? <CopyMenu title={title} standalone={copyContent} motionPackages={motionPackages} /> : null}
       </div>
       <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
         <TranslatedText>{description}</TranslatedText>
@@ -114,7 +92,6 @@ export async function ComponentDoc({
         </div>
       ) : null}
 
-      {requiresHtmlInCanvas ? <HtmlInCanvasBanner /> : null}
 
       {preview ? (
         <section className="mt-8" aria-label="Preview">
@@ -124,6 +101,7 @@ export async function ComponentDoc({
         </section>
       ) : null}
 
+      <LearningNotice className="mt-6 border-l-2 border-border pl-4" />
       {beforeInstall}
 
       <section className="mt-8" aria-label="Installation">
@@ -134,9 +112,8 @@ export async function ComponentDoc({
           Install
         </TranslatedText></h2>
         <div className="mt-3">
-          {installation ?? <InstallTabs item={installItem} hasWebGPU={hasWebGPU} />}
+          {installation}
         </div>
-        {!installation ? <InstallNote hasWebGPU={hasWebGPU} /> : null}
       </section>
 
       {dependencies.length > 0 || devDependencies.length > 0 || hasWebGPU ? (
@@ -155,9 +132,9 @@ export async function ComponentDoc({
             <DependencyTabs
               dependencies={dependencies}
               devDependencies={devDependencies}
-              webgpuDependencies={hasWebGPU ? webgpuDeps.dependencies : undefined}
+              webgpuDependencies={hasWebGPU ? [] : undefined}
               webgpuDevDependencies={
-                hasWebGPU ? webgpuDeps.devDependencies : undefined
+                hasWebGPU ? [] : undefined
               }
             />
           </div>
@@ -172,7 +149,7 @@ export async function ComponentDoc({
           Code
         </TranslatedText></h2>
         <div className="mt-3">
-          {code ?? <CodeTabs variants={webglVariants} webgpuVariants={webgpuVariants} />}
+          {code}
         </div>
       </section>
 

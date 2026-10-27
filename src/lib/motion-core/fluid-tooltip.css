@@ -1,0 +1,12 @@
+.ft-scene{position:relative;width:100%;height:var(--motion-height,1080px);overflow:hidden;isolation:isolate;background:linear-gradient(163deg,#224d6b 0%,#52778c 57%,#a1adb7 100%);color:#f2f2f3;font-family:FluidTooltipInter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.ft-stage{position:absolute;left:50%;top:50%;width:1288px;height:1080px;transform:translate(-50%,-50%) scale(var(--ft-fit,1));transform-origin:center;isolation:isolate}
+.ft-panel{position:absolute;inset:0 0 0 194px;border-left:2px solid #ffffff20;background:linear-gradient(145deg,#43536f 0%,#4b566b 100%);box-shadow:-20px 0 46px #112a3e30}
+.ft-grain{position:absolute;inset:0;pointer-events:none;opacity:.024;z-index:4;background-image:var(--ft-grain)}
+.ft-rail{position:absolute;left:236px;top:218px;display:flex;flex-direction:column;gap:9px;width:100px}
+.ft-trigger{position:relative;display:grid;place-items:center;flex:0 0 100px;width:100px;height:100px;padding:0;border:0;border-radius:35px;background:transparent;color:#d6dbe3;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ft-trigger:focus-visible{outline:3px solid #e9edf7;outline-offset:5px}.ft-trigger svg{width:44px;height:44px;pointer-events:none}.ft-trigger[data-item=tasks] svg path:first-child{fill:currentColor;stroke:none}.ft-trigger[data-item=tasks] svg path:last-child{stroke-dasharray:36 3 1.7 3 1.7 3}.ft-trigger[data-item=focus] svg circle:last-child{fill:currentColor}
+.ft-logo{display:block;width:66px;height:66px;object-fit:contain;border:1px solid #ffffff50;border-radius:50%;background:#fff;padding:4px;pointer-events:none}
+.ft-tooltip{position:absolute;left:356px;top:0;width:252px;height:86px;overflow:hidden;border-radius:43px;background:#1e1e23;box-shadow:0 6px 22px #1b203a12;pointer-events:none;opacity:0;will-change:transform,width,opacity}
+.ft-label-track{position:absolute;left:32px;top:0;will-change:transform}.ft-label-row{position:absolute;left:0;display:flex;align-items:center;gap:18px;height:86px;width:max-content;white-space:nowrap;font-size:38px;font-weight:600;line-height:46px;letter-spacing:-.8px}
+.ft-label-row kbd{min-width:75px;padding:0;background:none;border:0;font:600 38px/46px FluidTooltipInter,Arial,Helvetica,sans-serif;letter-spacing:-1.2px;color:#89898e}
+.ft-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

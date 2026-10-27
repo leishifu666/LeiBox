@@ -9,7 +9,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true}),results=[]
 try{
   for(const width of [1440,658,768,375]){
     const page=await browser.newPage({viewport:{width,height:1000},colorScheme:'light'});
-    await page.addInitScript(()=>{try{localStorage.setItem('canvasui:locale','zh');localStorage.setItem('theme','light');}catch{}});
+    await page.addInitScript(()=>{try{localStorage.setItem('leibox:locale','zh');localStorage.setItem('theme','light');}catch{}});
     await page.goto(base,{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);
     for(const locale of ['en','zh']){
       await page.locator('section[aria-labelledby="cta-heading"]').evaluate(node=>{window.scrollTo(0,window.scrollY+node.getBoundingClientRect().top-300);});
