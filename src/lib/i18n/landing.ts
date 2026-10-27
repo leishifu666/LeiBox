@@ -92,7 +92,7 @@ export const landingTranslations: Record<string, string> = {
   "{count} lines": "{count} 行",
   "Copy code": "复制代码",
   "A box of playful components for your pages.": "为你的页面，挑一箱好玩的组件",
-  "LeiBox offers free components for interactions, motion, and visual effects. Try them out, explore the docs and code, and use them in your work according to each item's source and license.": "LeiBox 免费提供交互、动效和视觉效果组件。每一个都能先上手玩，再看文档和代码，按条目注明的来源与许可，用进你的作品。",
+  "Free web interactions and motion. Try them out. Find your fit, explore the docs and code, and make it yours.": "免费的网页交互与动效，先点开、拖一拖、玩一玩。\n觉得对味，再看文档和代码，把它带进你的作品。",
   "Collected components": "收藏组件",
   "Curated and growing": "持续精选中",
   "Live demos": "真实演示",

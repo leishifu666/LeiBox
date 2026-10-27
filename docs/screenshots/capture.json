@@ -1,11 +1,11 @@
 {
   "captureDate": "2026-10-28",
-  "capturedAt": "2026-10-28T03:46:10.198+08:00",
+  "capturedAt": "2026-10-28T04:24:44.149+08:00",
   "timezone": "Asia/Shanghai",
   "base": "http://127.0.0.1:3000",
-  "baseCommit": "cd044fce9b75e2aa649d213266db1487354d7b33",
+  "baseCommit": "7002336fee1c464ded304f5ab284218f303a1a7a",
   "workingTreeDirty": true,
-  "buildId": "zH0TuFhfW26rex1UG4woI",
+  "buildId": "L03-IiuDA1gLAIeLDtBJa",
   "version": "Current locally built working tree. Includes uncommitted local changes; does not represent the deployed website.",
   "locale": "zh",
   "theme": "light",
@@ -22,8 +22,8 @@
         "width": 1440,
         "height": 1280
       },
-      "sha256": "114055a90bd9e9bcee644c867f8a8ba01e6447f94760ce07ca98bd320d78cf24",
-      "bytes": 408625
+      "sha256": "86ef51472dd66bf529e822e6c8046d9743c952baf1c2c778d8aeb1e338a5aaae",
+      "bytes": 409389
     },
     {
       "route": "/components",
@@ -48,8 +48,8 @@
         "width": 1440,
         "height": 1100
       },
-      "sha256": "967ff5e4c6abe596738e8d42866d01fb24d996a22af20a43c4e5e0d7bfd492c9",
-      "bytes": 275905
+      "sha256": "aec764640b05c8586e3f1ddcb4e4bae92ab0583a3d6cbf420e3be0afd745ace1",
+      "bytes": 275912
     },
     {
       "route": "/docs/components/glass-object",

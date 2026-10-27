@@ -4,6 +4,7 @@ import { preload } from "react-dom";
 
 import { HeroReveal } from "@/components/landing/hero-reveal";
 import { HeroInstallCommand } from "@/components/landing/hero-install-command";
+import { HeroText } from "@/components/landing/hero-text";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import { optimizedImage } from "@/lib/optimized-image";
 import { SoftArrow } from "@/components/landing/soft-arrow";
@@ -21,19 +22,13 @@ export function Hero() {
           data-hero-title
           style={{ "--enter-index": 0 } as React.CSSProperties}
           className="hero-enter text-[clamp(2.25rem,5.5vw,3.75rem)] leading-[1.04] font-medium tracking-tighter text-balance"
-        ><T>
-          A box of playful components for your pages.
-        </T></h1>
+        ><HeroText text="A box of playful components for your pages." /></h1>
 
         <p
           data-hero-description
           style={{ "--enter-index": 1 } as React.CSSProperties}
-          className="hero-enter mt-5 max-w-md text-base leading-7 text-pretty text-muted-foreground"
-        ><T>
-          LeiBox offers free components for interactions, motion, and visual
-          effects. Try them out, explore the docs and code, and use them in your
-          work according to each item&apos;s source and license.
-        </T></p>
+          className="hero-enter mt-5 w-full max-w-md text-base leading-7 text-pretty text-muted-foreground sm:whitespace-pre-line"
+        ><HeroText text={"Free web interactions and motion. Try them out.\nFind your fit, explore the docs and code, and make it yours."} /></p>
 
         <div
           data-hero-actions
