@@ -1,4 +1,5 @@
 import { BLOCKED_DOMAINS, BLOCKED_TLDS, suggestDomain } from "./domains";
+import { createContactHandler } from "../scripts/contact-mail.mjs";
 
 interface RateLimiter {
   limit: (options: { key: string }) => Promise<{ success: boolean }>;
@@ -11,6 +12,10 @@ interface Env {
   TURNSTILE_ENABLED?: string;
   ALLOWED_ORIGINS?: string;
   RESEND_SEGMENT_ID?: string;
+  CONTACT_FROM?: string;
+  CONTACT_TO?: string;
+  CONTACT_IP_LIMIT?: RateLimiter;
+  CONTACT_GLOBAL_LIMIT?: RateLimiter;
   SUBSCRIBE_IP_LIMIT?: RateLimiter;
   SUBSCRIBE_GLOBAL_LIMIT?: RateLimiter;
 }
@@ -242,9 +247,17 @@ async function subscribe(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+const contact = createContactHandler();
+
 const handler = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const { pathname } = new URL(request.url);
+
+    if (pathname === "/api/contact") {
+      return contact(request, env, {
+        clientKey: request.headers.get("cf-connecting-ip") ?? "unknown",
+      });
+    }
 
     if (pathname === "/api/subscribe") {
       return subscribe(request, env);

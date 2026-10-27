@@ -1,0 +1,43 @@
+import assert from 'node:assert/strict';
+import {expect} from 'playwright/test';
+
+export async function verifyCollectionLayoutMorph(page){
+ const scene=page.locator('#demo .clm-scene'),tiles=page.locator('#demo .clm-tile');
+ await expect(scene).toHaveAttribute('data-ready','true');await expect(scene).toHaveAttribute('data-view','list');
+ await expect(tiles).toHaveCount(3);
+ assert.deepEqual(await tiles.evaluateAll(nodes=>nodes.map(node=>node.getAttribute('aria-label'))),['Claude','Codex','Grok']);
+ await tiles.evaluateAll(nodes=>nodes.forEach((node,i)=>node.dataset.identity='original-'+i));
+ const shared=await tiles.nth(1).elementHandle();
+ const geometry=()=>tiles.evaluateAll(nodes=>nodes.map(node=>({x:Number(node._gsap.x.slice(0,-2)),y:Number(node._gsap.y.slice(0,-2)),width:parseFloat(node.style.width),rotation:parseFloat(node._gsap.rotation)})));
+ const wait=()=>expect(scene).toHaveAttribute('data-animating','false');
+ const tabs=page.locator('#demo .clm-tab');
+ await tabs.nth(1).click();await expect(scene).toHaveAttribute('data-view','card');
+ const first=await geometry();await page.waitForTimeout(80);const later=await geometry();
+ assert.notEqual(later[0].width,first[0].width,'same image actually resizes over time');
+ assert(await shared.evaluate(node=>node.isConnected&&node.dataset.identity==='original-1'),'Codex image keeps its DOM identity');
+ await wait();const card=await geometry();
+ assert(Math.abs(card[0].width-472/3)<.2);assert(card[1].x>card[0].x+card[0].width);assert(card[2].x>card[1].x+card[1].width);
+ await tabs.nth(2).click();await wait();const pack=await geometry();
+ assert.deepEqual(pack.map(node=>node.rotation),[-14,0,14]);assert(pack.every(node=>Math.abs(node.width-76)<.1));
+ assert.deepEqual(await page.locator('#demo .clm-item').evaluateAll(nodes=>nodes.map(node=>Number(node.style.zIndex))),[0,1,2]);
+ await tabs.nth(2).press('ArrowRight');await wait();await expect(scene).toHaveAttribute('data-view','list');
+ const list=await geometry();assert.deepEqual(list.map(node=>node.y),[0,88,176]);
+ await tabs.nth(0).press('End');await expect(scene).toHaveAttribute('data-view','pack');
+ await tabs.nth(2).press('Home');await expect(scene).toHaveAttribute('data-view','list');
+ for(const view of ['card','pack','list','pack','card'])await page.locator(`#demo [data-view=${view}].clm-tab`).click({force:true});
+ await wait();await expect(scene).toHaveAttribute('data-view','card');await expect(tiles).toHaveCount(3);
+ assert.deepEqual(await tiles.evaluateAll(nodes=>nodes.map(node=>node.dataset.identity)),['original-0','original-1','original-2']);
+ await page.evaluate(()=>window.__update({view:'pack',reducedMotion:true}));
+ await expect(scene).toHaveAttribute('data-view','pack');await expect(scene).toHaveAttribute('data-animating','false');
+ await tabs.nth(0).click();await expect(scene).toHaveAttribute('data-view','list');
+ assert.deepEqual((await geometry()).map(node=>node.y),[0,88,176],'reduced motion commits final geometry immediately');
+ await page.evaluate(()=>window.__update({view:'card',reducedMotion:false}));await expect(scene).toHaveAttribute('data-view','card');await wait();
+ await tabs.nth(2).focus();await tabs.nth(2).press('Enter');await expect(scene).toHaveAttribute('data-view','pack');
+ await tabs.nth(0).focus();await tabs.nth(0).press('Space');await expect(scene).toHaveAttribute('data-view','list');await wait();
+ const box=await tabs.nth(1).boundingBox(),cdp=await page.context().newCDPSession(page);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:box.x+box.width/2,y:box.y+box.height/2}]});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await cdp.detach();
+ await expect(scene).toHaveAttribute('data-view','card');await wait();
+ const ids=await page.locator('#demo .clm-art [id]').evaluateAll(nodes=>nodes.map(node=>node.id));assert.equal(ids.length,new Set(ids).size);
+ await tabs.nth(0).click();await wait();
+}

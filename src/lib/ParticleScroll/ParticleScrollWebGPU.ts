@@ -1,5 +1,5 @@
 import { getCanvasPixelRatio, createCanvasResizeObserver } from "../canvas-viewport";
-import { prepareHtmlInCanvas, drawHtmlInCanvas } from "../html-in-canvas";
+import { prepareHtmlInCanvas, drawHtmlInCanvas, createFallbackCapture } from "../html-in-canvas";
 import {
   draw,
   effect,
@@ -309,11 +309,11 @@ export function createParticleScroll(
   if (!supportsWebGPU()) return null;
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
+  const fallbackCapture = createFallbackCapture(source, content, output);
 
   const sourceCtx = source.getContext("2d") as ElementImageContext | null;
   const paintable = source as PaintableCanvas;
   const htmlInCanvas = Boolean(
-    source.contains(content) &&
     sourceCtx &&
     typeof sourceCtx.drawElementImage === "function" &&
     typeof paintable.requestPaint === "function",
@@ -874,6 +874,7 @@ export function createParticleScroll(
       start();
     },
     destroy() {
+      fallbackCapture?.destroy();
       destroyed = true;
       cancelAnimationFrame(raf);
       content.removeEventListener("scroll", onScroll);

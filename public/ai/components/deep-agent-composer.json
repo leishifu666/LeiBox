@@ -1,0 +1,231 @@
+{
+  "slug": "deep-agent-composer",
+  "name": {
+    "en": "Deep Agent Composer",
+    "zh": "Agent 对话输入框"
+  },
+  "description": {
+    "en": "The original Deep Agent Composer, including permission controls, context capacity, attachments, model selection, and the thinking-effort slider.",
+    "zh": "直接迁入 Deep Agent 原版对话输入框，包含权限菜单、上下文容量、附件、模型选择和思考强度滑块。"
+  },
+  "keywords": "Agent 对话 输入框 模型 思考 强度 推理 菜单 附件 计划 模式 Deep Agent composer chat model thinking reasoning effort slider",
+  "docsPath": "/docs/animations/deep-agent-composer",
+  "detailPath": "/ai/components/deep-agent-composer.json",
+  "markdownPath": "/ai/components/deep-agent-composer.md",
+  "previewPath": "/assets/components/deep-agent-composer.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "AI 聊天输入",
+      "智能体对话",
+      "AI chat composer"
+    ],
+    "searchTerms": [
+      "聊天",
+      "对话",
+      "输入框",
+      "附件",
+      "模型",
+      "chat",
+      "agent",
+      "composer",
+      "prompt"
+    ],
+    "visualTags": [
+      "product",
+      "compact"
+    ],
+    "interactions": [
+      "input",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "业务接口、附件上传、权限和模型调用需由目标项目接入。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/deep-agent-composer/react.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { DeepAgentComposer } from \"./DeepAgentComposer\";\n\nexport default function App() {\n  return <DeepAgentComposer />;\n}",
+      "files": [
+        "DeepAgentComposer.tsx",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/deep-agent-composer/vue.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport DeepAgentComposer from \"./DeepAgentComposer.vue\";\n</script>\n<template><DeepAgentComposer /></template>",
+      "files": [
+        "DeepAgentComposer.vue",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/deep-agent-composer/svelte.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "<script lang=\"ts\">\nimport DeepAgentComposer from \"./DeepAgentComposer.svelte\";\n</script>\n<DeepAgentComposer />",
+      "files": [
+        "DeepAgentComposer.svelte",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/deep-agent-composer/solid.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { DeepAgentComposer } from \"./DeepAgentComposer.solid\";\n\nexport default function App() {\n  return <DeepAgentComposer />;\n}",
+      "files": [
+        "DeepAgentComposer.solid.tsx",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/deep-agent-composer/preact.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { DeepAgentComposer } from \"./DeepAgentComposer.preact\";\n\nexport default function App() {\n  return <DeepAgentComposer />;\n}",
+      "files": [
+        "DeepAgentComposer.preact.tsx",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/deep-agent-composer/vanilla.json",
+      "component": "DeepAgentComposer",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { mount } from \"./DeepAgentComposer\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "DeepAgentComposer.ts",
+        "DeepAgentComposerEngine.js",
+        "motion-runtime.ts",
+        "DeepAgentComposerEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Open the original model pill to change thinking depth. Try the permission menu, context ring, attachments, or send action. The original React UI runs locally without a model connection.",
+    "zh": "点击原版模型胶囊调整思考强度，也可体验权限菜单、上下文容量、附件和发送。原版 React 界面独立运行，不连接模型。"
+  }
+}

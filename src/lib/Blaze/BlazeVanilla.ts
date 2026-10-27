@@ -351,6 +351,7 @@ export function supportsHtmlInCanvas(): boolean {
 export function createBlaze(
   elements: BlazeElements,
   options: BlazeOptions = {},
+  maxPixelRatio = Infinity,
 ): BlazeInstance | null {
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
@@ -490,7 +491,7 @@ export function createBlaze(
   }
 
   function syncCanvasSize() {
-    const dpr = getCanvasPixelRatio(output, gl!);
+    const dpr = Math.min(getCanvasPixelRatio(output, gl!), maxPixelRatio);
     const width = Math.max(1, Math.round(output.clientWidth * dpr));
     const height = Math.max(1, Math.round(output.clientHeight * dpr));
     if (output.width !== width || output.height !== height) {

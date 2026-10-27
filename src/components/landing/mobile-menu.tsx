@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/docs", label: "Docs" },
   { href: "/components", label: "Components" },
-  { href: "/playground", label: "Playground" },
 ];
 
 export function MobileMenu() {

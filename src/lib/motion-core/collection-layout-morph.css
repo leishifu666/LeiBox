@@ -1,0 +1,16 @@
+.clm-scene{position:relative;width:100%;height:var(--motion-height,720px);min-height:280px;background:#fff;overflow:hidden;isolation:isolate;color:#171717;font-family:Arial,Helvetica,system-ui,sans-serif}
+.clm-stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform:translate(-50%,-50%);transform-origin:center}
+.clm-panel{position:absolute;left:384px;top:140px;width:512px;height:410px}
+.clm-heading{margin:0;font-size:16px;line-height:20px;font-weight:500;letter-spacing:-.35px}
+.clm-tabs{position:absolute;left:0;top:38px;display:flex;gap:10px;height:32px;isolation:isolate}
+.clm-tab{position:relative;z-index:1;width:100px;height:32px;padding:0;border:0;border-radius:18px;background:transparent;color:#888;font:400 14px/20px Arial,Helvetica,system-ui,sans-serif;cursor:pointer;outline:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.clm-tab:nth-of-type(2){width:108px}.clm-tab:nth-of-type(3){width:110px}.clm-tab[aria-selected=true]{color:#171717}.clm-tab:hover{color:#333}.clm-tab:focus-visible{outline:2px solid #747474;outline-offset:3px}
+.clm-indicator{position:absolute;left:0;top:0;width:100px;height:32px;border-radius:18px;background:#e9e9e9;pointer-events:none;z-index:0}
+.clm-divider{position:absolute;left:0;top:88px;width:512px;height:1px;background:#ededed}
+.clm-board{position:absolute;left:0;top:130px;width:512px;height:300px}
+.clm-item{position:absolute;inset:0;pointer-events:none}
+.clm-tile{position:absolute;left:0;top:0;width:76px;height:76px;border-radius:5px;overflow:hidden;display:grid;place-items:center;box-shadow:inset 0 0 0 1px #ffffff66;transform-origin:center;will-change:transform,width,height}
+.clm-art{display:block;width:74%;height:74%;overflow:visible;pointer-events:none}
+.clm-bar{position:absolute;left:0;top:0;height:20px;border-radius:1px;background:#e6e6e6;pointer-events:none;transform-origin:top left}
+.clm-pack-meta{position:absolute;inset:0;pointer-events:none}
+.clm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

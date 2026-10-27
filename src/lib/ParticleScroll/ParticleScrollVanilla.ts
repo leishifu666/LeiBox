@@ -1,5 +1,5 @@
 import { getCanvasPixelRatio, createCanvasResizeObserver } from "../canvas-viewport";
-import { prepareHtmlInCanvas, drawHtmlInCanvas } from "../html-in-canvas";
+import { prepareHtmlInCanvas, drawHtmlInCanvas, createFallbackCapture } from "../html-in-canvas";
 export interface ParticleScrollOptions {
   /** Viewport fraction of the formation line. Content assembles as it scrolls up past this line and dissolves back below it. */
   point?: number;
@@ -239,11 +239,11 @@ export function createParticleScroll(
 ): ParticleScrollInstance | null {
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
+  const fallbackCapture = createFallbackCapture(source, content, output);
 
   const sourceCtx = source.getContext("2d") as ElementImageContext | null;
   const paintable = source as PaintableCanvas;
   const htmlInCanvas = Boolean(
-    source.contains(content) &&
     sourceCtx &&
     typeof sourceCtx.drawElementImage === "function" &&
     typeof paintable.requestPaint === "function",
@@ -260,7 +260,7 @@ export function createParticleScroll(
     antialias: false,
     premultipliedAlpha: false,
   });
-  if (!gl || gl.isContextLost()) return null;
+  if (!gl || gl.isContextLost()) { fallbackCapture?.destroy(); return null; }
 
   prepareHtmlInCanvas(source, content);
 
@@ -687,6 +687,7 @@ export function createParticleScroll(
       start();
     },
     destroy() {
+      fallbackCapture?.destroy();
       destroyed = true;
       cancelAnimationFrame(raf);
       content.removeEventListener("scroll", onScroll);

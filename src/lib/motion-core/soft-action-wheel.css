@@ -1,0 +1,8 @@
+html,body{background:#f1f1f1}
+.radial-menu-demo[data-variant=soft]{background:#f1f1f1;color:#000}
+[data-variant=soft] .rm-action,[data-variant=soft] .rm-toggle{border:1px solid transparent;background:linear-gradient(180deg,#fff 0%,#f3f3f3 2%,#f9f9f9 60%,#f9f9f9 98%,#fff 100%) padding-box,conic-gradient(from 0deg,#c9c9c9,#7c7c7c 25%,#b5b5b5 50%,#7c7c7c 75%,#c9c9c9) border-box;box-shadow:0 14px 24px rgba(0,0,0,.055)}
+[data-variant=soft] .rm-toggle{left:383px;top:383px;width:194px;height:194px}
+[data-variant=soft] .rm-icon{fill:#000}
+[data-variant=soft] .rm-toggle:hover,[data-variant=soft] .rm-action:hover{background:linear-gradient(160deg,#dedede,#ededed) padding-box,conic-gradient(from 0deg,#c9c9c9,#7c7c7c 25%,#b5b5b5 50%,#7c7c7c 75%,#c9c9c9) border-box;box-shadow:inset 0 1px 8px rgba(0,0,0,.035),inset 0 -1px 1px #fff,0 7px 15px rgba(0,0,0,.04)}
+[data-variant=soft] .rm-toggle:active,[data-variant=soft] .rm-action:active{background:linear-gradient(160deg,#d9d9d9,#e9e9e9) padding-box,conic-gradient(from 0deg,#c9c9c9,#7c7c7c 25%,#b5b5b5 50%,#7c7c7c 75%,#c9c9c9) border-box}
+[data-variant=soft] .rm-action:focus-visible{outline-color:#626aa6}

@@ -1,0 +1,34 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; min-height: 100%; background: #111111; }
+.galaxy-effort-demo { position: relative; width: 100%; height: 100vh; min-height: 516px; overflow: hidden; background: #111111; color: #e4e4e4; font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+.ge-stage { position: absolute; left: 50%; top: 50%; width: 945px; height: 516px; transform: translate(-50%, -50%) scale(var(--ge-scale, 1)); }
+.ge-card { position: absolute; left: 252.5px; top: 124px; width: 440px; height: 258px; border: 2px solid #292929; border-radius: 16px; background: #191919; box-shadow: 0 18px 28px -12px #0003; }
+.ge-heading { position: absolute; left: 22px; top: 25px; display: flex; align-items: baseline; gap: 16px; height: 35px; font-size: 26px; line-height: 35px; font-weight: 400; white-space: nowrap; }
+.ge-caption { color: #848484; }
+.ge-level { position: relative; color: #e1e1e1; display: inline-flex; }
+.ge-letter { display: inline-block; white-space: pre; }
+.ge-card[data-level="Galaxy"] .ge-level { color: #9dcef3; }
+.ge-help { position: absolute; right: 3px; top: 7px; display: grid; place-items: center; width: 70px; height: 70px; padding: 23px; color: #848484; border: 0; background: transparent; border-radius: 6px; cursor: help; }
+.ge-help:hover { color: #bfbfbf; }
+.ge-help svg { display: block; width: 24px; height: 24px; }
+.ge-help:focus-visible { outline: 2px solid #b591ff; outline-offset: 3px; }
+.ge-tooltip { position: absolute; z-index: 5; left: 22px; right: 22px; bottom: calc(100% + 12px); padding: 12px 14px; border: 1px solid #444; border-radius: 9px; background: #242424; color: #dedede; font-size: 14px; line-height: 20px; box-shadow: 0 6px 24px #0005; }
+.ge-tooltip[hidden] { display: none; }
+.ge-ends { position: absolute; top: 97px; left: 22px; right: 22px; display: flex; justify-content: space-between; color: #848484; font-size: 24px; line-height: 29px; }
+.ge-control { position: absolute; left: 22px; right: 22px; top: 133px; height: 72px; border-radius: 12px; touch-action: none; cursor: grab; -webkit-user-select: none; user-select: none; outline: none; }
+.ge-control[data-dragging="true"] { cursor: grabbing; }
+.ge-control:focus-visible { outline: 2px solid #b591ff; outline-offset: 4px; }
+.ge-track { position: absolute; inset: 15px 0 17px; overflow: hidden; border-radius: 10px; background: #272727; }
+.ge-fill { position: absolute; inset: 0 auto 0 0; width: 16px; background: linear-gradient(90deg, #312a2d 0%, #56394c 30%, #7d4970 60%, #a15992 90%, #af5e9d 100%); }
+.ge-pixels { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; background: linear-gradient(90deg, #10091d, #25123f); }
+.ge-tick { position: absolute; top: 18px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: rgb(255 255 255 / 20%); }
+.ge-tick[data-recommended] { top: 10px; width: 6px; height: 20px; border-radius: 3px; background: rgb(255 255 255 / 27%); }
+.ge-thumb { position: absolute; z-index: 2; top: 36px; left: 16px; width: 48px; height: 48px; margin: -24px; pointer-events: none; transform-origin: center; will-change: transform; }
+.ge-brain { display: block; width: 48px; height: 48px; overflow: visible; --ge-brain-fill: #ff92ce; --ge-brain-edge: #650e3c; }
+.ge-brain path { fill: var(--ge-brain-fill); stroke: var(--ge-brain-edge); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.ge-brain .ge-fold { fill: none; stroke-width: 4.2; }
+.ge-fold-layer { opacity: 0; }
+.ge-brain .ge-fold--detail { stroke-width: var(--ge-fold-width); stroke-dasharray: 1; stroke-dashoffset: var(--ge-fold-hidden, 1); }
+.ge-particles { position: absolute; z-index: 3; left: -100px; top: -60px; width: 640px; height: 390px; pointer-events: none; }
+.ge-recommended { position: absolute; left: 47px; top: 205px; margin: 0; color: #848484; font-size: 24px; line-height: 29px; }
+@media (prefers-reduced-motion: reduce) { .ge-thumb { will-change: auto; } }

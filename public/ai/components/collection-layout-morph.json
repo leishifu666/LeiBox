@@ -1,0 +1,165 @@
+{
+  "slug": "collection-layout-morph",
+  "name": {
+    "en": "Collection Layout Morph",
+    "zh": "列表卡片堆叠切换"
+  },
+  "description": {
+    "en": "The same three Claude, Codex and Grok SVG images smoothly move between a list, a card row and an overlapping pack.",
+    "zh": "Claude、Codex、Grok 三张 SVG 在列表、并排卡片与叠放之间连续移动、缩放和重排。"
+  },
+  "keywords": "列表 卡片 叠放 堆叠 布局 切换 图片 共享 元素 Claude Codex Grok list card pack shared layout morph collectibles Shawn Kel",
+  "docsPath": "/docs/animations/collection-layout-morph",
+  "detailPath": "/ai/components/collection-layout-morph.json",
+  "markdownPath": "/ai/components/collection-layout-morph.md",
+  "previewPath": "/assets/components/collection-layout-morph.png",
+  "discovery": {
+    "category": "layout",
+    "useCases": [
+      "收藏列表切换",
+      "卡片布局变换",
+      "list grid layout switch"
+    ],
+    "searchTerms": [
+      "列表",
+      "卡片",
+      "堆叠",
+      "布局",
+      "切换",
+      "list",
+      "grid",
+      "layout",
+      "stack"
+    ],
+    "visualTags": [
+      "cards"
+    ],
+    "interactions": [
+      "click",
+      "keyboard"
+    ],
+    "caveat": "接入时替换演示图片和条目，保留共享元素的连续布局。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent persistent-DOM layout state machine and GSAP transitions. Three embedded SVGs reuse the project's pinned Graphical/Lobe Icons assets, with their source records and applicable license notices retained.",
+    "designReference": "https://x.com/shawn_kel/status/2087937950424129978/video/1",
+    "designAuthor": "Previous Leon",
+    "license": "Original layout/code license not supplied or independently verified; original illustrations and reference video are not redistributed. Reused existing Claude/Codex vectors retain Lobe Icons Copyright (c) 2023 LobeHub and MIT notice. Grok Bot artwork source is recorded separately without claiming an MIT license for it."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/collection-layout-morph/react.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { CollectionLayoutMorph } from \"./CollectionLayoutMorph\";\n\nexport default function App() {\n  return <CollectionLayoutMorph />;\n}",
+      "files": [
+        "CollectionLayoutMorph.tsx",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/collection-layout-morph/vue.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport CollectionLayoutMorph from \"./CollectionLayoutMorph.vue\";\n</script>\n<template><CollectionLayoutMorph /></template>",
+      "files": [
+        "CollectionLayoutMorph.vue",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/collection-layout-morph/svelte.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport CollectionLayoutMorph from \"./CollectionLayoutMorph.svelte\";\n</script>\n<CollectionLayoutMorph />",
+      "files": [
+        "CollectionLayoutMorph.svelte",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/collection-layout-morph/solid.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { CollectionLayoutMorph } from \"./CollectionLayoutMorph.solid\";\n\nexport default function App() {\n  return <CollectionLayoutMorph />;\n}",
+      "files": [
+        "CollectionLayoutMorph.solid.tsx",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/collection-layout-morph/preact.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { CollectionLayoutMorph } from \"./CollectionLayoutMorph.preact\";\n\nexport default function App() {\n  return <CollectionLayoutMorph />;\n}",
+      "files": [
+        "CollectionLayoutMorph.preact.tsx",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/collection-layout-morph/vanilla.json",
+      "component": "CollectionLayoutMorph",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./CollectionLayoutMorph\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "CollectionLayoutMorph.ts",
+        "CollectionLayoutMorphEngine.js",
+        "motion-runtime.ts",
+        "CollectionLayoutMorphEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Choose List view, Card view or Pack view. Use arrow keys, Home or End on the tabs; all three SVG images keep their identity through rapid changes.",
+    "zh": "点击 List view、Card view 或 Pack view。标签支持方向键、Home 和 End，快速切换时三张图始终保留同一元素身份。"
+  }
+}

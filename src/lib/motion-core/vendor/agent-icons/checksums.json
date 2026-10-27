@@ -1,0 +1,22 @@
+[
+  {
+    "file": "claude-color.svg",
+    "sha256": "669a988581cb44765dc1c14497b0c6835627dc10acc9cb47cd1a8c9ea78336b8",
+    "bytes": 3310
+  },
+  {
+    "file": "codex-color.svg",
+    "sha256": "4a2f43ce46b5b6e3722c95088f88d26ef91e6a8c2e598e70642a1c54367386e4",
+    "bytes": 1769
+  },
+  {
+    "file": "cursor.svg",
+    "sha256": "a1edec13225f014dbc5f8ab515b1a464f869d987a8da2482493895ee10901116",
+    "bytes": 854
+  },
+  {
+    "file": "grok-bot.svg",
+    "sha256": "f3ede049c20b091287e2eb75f624707c5d7434fa31c4c010651c379fc284ef16",
+    "bytes": 523
+  }
+]

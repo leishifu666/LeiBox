@@ -1,0 +1,57 @@
+import assert from 'node:assert/strict';
+
+/** Exercise observable pointer and keyboard behavior against each real framework mount. */
+export async function verifyElasticPanel(page){
+ const scene=page.locator('#demo .er-scene'),handle=page.locator('#demo .er-handle');
+ const read=()=>scene.evaluate(n=>({p:Number(n.dataset.position),b:Number(n.dataset.bend)}));
+ const initial=await read();assert(Math.abs(initial.p-.3865)<.0001);
+ assert.equal(await scene.getAttribute('data-visible'),'false','handle starts hidden');
+ const panel=await page.locator('#demo .er-panel').elementHandle();
+ let box=await handle.boundingBox();
+ await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
+ await page.mouse.down();
+ await page.mouse.move(box.x-64,box.y+box.height/2,{steps:8});
+ await page.waitForTimeout(20);
+ const during=await read();assert(during.p<initial.p-.04,'pointer changes panel width');assert(during.b<0,'handle bends in the leftward movement direction');
+ const path=await handle.locator('.er-ink').getAttribute('d');
+ assert(Number(await scene.getAttribute('data-offset'))<0,'the whole handle moves off the panel edge');
+ await page.mouse.move(box.x+115,box.y+box.height/2,{steps:8});
+ await page.waitForFunction(()=>Number(document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('.er-scene').dataset.bend)>1);
+ assert.notEqual(await handle.locator('.er-ink').getAttribute('d'),path,'same path reverses its curvature');
+ await page.mouse.move(15,box.y+box.height/2,{steps:8});
+ const pulled=await read();assert(pulled.p<.276&&pulled.p>.276-16/1200,'overscroll is limited to a short resisted extension');
+ await page.waitForTimeout(350);
+ assert(Math.abs((await read()).b)<.1,'overdrag straightens the stretched handle');
+ await page.mouse.up();
+ await page.waitForFunction(()=>document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('.er-scene').dataset.state==='idle');
+ assert(Math.abs((await read()).p-.276)<.0001,'release springs back to the measured lower limit');
+ assert.equal((await read()).b,0,'release settles to a straight handle');
+ assert(await panel.evaluate(n=>n===n.getRootNode().querySelector('.er-panel')),'same panel survives the animation');
+ await handle.focus();await handle.press('Escape');
+ await page.waitForFunction(()=>Math.abs(Number(document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('.er-scene').dataset.position)-.3865)<.001);
+ await handle.press('ArrowLeft');assert.equal(await handle.getAttribute('aria-valuenow'),'63.4');
+ await handle.press('Home');assert.equal(await handle.getAttribute('aria-valuenow'),'72.4');
+ await handle.press('End');assert.equal(await handle.getAttribute('aria-valuenow'),'50');
+ await handle.press('Escape');
+ await page.waitForTimeout(700);
+ box=await handle.boundingBox();await page.mouse.move(box.x+box.width/2,box.y+80);await page.mouse.down();await page.mouse.move(20,box.y+80,{steps:8});
+ await handle.press('Escape');await page.mouse.up();
+ assert.equal(await handle.getAttribute('aria-valuenow'),'61.4','Escape cancels current drag');
+ await page.evaluate(()=>window.__update({reducedMotion:true}));
+ await handle.press('Home');assert.equal((await read()).p,.276);assert.equal((await read()).b,0);
+ await handle.press('End');assert.equal((await read()).p,.5);
+ await handle.press('Escape');assert.equal((await read()).p,.3865);
+ const cdp=await page.context().newCDPSession(page);
+ box=await handle.boundingBox();
+ const touch={x:box.x+box.width/2,y:box.y+box.height/2};
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[touch]});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:touch.x-160,y:touch.y}]});
+ assert(Number(await handle.getAttribute('aria-valuenow'))>65,'touch drag resizes the panel');
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});
+ assert.equal(await handle.getAttribute('aria-valuenow'),'61.4','pointer cancellation restores start width');
+ await cdp.detach();
+ await handle.dispatchEvent('dblclick');assert.equal((await read()).p,.3865,'double click resets');
+ await page.evaluate(()=>window.__update({reducedMotion:false}));
+ await page.mouse.move(10,10);await handle.evaluate(n=>n.blur());
+ await page.waitForFunction(()=>document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('.er-scene').dataset.visible==='false');
+}

@@ -1,0 +1,429 @@
+{
+  "slug": "ascii-object",
+  "name": {
+    "en": "ASCII Object",
+    "zh": "ASCII 物体"
+  },
+  "description": {
+    "en": "Any GLB/glTF model, SVG, or image floating in a studio scene, redrawn as shape-matched ASCII characters.",
+    "zh": "让任意 GLB/glTF 模型、SVG 或图片悬浮在影棚场景中，并以贴合轮廓的 ASCII 字符重绘。"
+  },
+  "docsPath": "/docs/components/ascii-object",
+  "detailPath": "/ai/components/ascii-object.json",
+  "markdownPath": "/ai/components/ascii-object.md",
+  "previewPath": "/assets/videos/ascii-object-leibox.webm",
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "品牌模型展示",
+      "首屏视觉",
+      "3D model showcase"
+    ],
+    "searchTerms": [
+      "字符",
+      "ascii",
+      "模型",
+      "3d",
+      "logo",
+      "首屏",
+      "hero"
+    ],
+    "visualTags": [
+      "ascii",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "source": {
+    "kind": "upstream-reference",
+    "author": "David Haz",
+    "website": "https://canvasui.dev/docs/components/ascii-object",
+    "repository": "https://github.com/DavidHDev/canvas-ui",
+    "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+    "license": "MIT + Commons Clause",
+    "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "registryNamespace": "@canvas-ui",
+    "notice": {
+      "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+      "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+    }
+  },
+  "apiReference": [
+    {
+      "name": "src",
+      "type": "string",
+      "description": {
+        "en": "URL of the asset to display: GLB/glTF, SVG, PNG, JPEG, WebP, or GIF. Object URLs from a file input work too. The format is sniffed from the bytes, not the extension. Draco-compressed models are supported via a decoder fetched on demand, and flat art is mounted as a card lit by the same studio.",
+        "zh": "要显示的素材网址：支持 GLB/glTF、SVG、PNG、JPEG、WebP 或 GIF，也支持文件输入生成的对象 URL。通过字节识别格式，而不依赖扩展名。Draco 压缩模型会按需加载解码器，二维素材则作为卡片放入同一灯光场景。"
+      }
+    },
+    {
+      "name": "ascii",
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": {
+        "en": "Render the object as ASCII characters. Turn off to see the raw render.",
+        "zh": "将物体渲染为 ASCII 字符。关闭后显示原始渲染。"
+      }
+    },
+    {
+      "name": "cellSize",
+      "type": "number",
+      "defaultValue": "10",
+      "description": {
+        "en": "Height of one character cell in CSS pixels.",
+        "zh": "单个字符单元的高度，单位为 CSS 像素。"
+      }
+    },
+    {
+      "name": "cellAspect",
+      "type": "number",
+      "defaultValue": "0.6",
+      "description": {
+        "en": "Width of a character cell relative to its height (0.35 to 1.25).",
+        "zh": "字符单元宽度相对于高度的比例（0.35 至 1.25）。"
+      }
+    },
+    {
+      "name": "charset",
+      "type": "string",
+      "defaultValue": "all 95 printable ASCII characters",
+      "description": {
+        "en": "Characters the renderer may choose from. Each character's shape is measured and matched against the underlying render, so glyphs like / and _ land on matching edges. A space is always available for empty cells.",
+        "zh": "渲染器可使用的字符。每个字符的形状都会与底层画面匹配，让 /、_ 等字符落在相应边缘。空白单元始终可以使用空格。"
+      }
+    },
+    {
+      "name": "colored",
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": {
+        "en": "Tint each character with the scene color underneath it. Turn off for a single-color look.",
+        "zh": "使用下方场景颜色为每个字符着色。关闭后使用单色。"
+      }
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "defaultValue": "\"#ffffff\"",
+      "description": {
+        "en": "Character color used when colored is off.",
+        "zh": "colored 关闭时使用的字符颜色。"
+      }
+    },
+    {
+      "name": "contrast",
+      "type": "number",
+      "defaultValue": "1.5",
+      "description": {
+        "en": "Tone contrast of the character selection. 1 keeps the original tones, higher values deepen shadows.",
+        "zh": "字符选择的明暗对比度。1 保留原始色调，更高的值会加深阴影。"
+      }
+    },
+    {
+      "name": "edgeContrast",
+      "type": "number",
+      "defaultValue": "3",
+      "description": {
+        "en": "How strongly characters snap to edges and contours of the object. 1 turns the effect off.",
+        "zh": "字符贴合物体边缘和轮廓的程度。1 表示关闭此效果。"
+      }
+    },
+    {
+      "name": "exposure",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Brightness multiplier applied before characters are chosen.",
+        "zh": "选择字符前应用的亮度倍数。"
+      }
+    },
+    {
+      "name": "invert",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": {
+        "en": "Invert the object tones so dark areas get the dense characters.",
+        "zh": "反转物体明暗，使暗部使用更密集的字符。"
+      }
+    },
+    {
+      "name": "background",
+      "type": "string",
+      "defaultValue": "\"\" (transparent)",
+      "description": {
+        "en": "Background color behind the characters. Leave empty for a transparent canvas.",
+        "zh": "字符后方的背景色。留空时画布透明。"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "string",
+      "defaultValue": "\"#066aff\"",
+      "description": {
+        "en": "Accent color of the ring light in the studio environment.",
+        "zh": "工作室环境中环形灯的强调色。"
+      }
+    },
+    {
+      "name": "environmentIntensity",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Brightness of the studio environment lighting.",
+        "zh": "工作室环境光亮度。"
+      }
+    },
+    {
+      "name": "roughness",
+      "type": "number",
+      "defaultValue": "-1",
+      "description": {
+        "en": "Roughness override applied to every material (0 to 1). Negative keeps the asset's own values.",
+        "zh": "对所有材质应用的粗糙度覆盖值（0 至 1）；负值保留素材自身的设置。"
+      }
+    },
+    {
+      "name": "scale",
+      "type": "number",
+      "defaultValue": "3",
+      "description": {
+        "en": "Size of the longest side of the object in scene units. The camera sits about 4 units away.",
+        "zh": "物体最长边的场景单位尺寸。相机距离约为 4 个单位。"
+      }
+    },
+    {
+      "name": "xOffset",
+      "type": "number",
+      "defaultValue": "0",
+      "description": {
+        "en": "Horizontal offset of the object in scene units.",
+        "zh": "物体水平偏移，单位为场景单位。"
+      }
+    },
+    {
+      "name": "yOffset",
+      "type": "number",
+      "defaultValue": "0",
+      "description": {
+        "en": "Vertical offset of the object in scene units.",
+        "zh": "物体垂直偏移，单位为场景单位。"
+      }
+    },
+    {
+      "name": "floatIntensity",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "Strength of the floating bob animation (0 disables).",
+        "zh": "上下漂浮动画的强度（0 关闭）。"
+      }
+    },
+    {
+      "name": "rotationIntensity",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Strength of the idle rocking rotation (0 disables).",
+        "zh": "闲置摇摆旋转的强度（0 关闭）。"
+      }
+    },
+    {
+      "name": "floatSpeed",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "Speed of the float and rocking animation.",
+        "zh": "漂浮与摇摆动画的速度。"
+      }
+    },
+    {
+      "name": "orbit",
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": {
+        "en": "Let the user orbit the camera by dragging.",
+        "zh": "允许用户拖动以环绕观察物体。"
+      }
+    },
+    {
+      "name": "zoom",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": {
+        "en": "Let the user zoom with the scroll wheel or pinch.",
+        "zh": "允许用户使用滚轮或双指手势缩放。"
+      }
+    },
+    {
+      "name": "autoRotate",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": {
+        "en": "Spin the camera around the object turntable-style.",
+        "zh": "让相机像转台一样环绕物体旋转。"
+      }
+    },
+    {
+      "name": "autoRotateSpeed",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "Turntable speed when autoRotate is on.",
+        "zh": "autoRotate 开启时的转台速度。"
+      }
+    },
+    {
+      "name": "fov",
+      "type": "number",
+      "defaultValue": "65",
+      "description": {
+        "en": "Camera field of view in degrees.",
+        "zh": "相机视场角，单位为度。"
+      }
+    },
+    {
+      "name": "cameraDistance",
+      "type": "number",
+      "defaultValue": "4.2",
+      "description": {
+        "en": "Camera distance from the center of the object.",
+        "zh": "相机到物体中心的距离。"
+      }
+    },
+    {
+      "name": "dracoDecoderPath",
+      "type": "string",
+      "defaultValue": "\"https://www.gstatic.com/draco/versioned/decoders/1.5.7/\"",
+      "description": {
+        "en": "Base URL of the Draco decoder, fetched only when a model needs it.",
+        "zh": "Draco 解码器的基础网址，仅在模型需要时加载。"
+      }
+    },
+    {
+      "name": "onLoad",
+      "type": "() => void",
+      "description": {
+        "en": "Called after an asset finishes loading.",
+        "zh": "素材加载完成后调用。"
+      }
+    },
+    {
+      "name": "onError",
+      "type": "(error: unknown) => void",
+      "description": {
+        "en": "Called when an asset fails to load.",
+        "zh": "素材加载失败时调用。"
+      }
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": {
+        "en": "Classes applied to the wrapper element.",
+        "zh": "应用到包装元素的 CSS 类。"
+      }
+    }
+  ],
+  "dependencies": {
+    "webgl": {
+      "runtime": [
+        "three"
+      ],
+      "dev": [
+        "@types/three"
+      ]
+    },
+    "webgpu": {
+      "runtime": [
+        "vgpu",
+        "three"
+      ],
+      "dev": [
+        "@webgpu/types",
+        "@types/three"
+      ]
+    },
+    "frameworkNote": "Solid uses solid-js; Preact uses preact. Other framework dependencies follow the target project."
+  },
+  "install": {
+    "provider": "upstream",
+    "registryUrls": {
+      "react": {
+        "webgl": "https://canvasui.dev/r/ascii-object-react.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-react-webgpu.json"
+      },
+      "vue": {
+        "webgl": "https://canvasui.dev/r/ascii-object-vue.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-vue-webgpu.json"
+      },
+      "svelte": {
+        "webgl": "https://canvasui.dev/r/ascii-object-svelte.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-svelte-webgpu.json"
+      },
+      "solid": {
+        "webgl": "https://canvasui.dev/r/ascii-object-solid.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-solid-webgpu.json"
+      },
+      "preact": {
+        "webgl": "https://canvasui.dev/r/ascii-object-preact.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-preact-webgpu.json"
+      },
+      "vanilla": {
+        "webgl": "https://canvasui.dev/r/ascii-object-vanilla.json",
+        "webgpu": "https://canvasui.dev/r/ascii-object-vanilla-webgpu.json"
+      }
+    },
+    "commands": {
+      "react": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-react",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-react-webgpu"
+      },
+      "vue": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-vue",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-vue-webgpu"
+      },
+      "svelte": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-svelte",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-svelte-webgpu"
+      },
+      "solid": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-solid",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-solid-webgpu"
+      },
+      "preact": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-preact",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-preact-webgpu"
+      },
+      "vanilla": {
+        "webgl": "npx shadcn@latest add @canvas-ui/ascii-object-vanilla",
+        "webgpu": "npx shadcn@latest add @canvas-ui/ascii-object-vanilla-webgpu"
+      }
+    },
+    "behavior": "Commands are metadata only. This catalog and CLI never execute installation."
+  },
+  "browserNotes": [
+    "WebGPU builds need a browser with WebGPU; verify the current browser support before choosing a renderer.",
+    "HTML-in-Canvas is experimental. Check the component's current upstream browser/fallback documentation. Do not assume DOM capture works in every browser."
+  ]
+}

@@ -118,7 +118,7 @@ export function ParticleScroll({
         ref={outputRef}
         aria-hidden
         style={{
-          display: native ? "block" : "none",
+          display: "block",
           position: "absolute",
           inset: 0,
           width: "100%",

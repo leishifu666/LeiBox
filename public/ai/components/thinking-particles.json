@@ -1,0 +1,158 @@
+{
+  "slug": "thinking-particles",
+  "name": {
+    "en": "Thinking Step Particle Morph",
+    "zh": "思考步骤粒子变形"
+  },
+  "description": {
+    "en": "Particles morph through five thinking steps, then collapse into a streamed answer with replay and copy controls.",
+    "zh": "粒子随五个思考步骤连续变形，完成后收起并逐字显示回答，支持暂停、重播和复制。"
+  },
+  "keywords": "思考 步骤 粒子 变形 放大镜 魔方 积木 机械臂 礼物 AI 推理 thinking reasoning particles morph agent",
+  "docsPath": "/docs/animations/thinking-particles",
+  "detailPath": "/ai/components/thinking-particles.json",
+  "markdownPath": "/ai/components/thinking-particles.md",
+  "previewPath": "/assets/components/thinking-particles.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "AI 思考等待反馈",
+      "推理步骤展示",
+      "AI thinking steps"
+    ],
+    "searchTerms": [
+      "等待",
+      "思考",
+      "推理",
+      "步骤",
+      "加载",
+      "thinking",
+      "reasoning",
+      "steps",
+      "loading"
+    ],
+    "visualTags": [
+      "particles"
+    ],
+    "interactions": [
+      "autoplay",
+      "click"
+    ],
+    "caveat": "把演示步骤绑定真实任务状态，不把动画进度当作真实推理进度。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/shridharathi/status/2113255894423158914/video/1",
+    "designAuthor": "Shridhar",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/thinking-particles/react.json",
+      "component": "ThinkingParticles",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ThinkingParticles } from \"./ThinkingParticles\";\n\nexport default function App() {\n  return <ThinkingParticles />;\n}",
+      "files": [
+        "ThinkingParticles.tsx",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/thinking-particles/vue.json",
+      "component": "ThinkingParticles",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ThinkingParticles from \"./ThinkingParticles.vue\";\n</script>\n<template><ThinkingParticles /></template>",
+      "files": [
+        "ThinkingParticles.vue",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/thinking-particles/svelte.json",
+      "component": "ThinkingParticles",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ThinkingParticles from \"./ThinkingParticles.svelte\";\n</script>\n<ThinkingParticles />",
+      "files": [
+        "ThinkingParticles.svelte",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/thinking-particles/solid.json",
+      "component": "ThinkingParticles",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ThinkingParticles } from \"./ThinkingParticles.solid\";\n\nexport default function App() {\n  return <ThinkingParticles />;\n}",
+      "files": [
+        "ThinkingParticles.solid.tsx",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/thinking-particles/preact.json",
+      "component": "ThinkingParticles",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ThinkingParticles } from \"./ThinkingParticles.preact\";\n\nexport default function App() {\n  return <ThinkingParticles />;\n}",
+      "files": [
+        "ThinkingParticles.preact.tsx",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/thinking-particles/vanilla.json",
+      "component": "ThinkingParticles",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ThinkingParticles\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ThinkingParticles.ts",
+        "ThinkingParticlesEngine.js",
+        "motion-runtime.ts",
+        "ThinkingParticlesEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Watch the five thinking steps, pause or resume with the black button, and expand Thought after completion. The answer and controls use local demo data.",
+    "zh": "观察五个思考步骤，用黑色按钮暂停或继续，完成后点击 Thought 查看过程。回答与操作均使用本地演示数据。"
+  }
+}

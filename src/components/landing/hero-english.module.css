@@ -1,0 +1,52 @@
+/* Gemini 3.1 Pro / High; English Hero only. */
+/* 针对英文环境的首屏排版优化 (基于容器宽度的最终方案) */
+:global(html[lang="en"]) .copy {
+  /* 建立容器查询，基于内容实际可用宽度(cqw)而非视口(vw) */
+  container-type: inline-size;
+}
+
+:global(html[lang="en"]) .copy h1[data-hero-title] {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  max-width: 600px;
+  text-wrap: balance; 
+}
+
+:global(html[lang="en"]) .copy p[data-hero-description] {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.6;
+  max-width: 540px;
+  margin-top: 1.25rem;
+}
+
+:global(html[lang="en"]) .copy div[data-hero-actions] {
+  margin-top: 2.5rem;
+}
+
+/* 移动端 (< 640px) 精准字号适配 */
+@media (max-width: 639px) {
+  :global(html[lang="en"]) .copy h1[data-hero-title] {
+    /* 
+      基于实测数据拟合的公式: 
+      260px宽时得 ~30.1px (甜点30px)
+      315px宽时得 ~34.7px (甜点31-36px)
+      330px宽时得 ~36.0px (甜点32-38px)
+      354px宽时得 ~38.0px (甜点34-40px)
+    */
+    font-size: clamp(30px, calc(8.5cqw + 8px), 44px);
+    max-width: 100%;
+    /* 恢复 balance，依赖上述精准字号即可完美两行 */
+    text-wrap: balance;
+  }
+  
+  :global(html[lang="en"]) .copy p[data-hero-description] {
+    margin-top: 1rem;
+    max-width: 100%;
+    padding-right: 1.5rem;
+  }
+  
+  :global(html[lang="en"]) .copy div[data-hero-actions] {
+    margin-top: 2rem;
+  }
+}

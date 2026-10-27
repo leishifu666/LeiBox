@@ -1,0 +1,166 @@
+{
+  "slug": "notes-text-color",
+  "name": {
+    "en": "Notes Text Color",
+    "zh": "文字选区调色器"
+  },
+  "description": {
+    "en": "Select note text to open a frosted nine-color palette, tint a real multiline selection, and return to recently colored passages.",
+    "zh": "选择笔记文字，唤出磨砂九色调色器；跨行选区随颜色变化，并可跳回最近上色的段落。"
+  },
+  "keywords": "文字 选区 调色器 颜色 笔记 备忘录 荧光 历史 磨砂 notes text color selection palette highlight typography",
+  "docsPath": "/docs/animations/notes-text-color",
+  "detailPath": "/ai/components/notes-text-color.json",
+  "markdownPath": "/ai/components/notes-text-color.md",
+  "previewPath": "/assets/components/notes-text-color.png",
+  "discovery": {
+    "category": "text",
+    "useCases": [
+      "笔记高亮",
+      "文字颜色编辑",
+      "note text highlighting"
+    ],
+    "searchTerms": [
+      "文字",
+      "选区",
+      "颜色",
+      "调色",
+      "笔记",
+      "高亮",
+      "highlight",
+      "color",
+      "notes"
+    ],
+    "visualTags": [
+      "glass",
+      "minimal"
+    ],
+    "interactions": [
+      "text-selection",
+      "click"
+    ],
+    "caveat": "将颜色选择结果接入目标编辑器，核对选区与持久化行为。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM, Selection/Range, CSS and GSAP reconstruction from observed video frames.",
+    "designReference": "https://x.com/heydamir/status/2106779932659470606/video/1",
+    "designAuthor": "Damir Sokolovsky",
+    "license": "Original design/source license not supplied or verified; the original video and author source are not redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/notes-text-color/react.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { NotesTextColor } from \"./NotesTextColor\";\n\nexport default function App() {\n  return <NotesTextColor />;\n}",
+      "files": [
+        "NotesTextColor.tsx",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/notes-text-color/vue.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport NotesTextColor from \"./NotesTextColor.vue\";\n</script>\n<template><NotesTextColor /></template>",
+      "files": [
+        "NotesTextColor.vue",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/notes-text-color/svelte.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport NotesTextColor from \"./NotesTextColor.svelte\";\n</script>\n<NotesTextColor />",
+      "files": [
+        "NotesTextColor.svelte",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/notes-text-color/solid.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { NotesTextColor } from \"./NotesTextColor.solid\";\n\nexport default function App() {\n  return <NotesTextColor />;\n}",
+      "files": [
+        "NotesTextColor.solid.tsx",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/notes-text-color/preact.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { NotesTextColor } from \"./NotesTextColor.preact\";\n\nexport default function App() {\n  return <NotesTextColor />;\n}",
+      "files": [
+        "NotesTextColor.preact.tsx",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/notes-text-color/vanilla.json",
+      "component": "NotesTextColor",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./NotesTextColor\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "NotesTextColor.ts",
+        "NotesTextColorEngine.js",
+        "motion-runtime.ts",
+        "NotesTextColorEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag to select text, double-click a word, or tap a colored phrase. Pick a color or revisit a recent selection. Focus a paragraph and press Enter for keyboard controls; Notes resets the demo.",
+    "zh": "拖选文字、双击单词，或轻触已上色短语。选择颜色，或点击最近选区跳回；聚焦段落后按 Enter 使用键盘操作，Notes 可重置演示。"
+  }
+}

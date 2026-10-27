@@ -1,0 +1,7 @@
+html,body{margin:0;width:100%;height:100%;background:#e7e3db;overflow:hidden}
+.crumple-demo{position:relative;width:100%;height:100vh;overflow:hidden;background:#e7e3db;isolation:isolate}
+.cp-canvas,.cp-shadows{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+.cp-shadows{z-index:0}.cp-canvas{z-index:1}
+.cp-hit{all:unset;box-sizing:border-box;position:absolute;z-index:2;transform:translate(-50%,-50%) scale(var(--cp-k,1));transform-origin:center;cursor:pointer;touch-action:manipulation;border-radius:12px;-webkit-tap-highlight-color:transparent}
+.cp-hit:focus-visible{outline:2px solid #497687;outline-offset:12px}
+.cp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

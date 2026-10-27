@@ -1,0 +1,160 @@
+{
+  "slug": "soft-action-wheel",
+  "name": {
+    "en": "Soft Action Wheel",
+    "zh": "柔光环形菜单展开"
+  },
+  "description": {
+    "en": "Six monochrome actions spring inward with a short clockwise stagger, framed by fine grey rims, white highlights, and soft shadows; all scatter out together on close.",
+    "zh": "黑色图标随短暂顺时针错峰收拢成环，保留细灰边、白色高光与柔和阴影，关闭时六项一起向外散开。"
+  },
+  "keywords": "柔光 浅色 环形 菜单 展开 细边 高光 阴影 模糊 弹簧 action wheel soft neumorphic radial menu",
+  "docsPath": "/docs/animations/soft-action-wheel",
+  "detailPath": "/ai/components/soft-action-wheel.json",
+  "markdownPath": "/ai/components/soft-action-wheel.md",
+  "previewPath": "/assets/components/soft-action-wheel.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "快捷操作菜单",
+      "工具栏展开",
+      "minimal radial actions"
+    ],
+    "searchTerms": [
+      "菜单",
+      "环形",
+      "快捷",
+      "工具栏",
+      "简洁",
+      "黑白",
+      "menu",
+      "radial",
+      "actions",
+      "toolbar"
+    ],
+    "visualTags": [
+      "minimal",
+      "monochrome"
+    ],
+    "interactions": [
+      "click",
+      "keyboard"
+    ],
+    "caveat": "替换演示操作，检查展开后按钮与页面边界的间距。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Variant of the local native radial-menu core, with independently reconstructed SVGs and light-surface styling; no original author source obtained.",
+    "designReference": "https://x.com/withAnimationUI/status/2110643020890849625/video/1",
+    "designAuthor": "withAnimation",
+    "license": "Original design license not supplied or independently verified; the reference video is retained only for internal comparison."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/soft-action-wheel/react.json",
+      "component": "SoftActionWheel",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { SoftActionWheel } from \"./SoftActionWheel\";\n\nexport default function App() {\n  return <SoftActionWheel />;\n}",
+      "files": [
+        "SoftActionWheel.tsx",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/soft-action-wheel/vue.json",
+      "component": "SoftActionWheel",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport SoftActionWheel from \"./SoftActionWheel.vue\";\n</script>\n<template><SoftActionWheel /></template>",
+      "files": [
+        "SoftActionWheel.vue",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/soft-action-wheel/svelte.json",
+      "component": "SoftActionWheel",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport SoftActionWheel from \"./SoftActionWheel.svelte\";\n</script>\n<SoftActionWheel />",
+      "files": [
+        "SoftActionWheel.svelte",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/soft-action-wheel/solid.json",
+      "component": "SoftActionWheel",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { SoftActionWheel } from \"./SoftActionWheel.solid\";\n\nexport default function App() {\n  return <SoftActionWheel />;\n}",
+      "files": [
+        "SoftActionWheel.solid.tsx",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/soft-action-wheel/preact.json",
+      "component": "SoftActionWheel",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { SoftActionWheel } from \"./SoftActionWheel.preact\";\n\nexport default function App() {\n  return <SoftActionWheel />;\n}",
+      "files": [
+        "SoftActionWheel.preact.tsx",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/soft-action-wheel/vanilla.json",
+      "component": "SoftActionWheel",
+      "dependencies": [],
+      "usage": "import { mount } from \"./SoftActionWheel\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "SoftActionWheel.ts",
+        "SoftActionWheelEngine.js",
+        "motion-runtime.ts",
+        "SoftActionWheelEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click + to reveal the actions, or × to scatter them out. Keyboard and touch are supported; each action records a local choice without opening another application.",
+    "zh": "点击 + 展开，点击 × 向外散开收起。支持键盘与触屏，菜单操作只记录本地选择，不打开其他应用。"
+  }
+}

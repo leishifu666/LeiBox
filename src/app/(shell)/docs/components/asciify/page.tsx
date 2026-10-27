@@ -145,7 +145,6 @@ export default async function AsciifyPage() {
         variants={[...variants]}
         installItem="asciify"
         tags={["html-in-canvas"]}
-        requiresHtmlInCanvas
         apiReference={API_REFERENCE}
         beforeInstall={
           <DemoImageSection

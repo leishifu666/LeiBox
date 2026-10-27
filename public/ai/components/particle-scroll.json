@@ -1,0 +1,263 @@
+{
+  "slug": "particle-scroll",
+  "name": {
+    "en": "Particle Scroll",
+    "zh": "粒子滚动"
+  },
+  "description": {
+    "en": "Dissolves your live HTML below a chosen line into fine sand particles that reassemble on scroll.",
+    "zh": "将指定分界线下方的实时 HTML 化为细沙粒子，并随滚动重新聚合。"
+  },
+  "docsPath": "/docs/components/particle-scroll",
+  "detailPath": "/ai/components/particle-scroll.json",
+  "markdownPath": "/ai/components/particle-scroll.md",
+  "previewPath": "/assets/videos/particle-scroll.webm",
+  "discovery": {
+    "category": "scroll",
+    "useCases": [
+      "滚动叙事",
+      "页面消散过渡",
+      "scroll storytelling"
+    ],
+    "searchTerms": [
+      "滚动",
+      "消散",
+      "细沙",
+      "粒子",
+      "scroll",
+      "dissolve",
+      "particles"
+    ],
+    "visualTags": [
+      "particles"
+    ],
+    "interactions": [
+      "scroll"
+    ],
+    "caveat": "涉及实时 HTML 捕获；适合局部叙事段落，浏览器要求见详情。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "source": {
+    "kind": "upstream-reference",
+    "author": "David Haz",
+    "website": "https://canvasui.dev/docs/components/particle-scroll",
+    "repository": "https://github.com/DavidHDev/canvas-ui",
+    "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+    "license": "MIT + Commons Clause",
+    "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "registryNamespace": "@canvas-ui",
+    "notice": {
+      "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+      "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+    }
+  },
+  "apiReference": [
+    {
+      "name": "point",
+      "type": "number",
+      "defaultValue": "0.68",
+      "description": {
+        "en": "Viewport fraction of the formation line. Content assembles as it scrolls up past this line and dissolves back below it.",
+        "zh": "成形线在视口中的比例位置；内容向上滚过此线时聚合，回到下方时重新溶解。"
+      }
+    },
+    {
+      "name": "band",
+      "type": "number",
+      "defaultValue": "420",
+      "description": {
+        "en": "Height in CSS pixels of the transition band where particles progressively reassemble.",
+        "zh": "粒子逐渐重新聚合的过渡带高度，单位为 CSS 像素。"
+      }
+    },
+    {
+      "name": "density",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "Grain spacing in CSS pixels. Smaller values mean finer, denser sand.",
+        "zh": "颗粒间距，单位为 CSS 像素；值越小沙粒越细密。"
+      }
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "defaultValue": "1.25",
+      "description": {
+        "en": "Size of fully scattered dust grains in CSS pixels. Grains grow to cover their cell as they land.",
+        "zh": "完全散开时的尘埃颗粒尺寸，单位为 CSS 像素；落定时颗粒会长大并覆盖其单元。"
+      }
+    },
+    {
+      "name": "spread",
+      "type": "number",
+      "defaultValue": "220",
+      "description": {
+        "en": "Maximum distance in CSS pixels particles scatter from their home position.",
+        "zh": "粒子偏离原位的最大距离，单位为 CSS 像素。"
+      }
+    },
+    {
+      "name": "gravity",
+      "type": "number",
+      "defaultValue": "0.35",
+      "description": {
+        "en": "Downward bias of the scattered cloud (-1 to 1), like sand settling. Negative values lift it.",
+        "zh": "散开粒子云的向下偏移（-1 至 1），如沙粒沉降；负值使其上浮。"
+      }
+    },
+    {
+      "name": "drift",
+      "type": "number",
+      "defaultValue": "0.7",
+      "description": {
+        "en": "Idle float speed of scattered particles (0 to 1). 0 freezes the cloud.",
+        "zh": "散开粒子的闲置浮动速度（0 至 1），0 冻结粒子云。"
+      }
+    },
+    {
+      "name": "swirl",
+      "type": "number",
+      "defaultValue": "60",
+      "description": {
+        "en": "Sideways arc in CSS pixels particles take while flying home.",
+        "zh": "粒子飞回原位时的侧向弧线幅度，单位为 CSS 像素。"
+      }
+    },
+    {
+      "name": "stagger",
+      "type": "number",
+      "defaultValue": "0.7",
+      "description": {
+        "en": "Per-particle randomness of reassembly timing (0 to 1).",
+        "zh": "各粒子重新聚合时序的随机程度（0 至 1）。"
+      }
+    },
+    {
+      "name": "fade",
+      "type": "number",
+      "defaultValue": "0.85",
+      "description": {
+        "en": "Opacity of fully scattered particles (0 to 1).",
+        "zh": "完全散开粒子的透明度（0 至 1）。"
+      }
+    },
+    {
+      "name": "settle",
+      "type": "number",
+      "defaultValue": "1.2",
+      "description": {
+        "en": "Seconds a row of dust takes to condense into the page once the reveal reaches it.",
+        "zh": "显现抵达后，一行尘埃凝聚为页面所需的秒数。"
+      }
+    },
+    {
+      "name": "smoothing",
+      "type": "number",
+      "defaultValue": "0.6",
+      "description": {
+        "en": "Seconds the damped scroll takes to catch up with the real scroll. Higher feels more fluid.",
+        "zh": "阻尼滚动追上真实滚动所需的秒数，值越高越有流动感。"
+      }
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": {
+        "en": "Classes applied to the wrapper element.",
+        "zh": "应用到包装元素的 CSS 类。"
+      }
+    }
+  ],
+  "dependencies": {
+    "webgl": {
+      "runtime": [],
+      "dev": []
+    },
+    "webgpu": {
+      "runtime": [
+        "vgpu"
+      ],
+      "dev": [
+        "@webgpu/types"
+      ]
+    },
+    "frameworkNote": "Solid uses solid-js; Preact uses preact. Other framework dependencies follow the target project."
+  },
+  "install": {
+    "provider": "upstream",
+    "registryUrls": {
+      "react": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-react.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-react-webgpu.json"
+      },
+      "vue": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-vue.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-vue-webgpu.json"
+      },
+      "svelte": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-svelte.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-svelte-webgpu.json"
+      },
+      "solid": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-solid.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-solid-webgpu.json"
+      },
+      "preact": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-preact.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-preact-webgpu.json"
+      },
+      "vanilla": {
+        "webgl": "https://canvasui.dev/r/particle-scroll-vanilla.json",
+        "webgpu": "https://canvasui.dev/r/particle-scroll-vanilla-webgpu.json"
+      }
+    },
+    "commands": {
+      "react": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-react",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-react-webgpu"
+      },
+      "vue": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-vue",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-vue-webgpu"
+      },
+      "svelte": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-svelte",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-svelte-webgpu"
+      },
+      "solid": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-solid",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-solid-webgpu"
+      },
+      "preact": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-preact",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-preact-webgpu"
+      },
+      "vanilla": {
+        "webgl": "npx shadcn@latest add @canvas-ui/particle-scroll-vanilla",
+        "webgpu": "npx shadcn@latest add @canvas-ui/particle-scroll-vanilla-webgpu"
+      }
+    },
+    "behavior": "Commands are metadata only. This catalog and CLI never execute installation."
+  },
+  "browserNotes": [
+    "WebGPU builds need a browser with WebGPU; verify the current browser support before choosing a renderer.",
+    "HTML-in-Canvas is experimental. Check the component's current upstream browser/fallback documentation. Do not assume DOM capture works in every browser."
+  ]
+}

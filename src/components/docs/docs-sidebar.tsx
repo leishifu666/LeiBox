@@ -12,8 +12,7 @@ import {
   useReducedMotion,
   useSpring,
 } from "motion/react";
-import { Shapes } from "lucide-react";
-import { useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
 import { SiteLogo } from "@/components/common/site-logo";
@@ -23,8 +22,15 @@ import {
   type ComponentEntry,
 } from "@/data/components";
 import { cn } from "@/lib/utils";
+import { INTERACTION_COMPONENTS, type MotionEntry } from "@/data/interaction-components";
+import { InteractionPreview } from "@/components/common/interaction-preview";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
 
-const PREVIEWS = new Map(COMPONENTS.map((entry) => [entry.href, entry]));
+type NavPreview = { kind: "canvas"; entry: ComponentEntry } | { kind: "interaction"; entry: MotionEntry };
+const PREVIEWS = new Map<string, NavPreview>([
+  ...COMPONENTS.map((entry): [string, NavPreview] => [entry.href, { kind: "canvas", entry }]),
+  ...INTERACTION_COMPONENTS.map((entry): [string, NavPreview] => [entry.href, { kind: "interaction", entry }]),
+]);
 const PREVIEW_W = 224;
 const PREVIEW_H = 168;
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -33,14 +39,7 @@ const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
 
 const NEW_HREFS = new Set([
   "/docs/components/ascii-object",
-  "/docs/components/ascii-sweep",
-  "/docs/components/canvas",
-  "/docs/components/decrypt-reveal",
-  "/docs/components/displacement",
-  "/docs/components/flame-wrap",
-  "/docs/components/force-field",
   "/docs/components/glyph-rain",
-  "/docs/components/ink-object",
   "/docs/components/liquid-object",
 ]);
 
@@ -57,48 +56,14 @@ const sections = [
       { href: "/docs", label: "Introduction" },
       { href: "/docs/installation", label: "Installation" },
       { href: "/docs/rendering", label: "Rendering" },
-      { href: "/docs/mcp", label: "MCP" },
+      { href: "/docs/mcp", label: "AI integration" },
     ],
   },
   {
     title: "Components",
     items: [
       { href: "/components", label: "Browse All" },
-      { href: "/docs/components/ascii-object", label: "ASCII Object" },
-      { href: "/docs/components/ascii-sweep", label: "ASCII Sweep" },
-      { href: "/docs/components/asciify", label: "Asciify" },
-      { href: "/docs/components/bend", label: "Bend" },
-      { href: "/docs/components/blaze", label: "Blaze" },
-      { href: "/docs/components/bubble", label: "Bubble" },
-      { href: "/docs/components/canvas", label: "Canvas" },
-      { href: "/docs/components/cloth", label: "Cloth" },
-      { href: "/docs/components/clouds", label: "Clouds" },
-      { href: "/docs/components/decrypt-reveal", label: "Decrypt Reveal" },
-      { href: "/docs/components/dithered-object", label: "Dithered Object" },
-      { href: "/docs/components/displacement", label: "Displacement" },
-      { href: "/docs/components/droplets", label: "Droplets" },
-      { href: "/docs/components/flame-wrap", label: "Flame Wrap" },
-      { href: "/docs/components/force-field", label: "Force Field" },
-      { href: "/docs/components/frost", label: "Frost" },
-      { href: "/docs/components/glass", label: "Glass" },
-      { href: "/docs/components/glass-object", label: "Glass Object" },
-      { href: "/docs/components/glitch", label: "Glitch" },
-      { href: "/docs/components/glyph-rain", label: "Glyph Rain" },
-      { href: "/docs/components/grid", label: "Grid" },
-      { href: "/docs/components/hex-float", label: "Hex Float" },
-      { href: "/docs/components/ink-object", label: "Ink Object" },
-      { href: "/docs/components/laser", label: "Laser" },
-      { href: "/docs/components/liquid", label: "Liquid" },
-      { href: "/docs/components/magnify", label: "Magnify" },
-      { href: "/docs/components/particle-object", label: "Particle Object" },
-      { href: "/docs/components/particle-reveal", label: "Particle Reveal" },
-      { href: "/docs/components/particle-scroll", label: "Particle Scroll" },
-      { href: "/docs/components/peel", label: "Peel" },
-      { href: "/docs/components/retro-dither", label: "Retro Dither" },
-      { href: "/docs/components/ripple", label: "Ripple" },
-      { href: "/docs/components/shatter", label: "Shatter" },
-      { href: "/docs/components/liquid-object", label: "Liquid Object" },
-      { href: "/docs/components/vhs", label: "VHS" },
+      ...COMPONENT_CATALOG.map(entry => ({ href: entry.href, label: entry.name })),
     ],
   },
 ] as const;
@@ -112,7 +77,8 @@ export function DocsNavList({
 }) {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
-  const [preview, setPreview] = useState<ComponentEntry | null>(null);
+  const [preview, setPreview] = useState<NavPreview | null>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const activeRef = useRef(false);
   const canHover = useSyncExternalStore(
     subscribeHover,
@@ -151,9 +117,24 @@ export function DocsNavList({
   };
 
   const clearPreview = () => {
+    clearTimeout(hoverTimer.current);
     activeRef.current = false;
     setPreview(null);
   };
+
+  useEffect(() => {
+    const hide = () => { clearTimeout(hoverTimer.current); activeRef.current = false; setPreview(null); };
+    const onVisibility = () => { if (document.hidden) hide(); };
+    window.addEventListener("blur", hide);
+    window.addEventListener("scroll", hide, true);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      clearTimeout(hoverTimer.current);
+      window.removeEventListener("blur", hide);
+      window.removeEventListener("scroll", hide, true);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [pathname]);
 
   return (
     <div onPointerLeave={enabled ? clearPreview : undefined}>
@@ -168,10 +149,10 @@ export function DocsNavList({
               const entry = enabled ? PREVIEWS.get(item.href) : undefined;
               return (
                 <li key={item.href}>
-                  <Link
+                  <Link prefetch={false}
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    onClick={onNavigate}
+                    onClick={() => { clearPreview(); onNavigate?.(); }}
                     onPointerEnter={
                       enabled
                         ? (event) => {
@@ -179,15 +160,28 @@ export function DocsNavList({
                               clearPreview();
                               return;
                             }
+                            clearTimeout(hoverTimer.current);
                             place(event, !activeRef.current);
+                            const switching = activeRef.current;
                             activeRef.current = true;
-                            setPreview(entry);
+                            if (switching) setPreview(entry);
+                            else hoverTimer.current = setTimeout(() => setPreview(entry), 120);
                           }
                         : undefined
                     }
                     onPointerMove={
                       entry ? (event) => place(event, false) : undefined
                     }
+                    onPointerLeave={enabled ? clearPreview : undefined}
+                    onFocus={entry ? (event) => {
+                      clearTimeout(hoverTimer.current);
+                      const rect = event.currentTarget.getBoundingClientRect();
+                      const px = Math.min(rect.right + 12, window.innerWidth - PREVIEW_W - 12);
+                      const py = Math.max(12, Math.min(rect.top, window.innerHeight - PREVIEW_H - 12));
+                      mx.jump(px); my.jump(py); sx.jump(px); sy.jump(py);
+                      activeRef.current = true; setPreview(entry);
+                    } : undefined}
+                    onBlur={entry ? clearPreview : undefined}
                     className={cn(
                       "flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm transition-colors duration-150",
                       active
@@ -231,44 +225,35 @@ export function DocsNavList({
                 }
                 transition={{ duration: 0.18, ease: EASE }}
                 style={{ x, y, width: PREVIEW_W }}
+                data-sidebar-preview={preview.entry.href}
+                aria-hidden="true"
                 className="pointer-events-none fixed top-0 left-0 z-50"
               >
                 <div className="overflow-hidden rounded-xl border border-border/60 bg-background shadow-2xl shadow-black/20">
-                  <video
-                    key={preview.video}
-                    src={preview.video}
+                  {preview.kind === "interaction" ? <div className="aspect-4/3 w-full">
+                    <InteractionPreview key={preview.entry.slug} slug={preview.entry.slug} poster={preview.entry.preview}
+                      source={preview.entry.sourceFile ? `/motion/${preview.entry.slug}.html` : undefined}
+                      width={preview.entry.canvasWidth} height={preview.entry.canvasHeight} active />
+                  </div> : <video
+                    key={preview.entry.video}
+                    src={preview.entry.video}
                     autoPlay
                     loop
                     muted
                     playsInline
                     className={cn(
                       "aspect-4/3 w-full object-cover",
-                      isLightVideo(preview.video)
+                      isLightVideo(preview.entry.video)
                         ? "dark:invert dark:hue-rotate-180"
                         : "invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0",
                     )}
-                  />
+                  />}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>,
           document.body,
         )}
-    </div>
-  );
-}
-
-export function PlaygroundCta({ onNavigate }: { onNavigate?: () => void }) {
-  return (
-    <div className="border-t border-border/50 p-2">
-      <Link
-        href="/playground"
-        onClick={onNavigate}
-        className="flex items-center justify-center gap-2 rounded-[calc(1rem-0.5rem)] bg-foreground px-3 py-3 text-sm font-medium text-background transition-opacity duration-150 hover:opacity-85"
-      >
-        <Shapes aria-hidden className="size-4" /><TranslatedText>
-        Playground
-      </TranslatedText></Link>
     </div>
   );
 }
@@ -299,12 +284,12 @@ export function DocsSidebar() {
   return (
     <aside className="fixed top-4 bottom-4 left-4 z-40 hidden w-60 flex-col rounded-2xl border border-border/60 bg-background/70 backdrop-blur-xl backdrop-saturate-150 [view-transition-name:docs-sidebar] lg:flex">
       <div className="px-5 pt-5 pb-4">
-        <Link
+        <Link prefetch={false}
           href="/"
-          aria-label={t("Canvas UI home")}
+          aria-label={t("LeiBox home")}
           className="inline-block transition-opacity duration-150 hover:opacity-70"
         >
-          <SiteLogo />
+          <SiteLogo navigation />
         </Link>
       </div>
 
@@ -316,7 +301,6 @@ export function DocsSidebar() {
         <DocsNavList showPreviews />
       </nav>
 
-      <PlaygroundCta />
     </aside>
   );
 }

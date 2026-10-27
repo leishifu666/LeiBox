@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/docs/rendering" },
 };
 
-const INSTALL_COMMAND = "npx shadcn@latest add @canvas-ui/ripple-react-webgpu";
+const INSTALL_COMMAND = "npx shadcn@latest add @canvas-ui/glass-react-webgpu";
 const WEBGPU_TYPES = `/// <reference types="@webgpu/types" />`;
 
 const PAGE_MARKDOWN = `# Rendering
@@ -34,7 +34,7 @@ WebGPU is a matter of taste, not a requirement. Pick WebGL for the widest browse
 | Frameworks | React, Vue, Svelte, Solid, Preact, vanilla | React, Vue, Svelte, Solid, Preact, vanilla |
 | Browser support | Widest support through WebGL2 | Chrome/Edge 113+, Safari 26+ / iOS 26, Firefox 141+ |
 | Fallback behavior | Falls back to regular HTML when html-in-canvas is unavailable | Shows wrapped content unchanged when WebGPU is unavailable |
-| Install suffix | None, for example \`@canvas-ui/ripple-react\` | \`-webgpu\`, for example \`@canvas-ui/ripple-react-webgpu\` |
+| Install suffix | None, for example \`@canvas-ui/glass-react\` | \`-webgpu\`, for example \`@canvas-ui/glass-react-webgpu\` |
 
 ## Install the WebGPU build
 
@@ -54,7 +54,7 @@ ${WEBGPU_TYPES}
 
 ## How it works
 
-Each installed component is still a single source file. React files inline the engine in files like \`Ripple.tsx\`. Vanilla WebGPU files use names like \`RippleWebGPU.ts\`, while the WebGL vanilla files use \`RippleVanilla.ts\`.
+Each installed component is still a single source file. React files inline the engine in files like \`Glass.tsx\`. Vanilla WebGPU files use names like \`GlassWebGPU.ts\`, while the WebGL vanilla files use \`GlassVanilla.ts\`.
 
 The public shape stays the same: \`create<Base>()\`, \`<Base>Options\`, \`setOptions()\`, and \`destroy()\`. The WebGPU path shares one device per page, initializes lazily and asynchronously, and returns \`null\` synchronously when \`navigator.gpu\` or an adapter is missing so framework wrappers can fall back without throwing.
 
@@ -83,7 +83,7 @@ The look, motion, props, option types, and public API are the same. WebGPU needs
 ## Next steps
 
 - Read the installation guide: https://canvasui.dev/docs/installation
-- Try Ripple: https://canvasui.dev/docs/components/ripple
+- Try Glass: https://canvasui.dev/docs/components/glass
 `;
 
 export default async function RenderingPage() {
@@ -150,8 +150,8 @@ export default async function RenderingPage() {
             </tr>
             <tr>
               <th><TranslatedText>Install suffix</TranslatedText></th>
-              <td><TranslatedText>None, for example @canvas-ui/ripple-react</TranslatedText></td>
-              <td><TranslatedText>-webgpu, for example @canvas-ui/ripple-react-webgpu</TranslatedText></td>
+              <td><TranslatedText>None, for example @canvas-ui/glass-react</TranslatedText></td>
+              <td><TranslatedText>-webgpu, for example @canvas-ui/glass-react-webgpu</TranslatedText></td>
             </tr>
           </tbody>
         </table>
@@ -162,7 +162,7 @@ export default async function RenderingPage() {
           registry item directly:
         </TranslatedText></p>
         <div className="not-typeset my-6">
-          <InstallTabs item="ripple" hasWebGPU />
+          <InstallTabs item="glass" hasWebGPU />
         </div>
 
         <h2><TranslatedText>TypeScript setup</TranslatedText></h2>
@@ -182,9 +182,9 @@ export default async function RenderingPage() {
         <h2><TranslatedText>How it works</TranslatedText></h2>
         <p><TranslatedText>
           Each installed component is still a single source file. React files
-          inline the engine in files like </TranslatedText><code>Ripple.tsx</code><TranslatedText>. Vanilla WebGPU
-          files use names like </TranslatedText><code>RippleWebGPU.ts</code><TranslatedText>, while the WebGL
-          vanilla files use </TranslatedText><code>RippleVanilla.ts</code>.
+          inline the engine in files like </TranslatedText><code>Glass.tsx</code><TranslatedText>. Vanilla WebGPU
+          files use names like </TranslatedText><code>GlassWebGPU.ts</code><TranslatedText>, while the WebGL
+          vanilla files use </TranslatedText><code>GlassVanilla.ts</code>.
         </p>
         <p><TranslatedText>
           The public shape stays the same: </TranslatedText><code>create&lt;Base&gt;()</code>,{" "}
@@ -256,9 +256,9 @@ export default async function RenderingPage() {
                 description: "Install from the CLI or copy the source manually.",
               },
               {
-                href: "/docs/components/ripple",
-                title: "Ripple",
-                description: "Water ripples from every click over live HTML.",
+                href: "/docs/components/glass",
+                title: "Glass",
+                description: "Water glasss from every click over live HTML.",
               },
             ]}
           />

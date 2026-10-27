@@ -1,0 +1,22 @@
+{
+  "module": 16,
+  "moduleDefinition": "本次定义 x = 字标主笔画宽度 16u，不是原作者提供的模数",
+  "mark": { "source": "public/leibox-mark.svg", "height": 208, "bounds": [63.742, 47.613, 384.516, 416.774] },
+  "lockup": { "gap": 44, "wordTop": 60, "wordWidth": 368, "wordHeight": 100 },
+  "L": { "stem": 16, "bendCenter": [23,77], "footEnd": [48,92], "capRadius": 8 },
+  "ei": {
+    "center": [94,62], "outerRadius": 38, "innerRadius": 22,
+    "arcStartDegrees": 38, "arcEndDegrees": 337, "arcEndTangentToBar": true,
+    "barStart": [72,76], "barEnd": [149,38], "barRadius": 7,
+    "stemBounds": [142,31,14,69], "dotCenter": [150,10], "dotRadius": 10
+  },
+  "B": {
+    "x": 168, "width": 64, "height": 100,
+    "outer": "M0 0 H33 C52 0 62 10 62 25 C62 36 55 43 47 46 C60 49 64 57 64 71 C64 90 53 100 33 100 H0 Z",
+    "upperCounter": "M16 15 H32 C42 15 47 20 47 28 C47 36 42 40 32 40 H16 Z",
+    "lowerCounter": "M16 54 H32 C44 54 51 58 51 70 C51 81 43 85 32 85 H16 Z",
+    "curveType": "custom cubic outlines fitted to the selected raster, not circular arcs"
+  },
+  "o": { "center": [272,62], "outerRadii": [36,38], "innerRadii": [20,22] },
+  "x": { "points": [[304,24],[322,24],[336,48],[350,24],[368,24],[345,62],[368,100],[350,100],[336,76],[322,100],[304,100],[327,62]] }
+}

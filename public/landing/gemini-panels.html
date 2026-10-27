@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeiBox · 首页面板预览</title>
+<style>/* ==========================================================================
+   LeiBox Showcase Panels
+   Scope: .lb-showcase
+   ========================================================================== */
+.lb-showcase {
+  --lb-bg: #ffffff;
+  --lb-text: #171717;
+  --lb-text-2: #525252;
+  --lb-text-3: #a3a3a3;
+  --lb-line: #f0f0f0;
+  --lb-line-strong: #e5e5e5;
+  --lb-surface: #f7f7f7;
+  --lb-surface-hover: #efefef;
+  --lb-code-bg: #fcfcfc;
+  --lb-accent: #000000;
+  --lb-accent-fg: #ffffff;
+  --lb-tk-k: #000000;
+  --lb-tk-s: #2563eb;
+  --lb-tk-t: #059669;
+  --lb-tk-c: #a3a3a3;
+  --lb-tk-base: #404040;
+  --lb-radius: 12px;
+  --lb-sans: "MiSans", "Geist", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --lb-mono: "Geist Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  
+  color: var(--lb-text);
+  font-family: var(--lb-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.lb-showcase[data-lb-theme="dark"] {
+  --lb-bg: #0a0a0a;
+  --lb-text: #ededed;
+  --lb-text-2: #a3a3a3;
+  --lb-text-3: #666666;
+  --lb-line: #1f1f1f;
+  --lb-line-strong: #333333;
+  --lb-surface: #141414;
+  --lb-surface-hover: #1f1f1f;
+  --lb-code-bg: #0f0f0f;
+  --lb-accent: #ffffff;
+  --lb-accent-fg: #000000;
+  --lb-tk-k: #ffffff;
+  --lb-tk-s: #60a5fa;
+  --lb-tk-t: #34d399;
+  --lb-tk-c: #666666;
+  --lb-tk-base: #d4d4d4;
+  color-scheme: dark;
+}
+
+.lb-showcase * { box-sizing: border-box; margin: 0; padding: 0; }
+.lb-showcase ul, .lb-showcase ol { list-style: none; }
+.lb-showcase button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.lb-showcase a { color: inherit; text-decoration: none; }
+.lb-showcase img { display: block; max-width: 100%; height: auto; }
+.lb-showcase code, .lb-showcase pre { font-family: var(--lb-mono); font-size: 13px; }
+.lb-showcase :focus { outline: none; }
+.lb-showcase :focus-visible { outline: 2px solid var(--lb-text); outline-offset: 2px; }
+.lb-showcase [data-lb-icon] { display: inline-flex; align-items: center; justify-content: center; flex: none; line-height: 0; }
+.lb-showcase [data-lb-icon] svg { width: 1.1em; height: 1.1em; display: block; }
+.lb-showcase .lb-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Panel Shell */
+.lb-showcase.lb-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 580px;
+  background: var(--lb-bg);
+  container-type: inline-size;
+  container-name: lbpanel;
+  overflow: hidden;
+  /* Minimalist outer boundary, relying on whitespace and soft shadow instead of hard borders */
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 8px 32px -12px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+.lb-showcase[data-lb-theme="dark"].lb-panel { box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 8px 32px -12px rgba(0,0,0,0.3); }
+
+/* Common Typography */
+.lb-showcase .lb-title-lg { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; color: var(--lb-text); margin-bottom: 0.25rem; }
+.lb-showcase .lb-title-md { font-size: 0.95rem; font-weight: 600; color: var(--lb-text); }
+.lb-showcase .lb-text-muted { color: var(--lb-text-2); font-size: 0.9rem; }
+.lb-showcase .lb-text-small { color: var(--lb-text-3); font-size: 0.85rem; }
+
+/* Link & Button */
+.lb-showcase .lb-link-btn {
+  display: inline-flex; align-items: center; gap: 4px; font-weight: 500; font-size: 0.85rem;
+  color: var(--lb-text); border-bottom: 1px solid var(--lb-text); padding-bottom: 1px; transition: opacity 0.2s;
+}
+.lb-showcase .lb-link-btn:hover { opacity: 0.6; }
+.lb-showcase .lb-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 28px; padding: 0 10px;
+  border-radius: 6px; background: var(--lb-surface); color: var(--lb-text); font-size: 0.85rem; font-weight: 500;
+  white-space: nowrap; user-select: none; transition: background-color 0.2s, color 0.2s;
+}
+.lb-showcase .lb-btn:hover { background: var(--lb-surface-hover); }
+.lb-showcase .lb-btn--icon { padding: 0; width: 28px; }
+.lb-showcase .lb-btn--ghost { background: transparent; }
+.lb-showcase .lb-btn--ghost:hover { background: var(--lb-surface); }
+.lb-showcase .lb-btn .lb-swap-done { display: none; }
+.lb-showcase .lb-btn[data-copied="true"] { color: var(--lb-accent-fg); background: var(--lb-accent); }
+.lb-showcase .lb-btn[data-copied="true"] .lb-swap-idle { display: none; }
+.lb-showcase .lb-btn[data-copied="true"] .lb-swap-done { display: inline-flex; }
+.lb-showcase .lb-btn[disabled] { opacity: 0.5; pointer-events: none; }
+
+/* ==========================================================================
+   Panel 1 · Discovery
+   ========================================================================== */
+.lb-showcase.lb-discovery { min-height: 460px; }
+.lb-showcase.lb-discovery .lb-stage { position: relative; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.lb-showcase.lb-discovery .lb-layer { position: absolute; inset: 0; display: flex; flex-direction: column; opacity: 0; visibility: hidden; }
+.lb-showcase.lb-discovery .lb-layer.is-active { opacity: 1; visibility: visible; position: relative; }
+
+/* Layer 1: Pick */
+.lb-showcase.lb-discovery .lb-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 20px; margin-top: 16px; }
+.lb-showcase .lb-card { position: relative; display: flex; flex-direction: column; gap: 8px; cursor: default; }
+.lb-showcase .lb-card .lb-media { aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: var(--lb-surface); position: relative; box-shadow: inset 0 0 0 1px var(--lb-line); }
+.lb-showcase .lb-card .lb-media img { width: 100%; height: 100%; object-fit: cover; }
+.lb-showcase .lb-card__info { display: flex; justify-content: space-between; align-items: center; padding: 0 2px; }
+.lb-showcase .lb-card__name { font-size: 0.85rem; font-weight: 500; color: var(--lb-text-3); transition: color 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-showcase .lb-card.is-selected .lb-card__name { color: var(--lb-text); }
+.lb-showcase .lb-card__check { width: 16px; height: 16px; border-radius: 50%; background: var(--lb-text); color: var(--lb-bg); display: inline-flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.5); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.lb-showcase .lb-card__check svg { width: 10px; height: 10px; stroke-width: 3; }
+.lb-showcase .lb-card.is-selected .lb-card__check { opacity: 1; transform: scale(1); }
+
+.lb-showcase .lb-cursor-img { position: absolute; width: 56px; height: 56px; pointer-events: none; opacity: 0; visibility: hidden; z-index: 10; transform-origin: 17.5px 12.25px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15)); }
+
+/* Layer 2: Source */
+.lb-showcase.lb-discovery .lb-source-layout { display: flex; flex-direction: column; gap: 14px; height: 100%; justify-content: flex-start; }
+.lb-showcase .lb-source-header { margin-bottom: -2px; }
+.lb-showcase .lb-source-hero { width: 100%; aspect-ratio: 2.4/1; border-radius: 8px; overflow: hidden; background: var(--lb-surface); flex-shrink: 0; box-shadow: inset 0 0 0 1px var(--lb-line); }
+.lb-showcase .lb-source-hero img { width: 100%; height: 100%; object-fit: cover; }
+.lb-showcase .lb-source-meta { display: flex; flex-direction: column; gap: 8px; }
+.lb-showcase .lb-meta-grid { display: grid; grid-template-columns: 36px 1fr; gap: 6px 16px; align-items: baseline; margin-top: 4px; }
+.lb-showcase .lb-meta-label { font-size: 0.8rem; color: var(--lb-text-3); white-space: nowrap; }
+.lb-showcase .lb-meta-value { font-size: 0.85rem; color: var(--lb-text-2); line-height: 1.4; }
+.lb-showcase .lb-meta-value code { background: var(--lb-surface); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; color: var(--lb-text); }
+
+/* Layer 3: Preview */
+.lb-showcase.lb-discovery .lb-preview-layout { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.lb-showcase .lb-preview-header { display: flex; justify-content: space-between; align-items: flex-end; }
+.lb-showcase .lb-preview-container { flex: 1; border-radius: 8px; overflow: hidden; background: var(--lb-surface); position: relative; min-height: 220px; box-shadow: inset 0 0 0 1px var(--lb-line); }
+.lb-showcase .lb-preview-frame { position: absolute; left: 0; top: 0; width: 1200px; height: 600px; border: 0; transform-origin: 0 0; opacity: 0; transition: opacity 0.3s; background: transparent; }
+.lb-showcase .lb-preview-frame.is-loaded { opacity: 1; }
+.lb-showcase .lb-preview-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; filter: blur(4px); transition: opacity 0.3s; }
+.lb-showcase .lb-preview-frame.is-loaded + .lb-preview-fallback { opacity: 0; }
+
+/* Step indicators & controls */
+.lb-showcase .lb-discovery-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 16px; }
+.lb-showcase .lb-mini-steps { display: flex; gap: 4px; }
+.lb-showcase .lb-mini-step { width: 24px; height: 2px; background: var(--lb-line-strong); border-radius: 2px; transition: background 0.3s; }
+.lb-showcase .lb-mini-step.is-active { background: var(--lb-text); }
+.lb-showcase .lb-play-ctrl .lb-ico-play { display: none; }
+.lb-showcase .lb-play-ctrl[data-playing="false"] .lb-ico-play { display: inline-flex; }
+.lb-showcase .lb-play-ctrl[data-playing="false"] .lb-ico-pause { display: none; }
+
+/* ==========================================================================
+   Panel 2 · Frameworks
+   ========================================================================== */
+.lb-showcase.lb-frameworks { min-height: 440px; display: flex; flex-direction: column; gap: 16px; }
+.lb-showcase .lb-fw-header { display: flex; justify-content: space-between; align-items: flex-end; }
+.lb-showcase .lb-fw-meta { display: flex; gap: 12px; font-size: 0.85rem; color: var(--lb-text-3); margin-top: 4px; }
+.lb-showcase .lb-fw-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.lb-showcase .lb-fw-tabs-wrap { position: relative; margin: 0 -4px; padding: 0 4px; border-bottom: 1px solid var(--lb-line); }
+.lb-showcase .lb-fw-tabs { display: flex; gap: 16px; padding-bottom: 8px; overflow-x: auto; scrollbar-width: none; }
+.lb-showcase .lb-fw-tabs::-webkit-scrollbar { display: none; }
+.lb-showcase .lb-fw-tab { font-size: 0.9rem; color: var(--lb-text-3); font-weight: 500; transition: color 0.2s; white-space: nowrap; padding: 0 4px; }
+.lb-showcase .lb-fw-tab:hover { color: var(--lb-text-2); }
+.lb-showcase .lb-fw-tab[aria-selected="true"] { color: var(--lb-text); }
+.lb-showcase .lb-fw-ink { position: absolute; bottom: -1px; left: 0; height: 2px; background: var(--lb-text); pointer-events: none; }
+
+.lb-showcase .lb-fw-content { flex: 1; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.lb-showcase .lb-install-cmd { font-family: var(--lb-mono); font-size: 0.85rem; color: var(--lb-text); background: var(--lb-surface); padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; gap: 8px; flex: none; overflow-x: auto; white-space: nowrap; }
+.lb-showcase .lb-install-cmd::before { content: "$"; color: var(--lb-text-3); }
+.lb-showcase .lb-code-viewer { flex: 1; background: var(--lb-code-bg); border-radius: 8px; padding: 12px 16px; overflow: auto; line-height: 1.6; scrollbar-width: thin; overscroll-behavior: contain; box-shadow: inset 0 0 0 1px var(--lb-line); }
+.lb-showcase .lb-code-viewer code { color: var(--lb-tk-base); display: block; white-space: pre; }
+.lb-showcase .tk-k { color: var(--lb-tk-k); }
+.lb-showcase .tk-s { color: var(--lb-tk-s); }
+.lb-showcase .tk-t { color: var(--lb-tk-t); }
+.lb-showcase .tk-c { color: var(--lb-tk-c); }
+
+/* ==========================================================================
+   Panel 3 · Agent Workflow
+   ========================================================================== */
+.lb-showcase .lb-agent-wrap { display: flex; flex-direction: column; gap: 20px; min-height: 440px; height: 100%; justify-content: space-between; }
+.lb-showcase .lb-agent-prompt { font-size: 1rem; font-weight: 500; line-height: 1.5; color: var(--lb-text); position: relative; padding-left: 14px; }
+.lb-showcase .lb-agent-prompt::before { content: ""; position: absolute; left: 0; top: 0.2em; bottom: 0.2em; width: 2px; background: var(--lb-text); border-radius: 2px; }
+.lb-showcase .lb-flow { --lb-flow-gap: 20px; display: flex; flex-direction: column; gap: var(--lb-flow-gap); position: relative; margin-left: 4px; }
+.lb-showcase .lb-flow-item { display: flex; gap: 12px; position: relative; z-index: 1; }
+.lb-showcase .lb-flow-item:not(:last-child)::before { content: ""; position: absolute; left: 7.5px; top: 11px; width: 1px; height: calc(100% + var(--lb-flow-gap)); background: var(--lb-line-strong); transform: scaleY(var(--lb-link-progress, 1)); transform-origin: center top; pointer-events: none; }
+.lb-showcase .lb-flow-icon { width: 16px; height: 16px; border-radius: 50%; background: var(--lb-bg); border: 1px solid var(--lb-line-strong); display: flex; align-items: center; justify-content: center; color: var(--lb-bg); flex: none; margin-top: 3px; position: relative; }
+.lb-showcase .lb-flow-icon::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; background: var(--lb-text); opacity: var(--lb-done, 0); }
+.lb-showcase .lb-flow-icon svg { position: relative; width: 10px; height: 10px; opacity: 0; stroke-width: 3; }
+.lb-showcase .lb-flow-content { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.lb-showcase .lb-flow-title { font-size: 0.9rem; font-weight: 500; color: var(--lb-text-3); transition: color 0.2s; }
+.lb-showcase .lb-flow-desc { font-size: 0.85rem; color: var(--lb-text-2); opacity: 0; visibility: hidden; }
+
+.lb-showcase .lb-flow-item[data-state="active"] .lb-flow-icon { border-color: var(--lb-text); }
+.lb-showcase .lb-flow-item[data-state="active"] .lb-flow-icon::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid transparent; border-top-color: var(--lb-text); animation: lb-spin 1s linear infinite; }
+.lb-showcase .lb-flow-item[data-state="active"] .lb-flow-title { color: var(--lb-text); }
+.lb-showcase .lb-flow-item[data-state="done"] .lb-flow-icon { --lb-done: 1; border-color: var(--lb-text); }
+.lb-showcase .lb-flow-item[data-state="done"] .lb-flow-icon svg { opacity: 1; }
+.lb-showcase .lb-flow-item[data-state="done"] .lb-flow-title { color: var(--lb-text); }
+.lb-showcase .lb-flow-item[data-state="done"] .lb-flow-desc { opacity: 1; visibility: visible; }
+@keyframes lb-spin { 100% { transform: rotate(360deg); } }
+
+.lb-showcase .lb-agent-result { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px; background: var(--lb-surface); opacity: 0; visibility: hidden; box-shadow: inset 0 0 0 1px var(--lb-line); }
+.lb-showcase .lb-agent-result .lb-media { width: 72px; aspect-ratio: 16/9; border-radius: 4px; overflow: hidden; background: var(--lb-bg); }
+.lb-showcase .lb-agent-result .lb-media img { width: 100%; height: 100%; object-fit: cover; }
+.lb-showcase .lb-agent-result-text { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.lb-showcase .lb-agent-result-name { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--lb-text); }
+.lb-showcase .lb-agent-result-meta { font-size: 0.8rem; color: var(--lb-text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.lb-showcase .lb-agent-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: auto; padding-top: 16px; }
+
+/* Responsive Container */
+@container lbpanel (max-width: 480px) {
+  .lb-showcase.lb-panel { padding: 16px; }
+  .lb-showcase.lb-discovery .lb-gallery { gap: 12px; grid-template-columns: repeat(2, 1fr); }
+  .lb-showcase .lb-meta-grid { grid-template-columns: 1fr; gap: 4px; }
+  .lb-showcase .lb-fw-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .lb-showcase .lb-cursor-img { display: none; }
+}
+
+/* Integration: use the homepage font/color tokens and native cursor origin. */
+.lb-showcase { box-sizing:border-box; --lb-bg:var(--background, #fff); --lb-text:var(--foreground, #171717); --lb-text-3:var(--muted-foreground, #737373); --lb-sans:var(--font-site-sans, "MiSans VF", sans-serif); --lb-mono:var(--font-mono, "GeistMono", monospace); }
+.lb-showcase[data-lb-theme="dark"] { --lb-bg:var(--background, #0a0a0a); --lb-text:var(--foreground, #ededed); --lb-text-3:var(--muted-foreground, #a3a3a3); }
+.lb-showcase .lb-cursor-img { left:0; top:0; width:56px; height:56px; filter:none; }
+.lb-showcase[data-panel-active="false"] * { animation-play-state:paused !important; }
+.lb-showcase .lb-fw-tabs { position:relative; }
+.lb-showcase .lb-fw-tabs-wrap { margin:0; padding:0; min-width:0; }
+.lb-showcase .lb-fw-ink { bottom:0; }
+/* Keep only Gemini's one soft outer plane; thumbnail and code grouping use their own content/background. */
+.lb-showcase .lb-media, .lb-showcase .lb-source-hero, .lb-showcase .lb-preview-container, .lb-showcase .lb-code-viewer, .lb-showcase .lb-agent-result { box-shadow:none; }
+/* The preview uses its native 1200 x 600 canvas; its footer follows the actual content. */
+.lb-showcase.lb-discovery:has([data-lb-layer="2"].is-active) { min-height:0; }
+.lb-showcase.lb-discovery:has([data-lb-layer="2"].is-active) .lb-stage { flex:0 0 auto; }
+.lb-showcase.lb-discovery:has([data-lb-layer="2"].is-active) .lb-discovery-foot { margin-top:0; }
+.lb-showcase.lb-discovery .lb-preview-layout { height:auto; }
+.lb-showcase.lb-discovery .lb-preview-container { flex:none; min-height:0; aspect-ratio:2 / 1; }
+
+/* Page Layout for testing isolation */
+.page-wrap { background: #f5f5f4; min-height: 100vh; padding: 40px 20px; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; gap: 60px; }
+.dark-mode .page-wrap { background: #0c0c0c; color: #eee; }
+.section-context { max-width: 1000px; width: 100%; display: grid; grid-template-columns: 1fr; gap: 40px; }
+@media(min-width: 900px) { .section-context { grid-template-columns: 1fr 1fr; align-items: center;} }
+.text-col h2 { font-size: 2rem; margin-bottom: 1rem; color: #111; }
+.text-col p { font-size: 1rem; color: #555; line-height: 1.6; }
+.dark-mode .text-col h2 { color: #eee; }
+.dark-mode .text-col p { color: #aaa; }
+.controls { display: flex; gap: 10px; margin-bottom: 20px; }
+.controls button { padding: 6px 12px; cursor: pointer; border: 1px solid #ccc; background: #fff; border-radius: 4px; }
+
+/* Standalone preview wrapper */
+.page-wrap{background:#fff}.dark-mode .page-wrap{background:#0a0a0a}
+</style>
+</head>
+<body>
+
+<div class="page-wrap" id="app-root">
+  <div class="controls">
+    <button onclick="toggleLang()">切换语言 (Toggle Lang)</button>
+    <button onclick="toggleTheme()">切换主题 (Toggle Theme)</button>
+  </div>
+
+  <!-- Panel 1: Discovery -->
+  <div class="section-context">
+    <div class="text-col">
+      <div style="font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: 600;">工作原理</div>
+      <h2>发现，理解，再应用</h2>
+      <p>浏览组件库，找到适合的效果。本站每个演示都是真实组件，正在实时运行。查看来源与许可，把灵感带入你的项目。</p>
+    </div>
+    <div class="panel-col">
+      <section class="lb-showcase lb-panel lb-discovery" data-leibox-panel="discovery" data-lb-theme="light">
+  <div class="lb-stage">
+    <!-- Step 1 -->
+    <div class="lb-layer is-active" data-lb-layer="0">
+      <div class="lb-source-header">
+        <h3 class="lb-title-lg" data-i18n="d.s1Title">组件收藏</h3>
+        <p class="lb-text-muted" data-i18n="d.s1Desc">搜索组件、动效与交互</p>
+      </div>
+      <div class="lb-gallery">
+        <div class="lb-card" data-slug="glass-folder">
+          <div class="lb-media"><img src="/assets/components/glass-folder.png" alt="" loading="lazy"></div>
+          <div class="lb-card__info">
+            <span class="lb-card__name" data-i18n="c.glass-folder">玻璃文件夹</span>
+            <span class="lb-card__check"><span data-lb-icon="Check"></span></span>
+          </div>
+        </div>
+        <div class="lb-card" data-slug="dot-matrix-trio">
+          <div class="lb-media"><img src="/assets/components/dot-matrix-trio.png" alt="" loading="lazy"></div>
+          <div class="lb-card__info">
+            <span class="lb-card__name" data-i18n="c.dot-matrix-trio">点阵波纹与旋涡</span>
+            <span class="lb-card__check"><span data-lb-icon="Check"></span></span>
+          </div>
+        </div>
+        <div class="lb-card" data-slug="brand-poster-cards">
+          <div class="lb-media"><img src="/assets/components/brand-poster-cards.png" alt="" loading="lazy"></div>
+          <div class="lb-card__info">
+            <span class="lb-card__name" data-i18n="c.brand-poster-cards">品牌海报三联卡片</span>
+            <span class="lb-card__check"><span data-lb-icon="Check"></span></span>
+          </div>
+        </div>
+        <div class="lb-card" data-slug="soft-action-wheel">
+          <div class="lb-media"><img src="/assets/components/soft-action-wheel.png" alt="" loading="lazy"></div>
+          <div class="lb-card__info">
+            <span class="lb-card__name" data-i18n="c.soft-action-wheel">柔光环形菜单</span>
+            <span class="lb-card__check"><span data-lb-icon="Check"></span></span>
+          </div>
+        </div>
+      </div>
+      <img src="/landing/agent-demo/cursors/default.svg" class="lb-cursor-img" alt="" aria-hidden="true">
+    </div>
+
+    <!-- Step 2 -->
+    <div class="lb-layer" data-lb-layer="1">
+      <div class="lb-source-layout">
+        <div class="lb-source-header">
+          <h3 class="lb-title-lg" data-i18n="d.s2Title">来源与许可</h3>
+          <p class="lb-text-muted" data-i18n="d.s2Desc">追溯原始设计与源码构成</p>
+        </div>
+        <div class="lb-source-hero"><img src="/assets/components/glass-folder.png" alt=""></div>
+        <div class="lb-source-meta">
+          <h4 class="lb-title-md">GlassFolder</h4>
+          <p class="lb-text-muted" data-i18n="d.desc">磨砂玻璃文件夹，点击展开真实文件卡片，支持添加文件和键盘菜单。</p>
+          <div class="lb-meta-grid">
+            <span class="lb-meta-label" data-i18n="d.source">来源</span>
+            <span class="lb-meta-value" data-i18n="d.sourceVal">用户提供的 React 源码，已在本项目适配</span>
+            <span class="lb-meta-label" data-i18n="d.license">许可</span>
+            <span class="lb-meta-value" data-i18n="d.licenseVal">以条目中的来源与许可说明为准</span>
+            <span class="lb-meta-label" data-i18n="d.files">源码</span>
+            <span class="lb-meta-value" data-lb-files-info>React 版 <code>4</code> 个文件 · <code>673</code> 行</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="lb-layer" data-lb-layer="2">
+       <div class="lb-preview-layout">
+         <div class="lb-preview-header">
+           <div>
+             <h3 class="lb-title-lg" data-i18n="d.s3Title">应用预览</h3>
+             <p class="lb-text-muted" data-i18n="d.s3Desc">真实运行演示</p>
+           </div>
+           <a href="/motion/glass-folder.html" target="_blank" class="lb-link-btn" rel="noopener">
+             <span data-i18n="d.openDemo">独立演示</span> <span data-lb-icon="ExternalLink"></span>
+           </a>
+         </div>
+         <div class="lb-preview-container">
+           <iframe class="lb-preview-frame" data-src="/motion/glass-folder.html" title="Preview" aria-hidden="true" tabindex="-1" loading="lazy"></iframe>
+           <img src="/assets/components/glass-folder.png" class="lb-preview-fallback" alt="">
+         </div>
+       </div>
+    </div>
+  </div>
+  
+  <div class="lb-discovery-foot">
+    <div class="lb-mini-steps" aria-hidden="true">
+      <div class="lb-mini-step is-active"></div><div class="lb-mini-step"></div><div class="lb-mini-step"></div>
+    </div>
+    <button type="button" class="lb-btn lb-btn--icon lb-btn--ghost lb-play-ctrl" data-lb-action="toggle-play" data-playing="true" aria-label="Pause">
+      <span class="lb-ico-pause" data-lb-icon="Pause"></span>
+      <span class="lb-ico-play" data-lb-icon="Play"></span>
+    </button>
+  </div>
+</section>
+    </div>
+  </div>
+
+  <!-- Panel 2: Frameworks -->
+  <div class="section-context" style="direction: rtl;">
+    <div class="text-col" style="direction: ltr;">
+      <div style="font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: 600;">不限定框架</div>
+      <h2>一个组件，六种框架版本</h2>
+      <p>玻璃文件夹示例提供 React、Vue、Svelte、Solid、Preact 与原生 TypeScript 版本。使用前请查看来源、依赖和许可说明。</p>
+    </div>
+    <div class="panel-col" style="direction: ltr;">
+      <section class="lb-showcase lb-panel lb-frameworks" data-leibox-panel="frameworks" data-lb-theme="light">
+  <div class="lb-fw-header">
+    <div>
+      <h3 class="lb-title-lg" data-i18n="f.title">组件源码</h3>
+      <div class="lb-fw-meta">
+        <span><span data-lb-icon="FileCode2"></span> <span data-lb-files-count data-i18n="f.filesCount">4 个文件</span></span>
+        <span><span data-lb-icon="Code2"></span> <span data-lb-lines-count data-i18n="f.linesCount">673 行</span></span>
+      </div>
+    </div>
+    <button type="button" class="lb-btn" data-lb-action="copy-code">
+      <span class="lb-swap-idle" data-lb-icon="Copy"></span>
+      <span class="lb-swap-done" data-lb-icon="Check"></span>
+      <span data-lb-label="f.copy" data-i18n="f.copy">复制代码</span>
+    </button>
+  </div>
+
+  <div class="lb-fw-tabs-wrap">
+    <div class="lb-fw-tabs" role="tablist">
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="true" data-fw="react">React</button>
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="false" data-fw="vue" tabindex="-1">Vue</button>
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="false" data-fw="svelte" tabindex="-1">Svelte</button>
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="false" data-fw="solid" tabindex="-1">Solid</button>
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="false" data-fw="preact" tabindex="-1">Preact</button>
+      <button type="button" class="lb-fw-tab" role="tab" aria-selected="false" data-fw="vanilla" tabindex="-1">Vanilla</button>
+      <div class="lb-fw-ink"></div>
+    </div>
+  </div>
+
+  <div class="lb-fw-content">
+    <div class="lb-install-cmd" data-lb-install>npm install react react-dom</div>
+    <div class="lb-code-viewer"><code data-lb-code><span class="tk-k">import</span> { GlassFolder } <span class="tk-k">from</span> <span class="tk-s">"./GlassFolder"</span>;
+
+<span class="tk-k">export</span> <span class="tk-k">default</span> <span class="tk-k">function</span> App() {
+  <span class="tk-k">return</span> &lt;<span class="tk-t">GlassFolder</span> /&gt;;
+}</code></div>
+  </div>
+</section>
+    </div>
+  </div>
+
+  <!-- Panel 3: Agent -->
+  <div class="section-context">
+    <div class="text-col">
+      <div style="font-size: 0.85rem; color: #888; margin-bottom: 8px; font-weight: 600;">为 AI 准备就绪</div>
+      <h2>让 AI 也能用好你的收藏</h2>
+      <p>安装一次 LeiBox Skill，让 AI 按需求找组件、选择项目框架，并把完整源码拉进你的项目。</p>
+    </div>
+    <div class="panel-col">
+       <section class="lb-showcase lb-panel" data-leibox-panel="agent" data-lb-theme="light">
+  <div class="lb-agent-wrap">
+    <div>
+      <div class="lb-agent-prompt" data-lb-prompt>将 LeiBox 的 GlassFolder 玻璃文件夹组件集成到这个项目中。</div>
+    </div>
+    
+    <div class="lb-flow">
+      <div class="lb-flow-item" data-state="pending">
+        <div class="lb-flow-icon"><span data-lb-icon="Check"></span></div>
+        <div class="lb-flow-content">
+          <div class="lb-flow-title" data-i18n="a.s1">读取组件源码</div>
+          <div class="lb-flow-desc" data-i18n="a.s1desc">4 个文件 · 673 行</div>
+        </div>
+      </div>
+      <div class="lb-flow-item" data-state="pending">
+        <div class="lb-flow-icon"><span data-lb-icon="Check"></span></div>
+        <div class="lb-flow-content">
+          <div class="lb-flow-title" data-i18n="a.s2">确认框架</div>
+          <div class="lb-flow-desc">React</div>
+        </div>
+      </div>
+      <div class="lb-flow-item" data-state="pending">
+        <div class="lb-flow-icon"><span data-lb-icon="Check"></span></div>
+        <div class="lb-flow-content">
+          <div class="lb-flow-title" data-i18n="a.s3">添加到项目</div>
+          <div class="lb-flow-desc" data-i18n="a.s3desc">提供用法示例</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lb-agent-result" data-lb-result>
+      <div class="lb-media"><img src="/assets/components/glass-folder.png" alt=""></div>
+      <div class="lb-agent-result-text">
+        <div class="lb-agent-result-name">GlassFolder</div>
+        <div class="lb-agent-result-meta" data-i18n="a.doneMeta">演示完成 · 仅供示意</div>
+      </div>
+      <a href="/docs/animations/glass-folder" class="lb-link-btn" style="margin-left:auto;">
+        <span data-lb-icon="ArrowUpRight"></span>
+      </a>
+    </div>
+
+    <div class="lb-agent-actions">
+       <button type="button" class="lb-btn lb-btn--ghost" data-lb-action="copy-prompt">
+         <span class="lb-swap-idle" data-lb-icon="Copy"></span>
+         <span class="lb-swap-done" data-lb-icon="Check"></span>
+         <span data-lb-label="a.copyPrompt" data-i18n="a.copyPrompt">复制提示词</span>
+       </button>
+       <button type="button" class="lb-btn lb-btn--icon lb-btn--ghost" data-lb-action="replay" aria-label="Replay">
+         <span data-lb-icon="RotateCcw"></span>
+       </button>
+    </div>
+  </div>
+</section>
+    </div>
+  </div>
+</div>
+
+<script src="/landing/claude-panels/gsap.min.js"></script>
+<script>/* Generated from outputs/gemini-home-panels-redesign/gemini-final.html by build.cjs. */
+/* eslint-disable */
+const gsap = window.gsap;
+
+/* ==========================================================================
+   LeiBoxPanels API
+   ========================================================================== */
+const api = (function() {
+  "use strict";
+
+  var DATA = {"brand":{"name":"LeiBox","mark":"/leibox-mark.svg","logo":"/leibox-logo.svg"},"components":[{"slug":"glass-folder","name":"玻璃文件夹","en":"Glass Folder Cards","width":1200,"height":600,"poster":"/assets/components/glass-folder.png","demo":"/motion/glass-folder.html","href":"/docs/animations/glass-folder"},{"slug":"brand-poster-cards","name":"品牌海报三联卡片","en":"Brand Poster Cards","width":1200,"height":675,"poster":"/assets/components/brand-poster-cards.png","demo":"/motion/brand-poster-cards.html","href":"/docs/animations/brand-poster-cards"},{"slug":"dot-matrix-trio","name":"点阵波纹与旋涡","en":"Dot Matrix Ripple and Spiral","width":960,"height":540,"poster":"/assets/components/dot-matrix-trio.png","demo":"/motion/dot-matrix-trio.html","href":"/docs/animations/dot-matrix-trio"},{"slug":"soft-action-wheel","name":"柔光环形菜单","en":"Soft Action Wheel","width":960,"height":960,"poster":"/assets/components/soft-action-wheel.png","demo":"/motion/soft-action-wheel.html","href":"/docs/animations/soft-action-wheel"},{"slug":"inline-text-morph","name":"内联词组变形","en":"Inline Phrase Morph","width":1044,"height":684,"poster":"/assets/components/inline-text-morph.png","demo":"/motion/inline-text-morph.html","href":"/docs/animations/inline-text-morph"},{"slug":"blue-fluted-glass","name":"蓝色棱纹流动背景","en":"Blue Fluted Glass Background","width":1200,"height":675,"poster":"/assets/components/blue-fluted-glass.png","demo":"/motion/blue-fluted-glass.html","href":"/docs/animations/blue-fluted-glass"}],"selected":{"slug":"glass-folder","name":"GlassFolder","description":"磨砂玻璃文件夹，点击展开真实文件卡片，支持添加文件和键盘菜单。","source":"用户提供的 React 源码，已在本项目适配","license":"以条目中的来源与许可说明为准","integrationPrompt":"将 LeiBox 的 GlassFolder 玻璃文件夹组件集成到这个项目中。"},"frameworks":[{"id":"react","label":"React","component":"GlassFolder","usage":"import { GlassFolder } from \"./GlassFolder\";\n\nexport default function App() {\n  return <GlassFolder />;\n}","install":"npm install react react-dom","files":[{"name":"GlassFolder.tsx","lines":18},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":673},{"id":"vue","label":"Vue","component":"GlassFolder","usage":"<script setup lang=\"ts\">\nimport GlassFolder from \"./GlassFolder.vue\";\n<\/script>\n<template><GlassFolder /></template>","install":"npm install vue","files":[{"name":"GlassFolder.vue","lines":13},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":667},{"id":"svelte","label":"Svelte","component":"GlassFolder","usage":"<script lang=\"ts\">\nimport GlassFolder from \"./GlassFolder.svelte\";\n<\/script>\n<GlassFolder />","install":"npm install svelte","files":[{"name":"GlassFolder.svelte","lines":16},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":670},{"id":"solid","label":"Solid","component":"GlassFolder","usage":"import { GlassFolder } from \"./GlassFolder.solid\";\n\nexport default function App() {\n  return <GlassFolder />;\n}","install":"npm install solid-js","files":[{"name":"GlassFolder.solid.tsx","lines":13},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":668},{"id":"preact","label":"Preact","component":"GlassFolder","usage":"import { GlassFolder } from \"./GlassFolder.preact\";\n\nexport default function App() {\n  return <GlassFolder />;\n}","install":"npm install preact","files":[{"name":"GlassFolder.preact.tsx","lines":18},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":673},{"id":"vanilla","label":"Vanilla","component":"GlassFolder","usage":"import { mount } from \"./GlassFolder\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();","install":"No runtime dependencies. Use TypeScript or a bundler to compile the entry file.","files":[{"name":"GlassFolder.ts","lines":8},{"name":"GlassFolderEngine.js","lines":445},{"name":"motion-runtime.ts","lines":169},{"name":"GlassFolderEngine.d.ts","lines":3}],"bundleLines":663}],"icons":{"FolderOpen":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-folder-open\" aria-hidden=\"true\"><path d=\"m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2\"></path></svg>","Search":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-search\" aria-hidden=\"true\"><path d=\"m21 21-4.34-4.34\"></path><circle cx=\"11\" cy=\"11\" r=\"8\"></circle></svg>","Check":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-check\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"></path></svg>","Code2":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-code-xml\" aria-hidden=\"true\"><path d=\"m18 16 4-4-4-4\"></path><path d=\"m6 8-4 4 4 4\"></path><path d=\"m14.5 4-5 16\"></path></svg>","Copy":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-copy\" aria-hidden=\"true\"><rect width=\"14\" height=\"14\" x=\"8\" y=\"8\" rx=\"2\" ry=\"2\"></rect><path d=\"M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2\"></path></svg>","Terminal":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-terminal\" aria-hidden=\"true\"><path d=\"M12 19h8\"></path><path d=\"m4 17 6-6-6-6\"></path></svg>","FileCode2":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-file-code-corner\" aria-hidden=\"true\"><path d=\"M4 12.15V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2h-3.35\"></path><path d=\"M14 2v5a1 1 0 0 0 1 1h5\"></path><path d=\"m5 16-3 3 3 3\"></path><path d=\"m9 22 3-3-3-3\"></path></svg>","ArrowUpRight":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-arrow-up-right\" aria-hidden=\"true\"><path d=\"M7 7h10v10\"></path><path d=\"M7 17 17 7\"></path></svg>","Play":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-play\" aria-hidden=\"true\"><path d=\"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z\"></path></svg>","Pause":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-pause\" aria-hidden=\"true\"><rect x=\"14\" y=\"3\" width=\"5\" height=\"18\" rx=\"1\"></rect><rect x=\"5\" y=\"3\" width=\"5\" height=\"18\" rx=\"1\"></rect></svg>","RotateCcw":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-rotate-ccw\" aria-hidden=\"true\"><path d=\"M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8\"></path><path d=\"M3 3v5h5\"></path></svg>","ChevronDown":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-chevron-down\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"></path></svg>","Sparkles":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-sparkles\" aria-hidden=\"true\"><path d=\"M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z\"></path><path d=\"M20 2v4\"></path><path d=\"M22 4h-4\"></path><circle cx=\"4\" cy=\"20\" r=\"2\"></circle></svg>","ExternalLink":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-external-link\" aria-hidden=\"true\"><path d=\"M15 3h6v6\"></path><path d=\"M10 14 21 3\"></path><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\"></path></svg>","CheckCircle2":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-circle-check\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><path d=\"m9 12 2 2 4-4\"></path></svg>"}};
+
+  var DICT = {
+    "zh-CN": {
+      "common.copied": "已复制",
+      "common.copyFailed": "复制失败",
+      "d.s1Title": "组件收藏", "d.s1Desc": "搜索组件、动效与交互",
+      "d.s2Title": "来源与许可", "d.s2Desc": "追溯原始设计与源码构成",
+      "d.s3Title": "应用预览", "d.s3Desc": "真实运行演示",
+      "d.openDemo": "独立演示",
+      "d.desc": DATA.selected.description,
+      "d.source": "来源", "d.sourceVal": DATA.selected.source,
+      "d.license": "许可", "d.licenseVal": DATA.selected.license,
+      "d.files": "源码", "d.filesVal": "React 版 {n} 个文件 · {lines} 行",
+      "f.title": "组件源码", "f.copy": "复制代码",
+      "f.filesCount": "{n} 个文件", "f.linesCount": "{lines} 行",
+      "a.s1": "读取组件源码", "a.s1desc": "{n} 个文件 · {lines} 行",
+      "a.s2": "确认框架",
+      "a.s3": "添加到项目", "a.s3desc": "提供用法示例",
+      "a.doneMeta": "演示完成 · 仅供示意",
+      "a.copyPrompt": "复制提示词"
+    },
+    "en": {
+      "common.copied": "Copied",
+      "common.copyFailed": "Failed",
+      "d.s1Title": "Collection", "d.s1Desc": "Search components & interactions",
+      "d.s2Title": "Source & License", "d.s2Desc": "Trace origins and structure",
+      "d.s3Title": "Preview", "d.s3Desc": "Live demo running",
+      "d.openDemo": "Open demo",
+      "d.desc": "Frosted glass folders that open into real file cards, with add-file support and a keyboard menu.",
+      "d.source": "Source", "d.sourceVal": "User provided React source, adapted",
+      "d.license": "License", "d.licenseVal": "See entry notes",
+      "d.files": "Files", "d.filesVal": "React: {n} files · {lines} lines",
+      "f.title": "Source Code", "f.copy": "Copy code",
+      "f.filesCount": "{n} files", "f.linesCount": "{lines} lines",
+      "a.s1": "Read source", "a.s1desc": "{n} files · {lines} lines",
+      "a.s2": "Confirm stack",
+      "a.s3": "Add to project", "a.s3desc": "Usage snippet provided",
+      "a.doneMeta": "Demo complete · Illustrative",
+      "a.copyPrompt": "Copy prompt"
+    }
+  };
+  DATA.components.forEach(function(c) {
+    DICT["zh-CN"]["c."+c.slug] = c.name;
+    DICT["en"]["c."+c.slug] = c.en;
+  });
+
+  Object.assign(DICT.en, {"common.copied":"Copied","common.copyFailed":"Failed","d.s1Title":"Collection","d.s1Desc":"Explore components and interactions","d.s2Title":"Source & License","d.s2Desc":"Trace origins and structure","d.s3Title":"Preview","d.s3Desc":"Live demo running","d.openDemo":"Open demo","d.desc":"Frosted glass folders that open into real file cards, with add-file support and a keyboard menu.","d.source":"Source","d.sourceVal":"User provided React source, adapted","d.license":"License","d.licenseVal":"See entry notes","d.files":"Files","d.filesVal":"React: {n} files · {lines} lines","f.title":"Source Code","f.copy":"Copy code","f.filesCount":"{n} files","f.linesCount":"{lines} lines","a.s1":"Read source","a.s1desc":"{n} files · {lines} lines","a.s2":"Confirm stack","a.s3":"Add to project","a.s3desc":"Usage snippet provided","a.doneMeta":"Demo complete · Illustrative","a.copyPrompt":"Copy prompt","c.glass-folder":"Glass Folder Cards","c.brand-poster-cards":"Brand Poster Cards","c.dot-matrix-trio":"Dot Matrix Ripple and Spiral","c.soft-action-wheel":"Soft Action Wheel","c.inline-text-morph":"Inline Phrase Morph","c.blue-fluted-glass":"Blue Fluted Glass Background","a.prompt":"Integrate GlassFolder from LeiBox into this project.","common.pause":"Pause demo","common.play":"Play demo","common.replay":"Replay demo","common.docs":"View documentation"});
+  Object.assign(DICT['zh-CN'], {"common.copied":"已复制","common.copyFailed":"复制失败","d.s1Title":"组件收藏","d.s1Desc":"浏览精选组件与交互动效","d.s2Title":"来源与许可","d.s2Desc":"追溯原始设计与源码构成","d.s3Title":"应用预览","d.s3Desc":"真实运行演示","d.openDemo":"独立演示","d.desc":"磨砂玻璃文件夹，点击展开真实文件卡片，支持添加文件和键盘菜单。","d.source":"来源","d.sourceVal":"用户提供的 React 源码，已在本项目适配","d.license":"许可","d.licenseVal":"以条目中的来源与许可说明为准","d.files":"源码","d.filesVal":"React 版 {n} 个文件 · {lines} 行","f.title":"组件源码","f.copy":"复制代码","f.filesCount":"{n} 个文件","f.linesCount":"{lines} 行","a.s1":"读取组件源码","a.s1desc":"{n} 个文件 · {lines} 行","a.s2":"确认框架","a.s3":"添加到项目","a.s3desc":"提供用法示例","a.doneMeta":"演示完成 · 仅供示意","a.copyPrompt":"复制提示词","c.glass-folder":"玻璃文件夹","c.brand-poster-cards":"品牌海报三联卡片","c.dot-matrix-trio":"点阵波纹与旋涡","c.soft-action-wheel":"柔光环形菜单","c.inline-text-morph":"内联词组变形","c.blue-fluted-glass":"蓝色棱纹流动背景","a.prompt":"将 LeiBox 的 GlassFolder 玻璃文件夹组件集成到这个项目中。","common.pause":"暂停演示","common.play":"播放演示","common.replay":"重新演示","common.docs":"查看文档"});
+
+  // Utils
+  function fmt(str, vars) { return String(str).replace(/\{(\w+)\}/g, function(_, k) { return vars && vars[k] != null ? String(vars[k]) : _; }); }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function toArr(list) { return Array.prototype.slice.call(list || []); }
+  function hasGSAP() { return typeof window !== 'undefined' && !!gsap; }
+
+  var KW = { "import": 1, "from": 1, "export": 1, "default": 1, "function": 1, "return": 1, "const": 1 };
+  var TOKEN_RE = /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')|(<\/?[A-Za-z][\w.]*|\/?>)|\b([A-Za-z_$][\w$]*)\b/g;
+  function hlLine(line) {
+    var out = "", last = 0, m;
+    TOKEN_RE.lastIndex = 0;
+    while ((m = TOKEN_RE.exec(line))) {
+      out += esc(line.slice(last, m.index));
+      if (m[1]) out += '<span class="tk-c">' + esc(m[1]) + "</span>";
+      else if (m[2]) out += '<span class="tk-s">' + esc(m[2]) + "</span>";
+      else if (m[3]) out += '<span class="tk-t">' + esc(m[3]) + "</span>";
+      else if (m[4]) out += KW[m[4]] ? '<span class="tk-k">' + esc(m[4]) + "</span>" : esc(m[4]);
+      last = TOKEN_RE.lastIndex;
+    }
+    return out + esc(line.slice(last));
+  }
+  function renderCode(src) { return src.split("\n").map(function(l) { return hlLine(l) || " "; }).join("\n"); }
+  
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function(res, rej) {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.cssText = "position:fixed;opacity:0;";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy") ? res() : rej(); } catch(e) { rej(); }
+      document.body.removeChild(ta);
+    });
+  }
+
+  // Timer robust enough for page visibility
+  function Timer(onDone) {
+    this.onDone = onDone; this.dur = 0; this.elap = 0; this.start = 0; this.tid = null; this.run = false;
+  }
+  Timer.prototype.pending = function() { return this.dur > 0 && this.elap < this.dur; };
+  Timer.prototype.startAt = function(ms) { this.stop(); this.dur = ms; this.elap = 0; this.resume(); };
+  Timer.prototype.resume = function() {
+    if (this.run || !this.pending()) return;
+    this.run = true; this.start = performance.now();
+    var self = this;
+    this.tid = setTimeout(function() { self.run = false; self.dur = 0; self.elap = 0; self.onDone(); }, this.dur - this.elap);
+  };
+  Timer.prototype.pause = function() {
+    if (!this.run) return;
+    this.run = false; clearTimeout(this.tid); this.elap += performance.now() - this.start;
+  };
+  Timer.prototype.stop = function() { this.run = false; clearTimeout(this.tid); this.dur = 0; this.elap = 0; };
+
+  // Base Controller
+  function createBase(el, opts) {
+    var b = { timeouts: new Set(), el: el, opts: opts || {}, uid: "lb" + Math.random().toString(36).substr(2, 6), cleans: [], tls: [] };
+    b.state = { loc: b.opts.locale === 'en' ? 'en' : 'zh-CN', thm: b.opts.theme === 'dark' ? 'dark' : 'light', act: b.opts.active !== false, view: typeof IntersectionObserver === "undefined", doc: !document.hidden, red: false };
+    
+    var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    if(mq) { b.state.red = mq.matches; b.cleans.push(function(){ mq.onchange = null; }); mq.onchange = function() { b.state.red = mq.matches; b.update(); }; }
+    
+    b.on = function(tgt, typ, fn, opt) { tgt.addEventListener(typ, fn, opt); b.cleans.push(function() { tgt.removeEventListener(typ, fn, opt); }); };
+    b.t = function(k, v) { if(b.opts.translate) return b.opts.translate(k,v); var d = DICT[b.state.loc] || DICT["zh-CN"]; var str = d[k] != null ? d[k] : (DICT["zh-CN"][k] || k); return fmt(str, v); };
+    b.translate = function() {
+      toArr(el.querySelectorAll("[data-i18n]")).forEach(function(n) {
+        var v = n.getAttribute("data-i18n-vars");
+        n.textContent = b.t(n.getAttribute("data-i18n"), v ? JSON.parse(v) : null);
+      });
+      el.setAttribute("lang", b.state.loc);
+      var replay=el.querySelector('[data-lb-action="replay"]'); if(replay) replay.setAttribute("aria-label",b.t("common.replay"));
+      var docs=el.querySelector(".lb-agent-result a"); if(docs) docs.setAttribute("aria-label",b.t("common.docs"));
+      var play=el.querySelector('[data-lb-action="toggle-play"]'); if(play) play.setAttribute("aria-label",b.t(play.getAttribute("data-playing")==="false"?"common.play":"common.pause"));
+    };
+    b.fillIcons = function(sc) {
+      toArr((sc || el).querySelectorAll("[data-lb-icon]")).forEach(function(n) {
+        if (!n.firstElementChild) n.innerHTML = DATA.icons[n.getAttribute("data-lb-icon")] || "";
+      });
+    };
+    b.flash = function(btn, ok) {
+      btn.setAttribute("data-copied", ok ? "true" : "error");
+      var l = btn.querySelector("[data-lb-label]");
+      if(l) l.textContent = b.t(ok ? "common.copied" : "common.copyFailed");
+      var timeout = setTimeout(function() { b.timeouts.delete(timeout); btn.removeAttribute("data-copied"); if(l) l.textContent = b.t(l.getAttribute("data-i18n")); }, 1600); b.timeouts.add(timeout);
+    };
+    b.canAnim = function() { return hasGSAP() && !b.state.red; };
+    b.running = function() { return b.state.act && b.state.view && b.state.doc && !b.state.red; };
+    
+    b.ctx = hasGSAP() && gsap.context ? gsap.context(function(){}, el) : null;
+    b.tl = function(v) { var t; if(b.ctx) b.ctx.add(function(){ t = gsap.timeline(v||{}); }); else t = gsap.timeline(v||{}); b.tls.push(t); return t; };
+    b.kill = function(t) { if(t) t.kill(); if(b.ctx) b.ctx.kill(false); b.tls.length = 0; return null; };
+    b.clear = function(n) { n = gsap.utils.toArray(n); if(hasGSAP() && n.length) gsap.set(n, {clearProps: "all"}); else n.forEach(function(x){ x.removeAttribute('style'); }); };
+    
+    b.update = function() { if(!b.running()) b.tls.forEach(function(t){ t.pause(); }); b.sync(); };
+    
+    if (typeof IntersectionObserver !== "undefined") {
+      var io = new IntersectionObserver(function(e) { e.forEach(function(x) { b.state.view = x.isIntersecting && x.intersectionRatio >= 0.2; }); b.update(); }, { threshold: [0, 0.2, 0.5] });
+      io.observe(el); b.cleans.push(function(){ io.disconnect(); });
+    }
+    b.on(document, "visibilitychange", function() { b.state.doc = !document.hidden; b.update(); });
+    
+    b.emit = function(i, s) { if(b.opts.onStepChange) { try { b.opts.onStepChange(i, {panel: el.getAttribute('data-leibox-panel'), source: s}); } catch(e){} } };
+    b.destroy = function() { b.timeouts.forEach(clearTimeout); b.tls.forEach(function(t){ t.kill(); }); b.cleans.forEach(function(f){ f(); }); if(b.ctx) b.ctx.revert({suppressEvents:true}); };
+    
+    el.setAttribute("data-lb-theme", b.state.thm);
+    b.fillIcons(); b.translate();
+    return b;
+  }
+
+  // --- 1. Discovery ---
+  function initDiscovery(b) {
+    var el = b.el, layers = toArr(el.querySelectorAll(".lb-layer")), dots = toArr(el.querySelectorAll(".lb-mini-step"));
+    var target = el.querySelector('.lb-card[data-slug="glass-folder"]'), cursor = el.querySelector(".lb-cursor-img"), iframe = el.querySelector(".lb-preview-frame");
+    var playBtn = el.querySelector('.lb-play-ctrl'), animEls = [cursor].concat(layers, el.querySelectorAll('.lb-card, .lb-card__check, .lb-source-hero, .lb-meta-grid > span, .lb-preview-container'));
+    
+    var step = 0, userPaused = false, tl = null, intro = false;
+    function syncPreview() {
+      if(step === 2 && b.running()) { if(!iframe.hasAttribute("src")) iframe.src = iframe.getAttribute("data-src"); }
+      else if(iframe.hasAttribute("src")) { iframe.removeAttribute("src"); iframe.classList.remove("is-loaded"); }
+    }
+    function fitPreview() { var host=iframe.parentElement,w=host.clientWidth,h=host.clientHeight,s=Math.min(w/1200,h/600); iframe.style.transform="translate("+((w-1200*s)/2)+"px,"+((h-600*s)/2)+"px) scale("+s+")"; }
+    var previewResize = new ResizeObserver(fitPreview); previewResize.observe(iframe.parentElement); b.cleans.push(function(){previewResize.disconnect();});
+    b.on(iframe,"load",function(){if(iframe.hasAttribute("src")) iframe.classList.add("is-loaded");fitPreview();});
+    var timer = new Timer(function() { go((step + 1) % 3, "auto"); });
+
+    b.el.querySelector('[data-lb-files-info]').setAttribute('data-i18n','d.filesVal');
+    b.el.querySelector('[data-lb-files-info]').setAttribute('data-i18n-vars', JSON.stringify({n: DATA.frameworks[0].files.length, lines: DATA.frameworks[0].bundleLines}));
+    b.translate();
+
+    function setBar() {
+      playBtn.setAttribute("data-playing", !userPaused ? "true" : "false"); playBtn.setAttribute("aria-label",b.t(userPaused?"common.play":"common.pause"));
+      dots.forEach(function(d, i) { d.classList.toggle("is-active", i === step); });
+    }
+    
+    function build0(t) {
+      if(cursor) {
+        var rootR = layers[0].getBoundingClientRect(), tgR = target.getBoundingClientRect();
+        var tx = tgR.left - rootR.left + tgR.width / 2 - 17.5, ty = tgR.top - rootR.top + tgR.height / 2 - 12.25;
+        t.fromTo(cursor, {x: rootR.width * 0.8, y: rootR.height * 0.8, autoAlpha: 0, scale: 1}, {autoAlpha: 1, duration: 0.2}, 0.2);
+        var startX=rootR.width*0.8,startY=rootR.height*0.8;
+        var path={p:0};
+        t.to(path,{p:1,duration:0.7,ease:"power2.inOut",onUpdate:function(){var p=path.p;gsap.set(cursor,{x:startX+(tx-startX)*p,y:startY+(ty-startY)*p-Math.sin(Math.PI*p)*18});}},">");
+        t.to(cursor, {scale: 0.9, duration: 0.1, yoyo: true, repeat: 1});
+        t.call(function() { target.classList.add("is-selected"); });
+        t.to(cursor, {autoAlpha: 0, duration: 0.2}, "+=0.4");
+      } else { t.call(function() { target.classList.add("is-selected"); }, null, 1.2); }
+    }
+    
+    function animateTo(from, to) {
+      if(!b.canAnim()) { tl = b.kill(tl); b.clear(animEls); layers.forEach(function(l, i){ l.classList.toggle("is-active", i === to); }); target.classList.add("is-selected"); syncPreview(); return; }
+      tl = b.kill(tl); b.clear(animEls);
+      layers.forEach(function(l, i){ l.classList.toggle("is-active", i === to); });
+      if(to !== 0) target.classList.add("is-selected"); else target.classList.remove("is-selected");
+      
+      b.ctx.add(function(){ gsap.set(layers[to], {autoAlpha: 0}); if(from !== to) gsap.set(layers[from], {autoAlpha: 1}); });
+      tl = b.tl({onComplete: function() { b.clear(animEls); }});
+      if(from !== to) tl.to(layers[from], {autoAlpha: 0, duration: 0.25}, 0);
+      tl.to(layers[to], {autoAlpha: 1, duration: 0.3}, from !== to ? 0.15 : 0);
+      
+      var at = from !== to ? 0.15 : 0;
+      if(to === 0) build0(tl);
+      else if(to === 1) {
+        tl.fromTo(el.querySelector(".lb-source-hero"), {scale: 0.95, autoAlpha: 0}, {scale: 1, autoAlpha: 1, duration: 0.35, ease: "power2.out"}, at + 0.1);
+        tl.fromTo(el.querySelectorAll(".lb-meta-grid > span"), {y: 6, autoAlpha: 0}, {y: 0, autoAlpha: 1, stagger: 0.04, duration: 0.25}, at + 0.2);
+      } else if(to === 2) {
+        syncPreview();
+        tl.fromTo(el.querySelector(".lb-preview-container"), {y: 10, autoAlpha: 0}, {y: 0, autoAlpha: 1, duration: 0.35}, at + 0.1);
+      }
+      if(!b.running()) tl.pause();
+    }
+
+    function sched() { timer.stop(); if(b.running() && !userPaused) timer.startAt(step === 0 ? 3200 : 3600); }
+    function go(i, src) {
+      if(src === "user" || src === "api") userPaused = true;
+      var from = step; step = i;
+      setBar();
+      if(intro && b.canAnim()) animateTo(from, i); else animateTo(i, i);
+      syncPreview(); b.emit(i, src); sched();
+    }
+
+    b.on(playBtn, "click", function() { userPaused = !userPaused; setBar(); if(userPaused) timer.stop(); else if(!intro && b.running()) b.sync(); else sched(); });
+    
+    b.sync = function() {
+      var r = b.running(); syncPreview();
+      if(r && !intro) { intro = true; animateTo(step, step); sched(); return; }
+      if(r) { b.tls.forEach(function(t){ if(t.progress()<1) t.resume(); }); if(!userPaused) { if(timer.pending()) timer.resume(); else sched(); } }
+      else { timer.pause(); if(b.state.red || !intro && !b.state.act) animateTo(step, step); }
+    };
+    
+    setBar(); animateTo(step, step);
+    return { setStep: function(i){ go(i|0, "api"); }, onLoc: function(){}, dest: function(){ timer.stop(); } };
+  }
+
+  // --- 2. Frameworks ---
+  function initFrameworks(b) {
+    var el = b.el, tabs = toArr(el.querySelectorAll(".lb-fw-tab")), ink = el.querySelector(".lb-fw-ink");
+    var codeEl = el.querySelector("[data-lb-code]"), instEl = el.querySelector("[data-lb-install]");
+    var fCount = el.querySelector("[data-lb-files-count]"), lCount = el.querySelector("[data-lb-lines-count]");
+    var copyBtn = el.querySelector('[data-lb-action="copy-code"]');
+    var idx = 0, tl = null;
+
+    function moveInk(t, anim) {
+      if(!t) return;
+      if(hasGSAP() && anim && b.canAnim()) {
+        tl = b.kill(tl); tl = b.tl();
+        tl.to(ink, {x: t.offsetLeft, width: t.offsetWidth, duration: 0.25, ease: "power2.out"});
+      } else { ink.style.transform = "translateX(" + t.offsetLeft + "px)"; ink.style.width = t.offsetWidth + "px"; }
+      var wrap = el.querySelector(".lb-fw-tabs");
+      var l = t.offsetLeft - 24, r = t.offsetLeft + t.offsetWidth + 24;
+      if(l < wrap.scrollLeft) wrap.scrollLeft = Math.max(0, l); else if(r > wrap.scrollLeft + wrap.clientWidth) wrap.scrollLeft = r - wrap.clientWidth;
+    }
+
+    function render(i, anim) {
+      idx = i; var fw = DATA.frameworks[i];
+      tabs.forEach(function(t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); t.tabIndex = k === i ? 0 : -1; });
+      moveInk(tabs[i], anim);
+      codeEl.innerHTML = renderCode(fw.usage); instEl.textContent = fw.install;
+      b.el.querySelector('[data-lb-files-count]').setAttribute('data-i18n-vars', JSON.stringify({n: fw.files.length}));
+      b.el.querySelector('[data-lb-lines-count]').setAttribute('data-i18n-vars', JSON.stringify({lines: fw.bundleLines}));
+      b.translate();
+    }
+
+    tabs.forEach(function(t, i) {
+      b.on(t, "click", function() { render(i, true); b.emit(i, "user"); });
+      b.on(t, "keydown", function(e) {
+        var n = null; if(e.key==="ArrowRight") n = (i+1)%6; else if(e.key==="ArrowLeft") n = (i-1+6)%6;
+        if(n!==null) { e.preventDefault(); render(n, true); tabs[n].focus(); b.emit(n, "user"); }
+      });
+    });
+    b.on(copyBtn, "click", function() { copyText(DATA.frameworks[idx].usage).then(function(){ b.flash(copyBtn, true); }, function(){ b.flash(copyBtn, false); }); });
+    
+    b.sync = function() {}; // No auto-play here
+    var resize = new ResizeObserver(function(){ moveInk(tabs[idx], false); }); resize.observe(el); b.cleans.push(function(){ resize.disconnect(); });
+    render(idx, false);
+    
+    return { setStep: function(i){ render(i%6|0, true); b.emit(i%6|0, "api"); }, onLoc: function(){ moveInk(tabs[idx], false); }, dest: function(){ if(tl) tl.kill(); } };
+  }
+
+  // --- 3. Agent ---
+  function initAgent(b) {
+    var el = b.el, flow = el.querySelector(".lb-flow"), items = toArr(el.querySelectorAll(".lb-flow-item")), res = el.querySelector(".lb-agent-result");
+    var icons = items.map(function(it) { return it.querySelector(".lb-flow-icon"); });
+    var checks = icons.map(function(icon) { return icon.querySelector("svg"); });
+    var contents = items.map(function(it) { return it.querySelector(".lb-flow-content"); });
+    var descriptions = items.map(function(it) { return it.querySelector(".lb-flow-desc"); });
+    var animated = [flow, res].concat(items, icons, checks, contents, descriptions);
+    var btnReplay = el.querySelector('[data-lb-action="replay"]'), btnPrompt = el.querySelector('[data-lb-action="copy-prompt"]');
+    var tl = null, intro = false, stage = 3;
+    var timer = new Timer(function() { if(b.running()) play("auto"); });
+
+    var react = DATA.frameworks[0];
+    el.querySelector("[data-lb-prompt]").setAttribute("data-i18n", "a.prompt");
+    el.querySelector('[data-i18n="a.s1desc"]').setAttribute('data-i18n-vars', JSON.stringify({n: react.files.length, lines: react.bundleLines}));
+    b.translate();
+
+    function setStat(k) {
+      stage = k;
+      items.forEach(function(it, i) { it.setAttribute("data-state", i < k ? "done" : i === k ? "active" : "pending"); });
+      res.style.opacity = k >= 3 ? 1 : 0;
+      res.style.visibility = k >= 3 ? "visible" : "hidden";
+    }
+
+    function settle(k) {
+      timer.stop();
+      tl = b.kill(tl);
+      b.clear(animated);
+      setStat(k);
+    }
+
+    function play(src) {
+      timer.stop();
+      if(!b.canAnim()) { settle(3); b.emit(3, src); return; }
+      tl = b.kill(tl);
+      tl = b.tl({ onComplete: function() {
+        b.clear(animated);
+        setStat(3);
+        b.emit(3, src);
+        if(b.running()) timer.startAt(6000);
+      } });
+
+      // Fade the old pass before resetting, keeping every row and circle in place.
+      tl.to([flow, res], {autoAlpha: 0, duration: 0.18, ease: "sine.out"}, 0);
+      tl.call(function() {
+        items.forEach(function(it) { it.setAttribute("data-state", "pending"); });
+        stage = -1;
+      }, null, 0.18);
+      tl.set(items, {"--lb-link-progress": 0}, 0.18);
+      tl.set(icons, {autoAlpha: 0, scale: 0.88, "--lb-done": 0}, 0.18);
+      tl.set(checks, {autoAlpha: 0, scale: 0.8, transformOrigin: "center"}, 0.18);
+      tl.set(contents, {autoAlpha: 0, y: 4}, 0.18);
+      tl.set(descriptions, {autoAlpha: 0, y: 3}, 0.18);
+      tl.set(res, {autoAlpha: 0, y: 5}, 0.18);
+      tl.set(flow, {autoAlpha: 1}, 0.18);
+
+      var arrival = 0.3;
+      items.forEach(function(it, i) {
+        var enter = arrival - 0.1, done = arrival + 0.48;
+        tl.to(icons[i], {autoAlpha: 1, scale: 1, duration: 0.32, ease: "power2.out"}, enter);
+        tl.to(contents[i], {autoAlpha: 1, y: 0, duration: 0.42, ease: "power2.out"}, enter);
+        tl.call(function() { it.setAttribute("data-state", "active"); stage = i; b.emit(i, src); }, null, arrival + 0.06);
+        tl.call(function() { it.setAttribute("data-state", "done"); }, null, done);
+        tl.to(icons[i], {"--lb-done": 1, duration: 0.32, ease: "sine.inOut"}, done);
+        tl.to(checks[i], {autoAlpha: 1, scale: 1, duration: 0.28, ease: "power2.out"}, done + 0.06);
+        tl.to(descriptions[i], {autoAlpha: 1, y: 0, duration: 0.36, ease: "power2.out"}, done + 0.06);
+        if(i < items.length - 1) {
+          // Each segment spans exactly two circle centers; the next circle fades in as it arrives.
+          tl.to(it, {"--lb-link-progress": 1, duration: 0.52, ease: "sine.inOut"}, done + 0.12);
+          arrival = done + 0.64;
+        } else {
+          tl.to(res, {autoAlpha: 1, y: 0, duration: 0.48, ease: "power2.out"}, done + 0.18);
+        }
+      });
+      if(!b.running()) tl.pause();
+    }
+
+    b.on(btnReplay, "click", function() { intro = true; play("user"); });
+    b.on(btnPrompt, "click", function() { timer.stop(); copyText(b.t("a.prompt")).then(function(){ b.flash(btnPrompt, true); }, function(){ b.flash(btnPrompt, false); }); });
+    b.sync = function() {
+      var r = b.running();
+      if(r && !intro) { intro = true; play("auto"); return; }
+      if(r) {
+        if(tl && tl.progress() < 1) tl.resume();
+        if(timer.pending()) timer.resume(); else if(stage >= 3 && (!tl || tl.progress() === 1)) timer.startAt(6000);
+      } else {
+        timer.pause();
+        if(b.state.red) settle(3);
+        else if(!intro && !b.state.act) setStat(3);
+      }
+    };
+    setStat(3);
+    return { setStep: function(i){ intro = true; settle(Math.max(0, Math.min(3, i|0))); b.emit(stage, "api"); }, onLoc: function(){}, dest: function(){ timer.stop(); } };
+  }
+
+  var FACTORIES = { "discovery": initDiscovery, "frameworks": initFrameworks, "agent": initAgent };
+
+  function initPanel(el, opts) {
+    if(el._lbApi) el._lbApi.destroy();
+    var kind = el.getAttribute("data-leibox-panel");
+    if(!FACTORIES[kind]) return null;
+    
+    var b = createBase(el, opts);
+    var p = FACTORIES[kind](b);
+    b.update();
+    
+    var api = {
+      panel: kind,
+      setStep: p.setStep,
+      setLocale: function(l) { b.state.loc = l === 'en' ? 'en' : 'zh-CN'; b.translate(); p.onLoc(); },
+      setTheme: function(t) { b.state.thm = t === 'dark' ? 'dark' : 'light'; el.setAttribute("data-lb-theme", b.state.thm); },
+      setActive: function(a) { b.state.act = !!a; b.update(); },
+      destroy: function() { p.dest(); b.destroy(); delete el._lbApi; }
+    };
+    el._lbApi = api;
+    return api;
+  }
+
+  return {
+    dictionary: DICT,
+    data: DATA,
+    init: function(root, opts) {
+      if(!root) return null;
+      var els = root.hasAttribute("data-leibox-panel") ? [root] : toArr(root.querySelectorAll("[data-leibox-panel]"));
+      var insts = els.map(function(el) { return initPanel(el, opts); }).filter(Boolean);
+      return {
+        panels: insts,
+        setStep: function(i) { insts.forEach(function(p){ p.setStep(i); }); },
+        setLocale: function(l) { insts.forEach(function(p){ p.setLocale(l); }); },
+        setTheme: function(t) { insts.forEach(function(p){ p.setTheme(t); }); },
+        setActive: function(a) { insts.forEach(function(p){ p.setActive(a); }); },
+        destroy: function() { insts.forEach(function(p){ p.destroy(); }); }
+      };
+    }
+  };
+})();
+
+const claudeDictionary = api.dictionary;
+function mountClaudePanel(root, options) { return api.init(root, options); }
+
+window.LeiBoxPanels = api;</script>
+
+<script>
+// Harness for local testing
+(function() {
+  var root = document.getElementById("app-root");
+  var loc = "zh-CN", thm = "light";
+  var api = window.LeiBoxPanels.init(root, {
+    locale: loc, theme: thm, active: true,
+    onStepChange: function(i, ctx) { console.log(ctx.panel, i, ctx.source); }
+  });
+  window.toggleLang = function() { loc = loc === "zh-CN" ? "en" : "zh-CN"; api.setLocale(loc); };
+  window.toggleTheme = function() { thm = thm === "light" ? "dark" : "light"; api.setTheme(thm); document.body.classList.toggle('dark-mode', thm === 'dark'); };
+})();
+</script>
+</body>
+</html>

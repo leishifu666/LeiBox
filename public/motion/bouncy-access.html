@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flawless Bouncy Access Request</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    /* 核心视觉 Token */
+    --bg-page: #f1f1f1;
+    --bg-widget: #18181b;
+    --bg-btn: #27272a;
+    --bg-btn-hover: #3f3f46;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --color-badge: #ef4444;
+    
+    --av-red: #ef4444;
+    --av-purple: #a855f7;
+    --av-yellow: #eab308;
+    --av-green: #22c55e;
+
+    /* 几何属性 */
+    --widget-width: 420px;
+    --widget-h-collapsed: 64px;
+    --widget-h-expanded: 296px;
+    --radius-collapsed: 32px;
+    --radius-expanded: 24px;
+    
+    /* * 【核心解法：非对称物理曲线】
+     * Expand: 带有 1.35 过冲的高张力弹簧，Q弹十足
+     * Collapse: 迅速收紧不反弹的平滑曲线，干净利落
+     */
+    --spring-expand: cubic-bezier(0.34, 1.35, 0.45, 1);
+    --ease-collapse: cubic-bezier(0.32, 0.72, 0, 1);
+    
+    --duration-expand: 0.5s;
+    --duration-collapse: 0.35s;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* ----------------------------------
+   * Widget 主体
+   * ---------------------------------- */
+  .widget-container {
+    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.12));
+  }
+
+  .widget {
+    background-color: var(--bg-widget);
+    width: var(--widget-width);
+    height: var(--widget-h-collapsed);
+    border-radius: var(--radius-collapsed);
+    position: relative;
+    cursor: pointer;
+    
+    /* 强制硬件加速并解决 Webkit 下圆角溢出 Bug */
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+    
+    /* 默认状态 (收起时的动画) */
+    transition: 
+      height var(--duration-collapse) var(--ease-collapse),
+      border-radius var(--duration-collapse) var(--ease-collapse);
+  }
+
+  /* 激活状态 (展开时的动画) */
+  .widget.is-expanded {
+    height: var(--widget-h-expanded);
+    border-radius: var(--radius-expanded);
+    cursor: default;
+    transition: 
+      height var(--duration-expand) var(--spring-expand),
+      border-radius var(--duration-expand) var(--spring-expand);
+  }
+
+  /* ----------------------------------
+   * 右上角控制区
+   * ---------------------------------- */
+  .controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 4px;
+    z-index: 20;
+  }
+
+  .icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .icon-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .icon-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .toggle-icon {
+    transition: transform var(--duration-collapse) var(--ease-collapse);
+  }
+
+  .widget.is-expanded .toggle-icon {
+    transform: rotate(180deg);
+    transition: transform var(--duration-expand) var(--spring-expand);
+  }
+
+  /* ----------------------------------
+   * 文字层
+   * ---------------------------------- */
+  .collapsed-text {
+    position: absolute;
+    left: 90px;
+    top: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: none;
+    /* 收回时：等一点点时间再出现 */
+    transition: opacity 0.2s ease 0.1s, transform var(--duration-collapse) var(--ease-collapse);
+  }
+
+  .collapsed-text .line-1 { color: var(--text-primary); font-size: 14.5px; }
+  .collapsed-text .line-1 strong { font-weight: 500; }
+  .collapsed-text .line-2 { color: var(--text-secondary); font-size: 13px; }
+
+  .widget.is-expanded .collapsed-text {
+    opacity: 0;
+    transform: translateY(-8px);
+    /* 展开时：瞬间消失 */
+    transition: opacity 0.15s ease, transform var(--duration-expand) var(--spring-expand);
+  }
+
+  .header-text {
+    position: absolute;
+    left: 20px;
+    top: 22px;
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    /* 收回时：瞬间消失 */
+    transition: opacity 0.15s ease, transform var(--duration-collapse) var(--ease-collapse);
+  }
+
+  .widget.is-expanded .header-text {
+    opacity: 1;
+    transform: translateY(0);
+    /* 展开时：平滑滑入 */
+    transition: opacity 0.3s ease 0.1s, transform var(--duration-expand) var(--spring-expand);
+  }
+
+  /* ----------------------------------
+   * 列表项 (精密的坐标系统)
+   * ---------------------------------- */
+  .list-item {
+    position: absolute;
+    top: 0; left: 0;
+    width: calc(100% - 40px);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Louis (Red) */
+  .item-louis { 
+    transform: translate(36px, 14px); 
+    z-index: 1; 
+    transition: transform var(--duration-collapse) var(--ease-collapse);
+  }
+  .widget.is-expanded .item-louis { 
+    transform: translate(20px, 72px); 
+    z-index: 4; 
+    transition: transform var(--duration-expand) var(--spring-expand);
+  }
+
+  /* Peter (Purple) */
+  .item-peter { 
+    transform: translate(14px, 14px); 
+    z-index: 2; 
+    transition: transform var(--duration-collapse) var(--ease-collapse);
+  }
+  .widget.is-expanded .item-peter { 
+    transform: translate(20px, 128px); 
+    z-index: 3; 
+    transition: transform var(--duration-expand) var(--spring-expand);
+  }
+
+  /* * Aditya & Chris (底部的两项)
+   * 收起时：瞬间透明，避免被容器边缘裁切产生残影！ 
+   */
+  .item-aditya { 
+    transform: translate(20px, 192px); 
+    opacity: 0; 
+    pointer-events: none;
+    transition: transform var(--duration-collapse) var(--ease-collapse), opacity 0.1s ease;
+  }
+  .widget.is-expanded .item-aditya { 
+    transform: translate(20px, 184px); 
+    opacity: 1; 
+    pointer-events: auto;
+    transition: transform var(--duration-expand) var(--spring-expand), opacity 0.3s ease 0.05s;
+  }
+
+  .item-chris { 
+    transform: translate(20px, 248px); 
+    opacity: 0; 
+    pointer-events: none;
+    transition: transform var(--duration-collapse) var(--ease-collapse), opacity 0.1s ease;
+  }
+  .widget.is-expanded .item-chris { 
+    transform: translate(20px, 240px); 
+    opacity: 1; 
+    pointer-events: auto;
+    transition: transform var(--duration-expand) var(--spring-expand), opacity 0.3s ease 0.08s;
+  }
+
+  /* ----------------------------------
+   * 头像 & Badge
+   * ---------------------------------- */
+  .avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--bg-widget);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    background-color: var(--color-badge);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-widget);
+    z-index: 5;
+    transform-origin: center;
+    
+    transform: scale(1);
+    opacity: 1;
+    transition: transform var(--duration-collapse) var(--ease-collapse), opacity 0.2s ease 0.1s;
+  }
+
+  .widget.is-expanded .badge {
+    transform: scale(0.2);
+    opacity: 0;
+    transition: transform var(--duration-expand) var(--spring-expand), opacity 0.2s ease;
+  }
+
+  .bg-red    { background-color: var(--av-red); }
+  .bg-purple { background-color: var(--av-purple); }
+  .bg-yellow { background-color: var(--av-yellow); }
+  .bg-green  { background-color: var(--av-green); }
+
+  .avatar-svg {
+    width: 100%;
+    height: 100%;
+    transform: translateY(4px);
+  }
+
+  /* ----------------------------------
+   * 右侧内容列 (姓名 + 按钮)
+   * ---------------------------------- */
+  .item-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* 收回时：瞬间隐藏，去掉 delay */
+    opacity: 0;
+    transform: translateX(8px);
+    transition: opacity 0.15s ease, transform var(--duration-collapse) var(--ease-collapse);
+    pointer-events: none;
+  }
+
+  .widget.is-expanded .item-content {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  /* 展开时：阶梯式延迟进场 */
+  .widget.is-expanded .item-louis .item-content { transition: opacity 0.3s ease 0.08s, transform var(--duration-expand) var(--spring-expand) 0.08s; }
+  .widget.is-expanded .item-peter .item-content { transition: opacity 0.3s ease 0.12s, transform var(--duration-expand) var(--spring-expand) 0.12s; }
+  .widget.is-expanded .item-aditya .item-content { transition: opacity 0.3s ease 0.16s, transform var(--duration-expand) var(--spring-expand) 0.16s; }
+  .widget.is-expanded .item-chris .item-content { transition: opacity 0.3s ease 0.20s, transform var(--duration-expand) var(--spring-expand) 0.20s; }
+
+  .user-name {
+    color: var(--text-primary);
+    font-size: 14.5px;
+    font-weight: 400;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-action {
+    background-color: var(--bg-btn);
+    color: var(--text-primary);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+  }
+
+  .btn-action:hover {
+    background-color: var(--bg-btn-hover);
+  }
+
+  .btn-action:active {
+    transform: scale(0.96);
+  }
+</style>
+</head>
+<body>
+
+  <svg style="display: none;">
+    <defs>
+      <g id="face-base"><path d="M12 40C12 32 15.5 28 20 28C24.5 28 28 32 28 40" fill="#fcd34d"/><circle cx="20" cy="18" r="8" fill="#fcd34d"/></g>
+      <g id="glasses"><rect x="13" y="15" width="5" height="4" rx="1" fill="#1f2937"/><rect x="22" y="15" width="5" height="4" rx="1" fill="#1f2937"/><path d="M18 17H22" stroke="#1f2937" stroke-width="2"/></g>
+      <g id="beard"><path d="M13 19C13 25 16 27 20 27C24 27 27 25 27 19C25 22 15 22 13 19Z" fill="#78350f"/></g>
+      <g id="hair-brown"><path d="M11 18C11 11 14 9 20 9C26 9 29 11 29 18C29 14 26 12 20 12C14 12 11 14 11 18Z" fill="#78350f"/></g>
+      <g id="hair-black"><path d="M11 18C11 11 14 9 20 9C26 9 29 11 29 18C29 14 26 12 20 12C14 12 11 14 11 18Z" fill="#111827"/></g>
+    </defs>
+  </svg>
+
+  <div class="widget-container">
+    <div class="widget" id="access-widget">
+      
+      <div class="controls">
+        <button class="icon-btn" id="toggle-btn" aria-label="Toggle View">
+          <svg class="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="collapsed-text">
+        <div class="line-1"><strong>@adityaSur11</strong> and <strong>4 others</strong></div>
+        <div class="line-2">requested access</div>
+      </div>
+
+      <div class="header-text">Access Request</div>
+
+      <div class="list-item item-louis">
+        <div class="avatar-wrapper">
+          <div class="avatar bg-red"><svg class="avatar-svg" viewBox="0 0 40 40"><use href="#face-base"/><use href="#hair-brown"/><use href="#glasses"/></svg></div>
+          <div class="badge">2</div>
+        </div>
+        <div class="item-content"><span class="user-name">Louis Griffen</span><div class="actions"><button class="btn-action">Approve</button><button class="btn-action">Reject</button></div></div>
+      </div>
+
+      <div class="list-item item-peter">
+        <div class="avatar-wrapper">
+          <div class="avatar bg-purple"><svg class="avatar-svg" viewBox="0 0 40 40"><use href="#face-base"/><use href="#hair-brown"/><use href="#beard"/></svg></div>
+        </div>
+        <div class="item-content"><span class="user-name">Peter Griffen</span><div class="actions"><button class="btn-action">Approve</button><button class="btn-action">Reject</button></div></div>
+      </div>
+
+      <div class="list-item item-aditya">
+        <div class="avatar-wrapper">
+          <div class="avatar bg-yellow"><svg class="avatar-svg" viewBox="0 0 40 40"><use href="#face-base"/><use href="#hair-black"/></svg></div>
+        </div>
+        <div class="item-content"><span class="user-name">Aditya sur</span><div class="actions"><button class="btn-action">Approve</button><button class="btn-action">Reject</button></div></div>
+      </div>
+
+      <div class="list-item item-chris">
+        <div class="avatar-wrapper">
+          <div class="avatar bg-green"><svg class="avatar-svg" viewBox="0 0 40 40"><use href="#face-base"/><use href="#hair-black"/></svg></div>
+        </div>
+        <div class="item-content"><span class="user-name">Chris Griffen</span><div class="actions"><button class="btn-action">Approve</button><button class="btn-action">Reject</button></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const widget = document.getElementById('access-widget');
+      const toggleBtn = document.getElementById('toggle-btn');
+
+      widget.addEventListener('click', (e) => {
+        if (!widget.classList.contains('is-expanded') && e.target.closest('.icon-btn') === null) {
+          widget.classList.add('is-expanded');
+        }
+      });
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        widget.classList.toggle('is-expanded');
+      });
+      
+      document.querySelectorAll('.btn-action, .icon-btn:not(#toggle-btn)').forEach(btn => {
+        btn.addEventListener('click', (e) => e.stopPropagation());
+      });
+    });
+  </script>
+</body>
+</html>

@@ -12,7 +12,7 @@ export function CodeBlock({
   /** File name shown in the header of a multi-line block. */
   fileName?: string;
 }) {
-  if (!html) {
+  if (!html && !fileName) {
     return (
       <div className="not-typeset flex items-center justify-between gap-3 overflow-hidden rounded-xl border border-border/60 py-1.5 pr-1.5 pl-4">
         <code className="font-mono text-[13px] break-all whitespace-pre-wrap text-foreground/90">
@@ -31,10 +31,7 @@ export function CodeBlock({
         </span>
         <CopyButton text={source} />
       </div>
-      <div
-        className="docs-code max-h-[480px] overflow-y-auto text-[13px] leading-6"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {html ? <div className="docs-code max-h-[480px] overflow-auto text-[13px] leading-6" dangerouslySetInnerHTML={{ __html: html }} /> : <pre translate="no" className="max-h-[480px] overflow-auto p-4 font-mono text-[13px] leading-6"><code>{source}</code></pre>}
     </div>
   );
 }

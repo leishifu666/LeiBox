@@ -1,0 +1,157 @@
+{
+  "slug": "brand-line-cards",
+  "name": {
+    "en": "Pointer Line Cards",
+    "zh": "鼠标感应线条"
+  },
+  "description": {
+    "en": "Apple, Google, and Tesla emerge from flowing vertical lines, with spring motion and pointer-driven detection boxes.",
+    "zh": "竖线重构 Apple、Google 与 Tesla 标志，结合弹簧回弹及随鼠标变化的检测框连线。"
+  },
+  "keywords": "品牌 线条 卡片 竖线 苹果 谷歌 特斯拉 检测框 连线 识别 噪声 弹簧 logo brand apple google tesla canvas luminance detection spring",
+  "docsPath": "/docs/animations/brand-line-cards",
+  "detailPath": "/ai/components/brand-line-cards.json",
+  "markdownPath": "/ai/components/brand-line-cards.md",
+  "previewPath": "/assets/components/brand-line-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "交互品牌卡片",
+      "线条 Logo 展示",
+      "interactive line logo cards"
+    ],
+    "searchTerms": [
+      "线条",
+      "品牌",
+      "标志",
+      "鼠标",
+      "line",
+      "brand",
+      "logo",
+      "pointer"
+    ],
+    "visualTags": [
+      "line-art",
+      "monochrome"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "演示含第三方品牌标志，接入时替换为项目自己的素材。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/ianneo_ai/status/2112718197690691657/video/1",
+    "designAuthor": "Ian (伊恩)",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/brand-line-cards/react.json",
+      "component": "BrandLineCards",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { BrandLineCards } from \"./BrandLineCards\";\n\nexport default function App() {\n  return <BrandLineCards />;\n}",
+      "files": [
+        "BrandLineCards.tsx",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/brand-line-cards/vue.json",
+      "component": "BrandLineCards",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BrandLineCards from \"./BrandLineCards.vue\";\n</script>\n<template><BrandLineCards /></template>",
+      "files": [
+        "BrandLineCards.vue",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/brand-line-cards/svelte.json",
+      "component": "BrandLineCards",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BrandLineCards from \"./BrandLineCards.svelte\";\n</script>\n<BrandLineCards />",
+      "files": [
+        "BrandLineCards.svelte",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/brand-line-cards/solid.json",
+      "component": "BrandLineCards",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { BrandLineCards } from \"./BrandLineCards.solid\";\n\nexport default function App() {\n  return <BrandLineCards />;\n}",
+      "files": [
+        "BrandLineCards.solid.tsx",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/brand-line-cards/preact.json",
+      "component": "BrandLineCards",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { BrandLineCards } from \"./BrandLineCards.preact\";\n\nexport default function App() {\n  return <BrandLineCards />;\n}",
+      "files": [
+        "BrandLineCards.preact.tsx",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/brand-line-cards/vanilla.json",
+      "component": "BrandLineCards",
+      "dependencies": [],
+      "usage": "import { mount } from \"./BrandLineCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BrandLineCards.ts",
+        "BrandLineCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandLineCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Move across each card to scatter the lines and change detection boxes. Tap on touch screens, or focus a card with the keyboard. Reveal the source opens its SVG path.",
+    "zh": "在卡片上移动鼠标，体验线条散开回弹与检测框变化；触屏可点击，键盘可聚焦卡片。点击 Reveal the source 查看 SVG 路径。"
+  }
+}

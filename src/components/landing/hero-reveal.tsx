@@ -1,186 +1,64 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { optimizedImage, heroVideo } from "@/lib/optimized-image";
 
-import { ParticleReveal } from "@/components/docs/live/ParticleReveal";
-import { supportsHtmlInCanvas } from "@/lib/ParticleReveal/ParticleRevealVanilla";
-
+const Native = lazy(() => import("./hero-reveal-native").then(module => ({ default: module.HeroRevealNative })));
 const emptySubscribe = () => () => {};
+let nativeSupport: boolean | undefined;
+function supportsNative() {
+  if (nativeSupport !== undefined) return nativeSupport;
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
+  nativeSupport = Boolean(context && typeof (context as CanvasRenderingContext2D & { drawElementImage?: unknown }).drawElementImage === "function" && typeof (canvas as HTMLCanvasElement & { requestPaint?: unknown }).requestPaint === "function");
+  return nativeSupport;
+}
+type Connection = EventTarget & { saveData?: boolean; effectiveType?: string };
+function connection() { return (navigator as Navigator & { connection?: Connection }).connection; }
+function limited() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches || Boolean(connection()?.saveData) || /(^|-)2g$/.test(connection()?.effectiveType ?? "");
+}
+function subscribe(callback: () => void) {
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const net = connection();
+  query.addEventListener("change", callback); net?.addEventListener("change", callback);
+  return () => { query.removeEventListener("change", callback); net?.removeEventListener("change", callback); };
+}
 
-export function HeroReveal({
-  background,
-  children,
-}: {
-  background: ReactNode;
-  children: ReactNode;
-}) {
-  const hostRef = useRef<HTMLDivElement>(null);
-
-  const native = useSyncExternalStore(
-    emptySubscribe,
-    supportsHtmlInCanvas,
-    () => false,
-  );
-
+export function HeroReveal({ backgroundUrl, children }: { backgroundUrl: string; children: ReactNode }) {
+  const host = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const native = useSyncExternalStore(emptySubscribe, supportsNative, () => false);
+  const constrained = useSyncExternalStore(subscribe, limited, () => true);
+  const [near, setNear] = useState(false);
   useEffect(() => {
-    if (!native) return;
-    const host = hostRef.current;
-    if (!host) return;
-    const target = host.firstElementChild;
-    if (!(target instanceof HTMLElement)) return;
-
-    let raf = 0;
-    let userActive = false;
-    let t = Math.random() * 100;
-    let last = performance.now();
-    let inView = true;
-    let running = false;
-    const reducedMotionQuery = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
-    let reducedMotion = reducedMotionQuery.matches;
-    let hostRect = host.getBoundingClientRect();
-
-    const updateHostRect = () => {
-      hostRect = host.getBoundingClientRect();
+    if (!host.current) return;
+    const observer = new IntersectionObserver(entries => setNear(entries.some(entry => entry.isIntersecting)));
+    observer.observe(host.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    const element = video.current;
+    if (!element) return;
+    const update = () => {
+      if (!near || native || constrained || document.hidden) { element.pause(); return; }
+      if (!element.getAttribute("src")) element.src = window.matchMedia("(max-width: 640px)").matches ? heroVideo.mobile : heroVideo.desktop;
+      void element.play().catch(() => {});
     };
-
-    const resizeObserver = new ResizeObserver(updateHostRect);
-    resizeObserver.observe(host);
-    window.addEventListener("resize", updateHostRect);
-    window.addEventListener("scroll", updateHostRect, { passive: true });
-
-    const stop = () => {
-      if (!running) return;
-      running = false;
-      cancelAnimationFrame(raf);
-    };
-
-    const start = () => {
-      if (reducedMotion || running || !inView || document.hidden) return;
-      running = true;
-      last = performance.now();
-      raf = requestAnimationFrame(tick);
-    };
-
-    const onMove = (event: PointerEvent) => {
-      if (event.isTrusted) {
-        userActive = true;
-        stop();
-      }
-    };
-    const onLeave = (event: PointerEvent) => {
-      if (event.isTrusted) {
-        userActive = false;
-        start();
-      }
-    };
-    host.addEventListener("pointermove", onMove, true);
-    host.addEventListener("pointerleave", onLeave, true);
-
-    const tick = (now: number) => {
-      if (!inView || document.hidden || reducedMotion || userActive) {
-        running = false;
-        return;
-      }
-      const dt = Math.min((now - last) / 1000, 0.1);
-      last = now;
-      if (!userActive) {
-        t += dt;
-        const nx =
-          0.5 + 0.34 * Math.sin(t * 0.37) + 0.14 * Math.sin(t * 0.93 + 1.7);
-        const ny =
-          0.5 +
-          0.3 * Math.sin(t * 0.53 + 0.8) +
-          0.14 * Math.sin(t * 1.19 + 4.1);
-        target.dispatchEvent(
-          new PointerEvent("pointermove", {
-            bubbles: true,
-            clientX: hostRect.left + hostRect.width * nx,
-            clientY: hostRect.top + hostRect.height * ny,
-          }),
-        );
-      }
-      raf = requestAnimationFrame(tick);
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      inView = entries[entries.length - 1]?.isIntersecting ?? true;
-      if (inView) {
-        start();
-      } else {
-        stop();
-      }
-    });
-    observer.observe(host);
-
-    const onVisibilityChange = () => {
-      if (document.hidden) {
-        stop();
-      } else {
-        start();
-      }
-    };
-    const onMotionChange = () => {
-      reducedMotion = reducedMotionQuery.matches;
-      if (reducedMotion) stop();
-      else start();
-    };
-    document.addEventListener("visibilitychange", onVisibilityChange);
-    reducedMotionQuery.addEventListener("change", onMotionChange);
-
-    start();
-
-    return () => {
-      stop();
-      observer.disconnect();
-      resizeObserver.disconnect();
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-      reducedMotionQuery.removeEventListener("change", onMotionChange);
-      window.removeEventListener("resize", updateHostRect);
-      window.removeEventListener("scroll", updateHostRect);
-      host.removeEventListener("pointermove", onMove, true);
-      host.removeEventListener("pointerleave", onLeave, true);
-    };
-  }, [native]);
-
-  if (!native) {
-    return (
-      <div className="absolute inset-0">
-        <video
-          src="/assets/fallback-hero.mp4"
-          poster="/assets/fallback-hero-poster.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        {children}
-      </div>
-    );
-  }
-
-  return (
-    <div ref={hostRef} className="absolute inset-0">
-      <ParticleReveal
-        radius={700}
-        softness={0.55}
-        size={1}
-        scatter={0}
-        drift={2}
-        aberration={70}
-        bend={100}
-        fade={1}
-        threshold={0}
-        smoothing={0.5}
-        style={{ position: "absolute", inset: 0 }}
-      >
-        {background}
-        {children}
-      </ParticleReveal>
-    </div>
-  );
+    const timer = window.setTimeout(update, 500);
+    document.addEventListener("visibilitychange", update);
+    return () => { window.clearTimeout(timer); document.removeEventListener("visibilitychange", update); element.pause(); };
+  }, [near, native, constrained]);
+  const fallback = <>
+    <video ref={video} poster={optimizedImage(backgroundUrl).src} muted loop playsInline preload="none" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
+    {children}
+  </>;
+  return <div ref={host} className="absolute inset-0">
+    {native && !constrained && near ? <Suspense fallback={fallback}>
+      <Native background={
+        // eslint-disable-next-line @next/next/no-img-element
+        <img {...optimizedImage(backgroundUrl, "(min-width: 1152px) 1088px, 100vw")} alt="" crossOrigin="anonymous" className="absolute inset-0 h-full w-full object-cover" />
+      }>{children}</Native>
+    </Suspense> : fallback}
+  </div>;
 }

@@ -1,14 +1,22 @@
 {
-  "name": "canvasui",
+  "name": "leibox",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run registry && next dev",
+    "dev": "npm run motion:build && npm run registry && npm run docs:assets && npm run assets:optimize && next dev",
     "live": "node --experimental-strip-types scripts/build-live-wrappers.mts",
     "registry": "npm run live && node --experimental-strip-types scripts/build-registry.mts",
-    "prebuild": "npm run registry",
+    "prebuild": "npm run motion:build && npm run registry && npm run docs:assets && npm run assets:optimize && npm run ai:catalog",
+    "docs:assets": "node --experimental-strip-types scripts/build-doc-assets.mts",
+    "assets:optimize": "node scripts/optimize-media.mjs",
+    "test:performance": "node --test scripts/performance-budget.test.mjs",
+    "motion:build": "node --experimental-strip-types scripts/build-motion-components.mts",
+    "test:motion": "npm run motion:build && node scripts/test-motion-components.mjs",
+    "test:motion:docs": "node scripts/test-motion-docs.mjs",
+    "test:motion:types": "node scripts/test-motion-types.mjs",
     "build": "next build",
-    "start": "node scripts/serve-local.mjs",
+    "build:netlify": "node scripts/build-netlify.mjs",
+    "start": "node --env-file-if-exists=.env.local scripts/serve-local.mjs",
     "lint": "eslint",
     "preview": "npm run build && wrangler dev",
     "preflight": "node --experimental-strip-types scripts/preflight-deploy.mts",
@@ -16,6 +24,11 @@
     "upload": "npm run preflight && npm run build && wrangler versions upload",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
     "test:server": "node --test scripts/serve-local.test.mjs",
+    "test:contact": "node --test scripts/contact-mail.test.mjs",
+    "ai:catalog": "node --experimental-strip-types scripts/build-ai-catalog.mts",
+    "ui": "node scripts/collection-cli.mjs",
+    "test:ai": "node --test scripts/collection-cli.test.mjs scripts/leibox-skill.test.mjs",
+    "test:actions": "node scripts/test-ai-actions.cjs",
     "test:locale": "node scripts/test-localization.cjs"
   },
   "dependencies": {
@@ -41,26 +54,41 @@
     "vgpu": "^0.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-typescript": "^7.29.9",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.6",
+    "@radix-ui/react-slider": "^1.4.7",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@webgpu/types": "^0.1.72",
+    "babel-preset-solid": "^1.9.16",
+    "deep-agent-base-ui": "npm:@base-ui/react@^1.8.0",
+    "deep-agent-lucide": "npm:lucide-react@^1.43.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "playwright": "^1.64.1",
     "preact": "^10.25.4",
+    "react-circular-progressbar": "^2.2.0",
+    "sharp": "0.34.5",
     "solid-js": "^1.9.14",
+    "svelte": "^5.57.2",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vue": "^3.5.44",
     "wrangler": "^4.111.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leishifu666/canvas-ui-local.git"
+    "url": "git+https://github.com/leishifu666/LeiBox.git"
   },
-  "homepage": "https://github.com/leishifu666/canvas-ui-local#readme",
+  "homepage": "https://github.com/leishifu666/LeiBox#readme",
   "bugs": {
-    "url": "https://github.com/leishifu666/canvas-ui-local/issues"
+    "url": "https://github.com/leishifu666/LeiBox/issues"
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "browserslist": [

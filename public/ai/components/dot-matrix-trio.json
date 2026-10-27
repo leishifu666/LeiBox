@@ -1,0 +1,159 @@
+{
+  "slug": "dot-matrix-trio",
+  "name": {
+    "en": "Dot Matrix Ripple and Spiral",
+    "zh": "点阵波纹与旋涡"
+  },
+  "description": {
+    "en": "Three synchronized dot grids form expanding two-color ripples, a rotating spiral, and a growing circular pulse on printed cards.",
+    "zh": "三张点阵卡片同步呈现双色扩散波纹、旋转旋涡与圆形扩张，保留印刷排版和渐变背景。"
+  },
+  "keywords": "点阵 波纹 旋涡 漩涡 圆形 扩散 三联 卡片 LeiBox 雷师傅 Chris Halaska dot matrix ripple spiral pulse",
+  "docsPath": "/docs/animations/dot-matrix-trio",
+  "detailPath": "/ai/components/dot-matrix-trio.json",
+  "markdownPath": "/ai/components/dot-matrix-trio.md",
+  "previewPath": "/assets/components/dot-matrix-trio.png",
+  "discovery": {
+    "category": "background",
+    "useCases": [
+      "品牌点阵展示",
+      "印刷风动效卡片",
+      "dot matrix brand cards"
+    ],
+    "searchTerms": [
+      "点阵",
+      "波纹",
+      "旋涡",
+      "品牌",
+      "dot",
+      "matrix",
+      "ripple",
+      "spiral"
+    ],
+    "visualTags": [
+      "dots",
+      "print"
+    ],
+    "interactions": [
+      "autoplay",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "三联卡片视觉；等待反馈可优先比较 ai-generating。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM and Canvas reconstruction by LeiBox; no original author source code was obtained or redistributed.",
+    "designReference": "https://x.com/chalaska/status/2096917032621199665/video/1",
+    "designAuthor": "Chris Halaska",
+    "license": "Original design, Circuit brand and artwork license not verified. Reference media is retained only as internal evidence; no original artwork, font or source code is included."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/dot-matrix-trio/react.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { DotMatrixTrio } from \"./DotMatrixTrio\";\n\nexport default function App() {\n  return <DotMatrixTrio />;\n}",
+      "files": [
+        "DotMatrixTrio.tsx",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/dot-matrix-trio/vue.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport DotMatrixTrio from \"./DotMatrixTrio.vue\";\n</script>\n<template><DotMatrixTrio /></template>",
+      "files": [
+        "DotMatrixTrio.vue",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/dot-matrix-trio/svelte.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport DotMatrixTrio from \"./DotMatrixTrio.svelte\";\n</script>\n<DotMatrixTrio />",
+      "files": [
+        "DotMatrixTrio.svelte",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/dot-matrix-trio/solid.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { DotMatrixTrio } from \"./DotMatrixTrio.solid\";\n\nexport default function App() {\n  return <DotMatrixTrio />;\n}",
+      "files": [
+        "DotMatrixTrio.solid.tsx",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/dot-matrix-trio/preact.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { DotMatrixTrio } from \"./DotMatrixTrio.preact\";\n\nexport default function App() {\n  return <DotMatrixTrio />;\n}",
+      "files": [
+        "DotMatrixTrio.preact.tsx",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/dot-matrix-trio/vanilla.json",
+      "component": "DotMatrixTrio",
+      "dependencies": [],
+      "usage": "import { mount } from \"./DotMatrixTrio\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "DotMatrixTrio.ts",
+        "DotMatrixTrioEngine.js",
+        "motion-runtime.ts",
+        "DotMatrixTrioEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click or tap a card to pause or resume all three patterns. Use Enter or Space when focused, arrow keys to step, and Home or Escape to reset.",
+    "zh": "点击或轻触任一卡片暂停、继续三组动效。聚焦后可按回车或空格切换，方向键逐帧查看，Home 或 Escape 重置。"
+  }
+}

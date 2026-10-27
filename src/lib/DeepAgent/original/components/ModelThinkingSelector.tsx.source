@@ -1,0 +1,251 @@
+import { HoverInfo } from "./ui/HoverInfo";
+import { useId } from "react";
+import { Check, ChevronDown, type LucideIcon } from "lucide-react";
+
+import { EffortSlider } from "./ui/EffortSlider";
+
+import { ListItem } from "./ui/ListItem";
+
+import { TintButton } from "./ui/TintButton";
+
+import { MorphingMenuShell } from "./ui/MorphingMenuShell";
+
+import { MENU_ITEM_ATTR, SlidingMenuList } from "./ui/SlidingMenuList";
+
+import { cn } from "./shadcn/utils";
+
+
+
+type ThinkingDepth = "simple" | "medium" | "deep";
+
+
+
+type ThinkingOption = {
+
+  id: ThinkingDepth;
+
+  label: string;
+
+  icon: LucideIcon;
+
+};
+
+
+
+type Props = {
+
+  open: boolean;
+
+  disabled?: boolean;
+
+  switching?: boolean;
+
+  models: string[];
+
+  selectedModel: string;
+
+  selectedThinking: ThinkingDepth;
+
+  thinkingOptions: readonly ThinkingOption[];
+
+  selectModelLabel: string;
+
+  noModelsLabel: string;
+
+  onOpenChange: (open: boolean) => void;
+
+  onChooseModel: (id: string) => void;
+
+  onChooseThinking: (id: ThinkingDepth) => void;
+
+  triggerClassName?: string;
+
+};
+
+
+
+function modelLabel(id: string): string {
+  if (!id) return "";
+  return id;
+}
+
+
+/** 标题、选项容器与滑轨统一外沿，选项文字保留独立内边距。 */
+const MODEL_MENU = {
+  padX: "px-3",
+  divider: "mx-3 my-2 h-px shrink-0 bg-border-theme opacity-[0.55]",
+  section: "flex items-center py-1 text-[12px]",
+  pill: "left-0 right-0 rounded-lg",
+} as const;
+
+
+
+export function ModelThinkingSelector({
+
+  open,
+
+  disabled = false,
+
+  switching = false,
+
+  models,
+
+  selectedModel,
+
+  selectedThinking,
+
+  thinkingOptions,
+
+  selectModelLabel,
+
+  noModelsLabel,
+
+  onOpenChange,
+
+  onChooseModel,
+
+  onChooseThinking,
+
+  triggerClassName,
+
+}: Props) {
+
+  const morphLayoutId = useId().replace(/:/g, "");
+
+  const selectedThinkingOption =
+
+    thinkingOptions.find((option) => option.id === selectedThinking) ?? thinkingOptions[1];
+
+  const pillModel = selectedModel ? modelLabel(selectedModel) : selectModelLabel;
+
+  const trigger = (
+    <HoverInfo content={`${selectModelLabel} / ${selectedThinkingOption.label}`}><TintButton
+      type="button"
+      disabled={disabled}
+      onClick={() => onOpenChange(!open)}
+      className={cn("flex h-8 max-w-[210px] flex-shrink-0 items-center rounded-full px-3 text-xs", triggerClassName)}
+
+    >
+      <selectedThinkingOption.icon size={12} className="mr-1.5 text-text-secondary" />
+      <span className="font-medium">{pillModel}</span>
+      <span className="ml-1.5 shrink-0 text-text-secondary">{selectedThinkingOption.label}</span>
+      <ChevronDown size={10} className="ml-2 text-text-secondary" />
+    </TintButton></HoverInfo>
+  );
+
+  return (
+    <MorphingMenuShell
+      open={open}
+      onOpenChange={onOpenChange}
+      layoutId={morphLayoutId}
+      trigger={trigger}
+      className="flex h-8 min-w-0 max-w-full items-center"
+      panelClassName="w-[264px]"
+      panelAlign="right"
+      zIndex={50}
+    >
+          <div className="py-2">
+
+          <div className={cn(MODEL_MENU.padX, "pb-1")}>
+
+            <div className={MODEL_MENU.section}>
+
+              <span className="font-medium text-text-base">模型</span>
+
+
+            </div>
+
+
+
+            <div className="max-h-[96px] overflow-y-auto">
+
+              {models.length === 0 ? (
+
+                <div className="rounded-lg px-2.5 py-2 text-[12px] text-text-secondary">{noModelsLabel}</div>
+
+              ) : (
+
+                <SlidingMenuList activeId={selectedModel} pillClassName={MODEL_MENU.pill} className="w-full py-0.5">
+
+                  {models.map((id) => {
+
+                    const selected = id === selectedModel;
+
+                    return (
+
+                      <ListItem
+
+                        key={id}
+
+                        {...{ [MENU_ITEM_ATTR]: id }}
+
+                        sliding
+
+                        selected={selected}
+
+                        onClick={switching ? undefined : () => onChooseModel(id)}
+
+                        className={cn(
+                          "cursor-pointer px-2.5 py-2 text-left",
+                          selected ? "text-text-base" : "text-text-secondary",
+                        )}
+
+                      >
+
+                        <span className="font-medium">{modelLabel(id)}</span>
+
+                        {selected && <Check size={10} className="ml-3 text-text-base" />}
+
+                      </ListItem>
+
+                    );
+
+                  })}
+
+                </SlidingMenuList>
+
+              )}
+
+            </div>
+
+          </div>
+
+
+
+          <div className={MODEL_MENU.divider} />
+
+
+
+          <div className="px-3 pb-1 pt-0.5">
+
+            <div className="mb-2.5 flex items-center text-[12px]">
+
+              <span className="font-medium text-text-base">推理强度</span>
+
+            </div>
+
+            <EffortSlider
+
+              stops={thinkingOptions.map((option) => ({
+                value: option.id,
+                label: option.label,
+                icon: option.icon,
+              }))}
+
+              value={selectedThinking}
+
+              onChange={(value) => onChooseThinking(value as ThinkingDepth)}
+
+              ariaLabel="推理强度"
+              disabled={disabled}
+
+            />
+
+          </div>
+
+          </div>
+    </MorphingMenuShell>
+  );
+
+}
+

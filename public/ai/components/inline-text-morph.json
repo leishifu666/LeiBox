@@ -1,0 +1,158 @@
+{
+  "slug": "inline-text-morph",
+  "name": {
+    "en": "Inline Phrase Morph",
+    "zh": "内联词组变形"
+  },
+  "description": {
+    "en": "Click three inline pills to morph shared letters, resize the sentence, and swap illustrated stickers with a spring.",
+    "zh": "点击三处内联胶囊，相同字母连续重排，句子随宽度变化居中，贴纸图标弹性切换。"
+  },
+  "keywords": "内联 词组 文字 字符 字母 变形 重排 胶囊 图标 Torph Graphical text morph inline phrase letter flip",
+  "docsPath": "/docs/animations/inline-text-morph",
+  "detailPath": "/ai/components/inline-text-morph.json",
+  "markdownPath": "/ai/components/inline-text-morph.md",
+  "previewPath": "/assets/components/inline-text-morph.png",
+  "discovery": {
+    "category": "text",
+    "useCases": [
+      "可切换标题",
+      "品牌标语互动",
+      "interactive headline"
+    ],
+    "searchTerms": [
+      "文字",
+      "标题",
+      "词组",
+      "变形",
+      "标语",
+      "text",
+      "headline",
+      "morph"
+    ],
+    "visualTags": [
+      "typographic",
+      "stickers"
+    ],
+    "interactions": [
+      "click",
+      "keyboard"
+    ],
+    "caveat": "接入时替换词组与贴纸，并检查目标语言的字形和排版。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independently rebuilt layout, remaining feature stickers, width spring and lifecycle; themes/spacing SVG geometry and paint order follow the reference. Existing agent SVGs from Graphical and Lobe Icons retain their source records and applicable notices. Bundled Torph 0.1.3 by Lochie Axon under MIT with its complete notice retained.",
+    "designReference": "https://x.com/lochieaxon/status/2107673625696641174/video/1",
+    "designAuthor": "Graphical",
+    "license": "Graphical's design and additional artwork license not independently verified. Lobe Icons' Codex, Claude and Cursor vector contributions retain Copyright (c) 2023 LobeHub and the full MIT notice. Grok Bot's source is recorded separately without claiming an MIT license for it. No commercial font files or reference video are redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/inline-text-morph/react.json",
+      "component": "InlineTextMorph",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { InlineTextMorph } from \"./InlineTextMorph\";\n\nexport default function App() {\n  return <InlineTextMorph />;\n}",
+      "files": [
+        "InlineTextMorph.tsx",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/inline-text-morph/vue.json",
+      "component": "InlineTextMorph",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport InlineTextMorph from \"./InlineTextMorph.vue\";\n</script>\n<template><InlineTextMorph /></template>",
+      "files": [
+        "InlineTextMorph.vue",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/inline-text-morph/svelte.json",
+      "component": "InlineTextMorph",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport InlineTextMorph from \"./InlineTextMorph.svelte\";\n</script>\n<InlineTextMorph />",
+      "files": [
+        "InlineTextMorph.svelte",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/inline-text-morph/solid.json",
+      "component": "InlineTextMorph",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { InlineTextMorph } from \"./InlineTextMorph.solid\";\n\nexport default function App() {\n  return <InlineTextMorph />;\n}",
+      "files": [
+        "InlineTextMorph.solid.tsx",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/inline-text-morph/preact.json",
+      "component": "InlineTextMorph",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { InlineTextMorph } from \"./InlineTextMorph.preact\";\n\nexport default function App() {\n  return <InlineTextMorph />;\n}",
+      "files": [
+        "InlineTextMorph.preact.tsx",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/inline-text-morph/vanilla.json",
+      "component": "InlineTextMorph",
+      "dependencies": [],
+      "usage": "import { mount } from \"./InlineTextMorph\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "InlineTextMorph.ts",
+        "InlineTextMorphEngine.js",
+        "motion-runtime.ts",
+        "InlineTextMorphEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click a highlighted word to cycle its text and sticker. Use Enter, Space, arrow keys, Home or End; each group changes independently.",
+    "zh": "点击高亮词组切换文字与贴纸。支持 Enter、空格、方向键和 Home/End，三组可分别操作。"
+  }
+}

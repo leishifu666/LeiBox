@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { SiteLogo } from "@/components/common/site-logo";
-import { DocsNavList, PlaygroundCta } from "@/components/docs/docs-sidebar";
+import { DocsNavList } from "@/components/docs/docs-sidebar";
 
 export function DocsMobileNav() {
   const { t } = useLanguage();
@@ -81,7 +81,6 @@ export function DocsMobileNav() {
                   <DocsNavList onNavigate={() => setOpen(false)} />
                 </nav>
 
-                <PlaygroundCta onNavigate={() => setOpen(false)} />
               </motion.div>
             )}
           </AnimatePresence>,

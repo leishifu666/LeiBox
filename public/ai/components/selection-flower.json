@@ -1,0 +1,158 @@
+{
+  "slug": "selection-flower",
+  "name": {
+    "en": "Text Selection Flowers",
+    "zh": "文字选区开花"
+  },
+  "description": {
+    "en": "Drag to select real text and grow seeded, outlined flowers around each character; release to fold the petals, leaves, and stems back into the page.",
+    "zh": "拖选真实文字，每个字符周围长出随机配色的描边花朵；松手后花瓣、叶片和茎依次反向收回。"
+  },
+  "keywords": "文字 选区 选择 拖选 开花 花朵 生长 收回 植物 随机 text selection flowers bloom grow reverse seeded canvas Omerico",
+  "docsPath": "/docs/animations/selection-flower",
+  "detailPath": "/ai/components/selection-flower.json",
+  "markdownPath": "/ai/components/selection-flower.md",
+  "previewPath": "/assets/components/selection-flower.png",
+  "discovery": {
+    "category": "text",
+    "useCases": [
+      "文章趣味选区",
+      "编辑型作品集",
+      "playful text selection"
+    ],
+    "searchTerms": [
+      "文字",
+      "选区",
+      "开花",
+      "花朵",
+      "文章",
+      "text",
+      "selection",
+      "flowers"
+    ],
+    "visualTags": [
+      "botanical",
+      "illustration"
+    ],
+    "interactions": [
+      "text-selection",
+      "keyboard"
+    ],
+    "caveat": "装饰性文字互动；需要编辑文字颜色时选择 notes-text-color。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM Selection/Range and Canvas 2D implementation from observed video frames. Flower geometry and deterministic generator are newly written local reconstruction code.",
+    "designReference": "https://x.com/omer_assa/status/2083862523640496179/video/1",
+    "designAuthor": "Omerico",
+    "license": "Original design/source license not supplied or independently verified. Reference footage is internal evidence only; no original source, font files or vector artwork are redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/selection-flower/react.json",
+      "component": "SelectionFlower",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { SelectionFlower } from \"./SelectionFlower\";\n\nexport default function App() {\n  return <SelectionFlower />;\n}",
+      "files": [
+        "SelectionFlower.tsx",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/selection-flower/vue.json",
+      "component": "SelectionFlower",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport SelectionFlower from \"./SelectionFlower.vue\";\n</script>\n<template><SelectionFlower /></template>",
+      "files": [
+        "SelectionFlower.vue",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/selection-flower/svelte.json",
+      "component": "SelectionFlower",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport SelectionFlower from \"./SelectionFlower.svelte\";\n</script>\n<SelectionFlower />",
+      "files": [
+        "SelectionFlower.svelte",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/selection-flower/solid.json",
+      "component": "SelectionFlower",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { SelectionFlower } from \"./SelectionFlower.solid\";\n\nexport default function App() {\n  return <SelectionFlower />;\n}",
+      "files": [
+        "SelectionFlower.solid.tsx",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/selection-flower/preact.json",
+      "component": "SelectionFlower",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { SelectionFlower } from \"./SelectionFlower.preact\";\n\nexport default function App() {\n  return <SelectionFlower />;\n}",
+      "files": [
+        "SelectionFlower.preact.tsx",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/selection-flower/vanilla.json",
+      "component": "SelectionFlower",
+      "dependencies": [],
+      "usage": "import { mount } from \"./SelectionFlower\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "SelectionFlower.ts",
+        "SelectionFlowerEngine.js",
+        "motion-runtime.ts",
+        "SelectionFlowerEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag across the text, then release to watch the flowers grow backwards. Focus a paragraph and press Enter, extend with Shift + arrow keys, or clear with Escape. Touch supports tapping and native text selection.",
+    "zh": "拖选文字后松手，观察花朵反向收回。聚焦段落按 Enter 开花，Shift + 方向键调整选区，Escape 清除。触屏支持轻点与原生文字选择。"
+  }
+}

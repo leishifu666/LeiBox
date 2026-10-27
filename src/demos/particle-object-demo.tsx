@@ -16,7 +16,7 @@ import { ColorRow, DemoControls } from "@/components/demos/demo-controls";
 import { useDemoControls } from "@/hooks/use-demo-controls";
 import { ParticleObject } from "@/components/docs/live/ParticleObject";
 
-const DEFAULT_MODEL = "/assets/models/duck.glb";
+const DEFAULT_MODEL = "/assets/models/leibox-particle.glb";
 const AUTO_COLOR = "auto";
 const LIGHT_BACKGROUND = "#ffffff";
 const DARK_BACKGROUND = "#0a0a0a";
@@ -25,14 +25,14 @@ const CONTROLS = {
   src: custom(DEFAULT_MODEL),
   autoRotate: toggle("Auto rotate", false),
   zoom: toggle("Scroll zoom", false),
-  count: scrub("Particles", 14000, {
+  count: scrub("Particles", 20000, {
     min: 1000,
     max: 60000,
     step: 1000,
     decimals: 0,
   }),
-  size: scrub("Size", 2.4, { min: 0.5, max: 8, step: 0.1, decimals: 1 }),
-  sizeVariance: scrub("Variance", 0.6, { min: 0, max: 1, step: 0.05 }),
+  size: scrub("Size", 2.1, { min: 0.5, max: 8, step: 0.1, decimals: 1 }),
+  sizeVariance: scrub("Variance", 0.45, { min: 0, max: 1, step: 0.05 }),
   radius: scrub("Push radius", 110, {
     min: 20,
     max: 320,

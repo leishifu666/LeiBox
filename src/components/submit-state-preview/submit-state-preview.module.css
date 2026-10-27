@@ -1,0 +1,84 @@
+.page { min-height: 100svh; color: var(--foreground); background: var(--background); }
+.header { display: flex; align-items: center; justify-content: space-between; max-width: 1320px; height: 76px; margin: auto; padding: 0 28px; }
+.homeLink { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted-foreground); }
+.homeLink:hover { color: var(--foreground); }
+.provenance { font-size: 10px; color: var(--muted-foreground); }
+.main { max-width: 1320px; margin: auto; padding: 32px 28px 44px; }
+.intro { margin-bottom: 28px; }
+.eyebrow { margin-bottom: 12px; font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .12em; color: var(--muted-foreground); }
+.intro h1 { font-size: clamp(28px, 3vw, 42px); font-weight: 500; line-height: 1.3; letter-spacing: -.04em; }
+.description { margin-top: 12px; font-size: 13px; line-height: 1.8; color: var(--muted-foreground); }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.scenarios { display: flex; gap: 3px; padding: 4px; border: 1px solid var(--border); border-radius: 10px; }
+.scenarios button { min-height: 32px; padding: 0 12px; border-radius: 6px; font-size: 12px; color: var(--muted-foreground); cursor: pointer; }
+.scenarios button[aria-pressed="true"] { background: var(--muted); color: var(--foreground); }
+.scenarios button:hover { color: var(--foreground); }
+.playback { display: flex; gap: 8px; }
+.playback button { font-size: 12px; }
+.options { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 14px 0 24px; font-size: 11px; line-height: 1.8; color: var(--muted-foreground); }
+.options > div { display: flex; gap: 18px; }
+.options label { display: flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+.options input { accent-color: var(--foreground); }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.card { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 13px; background: var(--background); }
+.cardHeader { display: flex; align-items: center; gap: 10px; padding: 18px 18px 8px; }
+.number { font-family: var(--font-geist-mono), monospace; font-size: 10px; color: var(--muted-foreground); }
+.cardHeader h2 { font-size: 16px; font-weight: 500; letter-spacing: -.02em; }
+.recommended { margin-left: auto; padding: 3px 6px; border-radius: 4px; font-size: 9px; background: var(--muted); color: var(--muted-foreground); white-space: nowrap; }
+.summary { min-height: 54px; margin: 0; padding: 0 18px 12px; font-size: 11px; line-height: 1.8; color: var(--muted-foreground); }
+.formPreview { margin: 0 14px; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: color-mix(in srgb, var(--muted) 20%, var(--background)); }
+.formHeader { display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 500; }
+.formHeader span { font-size: 10px; font-weight: 400; color: var(--muted-foreground); }
+.fieldGroup { padding: 14px 16px; }
+.fieldGroup label { display: block; margin-bottom: 7px; font-size: 11px; font-weight: 500; }
+.fieldGroup textarea { display: block; width: 100%; height: 74px; padding: 10px 11px; border: 1px solid var(--border); border-radius: 7px; outline: none; background: var(--background); font: inherit; font-size: 12px; line-height: 1.8; resize: none; }
+.fieldGroup textarea::placeholder { color: var(--muted-foreground); }
+.fieldGroup textarea:focus { border-color: var(--foreground); box-shadow: 0 0 0 1px var(--foreground); }
+.fieldGroup textarea[aria-invalid="true"] { border-color: var(--destructive); background: color-mix(in srgb, var(--destructive) 5%, var(--background)); }
+.fieldGroup textarea:disabled { color: var(--muted-foreground); }
+.formFooter { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.emailHint { font-size: 11px; color: var(--muted-foreground); }
+.buttonSlot { display: flex; width: 112px; height: 44px; align-items: center; justify-content: flex-end; flex-shrink: 0; }
+.submit { position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; width: 104px; height: 40px; padding: 0; border: none; border-radius: 8px; overflow: hidden; background: var(--foreground); color: var(--background); font-family: inherit; font-size: 13.5px; font-weight: 500; line-height: 20px; white-space: nowrap; cursor: pointer; }
+.submit:disabled { cursor: default; }
+.submit:hover:enabled { background: color-mix(in srgb, var(--foreground) 90%, var(--background)); }
+.submit [data-submit-label] { position: relative; z-index: 2; display: inline-block; pointer-events: none; }
+.submit [data-submit-loader] { position: absolute; z-index: 2; top: 50%; left: 50%; width: 20px; height: 20px; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
+.submit [data-submit-ring], .submit [data-submit-dot], .submit [data-submit-fill], .submit [data-submit-success], .submit [data-submit-error] { position: absolute; display: block; opacity: 0; pointer-events: none; }
+.submit [data-submit-ring] { top: 0; left: 0; width: 20px; height: 20px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; }
+.submit [data-submit-dot] { top: 50%; width: 4px; height: 4px; transform: translateY(-50%); border-radius: 50%; background: currentColor; }
+.submit [data-submit-success], .submit [data-submit-error] { z-index: 2; top: 50%; left: 16px; width: 16px; height: 16px; transform: translateY(-50%); }
+.submit [data-submit-fill] { z-index: 0; inset: 0; width: 100%; height: 100%; background: currentColor; transform-origin: left; }
+.feedback { display: flex; min-height: 48px; align-items: center; padding: 6px 18px; font-size: 10px; line-height: 1.8; color: var(--muted-foreground); }
+.feedback[data-feedback="success"] { color: var(--foreground); }
+.feedback[data-feedback="error"], .feedback[data-feedback="invalid"] { color: var(--destructive); }
+.cardControls { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 12px 10px; }
+.outcomes { display: flex; gap: 3px; }
+.outcomes button, .reset { min-height: 32px; padding: 0 9px; border-radius: 6px; font-size: 10px; color: var(--muted-foreground); cursor: pointer; }
+.outcomes button:hover, .reset:hover { background: var(--muted); color: var(--foreground); }
+.reset { display: grid; width: 32px; place-items: center; padding: 0; }
+.details { padding: 11px 18px; border-top: 1px solid var(--border); font-size: 10px; color: var(--muted-foreground); }
+.details summary { cursor: pointer; }
+.details p { margin-top: 9px; line-height: 1.8; }
+.details strong { margin-right: 6px; font-weight: 500; color: var(--foreground); }
+.verdict { display: flex; align-items: baseline; gap: 20px; margin-top: 28px; padding: 20px 0; border-top: 1px solid var(--border); }
+.verdict strong { font-size: 11px; font-weight: 500; white-space: nowrap; }
+.verdict p { max-width: 900px; font-size: 12px; line-height: 1.9; color: var(--muted-foreground); }
+.page button:focus-visible, .homeLink:focus-visible, .details summary:focus-visible, .options input:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; }
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .header { height: 64px; padding: 0 20px; }
+  .provenance { font-size: 9px; }
+  .main { padding: 22px 20px 32px; }
+  .description { max-width: 290px; font-size: 12px; }
+  .toolbar { flex-wrap: wrap; gap: 12px; }
+  .playback { margin-left: auto; }
+  .scenarios { width: 100%; }
+  .scenarios button { flex: 1; padding: 0 8px; }
+  .options { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .grid { grid-template-columns: 1fr; gap: 18px; }
+  .summary { min-height: 0; padding-bottom: 16px; }
+  .fieldGroup textarea { font-size: 16px; }
+  .verdict { display: block; }
+  .verdict p { margin-top: 9px; font-size: 11px; }
+}

@@ -1,0 +1,231 @@
+{
+  "slug": "reasoning-effort-slider",
+  "name": {
+    "en": "Reasoning Effort Slider",
+    "zh": "模型思考强度滑块"
+  },
+  "description": {
+    "en": "A three-stop thinking slider with a flowing star field, velocity-driven jelly deformation, and soft snapping from Simple to Deep.",
+    "zh": "三档模型思考强度滑块，保留流动星空填充、随拖速变化的果冻形变与柔和吸附。"
+  },
+  "keywords": "模型 思考 强度 推理 滑块 深度 简单 中度 深度 星空 液态 拖拽 Deep Agent reasoning effort thinking slider jelly",
+  "docsPath": "/docs/animations/reasoning-effort-slider",
+  "detailPath": "/ai/components/reasoning-effort-slider.json",
+  "markdownPath": "/ai/components/reasoning-effort-slider.md",
+  "previewPath": "/assets/components/reasoning-effort-slider.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "AI 推理档位选择",
+      "模型设置",
+      "reasoning effort settings"
+    ],
+    "searchTerms": [
+      "思考",
+      "推理",
+      "强度",
+      "滑块",
+      "模型",
+      "简洁",
+      "三档",
+      "reasoning",
+      "effort",
+      "slider"
+    ],
+    "visualTags": [
+      "cosmic",
+      "elastic"
+    ],
+    "interactions": [
+      "drag",
+      "keyboard"
+    ],
+    "caveat": "三档选择界面；实际模型参数需映射到目标项目的接口。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/reasoning-effort-slider/react.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { ReasoningEffortSlider } from \"./ReasoningEffortSlider\";\n\nexport default function App() {\n  return <ReasoningEffortSlider />;\n}",
+      "files": [
+        "ReasoningEffortSlider.tsx",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/reasoning-effort-slider/vue.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ReasoningEffortSlider from \"./ReasoningEffortSlider.vue\";\n</script>\n<template><ReasoningEffortSlider /></template>",
+      "files": [
+        "ReasoningEffortSlider.vue",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/reasoning-effort-slider/svelte.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ReasoningEffortSlider from \"./ReasoningEffortSlider.svelte\";\n</script>\n<ReasoningEffortSlider />",
+      "files": [
+        "ReasoningEffortSlider.svelte",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/reasoning-effort-slider/solid.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { ReasoningEffortSlider } from \"./ReasoningEffortSlider.solid\";\n\nexport default function App() {\n  return <ReasoningEffortSlider />;\n}",
+      "files": [
+        "ReasoningEffortSlider.solid.tsx",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/reasoning-effort-slider/preact.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { ReasoningEffortSlider } from \"./ReasoningEffortSlider.preact\";\n\nexport default function App() {\n  return <ReasoningEffortSlider />;\n}",
+      "files": [
+        "ReasoningEffortSlider.preact.tsx",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/reasoning-effort-slider/vanilla.json",
+      "component": "ReasoningEffortSlider",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7",
+        "deep-agent-base-ui@npm:@base-ui/react@1.8.0",
+        "deep-agent-lucide@npm:lucide-react@1.43.0",
+        "@fortawesome/fontawesome-svg-core@6.7.2",
+        "@fortawesome/free-solid-svg-icons@6.7.2",
+        "@fortawesome/react-fontawesome@0.2.6",
+        "@radix-ui/react-slider@1.4.7",
+        "react-circular-progressbar@2.2.0",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "usage": "import { mount } from \"./ReasoningEffortSlider\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ReasoningEffortSlider.ts",
+        "ReasoningEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "ReasoningEffortSliderEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag the thumb, click a stop, or use the arrow keys and Home/End. Copy the standalone slider to connect its value to your own model settings.",
+    "zh": "拖动滑块、点击档位，或使用方向键与 Home/End。可独立复制滑块，将选中值接入自己的模型设置。"
+  }
+}

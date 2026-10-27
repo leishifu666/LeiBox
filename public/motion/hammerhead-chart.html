@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammerhead Price Path Tracker</title>
+<style>
+:root {
+  --hh-bg: #000000;
+  --hh-text: #ececec;
+  --hh-dim: #6a6a6a;
+  --hh-accent: #c15a21;
+  --hh-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+html, body { margin: 0; background: var(--hh-bg); }
+body { min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hh-demo { position: relative; width: 100%; max-width: 1200px; aspect-ratio: 5 / 3; overflow: hidden; background: var(--hh-bg); }
+.hh-stage { position: absolute; left: 0; top: 0; width: 1200px; height: 720px; transform-origin: 0 0; font-family: var(--hh-mono); color: var(--hh-text); }
+.hh-canvas { position: absolute; inset: 0; width: 1200px; height: 720px; display: block; cursor: crosshair; touch-action: pan-y; }
+.hh-metric { position: absolute; left: 0; top: 0; font-size: 11px; line-height: 14px; color: #6c6c6c; white-space: pre; pointer-events: none; will-change: transform; transition: opacity .3s ease; }
+.hh-paths { position: absolute; inset: 0; pointer-events: none; }
+.hh-path { position: absolute; left: 892px; display: grid; gap: 2px; padding: 4px 8px 4px 14px; border: 0; border-radius: 4px; background: transparent; color: var(--hh-dim); font: inherit; text-align: left; cursor: pointer; pointer-events: auto; transition: color .24s ease, background-color .24s ease; }
+.hh-path::before { content: ""; position: absolute; left: 2px; top: 11px; width: 6px; height: 6px; background: var(--hh-accent); transform: scale(0); transition: transform .28s cubic-bezier(.34, 1.56, .64, 1); }
+.hh-path:hover { color: #a8a8a8; }
+.hh-path[aria-checked="true"] { color: var(--hh-text); }
+.hh-path.is-tagged::before { transform: scale(1); }
+.hh-path:focus-visible { outline: 1px solid var(--hh-accent); outline-offset: 2px; }
+.hh-odds { font-size: 18px; font-weight: 600; line-height: 20px; }
+.hh-target { font-size: 14px; line-height: 18px; white-space: nowrap; }
+.hh-live { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  .hh-path, .hh-path::before, .hh-metric { transition: none; }
+}
+</style>
+</head>
+<body>
+<main class="hh-demo" aria-label="Hammerhead price path tracker">
+  <div class="hh-stage">
+    <canvas class="hh-canvas" aria-hidden="true"></canvas>
+    <div class="hh-metric" aria-hidden="true"></div>
+    <div class="hh-paths" role="radiogroup" aria-label="Likeliest price paths">
+      <button type="button" class="hh-path" role="radio" aria-checked="false" tabindex="-1" data-index="0"><span class="hh-odds">21%</span><span class="hh-target">1226 +39.3%</span></button>
+      <button type="button" class="hh-path" role="radio" aria-checked="true" tabindex="0" data-index="1"><span class="hh-odds">54%</span><span class="hh-target">835.38 -5.1%</span></button>
+      <button type="button" class="hh-path" role="radio" aria-checked="false" tabindex="-1" data-index="2"><span class="hh-odds">25%</span><span class="hh-target">583.05 -33.8%</span></button>
+    </div>
+    <p class="hh-live" aria-live="polite"></p>
+  </div>
+</main>
+<script>
+(() => {
+const W = 1200, H = 720, CW = 6, CH = 10;
+const NOW_X = 572, END_X = 880, CHART_L = 64, CHART_R = 1100, TOP = 40, BOT = 630;
+const PMAX = 1300, PMIN = 540, SPOT = 880.20, POC = 900.12;
+const MONO = '"JetBrains Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", "Courier New", monospace';
+const LN = Math.log(PMAX / PMIN);
+const py = price => TOP + Math.log(PMAX / price) / LN * (BOT - TOP);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const mix = (a, b, t) => a + (b - a) * t;
+const rgb = (a, b, t) => `rgb(${Math.round(mix(a[0], b[0], t))},${Math.round(mix(a[1], b[1], t))},${Math.round(mix(a[2], b[2], t))})`;
+const PATHS = [
+  { odds: 21, price: 1226, change: '+39.3%', spread: .75, metric: 'σ 71.4/48.2%  H 0.71  K 1.3  Γ -$6M' },
+  { odds: 54, price: 835.38, change: '-5.1%', spread: .45, metric: 'σ 62.6/40.7%  H 0.63  K 0.8  Γ +$11M' },
+  { odds: 25, price: 583.05, change: '-33.8%', spread: .9, metric: 'σ 88.9/55.1%  H 0.48  K 1.9  Γ -$14M' },
+];
+const root = document.querySelector('.hh-demo');
+const stage = root.querySelector('.hh-stage');
+const canvas = root.querySelector('.hh-canvas');
+const ctx = canvas.getContext('2d');
+const metricEl = root.querySelector('.hh-metric');
+const group = root.querySelector('.hh-paths');
+const buttons = [...root.querySelectorAll('.hh-path')];
+const live = root.querySelector('.hh-live');
+const media = matchMedia('(prefers-reduced-motion: reduce)');
+const COLS = W / CW, ROWS = H / CH, RAMP = ' .:-=+*#%@';
+const LNMAX = Math.log(PMAX);
+const pyL = l => TOP + (LNMAX - l) / LN * (BOT - TOP);
+const lAt = y => LNMAX - (y - TOP) / (BOT - TOP) * LN;
+// Deterministic noise keeps the chart identical on every mount.
+const seeded = s => () => { s = s + 0x6d2b79f5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const hash = (a, b, c) => { let h = Math.imul(a | 0, 374761393) + Math.imul(b | 0, 668265263) + Math.imul(c | 0, 1442695041); h = Math.imul(h ^ h >>> 13, 1274126177); return ((h ^ h >>> 16) >>> 0) / 4294967296; };
+const gauss = (x, m, s) => Math.exp(-.5 * ((x - m) / s) ** 2);
+const put = (c, ch, x, y, color) => { c.fillStyle = color; c.fillText(ch, x, y); };
+
+// Forecast cone geometry: each path drifts in log-price from spot to its target.
+const lnS = Math.log(SPOT);
+const ease = t => 1 - Math.pow(1 - t, 1.7);
+const center = (i, t) => lnS + (Math.log(PATHS[i].price) - lnS) * ease(t);
+const sigma = (i, t) => .012 + PATHS[i].spread * .085 * Math.sqrt(t);
+const cyAt = (i, x) => pyL(center(i, clamp((x - NOW_X) / (END_X - NOW_X))));
+const CC0 = Math.floor(NOW_X / CW) + 1, CC1 = Math.floor(END_X / CW);
+const RR0 = Math.floor(TOP / CH), RR1 = Math.floor(BOT / CH);
+const traces = PATHS.map((_, i) => { const cells = []; for (let c = CC0; c <= CC1; c++) cells.push([c, Math.floor(cyAt(i, c * CW + CW / 2) / CH)]); return cells; });
+const traceKeys = new Set(traces.flat().map(([c, r]) => c * 1000 + r));
+const cone = [];
+for (let c = CC0; c <= CC1; c++) {
+  const t = clamp((c * CW + CW / 2 - NOW_X) / (END_X - NOW_X));
+  for (let r = RR0; r <= RR1; r++) {
+    if (traceKeys.has(c * 1000 + r)) continue;
+    const l = lAt(r * CH + CH / 2);
+    const d = PATHS.map((p, i) => { const s = sigma(i, t); return p.odds / 100 * .05 / s * gauss(l, center(i, t), s); });
+    const sum = d[0] + d[1] + d[2];
+    if (sum > .04) cone.push({ c, r, d, sum: Math.min(1.4, sum) });
+  }
+}
+
+// Static layer: grid dots, volume profile, candles, POC, spot line, axis and volume.
+const layer = document.createElement('canvas');
+const lctx = layer.getContext('2d');
+let dpr = 0;
+function paintStatic() {
+  layer.width = W * dpr; layer.height = H * dpr;
+  lctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  lctx.fillStyle = '#000'; lctx.fillRect(0, 0, W, H);
+  lctx.font = `10px ${MONO}`; lctx.textBaseline = 'top';
+  const occ = new Uint8Array(COLS * ROWS);
+  for (let r = 4; r < 64; r += 3) for (let c = 12; c < 182; c += 4) if (c < CC0 - 1 || c > CC1) put(lctx, '.', c * CW, r * CH, '#1e1e1e');
+  for (let r = RR0; r <= RR1; r++) {
+    const l = lAt(r * CH + CH / 2);
+    const v = gauss(l, Math.log(POC), .05) + .6 * gauss(l, Math.log(780), .045) + .35 * gauss(l, Math.log(1010), .05);
+    const n = Math.round(Math.min(1, v) * 8);
+    for (let k = 0; k < n; k++) put(lctx, '=', k * CW, r * CH, r === Math.floor(pyL(Math.log(POC)) / CH) ? '#a69a8f' : 'rgb(102,94,93)');
+  }
+  const rnd = seeded(7), c0 = Math.ceil(CHART_L / CW) + 2, c1 = Math.floor(NOW_X / CW) - 1, n = c1 - c0 + 1;
+  const walk = []; let l = Math.log(700);
+  for (let i = 0; i < n; i++) { l += (rnd() + rnd() + rnd() - 1.5) * .034 + Math.sin(i / 9) * .006; walk.push(l); }
+  const fix = lnS - walk[n - 1];
+  walk.forEach((v, i) => { walk[i] = v + fix * i / (n - 1); });
+  for (let i = 0; i < n; i++) {
+    const o = i ? walk[i - 1] : walk[0] - .01, cl = walk[i], up = cl >= o;
+    const hi = Math.max(o, cl) + rnd() * .018, lo = Math.min(o, cl) - rnd() * .018;
+    const rt = Math.floor(pyL(hi) / CH), rb = Math.floor(pyL(lo) / CH);
+    const bt = Math.floor(pyL(Math.max(o, cl)) / CH), bb = Math.floor(pyL(Math.min(o, cl)) / CH);
+    for (let r = rt; r <= rb; r++) {
+      const body = r >= bt && r <= bb;
+      put(lctx, body ? (up ? '#' : '+') : '|', (c0 + i) * CW, r * CH, body ? (up ? '#d8d8d8' : '#8a8a8a') : '#6a6a6a');
+      occ[r * COLS + c0 + i] = 1;
+    }
+    const vol = 1 + Math.floor(rnd() * rnd() * 6);
+    for (let k = 0; k < vol; k++) put(lctx, k === vol - 1 ? ':' : '|', (c0 + i) * CW, (70 - k) * CH, 'rgb(162,161,76)');
+  }
+  for (let c = c0; c <= CC1; c++) put(lctx, '.', c * CW, 71 * CH, '#3d3c1c');
+  const pr = Math.floor(pyL(Math.log(POC)) / CH);
+  for (let c = c0; c < CC0 - 1; c++) if (!occ[pr * COLS + c] && c % 2) put(lctx, '-', c * CW, pr * CH, '#4a4a4a');
+  for (let r = RR0; r <= RR1; r++) put(lctx, ':', (CC0 - 1) * CW, r * CH, '#3a3a3a');
+  for (let r = RR0; r <= RR1; r++) put(lctx, '|', CHART_R, r * CH, '#262626');
+  [1300, 1200, 1100, 1000, 900, 800, 700, 600].forEach(p => {
+    const y = pyL(Math.log(p));
+    put(lctx, '-', CHART_R, y - 5, '#8c8c85');
+    put(lctx, String(p), CHART_R + 14, y - 5, 'rgb(140,140,133)');
+  });
+}
+function paintMarks() {
+  const y = pyL(Math.log(POC));
+  put(lctx, 'POC 900.12', NOW_X + 6, y - 14, '#848484');
+  const s = pyL(lnS);
+  lctx.fillStyle = '#c15a21'; lctx.fillRect(CHART_R + 8, s - 7, 46, 14);
+  put(lctx, '880.20', CHART_R + 11, s - 5, '#000');
+}
+
+// Top-down hammerhead as a density field in local coords: u = forward, v = lateral.
+function sharkDensity(u, v, phase, still) {
+  const k = clamp((20 - u) / 110) ** 1.5;
+  if (!still) v -= 6 * Math.sin(phase - u * .06) * k;
+  const av = Math.abs(v);
+  let d = 1 - ((u + 22) / 52) ** 2 - (v / 13) ** 2;
+  const ud = u - 30 + .006 * v * v;
+  d = Math.max(d, 1 - (ud / 6) ** 2 - (Math.max(0, av - 24) / 9) ** 2);
+  const q = (av - 10) / 28;
+  if (q >= 0 && q <= 1) d = Math.max(d, 1 - ((u + 2 + 20 * q) / Math.max(1, 7 * (1 - q))) ** 2);
+  const qt = (-78 - u) / 24;
+  if (qt >= 0 && qt <= 1) d = Math.max(d, 1 - ((av - 15 * qt) / (3 + 2 * (1 - qt))) ** 2);
+  if (u < -70 && u > -82) d = Math.max(d, 1 - (av / 4) ** 2);
+  const eye = (u - 30) ** 2 + (av - 31) ** 2 < 16;
+  return { d, eye, spine: av < 3 && u > -60 && u < 20 };
+}
+
+const LOW = [44, 66, 90], HIGH = [214, 222, 236], WARM = [124, 56, 33], HOT = [193, 90, 33];
+const shark = { x: NOW_X + 40, y: 0, a: 0, vx: 0, vy: 0 };
+let active = 1, time = 0;
+function render() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.drawImage(layer, 0, 0, W, H);
+  ctx.font = `10px ${MONO}`; ctx.textBaseline = 'top';
+  const still = media.matches, phase = time * 6;
+  const ca = Math.cos(shark.a), sa = Math.sin(shark.a);
+  const cells = new Map();
+  const sc = Math.floor(shark.x / CW), sr = Math.floor(shark.y / CH);
+  // Clip to on-canvas cells so the c*1000+r key never sees a negative row or column.
+  for (let r = Math.max(0, sr - 11); r <= Math.min(H / CH - 1, sr + 11); r++) for (let c = Math.max(0, sc - 19); c <= Math.min(W / CW - 1, sc + 19); c++) {
+    const dx = c * CW + CW / 2 - shark.x, dy = r * CH + CH / 2 - shark.y;
+    const f = sharkDensity(dx * ca + dy * sa, -dx * sa + dy * ca, phase, still);
+    if (f.d > .02 || f.eye) cells.set(c * 1000 + r, f);
+  }
+  // Probability cone: the selected path burns warm, the others stay cold.
+  const flick = Math.floor(time * 8);
+  for (const cell of cone) {
+    const key = cell.c * 1000 + cell.r;
+    if (cells.has(key)) continue;
+    const own = cell.d[active] / cell.sum;
+    const n = still ? 0 : (hash(cell.c, cell.r, flick) - .5) * .18;
+    const lvl = clamp(cell.sum * .8 + n);
+    const ch = RAMP[1 + Math.floor(lvl * 8.99)];
+    put(ctx, ch, cell.c * CW, cell.r * CH, own > .5 ? rgb(WARM, HOT, clamp((own - .5) * 2 * lvl)) : rgb([22, 30, 40], LOW, lvl));
+  }
+  traces.forEach((trace, i) => {
+    for (const [c, r] of trace) {
+      if (cells.has(c * 1000 + r)) continue;
+      const lead = i === active && c * CW <= shark.x + 40;
+      put(ctx, lead ? '*' : '.', c * CW, r * CH, lead ? '#c15a21' : i === active ? '#6b4a36' : '#4a5562');
+    }
+  });
+  for (const [key, f] of cells) {
+    const c = Math.floor(key / 1000), r = key % 1000;
+    // Occlude the static layer so the body reads solid over candles and grid.
+    ctx.fillStyle = '#000'; ctx.fillRect(c * CW, r * CH, CW, CH);
+    if (f.eye) { put(ctx, '@', c * CW, r * CH, '#c15a21'); continue; }
+    const lum = clamp(f.d) * (f.spine ? 1 : .78);
+    put(ctx, f.spine ? '#' : RAMP[1 + Math.floor(lum * 8.99)], c * CW, r * CH, rgb(LOW, HIGH, lum));
+  }
+}
+// Hunt loop: the shark swims along the selected path, tags its label, then moves on.
+const ORDER = [1, 0, 2];
+let mode = 'auto', progress = 0, hold = 0, userX = END_X - 30, userY = 0, free = false, idle = 0, last = 0, raf = 0, ready = false;
+const startX = NOW_X + 30, stopX = END_X - 30;
+shark.x = startX; shark.y = cyAt(active, startX);
+const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));
+const tangent = (i, x) => Math.atan((cyAt(i, x + 6) - cyAt(i, x - 6)) / 12);
+const targetText = p => `${p.price} ${p.change}`;
+buttons.forEach((b, i) => { b.style.top = `${Math.round(py(PATHS[i].price) - 13)}px`; });
+metricEl.textContent = PATHS[active].metric;
+
+function select(i, announce = true) {
+  if (i === active) return;
+  active = i;
+  root.dataset.active = String(i);
+  buttons.forEach((b, k) => { const on = k === i; b.setAttribute('aria-checked', String(on)); b.tabIndex = on ? 0 : -1; });
+  metricEl.textContent = PATHS[i].metric;
+  progress = clamp((shark.x - startX) / (stopX - startX));
+  hold = 0;
+  if (announce) live.textContent = `${PATHS[i].odds}% path, target ${targetText(PATHS[i])}`;
+}
+function tag(i) { buttons[i].classList.add('is-tagged'); }
+function clearTags() { buttons.forEach(b => b.classList.remove('is-tagged')); }
+
+function step(dt) {
+  const still = media.matches;
+  let tx, ty;
+  if (mode === 'user') {
+    tx = userX;
+    if (free) ty = userY;
+    if ((idle += dt) > 1.6) {
+      mode = 'auto';
+      // Leaving free swim resumes the hunt from the spot line.
+      if (free) { free = false; progress = 0; hold = 0; }
+    }
+  } else {
+    if (still) progress = 1;
+    else if (progress < 1) progress = Math.min(1, progress + dt / 3.6);
+    else if ((hold += dt) > .7) {
+      const next = ORDER[(ORDER.indexOf(active) + 1) % 3];
+      if (next === ORDER[0]) clearTags();
+      select(next, false);
+      progress = 0;
+    }
+    tx = mix(startX, stopX, progress);
+  }
+  // Free swim targets the pointer itself; otherwise the shark rides the active path.
+  if (!free) ty = cyAt(active, tx);
+  ty += still ? 0 : Math.sin(time * 1.7) * 4;
+  if (still) {
+    shark.x = tx; shark.y = ty; shark.vx = shark.vy = 0;
+    if (!free) shark.a = tangent(active, tx);
+  } else {
+    // Damped spring toward the target; heading follows velocity, else the path tangent (free swim keeps its heading).
+    shark.vx += ((tx - shark.x) * 16 - shark.vx * 7.5) * dt;
+    shark.vy += ((ty - shark.y) * 16 - shark.vy * 7.5) * dt;
+    shark.x += shark.vx * dt; shark.y += shark.vy * dt;
+    const moving = Math.hypot(shark.vx, shark.vy) > 12;
+    const want = moving ? Math.atan2(shark.vy, shark.vx) : free ? shark.a : tangent(active, shark.x);
+    shark.a += wrap(want - shark.a) * Math.min(1, dt * 6);
+  }
+  if (!free && shark.x > END_X - 60 && Math.abs(shark.y - cyAt(active, shark.x)) < 14) tag(active);
+}
+
+function place() {
+  const mx = clamp(shark.x - 70, CHART_L + 10, CHART_R - 300);
+  const my = clamp(shark.y + 34, TOP, BOT - 20);
+  metricEl.style.transform = `translate(${Math.round(mx)}px, ${Math.round(my)}px)`;
+}
+
+function frame(now) {
+  const dt = last ? Math.min(.05, (now - last) / 1000) : 0;
+  last = now;
+  if (!media.matches) time += dt;
+  step(dt); render(); place();
+  if (!ready) { ready = true; root.dataset.ready = 'true'; document.body.dataset.motionReady = 'true'; }
+  raf = requestAnimationFrame(frame);
+}
+
+function resize() {
+  const scale = (root.clientWidth || W) / W;
+  stage.style.transform = `scale(${scale})`;
+  const next = Math.min(2, Math.max(1, (window.devicePixelRatio || 1) * scale));
+  if (next !== dpr) {
+    dpr = next;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    paintStatic(); paintMarks();
+  }
+}
+
+// Pointer: pick the path nearest to the pointer and let the shark chase it.
+function toLocal(e) {
+  const r = canvas.getBoundingClientRect();
+  return { x: (e.clientX - r.left) / (r.width || 1) * W, y: (e.clientY - r.top) / (r.height || 1) * H };
+}
+function chase(e) {
+  const p = toLocal(e);
+  mode = 'user'; idle = 0;
+  // Left of the spot line the shark swims freely over the candle history.
+  if (p.x < NOW_X) {
+    free = true;
+    userX = clamp(p.x, CHART_L + 20, NOW_X);
+    userY = clamp(p.y, TOP + 10, BOT - 10);
+    return;
+  }
+  free = false;
+  const x = clamp(p.x, startX, stopX);
+  let best = active, gap = Infinity;
+  PATHS.forEach((_, i) => { const d = Math.abs(cyAt(i, x) - p.y); if (d < gap) { gap = d; best = i; } });
+  select(best);
+  mode = 'user'; idle = 0; userX = x;
+}
+canvas.addEventListener('pointermove', chase);
+canvas.addEventListener('pointerdown', chase);
+canvas.addEventListener('pointerleave', () => { idle = Math.max(idle, 1.2); });
+buttons.forEach((b, i) => {
+  const pick = () => { select(i); mode = 'user'; idle = 0; free = false; userX = stopX; };
+  b.addEventListener('pointerenter', pick);
+  b.addEventListener('click', pick);
+});
+group.addEventListener('keydown', e => {
+  const keys = { ArrowUp: -1, ArrowLeft: -1, ArrowDown: 1, ArrowRight: 1 };
+  let i;
+  if (e.key in keys) i = (active + keys[e.key] + 3) % 3;
+  else if (e.key === 'Home') i = 0;
+  else if (e.key === 'End') i = 2;
+  else return;
+  e.preventDefault();
+  select(i);
+  buttons[i].focus();
+  mode = 'user'; idle = -2.4; free = false; userX = stopX;
+});
+document.addEventListener('visibilitychange', () => { last = 0; });
+
+new ResizeObserver(resize).observe(root);
+resize();
+raf = requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

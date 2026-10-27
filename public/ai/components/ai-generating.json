@@ -1,0 +1,159 @@
+{
+  "slug": "ai-generating",
+  "name": {
+    "en": "Dot Grid Loader",
+    "zh": "点阵加载"
+  },
+  "description": {
+    "en": "A restrained 20-by-20 dot field pulses around two moving focal points while an image is generating.",
+    "zh": "20 × 20 点阵围绕两个移动焦点呼吸，呈现图片生成中的等待反馈。"
+  },
+  "keywords": "动效 AI 生成 图片 加载 等待 反馈 点阵 光点 loading generating dots focus",
+  "docsPath": "/docs/animations/ai-generating",
+  "detailPath": "/ai/components/ai-generating.json",
+  "markdownPath": "/ai/components/ai-generating.md",
+  "previewPath": "/assets/components/ai-generating.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "图片生成等待",
+      "AI 加载反馈",
+      "image generation loading"
+    ],
+    "searchTerms": [
+      "等待",
+      "生成",
+      "加载",
+      "点阵",
+      "图片",
+      "loading",
+      "loader",
+      "generating",
+      "generation",
+      "image"
+    ],
+    "visualTags": [
+      "dots",
+      "minimal"
+    ],
+    "interactions": [
+      "autoplay"
+    ],
+    "caveat": "等待动画不表示真实完成百分比，需要绑定实际任务结束状态。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/ai-generating/react.json",
+      "component": "AiImageGeneration",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { AiImageGeneration } from \"./AiImageGeneration\";\n\nexport default function App() {\n  return <AiImageGeneration />;\n}",
+      "files": [
+        "AiImageGeneration.tsx",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/ai-generating/vue.json",
+      "component": "AiImageGeneration",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport AiImageGeneration from \"./AiImageGeneration.vue\";\n</script>\n<template><AiImageGeneration /></template>",
+      "files": [
+        "AiImageGeneration.vue",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/ai-generating/svelte.json",
+      "component": "AiImageGeneration",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport AiImageGeneration from \"./AiImageGeneration.svelte\";\n</script>\n<AiImageGeneration />",
+      "files": [
+        "AiImageGeneration.svelte",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/ai-generating/solid.json",
+      "component": "AiImageGeneration",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { AiImageGeneration } from \"./AiImageGeneration.solid\";\n\nexport default function App() {\n  return <AiImageGeneration />;\n}",
+      "files": [
+        "AiImageGeneration.solid.tsx",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/ai-generating/preact.json",
+      "component": "AiImageGeneration",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { AiImageGeneration } from \"./AiImageGeneration.preact\";\n\nexport default function App() {\n  return <AiImageGeneration />;\n}",
+      "files": [
+        "AiImageGeneration.preact.tsx",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/ai-generating/vanilla.json",
+      "component": "AiImageGeneration",
+      "dependencies": [],
+      "usage": "import { mount } from \"./AiImageGeneration\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "AiImageGeneration.ts",
+        "AiImageGenerationEngine.js",
+        "motion-runtime.ts",
+        "AiImageGenerationEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Watch the two moving focal points change the dot field. This is a loading animation, not an image-generation API.",
+    "zh": "观察双焦点如何驱动点阵变化。这是生成中的加载动效，不会调用生图接口。"
+  }
+}

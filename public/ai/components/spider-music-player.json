@@ -1,0 +1,172 @@
+{
+  "slug": "spider-music-player",
+  "name": {
+    "en": "Spider Track Switcher",
+    "zh": "蜘蛛牵引切歌"
+  },
+  "description": {
+    "en": "An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.",
+    "zh": "八足蜘蛛结网牵引专辑封面，在队列与播放区之间连续搬运，搭配真实专辑图片和可操作的本地播放控件。"
+  },
+  "keywords": "蜘蛛 蛛丝 结网 专辑 封面 音乐 播放器 队列 切歌 牵引 spider web music player album cover queue track switcher Divan Raj",
+  "docsPath": "/docs/animations/spider-music-player",
+  "detailPath": "/ai/components/spider-music-player.json",
+  "markdownPath": "/ai/components/spider-music-player.md",
+  "previewPath": "/assets/components/spider-music-player.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "专辑封面连续切换",
+      "趣味音乐播放器",
+      "animated album queue"
+    ],
+    "searchTerms": [
+      "蜘蛛",
+      "蛛丝",
+      "结网",
+      "音乐",
+      "专辑",
+      "封面",
+      "切歌",
+      "队列",
+      "spider",
+      "music",
+      "album",
+      "player",
+      "queue"
+    ],
+    "visualTags": [
+      "photography",
+      "tactile",
+      "spider"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "input"
+    ],
+    "caveat": "使用真实封面与本地播放计时；接入真实音源时替换媒体数据并核对封面权限。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM, inline SVG and GSAP reconstruction. Eight verified third-party album covers with copyright and source records are used as requested; no AI-generated cover art is used.",
+    "designReference": "https://x.com/desdivj/status/2114305692547043677/video/1",
+    "designAuthor": "Divan Raj",
+    "license": "Original motion design/source license not supplied or independently verified. Reference footage remains internal. Album covers retain their respective owners' rights and Apple Music source records; no free artwork redistribution license is claimed. No song audio, commercial font or original author code is included."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/spider-music-player/react.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { SpiderMusicPlayer } from \"./SpiderMusicPlayer\";\n\nexport default function App() {\n  return <SpiderMusicPlayer />;\n}",
+      "files": [
+        "SpiderMusicPlayer.tsx",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/spider-music-player/vue.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport SpiderMusicPlayer from \"./SpiderMusicPlayer.vue\";\n</script>\n<template><SpiderMusicPlayer /></template>",
+      "files": [
+        "SpiderMusicPlayer.vue",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/spider-music-player/svelte.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport SpiderMusicPlayer from \"./SpiderMusicPlayer.svelte\";\n</script>\n<SpiderMusicPlayer />",
+      "files": [
+        "SpiderMusicPlayer.svelte",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/spider-music-player/solid.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { SpiderMusicPlayer } from \"./SpiderMusicPlayer.solid\";\n\nexport default function App() {\n  return <SpiderMusicPlayer />;\n}",
+      "files": [
+        "SpiderMusicPlayer.solid.tsx",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/spider-music-player/preact.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { SpiderMusicPlayer } from \"./SpiderMusicPlayer.preact\";\n\nexport default function App() {\n  return <SpiderMusicPlayer />;\n}",
+      "files": [
+        "SpiderMusicPlayer.preact.tsx",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/spider-music-player/vanilla.json",
+      "component": "SpiderMusicPlayer",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./SpiderMusicPlayer\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "SpiderMusicPlayer.ts",
+        "SpiderMusicPlayerEngine.js",
+        "motion-runtime.ts",
+        "SpiderMusicPlayerEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Choose a queue row, or use previous and next to watch the spider fetch and return covers. Search, pause, seek, like and add tracks locally; the demo does not stream audio.",
+    "zh": "点击队列，或用上一首、下一首观察蜘蛛牵引和归还封面。支持本地搜索、暂停、进度调整、喜欢与添加歌曲；演示不播放音源。"
+  }
+}

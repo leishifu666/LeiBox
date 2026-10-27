@@ -1,0 +1,190 @@
+{
+  "images": {
+    "/assets/components/ai-generating.png": {
+      "src": "/assets/optimized/ai-generating-5b80f735c260-546.webp",
+      "srcSet": "/assets/optimized/ai-generating-5b80f735c260-320.webp 320w, /assets/optimized/ai-generating-5b80f735c260-546.webp 546w"
+    },
+    "/assets/components/blue-fluted-glass.png": {
+      "src": "/assets/optimized/blue-fluted-glass-671d8aaa6981-1200.webp",
+      "srcSet": "/assets/optimized/blue-fluted-glass-671d8aaa6981-320.webp 320w, /assets/optimized/blue-fluted-glass-671d8aaa6981-640.webp 640w, /assets/optimized/blue-fluted-glass-671d8aaa6981-960.webp 960w, /assets/optimized/blue-fluted-glass-671d8aaa6981-1200.webp 1200w"
+    },
+    "/assets/components/bouncy-access.png": {
+      "src": "/assets/optimized/bouncy-access-b1c0b785650d-546.webp",
+      "srcSet": "/assets/optimized/bouncy-access-b1c0b785650d-320.webp 320w, /assets/optimized/bouncy-access-b1c0b785650d-546.webp 546w"
+    },
+    "/assets/components/bounding-box-resize.png": {
+      "src": "/assets/optimized/bounding-box-resize-4cd91e02561a-1200.webp",
+      "srcSet": "/assets/optimized/bounding-box-resize-4cd91e02561a-320.webp 320w, /assets/optimized/bounding-box-resize-4cd91e02561a-640.webp 640w, /assets/optimized/bounding-box-resize-4cd91e02561a-960.webp 960w, /assets/optimized/bounding-box-resize-4cd91e02561a-1200.webp 1200w"
+    },
+    "/assets/components/brand-line-cards.png": {
+      "src": "/assets/optimized/brand-line-cards-affe198300a7-546.webp",
+      "srcSet": "/assets/optimized/brand-line-cards-affe198300a7-320.webp 320w, /assets/optimized/brand-line-cards-affe198300a7-546.webp 546w"
+    },
+    "/assets/components/brand-poster-cards.png": {
+      "src": "/assets/optimized/brand-poster-cards-251561b75c9e-1200.webp",
+      "srcSet": "/assets/optimized/brand-poster-cards-251561b75c9e-320.webp 320w, /assets/optimized/brand-poster-cards-251561b75c9e-640.webp 640w, /assets/optimized/brand-poster-cards-251561b75c9e-960.webp 960w, /assets/optimized/brand-poster-cards-251561b75c9e-1200.webp 1200w"
+    },
+    "/assets/components/collection-layout-morph.png": {
+      "src": "/assets/optimized/collection-layout-morph-5cf78720c78b-1200.webp",
+      "srcSet": "/assets/optimized/collection-layout-morph-5cf78720c78b-320.webp 320w, /assets/optimized/collection-layout-morph-5cf78720c78b-640.webp 640w, /assets/optimized/collection-layout-morph-5cf78720c78b-960.webp 960w, /assets/optimized/collection-layout-morph-5cf78720c78b-1200.webp 1200w"
+    },
+    "/assets/components/cosmic-panels.png": {
+      "src": "/assets/optimized/cosmic-panels-5acfcbf36766-1200.webp",
+      "srcSet": "/assets/optimized/cosmic-panels-5acfcbf36766-320.webp 320w, /assets/optimized/cosmic-panels-5acfcbf36766-640.webp 640w, /assets/optimized/cosmic-panels-5acfcbf36766-960.webp 960w, /assets/optimized/cosmic-panels-5acfcbf36766-1200.webp 1200w"
+    },
+    "/assets/components/crumpled-paper.png": {
+      "src": "/assets/optimized/crumpled-paper-a96eaca8710a-1200.webp",
+      "srcSet": "/assets/optimized/crumpled-paper-a96eaca8710a-320.webp 320w, /assets/optimized/crumpled-paper-a96eaca8710a-640.webp 640w, /assets/optimized/crumpled-paper-a96eaca8710a-960.webp 960w, /assets/optimized/crumpled-paper-a96eaca8710a-1200.webp 1200w"
+    },
+    "/assets/components/deep-agent-composer.png": {
+      "src": "/assets/optimized/deep-agent-composer-6004c7b68f42-900.webp",
+      "srcSet": "/assets/optimized/deep-agent-composer-6004c7b68f42-320.webp 320w, /assets/optimized/deep-agent-composer-6004c7b68f42-640.webp 640w, /assets/optimized/deep-agent-composer-6004c7b68f42-900.webp 900w"
+    },
+    "/assets/components/dot-matrix-trio.png": {
+      "src": "/assets/optimized/dot-matrix-trio-caf48c73102c-1200.webp",
+      "srcSet": "/assets/optimized/dot-matrix-trio-caf48c73102c-320.webp 320w, /assets/optimized/dot-matrix-trio-caf48c73102c-640.webp 640w, /assets/optimized/dot-matrix-trio-caf48c73102c-960.webp 960w, /assets/optimized/dot-matrix-trio-caf48c73102c-1200.webp 1200w"
+    },
+    "/assets/components/elastic-panel-resize.png": {
+      "src": "/assets/optimized/elastic-panel-resize-9282c19c34b5-1200.webp",
+      "srcSet": "/assets/optimized/elastic-panel-resize-9282c19c34b5-320.webp 320w, /assets/optimized/elastic-panel-resize-9282c19c34b5-640.webp 640w, /assets/optimized/elastic-panel-resize-9282c19c34b5-960.webp 960w, /assets/optimized/elastic-panel-resize-9282c19c34b5-1200.webp 1200w"
+    },
+    "/assets/components/galaxy-effort-slider.png": {
+      "src": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp",
+      "srcSet": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-320.webp 320w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-640.webp 640w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp 945w"
+    },
+    "/assets/components/glass-folder.png": {
+      "src": "/assets/optimized/glass-folder-a237d1600d80-1200.webp",
+      "srcSet": "/assets/optimized/glass-folder-a237d1600d80-320.webp 320w, /assets/optimized/glass-folder-a237d1600d80-640.webp 640w, /assets/optimized/glass-folder-a237d1600d80-960.webp 960w, /assets/optimized/glass-folder-a237d1600d80-1200.webp 1200w"
+    },
+    "/assets/components/glass-tab-menu.png": {
+      "src": "/assets/optimized/glass-tab-menu-57b8e6d1de24-1200.webp",
+      "srcSet": "/assets/optimized/glass-tab-menu-57b8e6d1de24-320.webp 320w, /assets/optimized/glass-tab-menu-57b8e6d1de24-640.webp 640w, /assets/optimized/glass-tab-menu-57b8e6d1de24-960.webp 960w, /assets/optimized/glass-tab-menu-57b8e6d1de24-1200.webp 1200w"
+    },
+    "/assets/components/gradient-cover-wall.png": {
+      "src": "/assets/optimized/gradient-cover-wall-bf32d9d76606-1200.webp",
+      "srcSet": "/assets/optimized/gradient-cover-wall-bf32d9d76606-320.webp 320w, /assets/optimized/gradient-cover-wall-bf32d9d76606-640.webp 640w, /assets/optimized/gradient-cover-wall-bf32d9d76606-960.webp 960w, /assets/optimized/gradient-cover-wall-bf32d9d76606-1200.webp 1200w"
+    },
+    "/assets/components/hammerhead-chart.png": {
+      "src": "/assets/optimized/hammerhead-chart-55720a189153-1200.webp",
+      "srcSet": "/assets/optimized/hammerhead-chart-55720a189153-320.webp 320w, /assets/optimized/hammerhead-chart-55720a189153-640.webp 640w, /assets/optimized/hammerhead-chart-55720a189153-960.webp 960w, /assets/optimized/hammerhead-chart-55720a189153-1200.webp 1200w"
+    },
+    "/assets/components/inline-text-morph.png": {
+      "src": "/assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp",
+      "srcSet": "/assets/optimized/inline-text-morph-8daecfa57f4c-320.webp 320w, /assets/optimized/inline-text-morph-8daecfa57f4c-640.webp 640w, /assets/optimized/inline-text-morph-8daecfa57f4c-960.webp 960w, /assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp 1044w"
+    },
+    "/assets/components/morphing-timer.png": {
+      "src": "/assets/optimized/morphing-timer-daf9fb769107-546.webp",
+      "srcSet": "/assets/optimized/morphing-timer-daf9fb769107-320.webp 320w, /assets/optimized/morphing-timer-daf9fb769107-546.webp 546w"
+    },
+    "/assets/components/notes-text-color.png": {
+      "src": "/assets/optimized/notes-text-color-bed022555fe4-900.webp",
+      "srcSet": "/assets/optimized/notes-text-color-bed022555fe4-320.webp 320w, /assets/optimized/notes-text-color-bed022555fe4-640.webp 640w, /assets/optimized/notes-text-color-bed022555fe4-900.webp 900w"
+    },
+    "/assets/components/otp-verification.png": {
+      "src": "/assets/optimized/otp-verification-eeec5a945ac9-546.webp",
+      "srcSet": "/assets/optimized/otp-verification-eeec5a945ac9-320.webp 320w, /assets/optimized/otp-verification-eeec5a945ac9-546.webp 546w"
+    },
+    "/assets/components/reasoning-effort-slider.png": {
+      "src": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp",
+      "srcSet": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-320.webp 320w, /assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp 520w"
+    },
+    "/assets/components/sailing-toc.png": {
+      "src": "/assets/optimized/sailing-toc-2d86ebba867c-1200.webp",
+      "srcSet": "/assets/optimized/sailing-toc-2d86ebba867c-320.webp 320w, /assets/optimized/sailing-toc-2d86ebba867c-640.webp 640w, /assets/optimized/sailing-toc-2d86ebba867c-960.webp 960w, /assets/optimized/sailing-toc-2d86ebba867c-1200.webp 1200w"
+    },
+    "/assets/components/selection-flower.png": {
+      "src": "/assets/optimized/selection-flower-7797a6f018b5-822.webp",
+      "srcSet": "/assets/optimized/selection-flower-7797a6f018b5-320.webp 320w, /assets/optimized/selection-flower-7797a6f018b5-640.webp 640w, /assets/optimized/selection-flower-7797a6f018b5-822.webp 822w"
+    },
+    "/assets/components/share-invite.png": {
+      "src": "/assets/optimized/share-invite-2e45dac61dff-546.webp",
+      "srcSet": "/assets/optimized/share-invite-2e45dac61dff-320.webp 320w, /assets/optimized/share-invite-2e45dac61dff-546.webp 546w"
+    },
+    "/assets/components/soft-action-wheel.png": {
+      "src": "/assets/optimized/soft-action-wheel-f63ea380bcdb-1200.webp",
+      "srcSet": "/assets/optimized/soft-action-wheel-f63ea380bcdb-320.webp 320w, /assets/optimized/soft-action-wheel-f63ea380bcdb-640.webp 640w, /assets/optimized/soft-action-wheel-f63ea380bcdb-960.webp 960w, /assets/optimized/soft-action-wheel-f63ea380bcdb-1200.webp 1200w"
+    },
+    "/assets/components/spider-music-player.png": {
+      "src": "/assets/optimized/spider-music-player-2052b7bac279-960.webp",
+      "srcSet": "/assets/optimized/spider-music-player-2052b7bac279-320.webp 320w, /assets/optimized/spider-music-player-2052b7bac279-640.webp 640w, /assets/optimized/spider-music-player-2052b7bac279-960.webp 960w"
+    },
+    "/assets/components/staggered-radial-menu.png": {
+      "src": "/assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp",
+      "srcSet": "/assets/optimized/staggered-radial-menu-ef5939c3f398-320.webp 320w, /assets/optimized/staggered-radial-menu-ef5939c3f398-640.webp 640w, /assets/optimized/staggered-radial-menu-ef5939c3f398-960.webp 960w, /assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp 1200w"
+    },
+    "/assets/components/thinking-particles.png": {
+      "src": "/assets/optimized/thinking-particles-f108db0f714f-1200.webp",
+      "srcSet": "/assets/optimized/thinking-particles-f108db0f714f-320.webp 320w, /assets/optimized/thinking-particles-f108db0f714f-640.webp 640w, /assets/optimized/thinking-particles-f108db0f714f-960.webp 960w, /assets/optimized/thinking-particles-f108db0f714f-1200.webp 1200w"
+    },
+    "/assets/components/velocity-drag.png": {
+      "src": "/assets/optimized/velocity-drag-d0fca960906f-546.webp",
+      "srcSet": "/assets/optimized/velocity-drag-d0fca960906f-320.webp 320w, /assets/optimized/velocity-drag-d0fca960906f-546.webp 546w"
+    },
+    "/assets/fallback-hero-poster.jpg": {
+      "src": "/assets/optimized/fallback-hero-poster-d1d8d2554406-1074.webp",
+      "srcSet": "/assets/optimized/fallback-hero-poster-d1d8d2554406-320.webp 320w, /assets/optimized/fallback-hero-poster-d1d8d2554406-640.webp 640w, /assets/optimized/fallback-hero-poster-d1d8d2554406-960.webp 960w, /assets/optimized/fallback-hero-poster-d1d8d2554406-1074.webp 1074w"
+    },
+    "/assets/hero-background.jpg": {
+      "src": "/assets/optimized/hero-background-12dd86814440-1200.webp",
+      "srcSet": "/assets/optimized/hero-background-12dd86814440-320.webp 320w, /assets/optimized/hero-background-12dd86814440-640.webp 640w, /assets/optimized/hero-background-12dd86814440-960.webp 960w, /assets/optimized/hero-background-12dd86814440-1200.webp 1200w"
+    },
+    "/assets/youtube/37wy90RnATM.jpg": {
+      "src": "/assets/optimized/37wy90RnATM-0331b88ec8c3-1200.webp",
+      "srcSet": "/assets/optimized/37wy90RnATM-0331b88ec8c3-320.webp 320w, /assets/optimized/37wy90RnATM-0331b88ec8c3-640.webp 640w, /assets/optimized/37wy90RnATM-0331b88ec8c3-960.webp 960w, /assets/optimized/37wy90RnATM-0331b88ec8c3-1200.webp 1200w"
+    },
+    "/assets/youtube/aVgR5YHk4QA.jpg": {
+      "src": "/assets/optimized/aVgR5YHk4QA-3c8b23e25e83-1200.webp",
+      "srcSet": "/assets/optimized/aVgR5YHk4QA-3c8b23e25e83-320.webp 320w, /assets/optimized/aVgR5YHk4QA-3c8b23e25e83-640.webp 640w, /assets/optimized/aVgR5YHk4QA-3c8b23e25e83-960.webp 960w, /assets/optimized/aVgR5YHk4QA-3c8b23e25e83-1200.webp 1200w"
+    },
+    "/assets/youtube/JZf_m_BVDaQ.jpg": {
+      "src": "/assets/optimized/JZf_m_BVDaQ-de62faf3eea9-1200.webp",
+      "srcSet": "/assets/optimized/JZf_m_BVDaQ-de62faf3eea9-320.webp 320w, /assets/optimized/JZf_m_BVDaQ-de62faf3eea9-640.webp 640w, /assets/optimized/JZf_m_BVDaQ-de62faf3eea9-960.webp 960w, /assets/optimized/JZf_m_BVDaQ-de62faf3eea9-1200.webp 1200w"
+    }
+  },
+  "video": {
+    "mobile": "/assets/optimized/hero-ced6e4b66e93-540-q30.mp4",
+    "desktop": "/assets/optimized/hero-ced6e4b66e93-720-q32.mp4"
+  },
+  "previews": {
+    "/assets/videos/ascii-object-leibox.webm": "/assets/optimized/preview-ascii-object-leibox-5c1750fb4b0d-640.webp",
+    "/assets/videos/ascii-object.webm": "/assets/optimized/preview-ascii-object-d9069d7ad240-640.webp",
+    "/assets/videos/ascii-sweep.webm": "/assets/optimized/preview-ascii-sweep-08621ab6e3c4-640.webp",
+    "/assets/videos/asciify.webm": "/assets/optimized/preview-asciify-d8cc78837e98-640.webp",
+    "/assets/videos/bend.webm": "/assets/optimized/preview-bend-42aafea84b9d-640.webp",
+    "/assets/videos/blaze.webm": "/assets/optimized/preview-blaze-4761085cdc52-640.webp",
+    "/assets/videos/bubble.webm": "/assets/optimized/preview-bubble-cc7ac0821fc1-640.webp",
+    "/assets/videos/canvas.webm": "/assets/optimized/preview-canvas-d46133ce8f13-640.webp",
+    "/assets/videos/cloth.webm": "/assets/optimized/preview-cloth-acb0c74e900e-640.webp",
+    "/assets/videos/clouds.webm": "/assets/optimized/preview-clouds-32bfdbbe5b04-640.webp",
+    "/assets/videos/decrypt-reveal.webm": "/assets/optimized/preview-decrypt-reveal-a0a859b4f725-640.webp",
+    "/assets/videos/displacement.webm": "/assets/optimized/preview-displacement-8aa7841554fd-640.webp",
+    "/assets/videos/dithered-object.webm": "/assets/optimized/preview-dithered-object-cf746fac44b1-640.webp",
+    "/assets/videos/droplets.webm": "/assets/optimized/preview-droplets-09e1227d06d8-640.webp",
+    "/assets/videos/flame-wrap.webm": "/assets/optimized/preview-flame-wrap-f8c99a263adf-640.webp",
+    "/assets/videos/force-field.webm": "/assets/optimized/preview-force-field-1426222ee999-640.webp",
+    "/assets/videos/frost.webm": "/assets/optimized/preview-frost-3dab3921e787-640.webp",
+    "/assets/videos/glass-object-leibox.webm": "/assets/optimized/preview-glass-object-leibox-0f31fc75c606-640.webp",
+    "/assets/videos/glass-object.webm": "/assets/optimized/preview-glass-object-5136c84e1794-640.webp",
+    "/assets/videos/glass.webm": "/assets/optimized/preview-glass-8a033d7faa62-640.webp",
+    "/assets/videos/glitch.webm": "/assets/optimized/preview-glitch-8cfae557bbcd-640.webp",
+    "/assets/videos/glyph-rain.webm": "/assets/optimized/preview-glyph-rain-c8fc1cd6be2e-640.webp",
+    "/assets/videos/grid.webm": "/assets/optimized/preview-grid-85a4c9ec4033-640.webp",
+    "/assets/videos/hex-float.webm": "/assets/optimized/preview-hex-float-aacc5715506a-640.webp",
+    "/assets/videos/ink-object.webm": "/assets/optimized/preview-ink-object-12c945e2de5e-640.webp",
+    "/assets/videos/laser.webm": "/assets/optimized/preview-laser-af26cb2a479e-640.webp",
+    "/assets/videos/liquid-object-leibox.webm": "/assets/optimized/preview-liquid-object-leibox-2c0d02c98a09-640.webp",
+    "/assets/videos/liquid-object.webm": "/assets/optimized/preview-liquid-object-60d51986fb16-640.webp",
+    "/assets/videos/liquid.webm": "/assets/optimized/preview-liquid-bc770f68d9e1-640.webp",
+    "/assets/videos/magnify.webm": "/assets/optimized/preview-magnify-187f927192f1-640.webp",
+    "/assets/videos/particle-object-leibox-3d.webm": "/assets/optimized/preview-particle-object-leibox-3d-8c6d38cb9f59-640.webp",
+    "/assets/videos/particle-object-leibox.webm": "/assets/optimized/preview-particle-object-leibox-00d20d5d2dfd-640.webp",
+    "/assets/videos/particle-object.webm": "/assets/optimized/preview-particle-object-bbe02ef1bfc6-640.webp",
+    "/assets/videos/particle-reveal.webm": "/assets/optimized/preview-particle-reveal-d036a39d0277-640.webp",
+    "/assets/videos/particle-scroll.webm": "/assets/optimized/preview-particle-scroll-e733f768fda2-640.webp",
+    "/assets/videos/peel.webm": "/assets/optimized/preview-peel-34127933c0e7-640.webp",
+    "/assets/videos/retro-dither.webm": "/assets/optimized/preview-retro-dither-a680aebe55f2-640.webp",
+    "/assets/videos/ripple.webm": "/assets/optimized/preview-ripple-1d17b3904c5e-640.webp",
+    "/assets/videos/shatter.webm": "/assets/optimized/preview-shatter-ea4227746271-640.webp",
+    "/assets/videos/vhs.webm": "/assets/optimized/preview-vhs-44e815f48db2-640.webp"
+  }
+}

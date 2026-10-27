@@ -1,0 +1,165 @@
+{
+  "slug": "otp-verification",
+  "name": {
+    "en": "OTP Input Verification",
+    "zh": "验证码输入验证"
+  },
+  "description": {
+    "en": "A six-digit code unfolds from a pill, contracts to verify, and responds with an error shake or a green confirmation.",
+    "zh": "胶囊展开为六位验证码输入框，收拢验证后呈现错误摇动或绿色成功反馈。"
+  },
+  "keywords": "otp verification code input password authentication pill morph error success 验证码 验证 输入 密码 胶囊 动效 错误 成功",
+  "docsPath": "/docs/components/otp-verification",
+  "detailPath": "/ai/components/otp-verification.json",
+  "markdownPath": "/ai/components/otp-verification.md",
+  "previewPath": "/assets/components/otp-verification.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "登录验证码",
+      "身份验证反馈",
+      "login verification code"
+    ],
+    "searchTerms": [
+      "验证码",
+      "登录",
+      "验证",
+      "短信",
+      "otp",
+      "verification",
+      "login",
+      "code"
+    ],
+    "visualTags": [
+      "minimal",
+      "capsule"
+    ],
+    "interactions": [
+      "input",
+      "keyboard"
+    ],
+    "caveat": "输入与结果反馈界面；验证码发送和校验需接入真实服务。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/bestsaasdesigns/status/2111020282551132539/video/1",
+    "designAuthor": "sucodee",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/otp-verification/react.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { OtpVerification } from \"./OtpVerification\";\n\nexport default function App() {\n  return <OtpVerification />;\n}",
+      "files": [
+        "OtpVerification.tsx",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/otp-verification/vue.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport OtpVerification from \"./OtpVerification.vue\";\n</script>\n<template><OtpVerification /></template>",
+      "files": [
+        "OtpVerification.vue",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/otp-verification/svelte.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport OtpVerification from \"./OtpVerification.svelte\";\n</script>\n<OtpVerification />",
+      "files": [
+        "OtpVerification.svelte",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/otp-verification/solid.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { OtpVerification } from \"./OtpVerification.solid\";\n\nexport default function App() {\n  return <OtpVerification />;\n}",
+      "files": [
+        "OtpVerification.solid.tsx",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/otp-verification/preact.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { OtpVerification } from \"./OtpVerification.preact\";\n\nexport default function App() {\n  return <OtpVerification />;\n}",
+      "files": [
+        "OtpVerification.preact.tsx",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/otp-verification/vanilla.json",
+      "component": "OtpVerification",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./OtpVerification\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "OtpVerification.ts",
+        "OtpVerificationEngine.js",
+        "motion-runtime.ts",
+        "OtpVerificationEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "",
+    "zh": ""
+  }
+}

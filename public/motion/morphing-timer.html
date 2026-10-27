@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Perfect Morphing Timer (Anti-Overlap)</title>
+    <style>
+        :root {
+            /* 【核心修复】：极其精确的安全坐标系统
+              通过计算每个元素的物理尺寸，数学上保证绝对不会重叠 
+            */
+            --v-pill-w: 210px;       /* 视图胶囊宽度极大化，防止挤压文字 */
+            --v-pill-x: -16px;       /* 视图胶囊中心 X 偏移 */
+            --v-btn-x: 62px;         /* 铅笔按钮中心 X 偏移 (完美落入胶囊右侧) */
+            
+            --e-card-h-x: -116px;    /* 小时卡片中心 X 偏移 */
+            --e-card-m-x: 44px;      /* 分钟卡片中心 X 偏移 */
+            --e-btn-x: 156px;        /* 确认按钮中心 X 偏移 */
+            
+            /* Apple 级物理回弹曲线 */
+            --spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+            --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; padding: 0; 
+            user-select: none; -webkit-user-select: none; 
+        }
+        
+        body {
+            background-color: #ffffff;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+            overflow: hidden;
+        }
+        
+        /* 根容器：所有元素以此为 (0,0) 绝对坐标原点 */
+        .app-root {
+            position: relative;
+            width: 440px; height: 100px;
+        }
+        
+        .abs-center {
+            position: absolute;
+            top: 50%; left: 50%;
+        }
+        
+        button { cursor: pointer; outline: none; border: none; }
+        
+        /* ==============================================
+           1. 视图模式 (View Pill)
+           ============================================== */
+        .view-pill {
+            transform: translate(calc(-50% + var(--v-pill-x)), -50%);
+            width: var(--v-pill-w);
+            height: 56px;
+            background-color: #f3f4f6;
+            border-radius: 28px;
+            display: flex; align-items: center;
+            padding-left: 24px; padding-right: 56px; /* 右侧留足给按钮的空间 */
+            z-index: 2;
+            white-space: nowrap;
+            
+            transition: transform 0.5s var(--spring), opacity 0.3s ease, filter 0.3s ease;
+            will-change: transform, opacity;
+        }
+        
+        .view-time { display: flex; align-items: baseline; gap: 4px; }
+        .view-time .val { font-size: 19px; font-weight: 700; color: #111827; letter-spacing: -0.3px; }
+        .view-time .unit { font-size: 14px; font-weight: 500; color: #6b7280; margin-right: 4px; }
+        
+        /* ==============================================
+           2. 编辑模式 (Split Cards)
+           ============================================== */
+        .edit-card {
+            width: 144px; /* 锁死物理宽度，绝不压缩 */
+            height: 56px; 
+            background-color: #f3f4f6;
+            border-radius: 28px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 6px; /* 控制边距 */
+            z-index: 1;
+            
+            /* 初始状态：缩小且不可见，藏在视图胶囊的中心点 */
+            opacity: 0; pointer-events: none;
+            transition: transform 0.5s var(--spring), opacity 0.35s var(--smooth);
+            will-change: transform, opacity;
+        }
+        
+        .card-h { transform: translate(calc(-50% + var(--v-pill-x)), -50%) scale(0.7); }
+        .card-m { transform: translate(calc(-50% + var(--v-pill-x)), -50%) scale(0.7); }
+        
+        /* 【防挤压核心修复】：对内部按钮和文本容器进行 0 弹性锁死 */
+        .ctrl-btn {
+            flex: 0 0 36px; /* 绝对禁止收缩，强制 36px */
+            width: 36px; height: 36px;
+            border-radius: 50%; background-color: #e5e7eb; color: #4b5563;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.1s, background-color 0.2s, color 0.2s;
+        }
+        .ctrl-btn svg { width: 14px; height: 14px; stroke-width: 2.5; pointer-events: none; }
+        .ctrl-btn:hover { color: #111827; background-color: #d1d5db; }
+        .ctrl-btn:active { transform: scale(0.88); }
+        
+        .val-col {
+            flex: 0 0 56px; /* 文本容器绝对锁死为 56px */
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        
+        /* ==============================================
+           3. 老虎机数字滚轮 (Slot Engine)
+           ============================================== */
+        .wheel-vp {
+            position: relative; width: 100%; height: 24px;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+        }
+        
+        .wheel-num {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 700; color: #111827;
+            transition: transform 0.3s var(--spring), opacity 0.3s ease, filter 0.3s ease;
+        }
+        
+        .enter-up { transform: translateY(24px); opacity: 0; filter: blur(3px); }
+        .exit-up { transform: translateY(-24px); opacity: 0; filter: blur(3px); }
+        .enter-down { transform: translateY(-24px); opacity: 0; filter: blur(3px); }
+        .exit-down { transform: translateY(24px); opacity: 0; filter: blur(3px); }
+        .active { transform: translateY(0); opacity: 1; filter: blur(0); }
+        
+        .lbl { font-size: 11px; font-weight: 500; color: #6b7280; margin-top: -2px; }
+        
+        /* ==============================================
+           4. 极度坚固的形变按钮 (The Magic Button)
+           ============================================== */
+        .morph-btn {
+            /* 初始(铅笔)位置 */
+            transform: translate(calc(-50% + var(--v-btn-x)), -50%);
+            width: 44px; height: 44px;
+            background-color: #ffffff; border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            
+            z-index: 10; 
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.5s var(--spring), width 0.4s var(--spring), height 0.4s var(--spring), background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .morph-btn:active { transform: translate(calc(-50% + var(--v-btn-x)), -50%) scale(0.9) !important; }
+        .app-root.is-editing .morph-btn:active { transform: translate(calc(-50% + var(--e-btn-x)), -50%) scale(0.9) !important; }
+        
+        .morph-btn svg {
+            position: absolute; top: 50%; left: 50%;
+            transition: opacity 0.3s ease, transform 0.5s var(--spring);
+            pointer-events: none; 
+        }
+        .icon-pencil { width: 17px; height: 17px; color: #111827; opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        .icon-check { width: 22px; height: 22px; color: #ffffff; opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(-90deg); stroke-width: 2.5;}
+        
+        /* ==============================================
+           5. 动画剧本：触发状态切换 (Action Timeline)
+           ============================================== */
+        
+        .app-root.is-editing .view-pill {
+            transform: translate(calc(-50% + var(--v-pill-x)), -50%) scaleX(1.15) scaleY(0.85);
+            opacity: 0; filter: blur(2px); pointer-events: none;
+        }
+        
+        .app-root.is-editing .card-h {
+            transform: translate(calc(-50% + var(--e-card-h-x)), -50%) scale(1);
+            opacity: 1; pointer-events: auto;
+        }
+        .app-root.is-editing .card-m {
+            transform: translate(calc(-50% + var(--e-card-m-x)), -50%) scale(1);
+            opacity: 1; pointer-events: auto;
+        }
+        
+        .app-root.is-editing .morph-btn {
+            transform: translate(calc(-50% + var(--e-btn-x)), -50%);
+            width: 56px; height: 56px;
+            background-color: #111827;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .app-root.is-editing .icon-pencil { opacity: 0; transform: translate(-50%, -50%) scale(0.5) rotate(90deg); }
+        .app-root.is-editing .icon-check { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    </style>
+</head>
+<body>
+
+    <div class="app-root" id="app">
+        
+        <div class="view-pill abs-center">
+            <div class="view-time">
+                <span class="val" id="v-h">3</span><span class="unit">hr</span>
+                <span class="val" id="v-m">40</span><span class="unit">min</span>
+            </div>
+        </div>
+
+        <div class="edit-card card-h abs-center">
+            <button type="button" class="ctrl-btn" onclick="stepValue('h', -1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="val-col">
+                <div class="wheel-vp" id="wheel-h">
+                    <span class="wheel-num active">3</span>
+                </div>
+                <span class="lbl">hours</span>
+            </div>
+            <button type="button" class="ctrl-btn" onclick="stepValue('h', 1)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+        </div>
+
+        <div class="edit-card card-m abs-center">
+            <button type="button" class="ctrl-btn" onclick="stepValue('m', -10)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="val-col">
+                <div class="wheel-vp" id="wheel-m">
+                    <span class="wheel-num active">40</span>
+                </div>
+                <span class="lbl">minutes</span>
+            </div>
+            <button type="button" class="ctrl-btn" onclick="stepValue('m', 10)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+        </div>
+
+        <button type="button" class="morph-btn abs-center" id="btn-toggle">
+            <svg class="icon-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+            </svg>
+            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </button>
+
+    </div>
+
+    <script>
+        const app = document.getElementById('app');
+        const btnToggle = document.getElementById('btn-toggle');
+        
+        let state = { h: 3, m: 40 };
+
+        btnToggle.addEventListener('click', () => {
+            app.classList.toggle('is-editing');
+            
+            // 收起瞬间立刻同步数据
+            if (!app.classList.contains('is-editing')) {
+                document.getElementById('v-h').textContent = state.h;
+                document.getElementById('v-m').textContent = state.m;
+            }
+        });
+
+        function stepValue(type, delta) {
+            let oldVal = Number(state[type]);
+            let newVal = oldVal + Number(delta);
+            
+            // 时钟循环算法
+            if (type === 'h') {
+                if (newVal > 23) newVal = 0;
+                if (newVal < 0) newVal = 23;
+            } else {
+                if (newVal > 50) newVal = 0;
+                if (newVal < 0) newVal = 50;
+            }
+            
+            state[type] = newVal;
+            
+            if (oldVal !== newVal) {
+                runSlotEngine(type, newVal, delta > 0 ? 'up' : 'down');
+            }
+        }
+
+        // 强健老虎机动画
+        function runSlotEngine(type, newVal, dir) {
+            const vp = document.getElementById(`wheel-${type}`);
+            
+            vp.querySelectorAll('.is-exiting').forEach(el => {
+                if (el.parentNode) el.remove();
+            });
+            
+            const current = vp.querySelector('.active');
+            if (current) {
+                current.classList.remove('active');
+                current.classList.add('is-exiting', dir === 'up' ? 'exit-up' : 'exit-down');
+                setTimeout(() => { if (current.parentNode) current.remove(); }, 300);
+            }
+            
+            const next = document.createElement('span');
+            next.textContent = newVal;
+            next.className = `wheel-num ${dir === 'up' ? 'enter-up' : 'enter-down'}`;
+            vp.appendChild(next);
+            
+            // 触发浏览器合批重绘
+            void next.offsetHeight;
+            
+            next.classList.remove('enter-up', 'enter-down');
+            next.classList.add('active');
+        }
+    </script>
+</body>
+</html>

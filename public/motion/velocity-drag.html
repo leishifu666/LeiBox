@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velocity Driven Drag - Ultimate Bug Fix</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg-window: #ffffff; --bg-toolbar: #f9f9fa; --border-subtle: #e5e7eb;
+    --text-primary: #111827; --text-secondary: #6b7280;
+    --col-time-width: 65px; --row-header-height: 60px; --row-hour-height: 90px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    margin: 0; height: 100vh; overflow: hidden;
+    background: radial-gradient(circle at 30% 70%, #355f3a, transparent 70%),
+                radial-gradient(circle at 70% 30%, #588f62, transparent 70%), #85a98d;
+    display: flex; align-items: center; justify-content: center;
+    user-select: none; -webkit-user-select: none;
+  }
+
+  body.is-dragging * { cursor: grabbing !important; }
+
+  .mac-window {
+    width: 92vw; height: 88vh; background: var(--bg-window); border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.2);
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+  
+  .toolbar { height: 52px; background: var(--bg-toolbar); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; padding: 0 16px; }
+  .window-controls { display: flex; gap: 8px; width: 200px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+  .address-bar { flex: 1; display: flex; justify-content: center; }
+  .address-input { background: #ebebeb; padding: 6px 12px; border-radius: 6px; font-size: 13px; color: #555; width: 300px; text-align: center; }
+  .calendar-header { height: 60px; display: flex; align-items: center; padding: 0 24px; border-bottom: 1px solid var(--border-subtle); }
+  .btn { padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-subtle); background: white; font-size: 13px; cursor: pointer; }
+  .month-title { font-size: 16px; font-weight: 500; margin-left: 16px; }
+  .calendar-body { flex: 1; position: relative; overflow-y: auto; overflow-x: hidden; }
+  .grid-container { display: grid; grid-template-columns: var(--col-time-width) repeat(7, 1fr); min-width: 800px; }
+  
+  .header-cell { height: var(--row-header-height); display: flex; flex-direction: column; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-secondary); }
+  .header-cell .day-num { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-top: 2px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+  .header-cell.today .day-num { background: #ef4444; color: white; }
+  .time-cell { height: var(--row-hour-height); border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: flex-start; justify-content: center; font-size: 11px; color: var(--text-secondary); }
+  .time-label { transform: translateY(-50%); background: white; padding: 0 4px; }
+  .grid-cell { height: var(--row-hour-height); border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+  .events-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+  
+  .event-card {
+    position: absolute; border-radius: 8px; cursor: grab; pointer-events: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: box-shadow 0.2s, opacity 0.2s;
+    overflow: hidden;
+  }
+  .event-content { padding: 8px 10px; display: flex; flex-direction: column; width: 100%; height: 100%; }
+  .event-time { font-size: 11px; font-weight: 600; margin-bottom: 4px; opacity: 0.8; }
+  .event-title { font-size: 12px; font-weight: 500; line-height: 1.3; }
+
+  .drag-placeholder {
+    position: absolute; border-radius: 8px; border: 2px dashed #94a3b8; background: rgba(241, 245, 249, 0.5);
+    pointer-events: none; z-index: 5; display: none;
+  }
+
+  .drag-ghost {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; 
+    border-radius: 8px; overflow: hidden;
+    transform-origin: center center;
+    will-change: transform, background, backdrop-filter;
+    transition: background 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                backdrop-filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0;
+  }
+
+  .drag-ghost.is-morphing {
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.4) inset;
+  }
+
+  .ghost-layer-original, .ghost-layer-new {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    will-change: opacity, filter, transform;
+  }
+  
+  .ghost-layer-original {
+    opacity: 1; filter: blur(0px); transform: scale(1);
+    transition: opacity 0.5s ease, filter 0.6s ease, transform 0.6s ease;
+  }
+  .drag-ghost.is-morphing .ghost-layer-original {
+    opacity: 0; filter: blur(12px); transform: scale(0.9);
+  }
+
+  .ghost-layer-new {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; 
+    opacity: 0; filter: blur(10px); transform: scale(1.05);
+    transition: opacity 0.5s ease 0.1s, filter 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+  }
+  .drag-ghost.is-morphing .ghost-layer-new {
+    opacity: 1; filter: blur(0px); transform: scale(1);
+  }
+
+  .avatars-mock { margin-top: auto; display: flex; gap: -4px; opacity: 0.9;}
+  .avatar-circle { width: 18px; height: 18px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0,0,0,0.1); margin-left:-4px;}
+  .avatar-circle:first-child { margin-left: 0; background: #fff;}
+  .avatar-circle svg { width: 10px; height: 10px; fill: white;}
+</style>
+</head>
+<body>
+
+<div class="mac-window">
+  <div class="toolbar">
+    <div class="window-controls"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+    <div class="address-bar"><div class="address-input">app.io</div></div>
+    <div class="window-controls"></div>
+  </div>
+  <div class="calendar-header">
+    <button class="btn">Today</button><div class="month-title">Aug 2026</div>
+  </div>
+  <div class="calendar-body" id="calendar-body">
+    <div class="grid-container" id="grid"></div>
+    <div class="events-layer" id="events-layer"></div>
+    <div class="drag-placeholder" id="placeholder"></div>
+  </div>
+</div>
+
+<div class="drag-ghost" id="ghost">
+  <div class="ghost-layer-original" id="ghost-original"></div>
+  <div class="ghost-layer-new" id="ghost-new"></div>
+</div>
+
+<script>
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const themes = {
+    pink: { bg: '#fce7f3', ghostBg: 'rgba(252, 231, 243, 0.7)', text: '#9f1239' },
+    green: { bg: '#dcfce7', ghostBg: 'rgba(220, 252, 231, 0.7)', text: '#166534' },
+    yellow: { bg: '#fef08a', ghostBg: 'rgba(254, 240, 138, 0.7)', text: '#854d0e' },
+    purple: { bg: '#f3e8ff', ghostBg: 'rgba(243, 232, 255, 0.7)', text: '#6b21a8' },
+    blue: { bg: '#dbeafe', ghostBg: 'rgba(219, 234, 254, 0.7)', text: '#1e3a8a' },
+    gray: { bg: '#f3f4f6', ghostBg: 'rgba(243, 244, 246, 0.7)', text: '#374151' }
+  };
+
+  let events = [
+    { id: 1, day: 1, hour: 9, duration: 1.5, theme: 'pink', title: 'Review Recent Work And Discuss Improvements.' },
+    { id: 2, day: 1, hour: 12, duration: 1.5, theme: 'blue', title: 'Quick Sync On Progress, Blockers, And Priorities.' },
+    { id: 3, day: 2, hour: 10, duration: 1.5, theme: 'green', title: 'Pack Bags And Leave For The Mountains.' },
+    { id: 4, day: 3, hour: 8, duration: 1, theme: 'gray', title: 'Pick Up Vegetables, Milk, Coffee...' },
+    { id: 5, day: 3, hour: 9, duration: 1.5, theme: 'yellow', title: '30-Minute Jog Around The Neighborhood.' },
+    { id: 6, day: 4, hour: 11, duration: 1.5, theme: 'purple', title: 'Final Launch Checklist, Announcements, And Deployment.' }
+  ];
+
+  const gridEl = document.getElementById('grid');
+  gridEl.innerHTML += `<div class="header-cell" style="border:none;"></div>`;
+  days.forEach((day, i) => gridEl.innerHTML += `<div class="header-cell ${i===1?'today':''}"><div>${day}</div><div class="day-num">${i+9}</div></div>`);
+  for (let h = 8; h <= 14; h++) {
+    gridEl.innerHTML += `<div class="time-cell"><span class="time-label">${h>12?h-12+' PM':(h===12?'12 PM':h+' AM')}</span></div>`;
+    for (let d = 0; d < 7; d++) gridEl.innerHTML += `<div class="grid-cell"></div>`;
+  }
+
+  const eventsLayer = document.getElementById('events-layer');
+  
+  function renderEvents() {
+    eventsLayer.innerHTML = '';
+    events.forEach(ev => {
+      const el = document.createElement('div');
+      el.className = 'event-card';
+      
+      // 修复核心 1：赋予绝对 ID，永不迷路
+      el.id = `event-${ev.id}`; 
+      
+      el.style.left = `calc(var(--col-time-width) + ${ev.day} * ((100% - var(--col-time-width)) / 7) + 4px)`;
+      el.style.width = `calc(((100% - var(--col-time-width)) / 7) - 8px)`;
+      el.style.top = `calc(var(--row-header-height) + ${(ev.hour - 8)} * 90px + 4px)`;
+      el.style.height = `calc(${ev.duration} * 90px - 8px)`;
+      
+      const themeConfig = themes[ev.theme];
+      el.style.background = themeConfig.bg;
+      el.style.color = themeConfig.text;
+      
+      // 修复核心 2：如果卡片正在被飞起或者降落，隐藏真身，防止重影！
+      if ((isDragging || isDropping) && draggedEv && ev.id === draggedEv.id) {
+          el.style.opacity = '0';
+          el.style.pointerEvents = 'none';
+      }
+      
+      el.innerHTML = `
+        <div class="event-content">
+          <div class="event-time">${ev.hour > 12 ? ev.hour-12 : ev.hour}:00 ${ev.hour >= 12 ? 'PM' : 'AM'} - Once</div>
+          <div class="event-title">${ev.title}</div>
+          <div class="avatars-mock">
+            <div class="avatar-circle"></div><div class="avatar-circle"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+          </div>
+        </div>
+      `;
+      el.addEventListener('mousedown', (e) => startDrag(e, ev, el, themeConfig));
+      eventsLayer.appendChild(el);
+    });
+  }
+
+  let isDragging = false; 
+  let isDropping = false; 
+  let draggedEv = null, originalEl = null, currentThemeConfig = null;
+  
+  const ghost = document.getElementById('ghost');
+  const ghostOrig = document.getElementById('ghost-original');
+  const ghostNew = document.getElementById('ghost-new');
+  const placeholder = document.getElementById('placeholder');
+  
+  let targetX = 0, targetY = 0, posX = 0, posY = 0;
+  let dropTargetX = 0, dropTargetY = 0; 
+  let lastPosX = 0, lastPosY = 0;
+  let velX = 0, velY = 0;
+  let rotX = 0, rotY = 0, rotZ = 0;
+  let currentScale = 1.0;
+  let targetScale = 1.0;
+  
+  let grabOffsetX = 0, grabOffsetY = 0;
+  let currentHoverDay = -1, currentHoverHour = -1;
+
+  function startDrag(e, evData, el, themeConfig) {
+    if(e.button !== 0) return;
+    if(isDragging) return; 
+
+    // 防抽搐逻辑：如果卡片还在降落途中被猛然点中，强制切断降落动画
+    if (isDropping) {
+        isDropping = false;
+        ghost.style.opacity = '0';
+        placeholder.style.display = 'none';
+        renderEvents();
+    }
+
+    isDragging = true; 
+    draggedEv = evData; 
+    originalEl = el;
+    currentThemeConfig = themeConfig;
+    
+    document.body.classList.add('is-dragging');
+    originalEl.style.opacity = '0'; 
+    
+    targetX = posX = e.clientX;
+    targetY = posY = e.clientY;
+    lastPosX = posX; lastPosY = posY;
+    velX = velY = rotX = rotY = rotZ = 0;
+    currentScale = targetScale = 1.0;
+
+    const rect = originalEl.getBoundingClientRect();
+    grabOffsetX = e.clientX - rect.left;
+    grabOffsetY = e.clientY - rect.top;
+
+    placeholder.style.left = originalEl.style.left;
+    placeholder.style.top = originalEl.style.top;
+    placeholder.style.width = originalEl.style.width;
+    placeholder.style.height = originalEl.style.height;
+    placeholder.style.display = 'block';
+
+    ghost.style.width = `${rect.width}px`;
+    ghost.style.height = `${rect.height}px`;
+
+    ghost.style.transition = 'none';
+    ghostOrig.style.transition = 'none';
+    ghostNew.style.transition = 'none';
+
+    ghost.classList.remove('is-morphing');
+    ghost.style.background = themeConfig.bg; 
+    ghostOrig.innerHTML = originalEl.innerHTML; 
+    ghostNew.style.color = themeConfig.text;
+    ghost.style.opacity = '1';
+
+    void ghost.offsetWidth;
+
+    ghost.style.transition = '';
+    ghostOrig.style.transition = '';
+    ghostNew.style.transition = '';
+
+    requestAnimationFrame(() => {
+      ghost.classList.add('is-morphing');
+      ghost.style.background = themeConfig.ghostBg;
+    });
+
+    updateGridFeedback(targetX, targetY);
+    
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('mouseup', endDrag);
+  }
+
+  function onDragMove(e) {
+    targetX = e.clientX; targetY = e.clientY;
+    updateGridFeedback(targetX, targetY);
+  }
+
+  function updateGridFeedback(clientX, clientY) {
+    const calendar = document.getElementById('calendar-body');
+    const rect = calendar.getBoundingClientRect();
+    let relativeX = clientX - rect.left + calendar.scrollLeft - 65;
+    let relativeY = clientY - rect.top + calendar.scrollTop - 60;
+    
+    let dayIdx = Math.floor(relativeX / ((rect.width - 65) / 7));
+    let hourIdx = Math.floor(relativeY / 90) + 8;
+    dayIdx = Math.max(0, Math.min(6, dayIdx));
+    hourIdx = Math.max(8, Math.min(14, hourIdx));
+    
+    if (dayIdx !== currentHoverDay || hourIdx !== currentHoverHour) {
+      currentHoverDay = dayIdx; currentHoverHour = hourIdx;
+      ghostNew.innerText = `${days[dayIdx]} ${hourIdx > 12 ? hourIdx-12+':00 PM' : hourIdx+':00 AM'}`;
+    }
+  }
+
+  function endDrag() {
+    isDragging = false;
+    document.body.classList.remove('is-dragging');
+    window.removeEventListener('mousemove', onDragMove);
+    window.removeEventListener('mouseup', endDrag);
+    
+    isDropping = true;
+
+    if (draggedEv) { 
+      draggedEv.day = currentHoverDay; 
+      draggedEv.hour = currentHoverHour; 
+    }
+    
+    // 渲染，但这会触发我们上面的逻辑：把正在放回的真身卡片强行隐身 (Opacity: 0)
+    renderEvents(); 
+
+    // 触发逆向变身动画
+    ghost.classList.remove('is-morphing');
+    ghost.style.background = currentThemeConfig.bg;
+  }
+
+  function physicsLoop() {
+    if (isDragging || isDropping) {
+      let targetRotY = 0, targetRotX = 0, targetRotZ = 0;
+
+      if (isDragging) {
+        let oldPosX = posX, oldPosY = posY;
+        posX += (targetX - posX) * 0.45;
+        posY += (targetY - posY) * 0.45;
+        
+        velX = posX - oldPosX;
+        velY = posY - oldPosY;
+
+        targetRotY = velX * 0.8; 
+        targetRotX = -velY * 0.8; 
+        targetRotZ = velX * 0.08; 
+        targetScale = 1.02;
+
+        targetRotY = Math.max(-25, Math.min(25, targetRotY));
+        targetRotX = Math.max(-25, Math.min(25, targetRotX));
+        targetRotZ = Math.max(-8, Math.min(8, targetRotZ));
+
+      } else if (isDropping) {
+        // 修复核心 3：无论发生什么，每一帧都重新精准锁定目标 DOM 的坐标
+        // 哪怕用户在降落期间疯狂滚动页面，它也能精准追踪进洞！
+        const dropTargetEl = document.getElementById(`event-${draggedEv.id}`);
+        if (dropTargetEl) {
+            const dropRect = dropTargetEl.getBoundingClientRect();
+            dropTargetX = dropRect.left + grabOffsetX;
+            dropTargetY = dropRect.top + grabOffsetY;
+        }
+
+        // 精调降落手感 (完美微回弹的参数)
+        let forceX = (dropTargetX - posX) * 0.35; 
+        let forceY = (dropTargetY - posY) * 0.35;
+        
+        velX = (velX + forceX) * 0.58; 
+        velY = (velY + forceY) * 0.58;
+        
+        posX += velX;
+        posY += velY;
+
+        targetRotY = 0; targetRotX = 0; targetRotZ = 0;
+        targetScale = 1.0;
+
+        let dist = Math.abs(dropTargetX - posX) + Math.abs(dropTargetY - posY);
+        let speed = Math.abs(velX) + Math.abs(velY);
+        
+        // 降落完成判断
+        if (dist < 0.5 && speed < 0.5) {
+          isDropping = false; 
+          ghost.style.opacity = '0'; 
+          placeholder.style.display = 'none'; 
+          
+          // 最后一次强刷，让一直在底下隐身的真实卡片瞬间显形 (因为 isDropping 变回 false 了)
+          renderEvents(); 
+          return requestAnimationFrame(physicsLoop);
+        }
+      }
+
+      rotX += (targetRotX - rotX) * 0.2;
+      rotY += (targetRotY - rotY) * 0.2;
+      rotZ += (targetRotZ - rotZ) * 0.2;
+      currentScale += (targetScale - currentScale) * 0.2;
+
+      ghost.style.transform = `
+        translate(${posX}px, ${posY}px)
+        translate(-${grabOffsetX}px, -${grabOffsetY}px)
+        perspective(1200px)
+        rotateX(${rotX}deg)
+        rotateY(${rotY}deg)
+        rotateZ(${rotZ}deg)
+        scale(${currentScale})
+      `;
+    }
+    requestAnimationFrame(physicsLoop);
+  }
+
+  renderEvents();
+  physicsLoop();
+</script>
+</body>
+</html>

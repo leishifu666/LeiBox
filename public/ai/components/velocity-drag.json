@@ -1,0 +1,157 @@
+{
+  "slug": "velocity-drag",
+  "name": {
+    "en": "Inertial Calendar Drag",
+    "zh": "日历惯性拖拽"
+  },
+  "description": {
+    "en": "Calendar events turn into a floating focus card that stretches and follows drag velocity.",
+    "zh": "日程卡片随拖拽速度拉伸、跟随，并在浮动状态中切换聚焦内容。"
+  },
+  "keywords": "动效 气动 对焦 拖拽 日历 日程 速度 惯性 形变 drag velocity focus calendar physics",
+  "docsPath": "/docs/animations/velocity-drag",
+  "detailPath": "/ai/components/velocity-drag.json",
+  "markdownPath": "/ai/components/velocity-drag.md",
+  "previewPath": "/assets/components/velocity-drag.png",
+  "discovery": {
+    "category": "layout",
+    "useCases": [
+      "日程卡片拖拽",
+      "日历交互反馈",
+      "calendar event drag"
+    ],
+    "searchTerms": [
+      "日历",
+      "日程",
+      "拖拽",
+      "惯性",
+      "calendar",
+      "schedule",
+      "drag",
+      "velocity"
+    ],
+    "visualTags": [
+      "elastic",
+      "cards"
+    ],
+    "interactions": [
+      "drag"
+    ],
+    "caveat": "拖拽视觉反馈；实际排期、碰撞与保存逻辑需接入项目。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/velocity-drag/react.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { VelocityFocusDrag } from \"./VelocityFocusDrag\";\n\nexport default function App() {\n  return <VelocityFocusDrag />;\n}",
+      "files": [
+        "VelocityFocusDrag.tsx",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/velocity-drag/vue.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport VelocityFocusDrag from \"./VelocityFocusDrag.vue\";\n</script>\n<template><VelocityFocusDrag /></template>",
+      "files": [
+        "VelocityFocusDrag.vue",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/velocity-drag/svelte.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport VelocityFocusDrag from \"./VelocityFocusDrag.svelte\";\n</script>\n<VelocityFocusDrag />",
+      "files": [
+        "VelocityFocusDrag.svelte",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/velocity-drag/solid.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { VelocityFocusDrag } from \"./VelocityFocusDrag.solid\";\n\nexport default function App() {\n  return <VelocityFocusDrag />;\n}",
+      "files": [
+        "VelocityFocusDrag.solid.tsx",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/velocity-drag/preact.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { VelocityFocusDrag } from \"./VelocityFocusDrag.preact\";\n\nexport default function App() {\n  return <VelocityFocusDrag />;\n}",
+      "files": [
+        "VelocityFocusDrag.preact.tsx",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/velocity-drag/vanilla.json",
+      "component": "VelocityFocusDrag",
+      "dependencies": [],
+      "usage": "import { mount } from \"./VelocityFocusDrag\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "VelocityFocusDrag.ts",
+        "VelocityFocusDragEngine.js",
+        "motion-runtime.ts",
+        "VelocityFocusDragEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag a calendar event to another day or time. Open the full preview for a larger calendar.",
+    "zh": "按住日程卡片，拖到其他日期或时间。可打开完整预览，在更大的日历中体验。"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "slug": "crumpled-paper",
+  "name": {
+    "en": "Crumpled Paper Unfold",
+    "zh": "揉皱纸张展开"
+  },
+  "description": {
+    "en": "Three crumpled paper meshes unfold into a handwritten letter, a blue mountain photograph, and a printed note as you hover.",
+    "zh": "三张纸团随悬停展开为手写信、蓝色山景照片和印刷便笺，纸面沿真实折叠网格连续变形。"
+  },
+  "keywords": "揉皱 纸团 纸张 展开 信件 照片 折痕 网格 悬停 crumpled paper unfold mesh letter photograph webgl",
+  "docsPath": "/docs/animations/crumpled-paper",
+  "detailPath": "/ai/components/crumpled-paper.json",
+  "markdownPath": "/ai/components/crumpled-paper.md",
+  "previewPath": "/assets/components/crumpled-paper.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "信件展示",
+      "照片便笺互动",
+      "paper letter photo reveal"
+    ],
+    "searchTerms": [
+      "纸张",
+      "揉皱",
+      "信件",
+      "照片",
+      "便笺",
+      "paper",
+      "letter",
+      "photo",
+      "unfold"
+    ],
+    "visualTags": [
+      "paper",
+      "tactile"
+    ],
+    "interactions": [
+      "hover"
+    ],
+    "caveat": "替换示例信件和照片，并为触摸设备检查交互路径。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/insporadesign/status/2113586239110828465/video/1",
+    "designAuthor": "Matt",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/crumpled-paper/react.json",
+      "component": "CrumpledPaper",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { CrumpledPaper } from \"./CrumpledPaper\";\n\nexport default function App() {\n  return <CrumpledPaper />;\n}",
+      "files": [
+        "CrumpledPaper.tsx",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/crumpled-paper/vue.json",
+      "component": "CrumpledPaper",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport CrumpledPaper from \"./CrumpledPaper.vue\";\n</script>\n<template><CrumpledPaper /></template>",
+      "files": [
+        "CrumpledPaper.vue",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/crumpled-paper/svelte.json",
+      "component": "CrumpledPaper",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport CrumpledPaper from \"./CrumpledPaper.svelte\";\n</script>\n<CrumpledPaper />",
+      "files": [
+        "CrumpledPaper.svelte",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/crumpled-paper/solid.json",
+      "component": "CrumpledPaper",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { CrumpledPaper } from \"./CrumpledPaper.solid\";\n\nexport default function App() {\n  return <CrumpledPaper />;\n}",
+      "files": [
+        "CrumpledPaper.solid.tsx",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/crumpled-paper/preact.json",
+      "component": "CrumpledPaper",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { CrumpledPaper } from \"./CrumpledPaper.preact\";\n\nexport default function App() {\n  return <CrumpledPaper />;\n}",
+      "files": [
+        "CrumpledPaper.preact.tsx",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/crumpled-paper/vanilla.json",
+      "component": "CrumpledPaper",
+      "dependencies": [],
+      "usage": "import { mount } from \"./CrumpledPaper\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "CrumpledPaper.ts",
+        "CrumpledPaperEngine.js",
+        "motion-runtime.ts",
+        "CrumpledPaperEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus a paper to unfold it, and move away to crumple it again. Tap on touch screens; use arrow keys, Space, or Escape with a keyboard.",
+    "zh": "悬停或聚焦纸团即可展开，移开后重新揉皱。触屏点击切换；键盘支持方向键、空格与 Escape。"
+  }
+}

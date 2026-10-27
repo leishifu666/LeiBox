@@ -1,0 +1,146 @@
+.page {
+  --ink: #0b1720;
+  --paper: #e8e9eb;
+  --soft: #56606a;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: clip;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-site-sans);
+}
+
+.page a, .page button { -webkit-tap-highlight-color: transparent; }
+.page a:focus-visible, .page button:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
+.header { position: relative; z-index: 3; display: flex; height: 104px; flex-shrink: 0; align-items: center; justify-content: space-between; padding: 0 48px; }
+.logoLink { display: flex; align-items: center; }
+.wordmark { width: 100px; height: auto; filter: invert(1); }
+.switcher { position: absolute; left: 50%; display: flex; gap: 3px; padding: 4px; border: 1px solid #0b17201a; border-radius: 99px; transform: translateX(-50%); }
+.switcher a { display: flex; min-height: 36px; align-items: center; gap: 9px; border-radius: 99px; padding: 0 17px; color: var(--soft); font-size: 12px; transition: color 160ms, background 160ms; white-space: nowrap; }
+.switcher a:hover { color: var(--ink); background: #0b172008; }
+.switcher a[aria-current] { color: var(--paper); background: var(--ink); }
+.optionNumber { font-family: var(--font-geist-mono), monospace; font-size: 10px; opacity: .7; }
+.headerNote { color: var(--soft); font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .11em; }
+.themeControls { display: flex; align-items: center; gap: 16px; }
+.themeControls :global([data-theme-toggle]) { width: 40px; height: 40px; border-color: var(--theme-border); color: var(--soft); }
+.themeControls :global([data-theme-toggle]):hover { color: var(--ink); }
+.footer { position: relative; z-index: 2; display: flex; min-height: 75px; flex-shrink: 0; align-items: center; justify-content: space-between; padding: 0 48px; color: var(--soft); font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .08em; }
+.footerCenter { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.footerIndex { display: flex; align-items: center; gap: 12px; }
+.footerIndex > span { opacity: .45; }
+.brandMain { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; padding: 50px 24px 80px; }
+.brandIntro { margin: 0 0 36px; font-size: clamp(14px, 1.5vw, 21px); font-weight: 400; letter-spacing: -.03em; }
+.brandComposition { display: flex; width: min(790px, 76vw); align-items: center; justify-content: center; }
+.solidFour { display: block; font-family: var(--font-geist-sans), Arial, sans-serif; font-size: clamp(130px, 34vw, 352px); font-weight: 600; line-height: .9; letter-spacing: -.075em; }
+.brandMark { display: block; width: 37%; height: auto; margin: 0 1.5% 0 2%; mix-blend-mode: multiply; }
+.brandActions { display: flex; flex-direction: column; align-items: center; gap: 22px; margin-top: 58px; }
+.homeButton { position: relative; display: flex; width: 190px; min-height: 54px; align-items: center; justify-content: center; gap: 32px; border: 1px solid var(--ink); border-radius: 4px; color: var(--paper); background: var(--ink); font-size: 13px; transition: background 160ms; }
+.homeButton:hover { background: #24343f; }
+.homeButton::before, .homeButton::after { position: absolute; width: 4px; height: 4px; content: ""; }
+.homeButton::before { bottom: 6px; left: 6px; border-bottom: 1px solid #e8e9eb99; border-left: 1px solid #e8e9eb99; }
+.homeButton::after { top: 6px; right: 6px; border-top: 1px solid #e8e9eb99; border-right: 1px solid #e8e9eb99; }
+.browseLink { padding: 4px; color: var(--soft); font-size: 12px; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: #56606a55; transition: color 160ms; }
+.browseLink:hover { color: var(--ink); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+.orbit {
+  height: 100dvh;
+  min-height: 0;
+  --ink: #181818;
+  --paper: #fafaf9;
+  --soft: #656560;
+  --home: #565651;
+  --theme-border: #18181826;
+  --wordmark-filter: invert(1);
+  color-scheme: light;
+}
+:global(.dark) .orbit {
+  --ink: #e8e6e1;
+  --paper: #090909;
+  --soft: #999894;
+  --home: #bdbbb6;
+  --theme-border: #ffffff26;
+  --wordmark-filter: none;
+  color-scheme: dark;
+}
+.orbit .wordmark { filter: var(--wordmark-filter); }
+.orbitMain { display: flex; min-height: 0; flex: 1; flex-direction: column; align-items: center; justify-content: center; padding: 10px 24px 26px; container-type: size; }
+.orbitComposition { position: relative; display: grid; width: min(1200px, 100%); height: min(630px, 100cqh); place-items: center; isolation: isolate; }
+.expressiveFour { position: absolute; z-index: -1; top: 50%; font-family: "Times New Roman", Georgia, serif; font-size: min(clamp(300px, 35vw, 510px), 76cqh); font-style: italic; font-weight: 400; line-height: .8; letter-spacing: -.1em; transform: translateY(-54%) scaleY(1.2); user-select: none; }
+.page[data-404-font="site"] .expressiveFour { font-family: var(--font-site-sans); font-style: normal; }
+.leftFour { left: 1%; }
+.rightFour { right: 5%; }
+/* Leave room for the cards beyond the ring itself, including while it rotates. */
+.orbitStage { --diameter: min(570px, 45vw, 86cqh); --radius: calc(var(--diameter) * .411); --card-width: min(146px, 10.2vw, calc(var(--diameter) * .256)); position: relative; width: var(--diameter); height: var(--diameter); }
+.orbitRing { position: absolute; inset: 0; will-change: transform; }
+.orbitPosition { position: absolute; top: 50%; left: 50%; width: var(--card-width); aspect-ratio: 1.3; transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(-1 * var(--radius))); }
+.componentCard { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border: 0; border-radius: 0; background: transparent; }
+.componentCard::after { position: absolute; z-index: 2; inset: 0; background: #00000010; content: ""; pointer-events: none; transition: background 180ms; }
+.componentCard[data-active="true"]::after { background: transparent; }
+.componentCard > div { border-radius: inherit; }
+.componentCard .video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: none !important; }
+.cardArrow { position: absolute; z-index: 3; top: 5px; right: 5px; display: grid; width: 21px; height: 21px; place-items: center; border-radius: 50%; color: #111; background: #ffffffe6; opacity: 0; transition: opacity 160ms; }
+.componentCard[data-active="true"] .cardArrow { opacity: 1; }
+.orbitCenter { position: absolute; top: 50%; left: 50%; width: 58%; text-align: center; transform: translate(-50%, -50%); }
+.eyebrow { color: var(--soft); font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .19em; }
+.orbitTitle { margin-top: 14px; font-size: clamp(14px, calc(var(--diameter) * .06), 31px); font-weight: 300; letter-spacing: -.055em; white-space: nowrap; }
+.orbitHome { display: inline-flex; min-height: 40px; align-items: center; gap: 6px; margin-top: 10px; padding: 0 5px; color: var(--home); font-size: 11px; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: color-mix(in srgb, var(--home) 40%, transparent); }
+.orbitHome:hover { color: var(--ink); }
+
+@media (min-width: 1600px) {
+  .orbitComposition { height: min(680px, 100cqh); }
+  .orbitStage { --diameter: min(620px, 86cqh); --card-width: min(154px, calc(var(--diameter) * .256)); }
+  .expressiveFour { font-size: min(550px, 76cqh); }
+}
+@media (max-width: 900px) {
+  .header { height: 88px; padding: 0 28px; }
+  .headerNote { display: none; }
+  .switcher { position: static; transform: none; }
+  .footer { min-height: 64px; padding: 0 28px; }
+  .footerCenter { font-size: 7px; }
+  .orbitComposition { height: min(490px, 100cqh); }
+  .orbitStage { --diameter: min(440px, 86cqh); --card-width: min(108px, calc(var(--diameter) * .256)); }
+  .expressiveFour { font-size: min(340px, 76cqh); }
+  .leftFour { left: -2%; }
+  .rightFour { right: 4%; }
+}
+@media (max-width: 600px) {
+  .header { height: 88px; padding: 0 20px; }
+  .wordmark { width: 78px; }
+  .switcher { gap: 1px; padding: 3px; }
+  .switcher a { min-height: 34px; gap: 5px; padding: 0 11px; font-size: 10px; }
+  .optionNumber { font-size: 8px; }
+  .brandMain { padding: 25px 20px 60px; }
+  .brandIntro { max-width: 250px; margin-bottom: 30px; font-size: 13px; line-height: 1.8; text-align: center; }
+  .brandComposition { width: min(100%, 430px); }
+  .solidFour { font-size: 37vw; }
+  .brandMark { width: 35%; margin: 0 1.5%; }
+  .brandActions { gap: 18px; margin-top: 40px; }
+  .homeButton { width: 164px; min-height: 50px; font-size: 12px; }
+  .footer { min-height: 62px; padding: 0 20px; font-size: 8px; }
+  .footerCenter { display: none; }
+  .footerIndex { gap: 9px; }
+  .orbitMain { padding: 12px 12px 30px; }
+  .orbitComposition { height: min(470px, 100cqh); }
+  .orbitStage { --diameter: min(340px, 91vw, 86cqh); --card-width: min(clamp(67px, 20.3vw, 90px), calc(var(--diameter) * .256)); }
+  .orbitPosition { aspect-ratio: 1.26; }
+  .expressiveFour { font-size: min(60vw, 76cqh); opacity: .65; }
+  .leftFour { left: -5%; }
+  .rightFour { right: -2%; }
+  .orbitCenter { width: 58%; }
+  .eyebrow { font-size: 7px; }
+  .orbitTitle { margin-top: 11px; }
+  .orbitHome { margin-top: 4px; font-size: 10px; }
+  .cardArrow { width: 16px; height: 16px; }
+}
+@media (max-height: 500px) {
+  .orbit .header { height: 64px; }
+  .orbitMain { padding: 4px 20px 12px; }
+  .eyebrow { font-size: 7px; }
+  .orbitTitle { margin-top: 8px; }
+  .orbitHome { min-height: 32px; margin-top: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page *, .page *::before, .page *::after { transition: none !important; }
+}

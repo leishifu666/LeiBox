@@ -1,249 +1,76 @@
-import { T as TranslatedText } from "@/components/common/language-provider";
-
 import type { Metadata } from "next";
-
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { T } from "@/components/common/language-provider";
 import { CodeBlock } from "@/components/docs/code-block";
 import { CopyButton } from "@/components/docs/copy-button";
 import { highlight } from "@/components/docs/highlight";
-import { SnippetTabs, type SnippetTab } from "@/components/docs/snippet-tabs";
 import { Footer } from "@/components/landing/footer";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { LEIBOX_SKILL_INSTALL_COMMAND } from "@/lib/leibox-skill";
 
 export const metadata: Metadata = {
-  title: "MCP Server",
-  description:
-    "Use the Canvas UI registry with the shadcn MCP server so your AI assistant can browse and install components.",
+  title: "AI integration",
+  description: "Install LeiBox Skill, search the live collection and pull complete component source into your project.",
   alternates: { canonical: "/docs/mcp" },
 };
+const EXAMPLE = "用 LeiBox 找一个玻璃文件夹组件，使用我项目里的 React，把完整源码接入当前页面。";
+const COMMANDS = `node <installed-skill>/scripts/leibox.mjs search "玻璃 文件夹"
+node <installed-skill>/scripts/leibox.mjs show glass-folder --framework react
+node <installed-skill>/scripts/leibox.mjs pull glass-folder --framework react --out src/components/leibox/glass-folder`;
+const MARKDOWN = `# LeiBox Skill
 
-const REGISTRY_CONFIG = `{
-  "registries": {
-    "@canvas-ui": "https://canvasui.dev/r/{name}.json"
-  }
-}`;
+${LEIBOX_SKILL_INSTALL_COMMAND}
 
-const CODEX_CONFIG = `[mcp_servers.shadcn]
-command = "npx"
-args = ["shadcn@latest", "mcp"]`;
+Install the Skill in the AI client you use. Then ask it to search the live LeiBox collection, choose your project's framework and pull the complete source into your project. No LeiBox repository checkout, API key or MCP server is required.
 
-const ADD_COMMAND = "npx shadcn@latest add @canvas-ui/liquid-react";
+Example: ${EXAMPLE}
 
-const initCommand = (client: string) =>
-  `npx shadcn@latest mcp init --client ${client}`;
+Current collection: ${COMPONENT_CATALOG.length} components. The Skill fetches /ai/catalog.json for every query, so new published entries are available without reinstalling the Skill.
 
-const PROMPTS = [
-  "Show me the components in the @canvas-ui registry",
-  "Add liquid from the @canvas-ui registry to my hero section",
-];
+${COMMANDS}
 
-const CLIENTS = [
-  { id: "claude", label: "Claude Code", source: initCommand("claude") },
-  { id: "cursor", label: "Cursor", source: initCommand("cursor") },
-  { id: "vscode", label: "VS Code", source: initCommand("vscode") },
-  {
-    id: "codex",
-    label: "Codex",
-    source: CODEX_CONFIG,
-    fileName: "~/.codex/config.toml",
-  },
-  { id: "opencode", label: "OpenCode", source: initCommand("opencode") },
-] as const;
+Project source is fetched from LeiBox; Canvas UI reference source is fetched directly from the original provider. Keep source notices and design references. Pull does not overwrite different existing files or run downloaded code.`;
 
-const PAGE_MARKDOWN = `# MCP server
-
-Use the Canvas UI registry with the shadcn MCP server so your AI assistant can browse and install components for you.
-
-The shadcn MCP server works with any shadcn-compatible registry, including this one. Point it at the Canvas UI registry and your assistant can list components, read their metadata, and add them straight to your project.
-
-## Configure the registry
-
-Canvas UI is a trusted shadcn registry, so the @canvas-ui namespace works out of the box, with or without MCP:
-
-\`\`\`sh
-${ADD_COMMAND}
-\`\`\`
-
-WebGPU registry items use the same name with -webgpu after the framework, for example @canvas-ui/liquid-react-webgpu.
-
-Optionally, you can pin the registry in your components.json file:
-
-\`\`\`json
-${REGISTRY_CONFIG}
-\`\`\`
-
-## Set up your client
-
-### Claude Code
-
-\`\`\`sh
-${initCommand("claude")}
-\`\`\`
-
-Restart Claude Code. Use the /mcp command to debug the server.
-
-### Cursor
-
-\`\`\`sh
-${initCommand("cursor")}
-\`\`\`
-
-Open Cursor Settings and enable the MCP server for shadcn.
-
-### VS Code
-
-\`\`\`sh
-${initCommand("vscode")}
-\`\`\`
-
-Open .vscode/mcp.json and select Start next to the shadcn server, then prompt through GitHub Copilot.
-
-### Codex
-
-Add the following to ~/.codex/config.toml, then restart Codex:
-
-\`\`\`toml
-${CODEX_CONFIG}
-\`\`\`
-
-### OpenCode
-
-\`\`\`sh
-${initCommand("opencode")}
-\`\`\`
-
-Restart OpenCode.
-
-## Prompts to try
-
-${PROMPTS.map((prompt) => `- ${prompt}`).join("\n")}
-`;
-
-export default async function McpPage() {
-  const [configHtml, codexHtml] = await Promise.all([
-    highlight(REGISTRY_CONFIG, "json"),
-    highlight(CODEX_CONFIG, "toml"),
-  ]);
-
-  const clientTabs: SnippetTab[] = CLIENTS.map((client) => ({
-    id: client.id,
-    label: client.label,
-    fileName: "fileName" in client ? client.fileName : undefined,
-    source: client.source,
-    html: client.id === "codex" ? codexHtml : undefined,
-  }));
-
-  const prompts = (
-    <ul>
-      {PROMPTS.map((prompt) => (
-        <li key={prompt}>{prompt}</li>
-      ))}
-    </ul>
-  );
-
-  const footers = {
-    claude: (
-      <>
-        <p><TranslatedText>Restart Claude Code and try the following prompts:</TranslatedText></p>
-        {prompts}
-        <p><TranslatedText>
-          You can use the </TranslatedText><code>/mcp</code><TranslatedText> command in Claude Code to debug the
-          MCP server.
-        </TranslatedText></p>
-      </>
-    ),
-    cursor: (
-      <>
-        <p><TranslatedText>
-          Open Cursor Settings and enable the MCP server for shadcn, then try
-          the following prompts:
-        </TranslatedText></p>
-        {prompts}
-      </>
-    ),
-    vscode: (
-      <>
-        <p><TranslatedText>
-          Open </TranslatedText><code>.vscode/mcp.json</code><TranslatedText> and select Start next to the shadcn
-          server, then try the following prompts with GitHub Copilot:
-        </TranslatedText></p>
-        {prompts}
-      </>
-    ),
-    codex: (
-      <>
-        <p><TranslatedText>Restart Codex and try the following prompts:</TranslatedText></p>
-        {prompts}
-      </>
-    ),
-    opencode: (
-      <>
-        <p><TranslatedText>Restart OpenCode and try the following prompts:</TranslatedText></p>
-        {prompts}
-      </>
-    ),
-  };
-
+export default async function AiIntegrationPage() {
+  const skillSource = await readFile(path.join(process.cwd(), "integrations/skills/leibox/SKILL.md"), "utf8");
+  const skillHtml = await highlight(skillSource, "markdown");
   return (
     <article className="page-enter mx-auto w-full max-w-3xl">
       <div className="typeset typeset-docs">
         <div className="flex items-start justify-between gap-4">
-          <h1><TranslatedText>MCP server</TranslatedText></h1>
-          <CopyButton
-            text={PAGE_MARKDOWN}
-            label="Copy as Markdown"
-            className="mt-1 shrink-0 border border-border/70 px-3"
-          />
+          <h1><T>Use the LeiBox Skill</T></h1>
+          <CopyButton text={MARKDOWN} label="Copy as Markdown" className="mt-1 shrink-0 border border-border/70 px-3" />
         </div>
-        <p className="max-w-xl text-muted-foreground"><TranslatedText>
-          Use the Canvas UI registry with the shadcn MCP server, and let your AI
-          assistant browse and install components for you.
-        </TranslatedText></p>
-        <p><TranslatedText>
-          The shadcn MCP server works with any shadcn-compatible registry,
-          including this one. Point it at the Canvas UI registry and your
-          assistant can list components, read their metadata, and add them
-          straight to your project.
-        </TranslatedText></p>
-
-        <h2><TranslatedText>Configure the registry</TranslatedText></h2>
-        <p><TranslatedText>
-          Canvas UI is a trusted shadcn registry, so the</TranslatedText>{" "}
-          <code>@canvas-ui</code><TranslatedText> namespace works out of the box, with or
-          without MCP:
-        </TranslatedText></p>
-        <div className="my-6">
-          <CodeBlock source={ADD_COMMAND} />
-        </div>
-        <p><TranslatedText>
-          WebGPU registry items use the same name with </TranslatedText><code>-webgpu</code>{" "}<TranslatedText>
-          after the framework, for example</TranslatedText>{" "}
-          <code>@canvas-ui/liquid-react-webgpu</code>.
-        </p>
-        <p><TranslatedText>
-          Optionally, you can pin the registry in your</TranslatedText>{" "}
-          <code>components.json</code><TranslatedText> file:
-        </TranslatedText></p>
-        <div className="my-6">
-          <CodeBlock
-            html={configHtml}
-            source={REGISTRY_CONFIG}
-            fileName="components.json"
-          />
-        </div>
-
-        <h2><TranslatedText>Set up your client</TranslatedText></h2>
-        <p><TranslatedText>Run the setup for your client, straight from your project:</TranslatedText></p>
-        <div className="mt-6">
-          <SnippetTabs
-            storageKey="mcp-client"
-            tabs={clientTabs}
-            footers={footers}
-          />
-        </div>
+        <p className="max-w-xl text-muted-foreground"><T>Install once. Let your AI search the collection and pull complete component source into your project.</T></p>
+        <h2 id="install-skill"><T>Install the LeiBox Skill</T></h2>
+        <p><T>Run this command in your project and choose the AI client you use. No LeiBox repository checkout, API key or MCP server is required.</T></p>
+        <div className="my-6"><CodeBlock source={LEIBOX_SKILL_INSTALL_COMMAND} fileName="Terminal" /></div>
+        <h2><T>Ask your AI</T></h2>
+        <p><T>After installation, describe the component you need and your AI will search, choose the matching framework and download the actual source files.</T></p>
+        <blockquote><T>Use LeiBox to find a glass folder component and integrate its React source into my current page.</T></blockquote>
+        <p><T>The Skill reads the live catalog every time. Newly published components become searchable without reinstalling it.</T></p>
+        <h2><T>The complete collection</T></h2>
+        <p><strong>{COMPONENT_CATALOG.length}</strong> <T>components are currently searchable, with six framework versions where offered.</T></p>
+        <ul>
+          <li><a href="/ai/catalog.json"><code>/ai/catalog.json</code></a> — <T>Searchable component metadata</T></li>
+          <li><a href="/ai/components/glass-folder.json"><code>/ai/components/glass-folder.json</code></a> — <T>Example component detail as JSON</T></li>
+          <li><a href="/ai/packages/glass-folder/react.json"><code>/ai/packages/glass-folder/react.json</code></a> — <T>Complete React source, dependencies and usage</T></li>
+          <li><a href="/llms.txt"><code>/llms.txt</code></a> — <T>Index for AI readers</T></li>
+        </ul>
+        <h2><T>Search and download with the installed helper</T></h2>
+        <p><T>The Skill includes a standalone Node.js helper. Resolve its path from the installed Skill folder and run it in your target project.</T></p>
+        <div className="my-6"><CodeBlock source={COMMANDS} fileName="LeiBox Skill" /></div>
+        <p><T>Pull downloads the selected framework&apos;s complete file set and checks its content hashes. It preserves different existing files and does not execute code or install dependencies.</T></p>
+        <h2><T>Source and distribution</T></h2>
+        <p><T>LeiBox framework packages are downloaded from this website. Canvas UI reference entries are downloaded directly from their original provider. Keep the source notices and each component&apos;s design-reference attribution.</T></p>
+        <details className="my-6 rounded-xl border border-border/60 p-4">
+          <summary className="cursor-pointer text-sm font-medium"><T>Read Skill instructions</T></summary>
+          <div className="mt-4"><CodeBlock html={skillHtml} source={skillSource} fileName="SKILL.md" /></div>
+        </details>
+        <p><a href="/ai/SKILL.md" download="SKILL.md"><T>Download SKILL.md</T></a></p>
       </div>
-
-      <div className="mt-24">
-        <Footer variant="docs" />
-      </div>
+      <div className="mt-24"><Footer variant="docs" /></div>
     </article>
   );
 }

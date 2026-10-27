@@ -1,0 +1,12 @@
+{
+  "--theme-accent": "#339CFF",
+  "--theme-accent-hover": "#2563EB",
+  "--theme-bg": "#FFFFFF",
+  "--theme-sidebar": "#F9F8F6",
+  "--theme-elevated": "#FFFFFF",
+  "--theme-fg": "#1F2937",
+  "--theme-text-secondary": "#707784",
+  "--theme-border": "#E6E8EC",
+  "--theme-hover": "#F4F4F6",
+  "--theme-selection": "#DCEBFE"
+}

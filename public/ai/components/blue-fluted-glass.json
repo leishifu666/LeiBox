@@ -1,0 +1,159 @@
+{
+  "slug": "blue-fluted-glass",
+  "name": {
+    "en": "Blue Fluted Glass Background",
+    "zh": "蓝色棱纹流动背景"
+  },
+  "description": {
+    "en": "Slow blue fluid folds refract through vertical frosted-glass ribs behind a fixed white LeiBox logo.",
+    "zh": "蓝色流体缓慢折叠流动，经竖向毛玻璃棱纹折射，中央白色 LeiBox 标志保持固定。"
+  },
+  "keywords": "蓝色 棱纹 流动 背景 毛玻璃 竖纹 流体 渐变 品牌 标志 blue fluted ribbed frosted glass fluid gradient background logo LeiBox",
+  "docsPath": "/docs/animations/blue-fluted-glass",
+  "detailPath": "/ai/components/blue-fluted-glass.json",
+  "markdownPath": "/ai/components/blue-fluted-glass.md",
+  "previewPath": "/assets/components/blue-fluted-glass.png",
+  "discovery": {
+    "category": "background",
+    "useCases": [
+      "品牌首屏背景",
+      "蓝色玻璃场景",
+      "blue glass hero background"
+    ],
+    "searchTerms": [
+      "背景",
+      "首屏",
+      "蓝色",
+      "棱纹",
+      "毛玻璃",
+      "background",
+      "hero",
+      "blue",
+      "fluted"
+    ],
+    "visualTags": [
+      "blue",
+      "glass",
+      "liquid"
+    ],
+    "interactions": [
+      "autoplay"
+    ],
+    "caveat": "替换演示 Logo；正文需要在流动背景上保持可读。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent WebGL reconstruction from observed video frames; existing LeiBox vector artwork embedded locally.",
+    "designReference": "https://x.com/sashabirukoff/status/2113002960892649916/video/1",
+    "designAuthor": "sasha birukoff",
+    "license": "Original design/source license not supplied or verified; no original code or video is included in the component package."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/blue-fluted-glass/react.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { BlueFlutedGlass } from \"./BlueFlutedGlass\";\n\nexport default function App() {\n  return <BlueFlutedGlass />;\n}",
+      "files": [
+        "BlueFlutedGlass.tsx",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/blue-fluted-glass/vue.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BlueFlutedGlass from \"./BlueFlutedGlass.vue\";\n</script>\n<template><BlueFlutedGlass /></template>",
+      "files": [
+        "BlueFlutedGlass.vue",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/blue-fluted-glass/svelte.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BlueFlutedGlass from \"./BlueFlutedGlass.svelte\";\n</script>\n<BlueFlutedGlass />",
+      "files": [
+        "BlueFlutedGlass.svelte",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/blue-fluted-glass/solid.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { BlueFlutedGlass } from \"./BlueFlutedGlass.solid\";\n\nexport default function App() {\n  return <BlueFlutedGlass />;\n}",
+      "files": [
+        "BlueFlutedGlass.solid.tsx",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/blue-fluted-glass/preact.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { BlueFlutedGlass } from \"./BlueFlutedGlass.preact\";\n\nexport default function App() {\n  return <BlueFlutedGlass />;\n}",
+      "files": [
+        "BlueFlutedGlass.preact.tsx",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/blue-fluted-glass/vanilla.json",
+      "component": "BlueFlutedGlass",
+      "dependencies": [],
+      "usage": "import { mount } from \"./BlueFlutedGlass\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BlueFlutedGlass.ts",
+        "BlueFlutedGlassEngine.js",
+        "motion-runtime.ts",
+        "BlueFlutedGlassEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Watch the blue folds flow behind the fixed LeiBox logo. Click, tap, or press Space or Enter to pause and resume. Reduced motion shows a still frame.",
+    "zh": "观察 LeiBox 标志背后的蓝色流体与棱纹变化。点击、轻触，或按空格与回车暂停和继续；减少动态效果时显示静帧。"
+  }
+}

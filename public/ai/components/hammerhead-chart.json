@@ -1,0 +1,158 @@
+{
+  "slug": "hammerhead-chart",
+  "name": {
+    "en": "ASCII Shark Price Paths",
+    "zh": "字符鲨鱼追踪价格路径"
+  },
+  "description": {
+    "en": "An ASCII hammerhead swims along three forecast price paths and tags each with its odds, volatility and dealer gamma; the pointer steers it to the nearest path, or lets it swim freely over the candle history.",
+    "zh": "字符锤头鲨沿三条预测价格路径游动，依次标记概率、波动率与 dealer gamma；指针在预测区时鲨鱼追向最近的路径，移到左侧K线区时鲨鱼跟着指针自由游动。"
+  },
+  "keywords": "鲨鱼 锤头鲨 字符 ASCII 价格 路径 预测 K线 概率 金融 图表 终端 hammerhead shark price paths forecast candles chart terminal",
+  "docsPath": "/docs/animations/hammerhead-chart",
+  "detailPath": "/ai/components/hammerhead-chart.json",
+  "markdownPath": "/ai/components/hammerhead-chart.md",
+  "previewPath": "/assets/components/hammerhead-chart.png",
+  "discovery": {
+    "category": "data",
+    "useCases": [
+      "创意图表叙事",
+      "价格路径演示",
+      "price path visualization"
+    ],
+    "searchTerms": [
+      "图表",
+      "价格",
+      "路径",
+      "鲨鱼",
+      "chart",
+      "price",
+      "shark",
+      "forecast"
+    ],
+    "visualTags": [
+      "ascii",
+      "chart"
+    ],
+    "interactions": [
+      "pointer",
+      "autoplay"
+    ],
+    "caveat": "价格路径是界面演示，使用前确认数据来源与业务含义。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/stackedlol/status/2113757384656974179/video/1",
+    "designAuthor": "stacked",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/hammerhead-chart/react.json",
+      "component": "HammerheadChart",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { HammerheadChart } from \"./HammerheadChart\";\n\nexport default function App() {\n  return <HammerheadChart />;\n}",
+      "files": [
+        "HammerheadChart.tsx",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/hammerhead-chart/vue.json",
+      "component": "HammerheadChart",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport HammerheadChart from \"./HammerheadChart.vue\";\n</script>\n<template><HammerheadChart /></template>",
+      "files": [
+        "HammerheadChart.vue",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/hammerhead-chart/svelte.json",
+      "component": "HammerheadChart",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport HammerheadChart from \"./HammerheadChart.svelte\";\n</script>\n<HammerheadChart />",
+      "files": [
+        "HammerheadChart.svelte",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/hammerhead-chart/solid.json",
+      "component": "HammerheadChart",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { HammerheadChart } from \"./HammerheadChart.solid\";\n\nexport default function App() {\n  return <HammerheadChart />;\n}",
+      "files": [
+        "HammerheadChart.solid.tsx",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/hammerhead-chart/preact.json",
+      "component": "HammerheadChart",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { HammerheadChart } from \"./HammerheadChart.preact\";\n\nexport default function App() {\n  return <HammerheadChart />;\n}",
+      "files": [
+        "HammerheadChart.preact.tsx",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/hammerhead-chart/vanilla.json",
+      "component": "HammerheadChart",
+      "dependencies": [],
+      "usage": "import { mount } from \"./HammerheadChart\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "HammerheadChart.ts",
+        "HammerheadChartEngine.js",
+        "motion-runtime.ts",
+        "HammerheadChartEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Watch the shark tag each path in turn. Move the pointer over the forecast cone, hover or click a label, or use the arrow keys to choose a path. Prices are local demonstration data.",
+    "zh": "鲨鱼会依次标记每条路径。在预测锥区移动指针，悬停或点击右侧标签，或用方向键选择路径。价格为本地演示数据。"
+  }
+}

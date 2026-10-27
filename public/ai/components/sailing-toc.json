@@ -1,0 +1,161 @@
+{
+  "slug": "sailing-toc",
+  "name": {
+    "en": "Sailing Scroll Contents",
+    "zh": "帆船滚动目录"
+  },
+  "description": {
+    "en": "A sailing ship follows the current section along a bending dashed route, with scroll tracking and smooth contents navigation.",
+    "zh": "帆船随当前章节沿弯曲虚线移动，支持滚动跟随与点击目录平滑跳转。"
+  },
+  "keywords": "帆船 滚动 目录 导航 航线 虚线 弹簧 船 阅读 sailing ship scroll contents navigation toc spring",
+  "docsPath": "/docs/animations/sailing-toc",
+  "detailPath": "/ai/components/sailing-toc.json",
+  "markdownPath": "/ai/components/sailing-toc.md",
+  "previewPath": "/assets/components/sailing-toc.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "长文章节目录",
+      "文档阅读导航",
+      "article table of contents"
+    ],
+    "searchTerms": [
+      "目录",
+      "章节",
+      "长文",
+      "阅读",
+      "导航",
+      "文章",
+      "文档",
+      "toc",
+      "article",
+      "documentation",
+      "navigation"
+    ],
+    "visualTags": [
+      "nautical",
+      "minimal"
+    ],
+    "interactions": [
+      "scroll",
+      "click"
+    ],
+    "caveat": "章节 ID 与页面标题保持一致；帆船意象需符合页面风格。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/emirayaz/status/2113414926911881647/video/1",
+    "designAuthor": "Emir Ayaz",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/sailing-toc/react.json",
+      "component": "SailingToc",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { SailingToc } from \"./SailingToc\";\n\nexport default function App() {\n  return <SailingToc />;\n}",
+      "files": [
+        "SailingToc.tsx",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/sailing-toc/vue.json",
+      "component": "SailingToc",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport SailingToc from \"./SailingToc.vue\";\n</script>\n<template><SailingToc /></template>",
+      "files": [
+        "SailingToc.vue",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/sailing-toc/svelte.json",
+      "component": "SailingToc",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport SailingToc from \"./SailingToc.svelte\";\n</script>\n<SailingToc />",
+      "files": [
+        "SailingToc.svelte",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/sailing-toc/solid.json",
+      "component": "SailingToc",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { SailingToc } from \"./SailingToc.solid\";\n\nexport default function App() {\n  return <SailingToc />;\n}",
+      "files": [
+        "SailingToc.solid.tsx",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/sailing-toc/preact.json",
+      "component": "SailingToc",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { SailingToc } from \"./SailingToc.preact\";\n\nexport default function App() {\n  return <SailingToc />;\n}",
+      "files": [
+        "SailingToc.preact.tsx",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/sailing-toc/vanilla.json",
+      "component": "SailingToc",
+      "dependencies": [],
+      "usage": "import { mount } from \"./SailingToc\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "SailingToc.ts",
+        "SailingTocEngine.js",
+        "motion-runtime.ts",
+        "SailingTocEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Scroll the article or choose a contents entry. The ship follows the active section and leans as it changes direction. The article uses independent demonstration copy.",
+    "zh": "滚动正文或点击目录，观察帆船跟随章节、转向与摇摆。正文为独立编写的阅读演示文案。"
+  }
+}

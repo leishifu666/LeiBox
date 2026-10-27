@@ -1,0 +1,292 @@
+{
+  "slug": "glass",
+  "name": {
+    "en": "Glass",
+    "zh": "玻璃透镜"
+  },
+  "description": {
+    "en": "A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.",
+    "zh": "玻璃透镜跟随光标，折射实时 HTML，并像水晶球一样放大目标。"
+  },
+  "docsPath": "/docs/components/glass",
+  "detailPath": "/ai/components/glass.json",
+  "markdownPath": "/ai/components/glass.md",
+  "previewPath": "/assets/videos/glass.webm",
+  "discovery": {
+    "category": "cursor",
+    "useCases": [
+      "鼠标放大镜",
+      "首屏玻璃透镜",
+      "magnifying cursor"
+    ],
+    "searchTerms": [
+      "玻璃",
+      "透镜",
+      "放大镜",
+      "折射",
+      "鼠标",
+      "glass",
+      "lens",
+      "magnifier"
+    ],
+    "visualTags": [
+      "glass",
+      "refraction"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "涉及实时 HTML 捕获；玻璃文件管理卡片应选择 glass-folder。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "source": {
+    "kind": "upstream-reference",
+    "author": "David Haz",
+    "website": "https://canvasui.dev/docs/components/glass",
+    "repository": "https://github.com/DavidHDev/canvas-ui",
+    "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+    "license": "MIT + Commons Clause",
+    "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "registryNamespace": "@canvas-ui",
+    "notice": {
+      "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+      "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+    }
+  },
+  "apiReference": [
+    {
+      "name": "shape",
+      "type": "\"circle\" | \"square\" | \"rectangle\"",
+      "defaultValue": "\"circle\"",
+      "description": {
+        "en": "Lens shape: \"circle\", \"square\", or \"rectangle\".",
+        "zh": "镜片形状：\"circle\"、\"square\" 或 \"rectangle\"。"
+      }
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "defaultValue": "120",
+      "description": {
+        "en": "Lens size (radius, or half height for rectangles) in CSS pixels.",
+        "zh": "镜片尺寸，单位为 CSS 像素；圆形为半径，矩形为半高。"
+      }
+    },
+    {
+      "name": "aspect",
+      "type": "number",
+      "defaultValue": "1.7",
+      "description": {
+        "en": "Width to height ratio of the rectangle shape (1 to 3).",
+        "zh": "矩形形状的宽高比（1 至 3）。"
+      }
+    },
+    {
+      "name": "corner",
+      "type": "number",
+      "defaultValue": "32",
+      "description": {
+        "en": "Corner radius for square and rectangle shapes in CSS pixels.",
+        "zh": "正方形及矩形的圆角半径，单位为 CSS 像素。"
+      }
+    },
+    {
+      "name": "ior",
+      "type": "number",
+      "defaultValue": "1.5",
+      "description": {
+        "en": "Index of refraction of the glass (1 to 2). Higher bends light more strongly at the rim.",
+        "zh": "玻璃折射率（1 至 2），值越高边缘对光线的弯折越强。"
+      }
+    },
+    {
+      "name": "edge",
+      "type": "number",
+      "defaultValue": "0.7",
+      "description": {
+        "en": "Fraction of the lens that stays optically flat before the rim starts bending (0 to 1).",
+        "zh": "镜片边缘开始弯折前保持光学平坦的比例（0 至 1）。"
+      }
+    },
+    {
+      "name": "bevel",
+      "type": "number",
+      "defaultValue": "4",
+      "description": {
+        "en": "How sharply the rim curves away (1 to 10).",
+        "zh": "镜片边缘弯曲的锐度（1 至 10）。"
+      }
+    },
+    {
+      "name": "depth",
+      "type": "number",
+      "defaultValue": "250",
+      "description": {
+        "en": "Optical depth in CSS pixels: how far the glass floats above the page, which scales the refraction displacement.",
+        "zh": "光学深度，单位为 CSS 像素：玻璃悬浮于页面上方的距离，决定折射位移的大小。"
+      }
+    },
+    {
+      "name": "aberration",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Chromatic aberration strength at the rim (0 to 3). 0 disables the spectral split.",
+        "zh": "边缘色差强度（0 至 3），0 关闭光谱分离。"
+      }
+    },
+    {
+      "name": "blur",
+      "type": "number",
+      "defaultValue": "0",
+      "description": {
+        "en": "Frosted blur of the glass face (0 to 4). 0 keeps the glass optically clear.",
+        "zh": "玻璃表面的磨砂模糊程度（0 至 4），0 保持光学清晰。"
+      }
+    },
+    {
+      "name": "reflection",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Strength of the fresnel reflection on the rim (0 to 2). 0 disables it.",
+        "zh": "边缘菲涅耳反射的强度（0 至 2），0 关闭。"
+      }
+    },
+    {
+      "name": "shine",
+      "type": "number",
+      "defaultValue": "0.01",
+      "description": {
+        "en": "Specular rim highlight (0 to 2) that keeps the lens visible over plain backgrounds. 0 disables it.",
+        "zh": "镜面边缘高光（0 至 2），使镜片在纯色背景上仍可见；0 关闭。"
+      }
+    },
+    {
+      "name": "zoom",
+      "type": "number",
+      "defaultValue": "1.5",
+      "description": {
+        "en": "Magnification while hovering a target element (1 to 3), like a crystal ball.",
+        "zh": "悬停目标元素时的放大倍数（1 至 3），类似水晶球。"
+      }
+    },
+    {
+      "name": "targets",
+      "type": "string",
+      "defaultValue": "\"[data-glass-target]\"",
+      "description": {
+        "en": "CSS selector for the elements that trigger the crystal ball zoom on hover.",
+        "zh": "触发悬停水晶球放大的元素 CSS 选择器。"
+      }
+    },
+    {
+      "name": "follow",
+      "type": "number",
+      "defaultValue": "0.2",
+      "description": {
+        "en": "How quickly the lens follows the cursor (0 to 1). 1 snaps to it.",
+        "zh": "镜片跟随光标的速度（0 至 1），1 表示紧贴。"
+      }
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": {
+        "en": "Classes applied to the wrapper element.",
+        "zh": "应用到包装元素的 CSS 类。"
+      }
+    }
+  ],
+  "dependencies": {
+    "webgl": {
+      "runtime": [],
+      "dev": []
+    },
+    "webgpu": {
+      "runtime": [
+        "vgpu"
+      ],
+      "dev": [
+        "@webgpu/types"
+      ]
+    },
+    "frameworkNote": "Solid uses solid-js; Preact uses preact. Other framework dependencies follow the target project."
+  },
+  "install": {
+    "provider": "upstream",
+    "registryUrls": {
+      "react": {
+        "webgl": "https://canvasui.dev/r/glass-react.json",
+        "webgpu": "https://canvasui.dev/r/glass-react-webgpu.json"
+      },
+      "vue": {
+        "webgl": "https://canvasui.dev/r/glass-vue.json",
+        "webgpu": "https://canvasui.dev/r/glass-vue-webgpu.json"
+      },
+      "svelte": {
+        "webgl": "https://canvasui.dev/r/glass-svelte.json",
+        "webgpu": "https://canvasui.dev/r/glass-svelte-webgpu.json"
+      },
+      "solid": {
+        "webgl": "https://canvasui.dev/r/glass-solid.json",
+        "webgpu": "https://canvasui.dev/r/glass-solid-webgpu.json"
+      },
+      "preact": {
+        "webgl": "https://canvasui.dev/r/glass-preact.json",
+        "webgpu": "https://canvasui.dev/r/glass-preact-webgpu.json"
+      },
+      "vanilla": {
+        "webgl": "https://canvasui.dev/r/glass-vanilla.json",
+        "webgpu": "https://canvasui.dev/r/glass-vanilla-webgpu.json"
+      }
+    },
+    "commands": {
+      "react": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-react",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-react-webgpu"
+      },
+      "vue": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-vue",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-vue-webgpu"
+      },
+      "svelte": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-svelte",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-svelte-webgpu"
+      },
+      "solid": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-solid",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-solid-webgpu"
+      },
+      "preact": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-preact",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-preact-webgpu"
+      },
+      "vanilla": {
+        "webgl": "npx shadcn@latest add @canvas-ui/glass-vanilla",
+        "webgpu": "npx shadcn@latest add @canvas-ui/glass-vanilla-webgpu"
+      }
+    },
+    "behavior": "Commands are metadata only. This catalog and CLI never execute installation."
+  },
+  "browserNotes": [
+    "WebGPU builds need a browser with WebGPU; verify the current browser support before choosing a renderer.",
+    "HTML-in-Canvas is experimental. Check the component's current upstream browser/fallback documentation. Do not assume DOM capture works in every browser."
+  ]
+}

@@ -1,0 +1,159 @@
+/* Independent reconstruction from measured frames; the original source was not supplied. */
+(() => {
+  const scene=document.querySelector('.er-scene');
+  const panel=scene.querySelector('.er-panel');
+  const handle=scene.querySelector('.er-handle');
+  const ink=scene.querySelector('.er-ink');
+  const outline=scene.querySelector('.er-outline');
+  const status=scene.querySelector('.er-status');
+  const media=matchMedia('(prefers-reduced-motion: reduce)');
+  const initial=.3865, min=.276, max=.5;
+  // Preview iframes and hidden mounts can execute before their first layout.
+  let width=scene.getBoundingClientRect().width||1000;
+  let position=initial*width, target=position, velocity=0;
+  let bend=0, bendVelocity=0, offset=0, offsetVelocity=0;
+  let thickness=0, length=60, reveal=0, visible=false, motion=0;
+  let hovered=false, focused=false, drag=null, raf=0, last=0, hideTimer=0;
+  const clamp=(value,lower,upper)=>Math.max(lower,Math.min(upper,value));
+  const reduced=()=>media.matches;
+  const legal=value=>clamp(value,min*width,max*width);
+  // Only the portion beyond a limit is resisted. The edge follows the pointer inside it.
+  const rubber=value=>{
+    const bounded=legal(value),excess=value-bounded;
+    return bounded+Math.sign(excess)*15*(1-Math.exp(-Math.abs(excess)/35));
+  };
+  function updateValue(){
+    const value=Math.round((1-target/width)*1000+1e-8)/10;
+    handle.setAttribute('aria-valuenow',String(value));
+    handle.setAttribute('aria-valuetext',`${value} percent wide`);
+  }
+  function draw(){
+    panel.style.left=`${position}px`;
+    handle.style.left=`${position}px`;
+    const x=40+offset;
+    const path=`M${x} ${80-length/2} Q${x+bend*2} 80 ${x} ${80+length/2}`;
+    ink.setAttribute('d',path);outline.setAttribute('d',path);
+    ink.style.strokeWidth=String(thickness);
+    outline.style.strokeWidth=String(thickness+2*reveal);
+    const gray=Math.round(198-39*motion);
+    ink.style.stroke=`rgb(${gray},${gray},${gray})`;
+    handle.style.setProperty('--er-reveal',String(reveal));
+    scene.dataset.position=(position/width).toFixed(5);
+    scene.dataset.bend=bend.toFixed(3);
+    scene.dataset.offset=offset.toFixed(3);
+    scene.dataset.visible=String(visible);
+    scene.dataset.stretch=drag?Math.abs(drag.raw-target).toFixed(2):'0';
+    updateValue();
+  }
+  function tick(now){
+    raf=0;
+    const dt=Math.min((now-last)/1000||1/60,1/30);last=now;
+    const excess=drag?drag.raw-target:0;
+    const pull=clamp(Math.abs(excess)/80,0,1);
+    const speed=drag?(now-drag.time<70?drag.speed:0):0;
+    const direction=clamp(speed/60,-1,1);
+    const bendTarget=direction*4.5*(1-pull);
+    const offsetTarget=direction*9*(1-pull)+Math.sign(excess)*6*pull;
+    motion=Math.max(Math.abs(direction)*(1-pull),pull);
+    const revealTarget=visible?1:0;
+    const thicknessTarget=(15-10*motion-2*pull)*revealTarget;
+    const lengthTarget=60+30*motion+21*pull;
+    if(reduced()){
+      position=drag?legal(drag.raw):target;velocity=0;bend=0;bendVelocity=0;offset=0;offsetVelocity=0;
+      reveal=revealTarget;thickness=visible?15:0;length=60;motion=0;
+      scene.dataset.state=drag?'dragging':'idle';draw();return;
+    }
+    for(let i=0;i<4;i++){
+      const step=dt/4;
+      if(!drag){velocity+=((target-position)*400-velocity*26)*step;position+=velocity*step;}
+      bendVelocity+=((bendTarget-bend)*680-bendVelocity*34)*step;bend+=bendVelocity*step;
+      offsetVelocity+=((offsetTarget-offset)*680-offsetVelocity*34)*step;offset+=offsetVelocity*step;
+    }
+    const amount=1-Math.exp(-32*dt);
+    reveal+=(revealTarget-reveal)*amount;
+    thickness+=(thicknessTarget-thickness)*amount;
+    length+=(lengthTarget-length)*amount;
+    draw();
+    const moving=Math.abs(target-position)>.01||Math.abs(velocity)>.05;
+    const shaping=Math.abs(bendTarget-bend)>.01||Math.abs(bendVelocity)>.03||Math.abs(offsetTarget-offset)>.01||Math.abs(offsetVelocity)>.03;
+    const morphing=Math.abs(thicknessTarget-thickness)>.01||Math.abs(lengthTarget-length)>.01||Math.abs(revealTarget-reveal)>.001;
+    if((!drag&&moving)||shaping||morphing||(drag&&Math.abs(speed)>.1))raf=requestAnimationFrame(tick);
+    else{
+      if(!drag){position=target;velocity=0;scene.dataset.state='idle';}
+      bend=drag?bendTarget:0;offset=drag?offsetTarget:0;
+      bendVelocity=0;offsetVelocity=0;reveal=revealTarget;
+      thickness=drag?thicknessTarget:15*reveal;length=drag?lengthTarget:60;
+      if(!drag)motion=0;
+      draw();
+    }
+  }
+  function wake(){
+    if(reduced()){if(raf)cancelAnimationFrame(raf);raf=0;tick(performance.now());return;}
+    if(!raf){last=performance.now();raf=requestAnimationFrame(tick);}
+  }
+  function show(){clearTimeout(hideTimer);visible=true;wake();}
+  function hideLater(){
+    clearTimeout(hideTimer);
+    if(hovered||focused||drag)return;
+    hideTimer=setTimeout(()=>{visible=false;wake();},450);
+  }
+  function setTarget(value){
+    target=legal(value);updateValue();
+    scene.dataset.state='settling';show();hideLater();
+  }
+  function release(cancel=false){
+    if(!drag)return;
+    const previous=drag;drag=null;velocity=0;
+    if(cancel)target=previous.start;
+    updateValue();
+    // Captured pointerleave does not reveal whether release occurred off the edge.
+    hovered=previous.type!=='touch'&&Math.abs(previous.pointer-position)<16;
+    if(handle.hasPointerCapture(previous.id))handle.releasePointerCapture(previous.id);
+    scene.dataset.state='settling';
+    status.textContent=`Panel width ${handle.getAttribute('aria-valuenow')} percent`;
+    show();hideLater();
+  }
+  handle.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch'){hovered=true;show();}});
+  handle.addEventListener('pointerleave',()=>{hovered=false;hideLater();});
+  handle.addEventListener('focus',()=>{focused=true;show();});
+  handle.addEventListener('blur',()=>{focused=false;hideLater();});
+  handle.addEventListener('pointerdown',event=>{
+    if(event.button!==0||drag)return;
+    event.preventDefault();
+    const rect=scene.getBoundingClientRect();
+    const pointer=event.clientX-rect.left;
+    drag={id:event.pointerId,type:event.pointerType,start:target,offset:pointer-position,raw:position,pointer,speed:0,time:performance.now()};
+    target=legal(position);velocity=0;
+    handle.setPointerCapture(event.pointerId);scene.dataset.state='dragging';show();
+  });
+  window.addEventListener('pointermove',event=>{
+    if(!drag||event.pointerId!==drag.id)return;
+    const rect=scene.getBoundingClientRect(),now=performance.now();
+    const pointer=event.clientX-rect.left,raw=pointer-drag.offset;
+    drag.speed=clamp((raw-drag.raw)/Math.max((now-drag.time)/1000,.008),-2200,2200);
+    drag.raw=raw;drag.pointer=pointer;drag.time=now;
+    target=legal(raw);position=reduced()?target:rubber(raw);
+    scene.dataset.state='dragging';updateValue();draw();wake();
+  });
+  window.addEventListener('pointerup',event=>{if(event.pointerId===drag?.id)release();});
+  window.addEventListener('pointercancel',event=>{if(event.pointerId===drag?.id)release(true);});
+  handle.addEventListener('lostpointercapture',()=>release());
+  handle.addEventListener('dblclick',()=>setTarget(initial*width));
+  handle.addEventListener('keydown',event=>{
+    const step=(event.shiftKey ? .06 : .02)*width;
+    const values={ArrowLeft:target-step,ArrowRight:target+step,Home:min*width,End:max*width,Escape:drag?drag.start:initial*width};
+    if(!(event.key in values))return;
+    event.preventDefault();
+    if(event.key==='Escape'&&drag)release(true);else setTarget(values[event.key]);
+    status.textContent=`Panel width ${handle.getAttribute('aria-valuenow')} percent`;
+  });
+  const observer=new ResizeObserver(()=>{
+    const next=scene.getBoundingClientRect().width;
+    if(!next||next===width)return;
+    const ratio=next/width;position*=ratio;target*=ratio;velocity*=ratio;
+    if(drag){drag.raw*=ratio;drag.offset*=ratio;drag.pointer*=ratio;drag.start*=ratio;}
+    width=next;draw();
+  });
+  observer.observe(scene);media.addEventListener('change',wake);
+  scene.dataset.state='idle';draw();document.body.dataset.motionReady='true';
+})();

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site-url";
+import { getMotionPackages } from "@/lib/motion-packages";
 
+import { AgentDemo } from "@/components/landing/agent-demo";
 import { Agents } from "@/components/landing/agents";
 import { Cta } from "@/components/landing/cta";
 import { Faq } from "@/components/landing/faq";
-import { FeaturedVideos } from "@/components/landing/featured-videos";
 import { Frameworks } from "@/components/landing/frameworks";
 import { Gallery } from "@/components/landing/gallery";
 import { Hero } from "@/components/landing/hero";
@@ -17,17 +19,15 @@ export const metadata: Metadata = {
 
 const JSON_LD = {
   "@context": "https://schema.org",
-  "@type": "SoftwareSourceCode",
-  name: "Canvas UI",
+  "@type": "WebSite",
+  name: "LeiBox",
   description:
-    "A free, open source component library of creative canvas effects for React, Solid, Preact, Vue, Svelte, and vanilla JS. Every effect ships as WebGL and WebGPU (via vgpu) builds.",
-  url: "https://canvasui.dev",
-  codeRepository: "https://github.com/DavidHDev/canvas-ui",
-  programmingLanguage: "TypeScript",
+    "A personal collection of UI inspiration, creative components, and design references for people and AI assistants.",
+  url: SITE_URL,
   author: {
     "@type": "Person",
-    name: "David Haz",
-    url: "https://github.com/DavidHDev",
+    name: "雷师傅",
+    url: "https://github.com/leishifu666",
   },
 };
 
@@ -37,7 +37,19 @@ const htmlSafeJsonStringify = (obj: unknown): string =>
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026");
 
-export default function Home() {
+export default async function Home() {
+  const packages = await getMotionPackages("glass-folder");
+  const reactPackage = packages.find((entry) => entry.framework === "react")!;
+  const demoCode = {
+    component: reactPackage.component,
+    bundle: reactPackage.bundle,
+    entry: reactPackage.files[0].source,
+    lineCount: reactPackage.bundle.trimEnd().split(/\r?\n/).length,
+    files: reactPackage.files.map((file) => ({
+      name: file.fileName,
+      lines: file.source.trimEnd().split(/\r?\n/).length,
+    })),
+  };
   return (
     <>
       <script
@@ -45,16 +57,18 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: htmlSafeJsonStringify(JSON_LD) }}
       />
       <Navbar />
-      <main className="page-enter flex flex-1 flex-col overflow-x-clip">
+      <main data-component-entry-state="idle" className="page-enter flex flex-1 flex-col overflow-x-clip">
         <div className="relative mx-auto w-full max-w-6xl">
           <div aria-hidden className="landing-rail absolute inset-y-0 left-0" />
           <div
             aria-hidden
             className="landing-rail absolute inset-y-0 right-0"
           />
-          <Hero />
+          <section className="landing-hero-demo">
+            <Hero />
+            <AgentDemo code={demoCode} />
+          </section>
           <Gallery />
-          <FeaturedVideos />
           <HowItWorks />
           <Frameworks />
           <Agents />

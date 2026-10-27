@@ -7,18 +7,23 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { copyText } from "@/lib/copy-text";
+import { loadDocAsset } from "@/lib/load-doc-asset";
 
 export function CopyButton({
   text,
+  sourceUrl,
   label,
   className,
 }: {
-  text: string;
+  text?: string;
+  sourceUrl?: string;
   label?: string;
   className?: string;
 }) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
+  const [failed, setFailed] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -28,16 +33,23 @@ export function CopyButton({
   }, []);
 
   const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
+    try {
+      await copyText(sourceUrl ? loadDocAsset<{ source: string }>(sourceUrl).then(data => data.source) : text ?? "");
+      setCopied(true);
+      setFailed(false);
+    } catch {
+      setCopied(false);
+      setFailed(true);
+    }
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setCopied(false), 1600);
+    timeoutRef.current = setTimeout(() => { setCopied(false); setFailed(false); }, 1600);
   };
 
   return (
     <button
       type="button"
-      aria-label={t(copied ? "Copied" : (label ?? "Copy to clipboard"))}
+      aria-label={t(failed ? "Copy failed, try again" : copied ? "Copied" : (label ?? "Copy to clipboard"))}
+      aria-live="polite"
       onClick={copy}
       className={cn(
         "inline-flex h-8 items-center gap-1.5 rounded-full px-2.5 text-[13px] text-muted-foreground transition-[color,transform] duration-150 ease-out hover:text-foreground active:scale-95 motion-reduce:transition-none",
@@ -60,7 +72,7 @@ export function CopyButton({
           )}
         />
       </span>
-      {label ? <span><TranslatedText>{copied ? "Copied" : label}</TranslatedText></span> : null}
+      {label || failed ? <span><TranslatedText>{failed ? "Copy failed, try again" : copied ? "Copied" : label}</TranslatedText></span> : null}
     </button>
   );
 }

@@ -1,222 +1,30 @@
-import { T } from "@/components/common/language-provider";
 import type { Metadata } from "next";
-import Link from "next/link";
-
-import { Footer } from "@/components/landing/footer";
+import { T } from "@/components/common/language-provider";
 import { Navbar } from "@/components/landing/navbar";
+import { Footer } from "@/components/landing/footer";
 
-export const metadata: Metadata = {
-  title: "Privacy",
-  description:
-    "What Canvas UI collects, what it does not, and how to have your data removed.",
-  alternates: { canonical: "/privacy" },
-};
-
-const LAST_UPDATED = "August 14, 2026";
-
-const CONTACT = "hello@canvasui.dev";
-
-const linkClass =
-  "text-foreground underline decoration-border underline-offset-4 transition-colors duration-150 hover:decoration-foreground";
-
-function Section({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="mt-12">
-      <h2 className="text-lg font-medium tracking-tight text-foreground">
-        <T>{title}</T>
-      </h2>
-      <div className="mt-3 flex flex-col gap-3 text-[15px] leading-7 text-muted-foreground">
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function MailLink() {
-  return (
-    <a href={`mailto:${CONTACT}`} className={linkClass}>
-      {CONTACT}
-    </a>
-  );
-}
-
-function ExternalLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noreferrer" className={linkClass}>
-      {children}
-    </a>
-  );
-}
+export const metadata: Metadata = { title: "LeiBox 隐私政策", description: "雷师傅的 LeiBox 网站如何处理留言与投稿、浏览器偏好、组件演示和第三方服务。", alternates: { canonical: "/privacy" } };
 
 export default function PrivacyPage() {
-  return (
-    <>
-      <Navbar />
-      <main className="page-enter flex flex-1 flex-col">
-        <div className="mx-auto w-full max-w-2xl px-5 pt-28 pb-24 sm:px-8 sm:pt-36">
-          <h1 className="text-3xl font-medium tracking-tighter text-balance sm:text-4xl"><T>
-            Privacy policy
-          </T></h1>
-          <p className="mt-4 text-[15px] leading-7 text-muted-foreground"><T>
-            Canvas UI is a free, open source component library. This page
-            explains exactly what the site collects and what it does not. Last
-            updated </T><T>{LAST_UPDATED}</T>.
-          </p>
-
-          <div className="mt-10 rounded-[calc(var(--radius)+0.75rem)] border border-border/60 bg-muted/30 p-2">
-            <div className="rounded-[var(--radius)] border border-dashed border-border/70 bg-background p-4 sm:p-5">
-              <h2 className="text-sm font-medium text-foreground"><T>
-                The short version
-              </T></h2>
-              <p className="mt-2 text-[15px] leading-7 text-muted-foreground"><T>
-                There are no tracking cookies, no advertising, and no analytics
-                scripts running in your browser. Cloudflare records anonymous,
-                aggregate traffic statistics from ordinary web requests. The
-                only personal data collected is an email address, and only if
-                you type one into the newsletter form. It is never sold or
-                shared, and you can have it deleted at any time by emailing</T>{" "}
-                <MailLink />.
-              </p>
-            </div>
-          </div>
-
-          <Section title="What is collected">
-            <p>
-              <span className="text-foreground"><T>Your email address</T></span><T>, if
-              you submit the newsletter form. It is used to send occasional
-              updates about Canvas UI. Nothing else is required, and no other
-              field is stored.
-            </T></p>
-            <p>
-              <span className="text-foreground"><T>Abuse prevention data</T></span><T>.
-              When you submit the form, your IP address is used to rate limit
-              requests and to complete the anti-bot check. It is processed at
-              the moment of the request and is not written to any database or
-              logged by this site.
-            </T></p>
-            <p>
-              <span className="text-foreground"><T>Aggregate traffic data</T></span><T>.
-              Cloudflare, which serves this site, reports totals such as page
-              views, referring sites, and country-level location. This is
-              derived from the ordinary web requests your browser already makes.
-              Nothing is stored on your device for it, it is only ever seen as
-              totals, and it is not linked to you or to any email address.
-            </T></p>
-          </Section>
-
-          <Section title="What is not collected">
-            <p><T>
-              No analytics or measurement scripts of any kind run in your
-              browser. There are no tracking cookies, no advertising pixels, no
-              fingerprinting, no session recording, and no profiling. Fonts are
-              served from this domain rather than a third party, and the pages
-              you visit are not tied to your identity or used to build a profile
-              of you.
-            </T></p>
-            <p><T>
-              Your data is never sold, rented, or shared for anyone else&rsquo;s
-              marketing.
-            </T></p>
-          </Section>
-
-          <Section title="Data stored in your browser">
-            <p><T>
-              A few preferences are kept in your browser&rsquo;s local storage:
-              your theme, your preferred package manager and framework for code
-              snippets, and whether you have dismissed or completed the
-              newsletter form. This stays on your device, is never sent to a
-              server, and can be cleared at any time through your
-              browser&rsquo;s site data settings.
-            </T></p>
-          </Section>
-
-          <Section title="Services used">
-            <p>
-              <ExternalLink href="https://www.cloudflare.com/privacypolicy/"><T>
-                Cloudflare
-              </T></ExternalLink>{" "}<T>
-              hosts the site, runs the form endpoint including the Turnstile
-              anti-bot check, and provides the aggregate traffic statistics
-              described above.
-            </T></p>
-            <p>
-              <ExternalLink href="https://resend.com/legal/privacy-policy"><T>
-                Resend
-              </T></ExternalLink>{" "}<T>
-              stores the newsletter list and delivers the emails. Their servers
-              are in the United States, so submitting the form transfers your
-              email address there.
-            </T></p>
-            <p>
-              <ExternalLink href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"><T>
-                GitHub
-              </T></ExternalLink>{" "}<T>
-              serves the public star count, which your browser requests
-              directly. Video embeds use YouTube&rsquo;s no-cookie domain and
-              only load once you press play.
-            </T></p>
-          </Section>
-
-          <Section title="How long it is kept">
-            <p><T>
-              Your email address is kept until you unsubscribe or ask for it to
-              be removed, at which point it is deleted from the list. Every
-              email includes an unsubscribe link.
-            </T></p>
-          </Section>
-
-          <Section title="Your rights">
-            <p><T>
-              If you are in the EU or UK, the legal basis for holding your email
-              address is your consent, given when you submit the form. You can
-              withdraw it at any time.
-            </T></p>
-            <p><T>
-              You have the right to access a copy of your data, correct it, have
-              it deleted, or object to its use. Email </T><MailLink /><T> and it will
-              be handled within 30 days. There is no account to log into and no
-              identity check beyond the address itself.
-            </T></p>
-          </Section>
-
-          <Section title="Changes">
-            <p><T>
-              If this policy changes in a way that affects what is collected,
-              the date at the top of this page will be updated. The site is open
-              source, so the full history of this page is public in the</T>{" "}
-              <ExternalLink href="https://github.com/DavidHDev/canvas-ui"><T>
-                repository
-              </T></ExternalLink>
-              .
-            </p>
-          </Section>
-
-          <Section title="Contact">
-            <p><T>
-              Questions about any of this can go to </T><MailLink />.
-            </p>
-          </Section>
-
-          <div className="mt-14 border-t border-border/60 pt-6">
-            <Link
-              href="/"
-              className="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
-            ><T>
-              &larr; Back home
-            </T></Link>
-          </div>
-        </div>
-
-        <div className="mt-auto border-t border-border/60">
-          <Footer />
-        </div>
-      </main>
-    </>
-  );
+  return <><Navbar /><main className="page-enter flex flex-1 flex-col">
+    <article className="mx-auto w-full max-w-2xl px-5 pt-28 pb-24 text-[15px] leading-7 text-muted-foreground sm:px-8 sm:pt-36">
+      <h1 className="text-3xl font-medium tracking-tighter text-foreground sm:text-4xl"><T>Privacy policy</T></h1>
+      <p className="mt-4 text-sm"><T>Last updated: October 22, 2026</T></p>
+      <p className="mt-4"><T>LeiBox is a personal website maintained by Lei Shifu to collect UI inspiration, components, and interaction examples. This policy applies to LeiBox; linked websites have their own privacy policies.</T></p>
+      <h2 className="mt-10 text-lg font-medium text-foreground"><T>Messages and component submissions</T></h2>
+      <p className="mt-3"><T>When you contact me, you choose to provide a reply email, optional name, message, and reference link. I use them to read your submission, evaluate the suggested component, and reply. Sending a message does not subscribe you to a mailing list.</T></p>
+      <p className="mt-3"><T>If email delivery is configured, Resend forwards your message to my inbox. If delivery is unavailable, the page reports the failure and offers an email-app link. LeiBox does not save contact messages in a site database; messages may remain in my mailbox and the email provider’s records.</T></p>
+      <h2 className="mt-10 text-lg font-medium text-foreground"><T>Browser preferences and component previews</T></h2>
+      <p className="mt-3"><T>Language, theme, code-file selection, framework, and similar display preferences are saved in your browser. Clearing this website’s data in your browser resets these choices.</T></p>
+      <p className="mt-3"><T>Emails and members entered in the Share & Invite preview stay in the current page. The preview does not send invitation emails or change real permissions. Reloading or resetting it clears that demo state.</T></p>
+      <h2 className="mt-10 text-lg font-medium text-foreground"><T>Copy buttons and external services</T></h2>
+      <p className="mt-3"><T>A copy button writes the selected prompt, code, or link to your clipboard. LeiBox does not read other clipboard contents. If your browser blocks access, the page reports the failure.</T></p>
+      <p className="mt-3"><T>Source links, GitHub, ChatGPT, and Claude open the relevant external service. AI shortcuts open the prompt you selected; LeiBox does not call an AI API to send messages for you. External images, fonts, and videos may contact their providers when loaded; those providers apply their own privacy policies.</T></p>
+      <h2 className="mt-10 text-lg font-medium text-foreground"><T>Website operation</T></h2>
+      <p className="mt-3"><T>Your browser sends ordinary connection information, including its IP address and request details, to the hosting server. Hosting providers may process it to serve pages, prevent abuse, and diagnose faults. Contact requests use temporary request counters to limit repeated submissions. The current website includes no advertising trackers or user-profiling scripts.</T></p>
+      <h2 className="mt-10 text-lg font-medium text-foreground"><T>Your choices and contact</T></h2>
+      <p className="mt-3"><T>You can browse without submitting a message. To ask about information you sent, request a correction, or ask me to remove a message from my mailbox, contact the address below. I will check the request and handle information within my control; third-party providers may retain records under their own policies.</T></p>
+      <p className="mt-3"><T>I will update this page when the website’s information-handling features change. The date above identifies the current version.</T></p>
+      <p className="mt-3"><a className="text-foreground underline underline-offset-4" href="mailto:leir0491@gmail.com">leir0491@gmail.com</a></p>
+    </article><Footer /></main></>;
 }

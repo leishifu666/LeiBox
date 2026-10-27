@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Generating State - Refined Grid</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --surface-01: #f4f4f5;
+            
+            --dot-base: #e4e4e7; 
+            --dot-active-rgb: 152, 152, 152; 
+            --dot-base-rgb: 228, 228, 231;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .title {
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 400;
+            padding-left: 4px;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title::after {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background-color: var(--text-secondary);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite opacity;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .card {
+            width: 420px;
+            height: 420px;
+            background-color: var(--surface-01);
+            border-radius: 24px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(20, 18px);
+            grid-template-rows: repeat(20, 18px);
+            place-items: center; 
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--dot-base);
+            border-radius: 50%;
+            will-change: transform, background-color;
+            backface-visibility: hidden;
+            transform: translateZ(0) scale(0.333);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">AI is designing the poster</div>
+        <div class="card" id="interactive-card">
+            <div class="grid" id="dot-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('dot-grid');
+            
+            const cols = 20;
+            const rows = 20;
+            const dots = [];
+            
+            const effectRadius = 110; 
+            
+            const minScale = 0.333; 
+            // 【核心调整】：把最大缩放值从 1 降到了 0.65，让点变得更小、更克制
+            const maxScale = 0.65;     
+
+            const baseRGB = [228, 228, 231];
+            const activeRGB = [152, 152, 152]; 
+
+            for (let i = 0; i < rows * cols; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                grid.appendChild(dot);
+                
+                dots.push({
+                    el: dot,
+                    x: (i % cols - cols / 2) * 18,     
+                    y: (Math.floor(i / cols) - rows / 2) * 18
+                });
+            }
+
+            const orbs = [
+                { rx: 90, ry: 70, sx: 0.7, sy: 1.1, px: 0, py: 0, pulseSpeed: 0 },
+                { rx: 70, ry: 95, sx: -1.2, sy: 0.8, px: 2, py: 1.5, pulseSpeed: 0.35 }
+            ];
+
+            const animateDots = (timestamp) => {
+                const time = timestamp * 0.0012;
+
+                const activeFocus = orbs.map(orb => {
+                    const weight = orb.pulseSpeed > 0 
+                        ? (Math.sin(time * orb.pulseSpeed) + 1) / 2 
+                        : 1;
+
+                    return {
+                        x: Math.sin(time * orb.sx + orb.px) * orb.rx,
+                        y: Math.cos(time * orb.sy + orb.py) * orb.ry,
+                        weight: weight
+                    };
+                });
+
+                dots.forEach((dot) => {
+                    let combinedIntensity = 0;
+
+                    activeFocus.forEach(focus => {
+                        const dx = focus.x - dot.x;
+                        const dy = focus.y - dot.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < effectRadius) {
+                            let intensity = 1 - (distance / effectRadius);
+                            intensity = Math.pow(intensity, 1.4) * focus.weight; 
+                            
+                            combinedIntensity += intensity;
+                        }
+                    });
+
+                    combinedIntensity = Math.min(1.0, combinedIntensity);
+
+                    if (combinedIntensity > 0.01) {
+                        const scale = minScale + (maxScale - minScale) * combinedIntensity;
+
+                        const r = Math.round(baseRGB[0] + (activeRGB[0] - baseRGB[0]) * combinedIntensity);
+                        const g = Math.round(baseRGB[1] + (activeRGB[1] - baseRGB[1]) * combinedIntensity);
+                        const b = Math.round(baseRGB[2] + (activeRGB[2] - baseRGB[2]) * combinedIntensity);
+
+                        dot.el.style.transform = `translateZ(0) scale(${scale})`;
+                        dot.el.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    } else {
+                        dot.el.style.transform = `translateZ(0) scale(${minScale})`;
+                        dot.el.style.backgroundColor = 'var(--dot-base)';
+                    }
+                });
+
+                requestAnimationFrame(animateDots);
+            };
+
+            requestAnimationFrame(animateDots);
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
-  "name": "Canvas UI",
-  "short_name": "Canvas UI",
-  "description": "An open source library of creative, framework-agnostic components drawn on canvas.",
+  "name": "LeiBox",
+  "short_name": "LeiBox",
+  "description": "A personal collection of UI inspiration and creative components.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

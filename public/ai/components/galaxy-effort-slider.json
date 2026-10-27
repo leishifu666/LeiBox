@@ -1,0 +1,158 @@
+{
+  "slug": "galaxy-effort-slider",
+  "name": {
+    "en": "Brain Particle Effort Slider",
+    "zh": "脑形滑块粒子增强"
+  },
+  "description": {
+    "en": "A pink brain gains more folds as effort increases through six levels, then glows with a twinkling pixel track, dotted rays, and a brief shake in Galaxy mode.",
+    "zh": "脑形褶皱随六档思考强度逐层增加，进入 Galaxy 后点亮闪动点阵、放射粒子与光晕，并伴随短促震动。"
+  },
+  "keywords": "脑形 大脑 褶皱 脑沟 沟回 生长 滑块 推理 强度 粒子 点阵 发光 六档 银河 brain folds wrinkles particle effort slider galaxy low medium high extra max ozzy",
+  "docsPath": "/docs/animations/galaxy-effort-slider",
+  "detailPath": "/ai/components/galaxy-effort-slider.json",
+  "markdownPath": "/ai/components/galaxy-effort-slider.md",
+  "previewPath": "/assets/components/galaxy-effort-slider.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "AI 思考强度选择",
+      "模型参数调节",
+      "AI reasoning effort"
+    ],
+    "searchTerms": [
+      "思考",
+      "推理",
+      "强度",
+      "滑块",
+      "脑",
+      "reasoning",
+      "effort",
+      "slider"
+    ],
+    "visualTags": [
+      "particles",
+      "cosmic"
+    ],
+    "interactions": [
+      "drag",
+      "keyboard"
+    ],
+    "caveat": "视觉强度选择器；实际模型参数需映射到目标项目的接口。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM, inline SVG and Canvas reconstruction from the reference video; no original author code, fonts or assets obtained.",
+    "designReference": "https://x.com/ozzyxs1a/status/2107523169649389677/video/1",
+    "designAuthor": "ozzy",
+    "license": "Original design/source license not supplied or independently verified. The reference video is retained for internal comparison only."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/galaxy-effort-slider/react.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GalaxyEffortSlider } from \"./GalaxyEffortSlider\";\n\nexport default function App() {\n  return <GalaxyEffortSlider />;\n}",
+      "files": [
+        "GalaxyEffortSlider.tsx",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/galaxy-effort-slider/vue.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GalaxyEffortSlider from \"./GalaxyEffortSlider.vue\";\n</script>\n<template><GalaxyEffortSlider /></template>",
+      "files": [
+        "GalaxyEffortSlider.vue",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/galaxy-effort-slider/svelte.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GalaxyEffortSlider from \"./GalaxyEffortSlider.svelte\";\n</script>\n<GalaxyEffortSlider />",
+      "files": [
+        "GalaxyEffortSlider.svelte",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/galaxy-effort-slider/solid.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GalaxyEffortSlider } from \"./GalaxyEffortSlider.solid\";\n\nexport default function App() {\n  return <GalaxyEffortSlider />;\n}",
+      "files": [
+        "GalaxyEffortSlider.solid.tsx",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/galaxy-effort-slider/preact.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GalaxyEffortSlider } from \"./GalaxyEffortSlider.preact\";\n\nexport default function App() {\n  return <GalaxyEffortSlider />;\n}",
+      "files": [
+        "GalaxyEffortSlider.preact.tsx",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/galaxy-effort-slider/vanilla.json",
+      "component": "GalaxyEffortSlider",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GalaxyEffortSlider\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GalaxyEffortSlider.ts",
+        "GalaxyEffortSliderEngine.js",
+        "motion-runtime.ts",
+        "GalaxyEffortSliderEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag the brain, click the track, or use arrow keys to change effort. End selects Galaxy; Home or Escape resets to Low. Values stay in this local demo.",
+    "zh": "拖动脑形、点击轨道或用方向键切换强度。End 进入 Galaxy，Home 或 Escape 回到 Low；数值只保存在本地演示中。"
+  }
+}

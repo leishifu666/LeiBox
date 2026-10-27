@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 import { isLightVideo } from "@/data/components";
+import { previewPoster } from "@/lib/optimized-image";
 
 export function PreviewVideo({
   src,
@@ -20,65 +21,79 @@ export function PreviewVideo({
     video.muted = true;
 
     let hovered = false;
-    let primed = false;
-    let cancelled = false;
-
-    const prime = () => {
-      if (primed) return;
-      primed = true;
-      video.preload = "metadata";
-      void video
-        .play()
-        .then(() => {
-          if (cancelled || hovered) return;
-          video.pause();
-          video.currentTime = 0;
-        })
-        .catch(() => {});
+    let focused = false;
+    let inView = false;
+    let releaseTimer: number | undefined;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const release = () => {
+      window.clearTimeout(releaseTimer);
+      video.pause();
+      if (!video.hasAttribute("src")) return;
+      video.removeAttribute("src");
+      video.load();
+    };
+    const sync = () => {
+      window.clearTimeout(releaseTimer);
+      if (inView && !document.hidden && !motion.matches && (hovered || focused)) {
+        if (!video.hasAttribute("src")) video.src = src;
+        void video.play().catch(() => {});
+        return;
+      }
+      video.pause();
+      // Keep a brief pointer crossing from reopening the same decoder.
+      if (!inView || document.hidden || motion.matches) release();
+      else releaseTimer = window.setTimeout(release, 350);
     };
 
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          prime();
-          io.disconnect();
-        }
+        inView = entries.some((entry) => entry.isIntersecting);
+        sync();
       },
       { rootMargin: "200px" },
     );
     io.observe(video);
 
     const card =
-      video.closest("a, [data-preview-card]") ?? video.parentElement ?? video;
-    const play = () => {
+      video.closest<HTMLElement>("a, [data-preview-card]") ?? video.parentElement ?? video;
+    const play = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
       hovered = true;
-      primed = true;
-      void video.play().catch(() => {});
+      sync();
     };
     const pause = () => {
       hovered = false;
-      video.pause();
+      sync();
+    };
+    const focus = () => { focused = true; sync(); };
+    const blur = (event: FocusEvent) => {
+      if (card.contains(event.relatedTarget as Node | null)) return;
+      focused = false;
+      sync();
     };
 
     card.addEventListener("pointerenter", play);
     card.addEventListener("pointerleave", pause);
-    card.addEventListener("focusin", play);
-    card.addEventListener("focusout", pause);
+    card.addEventListener("focusin", focus);
+    card.addEventListener("focusout", blur);
+    document.addEventListener("visibilitychange", sync);
+    motion.addEventListener("change", sync);
     return () => {
-      cancelled = true;
       io.disconnect();
-      video.pause();
+      release();
       card.removeEventListener("pointerenter", play);
       card.removeEventListener("pointerleave", pause);
-      card.removeEventListener("focusin", play);
-      card.removeEventListener("focusout", pause);
+      card.removeEventListener("focusin", focus);
+      card.removeEventListener("focusout", blur);
+      document.removeEventListener("visibilitychange", sync);
+      motion.removeEventListener("change", sync);
     };
   }, [src]);
 
   return (
     <video
       ref={ref}
-      src={src}
+      poster={previewPoster(src)}
       loop
       muted
       playsInline

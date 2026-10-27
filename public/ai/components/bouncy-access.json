@@ -1,0 +1,157 @@
+{
+  "slug": "bouncy-access",
+  "name": {
+    "en": "Expandable Access Request",
+    "zh": "访问申请展开"
+  },
+  "description": {
+    "en": "A compact access request expands into an avatar list with staggered spring motion.",
+    "zh": "权限申请胶囊弹性展开，堆叠头像与成员列表交错切换。"
+  },
+  "keywords": "动效 访问 权限 申请 弹性 展开 收起 头像 access request spring morph panel",
+  "docsPath": "/docs/animations/bouncy-access",
+  "detailPath": "/ai/components/bouncy-access.json",
+  "markdownPath": "/ai/components/bouncy-access.md",
+  "previewPath": "/assets/components/bouncy-access.png",
+  "discovery": {
+    "category": "collaboration",
+    "useCases": [
+      "访问权限申请",
+      "成员列表展开",
+      "request access members"
+    ],
+    "searchTerms": [
+      "访问",
+      "申请",
+      "权限",
+      "成员",
+      "access",
+      "request",
+      "permission",
+      "members"
+    ],
+    "visualTags": [
+      "capsule",
+      "spring"
+    ],
+    "interactions": [
+      "click"
+    ],
+    "caveat": "权限申请与成员状态需绑定项目业务数据。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/bouncy-access/react.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { BouncyAccessRequest } from \"./BouncyAccessRequest\";\n\nexport default function App() {\n  return <BouncyAccessRequest />;\n}",
+      "files": [
+        "BouncyAccessRequest.tsx",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/bouncy-access/vue.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BouncyAccessRequest from \"./BouncyAccessRequest.vue\";\n</script>\n<template><BouncyAccessRequest /></template>",
+      "files": [
+        "BouncyAccessRequest.vue",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/bouncy-access/svelte.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BouncyAccessRequest from \"./BouncyAccessRequest.svelte\";\n</script>\n<BouncyAccessRequest />",
+      "files": [
+        "BouncyAccessRequest.svelte",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/bouncy-access/solid.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { BouncyAccessRequest } from \"./BouncyAccessRequest.solid\";\n\nexport default function App() {\n  return <BouncyAccessRequest />;\n}",
+      "files": [
+        "BouncyAccessRequest.solid.tsx",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/bouncy-access/preact.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { BouncyAccessRequest } from \"./BouncyAccessRequest.preact\";\n\nexport default function App() {\n  return <BouncyAccessRequest />;\n}",
+      "files": [
+        "BouncyAccessRequest.preact.tsx",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/bouncy-access/vanilla.json",
+      "component": "BouncyAccessRequest",
+      "dependencies": [],
+      "usage": "import { mount } from \"./BouncyAccessRequest\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BouncyAccessRequest.ts",
+        "BouncyAccessRequestEngine.js",
+        "motion-runtime.ts",
+        "BouncyAccessRequestEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click the request pill to expand, then use the chevron to collapse. Approval buttons are visual examples.",
+    "zh": "点击申请胶囊展开，再用箭头收起。审批按钮按原文件保留，为视觉演示。"
+  }
+}

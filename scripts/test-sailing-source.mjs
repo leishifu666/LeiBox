@@ -1,0 +1,35 @@
+import fs from 'node:fs/promises';
+import http from 'node:http';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {verifySailingBoat} from './test-sailing-boat.mjs';
+const root=process.cwd(),out=path.join(root,'outputs/sailing-toc');
+await fs.mkdir(out,{recursive:true});
+const server=http.createServer(async(req,res)=>{res.setHeader('content-type','text/html');res.end(await fs.readFile(path.join(root,'public/motion/sailing-toc.html')));});
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try{
+ const page=await browser.newPage({viewport:{width:1200,height:918}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:${server.address().port}`);
+ await page.locator('.st-demo[data-ready=true]').waitFor();
+ assert.equal(await page.locator('.st-link').count(),16);
+ assert.equal(await page.locator('.st-link[aria-current=location]').getAttribute('data-index'),'3');
+ await page.screenshot({path:path.join(out,'initial.png')});
+ await page.locator('.st-link').nth(10).click();
+ await page.waitForFunction(()=>document.querySelector('.st-demo').dataset.moving==='true');
+ await page.waitForTimeout(160);await page.screenshot({path:path.join(out,'travelling.png')});
+ await page.locator('.st-demo[data-moving=false]').waitFor();
+ assert.equal(await page.locator('.st-link[aria-current=location]').getAttribute('data-index'),'10');
+ await page.screenshot({path:path.join(out,'selected.png')});
+ await page.locator('.st-link').nth(1).click();await page.locator('.st-link').nth(12).click();
+ await page.locator('.st-demo[data-moving=false]').waitFor();
+ assert.equal(await page.locator('.st-link[aria-current=location]').getAttribute('data-index'),'12');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.locator('.st-link').nth(5).click();
+ assert.equal(await page.locator('.st-link[aria-current=location]').getAttribute('data-index'),'5');
+ assert.equal(await page.locator('.st-demo').getAttribute('data-navigating'),'false');
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await verifySailingBoat(page);
+ assert.deepEqual(errors,[]);
+ console.log('PASS sailing source: initial state, scroll navigation, spring travel, reversal and reduced motion.');
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

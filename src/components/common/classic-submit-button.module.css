@@ -1,0 +1,10 @@
+.button { --submit-width: 104px; position: relative; isolation: isolate; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: var(--submit-width); height: 40px; padding: 0; overflow: hidden; border: none; border-radius: 8px; background: var(--foreground); color: var(--background); font-family: inherit; font-size: 13.5px; font-weight: 500; line-height: 20px; white-space: nowrap; cursor: pointer; }
+.button:lang(en) { --submit-width: 120px; }
+.button:hover:enabled { background: color-mix(in srgb, var(--foreground) 90%, var(--background)); }
+.button:disabled { cursor: default; }
+.button[data-state="unavailable"] { opacity: 0.6; }
+.button:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; }
+.button [data-submit-label] { position: relative; z-index: 2; display: inline-block; pointer-events: none; }
+.button [data-submit-loader] { position: absolute; z-index: 2; top: 50%; left: 50%; width: 20px; height: 20px; transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
+.button [data-submit-ring] { position: absolute; top: 0; left: 0; width: 20px; height: 20px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; opacity: 0; }
+.button [data-submit-success], .button [data-submit-error] { position: absolute; z-index: 2; top: 50%; left: 16px; width: 16px; height: 16px; transform: translateY(-50%); opacity: 0; pointer-events: none; }

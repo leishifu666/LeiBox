@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 
 const ITEMS = [
   {
-    question: "Is Canvas UI free to use?",
+    question: "Can I copy every item in LeiBox?",
     answer:
-      "Yes. Canvas UI is licensed under MIT + Commons Clause: use every component in any personal or commercial app or website, free forever. The only restriction is reselling or redistributing the components themselves, whether alone, in a bundle, or as a port.",
+      "Each item keeps its own source and license. Use copy and installation tools only where that license permits. The current Canvas UI examples retain MIT + Commons Clause and cannot be redistributed as a component library.",
   },
   {
     question: "Which browsers are supported?",

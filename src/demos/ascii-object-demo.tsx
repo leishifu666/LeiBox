@@ -17,8 +17,9 @@ import { ColorRow, DemoControls } from "@/components/demos/demo-controls";
 import { useDemoControls } from "@/hooks/use-demo-controls";
 import { AsciiObject } from "@/components/docs/live/AsciiObject";
 
-const DEFAULT_MODEL = "/assets/models/duck.glb";
+const DEFAULT_MODEL = "/logo-icon.svg";
 const DEFAULT_HIGHLIGHT = "#066aff";
+const AUTO_GLYPH_COLOR = "auto";
 const LIGHT_BACKGROUND = "#ffffff";
 const DARK_BACKGROUND = "#0a0a0a";
 
@@ -31,7 +32,7 @@ const CHARSETS: Record<string, string | undefined> = {
 const CONTROLS = {
   src: custom(DEFAULT_MODEL),
   ascii: toggle("ASCII", true),
-  colored: toggle("Scene colors", true, {
+  colored: toggle("Scene colors", false, {
     when: (values) => values.ascii === true,
   }),
   invert: toggle("Invert", false, {
@@ -64,7 +65,8 @@ const CONTROLS = {
     decimals: 1,
   }),
   exposure: scrub("Exposure", 1, { min: 0, max: 3, step: 0.05 }),
-  color: color("Character color", "#ffffff", {
+  color: color("Character color", AUTO_GLYPH_COLOR, {
+    auto: { label: "Auto" },
     when: (values) => values.colored === false,
   }),
   environmentIntensity: scrub("Environment", 1, {
@@ -119,6 +121,7 @@ export function AsciiObjectDemo() {
     color: glyphColor,
     ...values
   } = controls.values;
+  const displayColor = glyphColor === AUTO_GLYPH_COLOR ? (resolvedTheme === "dark" ? "#ffffff" : "#111111") : glyphColor;
   const background = backgroundValue === "" ? null : backgroundValue;
   const toggles = { ascii, colored, invert, autoRotate, zoom };
   const charset = CHARSETS[charsetChoice];
@@ -170,7 +173,7 @@ export function AsciiObjectDemo() {
           {...values}
           {...toggles}
           {...(charset ? { charset } : {})}
-          color={glyphColor}
+          color={displayColor}
           background={background ?? ""}
           highlight={highlight}
           onLoad={() => setStatus("ready")}
@@ -197,7 +200,7 @@ export function AsciiObjectDemo() {
             ...values,
             ...toggles,
             ...(charset ? { charset } : {}),
-            color: glyphColor,
+            color: displayColor,
             highlight,
           },
         }}

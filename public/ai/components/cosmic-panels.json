@@ -1,0 +1,157 @@
+{
+  "slug": "cosmic-panels",
+  "name": {
+    "en": "Orbit & Halftone Animation",
+    "zh": "轨道与点阵动效"
+  },
+  "description": {
+    "en": "Orbital loading, flowing halftone clouds, and floating isometric servers form a three-panel cosmic visual system.",
+    "zh": "轨道加载、流动半色调星云和悬浮服务器组成三联宇宙视觉。"
+  },
+  "keywords": "cosmic space orbit loading astronaut servers globe halftone canvas 宇宙 星云 轨道 点阵 半色调 地球 服务器",
+  "docsPath": "/docs/animations/cosmic-panels",
+  "detailPath": "/ai/components/cosmic-panels.json",
+  "markdownPath": "/ai/components/cosmic-panels.md",
+  "previewPath": "/assets/components/cosmic-panels.png",
+  "discovery": {
+    "category": "background",
+    "useCases": [
+      "云服务品牌视觉",
+      "宇宙主题展示",
+      "cosmic infrastructure showcase"
+    ],
+    "searchTerms": [
+      "轨道",
+      "星云",
+      "宇宙",
+      "服务器",
+      "cosmic",
+      "orbit",
+      "nebula",
+      "server"
+    ],
+    "visualTags": [
+      "cosmic",
+      "dots"
+    ],
+    "interactions": [
+      "autoplay"
+    ],
+    "caveat": "包含多个视觉模块，按页面需要选择，避免全部挤入小区域。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/acream_1/status/2113235166453964924/video/1",
+    "designAuthor": "Acream",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/cosmic-panels/react.json",
+      "component": "CosmicPanels",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { CosmicPanels } from \"./CosmicPanels\";\n\nexport default function App() {\n  return <CosmicPanels />;\n}",
+      "files": [
+        "CosmicPanels.tsx",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/cosmic-panels/vue.json",
+      "component": "CosmicPanels",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport CosmicPanels from \"./CosmicPanels.vue\";\n</script>\n<template><CosmicPanels /></template>",
+      "files": [
+        "CosmicPanels.vue",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/cosmic-panels/svelte.json",
+      "component": "CosmicPanels",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport CosmicPanels from \"./CosmicPanels.svelte\";\n</script>\n<CosmicPanels />",
+      "files": [
+        "CosmicPanels.svelte",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/cosmic-panels/solid.json",
+      "component": "CosmicPanels",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { CosmicPanels } from \"./CosmicPanels.solid\";\n\nexport default function App() {\n  return <CosmicPanels />;\n}",
+      "files": [
+        "CosmicPanels.solid.tsx",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/cosmic-panels/preact.json",
+      "component": "CosmicPanels",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { CosmicPanels } from \"./CosmicPanels.preact\";\n\nexport default function App() {\n  return <CosmicPanels />;\n}",
+      "files": [
+        "CosmicPanels.preact.tsx",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/cosmic-panels/vanilla.json",
+      "component": "CosmicPanels",
+      "dependencies": [],
+      "usage": "import { mount } from \"./CosmicPanels\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "CosmicPanels.ts",
+        "CosmicPanelsEngine.js",
+        "motion-runtime.ts",
+        "CosmicPanelsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Watch the three panels animate together. Click a panel, or focus it and press Space, to pause or resume. The reference video shows automatic playback.",
+    "zh": "三张卡片同步播放。点击任一卡片，或聚焦后按空格暂停和恢复；原视频展示的是自动播放。"
+  }
+}

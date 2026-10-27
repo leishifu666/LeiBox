@@ -23,13 +23,13 @@ const USAGE = [
     label: "React",
     fileName: "page.tsx",
     lang: "tsx",
-    source: `import { Liquid } from "@/components/canvasui/Liquid";
+    source: `import { Glass } from "@/components/canvasui/Glass";
 
 export default function Page() {
   return (
-    <Liquid rainbow style={{ height: 480 }}>
+    <Glass style={{ height: 480 }}>
       <YourContent />
-    </Liquid>
+    </Glass>
   );
 }`,
   },
@@ -39,13 +39,13 @@ export default function Page() {
     fileName: "App.vue",
     lang: "vue",
     source: `<script setup lang="ts">
-import Liquid from "@/components/canvasui/Liquid.vue";
+import Glass from "@/components/canvasui/Glass.vue";
 </script>
 
 <template>
-  <Liquid rainbow style="height: 480px">
+  <Glass style="height: 480px">
     <YourContent />
-  </Liquid>
+  </Glass>
 </template>`,
   },
   {
@@ -54,25 +54,25 @@ import Liquid from "@/components/canvasui/Liquid.vue";
     fileName: "+page.svelte",
     lang: "svelte",
     source: `<script lang="ts">
-  import Liquid from "$lib/components/canvasui/Liquid.svelte";
+  import Glass from "$lib/components/canvasui/Glass.svelte";
 </script>
 
-<Liquid rainbow>
+<Glass>
   <YourContent />
-</Liquid>`,
+</Glass>`,
   },
   {
     id: "solid",
     label: "Solid",
     fileName: "App.tsx",
     lang: "tsx",
-    source: `import { Liquid } from "@/components/canvasui/Liquid";
+    source: `import { Glass } from "@/components/canvasui/Glass";
 
 export default function App() {
   return (
-    <Liquid rainbow style={{ height: "480px" }}>
+    <Glass style={{ height: "480px" }}>
       <YourContent />
-    </Liquid>
+    </Glass>
   );
 }`,
   },
@@ -81,13 +81,13 @@ export default function App() {
     label: "Preact",
     fileName: "App.tsx",
     lang: "tsx",
-    source: `import { Liquid } from "@/components/canvasui/Liquid";
+    source: `import { Glass } from "@/components/canvasui/Glass";
 
 export default function App() {
   return (
-    <Liquid rainbow style={{ height: "480px" }}>
+    <Glass style={{ height: "480px" }}>
       <YourContent />
-    </Liquid>
+    </Glass>
   );
 }`,
   },
@@ -96,19 +96,19 @@ export default function App() {
     label: "Vanilla",
     fileName: "main.ts",
     lang: "typescript",
-    source: `import { createLiquid } from "@/components/canvasui/LiquidVanilla";
+    source: `import { createGlass } from "@/components/canvasui/GlassVanilla";
 
-const liquid = createLiquid(
+const glass = createGlass(
   {
     source: document.querySelector<HTMLCanvasElement>("#source")!,
     content: document.querySelector<HTMLDivElement>("#content")!,
     output: document.querySelector<HTMLCanvasElement>("#output")!,
   },
-  { rainbow: true },
+  { radius: 0.12 },
 );
 
-liquid.setOptions({ radius: 0.4 });
-liquid.destroy();`,
+glass.setOptions({ radius: 0.4 });
+glass.destroy();`,
   },
 ] as const;
 
@@ -135,10 +135,10 @@ Renderers: every effect has a WebGL build and a WebGPU build where available. We
 Every component has a registry entry per framework and per renderer: six WebGL entries and six WebGPU entries. Pick your package manager, renderer, and framework below, and the docs remember your choices everywhere.
 
 \`\`\`sh
-npx shadcn@latest add @canvas-ui/liquid-react
+npx shadcn@latest add @canvas-ui/glass-react
 \`\`\`
 
-The renderer selector switches the command between the WebGL item and the WebGPU item. WebGPU registry names add -webgpu after the framework, for example @canvas-ui/liquid-react-webgpu.
+The renderer selector switches the command between the WebGL item and the WebGPU item. WebGPU registry names add -webgpu after the framework, for example @canvas-ui/glass-react-webgpu.
 
 The CLI drops the file into components/canvasui/ in your project (Svelte: src/lib/components/canvasui/, so the \`$lib\` import resolves). If you have not used shadcn before, run \`npx shadcn@latest init\` first.
 
@@ -154,12 +154,12 @@ Wrap the part of your interface the effect should run over. Props are optional a
 ${USAGE[0].source}
 \`\`\`
 
-For vanilla WebGPU, import from LiquidWebGPU.ts instead of LiquidVanilla.ts. The createLiquid call is the same.
+For vanilla WebGPU, import from GlassWebGPU.ts instead of GlassVanilla.ts. The createGlass call is the same.
 
 ## Next steps
 
 - Read the rendering guide: https://canvasui.dev/docs/rendering
-- Try Liquid, the first component: https://canvasui.dev/docs/components/liquid
+- Try Glass: https://canvasui.dev/docs/components/glass
 - Set up the MCP server: https://canvasui.dev/docs/mcp
 `;
 
@@ -241,12 +241,12 @@ export default async function InstallationPage() {
           everywhere.
         </TranslatedText></p>
         <div className="not-typeset my-6">
-          <InstallTabs item="liquid" hasWebGPU />
+          <InstallTabs item="glass" hasWebGPU />
         </div>
         <p><TranslatedText>
           The renderer selector switches the command between the WebGL item and
           the WebGPU item. WebGPU registry names add </TranslatedText><code>-webgpu</code><TranslatedText> after
-          the framework, for example </TranslatedText><code>@canvas-ui/liquid-react-webgpu</code>.
+          the framework, for example </TranslatedText><code>@canvas-ui/glass-react-webgpu</code>.
         </p>
         <p><TranslatedText>
           The CLI drops the file into </TranslatedText><code>components/canvasui/</code><TranslatedText> in your
@@ -271,8 +271,8 @@ export default async function InstallationPage() {
           <CodeTabs variants={usageVariants} />
         </div>
         <p><TranslatedText>
-          For vanilla WebGPU, import from </TranslatedText><code>LiquidWebGPU.ts</code><TranslatedText> instead
-          of </TranslatedText><code>LiquidVanilla.ts</code><TranslatedText>. The </TranslatedText><code>createLiquid</code><TranslatedText> call is
+          For vanilla WebGPU, import from </TranslatedText><code>GlassWebGPU.ts</code><TranslatedText> instead
+          of </TranslatedText><code>GlassVanilla.ts</code><TranslatedText>. The </TranslatedText><code>createGlass</code><TranslatedText> call is
           the same.
         </TranslatedText></p>
 
@@ -286,10 +286,10 @@ export default async function InstallationPage() {
                 description: "Choose WebGL or WebGPU for each component.",
               },
               {
-                href: "/docs/components/liquid",
-                title: "Liquid",
+                href: "/docs/components/glass",
+                title: "Glass",
                 description:
-                  "A pointer-driven fluid simulation over live HTML.",
+                  "A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.",
               },
               {
                 href: "/docs/mcp",

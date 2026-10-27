@@ -1,0 +1,166 @@
+{
+  "slug": "brand-poster-cards",
+  "name": {
+    "en": "Brand Poster Cards",
+    "zh": "品牌海报三联卡片"
+  },
+  "description": {
+    "en": "Three portrait posters pair a small corner symbol, a centered brand wordmark, and a shared introduction. The photographs gently zoom while the branding stays fixed.",
+    "zh": "三张人像海报统一搭配左上角标、中央品牌字标与底部介绍，图片轻缓缩放，标志和文字保持固定。"
+  },
+  "keywords": "品牌 海报 三联 卡片 人像 图片 肖像 字标 标志 排版 LeiBox brand poster cards portrait triptych logo identity photography",
+  "docsPath": "/docs/animations/brand-poster-cards",
+  "detailPath": "/ai/components/brand-poster-cards.json",
+  "markdownPath": "/ai/components/brand-poster-cards.md",
+  "previewPath": "/assets/components/brand-poster-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "品牌海报展示",
+      "人物作品集",
+      "brand poster portfolio"
+    ],
+    "searchTerms": [
+      "品牌",
+      "海报",
+      "人物",
+      "作品集",
+      "brand",
+      "poster",
+      "portrait",
+      "portfolio"
+    ],
+    "visualTags": [
+      "photography",
+      "editorial"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "替换演示人像、品牌标志和文案，并确认素材使用权限。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM/CSS/GSAP reconstruction of a user-provided screenshot, with user-provided portrait assets and existing LeiBox brand vectors.",
+    "designReference": null,
+    "designAuthor": "User-provided screenshot; author unknown",
+    "license": "Original layout designer/license unknown. User supplied the replacement portraits and requested reuse of the site's own LeiBox brand assets; no original Ninja images, logo or copy are redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/brand-poster-cards/react.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { BrandPosterCards } from \"./BrandPosterCards\";\n\nexport default function App() {\n  return <BrandPosterCards />;\n}",
+      "files": [
+        "BrandPosterCards.tsx",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/brand-poster-cards/vue.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BrandPosterCards from \"./BrandPosterCards.vue\";\n</script>\n<template><BrandPosterCards /></template>",
+      "files": [
+        "BrandPosterCards.vue",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/brand-poster-cards/svelte.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BrandPosterCards from \"./BrandPosterCards.svelte\";\n</script>\n<BrandPosterCards />",
+      "files": [
+        "BrandPosterCards.svelte",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/brand-poster-cards/solid.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { BrandPosterCards } from \"./BrandPosterCards.solid\";\n\nexport default function App() {\n  return <BrandPosterCards />;\n}",
+      "files": [
+        "BrandPosterCards.solid.tsx",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/brand-poster-cards/preact.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { BrandPosterCards } from \"./BrandPosterCards.preact\";\n\nexport default function App() {\n  return <BrandPosterCards />;\n}",
+      "files": [
+        "BrandPosterCards.preact.tsx",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/brand-poster-cards/vanilla.json",
+      "component": "BrandPosterCards",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./BrandPosterCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BrandPosterCards.ts",
+        "BrandPosterCardsEngine.js",
+        "motion-runtime.ts",
+        "BrandPosterCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus a portrait for a gentle photo zoom. Tap, Enter or Space pins it; Escape clears it. Copy the component to replace the three photos, wordmark, corner symbol, and description.",
+    "zh": "悬停或聚焦卡片，图片轻缓放大。轻触、Enter 或空格固定选中，Escape 取消；复制后可替换三张图片、中央字标、角标及介绍。"
+  }
+}

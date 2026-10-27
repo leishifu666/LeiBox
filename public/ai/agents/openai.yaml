@@ -1,0 +1,6 @@
+interface:
+  display_name: "LeiBox 组件库"
+  short_description: "按当前界面任务主动推荐雷盒组件与动效，匹配项目框架并下载完整源码接入"
+  default_prompt: "使用 $leibox 为当前界面推荐合适组件，说明理由，并按项目框架接入源码。"
+policy:
+  allow_implicit_invocation: true

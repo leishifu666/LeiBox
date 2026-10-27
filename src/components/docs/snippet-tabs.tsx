@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { ChoiceSelect } from "@/components/docs/choice-select";
 import { CopyButton } from "@/components/docs/copy-button";
 import { usePreference } from "@/hooks/use-preference";
+import { DeferredCode } from "./deferred-code";
 
 export interface SnippetTab {
   /** Short identifier, e.g. "claude". */
@@ -14,7 +15,8 @@ export interface SnippetTab {
   /** Optional file name shown above the code. */
   fileName?: string;
   /** Raw source, used for the copy button. */
-  source: string;
+  source?: string;
+  url?: string;
   /** Pre-highlighted HTML. Omit for a single-line command row. */
   html?: string;
 }
@@ -23,6 +25,7 @@ export function SnippetTabs({
   storageKey,
   tabs,
   footers,
+  label = "Client",
 }: {
   /** localStorage key suffix the selection is persisted under. */
   storageKey: string;
@@ -30,6 +33,7 @@ export function SnippetTabs({
   tabs: readonly SnippetTab[];
   /** Optional content rendered below the snippet per tab id. */
   footers?: Record<string, ReactNode>;
+  label?: string;
 }) {
   const [activeId, setActiveId] = usePreference(
     storageKey,
@@ -45,14 +49,14 @@ export function SnippetTabs({
       <div className="not-typeset overflow-hidden rounded-xl border border-border/60">
         <div className="flex items-center justify-between gap-2 border-b border-border/60 bg-muted/40 pr-1.5 pl-2">
           <ChoiceSelect
-            label="Client"
+            label={label}
             options={tabs}
             value={active.id}
             onValueChange={setActiveId}
           />
-          {active.html ? <CopyButton text={active.source} /> : null}
+          {active.html || active.fileName ? <CopyButton text={active.source} sourceUrl={active.url} /> : null}
         </div>
-        {active.html ? (
+        {active.html || active.fileName ? (
           <>
             {active.fileName ? (
               <div className="flex items-center justify-between border-b border-border/40 px-4 py-2">
@@ -61,10 +65,10 @@ export function SnippetTabs({
                 </span>
               </div>
             ) : null}
-            <div
+            {active.url ? <DeferredCode url={active.url} /> : active.html ? <div
               className="docs-code max-h-[480px] overflow-auto text-[13px] leading-6"
               dangerouslySetInnerHTML={{ __html: active.html }}
-            />
+            /> : <pre translate="no" className="max-h-[480px] overflow-auto p-4 font-mono text-[13px] leading-6"><code>{active.source}</code></pre>}
           </>
         ) : (
           <div className="flex items-center justify-between gap-3 py-1.5 pr-1.5 pl-4">

@@ -1,0 +1,158 @@
+{
+  "slug": "gradient-cover-wall",
+  "name": {
+    "en": "Interactive Gradient Cards",
+    "zh": "渐变卡片跟随"
+  },
+  "description": {
+    "en": "Six grainy gradient covers with fine SVG patterns, drifting colours, and spring-driven pointer light.",
+    "zh": "六张颗粒渐变封面，搭配细线纹样、缓慢漂移的色团和弹簧柔光交互。"
+  },
+  "keywords": "渐变 封面 卡片墙 颗粒 噪点 柔光 纹样 弹簧 gradient grain noise cover wall radial spring canvas",
+  "docsPath": "/docs/animations/gradient-cover-wall",
+  "detailPath": "/ai/components/gradient-cover-wall.json",
+  "markdownPath": "/ai/components/gradient-cover-wall.md",
+  "previewPath": "/assets/components/gradient-cover-wall.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "封面画廊",
+      "渐变作品展示",
+      "gradient cover gallery"
+    ],
+    "searchTerms": [
+      "渐变",
+      "封面",
+      "画廊",
+      "作品集",
+      "gradient",
+      "cover",
+      "gallery",
+      "portfolio"
+    ],
+    "visualTags": [
+      "gradient",
+      "grain"
+    ],
+    "interactions": [
+      "pointer",
+      "autoplay"
+    ],
+    "caveat": "装饰性封面展示；业务列表的名称与链接需接入项目。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/gradient-cover-wall/react.json",
+      "component": "GradientCoverWall",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GradientCoverWall } from \"./GradientCoverWall\";\n\nexport default function App() {\n  return <GradientCoverWall />;\n}",
+      "files": [
+        "GradientCoverWall.tsx",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/gradient-cover-wall/vue.json",
+      "component": "GradientCoverWall",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GradientCoverWall from \"./GradientCoverWall.vue\";\n</script>\n<template><GradientCoverWall /></template>",
+      "files": [
+        "GradientCoverWall.vue",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/gradient-cover-wall/svelte.json",
+      "component": "GradientCoverWall",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GradientCoverWall from \"./GradientCoverWall.svelte\";\n</script>\n<GradientCoverWall />",
+      "files": [
+        "GradientCoverWall.svelte",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/gradient-cover-wall/solid.json",
+      "component": "GradientCoverWall",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GradientCoverWall } from \"./GradientCoverWall.solid\";\n\nexport default function App() {\n  return <GradientCoverWall />;\n}",
+      "files": [
+        "GradientCoverWall.solid.tsx",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/gradient-cover-wall/preact.json",
+      "component": "GradientCoverWall",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GradientCoverWall } from \"./GradientCoverWall.preact\";\n\nexport default function App() {\n  return <GradientCoverWall />;\n}",
+      "files": [
+        "GradientCoverWall.preact.tsx",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/gradient-cover-wall/vanilla.json",
+      "component": "GradientCoverWall",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GradientCoverWall\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GradientCoverWall.ts",
+        "GradientCoverWallEngine.js",
+        "motion-runtime.ts",
+        "GradientCoverWallEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Move across a cover to shift the colours and light. Focus a card and use the arrow keys, or press Escape to reset. Reduced motion keeps the covers still.",
+    "zh": "移动光标体验色团与柔光变化；聚焦后可用方向键调整，Escape 复位。开启减少动态效果时保持静止。"
+  }
+}

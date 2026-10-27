@@ -1,0 +1,158 @@
+{
+  "slug": "glass-tab-menu",
+  "name": {
+    "en": "Glass Tab Menu",
+    "zh": "玻璃标签栏展开菜单"
+  },
+  "description": {
+    "en": "A frosted four-tab bar expands into six creation actions, with a translucent sliding selection and a rotating plus button.",
+    "zh": "四项磨砂标签栏连续展开为六宫格菜单，选中块通透滑动，加号旋转为关闭按钮。"
+  },
+  "keywords": "玻璃 标签栏 菜单 展开 六宫格 加号 磨砂 滑动 glass tabs menu morph frosted toolbar creation",
+  "docsPath": "/docs/animations/glass-tab-menu",
+  "detailPath": "/ai/components/glass-tab-menu.json",
+  "markdownPath": "/ai/components/glass-tab-menu.md",
+  "previewPath": "/assets/components/glass-tab-menu.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "标签页导航",
+      "可展开应用菜单",
+      "expandable tab navigation"
+    ],
+    "searchTerms": [
+      "导航",
+      "标签",
+      "菜单",
+      "玻璃",
+      "navigation",
+      "tabs",
+      "menu",
+      "glass"
+    ],
+    "visualTags": [
+      "glass",
+      "minimal"
+    ],
+    "interactions": [
+      "click",
+      "keyboard"
+    ],
+    "caveat": "根据真实页面定义导航项与选中状态。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/SolutionB2u/status/2113575003341881728/video/1",
+    "designAuthor": "solutionb",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/glass-tab-menu/react.json",
+      "component": "GlassTabMenu",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GlassTabMenu } from \"./GlassTabMenu\";\n\nexport default function App() {\n  return <GlassTabMenu />;\n}",
+      "files": [
+        "GlassTabMenu.tsx",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/glass-tab-menu/vue.json",
+      "component": "GlassTabMenu",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GlassTabMenu from \"./GlassTabMenu.vue\";\n</script>\n<template><GlassTabMenu /></template>",
+      "files": [
+        "GlassTabMenu.vue",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/glass-tab-menu/svelte.json",
+      "component": "GlassTabMenu",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GlassTabMenu from \"./GlassTabMenu.svelte\";\n</script>\n<GlassTabMenu />",
+      "files": [
+        "GlassTabMenu.svelte",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/glass-tab-menu/solid.json",
+      "component": "GlassTabMenu",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GlassTabMenu } from \"./GlassTabMenu.solid\";\n\nexport default function App() {\n  return <GlassTabMenu />;\n}",
+      "files": [
+        "GlassTabMenu.solid.tsx",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/glass-tab-menu/preact.json",
+      "component": "GlassTabMenu",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GlassTabMenu } from \"./GlassTabMenu.preact\";\n\nexport default function App() {\n  return <GlassTabMenu />;\n}",
+      "files": [
+        "GlassTabMenu.preact.tsx",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/glass-tab-menu/vanilla.json",
+      "component": "GlassTabMenu",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GlassTabMenu\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GlassTabMenu.ts",
+        "GlassTabMenuEngine.js",
+        "motion-runtime.ts",
+        "GlassTabMenuEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click a tab to move the selection, or press + to open the six-action menu. Keyboard and touch are supported; actions use local demonstration state.",
+    "zh": "点击标签切换选中项，按 + 展开六宫格菜单。支持键盘和触屏，菜单操作使用本地演示状态。"
+  }
+}

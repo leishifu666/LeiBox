@@ -1,0 +1,46 @@
+{
+  "reference": "selected-reference.png",
+  "image_size": [
+    170,
+    79
+  ],
+  "mode": "geometric regularization of the selected original ei ligature",
+  "threshold": 128,
+  "mark_crop": [
+    9,
+    19,
+    57,
+    71
+  ],
+  "word_crop": [
+    68,
+    34,
+    160,
+    59
+  ],
+  "word_source_topology": {
+    "components": 6,
+    "holes": 4
+  },
+  "ei_source_topology": {
+    "components": 2,
+    "holes": 1
+  },
+  "locked_features": [
+    "exact existing left SVG path",
+    "LeiBox spelling",
+    "e-i diagonal shared stroke",
+    "separate circular i dot",
+    "open lower e aperture",
+    "two B counters",
+    "one o counter"
+  ],
+  "allowed_adjustments": [
+    "raster noise",
+    "smooth shared curves",
+    "terminal radii",
+    "optical letter spacing"
+  ],
+  "word_cap_height_source_px": 25,
+  "note": "The 170x79 user crop is authoritative. The earlier larger generated board is a style reference only."
+}

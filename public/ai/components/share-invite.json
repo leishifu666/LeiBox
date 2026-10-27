@@ -1,0 +1,168 @@
+{
+  "slug": "share-invite",
+  "name": {
+    "en": "Share Invite Panel",
+    "zh": "分享邀请面板"
+  },
+  "description": {
+    "en": "An expandable sharing panel with email invitations, member roles, and a real copy-link action.",
+    "zh": "可展开收拢的分享面板，支持邮箱邀请、成员权限和真实链接复制。"
+  },
+  "keywords": "motion animation share invite collaboration permissions email 动效 分享 邀请 协作 权限 邮箱 弹簧 面板 形变",
+  "docsPath": "/docs/components/share-invite",
+  "detailPath": "/ai/components/share-invite.json",
+  "markdownPath": "/ai/components/share-invite.md",
+  "previewPath": "/assets/components/share-invite.png",
+  "discovery": {
+    "category": "collaboration",
+    "useCases": [
+      "分享链接",
+      "团队成员邀请",
+      "team member sharing invite"
+    ],
+    "searchTerms": [
+      "分享",
+      "邀请",
+      "成员",
+      "团队",
+      "权限",
+      "share",
+      "invite",
+      "invitation",
+      "members",
+      "team"
+    ],
+    "visualTags": [
+      "product",
+      "compact"
+    ],
+    "interactions": [
+      "input",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "链接复制可接实际地址；邀请发送与权限变更需接入业务接口。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": "https://x.com/sucodeee/status/2111061993599713612/video/1",
+    "designAuthor": "sucodee",
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/share-invite/react.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { ShareInvite } from \"./ShareInvite\";\n\nexport default function App() {\n  return <ShareInvite />;\n}",
+      "files": [
+        "ShareInvite.tsx",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/share-invite/vue.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ShareInvite from \"./ShareInvite.vue\";\n</script>\n<template><ShareInvite /></template>",
+      "files": [
+        "ShareInvite.vue",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/share-invite/svelte.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ShareInvite from \"./ShareInvite.svelte\";\n</script>\n<ShareInvite />",
+      "files": [
+        "ShareInvite.svelte",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/share-invite/solid.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { ShareInvite } from \"./ShareInvite.solid\";\n\nexport default function App() {\n  return <ShareInvite />;\n}",
+      "files": [
+        "ShareInvite.solid.tsx",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/share-invite/preact.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { ShareInvite } from \"./ShareInvite.preact\";\n\nexport default function App() {\n  return <ShareInvite />;\n}",
+      "files": [
+        "ShareInvite.preact.tsx",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/share-invite/vanilla.json",
+      "component": "ShareInvite",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./ShareInvite\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ShareInvite.ts",
+        "ShareInviteEngine.js",
+        "motion-runtime.ts",
+        "ShareInviteEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "",
+    "zh": ""
+  }
+}

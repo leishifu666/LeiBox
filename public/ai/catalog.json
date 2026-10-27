@@ -1,0 +1,2702 @@
+{
+  "schemaVersion": 1,
+  "title": "LeiBox UI collection metadata",
+  "revision": "889bd95389ba3ef6b52259046d37f9adde281ee0a933fe315eea5394f250a074",
+  "links": {
+    "searchIndex": "/ai/search-index.json",
+    "searchSchema": "/ai/search-index.schema.json",
+    "agentGuide": "/ai/README.md",
+    "catalog": "/ai/catalog.json",
+    "llms": "/llms.txt",
+    "docs": "/docs",
+    "components": "/components",
+    "skill": "/ai/SKILL.md",
+    "aiGuide": "/docs/mcp"
+  },
+  "capabilities": {
+    "list": true,
+    "bilingualSearch": true,
+    "componentMetadata": true,
+    "sourceDownload": true,
+    "sourceRedistribution": true,
+    "perComponentDistribution": true,
+    "autoInstall": false
+  },
+  "classificationPolicy": {
+    "supportedKinds": [
+      "upstream-reference",
+      "project-source",
+      "original",
+      "licensed-copy"
+    ],
+    "currentKind": "mixed",
+    "distribution": "Check each entry. Project framework packages are fetched from LeiBox; upstream-reference source is fetched directly from its author."
+  },
+  "items": [
+    {
+      "slug": "ascii-object",
+      "name": {
+        "en": "ASCII Object",
+        "zh": "ASCII 物体"
+      },
+      "description": {
+        "en": "Any GLB/glTF model, SVG, or image floating in a studio scene, redrawn as shape-matched ASCII characters.",
+        "zh": "让任意 GLB/glTF 模型、SVG 或图片悬浮在影棚场景中，并以贴合轮廓的 ASCII 字符重绘。"
+      },
+      "docsPath": "/docs/components/ascii-object",
+      "detailPath": "/ai/components/ascii-object.json",
+      "markdownPath": "/ai/components/ascii-object.md",
+      "previewPath": "/assets/videos/ascii-object-leibox.webm",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "品牌模型展示",
+          "首屏视觉",
+          "3D model showcase"
+        ],
+        "searchTerms": [
+          "字符",
+          "ascii",
+          "模型",
+          "3d",
+          "logo",
+          "首屏",
+          "hero"
+        ],
+        "visualTags": [
+          "ascii",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/ascii-object",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "asciify",
+      "name": {
+        "en": "Asciify",
+        "zh": "字符透镜"
+      },
+      "description": {
+        "en": "A soft lens that follows your cursor and redraws the live HTML beneath it as ascii characters.",
+        "zh": "柔和的透镜跟随光标，将下方的实时 HTML 重绘为 ASCII 字符。"
+      },
+      "docsPath": "/docs/components/asciify",
+      "detailPath": "/ai/components/asciify.json",
+      "markdownPath": "/ai/components/asciify.md",
+      "previewPath": "/assets/videos/asciify.webm",
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "鼠标探索效果",
+          "网页局部字符化",
+          "cursor lens"
+        ],
+        "searchTerms": [
+          "字符",
+          "ascii",
+          "透镜",
+          "鼠标",
+          "光标",
+          "cursor",
+          "lens"
+        ],
+        "visualTags": [
+          "ascii"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/asciify",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "frost",
+      "name": {
+        "en": "Frost",
+        "zh": "冰霜"
+      },
+      "description": {
+        "en": "A frozen pane of ice over your live HTML that melts under the cursor and refreezes.",
+        "zh": "在实时 HTML 上覆盖冰层，光标划过时融化，离开后重新结冰。"
+      },
+      "docsPath": "/docs/components/frost",
+      "detailPath": "/ai/components/frost.json",
+      "markdownPath": "/ai/components/frost.md",
+      "previewPath": "/assets/videos/frost.webm",
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "冰霜擦除互动",
+          "节日活动首屏",
+          "ice reveal"
+        ],
+        "searchTerms": [
+          "冰霜",
+          "冰冻",
+          "融化",
+          "擦除",
+          "ice",
+          "frost",
+          "reveal"
+        ],
+        "visualTags": [
+          "ice",
+          "translucent"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/frost",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "glass",
+      "name": {
+        "en": "Glass",
+        "zh": "玻璃透镜"
+      },
+      "description": {
+        "en": "A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.",
+        "zh": "玻璃透镜跟随光标，折射实时 HTML，并像水晶球一样放大目标。"
+      },
+      "docsPath": "/docs/components/glass",
+      "detailPath": "/ai/components/glass.json",
+      "markdownPath": "/ai/components/glass.md",
+      "previewPath": "/assets/videos/glass.webm",
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "鼠标放大镜",
+          "首屏玻璃透镜",
+          "magnifying cursor"
+        ],
+        "searchTerms": [
+          "玻璃",
+          "透镜",
+          "放大镜",
+          "折射",
+          "鼠标",
+          "glass",
+          "lens",
+          "magnifier"
+        ],
+        "visualTags": [
+          "glass",
+          "refraction"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获；玻璃文件管理卡片应选择 glass-folder。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/glass",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "glass-object",
+      "name": {
+        "en": "Glass Object",
+        "zh": "玻璃物体"
+      },
+      "description": {
+        "en": "Turns any 3D model, SVG, or image into floating liquid glass with real refraction, dispersion, and frost.",
+        "zh": "将任意 3D 模型、SVG 或图片变为悬浮液态玻璃，呈现真实折射、色散与磨砂效果。"
+      },
+      "docsPath": "/docs/components/glass-object",
+      "detailPath": "/ai/components/glass-object.json",
+      "markdownPath": "/ai/components/glass-object.md",
+      "previewPath": "/assets/videos/glass-object-leibox.webm",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "玻璃品牌标志",
+          "产品模型展示",
+          "glass logo showcase"
+        ],
+        "searchTerms": [
+          "玻璃",
+          "液态",
+          "折射",
+          "模型",
+          "logo",
+          "glass",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "glass",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/glass-object",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "glyph-rain",
+      "name": {
+        "en": "Glyph Rain",
+        "zh": "字符雨"
+      },
+      "description": {
+        "en": "Falling glyph streams that light up your live HTML, with drop heads that surge where your cursor cuts through.",
+        "zh": "下落的字符流照亮实时 HTML，光标穿过时，字符雨的前端会涌动增强。"
+      },
+      "docsPath": "/docs/components/glyph-rain",
+      "detailPath": "/ai/components/glyph-rain.json",
+      "markdownPath": "/ai/components/glyph-rain.md",
+      "previewPath": "/assets/videos/glyph-rain.webm",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "代码雨背景",
+          "科技主题首屏",
+          "matrix code rain"
+        ],
+        "searchTerms": [
+          "代码雨",
+          "字符雨",
+          "黑客",
+          "矩阵",
+          "matrix",
+          "rain",
+          "background"
+        ],
+        "visualTags": [
+          "ascii",
+          "cyber"
+        ],
+        "interactions": [
+          "pointer",
+          "autoplay"
+        ],
+        "caveat": "涉及实时 HTML 捕获；保持正文可读，浏览器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/glyph-rain",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "particle-object",
+      "name": {
+        "en": "Particle Object",
+        "zh": "粒子物体"
+      },
+      "description": {
+        "en": "Rebuilds any 3D model, SVG, or image as particles that scatter around the cursor and spring back into shape.",
+        "zh": "将任意 3D 模型、SVG 或图片重建为粒子，在光标周围散开后弹回原来的形状。"
+      },
+      "docsPath": "/docs/components/particle-object",
+      "detailPath": "/ai/components/particle-object.json",
+      "markdownPath": "/ai/components/particle-object.md",
+      "previewPath": "/assets/videos/particle-object-leibox-3d.webm",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "粒子 Logo",
+          "交互模型展示",
+          "interactive particle logo"
+        ],
+        "searchTerms": [
+          "粒子",
+          "散开",
+          "聚合",
+          "模型",
+          "logo",
+          "particles",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "particles",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/particle-object",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "particle-scroll",
+      "name": {
+        "en": "Particle Scroll",
+        "zh": "粒子滚动"
+      },
+      "description": {
+        "en": "Dissolves your live HTML below a chosen line into fine sand particles that reassemble on scroll.",
+        "zh": "将指定分界线下方的实时 HTML 化为细沙粒子，并随滚动重新聚合。"
+      },
+      "docsPath": "/docs/components/particle-scroll",
+      "detailPath": "/ai/components/particle-scroll.json",
+      "markdownPath": "/ai/components/particle-scroll.md",
+      "previewPath": "/assets/videos/particle-scroll.webm",
+      "discovery": {
+        "category": "scroll",
+        "useCases": [
+          "滚动叙事",
+          "页面消散过渡",
+          "scroll storytelling"
+        ],
+        "searchTerms": [
+          "滚动",
+          "消散",
+          "细沙",
+          "粒子",
+          "scroll",
+          "dissolve",
+          "particles"
+        ],
+        "visualTags": [
+          "particles"
+        ],
+        "interactions": [
+          "scroll"
+        ],
+        "caveat": "涉及实时 HTML 捕获；适合局部叙事段落，浏览器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/particle-scroll",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-object",
+      "name": {
+        "en": "Liquid Object",
+        "zh": "流体物体"
+      },
+      "description": {
+        "en": "Drags any 3D model, SVG, or image through invisible liquid that swirls under the cursor and splits the light into color.",
+        "zh": "让任意 3D 模型、SVG 或图片穿过隐形液体，在光标下旋转流动，并将光线分解为色彩。"
+      },
+      "docsPath": "/docs/components/liquid-object",
+      "detailPath": "/ai/components/liquid-object.json",
+      "markdownPath": "/ai/components/liquid-object.md",
+      "previewPath": "/assets/videos/liquid-object-leibox.webm",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "液态品牌展示",
+          "流体模型互动",
+          "liquid model showcase"
+        ],
+        "searchTerms": [
+          "液态",
+          "流体",
+          "模型",
+          "logo",
+          "liquid",
+          "fluid",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "liquid",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "source": {
+        "kind": "upstream-reference",
+        "author": "David Haz",
+        "website": "https://canvasui.dev/docs/components/liquid-object",
+        "repository": "https://github.com/DavidHDev/canvas-ui",
+        "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+        "license": "MIT + Commons Clause",
+        "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "registryNamespace": "@canvas-ui",
+        "notice": {
+          "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+          "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+        }
+      }
+    },
+    {
+      "slug": "spider-music-player",
+      "name": {
+        "en": "Spider Track Switcher",
+        "zh": "蜘蛛牵引切歌"
+      },
+      "description": {
+        "en": "An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.",
+        "zh": "八足蜘蛛结网牵引专辑封面，在队列与播放区之间连续搬运，搭配真实专辑图片和可操作的本地播放控件。"
+      },
+      "keywords": "蜘蛛 蛛丝 结网 专辑 封面 音乐 播放器 队列 切歌 牵引 spider web music player album cover queue track switcher Divan Raj",
+      "docsPath": "/docs/animations/spider-music-player",
+      "detailPath": "/ai/components/spider-music-player.json",
+      "markdownPath": "/ai/components/spider-music-player.md",
+      "previewPath": "/assets/components/spider-music-player.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "专辑封面连续切换",
+          "趣味音乐播放器",
+          "animated album queue"
+        ],
+        "searchTerms": [
+          "蜘蛛",
+          "蛛丝",
+          "结网",
+          "音乐",
+          "专辑",
+          "封面",
+          "切歌",
+          "队列",
+          "spider",
+          "music",
+          "album",
+          "player",
+          "queue"
+        ],
+        "visualTags": [
+          "photography",
+          "tactile",
+          "spider"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "input"
+        ],
+        "caveat": "使用真实封面与本地播放计时；接入真实音源时替换媒体数据并核对封面权限。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM, inline SVG and GSAP reconstruction. Eight verified third-party album covers with copyright and source records are used as requested; no AI-generated cover art is used.",
+        "designReference": "https://x.com/desdivj/status/2114305692547043677/video/1",
+        "designAuthor": "Divan Raj",
+        "license": "Original motion design/source license not supplied or independently verified. Reference footage remains internal. Album covers retain their respective owners' rights and Apple Music source records; no free artwork redistribution license is claimed. No song audio, commercial font or original author code is included."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "collection-layout-morph",
+      "name": {
+        "en": "Collection Layout Morph",
+        "zh": "列表卡片堆叠切换"
+      },
+      "description": {
+        "en": "The same three Claude, Codex and Grok SVG images smoothly move between a list, a card row and an overlapping pack.",
+        "zh": "Claude、Codex、Grok 三张 SVG 在列表、并排卡片与叠放之间连续移动、缩放和重排。"
+      },
+      "keywords": "列表 卡片 叠放 堆叠 布局 切换 图片 共享 元素 Claude Codex Grok list card pack shared layout morph collectibles Shawn Kel",
+      "docsPath": "/docs/animations/collection-layout-morph",
+      "detailPath": "/ai/components/collection-layout-morph.json",
+      "markdownPath": "/ai/components/collection-layout-morph.md",
+      "previewPath": "/assets/components/collection-layout-morph.png",
+      "discovery": {
+        "category": "layout",
+        "useCases": [
+          "收藏列表切换",
+          "卡片布局变换",
+          "list grid layout switch"
+        ],
+        "searchTerms": [
+          "列表",
+          "卡片",
+          "堆叠",
+          "布局",
+          "切换",
+          "list",
+          "grid",
+          "layout",
+          "stack"
+        ],
+        "visualTags": [
+          "cards"
+        ],
+        "interactions": [
+          "click",
+          "keyboard"
+        ],
+        "caveat": "接入时替换演示图片和条目，保留共享元素的连续布局。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent persistent-DOM layout state machine and GSAP transitions. Three embedded SVGs reuse the project's pinned Graphical/Lobe Icons assets, with their source records and applicable license notices retained.",
+        "designReference": "https://x.com/shawn_kel/status/2087937950424129978/video/1",
+        "designAuthor": "Previous Leon",
+        "license": "Original layout/code license not supplied or independently verified; original illustrations and reference video are not redistributed. Reused existing Claude/Codex vectors retain Lobe Icons Copyright (c) 2023 LobeHub and MIT notice. Grok Bot artwork source is recorded separately without claiming an MIT license for it."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "brand-poster-cards",
+      "name": {
+        "en": "Brand Poster Cards",
+        "zh": "品牌海报三联卡片"
+      },
+      "description": {
+        "en": "Three portrait posters pair a small corner symbol, a centered brand wordmark, and a shared introduction. The photographs gently zoom while the branding stays fixed.",
+        "zh": "三张人像海报统一搭配左上角标、中央品牌字标与底部介绍，图片轻缓缩放，标志和文字保持固定。"
+      },
+      "keywords": "品牌 海报 三联 卡片 人像 图片 肖像 字标 标志 排版 LeiBox brand poster cards portrait triptych logo identity photography",
+      "docsPath": "/docs/animations/brand-poster-cards",
+      "detailPath": "/ai/components/brand-poster-cards.json",
+      "markdownPath": "/ai/components/brand-poster-cards.md",
+      "previewPath": "/assets/components/brand-poster-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "品牌海报展示",
+          "人物作品集",
+          "brand poster portfolio"
+        ],
+        "searchTerms": [
+          "品牌",
+          "海报",
+          "人物",
+          "作品集",
+          "brand",
+          "poster",
+          "portrait",
+          "portfolio"
+        ],
+        "visualTags": [
+          "photography",
+          "editorial"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "替换演示人像、品牌标志和文案，并确认素材使用权限。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM/CSS/GSAP reconstruction of a user-provided screenshot, with user-provided portrait assets and existing LeiBox brand vectors.",
+        "designReference": null,
+        "designAuthor": "User-provided screenshot; author unknown",
+        "license": "Original layout designer/license unknown. User supplied the replacement portraits and requested reuse of the site's own LeiBox brand assets; no original Ninja images, logo or copy are redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "dot-matrix-trio",
+      "name": {
+        "en": "Dot Matrix Ripple and Spiral",
+        "zh": "点阵波纹与旋涡"
+      },
+      "description": {
+        "en": "Three synchronized dot grids form expanding two-color ripples, a rotating spiral, and a growing circular pulse on printed cards.",
+        "zh": "三张点阵卡片同步呈现双色扩散波纹、旋转旋涡与圆形扩张，保留印刷排版和渐变背景。"
+      },
+      "keywords": "点阵 波纹 旋涡 漩涡 圆形 扩散 三联 卡片 LeiBox 雷师傅 Chris Halaska dot matrix ripple spiral pulse",
+      "docsPath": "/docs/animations/dot-matrix-trio",
+      "detailPath": "/ai/components/dot-matrix-trio.json",
+      "markdownPath": "/ai/components/dot-matrix-trio.md",
+      "previewPath": "/assets/components/dot-matrix-trio.png",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "品牌点阵展示",
+          "印刷风动效卡片",
+          "dot matrix brand cards"
+        ],
+        "searchTerms": [
+          "点阵",
+          "波纹",
+          "旋涡",
+          "品牌",
+          "dot",
+          "matrix",
+          "ripple",
+          "spiral"
+        ],
+        "visualTags": [
+          "dots",
+          "print"
+        ],
+        "interactions": [
+          "autoplay",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "三联卡片视觉；等待反馈可优先比较 ai-generating。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM and Canvas reconstruction by LeiBox; no original author source code was obtained or redistributed.",
+        "designReference": "https://x.com/chalaska/status/2096917032621199665/video/1",
+        "designAuthor": "Chris Halaska",
+        "license": "Original design, Circuit brand and artwork license not verified. Reference media is retained only as internal evidence; no original artwork, font or source code is included."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "selection-flower",
+      "name": {
+        "en": "Text Selection Flowers",
+        "zh": "文字选区开花"
+      },
+      "description": {
+        "en": "Drag to select real text and grow seeded, outlined flowers around each character; release to fold the petals, leaves, and stems back into the page.",
+        "zh": "拖选真实文字，每个字符周围长出随机配色的描边花朵；松手后花瓣、叶片和茎依次反向收回。"
+      },
+      "keywords": "文字 选区 选择 拖选 开花 花朵 生长 收回 植物 随机 text selection flowers bloom grow reverse seeded canvas Omerico",
+      "docsPath": "/docs/animations/selection-flower",
+      "detailPath": "/ai/components/selection-flower.json",
+      "markdownPath": "/ai/components/selection-flower.md",
+      "previewPath": "/assets/components/selection-flower.png",
+      "discovery": {
+        "category": "text",
+        "useCases": [
+          "文章趣味选区",
+          "编辑型作品集",
+          "playful text selection"
+        ],
+        "searchTerms": [
+          "文字",
+          "选区",
+          "开花",
+          "花朵",
+          "文章",
+          "text",
+          "selection",
+          "flowers"
+        ],
+        "visualTags": [
+          "botanical",
+          "illustration"
+        ],
+        "interactions": [
+          "text-selection",
+          "keyboard"
+        ],
+        "caveat": "装饰性文字互动；需要编辑文字颜色时选择 notes-text-color。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM Selection/Range and Canvas 2D implementation from observed video frames. Flower geometry and deterministic generator are newly written local reconstruction code.",
+        "designReference": "https://x.com/omer_assa/status/2083862523640496179/video/1",
+        "designAuthor": "Omerico",
+        "license": "Original design/source license not supplied or independently verified. Reference footage is internal evidence only; no original source, font files or vector artwork are redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "inline-text-morph",
+      "name": {
+        "en": "Inline Phrase Morph",
+        "zh": "内联词组变形"
+      },
+      "description": {
+        "en": "Click three inline pills to morph shared letters, resize the sentence, and swap illustrated stickers with a spring.",
+        "zh": "点击三处内联胶囊，相同字母连续重排，句子随宽度变化居中，贴纸图标弹性切换。"
+      },
+      "keywords": "内联 词组 文字 字符 字母 变形 重排 胶囊 图标 Torph Graphical text morph inline phrase letter flip",
+      "docsPath": "/docs/animations/inline-text-morph",
+      "detailPath": "/ai/components/inline-text-morph.json",
+      "markdownPath": "/ai/components/inline-text-morph.md",
+      "previewPath": "/assets/components/inline-text-morph.png",
+      "discovery": {
+        "category": "text",
+        "useCases": [
+          "可切换标题",
+          "品牌标语互动",
+          "interactive headline"
+        ],
+        "searchTerms": [
+          "文字",
+          "标题",
+          "词组",
+          "变形",
+          "标语",
+          "text",
+          "headline",
+          "morph"
+        ],
+        "visualTags": [
+          "typographic",
+          "stickers"
+        ],
+        "interactions": [
+          "click",
+          "keyboard"
+        ],
+        "caveat": "接入时替换词组与贴纸，并检查目标语言的字形和排版。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independently rebuilt layout, remaining feature stickers, width spring and lifecycle; themes/spacing SVG geometry and paint order follow the reference. Existing agent SVGs from Graphical and Lobe Icons retain their source records and applicable notices. Bundled Torph 0.1.3 by Lochie Axon under MIT with its complete notice retained.",
+        "designReference": "https://x.com/lochieaxon/status/2107673625696641174/video/1",
+        "designAuthor": "Graphical",
+        "license": "Graphical's design and additional artwork license not independently verified. Lobe Icons' Codex, Claude and Cursor vector contributions retain Copyright (c) 2023 LobeHub and the full MIT notice. Grok Bot's source is recorded separately without claiming an MIT license for it. No commercial font files or reference video are redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "galaxy-effort-slider",
+      "name": {
+        "en": "Brain Particle Effort Slider",
+        "zh": "脑形滑块粒子增强"
+      },
+      "description": {
+        "en": "A pink brain gains more folds as effort increases through six levels, then glows with a twinkling pixel track, dotted rays, and a brief shake in Galaxy mode.",
+        "zh": "脑形褶皱随六档思考强度逐层增加，进入 Galaxy 后点亮闪动点阵、放射粒子与光晕，并伴随短促震动。"
+      },
+      "keywords": "脑形 大脑 褶皱 脑沟 沟回 生长 滑块 推理 强度 粒子 点阵 发光 六档 银河 brain folds wrinkles particle effort slider galaxy low medium high extra max ozzy",
+      "docsPath": "/docs/animations/galaxy-effort-slider",
+      "detailPath": "/ai/components/galaxy-effort-slider.json",
+      "markdownPath": "/ai/components/galaxy-effort-slider.md",
+      "previewPath": "/assets/components/galaxy-effort-slider.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "AI 思考强度选择",
+          "模型参数调节",
+          "AI reasoning effort"
+        ],
+        "searchTerms": [
+          "思考",
+          "推理",
+          "强度",
+          "滑块",
+          "脑",
+          "reasoning",
+          "effort",
+          "slider"
+        ],
+        "visualTags": [
+          "particles",
+          "cosmic"
+        ],
+        "interactions": [
+          "drag",
+          "keyboard"
+        ],
+        "caveat": "视觉强度选择器；实际模型参数需映射到目标项目的接口。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM, inline SVG and Canvas reconstruction from the reference video; no original author code, fonts or assets obtained.",
+        "designReference": "https://x.com/ozzyxs1a/status/2107523169649389677/video/1",
+        "designAuthor": "ozzy",
+        "license": "Original design/source license not supplied or independently verified. The reference video is retained for internal comparison only."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "notes-text-color",
+      "name": {
+        "en": "Notes Text Color",
+        "zh": "文字选区调色器"
+      },
+      "description": {
+        "en": "Select note text to open a frosted nine-color palette, tint a real multiline selection, and return to recently colored passages.",
+        "zh": "选择笔记文字，唤出磨砂九色调色器；跨行选区随颜色变化，并可跳回最近上色的段落。"
+      },
+      "keywords": "文字 选区 调色器 颜色 笔记 备忘录 荧光 历史 磨砂 notes text color selection palette highlight typography",
+      "docsPath": "/docs/animations/notes-text-color",
+      "detailPath": "/ai/components/notes-text-color.json",
+      "markdownPath": "/ai/components/notes-text-color.md",
+      "previewPath": "/assets/components/notes-text-color.png",
+      "discovery": {
+        "category": "text",
+        "useCases": [
+          "笔记高亮",
+          "文字颜色编辑",
+          "note text highlighting"
+        ],
+        "searchTerms": [
+          "文字",
+          "选区",
+          "颜色",
+          "调色",
+          "笔记",
+          "高亮",
+          "highlight",
+          "color",
+          "notes"
+        ],
+        "visualTags": [
+          "glass",
+          "minimal"
+        ],
+        "interactions": [
+          "text-selection",
+          "click"
+        ],
+        "caveat": "将颜色选择结果接入目标编辑器，核对选区与持久化行为。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM, Selection/Range, CSS and GSAP reconstruction from observed video frames.",
+        "designReference": "https://x.com/heydamir/status/2106779932659470606/video/1",
+        "designAuthor": "Damir Sokolovsky",
+        "license": "Original design/source license not supplied or verified; the original video and author source are not redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "bounding-box-resize",
+      "name": {
+        "en": "Bounding Box Resize",
+        "zh": "选框拖拽缩放"
+      },
+      "description": {
+        "en": "Eight square handles morph into directional arrows, with live size pills, editable dimensions, and guides as the selection resizes.",
+        "zh": "八个方形控制点连续变成方向箭头，拖动时显示实时尺寸胶囊和辅助线，支持直接输入宽高。"
+      },
+      "keywords": "选框 拖拽 缩放 边框 控制点 箭头 尺寸 输入 形变 bounding box resize handles arrows dimensions guides selection",
+      "docsPath": "/docs/animations/bounding-box-resize",
+      "detailPath": "/ai/components/bounding-box-resize.json",
+      "markdownPath": "/ai/components/bounding-box-resize.md",
+      "previewPath": "/assets/components/bounding-box-resize.png",
+      "discovery": {
+        "category": "layout",
+        "useCases": [
+          "画布选框缩放",
+          "设计编辑器",
+          "canvas resize handles"
+        ],
+        "searchTerms": [
+          "选框",
+          "缩放",
+          "尺寸",
+          "画布",
+          "resize",
+          "bounds",
+          "editor"
+        ],
+        "visualTags": [
+          "minimal",
+          "editor"
+        ],
+        "interactions": [
+          "drag",
+          "input"
+        ],
+        "caveat": "缩放交互演示；尺寸结果需接入目标项目的画布状态。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent native DOM/SVG reconstruction from observed frames; no original author source or assets obtained.",
+        "designReference": "https://x.com/azlenelza/status/2106600214593462393/video/1",
+        "designAuthor": "Azlen",
+        "license": "Original design license not supplied or independently verified; the video is retained only for internal comparison."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "soft-action-wheel",
+      "name": {
+        "en": "Soft Action Wheel",
+        "zh": "柔光环形菜单展开"
+      },
+      "description": {
+        "en": "Six monochrome actions spring inward with a short clockwise stagger, framed by fine grey rims, white highlights, and soft shadows; all scatter out together on close.",
+        "zh": "黑色图标随短暂顺时针错峰收拢成环，保留细灰边、白色高光与柔和阴影，关闭时六项一起向外散开。"
+      },
+      "keywords": "柔光 浅色 环形 菜单 展开 细边 高光 阴影 模糊 弹簧 action wheel soft neumorphic radial menu",
+      "docsPath": "/docs/animations/soft-action-wheel",
+      "detailPath": "/ai/components/soft-action-wheel.json",
+      "markdownPath": "/ai/components/soft-action-wheel.md",
+      "previewPath": "/assets/components/soft-action-wheel.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "快捷操作菜单",
+          "工具栏展开",
+          "minimal radial actions"
+        ],
+        "searchTerms": [
+          "菜单",
+          "环形",
+          "快捷",
+          "工具栏",
+          "简洁",
+          "黑白",
+          "menu",
+          "radial",
+          "actions",
+          "toolbar"
+        ],
+        "visualTags": [
+          "minimal",
+          "monochrome"
+        ],
+        "interactions": [
+          "click",
+          "keyboard"
+        ],
+        "caveat": "替换演示操作，检查展开后按钮与页面边界的间距。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Variant of the local native radial-menu core, with independently reconstructed SVGs and light-surface styling; no original author source obtained.",
+        "designReference": "https://x.com/withAnimationUI/status/2110643020890849625/video/1",
+        "designAuthor": "withAnimation",
+        "license": "Original design license not supplied or independently verified; the reference video is retained only for internal comparison."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "staggered-radial-menu",
+      "name": {
+        "en": "Staggered Radial Menu",
+        "zh": "环形菜单交错展开"
+      },
+      "description": {
+        "en": "Six coloured actions arrive from the outside in clockwise order, spring into a ring, then scatter outwards in reverse with soft blur.",
+        "zh": "六个彩色按钮从外围顺时针依次收拢成环，弹性停稳；关闭时逆序向外散开并模糊淡出。"
+      },
+      "keywords": "环形 菜单 交错 展开 圆形 按钮 加号 模糊 错峰 弹簧 stagger radial menu clockwise blur spring",
+      "docsPath": "/docs/animations/staggered-radial-menu",
+      "detailPath": "/ai/components/staggered-radial-menu.json",
+      "markdownPath": "/ai/components/staggered-radial-menu.md",
+      "previewPath": "/assets/components/staggered-radial-menu.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "彩色快捷菜单",
+          "创意工具入口",
+          "colorful radial menu"
+        ],
+        "searchTerms": [
+          "菜单",
+          "环形",
+          "彩色",
+          "快捷",
+          "menu",
+          "radial",
+          "colorful",
+          "actions"
+        ],
+        "visualTags": [
+          "colorful",
+          "spring"
+        ],
+        "interactions": [
+          "click",
+          "keyboard"
+        ],
+        "caveat": "适合少量快捷操作，接入时替换演示动作。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM/CSS/SVG reconstruction; no original author source or vector files obtained.",
+        "designReference": "https://x.com/nitishkmrk/status/2110936271078281321/video/1",
+        "designAuthor": "Nitish Khagwal",
+        "license": "Original design license not verified; attribution does not grant redistribution rights to original assets."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "elastic-panel-resize",
+      "name": {
+        "en": "Elastic Panel Resize",
+        "zh": "弹性面板缩放"
+      },
+      "description": {
+        "en": "A resizable blank panel with a hidden handle, directional bending, and a short resisted stretch beyond its width limits.",
+        "zh": "把手靠近时显现，拖动时同向弯曲；超过面板宽度边界后弹性拉伸，松手回弹。"
+      },
+      "keywords": "弹性 面板 缩放 调整 宽度 拖动 把手 弯曲 回弹 elastic panel resize spring handle drag",
+      "docsPath": "/docs/animations/elastic-panel-resize",
+      "detailPath": "/ai/components/elastic-panel-resize.json",
+      "markdownPath": "/ai/components/elastic-panel-resize.md",
+      "previewPath": "/assets/components/elastic-panel-resize.png",
+      "discovery": {
+        "category": "layout",
+        "useCases": [
+          "侧栏宽度调节",
+          "可拖拽面板",
+          "resizable sidebar panel"
+        ],
+        "searchTerms": [
+          "面板",
+          "侧栏",
+          "缩放",
+          "宽度",
+          "拖拽",
+          "panel",
+          "sidebar",
+          "resize",
+          "drag"
+        ],
+        "visualTags": [
+          "minimal",
+          "elastic"
+        ],
+        "interactions": [
+          "drag"
+        ],
+        "caveat": "将拖拽尺寸接入实际布局，并检查项目需要的最小宽度。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent DOM/SVG reconstruction under the repository license; no original author source supplied.",
+        "designReference": "https://x.com/alvish/status/2111084319716647114/video/1",
+        "designAuthor": "Alvish",
+        "license": "Reference design license not supplied or independently verified; the original video and source are not redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "blue-fluted-glass",
+      "name": {
+        "en": "Blue Fluted Glass Background",
+        "zh": "蓝色棱纹流动背景"
+      },
+      "description": {
+        "en": "Slow blue fluid folds refract through vertical frosted-glass ribs behind a fixed white LeiBox logo.",
+        "zh": "蓝色流体缓慢折叠流动，经竖向毛玻璃棱纹折射，中央白色 LeiBox 标志保持固定。"
+      },
+      "keywords": "蓝色 棱纹 流动 背景 毛玻璃 竖纹 流体 渐变 品牌 标志 blue fluted ribbed frosted glass fluid gradient background logo LeiBox",
+      "docsPath": "/docs/animations/blue-fluted-glass",
+      "detailPath": "/ai/components/blue-fluted-glass.json",
+      "markdownPath": "/ai/components/blue-fluted-glass.md",
+      "previewPath": "/assets/components/blue-fluted-glass.png",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "品牌首屏背景",
+          "蓝色玻璃场景",
+          "blue glass hero background"
+        ],
+        "searchTerms": [
+          "背景",
+          "首屏",
+          "蓝色",
+          "棱纹",
+          "毛玻璃",
+          "background",
+          "hero",
+          "blue",
+          "fluted"
+        ],
+        "visualTags": [
+          "blue",
+          "glass",
+          "liquid"
+        ],
+        "interactions": [
+          "autoplay"
+        ],
+        "caveat": "替换演示 Logo；正文需要在流动背景上保持可读。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent WebGL reconstruction from observed video frames; existing LeiBox vector artwork embedded locally.",
+        "designReference": "https://x.com/sashabirukoff/status/2113002960892649916/video/1",
+        "designAuthor": "sasha birukoff",
+        "license": "Original design/source license not supplied or verified; no original code or video is included in the component package."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "reasoning-effort-slider",
+      "name": {
+        "en": "Reasoning Effort Slider",
+        "zh": "模型思考强度滑块"
+      },
+      "description": {
+        "en": "A three-stop thinking slider with a flowing star field, velocity-driven jelly deformation, and soft snapping from Simple to Deep.",
+        "zh": "三档模型思考强度滑块，保留流动星空填充、随拖速变化的果冻形变与柔和吸附。"
+      },
+      "keywords": "模型 思考 强度 推理 滑块 深度 简单 中度 深度 星空 液态 拖拽 Deep Agent reasoning effort thinking slider jelly",
+      "docsPath": "/docs/animations/reasoning-effort-slider",
+      "detailPath": "/ai/components/reasoning-effort-slider.json",
+      "markdownPath": "/ai/components/reasoning-effort-slider.md",
+      "previewPath": "/assets/components/reasoning-effort-slider.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "AI 推理档位选择",
+          "模型设置",
+          "reasoning effort settings"
+        ],
+        "searchTerms": [
+          "思考",
+          "推理",
+          "强度",
+          "滑块",
+          "模型",
+          "简洁",
+          "三档",
+          "reasoning",
+          "effort",
+          "slider"
+        ],
+        "visualTags": [
+          "cosmic",
+          "elastic"
+        ],
+        "interactions": [
+          "drag",
+          "keyboard"
+        ],
+        "caveat": "三档选择界面；实际模型参数需映射到目标项目的接口。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "deep-agent-composer",
+      "name": {
+        "en": "Deep Agent Composer",
+        "zh": "Agent 对话输入框"
+      },
+      "description": {
+        "en": "The original Deep Agent Composer, including permission controls, context capacity, attachments, model selection, and the thinking-effort slider.",
+        "zh": "直接迁入 Deep Agent 原版对话输入框，包含权限菜单、上下文容量、附件、模型选择和思考强度滑块。"
+      },
+      "keywords": "Agent 对话 输入框 模型 思考 强度 推理 菜单 附件 计划 模式 Deep Agent composer chat model thinking reasoning effort slider",
+      "docsPath": "/docs/animations/deep-agent-composer",
+      "detailPath": "/ai/components/deep-agent-composer.json",
+      "markdownPath": "/ai/components/deep-agent-composer.md",
+      "previewPath": "/assets/components/deep-agent-composer.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "AI 聊天输入",
+          "智能体对话",
+          "AI chat composer"
+        ],
+        "searchTerms": [
+          "聊天",
+          "对话",
+          "输入框",
+          "附件",
+          "模型",
+          "chat",
+          "agent",
+          "composer",
+          "prompt"
+        ],
+        "visualTags": [
+          "product",
+          "compact"
+        ],
+        "interactions": [
+          "input",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "业务接口、附件上传、权限和模型调用需由目标项目接入。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "hammerhead-chart",
+      "name": {
+        "en": "ASCII Shark Price Paths",
+        "zh": "字符鲨鱼追踪价格路径"
+      },
+      "description": {
+        "en": "An ASCII hammerhead swims along three forecast price paths and tags each with its odds, volatility and dealer gamma; the pointer steers it to the nearest path, or lets it swim freely over the candle history.",
+        "zh": "字符锤头鲨沿三条预测价格路径游动，依次标记概率、波动率与 dealer gamma；指针在预测区时鲨鱼追向最近的路径，移到左侧K线区时鲨鱼跟着指针自由游动。"
+      },
+      "keywords": "鲨鱼 锤头鲨 字符 ASCII 价格 路径 预测 K线 概率 金融 图表 终端 hammerhead shark price paths forecast candles chart terminal",
+      "docsPath": "/docs/animations/hammerhead-chart",
+      "detailPath": "/ai/components/hammerhead-chart.json",
+      "markdownPath": "/ai/components/hammerhead-chart.md",
+      "previewPath": "/assets/components/hammerhead-chart.png",
+      "discovery": {
+        "category": "data",
+        "useCases": [
+          "创意图表叙事",
+          "价格路径演示",
+          "price path visualization"
+        ],
+        "searchTerms": [
+          "图表",
+          "价格",
+          "路径",
+          "鲨鱼",
+          "chart",
+          "price",
+          "shark",
+          "forecast"
+        ],
+        "visualTags": [
+          "ascii",
+          "chart"
+        ],
+        "interactions": [
+          "pointer",
+          "autoplay"
+        ],
+        "caveat": "价格路径是界面演示，使用前确认数据来源与业务含义。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/stackedlol/status/2113757384656974179/video/1",
+        "designAuthor": "stacked",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "glass-tab-menu",
+      "name": {
+        "en": "Glass Tab Menu",
+        "zh": "玻璃标签栏展开菜单"
+      },
+      "description": {
+        "en": "A frosted four-tab bar expands into six creation actions, with a translucent sliding selection and a rotating plus button.",
+        "zh": "四项磨砂标签栏连续展开为六宫格菜单，选中块通透滑动，加号旋转为关闭按钮。"
+      },
+      "keywords": "玻璃 标签栏 菜单 展开 六宫格 加号 磨砂 滑动 glass tabs menu morph frosted toolbar creation",
+      "docsPath": "/docs/animations/glass-tab-menu",
+      "detailPath": "/ai/components/glass-tab-menu.json",
+      "markdownPath": "/ai/components/glass-tab-menu.md",
+      "previewPath": "/assets/components/glass-tab-menu.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "标签页导航",
+          "可展开应用菜单",
+          "expandable tab navigation"
+        ],
+        "searchTerms": [
+          "导航",
+          "标签",
+          "菜单",
+          "玻璃",
+          "navigation",
+          "tabs",
+          "menu",
+          "glass"
+        ],
+        "visualTags": [
+          "glass",
+          "minimal"
+        ],
+        "interactions": [
+          "click",
+          "keyboard"
+        ],
+        "caveat": "根据真实页面定义导航项与选中状态。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/SolutionB2u/status/2113575003341881728/video/1",
+        "designAuthor": "solutionb",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "crumpled-paper",
+      "name": {
+        "en": "Crumpled Paper Unfold",
+        "zh": "揉皱纸张展开"
+      },
+      "description": {
+        "en": "Three crumpled paper meshes unfold into a handwritten letter, a blue mountain photograph, and a printed note as you hover.",
+        "zh": "三张纸团随悬停展开为手写信、蓝色山景照片和印刷便笺，纸面沿真实折叠网格连续变形。"
+      },
+      "keywords": "揉皱 纸团 纸张 展开 信件 照片 折痕 网格 悬停 crumpled paper unfold mesh letter photograph webgl",
+      "docsPath": "/docs/animations/crumpled-paper",
+      "detailPath": "/ai/components/crumpled-paper.json",
+      "markdownPath": "/ai/components/crumpled-paper.md",
+      "previewPath": "/assets/components/crumpled-paper.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "信件展示",
+          "照片便笺互动",
+          "paper letter photo reveal"
+        ],
+        "searchTerms": [
+          "纸张",
+          "揉皱",
+          "信件",
+          "照片",
+          "便笺",
+          "paper",
+          "letter",
+          "photo",
+          "unfold"
+        ],
+        "visualTags": [
+          "paper",
+          "tactile"
+        ],
+        "interactions": [
+          "hover"
+        ],
+        "caveat": "替换示例信件和照片，并为触摸设备检查交互路径。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/insporadesign/status/2113586239110828465/video/1",
+        "designAuthor": "Matt",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "sailing-toc",
+      "name": {
+        "en": "Sailing Scroll Contents",
+        "zh": "帆船滚动目录"
+      },
+      "description": {
+        "en": "A sailing ship follows the current section along a bending dashed route, with scroll tracking and smooth contents navigation.",
+        "zh": "帆船随当前章节沿弯曲虚线移动，支持滚动跟随与点击目录平滑跳转。"
+      },
+      "keywords": "帆船 滚动 目录 导航 航线 虚线 弹簧 船 阅读 sailing ship scroll contents navigation toc spring",
+      "docsPath": "/docs/animations/sailing-toc",
+      "detailPath": "/ai/components/sailing-toc.json",
+      "markdownPath": "/ai/components/sailing-toc.md",
+      "previewPath": "/assets/components/sailing-toc.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "长文章节目录",
+          "文档阅读导航",
+          "article table of contents"
+        ],
+        "searchTerms": [
+          "目录",
+          "章节",
+          "长文",
+          "阅读",
+          "导航",
+          "文章",
+          "文档",
+          "toc",
+          "article",
+          "documentation",
+          "navigation"
+        ],
+        "visualTags": [
+          "nautical",
+          "minimal"
+        ],
+        "interactions": [
+          "scroll",
+          "click"
+        ],
+        "caveat": "章节 ID 与页面标题保持一致；帆船意象需符合页面风格。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/emirayaz/status/2113414926911881647/video/1",
+        "designAuthor": "Emir Ayaz",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "thinking-particles",
+      "name": {
+        "en": "Thinking Step Particle Morph",
+        "zh": "思考步骤粒子变形"
+      },
+      "description": {
+        "en": "Particles morph through five thinking steps, then collapse into a streamed answer with replay and copy controls.",
+        "zh": "粒子随五个思考步骤连续变形，完成后收起并逐字显示回答，支持暂停、重播和复制。"
+      },
+      "keywords": "思考 步骤 粒子 变形 放大镜 魔方 积木 机械臂 礼物 AI 推理 thinking reasoning particles morph agent",
+      "docsPath": "/docs/animations/thinking-particles",
+      "detailPath": "/ai/components/thinking-particles.json",
+      "markdownPath": "/ai/components/thinking-particles.md",
+      "previewPath": "/assets/components/thinking-particles.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "AI 思考等待反馈",
+          "推理步骤展示",
+          "AI thinking steps"
+        ],
+        "searchTerms": [
+          "等待",
+          "思考",
+          "推理",
+          "步骤",
+          "加载",
+          "thinking",
+          "reasoning",
+          "steps",
+          "loading"
+        ],
+        "visualTags": [
+          "particles"
+        ],
+        "interactions": [
+          "autoplay",
+          "click"
+        ],
+        "caveat": "把演示步骤绑定真实任务状态，不把动画进度当作真实推理进度。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/shridharathi/status/2113255894423158914/video/1",
+        "designAuthor": "Shridhar",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "glass-folder",
+      "name": {
+        "en": "Glass Folder Cards",
+        "zh": "玻璃文件夹展开"
+      },
+      "description": {
+        "en": "Frosted folders open into a fan of real files, with generated artwork, a drop-in add action, and keyboard menus.",
+        "zh": "磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。"
+      },
+      "keywords": "glass folder files frosted blur art marble add fan menu 玻璃 文件夹 文件 磨砂 扇出 添加 菜单 纹理",
+      "docsPath": "/docs/animations/glass-folder",
+      "detailPath": "/ai/components/glass-folder.json",
+      "markdownPath": "/ai/components/glass-folder.md",
+      "previewPath": "/assets/components/glass-folder.png",
+      "discovery": {
+        "category": "files",
+        "useCases": [
+          "文件管理",
+          "作品集分组",
+          "document file manager"
+        ],
+        "searchTerms": [
+          "文件",
+          "文件夹",
+          "资料",
+          "管理",
+          "玻璃",
+          "file",
+          "files",
+          "folder",
+          "documents",
+          "manager"
+        ],
+        "visualTags": [
+          "glass",
+          "cards"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "文件卡片展示界面；存储、上传与真实文件权限需接入项目。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "cosmic-panels",
+      "name": {
+        "en": "Orbit & Halftone Animation",
+        "zh": "轨道与点阵动效"
+      },
+      "description": {
+        "en": "Orbital loading, flowing halftone clouds, and floating isometric servers form a three-panel cosmic visual system.",
+        "zh": "轨道加载、流动半色调星云和悬浮服务器组成三联宇宙视觉。"
+      },
+      "keywords": "cosmic space orbit loading astronaut servers globe halftone canvas 宇宙 星云 轨道 点阵 半色调 地球 服务器",
+      "docsPath": "/docs/animations/cosmic-panels",
+      "detailPath": "/ai/components/cosmic-panels.json",
+      "markdownPath": "/ai/components/cosmic-panels.md",
+      "previewPath": "/assets/components/cosmic-panels.png",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "云服务品牌视觉",
+          "宇宙主题展示",
+          "cosmic infrastructure showcase"
+        ],
+        "searchTerms": [
+          "轨道",
+          "星云",
+          "宇宙",
+          "服务器",
+          "cosmic",
+          "orbit",
+          "nebula",
+          "server"
+        ],
+        "visualTags": [
+          "cosmic",
+          "dots"
+        ],
+        "interactions": [
+          "autoplay"
+        ],
+        "caveat": "包含多个视觉模块，按页面需要选择，避免全部挤入小区域。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/acream_1/status/2113235166453964924/video/1",
+        "designAuthor": "Acream",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "gradient-cover-wall",
+      "name": {
+        "en": "Interactive Gradient Cards",
+        "zh": "渐变卡片跟随"
+      },
+      "description": {
+        "en": "Six grainy gradient covers with fine SVG patterns, drifting colours, and spring-driven pointer light.",
+        "zh": "六张颗粒渐变封面，搭配细线纹样、缓慢漂移的色团和弹簧柔光交互。"
+      },
+      "keywords": "渐变 封面 卡片墙 颗粒 噪点 柔光 纹样 弹簧 gradient grain noise cover wall radial spring canvas",
+      "docsPath": "/docs/animations/gradient-cover-wall",
+      "detailPath": "/ai/components/gradient-cover-wall.json",
+      "markdownPath": "/ai/components/gradient-cover-wall.md",
+      "previewPath": "/assets/components/gradient-cover-wall.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "封面画廊",
+          "渐变作品展示",
+          "gradient cover gallery"
+        ],
+        "searchTerms": [
+          "渐变",
+          "封面",
+          "画廊",
+          "作品集",
+          "gradient",
+          "cover",
+          "gallery",
+          "portfolio"
+        ],
+        "visualTags": [
+          "gradient",
+          "grain"
+        ],
+        "interactions": [
+          "pointer",
+          "autoplay"
+        ],
+        "caveat": "装饰性封面展示；业务列表的名称与链接需接入项目。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "otp-verification",
+      "name": {
+        "en": "OTP Input Verification",
+        "zh": "验证码输入验证"
+      },
+      "description": {
+        "en": "A six-digit code unfolds from a pill, contracts to verify, and responds with an error shake or a green confirmation.",
+        "zh": "胶囊展开为六位验证码输入框，收拢验证后呈现错误摇动或绿色成功反馈。"
+      },
+      "keywords": "otp verification code input password authentication pill morph error success 验证码 验证 输入 密码 胶囊 动效 错误 成功",
+      "docsPath": "/docs/components/otp-verification",
+      "detailPath": "/ai/components/otp-verification.json",
+      "markdownPath": "/ai/components/otp-verification.md",
+      "previewPath": "/assets/components/otp-verification.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "登录验证码",
+          "身份验证反馈",
+          "login verification code"
+        ],
+        "searchTerms": [
+          "验证码",
+          "登录",
+          "验证",
+          "短信",
+          "otp",
+          "verification",
+          "login",
+          "code"
+        ],
+        "visualTags": [
+          "minimal",
+          "capsule"
+        ],
+        "interactions": [
+          "input",
+          "keyboard"
+        ],
+        "caveat": "输入与结果反馈界面；验证码发送和校验需接入真实服务。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/bestsaasdesigns/status/2111020282551132539/video/1",
+        "designAuthor": "sucodee",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "brand-line-cards",
+      "name": {
+        "en": "Pointer Line Cards",
+        "zh": "鼠标感应线条"
+      },
+      "description": {
+        "en": "Apple, Google, and Tesla emerge from flowing vertical lines, with spring motion and pointer-driven detection boxes.",
+        "zh": "竖线重构 Apple、Google 与 Tesla 标志，结合弹簧回弹及随鼠标变化的检测框连线。"
+      },
+      "keywords": "品牌 线条 卡片 竖线 苹果 谷歌 特斯拉 检测框 连线 识别 噪声 弹簧 logo brand apple google tesla canvas luminance detection spring",
+      "docsPath": "/docs/animations/brand-line-cards",
+      "detailPath": "/ai/components/brand-line-cards.json",
+      "markdownPath": "/ai/components/brand-line-cards.md",
+      "previewPath": "/assets/components/brand-line-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "交互品牌卡片",
+          "线条 Logo 展示",
+          "interactive line logo cards"
+        ],
+        "searchTerms": [
+          "线条",
+          "品牌",
+          "标志",
+          "鼠标",
+          "line",
+          "brand",
+          "logo",
+          "pointer"
+        ],
+        "visualTags": [
+          "line-art",
+          "monochrome"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "演示含第三方品牌标志，接入时替换为项目自己的素材。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/ianneo_ai/status/2112718197690691657/video/1",
+        "designAuthor": "Ian (伊恩)",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "share-invite",
+      "name": {
+        "en": "Share Invite Panel",
+        "zh": "分享邀请面板"
+      },
+      "description": {
+        "en": "An expandable sharing panel with email invitations, member roles, and a real copy-link action.",
+        "zh": "可展开收拢的分享面板，支持邮箱邀请、成员权限和真实链接复制。"
+      },
+      "keywords": "motion animation share invite collaboration permissions email 动效 分享 邀请 协作 权限 邮箱 弹簧 面板 形变",
+      "docsPath": "/docs/components/share-invite",
+      "detailPath": "/ai/components/share-invite.json",
+      "markdownPath": "/ai/components/share-invite.md",
+      "previewPath": "/assets/components/share-invite.png",
+      "discovery": {
+        "category": "collaboration",
+        "useCases": [
+          "分享链接",
+          "团队成员邀请",
+          "team member sharing invite"
+        ],
+        "searchTerms": [
+          "分享",
+          "邀请",
+          "成员",
+          "团队",
+          "权限",
+          "share",
+          "invite",
+          "invitation",
+          "members",
+          "team"
+        ],
+        "visualTags": [
+          "product",
+          "compact"
+        ],
+        "interactions": [
+          "input",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "链接复制可接实际地址；邀请发送与权限变更需接入业务接口。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": "https://x.com/sucodeee/status/2111061993599713612/video/1",
+        "designAuthor": "sucodee",
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "bouncy-access",
+      "name": {
+        "en": "Expandable Access Request",
+        "zh": "访问申请展开"
+      },
+      "description": {
+        "en": "A compact access request expands into an avatar list with staggered spring motion.",
+        "zh": "权限申请胶囊弹性展开，堆叠头像与成员列表交错切换。"
+      },
+      "keywords": "动效 访问 权限 申请 弹性 展开 收起 头像 access request spring morph panel",
+      "docsPath": "/docs/animations/bouncy-access",
+      "detailPath": "/ai/components/bouncy-access.json",
+      "markdownPath": "/ai/components/bouncy-access.md",
+      "previewPath": "/assets/components/bouncy-access.png",
+      "discovery": {
+        "category": "collaboration",
+        "useCases": [
+          "访问权限申请",
+          "成员列表展开",
+          "request access members"
+        ],
+        "searchTerms": [
+          "访问",
+          "申请",
+          "权限",
+          "成员",
+          "access",
+          "request",
+          "permission",
+          "members"
+        ],
+        "visualTags": [
+          "capsule",
+          "spring"
+        ],
+        "interactions": [
+          "click"
+        ],
+        "caveat": "权限申请与成员状态需绑定项目业务数据。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "velocity-drag",
+      "name": {
+        "en": "Inertial Calendar Drag",
+        "zh": "日历惯性拖拽"
+      },
+      "description": {
+        "en": "Calendar events turn into a floating focus card that stretches and follows drag velocity.",
+        "zh": "日程卡片随拖拽速度拉伸、跟随，并在浮动状态中切换聚焦内容。"
+      },
+      "keywords": "动效 气动 对焦 拖拽 日历 日程 速度 惯性 形变 drag velocity focus calendar physics",
+      "docsPath": "/docs/animations/velocity-drag",
+      "detailPath": "/ai/components/velocity-drag.json",
+      "markdownPath": "/ai/components/velocity-drag.md",
+      "previewPath": "/assets/components/velocity-drag.png",
+      "discovery": {
+        "category": "layout",
+        "useCases": [
+          "日程卡片拖拽",
+          "日历交互反馈",
+          "calendar event drag"
+        ],
+        "searchTerms": [
+          "日历",
+          "日程",
+          "拖拽",
+          "惯性",
+          "calendar",
+          "schedule",
+          "drag",
+          "velocity"
+        ],
+        "visualTags": [
+          "elastic",
+          "cards"
+        ],
+        "interactions": [
+          "drag"
+        ],
+        "caveat": "拖拽视觉反馈；实际排期、碰撞与保存逻辑需接入项目。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "ai-generating",
+      "name": {
+        "en": "Dot Grid Loader",
+        "zh": "点阵加载"
+      },
+      "description": {
+        "en": "A restrained 20-by-20 dot field pulses around two moving focal points while an image is generating.",
+        "zh": "20 × 20 点阵围绕两个移动焦点呼吸，呈现图片生成中的等待反馈。"
+      },
+      "keywords": "动效 AI 生成 图片 加载 等待 反馈 点阵 光点 loading generating dots focus",
+      "docsPath": "/docs/animations/ai-generating",
+      "detailPath": "/ai/components/ai-generating.json",
+      "markdownPath": "/ai/components/ai-generating.md",
+      "previewPath": "/assets/components/ai-generating.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "图片生成等待",
+          "AI 加载反馈",
+          "image generation loading"
+        ],
+        "searchTerms": [
+          "等待",
+          "生成",
+          "加载",
+          "点阵",
+          "图片",
+          "loading",
+          "loader",
+          "generating",
+          "generation",
+          "image"
+        ],
+        "visualTags": [
+          "dots",
+          "minimal"
+        ],
+        "interactions": [
+          "autoplay"
+        ],
+        "caveat": "等待动画不表示真实完成百分比，需要绑定实际任务结束状态。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox component package",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    }
+  ]
+}

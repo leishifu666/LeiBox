@@ -1,0 +1,492 @@
+{
+  "slug": "liquid-object",
+  "name": {
+    "en": "Liquid Object",
+    "zh": "流体物体"
+  },
+  "description": {
+    "en": "Drags any 3D model, SVG, or image through invisible liquid that swirls under the cursor and splits the light into color.",
+    "zh": "让任意 3D 模型、SVG 或图片穿过隐形液体，在光标下旋转流动，并将光线分解为色彩。"
+  },
+  "docsPath": "/docs/components/liquid-object",
+  "detailPath": "/ai/components/liquid-object.json",
+  "markdownPath": "/ai/components/liquid-object.md",
+  "previewPath": "/assets/videos/liquid-object-leibox.webm",
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "液态品牌展示",
+      "流体模型互动",
+      "liquid model showcase"
+    ],
+    "searchTerms": [
+      "液态",
+      "流体",
+      "模型",
+      "logo",
+      "liquid",
+      "fluid",
+      "3d",
+      "hero"
+    ],
+    "visualTags": [
+      "liquid",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "source": {
+    "kind": "upstream-reference",
+    "author": "David Haz",
+    "website": "https://canvasui.dev/docs/components/liquid-object",
+    "repository": "https://github.com/DavidHDev/canvas-ui",
+    "revision": "a04a99b235299ee79a123a16ccb2e6cf9da74b6b",
+    "license": "MIT + Commons Clause",
+    "licenseUrl": "https://github.com/DavidHDev/canvas-ui/blob/a04a99b235299ee79a123a16ccb2e6cf9da74b6b/LICENSE.md"
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "registryNamespace": "@canvas-ui",
+    "notice": {
+      "en": "Reference entry. This AI catalog does not redistribute component source. Install directly from the author's registry under its license; the @canvas-ui namespace belongs to the upstream author.",
+      "zh": "来源收藏条目。本 AI 目录不重新分发组件源码；如需使用，请遵守作者许可并直接从作者的注册表安装。@canvas-ui 属于上游作者。"
+    }
+  },
+  "apiReference": [
+    {
+      "name": "src",
+      "type": "string",
+      "description": {
+        "en": "URL of the asset to display: GLB/glTF, SVG, PNG, JPEG, WebP, or GIF. Object URLs from a file input work too. The format is sniffed from the bytes, not the extension.",
+        "zh": "要显示的素材 URL：GLB/glTF、SVG、PNG、JPEG、WebP 或 GIF；也支持文件输入生成的 Object URL。根据字节内容识别格式，而非扩展名。"
+      }
+    },
+    {
+      "name": "distortion",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "How far the liquid drags the object as it flows.",
+        "zh": "液体流动时拖拽物体的距离。"
+      }
+    },
+    {
+      "name": "aberration",
+      "type": "number",
+      "defaultValue": "0.75",
+      "description": {
+        "en": "Strength of the chromatic lens fringe in a soft radius around the cursor.",
+        "zh": "光标周围柔和范围内的彩色镜头边缘强度。"
+      }
+    },
+    {
+      "name": "grain",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Amount of animated film grain. Subtle across the frame, strongest inside the cursor lens.",
+        "zh": "动态胶片颗粒量；全画面较轻，光标镜头内最强。"
+      }
+    },
+    {
+      "name": "sheen",
+      "type": "number",
+      "defaultValue": "1.6",
+      "description": {
+        "en": "Brightness of the light glinting off the moving liquid.",
+        "zh": "运动液体反射闪光的亮度。"
+      }
+    },
+    {
+      "name": "cursorSize",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Size of the area the cursor disturbs.",
+        "zh": "光标扰动区域的大小。"
+      }
+    },
+    {
+      "name": "cursorForce",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "How hard the cursor pushes the liquid.",
+        "zh": "光标推动液体的力度。"
+      }
+    },
+    {
+      "name": "persistence",
+      "type": "number",
+      "defaultValue": "0.6",
+      "description": {
+        "en": "How long the ripples keep flowing after the cursor stops.",
+        "zh": "光标停止后涟漪继续流动的时长。"
+      }
+    },
+    {
+      "name": "swirl",
+      "type": "number",
+      "defaultValue": "0.5",
+      "description": {
+        "en": "How much the flow curls into swirls and eddies.",
+        "zh": "流动卷成旋涡与涡流的程度。"
+      }
+    },
+    {
+      "name": "iridescence",
+      "type": "number",
+      "defaultValue": "1.5",
+      "description": {
+        "en": "Strength of the rainbow shimmer where the liquid flows.",
+        "zh": "液体流动处彩虹光泽的强度。"
+      }
+    },
+    {
+      "name": "splash",
+      "type": "number",
+      "defaultValue": "1.2",
+      "description": {
+        "en": "Strength of the liquid burst fired when the canvas is clicked or tapped. 0 disables.",
+        "zh": "点击或轻触画布时液体爆发的强度，0 关闭。"
+      }
+    },
+    {
+      "name": "ambient",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Amount of slow idle drift that keeps the surface alive while the cursor is away.",
+        "zh": "光标离开时使表面保持活力的缓慢漂移量。"
+      }
+    },
+    {
+      "name": "wobble",
+      "type": "number",
+      "defaultValue": "0",
+      "description": {
+        "en": "How much the object tilts and bounces like jelly in response to the cursor.",
+        "zh": "物体响应光标时，像果冻般倾斜弹动的程度。"
+      }
+    },
+    {
+      "name": "gloss",
+      "type": "number",
+      "defaultValue": "0.65",
+      "description": {
+        "en": "Surface finish of extruded 2D assets, from matte to mirror. Models keep their own materials.",
+        "zh": "拉伸二维素材的表面质感，从哑光到镜面；模型保留自身材质。"
+      }
+    },
+    {
+      "name": "metallic",
+      "type": "number",
+      "defaultValue": "0.15",
+      "description": {
+        "en": "How metallic the asset reads. 0 keeps the original material finish, 1 turns it to polished metal.",
+        "zh": "素材的金属质感，0 保留原材质外观，1 变为抛光金属。"
+      }
+    },
+    {
+      "name": "tint",
+      "type": "string",
+      "description": {
+        "en": "Tint multiplied over the asset colors. Empty string keeps the original colors.",
+        "zh": "与素材颜色相乘的着色；空字符串保留原色。"
+      }
+    },
+    {
+      "name": "depth",
+      "type": "number",
+      "defaultValue": "0.05",
+      "description": {
+        "en": "Extrusion depth of 2D assets (SVG or image) as a fraction of their longest side.",
+        "zh": "二维素材（SVG 或图片）的拉伸深度，相对于其最长边。"
+      }
+    },
+    {
+      "name": "bevel",
+      "type": "number",
+      "defaultValue": "0.5",
+      "description": {
+        "en": "Edge rounding of extruded 2D assets (0 to 1). Higher values melt the edges into a liquid lip.",
+        "zh": "拉伸二维素材的边缘圆润程度（0 至 1）；较高值使边缘呈液态唇口。"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "string",
+      "defaultValue": "#ffffff",
+      "description": {
+        "en": "Accent color of the ring light in the studio environment.",
+        "zh": "工作室环境中环形灯的强调色。"
+      }
+    },
+    {
+      "name": "environmentIntensity",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Brightness of the studio environment lighting.",
+        "zh": "工作室环境光亮度。"
+      }
+    },
+    {
+      "name": "brightness",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Output brightness. 1 is neutral.",
+        "zh": "输出亮度，1 为中性值。"
+      }
+    },
+    {
+      "name": "saturation",
+      "type": "number",
+      "defaultValue": "1.2",
+      "description": {
+        "en": "Output color saturation. 0 is grayscale, 1 is neutral.",
+        "zh": "输出色彩饱和度，0 为灰度，1 为中性值。"
+      }
+    },
+    {
+      "name": "background",
+      "type": "string",
+      "description": {
+        "en": "Background color behind the object. Empty string keeps the canvas transparent.",
+        "zh": "物体后方的背景色，空字符串保持画布透明。"
+      }
+    },
+    {
+      "name": "scale",
+      "type": "number",
+      "defaultValue": "3",
+      "description": {
+        "en": "Size of the longest side of the asset in scene units. The camera sits about 4 units away.",
+        "zh": "素材最长边的大小，单位为场景单位；摄像机距离约为 4 个单位。"
+      }
+    },
+    {
+      "name": "xOffset",
+      "type": "number",
+      "defaultValue": "0",
+      "description": {
+        "en": "Horizontal offset of the asset in scene units.",
+        "zh": "素材的水平偏移，单位为场景单位。"
+      }
+    },
+    {
+      "name": "yOffset",
+      "type": "number",
+      "defaultValue": "-0.2",
+      "description": {
+        "en": "Vertical offset of the asset in scene units.",
+        "zh": "素材的垂直偏移，单位为场景单位。"
+      }
+    },
+    {
+      "name": "floatIntensity",
+      "type": "number",
+      "defaultValue": "1",
+      "description": {
+        "en": "Strength of the floating bob animation (0 disables).",
+        "zh": "上下漂浮动画的强度（0 关闭）。"
+      }
+    },
+    {
+      "name": "rotationIntensity",
+      "type": "number",
+      "defaultValue": "0.5",
+      "description": {
+        "en": "Strength of the idle rocking rotation (0 disables).",
+        "zh": "闲置摇摆旋转的强度（0 关闭）。"
+      }
+    },
+    {
+      "name": "floatSpeed",
+      "type": "number",
+      "defaultValue": "1.5",
+      "description": {
+        "en": "Speed of the float and rocking animation.",
+        "zh": "漂浮与摇摆动画的速度。"
+      }
+    },
+    {
+      "name": "orbit",
+      "type": "boolean",
+      "defaultValue": "true",
+      "description": {
+        "en": "Let the user orbit the camera by dragging.",
+        "zh": "允许用户拖动以环绕观察物体。"
+      }
+    },
+    {
+      "name": "zoom",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": {
+        "en": "Let the user zoom with the scroll wheel or pinch.",
+        "zh": "允许用户使用滚轮或双指手势缩放。"
+      }
+    },
+    {
+      "name": "autoRotate",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": {
+        "en": "Spin the camera around the asset turntable-style.",
+        "zh": "让摄像机以转台方式环绕素材。"
+      }
+    },
+    {
+      "name": "autoRotateSpeed",
+      "type": "number",
+      "defaultValue": "2",
+      "description": {
+        "en": "Turntable speed when autoRotate is on.",
+        "zh": "autoRotate 开启时的转台速度。"
+      }
+    },
+    {
+      "name": "fov",
+      "type": "number",
+      "defaultValue": "60",
+      "description": {
+        "en": "Camera field of view in degrees.",
+        "zh": "相机视场角，单位为度。"
+      }
+    },
+    {
+      "name": "cameraDistance",
+      "type": "number",
+      "defaultValue": "4",
+      "description": {
+        "en": "Camera distance from the center of the asset.",
+        "zh": "摄像机与素材中心的距离。"
+      }
+    },
+    {
+      "name": "dracoDecoderPath",
+      "type": "string",
+      "defaultValue": "https://www.gstatic.com/draco/versioned/decoders/1.5.7/",
+      "description": {
+        "en": "Base URL of the Draco decoder, fetched only when a model needs it.",
+        "zh": "Draco 解码器的基础网址，仅在模型需要时加载。"
+      }
+    },
+    {
+      "name": "onLoad",
+      "type": "(() => void) | null",
+      "description": {
+        "en": "Called after an asset finishes loading.",
+        "zh": "素材加载完成后调用。"
+      }
+    },
+    {
+      "name": "onError",
+      "type": "((error: unknown) => void) | null",
+      "description": {
+        "en": "Called when an asset fails to load.",
+        "zh": "素材加载失败时调用。"
+      }
+    }
+  ],
+  "dependencies": {
+    "webgl": {
+      "runtime": [
+        "three"
+      ],
+      "dev": [
+        "@types/three"
+      ]
+    },
+    "webgpu": {
+      "runtime": [
+        "vgpu",
+        "three"
+      ],
+      "dev": [
+        "@webgpu/types",
+        "@types/three"
+      ]
+    },
+    "frameworkNote": "Solid uses solid-js; Preact uses preact. Other framework dependencies follow the target project."
+  },
+  "install": {
+    "provider": "upstream",
+    "registryUrls": {
+      "react": {
+        "webgl": "https://canvasui.dev/r/liquid-object-react.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-react-webgpu.json"
+      },
+      "vue": {
+        "webgl": "https://canvasui.dev/r/liquid-object-vue.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-vue-webgpu.json"
+      },
+      "svelte": {
+        "webgl": "https://canvasui.dev/r/liquid-object-svelte.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-svelte-webgpu.json"
+      },
+      "solid": {
+        "webgl": "https://canvasui.dev/r/liquid-object-solid.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-solid-webgpu.json"
+      },
+      "preact": {
+        "webgl": "https://canvasui.dev/r/liquid-object-preact.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-preact-webgpu.json"
+      },
+      "vanilla": {
+        "webgl": "https://canvasui.dev/r/liquid-object-vanilla.json",
+        "webgpu": "https://canvasui.dev/r/liquid-object-vanilla-webgpu.json"
+      }
+    },
+    "commands": {
+      "react": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-react",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-react-webgpu"
+      },
+      "vue": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-vue",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-vue-webgpu"
+      },
+      "svelte": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-svelte",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-svelte-webgpu"
+      },
+      "solid": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-solid",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-solid-webgpu"
+      },
+      "preact": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-preact",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-preact-webgpu"
+      },
+      "vanilla": {
+        "webgl": "npx shadcn@latest add @canvas-ui/liquid-object-vanilla",
+        "webgpu": "npx shadcn@latest add @canvas-ui/liquid-object-vanilla-webgpu"
+      }
+    },
+    "behavior": "Commands are metadata only. This catalog and CLI never execute installation."
+  },
+  "browserNotes": [
+    "WebGPU builds need a browser with WebGPU; verify the current browser support before choosing a renderer.",
+    "HTML-in-Canvas is experimental. Check the component's current upstream browser/fallback documentation. Do not assume DOM capture works in every browser."
+  ]
+}

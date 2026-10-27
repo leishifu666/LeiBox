@@ -1,0 +1,72 @@
+.page { min-height: 100svh; background: var(--background); color: var(--foreground); }
+.header { display: flex; height: 76px; align-items: center; justify-content: space-between; max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+.homeLink { display: inline-flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 12px; }
+.homeLink:hover { color: var(--foreground); }
+.provenance { color: var(--muted-foreground); font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .08em; }
+.main { max-width: 1320px; margin: 0 auto; padding: 35px 28px 44px; }
+.intro { margin-bottom: 30px; }
+.eyebrow { margin-bottom: 12px; color: var(--muted-foreground); font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .12em; }
+.intro h1 { font-size: clamp(27px, 3vw, 42px); font-weight: 500; line-height: 1.3; letter-spacing: -.045em; }
+.description { margin-top: 12px; color: var(--muted-foreground); font-size: 13px; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.globalRoutes { display: flex; gap: 3px; padding: 4px; border: 1px solid var(--border); border-radius: 10px; }
+.playback { display: flex; align-items: center; gap: 8px; }
+.toolbar button { font-size: 12px; }
+.note { display: flex; justify-content: space-between; gap: 16px; margin: 13px 0 22px; color: var(--muted-foreground); font-size: 11px; line-height: 1.7; }
+.note span { text-align: right; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.card { overflow: hidden; border: 1px solid var(--border); border-radius: 13px; background: var(--background); }
+.cardHeading { display: flex; min-height: 60px; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; }
+.cardTitle { display: flex; align-items: center; gap: 10px; }
+.number { color: var(--muted-foreground); font-family: var(--font-geist-mono), monospace; font-size: 10px; }
+.cardTitle h2 { font-size: 14px; font-weight: 500; letter-spacing: -.02em; }
+.cardMeta { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 10px; white-space: nowrap; }
+.recommendation { padding: 3px 6px; border-radius: 4px; color: var(--foreground); background: var(--muted); font-size: 9px; }
+.stage { position: relative; height: 200px; overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 45%, var(--background)); isolation: isolate; }
+.mockHeader { position: absolute; inset: 0 0 auto; display: flex; height: 60px; align-items: center; justify-content: flex-end; gap: 6px; padding: 0 20px; border-bottom: 1px solid var(--border); background: var(--background); }
+.mockHeader span { width: 5px; height: 5px; border-radius: 50%; background: var(--border); }
+.mockSidebar { position: absolute; inset: 64px auto 15px 12px; display: none; width: 93px; flex-direction: column; gap: 9px; border: 1px solid var(--border); border-radius: 7px; padding: 48px 12px 0; background: var(--background); }
+.mockSidebar i { width: 55px; height: 4px; border-radius: 5px; background: var(--border); }
+.mockBody { position: absolute; top: 88px; right: 24px; left: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.mockBody i { display: block; height: 60px; border: 1px solid color-mix(in srgb, var(--border) 65%, transparent); border-radius: 5px; background: var(--background); }
+.mock404 { position: absolute; inset: 69px 0 auto; display: none; color: var(--border); font-family: "Times New Roman", serif; font-size: 80px; font-style: italic; line-height: 1; text-align: center; }
+.routeLabel { position: absolute; right: 16px; bottom: 12px; color: var(--muted-foreground); font-size: 9px; }
+.movingLogo { position: absolute; z-index: 3; top: 23px; left: 40%; width: auto; height: 25px; max-width: none; filter: invert(1); transform: scale(.88); transform-origin: left top; will-change: transform; }
+:global(.dark) .movingLogo { filter: none; }
+.stage[data-route="components"] .mockSidebar { display: flex; }
+.stage[data-route="components"] .mockBody { left: 126px; }
+.stage[data-route="components"] .mockHeader { background: transparent; border-bottom-color: transparent; }
+.stage[data-route="missing"] .mockBody { display: none; }
+.stage[data-route="missing"] .mock404 { display: block; }
+.pathLabel { position: absolute; left: 16px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; color: var(--muted-foreground); font-size: 9px; }
+.summary { min-height: 56px; margin: 0; padding: 13px 16px 0; color: var(--muted-foreground); font-size: 11px; line-height: 1.8; }
+.cardControls { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px 11px; }
+.routes { display: flex; gap: 3px; }
+.routes button { min-height: 32px; padding: 0 9px; border-radius: 6px; color: var(--muted-foreground); font-size: 10px; cursor: pointer; }
+.routes button:hover { background: var(--muted); color: var(--foreground); }
+.routes button[aria-pressed="true"] { background: var(--muted); color: var(--foreground); }
+.replay { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 6px; color: var(--muted-foreground); cursor: pointer; }
+.replay:hover { background: var(--muted); color: var(--foreground); }
+.details { border-top: 1px solid var(--border); padding: 10px 16px; color: var(--muted-foreground); font-size: 10px; }
+.details summary { cursor: pointer; }
+.details p { margin-top: 9px; line-height: 1.8; }
+.card button:focus-visible, .details summary:focus-visible, .homeLink:focus-visible { outline: 2px solid var(--foreground); outline-offset: 3px; }
+.verdict { display: flex; align-items: baseline; gap: 20px; margin-top: 30px; padding: 20px 0; border-top: 1px solid var(--border); }
+.verdict > span { flex-shrink: 0; font-size: 11px; font-weight: 500; }
+.verdict p { max-width: 850px; color: var(--muted-foreground); font-size: 12px; line-height: 1.9; }
+.footer { color: var(--muted-foreground); font-size: 10px; }
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .header { height: 64px; padding: 0 20px; }
+  .provenance { font-size: 7px; }
+  .main { padding: 22px 20px 32px; }
+  .intro { margin-bottom: 24px; }
+  .description { max-width: 280px; font-size: 12px; line-height: 1.8; }
+  .toolbar { flex-wrap: wrap; }
+  .playback { margin-left: auto; }
+  .note { display: block; font-size: 10px; }
+  .note span { display: block; margin-top: 2px; text-align: left; }
+  .grid { grid-template-columns: 1fr; gap: 18px; }
+  .verdict { display: block; }
+  .verdict p { margin-top: 9px; font-size: 11px; }
+}

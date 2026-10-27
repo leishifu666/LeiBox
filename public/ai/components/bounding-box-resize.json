@@ -1,0 +1,157 @@
+{
+  "slug": "bounding-box-resize",
+  "name": {
+    "en": "Bounding Box Resize",
+    "zh": "选框拖拽缩放"
+  },
+  "description": {
+    "en": "Eight square handles morph into directional arrows, with live size pills, editable dimensions, and guides as the selection resizes.",
+    "zh": "八个方形控制点连续变成方向箭头，拖动时显示实时尺寸胶囊和辅助线，支持直接输入宽高。"
+  },
+  "keywords": "选框 拖拽 缩放 边框 控制点 箭头 尺寸 输入 形变 bounding box resize handles arrows dimensions guides selection",
+  "docsPath": "/docs/animations/bounding-box-resize",
+  "detailPath": "/ai/components/bounding-box-resize.json",
+  "markdownPath": "/ai/components/bounding-box-resize.md",
+  "previewPath": "/assets/components/bounding-box-resize.png",
+  "discovery": {
+    "category": "layout",
+    "useCases": [
+      "画布选框缩放",
+      "设计编辑器",
+      "canvas resize handles"
+    ],
+    "searchTerms": [
+      "选框",
+      "缩放",
+      "尺寸",
+      "画布",
+      "resize",
+      "bounds",
+      "editor"
+    ],
+    "visualTags": [
+      "minimal",
+      "editor"
+    ],
+    "interactions": [
+      "drag",
+      "input"
+    ],
+    "caveat": "缩放交互演示；尺寸结果需接入目标项目的画布状态。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent native DOM/SVG reconstruction from observed frames; no original author source or assets obtained.",
+    "designReference": "https://x.com/azlenelza/status/2106600214593462393/video/1",
+    "designAuthor": "Azlen",
+    "license": "Original design license not supplied or independently verified; the video is retained only for internal comparison."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/bounding-box-resize/react.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { BoundingBoxResize } from \"./BoundingBoxResize\";\n\nexport default function App() {\n  return <BoundingBoxResize />;\n}",
+      "files": [
+        "BoundingBoxResize.tsx",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/bounding-box-resize/vue.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BoundingBoxResize from \"./BoundingBoxResize.vue\";\n</script>\n<template><BoundingBoxResize /></template>",
+      "files": [
+        "BoundingBoxResize.vue",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/bounding-box-resize/svelte.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BoundingBoxResize from \"./BoundingBoxResize.svelte\";\n</script>\n<BoundingBoxResize />",
+      "files": [
+        "BoundingBoxResize.svelte",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/bounding-box-resize/solid.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { BoundingBoxResize } from \"./BoundingBoxResize.solid\";\n\nexport default function App() {\n  return <BoundingBoxResize />;\n}",
+      "files": [
+        "BoundingBoxResize.solid.tsx",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/bounding-box-resize/preact.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { BoundingBoxResize } from \"./BoundingBoxResize.preact\";\n\nexport default function App() {\n  return <BoundingBoxResize />;\n}",
+      "files": [
+        "BoundingBoxResize.preact.tsx",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/bounding-box-resize/vanilla.json",
+      "component": "BoundingBoxResize",
+      "dependencies": [],
+      "usage": "import { mount } from \"./BoundingBoxResize\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BoundingBoxResize.ts",
+        "BoundingBoxResizeEngine.js",
+        "motion-runtime.ts",
+        "BoundingBoxResizeEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag a corner or edge handle. Click a visible size pill to type a dimension; Enter applies it and Escape cancels. Focus a handle to use arrow keys, Shift for larger steps, or Escape to reset.",
+    "zh": "拖动角点或边中点，点击出现的尺寸胶囊输入宽高，回车确认、Escape 撤销。聚焦控制点后可用方向键调整，Shift 加大步长，Escape 重置。"
+  }
+}

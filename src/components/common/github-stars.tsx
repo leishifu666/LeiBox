@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { PROJECT_REPO as REPO, PROJECT_REPO_PRIVATE } from "@/lib/github";
+import { PROJECT_REPO as REPO } from "@/lib/github";
 import { useLanguage } from "@/components/common/language-provider";
 
-const CACHE_KEY = "canvasui:stars";
-const CACHE_TTL = 24 * 60 * 60 * 1000;
+const CACHE_KEY = `leibox:stars:${REPO}`;
+const CACHE_TTL = 5 * 60 * 1000;
 
 function formatStars(n: number): string {
   if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`;
@@ -18,7 +18,10 @@ function readCache(): number | null {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const { value, time } = JSON.parse(raw) as { value: number; time: number };
-    if (typeof value !== "number" || Date.now() - time > CACHE_TTL) return null;
+    if (
+      !Number.isSafeInteger(value) || value < 0 ||
+      !Number.isFinite(time) || Date.now() - time >= CACHE_TTL
+    ) return null;
     return value;
   } catch {
     return null;
@@ -39,10 +42,13 @@ let inflight: Promise<number | null> | null = null;
 async function fetchStars(): Promise<number | null> {
   inflight ??= (async () => {
     try {
-      const res = await fetch(`https://api.github.com/repos/${REPO}`);
+      const res = await fetch(`https://api.github.com/repos/${REPO}`, { cache: "no-cache" });
       if (!res.ok) return null;
-      const data = (await res.json()) as { stargazers_count?: number };
-      return data.stargazers_count ?? null;
+      const data = (await res.json()) as { stargazers_count?: unknown };
+      const value = data.stargazers_count;
+      return typeof value === "number" && Number.isSafeInteger(value) && value >= 0
+        ? value
+        : null;
     } catch {
       return null;
     } finally {
@@ -56,14 +62,13 @@ async function fetchStars(): Promise<number | null> {
 
 export function GitHubStars() {
   const { t } = useLanguage();
-  const [stars, setStars] = useState(0);
+  const [stars, setStars] = useState<number | null>(null);
 
   useEffect(() => {
-    if (PROJECT_REPO_PRIVATE) return;
     let cancelled = false;
-    void (async () => {
+    const refresh = async (force = false) => {
       const cached = readCache();
-      if (cached !== null) {
+      if (cached !== null && !force) {
         if (!cancelled) setStars(cached);
         return;
       }
@@ -71,9 +76,15 @@ export function GitHubStars() {
       if (fetched === null) return;
       writeCache(fetched);
       if (!cancelled) setStars(fetched);
-    })();
+    };
+    void refresh();
+    const interval = window.setInterval(() => { void refresh(true); }, CACHE_TTL);
+    const onFocus = () => { void refresh(true); };
+    window.addEventListener("focus", onFocus);
     return () => {
       cancelled = true;
+      window.clearInterval(interval);
+      window.removeEventListener("focus", onFocus);
     };
   }, []);
 
@@ -83,9 +94,9 @@ export function GitHubStars() {
       target="_blank"
       rel="noreferrer"
       aria-label={
-        stars > 0
-          ? `Canvas UI on GitHub, ${stars} stars`
-          : t("Canvas UI on GitHub")
+        stars !== null
+          ? `${t("LeiBox on GitHub")}, ${stars} Star`
+          : t("LeiBox on GitHub")
       }
       className="group inline-flex h-8 items-center gap-2 rounded-full border border-border/70 px-2.5 text-[13px] font-medium text-muted-foreground transition-colors duration-150 hover:border-border hover:text-foreground sm:px-3"
     >
@@ -93,7 +104,7 @@ export function GitHubStars() {
         <path d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A8.01 8.01 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
       </svg>
       <span className="hidden items-center gap-1 tabular-nums sm:inline-flex">
-        {stars > 0 ? formatStars(stars) : "GitHub"}
+        {stars !== null ? `Star ${formatStars(stars)}` : "GitHub"}
       </span>
     </a>
   );

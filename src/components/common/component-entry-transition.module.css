@@ -1,0 +1,35 @@
+.main[data-component-entry-state="waiting"] { visibility: hidden; }
+
+.main[data-component-entry-state="entering"],
+.main[data-component-entry-state="returning"] {
+  position: relative;
+  z-index: 31;
+  background: var(--background);
+  will-change: opacity;
+}
+
+/* Keep the selected route from replaying its ordinary page-in after handoff. */
+.main :global([data-component-entry-page]) { animation: none !important; }
+.main h1:global([data-component-entry-focus]):focus { outline: none; }
+
+.backdrop,
+.floating {
+  position: fixed;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backdrop { z-index: 30; background: var(--background); }
+.floating { z-index: 35; }
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0;
+  pointer-events: none;
+  transform-origin: left top;
+}

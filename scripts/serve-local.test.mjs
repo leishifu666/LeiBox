@@ -2,12 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 const base=process.env.TEST_BASE_URL||'http://127.0.0.1:3000';
 test('exported pages and nested RSC segments resolve',async()=>{
- for(const url of ['/','/components','/docs','/docs/components/ripple','/playground','/privacy']){
+ for(const url of ['/','/components','/docs','/docs/components/glass','/privacy']){
   const r=await fetch(base+url);assert.equal(r.status,200,url);assert.match(r.headers.get('content-type'),/text\/html/);
  }
- for(const url of ['/components/__next.!KHNoZWxsKQ.components.__PAGE__.txt?_rsc=test','/docs/components/ripple/__next.!KHNoZWxsKQ.docs.components.ripple.txt?_rsc=test','/playground/__next.playground.__PAGE__.txt?_rsc=test']){
+ for(const url of ['/components/__next.!KHNoZWxsKQ.components.__PAGE__.txt?_rsc=test','/docs/components/glass/__next.!KHNoZWxsKQ.docs.components.glass.txt?_rsc=test']){
   const r=await fetch(base+url);assert.equal(r.status,200,url);assert.match(r.headers.get('content-type'),/text\/x-component/);assert.doesNotMatch((await r.text()).slice(0,100),/<!DOCTYPE html>/);
  }
+});
+test('removed playground is unavailable',async()=>{
+ assert.equal((await fetch(base+'/playground')).status,404);
 });
 test('videos support range requests for playback and seeking',async()=>{
  const r=await fetch(base+'/assets/fallback-hero.mp4',{headers:{Range:'bytes=0-1023'}});assert.equal(r.status,206);assert.equal(Number(r.headers.get('content-length')),1024);assert.match(r.headers.get('content-range'),/^bytes 0-1023\//);assert.equal((await r.arrayBuffer()).byteLength,1024);

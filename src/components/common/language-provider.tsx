@@ -1,7 +1,8 @@
 "use client";
 
-import { Children, cloneElement, createContext, isValidElement, useContext, useEffect, useMemo, useSyncExternalStore, type ReactElement, type ReactNode } from "react";
+import { Children, cloneElement, createContext, isValidElement, useContext, useLayoutEffect, useMemo, useSyncExternalStore, type ReactElement, type ReactNode } from "react";
 import { LOCALE_STORAGE_KEY, translateText, type Locale } from "@/lib/i18n/translate";
+import { useLanguageTransition } from "@/hooks/use-language-transition";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -31,7 +32,7 @@ function subscribeLocale(listener: () => void) {
   window.addEventListener("storage", sync);
   return () => { localeListeners.delete(listener); window.removeEventListener("storage", sync); };
 }
-function setLocale(next: Locale) {
+function commitLocale(next: Locale) {
   try { localStorage.setItem(LOCALE_STORAGE_KEY, next); transientLocale = null; }
   catch { transientLocale = next; /* Storage is optional; switching still works in memory. */ }
   localeListeners.forEach(listener => listener());
@@ -39,8 +40,9 @@ function setLocale(next: Locale) {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const locale = useSyncExternalStore(subscribeLocale, readLocale, serverLocale);
-  useEffect(() => { document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"; document.documentElement.dataset.locale = locale; }, [locale]);
-  const value = useMemo(() => ({ locale, setLocale, t: (text: string) => translateText(text, locale) }), [locale]);
+  const setLocale = useLanguageTransition(locale, commitLocale);
+  useLayoutEffect(() => { document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"; document.documentElement.dataset.locale = locale; }, [locale]);
+  const value = useMemo(() => ({ locale, setLocale, t: (text: string) => translateText(text, locale) }), [locale, setLocale]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

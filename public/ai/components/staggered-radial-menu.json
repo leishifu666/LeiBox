@@ -1,0 +1,158 @@
+{
+  "slug": "staggered-radial-menu",
+  "name": {
+    "en": "Staggered Radial Menu",
+    "zh": "环形菜单交错展开"
+  },
+  "description": {
+    "en": "Six coloured actions arrive from the outside in clockwise order, spring into a ring, then scatter outwards in reverse with soft blur.",
+    "zh": "六个彩色按钮从外围顺时针依次收拢成环，弹性停稳；关闭时逆序向外散开并模糊淡出。"
+  },
+  "keywords": "环形 菜单 交错 展开 圆形 按钮 加号 模糊 错峰 弹簧 stagger radial menu clockwise blur spring",
+  "docsPath": "/docs/animations/staggered-radial-menu",
+  "detailPath": "/ai/components/staggered-radial-menu.json",
+  "markdownPath": "/ai/components/staggered-radial-menu.md",
+  "previewPath": "/assets/components/staggered-radial-menu.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "彩色快捷菜单",
+      "创意工具入口",
+      "colorful radial menu"
+    ],
+    "searchTerms": [
+      "菜单",
+      "环形",
+      "彩色",
+      "快捷",
+      "menu",
+      "radial",
+      "colorful",
+      "actions"
+    ],
+    "visualTags": [
+      "colorful",
+      "spring"
+    ],
+    "interactions": [
+      "click",
+      "keyboard"
+    ],
+    "caveat": "适合少量快捷操作，接入时替换演示动作。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent DOM/CSS/SVG reconstruction; no original author source or vector files obtained.",
+    "designReference": "https://x.com/nitishkmrk/status/2110936271078281321/video/1",
+    "designAuthor": "Nitish Khagwal",
+    "license": "Original design license not verified; attribution does not grant redistribution rights to original assets."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/staggered-radial-menu/react.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { StaggeredRadialMenu } from \"./StaggeredRadialMenu\";\n\nexport default function App() {\n  return <StaggeredRadialMenu />;\n}",
+      "files": [
+        "StaggeredRadialMenu.tsx",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/staggered-radial-menu/vue.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport StaggeredRadialMenu from \"./StaggeredRadialMenu.vue\";\n</script>\n<template><StaggeredRadialMenu /></template>",
+      "files": [
+        "StaggeredRadialMenu.vue",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/staggered-radial-menu/svelte.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport StaggeredRadialMenu from \"./StaggeredRadialMenu.svelte\";\n</script>\n<StaggeredRadialMenu />",
+      "files": [
+        "StaggeredRadialMenu.svelte",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/staggered-radial-menu/solid.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { StaggeredRadialMenu } from \"./StaggeredRadialMenu.solid\";\n\nexport default function App() {\n  return <StaggeredRadialMenu />;\n}",
+      "files": [
+        "StaggeredRadialMenu.solid.tsx",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/staggered-radial-menu/preact.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { StaggeredRadialMenu } from \"./StaggeredRadialMenu.preact\";\n\nexport default function App() {\n  return <StaggeredRadialMenu />;\n}",
+      "files": [
+        "StaggeredRadialMenu.preact.tsx",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/staggered-radial-menu/vanilla.json",
+      "component": "StaggeredRadialMenu",
+      "dependencies": [],
+      "usage": "import { mount } from \"./StaggeredRadialMenu\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "StaggeredRadialMenu.ts",
+        "StaggeredRadialMenuEngine.js",
+        "motion-runtime.ts",
+        "StaggeredRadialMenuEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click + to open the actions and × to scatter them outwards. Touch and keyboard work too; choosing an action only updates this local demonstration.",
+    "zh": "点击 + 展开，点击 × 向外散开收起。支持触屏和键盘，选择菜单项仅更新本地演示状态。"
+  }
+}

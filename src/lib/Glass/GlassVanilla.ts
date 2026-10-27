@@ -1,5 +1,5 @@
 import { getCanvasPixelRatio, createCanvasResizeObserver } from "../canvas-viewport";
-import { prepareHtmlInCanvas, drawHtmlInCanvas } from "../html-in-canvas";
+import { prepareHtmlInCanvas, drawHtmlInCanvas, createFallbackCapture } from "../html-in-canvas";
 import { createRectCache } from "../rect-cache";
 
 export interface GlassOptions {
@@ -272,6 +272,7 @@ export function createGlass(
 ): GlassInstance | null {
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
+  const fallbackCapture = createFallbackCapture(source, content, output);
 
   const gl = output.getContext("webgl2", {
     alpha: true,
@@ -280,7 +281,7 @@ export function createGlass(
     antialias: false,
     premultipliedAlpha: true,
   });
-  if (!gl || gl.isContextLost()) return null;
+  if (!gl || gl.isContextLost()) { fallbackCapture?.destroy(); return null; }
 
   const sourceCtx = source.getContext("2d") as ElementImageContext | null;
   const paintable = source as PaintableCanvas;
@@ -606,6 +607,7 @@ export function createGlass(
       start();
     },
     destroy() {
+      fallbackCapture?.destroy();
       destroyed = true;
       rectCache.destroy();
       cancelAnimationFrame(raf);

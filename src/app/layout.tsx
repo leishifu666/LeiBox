@@ -7,10 +7,11 @@ import { ThemeFavicon } from "@/components/common/theme-favicon";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { UrlStateProvider } from "@/components/common/url-state-provider";
 import { LanguageProvider } from "@/components/common/language-provider";
-
-const SITE_URL = "https://canvasui.dev";
+import { LogoTransitionProvider } from "@/components/common/logo-transition-provider";
+import { ComponentEntryTransition } from "@/components/common/component-entry-transition";
+import { SITE_URL } from "@/lib/site-url";
 const DESCRIPTION =
-  "An open source component library of creative html-in-canvas effects for React, Solid, Preact, Vue, Svelte, and vanilla JS. Every effect ships as WebGL and WebGPU (via vgpu) builds, running over live HTML.";
+  "LeiBox is a personal collection of UI inspiration, creative components, and practical design references for people and AI assistants.";
 
 const ORIGIN_TRIAL_TOKEN =
   process.env.NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN ?? "";
@@ -18,13 +19,13 @@ const ORIGIN_TRIAL_TOKEN =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Canvas UI: Creative Canvas, WebGL and WebGPU Component Library",
-    template: "%s | Canvas UI",
+    default: "LeiBox — UI inspiration and component collection",
+    template: "%s | LeiBox",
   },
   description: DESCRIPTION,
-  applicationName: "Canvas UI",
-  authors: [{ name: "David Haz", url: "https://github.com/DavidHDev" }],
-  creator: "David Haz",
+  applicationName: "LeiBox",
+  authors: [{ name: "雷师傅", url: "https://github.com/leishifu666" }],
+  creator: "LeiBox",
   keywords: [
     "component library",
     "react component library",
@@ -52,21 +53,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Canvas UI",
-    locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Canvas UI" }],
+    siteName: "LeiBox",
+    locale: "zh_CN",
+    images: [{ url: "/leibox-og.png?v=ei-20261023", width: 1200, height: 630, alt: "LeiBox" }],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@davidhaz",
-    creator: "@davidhaz",
-    images: ["/og.png"],
+    images: ["/leibox-og.png?v=ei-20261023"],
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/favicon.svg?v=leibox-white-20261022", type: "image/svg+xml" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
+  other: {
+    "font-attribution": "Chinese typeface: MiSans VF by Xiaomi. https://hyperos.mi.com/font/zh/",
+  },
 };
 
 export const viewport: Viewport = {
@@ -95,7 +97,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>
           <ThemeFavicon />
-          <LanguageProvider><UrlStateProvider>{children}</UrlStateProvider></LanguageProvider>
+          <LanguageProvider><UrlStateProvider><LogoTransitionProvider><ComponentEntryTransition>{children}</ComponentEntryTransition></LogoTransitionProvider></UrlStateProvider></LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

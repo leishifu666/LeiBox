@@ -3,16 +3,17 @@ import Link from "next/link";
 import { GitHubStars } from "@/components/common/github-stars";
 import { MobileMenu } from "@/components/landing/mobile-menu";
 import { SearchButton, SearchDialog } from "@/components/common/site-search";
-import { SiteLogo } from "@/components/common/site-logo";
+import { HomeLogoLink } from "@/components/common/home-logo-link";
 import { ThemeToggle } from "@/components/common/theme-toggle";
 import { LanguageToggle } from "@/components/common/language-toggle";
 import { T } from "@/components/common/language-provider";
+import { ContactButton } from "@/components/common/contact-button";
+import { ContactPanel } from "@/components/common/contact-panel";
 import { ScrollHideHeader } from "@/components/common/scroll-hide-header";
 
 const links = [
   { href: "/docs", label: "Docs" },
   { href: "/components", label: "Components" },
-  { href: "/playground", label: "Playground" },
 ];
 
 export function Navbar() {
@@ -23,13 +24,9 @@ export function Navbar() {
         aria-label="Main"
         className="mx-auto grid h-14 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8"
       >
-        <Link
-          href="/"
-          aria-label="Canvas UI home"
+        <HomeLogoLink
           className="col-start-1 justify-self-start transition-opacity duration-150 hover:opacity-70"
-        >
-          <SiteLogo />
-        </Link>
+        />
 
         <ul className="col-start-2 hidden items-center gap-1 sm:flex">
           {links.map((link) => (
@@ -44,8 +41,9 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="col-start-3 flex items-center gap-2 justify-self-end">
+        <div className="col-start-3 flex items-center gap-1 justify-self-end sm:gap-2">
           <LanguageToggle />
+          <ContactButton />
           <SearchButton />
           <ThemeToggle />
           <GitHubStars />
@@ -55,6 +53,7 @@ export function Navbar() {
 
     </ScrollHideHeader>
     <SearchDialog />
+    <ContactPanel />
     </>
   );
 }

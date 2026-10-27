@@ -1,0 +1,13 @@
+{
+  "visualChanges": [],
+  "platformAdaptations": [
+    {
+      "file": "components/message.tsx",
+      "change": "Expose disposal for the original desktop notice root."
+    },
+    {
+      "file": "components/shadcn/hover-card.tsx",
+      "change": "Route the portal into this component instance; popup markup, styles and motion remain original."
+    }
+  ]
+}

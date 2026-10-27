@@ -21,7 +21,9 @@ import {
 } from "react";
 
 import type { ApiProp } from "@/components/docs/api-reference";
-import type { CodeVariant } from "@/components/docs/code-tabs";
+import type { CodeAsset, CodeContent, MotionPackageRef } from "@/lib/doc-asset-types";
+import { loadDocAsset } from "@/lib/load-doc-asset";
+import { copyText as writeCopyText } from "@/lib/copy-text";
 import {
   buildConfiguredJsx,
   getDemoSnippet,
@@ -34,23 +36,33 @@ import {
 import { resolveFramework, useRenderer } from "@/components/docs/renderer";
 import { usePreference } from "@/hooks/use-preference";
 import { cn } from "@/lib/utils";
+import { siteUrl } from "@/lib/site-url";
 
-const SITE_URL = "https://canvasui.dev";
+export interface StandaloneCopyContent {
+  href: string;
+  prompt: string;
+  code: string;
+  codeLabel: string;
+  markdown: string;
+  bundleUrl?: string;
+}
 
 interface CopyMenuProps {
   title: string;
   description: string;
   installItem: string;
-  variants: CodeVariant[];
+  variants: CodeAsset[];
   /** WebGPU (vgpu) sources; empty when the component has no WebGPU build. */
-  webgpuVariants?: CodeVariant[];
+  webgpuVariants?: CodeAsset[];
   apiReference?: ApiProp[];
   dependencies?: string[];
   devDependencies?: string[];
   /** Dependencies of the WebGPU build (includes vgpu). */
   webgpuDependencies?: string[];
   webgpuDevDependencies?: string[];
-  demoSource?: string | null;
+  demoSourceUrl?: string;
+  standalone?: StandaloneCopyContent;
+  motionPackages?: MotionPackageRef[];
 }
 
 const LANG_BY_ID: Record<string, string> = {
@@ -75,14 +87,6 @@ function OpenAiIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
       <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.073zM13.2599 22.4301a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6455zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997z" />
-    </svg>
-  );
-}
-
-function V0Icon(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
-      <path d="M14.066 6.028v2.22h5.729q.075-.001.148.005l-5.853 5.752a2 2 0 0 1-.024-.309V8.247h-2.353v5.45c0 2.322 1.935 4.222 4.258 4.222h5.675v-2.22h-5.675q-.03 0-.059-.003l5.729-5.629q.006.082.006.166v5.465H24v-5.465a4.204 4.204 0 0 0-4.205-4.205zM0 8.245l8.28 9.266c.839.94 2.396.346 2.396-.914V8.245H8.19v5.44l-4.86-5.44Z" />
     </svg>
   );
 }
@@ -137,7 +141,9 @@ export function CopyMenu({
   devDependencies: webglDevDependencies = [],
   webgpuDependencies = [],
   webgpuDevDependencies = [],
-  demoSource,
+  demoSourceUrl,
+  standalone,
+  motionPackages,
 }: CopyMenuProps) {
   const { t } = useLanguage();
   const shouldReduceMotion = useReducedMotion();
@@ -152,6 +158,7 @@ export function CopyMenu({
   const rendererLabel = webgpu ? "WebGPU via vgpu" : "WebGL";
   const [open, setOpen] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [failedId, setFailedId] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -179,12 +186,13 @@ export function CopyMenu({
 
   const variant =
     variants.find((entry) => entry.id === frameworkId) ?? variants[0];
+  const motionPackage = motionPackages?.find(pack => pack.framework === storedFramework) ?? motionPackages?.[0];
   const depLines = buildDependencyLines(
     managerId,
     dependencies,
     devDependencies,
   );
-  const docsUrl = `${SITE_URL}/docs/components/${installItem}`;
+  const docsUrl = siteUrl(standalone?.href ?? `/docs/components/${installItem}`);
 
   const configuredCode = () => {
     const snippet = getDemoSnippet();
@@ -212,11 +220,14 @@ export function CopyMenu({
     ];
   };
 
-  const buildPrompt = () =>
-    [
-      `# Canvas UI: ${title} (${variant.label}, ${rendererLabel})`,
+  const buildPrompt = async () => {
+    const content = await loadDocAsset<CodeContent>(variant.url);
+    return [
+      `# LeiBox reference: ${title} (${variant.label}, ${rendererLabel})`,
       "",
       description,
+      "",
+      "Source: Canvas UI by David Haz. License: MIT + Commons Clause. Install from the original provider; this reference does not grant redistribution rights.",
       "",
       ...(webgpu
         ? [
@@ -249,13 +260,15 @@ export function CopyMenu({
       `## ${variant.fileName}`,
       "",
       "```" + (LANG_BY_ID[variant.id] ?? "ts"),
-      variant.source.trimEnd(),
+      content.source.trimEnd(),
       "```",
       "",
     ].join("\n");
+  };
 
-  const buildPageMarkdown = () =>
-    [
+  const buildPageMarkdown = async () => {
+    const contents = await Promise.all(variants.map(entry => loadDocAsset<CodeContent>(entry.url)));
+    return [
       `# ${title}`,
       "",
       description,
@@ -275,22 +288,32 @@ export function CopyMenu({
         : []),
       "## Code",
       "",
-      ...variants.flatMap((entry) => [
+      ...variants.flatMap((entry, index) => [
         `### ${entry.fileName}`,
         "",
         "```" + (LANG_BY_ID[entry.id] ?? "ts"),
-        entry.source.trimEnd(),
+        contents[index].source.trimEnd(),
         "```",
         "",
       ]),
       ...buildPropsTable(apiReference),
     ].join("\n");
+  };
 
-  const aiPrompt = `I'm looking at the ${title} component from Canvas UI: ${docsUrl}. Help me add it to my project and adjust it to my use case. Install command: ${buildInstallCommand(managerId, installItem, frameworkId)}`;
+  const aiPrompt = motionPackage ? motionPackage.prompt : standalone
+    ? `Help me use the ${title} example from LeiBox. Reference page: ${docsUrl}. Ask me to paste the complete Copy prompt and source from this page if you cannot access it. Use its actual local files and dependencies; do not invent a registry package or API.`
+    : `Help me use the ${title} component (${variant.label}, ${rendererLabel}). Reference page: ${docsUrl}. The component provider is Canvas UI by David Haz; install from the original provider: ${buildInstallCommand(managerId, installItem, frameworkId, renderer)}. ${configuredCode() ? `Current configuration:\n${configuredCode()}` : ""} If you cannot access this reference page, ask me to paste the complete Copy prompt content; do not invent the API.`;
 
-  const copyText = async (id: string, text: string) => {
-    await navigator.clipboard.writeText(text);
-    setCopiedId(id);
+  const copyText = async (id: string, text: string | Promise<string>) => {
+    try {
+      await writeCopyText(text);
+      setCopiedId(id);
+      setFailedId(null);
+    } catch {
+      setFailedId(id);
+      setCopiedId(null);
+      return;
+    }
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setCopiedId(null);
@@ -302,8 +325,19 @@ export function CopyMenu({
     id: string;
     label: string;
     icon: IconComponent;
-    action: { copy: () => string } | { open: string };
+    action: { copy: () => string | Promise<string> } | { open: string };
   }[] = [
+    ...(standalone ? [
+      { id: "prompt", label: "Copy prompt", icon: Sparkles, action: { copy: () => motionPackage?.prompt ?? standalone.prompt } },
+      { id: "source", label: motionPackage ? "Copy full code bundle" : standalone.codeLabel, icon: SquareCode as IconComponent, action: { copy: () => {
+        const url = motionPackage?.bundleUrl ?? standalone.bundleUrl;
+        return url ? loadDocAsset<CodeContent>(url).then(data => data.source) : standalone.code;
+      } } },
+      { id: "markdown", label: "Copy page as markdown", icon: FileText, action: { copy: () => {
+        const url = motionPackage?.bundleUrl ?? standalone.bundleUrl;
+        return url ? loadDocAsset<CodeContent>(url).then(data => `${data.source}\n\n## Recreation prompt\n${motionPackage?.prompt ?? standalone.prompt}`) : standalone.markdown;
+      } } },
+    ] : [
     {
       id: "prompt",
       label: "Copy prompt",
@@ -326,30 +360,23 @@ export function CopyMenu({
       icon: FileText,
       action: { copy: buildPageMarkdown },
     },
-    ...(demoSource
+    ...(demoSourceUrl
       ? [
           {
             id: "demo",
             label: "Copy demo source",
             icon: SquareCode as IconComponent,
-            action: { copy: () => demoSource },
+            action: { copy: () => loadDocAsset<CodeContent>(demoSourceUrl).then(data => data.source) },
           },
         ]
       : []),
+    ]),
     {
       id: "chatgpt",
       label: "Open in ChatGPT",
       icon: OpenAiIcon,
       action: {
         open: `https://chatgpt.com/?q=${encodeURIComponent(aiPrompt)}`,
-      },
-    },
-    {
-      id: "v0",
-      label: "Open in v0",
-      icon: V0Icon,
-      action: {
-        open: `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${SITE_URL}/r/${installItem}-react.json`)}`,
       },
     },
     {
@@ -425,7 +452,7 @@ export function CopyMenu({
                   className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-muted-foreground transition-colors duration-100 hover:bg-muted/60 hover:text-foreground"
                 >
                   <Icon aria-hidden className="size-4 shrink-0" />
-                  <TranslatedText>{copied ? "Copied" : item.label}</TranslatedText>
+                  <TranslatedText>{failedId === item.id ? "Copy failed, try again" : copied ? "Copied" : item.label}</TranslatedText>
                 </button>
               );
             })}

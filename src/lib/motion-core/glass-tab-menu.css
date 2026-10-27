@@ -1,0 +1,23 @@
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9d7e1}
+.glass-tab-demo{position:relative;width:100%;height:100vh;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse 185.261% 116.406% at 25.830% 17.028%,rgba(255,255,255,0.9083) 0%,rgba(255,255,255,0.8967) 5%,rgba(255,255,255,0.8662) 10%,rgba(255,255,255,0.8199) 15%,rgba(255,255,255,0.7614) 20%,rgba(255,255,255,0.6939) 25%,rgba(255,255,255,0.6211) 30%,rgba(255,255,255,0.5460) 35%,rgba(255,255,255,0.4716) 40%,rgba(255,255,255,0.4004) 45%,rgba(255,255,255,0.3341) 50%,rgba(255,255,255,0.2742) 55%,rgba(255,255,255,0.2212) 60%,rgba(255,255,255,0.1756) 65%,rgba(255,255,255,0.1371) 70%,rgba(255,255,255,0.1053) 75%,rgba(255,255,255,0.0796) 80%,rgba(255,255,255,0.0592) 85%,rgba(255,255,255,0.0433) 90%,rgba(255,255,255,0.0312) 95%,rgba(255,255,255,0.0221) 100%),linear-gradient(177.617deg,rgb(212.26,208.59,223.64),rgb(208.49,207.49,217.85));color:#090909;font-family:GlassTabInter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.glass-tab-demo *{box-sizing:border-box}
+.gt-stage{position:absolute;left:50%;top:50%;width:1080px;height:1080px;transform:translate(-50%,-50%) scale(var(--gt-scale,1));transform-origin:center}
+.gt-cluster{position:absolute;left:65px;bottom:318px;width:950px;height:446px;pointer-events:none}
+.gt-panel{position:absolute;left:0;bottom:0;width:762px;height:147px;border:2px solid rgba(255,255,255,.85);border-radius:74px;background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.25));box-shadow:inset 0 1px 2px #fff,inset 0 0 16px rgba(255,255,255,.12),0 13px 42px -13px rgba(76,73,91,.22);backdrop-filter:blur(25px) saturate(1.1);-webkit-backdrop-filter:blur(25px) saturate(1.1);pointer-events:auto;overflow:hidden;transform:translateZ(0)}
+.gt-tabs{position:absolute;left:50%;bottom:-3px;display:grid;grid-template-columns:repeat(4,183px);width:762px;height:147px;padding:15px;box-sizing:border-box;transform-origin:center bottom}
+.gt-selection,.gt-lens{position:absolute;left:15px;top:16px;width:179px;height:116px;border:1.5px solid rgba(255,255,255,.9);border-radius:65px;box-sizing:border-box;pointer-events:none;background:#fff;box-shadow:0 7px 17px rgba(82,77,99,.15)}
+.gt-lens{z-index:2;opacity:0;border:0;background:rgba(255,255,255,.12);box-shadow:none;backdrop-filter:blur(.65px);-webkit-backdrop-filter:blur(.65px)}
+.gt-tab,.gt-toggle,.gt-action{all:unset;box-sizing:border-box;position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.gt-tab{width:183px;height:116px;border-radius:65px;z-index:1}
+.gt-icon{display:block;width:64px;height:64px;flex:none;overflow:visible}
+.gt-menu{position:absolute;left:50%;bottom:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:16px;padding:24px;width:758px;height:442px;box-sizing:border-box;transform-origin:center bottom;opacity:0;pointer-events:none}
+.gt-action{flex-direction:column;gap:24px;padding-top:8px;border-radius:57px;background:linear-gradient(145deg,rgba(111,107,124,.10),rgba(105,101,119,.145));box-shadow:inset 0 1px 1px rgba(255,255,255,.18);font-size:33px;line-height:1.15;font-weight:500;letter-spacing:0}
+.gt-action .gt-icon{width:60px;height:60px}
+.gt-action:hover{background-color:rgba(255,255,255,.17)}
+.gt-action:active{background-color:rgba(255,255,255,.38)}
+.gt-toggle{position:absolute;right:0;bottom:0;width:147px;height:147px;border:2px solid rgba(255,255,255,.85);border-radius:50%;background:linear-gradient(155deg,rgba(255,255,255,.43),rgba(255,255,255,.27));box-shadow:inset 0 1px 2px #fff;backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);pointer-events:auto;transform-origin:center}
+.gt-plus{position:relative;display:block;width:44px;height:44px;left:-1px}
+.gt-plus:before,.gt-plus:after{content:"";position:absolute;left:19px;top:1px;width:6px;height:42px;border-radius:5px;background:#050505}
+.gt-plus:after{transform:rotate(90deg)}
+.gt-tab:focus-visible,.gt-toggle:focus-visible,.gt-action:focus-visible{outline:3px solid #555d7d;outline-offset:-7px}
+.gt-sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

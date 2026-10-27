@@ -1,0 +1,221 @@
+{
+  "schemes": [
+    {
+      "id": 1,
+      "name": "极简直达",
+      "summary": "点到点的线性滑行，无冗余动作，干脆利落。",
+      "durationMs": 500,
+      "character": "迅捷, 稳重, 直接",
+      "bestFor": "频繁的文档内部快速切换，降低视觉疲劳。",
+      "tradeoff": "缺乏空间纵深感，大跨度位移（如 404 到首页）时略显生硬。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "power3.out"
+        }
+      ],
+      "implementation": "通过 FLIP 直接计算起终点，在 fixed 层用单次 gsap.to 驱动。快速改向时，直接 kill 动画并用新目标重开。"
+    },
+    {
+      "id": 2,
+      "name": "悬浮上抛",
+      "summary": "带有轻微向上法线偏移的弧线，仿佛 Logo 在页面间轻盈跳跃。",
+      "durationMs": 750,
+      "character": "轻盈, 优雅, 呼吸感",
+      "bestFor": "大距离斜向转移，能完美掩盖距离造成的突兀感。",
+      "tradeoff": "中长耗时结合非直线轨迹，连续极其快速地反复切页时会有视觉堆叠的错觉。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 0.4,
+          "progress": 0.45,
+          "normal": -0.12,
+          "scale": 0.97,
+          "ease": "power1.out"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "power2.out"
+        }
+      ],
+      "implementation": "利用 normal 乘以向量法线动态偏移。中途切页时需重新计算剩余向量，将现有法线偏移量平滑归零。"
+    },
+    {
+      "id": 3,
+      "name": "呼吸回弹",
+      "summary": "抵达终点前略微超越并弹性回落，物理惯性感强。",
+      "durationMs": 850,
+      "character": "弹性, 物理感, 精致",
+      "bestFor": "组件页到首页的切换，强调“装下组件的盒子”这一物理隐喻。",
+      "tradeoff": "耗时最长，超调（Overshoot）设计在小距离位移时效果不明显。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 0.65,
+          "progress": 0.85,
+          "normal": 0,
+          "scale": 0.98,
+          "ease": "power2.inOut"
+        },
+        {
+          "at": 0.85,
+          "progress": 1.04,
+          "normal": 0,
+          "scale": 1.02,
+          "ease": "power2.out"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "sine.inOut"
+        }
+      ],
+      "implementation": "允许 progress 大于 1，需在目标终点周围保留不被裁切的渲染区。中继接力时要捕捉此刻的加速度进行动量保留。"
+    },
+    {
+      "id": 4,
+      "name": "沉浸下坠",
+      "summary": "带有向下弧度，配合微小的收缩感，仿佛被页面重力捕捉。",
+      "durationMs": 800,
+      "character": "沉稳, 吸引力, 内敛",
+      "bestFor": "从 404 这种带有大尺寸 Logo 的特殊页回归到常规导航栏。",
+      "tradeoff": "向下轨迹容易在某些分辨率下贴近正文区，产生轻微的遮挡暗示。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 0.5,
+          "progress": 0.55,
+          "normal": 0.15,
+          "scale": 0.96,
+          "ease": "sine.inOut"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "expo.out"
+        }
+      ],
+      "implementation": "控制 scale 下限以避免字体发虚。快速反向切换时，下坠状态需用较低时长的补间修正到新轨迹上。"
+    },
+    {
+      "id": 5,
+      "name": "灵动流转",
+      "summary": "路径呈现非常微弱的 S 型，如同顺应着页面滚动的气流。",
+      "durationMs": 850,
+      "character": "流体, 灵动, 有趣",
+      "bestFor": "宽屏下首页与文档页跨越半个屏幕宽度的对角线对换。",
+      "tradeoff": "轨迹计算较为复杂，视觉容易分散对新页面首屏核心内容的注意力。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 0.35,
+          "progress": 0.3,
+          "normal": -0.06,
+          "scale": 0.99,
+          "ease": "sine.inOut"
+        },
+        {
+          "at": 0.7,
+          "progress": 0.75,
+          "normal": 0.06,
+          "scale": 1.01,
+          "ease": "sine.inOut"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "power2.out"
+        }
+      ],
+      "implementation": "需要 GSAP timeline 通过进度插值分别驱动 x/y 的 bezier 模拟。改向时需重置法线方向。"
+    },
+    {
+      "id": 6,
+      "name": "引力弹射",
+      "summary": "起步稍显蓄力紧凑，随后高速释放并精准滑入目标位。",
+      "durationMs": 650,
+      "character": "张力, 科技感, 聚焦",
+      "bestFor": "追求高效的工具型用户频繁查阅组件时的操作体验。",
+      "tradeoff": "前期的蓄力延迟感会让部分用户误以为页面响应变慢。",
+      "keyframes": [
+        {
+          "at": 0,
+          "progress": 0,
+          "normal": 0,
+          "scale": 1,
+          "ease": "none"
+        },
+        {
+          "at": 0.25,
+          "progress": 0.15,
+          "normal": 0,
+          "scale": 0.94,
+          "ease": "power1.in"
+        },
+        {
+          "at": 0.65,
+          "progress": 0.85,
+          "normal": 0,
+          "scale": 1.03,
+          "ease": "expo.out"
+        },
+        {
+          "at": 1,
+          "progress": 1,
+          "normal": 0,
+          "scale": 1,
+          "ease": "power2.out"
+        }
+      ],
+      "implementation": "通过 scale 的非线性变化制造张力。捕获终点后立即恢复 1:1 比例，并在中途被打断时保留当前形变状态进行过渡。"
+    }
+  ],
+  "recommended": [
+    2,
+    3
+  ],
+  "recommendation": "「悬浮上抛」在 LeiBox 的大跨距切页中极具优雅感，而「呼吸回弹」通过末端物理惯性提升了组件库“把玩”的精致度。"
+}

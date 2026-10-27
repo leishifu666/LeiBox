@@ -15,7 +15,7 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const GENERIC_ERROR = "Something went wrong. Please try again.";
 
-export const NEWSLETTER_TITLE = "See how Canvas UI evolves";
+export const NEWSLETTER_TITLE = "See how LeiBox evolves";
 export const NEWSLETTER_DESCRIPTION =
   "Sign up to our newsletter for updates and exclusive goodies. No spam. No noise.";
 

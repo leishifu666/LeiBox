@@ -1,0 +1,161 @@
+{
+  "slug": "glass-folder",
+  "name": {
+    "en": "Glass Folder Cards",
+    "zh": "玻璃文件夹展开"
+  },
+  "description": {
+    "en": "Frosted folders open into a fan of real files, with generated artwork, a drop-in add action, and keyboard menus.",
+    "zh": "磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。"
+  },
+  "keywords": "glass folder files frosted blur art marble add fan menu 玻璃 文件夹 文件 磨砂 扇出 添加 菜单 纹理",
+  "docsPath": "/docs/animations/glass-folder",
+  "detailPath": "/ai/components/glass-folder.json",
+  "markdownPath": "/ai/components/glass-folder.md",
+  "previewPath": "/assets/components/glass-folder.png",
+  "discovery": {
+    "category": "files",
+    "useCases": [
+      "文件管理",
+      "作品集分组",
+      "document file manager"
+    ],
+    "searchTerms": [
+      "文件",
+      "文件夹",
+      "资料",
+      "管理",
+      "玻璃",
+      "file",
+      "files",
+      "folder",
+      "documents",
+      "manager"
+    ],
+    "visualTags": [
+      "glass",
+      "cards"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "文件卡片展示界面；存储、上传与真实文件权限需接入项目。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox component package",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/glass-folder/react.json",
+      "component": "GlassFolder",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GlassFolder } from \"./GlassFolder\";\n\nexport default function App() {\n  return <GlassFolder />;\n}",
+      "files": [
+        "GlassFolder.tsx",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/glass-folder/vue.json",
+      "component": "GlassFolder",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GlassFolder from \"./GlassFolder.vue\";\n</script>\n<template><GlassFolder /></template>",
+      "files": [
+        "GlassFolder.vue",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/glass-folder/svelte.json",
+      "component": "GlassFolder",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GlassFolder from \"./GlassFolder.svelte\";\n</script>\n<GlassFolder />",
+      "files": [
+        "GlassFolder.svelte",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/glass-folder/solid.json",
+      "component": "GlassFolder",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GlassFolder } from \"./GlassFolder.solid\";\n\nexport default function App() {\n  return <GlassFolder />;\n}",
+      "files": [
+        "GlassFolder.solid.tsx",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/glass-folder/preact.json",
+      "component": "GlassFolder",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GlassFolder } from \"./GlassFolder.preact\";\n\nexport default function App() {\n  return <GlassFolder />;\n}",
+      "files": [
+        "GlassFolder.preact.tsx",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/glass-folder/vanilla.json",
+      "component": "GlassFolder",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GlassFolder\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GlassFolder.ts",
+        "GlassFolderEngine.js",
+        "motion-runtime.ts",
+        "GlassFolderEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus to peek, click to open, and press + to add a file. The dark folder has a keyboard-accessible menu. All files are local demo state.",
+    "zh": "悬停或聚焦预览，点击展开，按 + 添加文件。深色文件夹带键盘菜单，所有文件均为本地演示状态。"
+  }
+}

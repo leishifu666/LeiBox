@@ -1,0 +1,13 @@
+.overlay {
+  position: fixed;
+  z-index: 90;
+  top: 0;
+  left: 0;
+  display: none;
+  max-width: none;
+  pointer-events: none;
+  transform-origin: left top;
+  view-transition-name: none;
+}
+
+.hiddenTarget { opacity: 0 !important; }

@@ -16,13 +16,13 @@ export function Gallery() {
       <Reveal className="flex w-full flex-wrap items-end justify-between gap-x-8 gap-y-4 px-5 sm:px-8">
         <div>
           <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase"><T>
-            The library
+            The collection
           </T></p>
           <h2
             id="gallery-heading"
             className="mt-3 text-3xl font-medium tracking-tighter text-balance sm:text-4xl"
           ><T>
-            Every component, alive on canvas.
+            A closer look at every component.
           </T></h2>
         </div>
         <Link

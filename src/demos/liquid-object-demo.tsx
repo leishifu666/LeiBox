@@ -16,7 +16,7 @@ import { ColorRow, DemoControls } from "@/components/demos/demo-controls";
 import { useDemoControls } from "@/hooks/use-demo-controls";
 import { LiquidObject } from "@/components/docs/live/LiquidObject";
 
-const DEFAULT_MODEL = "/assets/models/duck.glb";
+const DEFAULT_MODEL = "/leibox-mark.svg";
 const LIGHT_BACKGROUND = "#ffffff";
 const DARK_BACKGROUND = "#0a0a0a";
 
@@ -87,6 +87,7 @@ export function LiquidObjectDemo() {
     autoRotate,
     ...values
   } = controls.values;
+  const displaySrc = src === DEFAULT_MODEL && resolvedTheme === "dark" ? "/logo-icon.svg" : src;
   const background = backgroundValue === "" ? null : backgroundValue;
   const toggles = { orbit, autoRotate };
   const [urlDraft, setUrlDraft] = useState(src);
@@ -134,7 +135,7 @@ export function LiquidObjectDemo() {
     <>
       <div className="relative h-[420px] overflow-hidden rounded-xl border border-border/60 sm:h-[520px]">
         <LiquidObject
-          src={src}
+          src={displaySrc}
           {...values}
           {...toggles}
           background={background ?? ""}
@@ -158,7 +159,7 @@ export function LiquidObjectDemo() {
         snippet={{
           component: "LiquidObject",
           props: {
-            src,
+            src: displaySrc,
             ...values,
             ...toggles,
           },

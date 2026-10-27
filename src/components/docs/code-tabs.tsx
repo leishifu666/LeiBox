@@ -8,6 +8,8 @@ import {
   useRenderer,
 } from "@/components/docs/renderer";
 import { usePreference } from "@/hooks/use-preference";
+import type { CodeAsset } from "@/lib/doc-asset-types";
+import { DeferredCode } from "./deferred-code";
 
 export interface CodeVariant {
   /** Short identifier, e.g. "react". */
@@ -27,9 +29,9 @@ export function CodeTabs({
   webgpuVariants = [],
 }: {
   /** WebGL sources, one per framework. */
-  variants: CodeVariant[];
+  variants: (CodeAsset | CodeVariant)[];
   /** WebGPU (vgpu) sources; empty when the component has no WebGPU build. */
-  webgpuVariants?: CodeVariant[];
+  webgpuVariants?: (CodeAsset | CodeVariant)[];
 }) {
   const hasWebGPU = webgpuVariants.length > 0;
   const [renderer, setRenderer] = useRenderer(hasWebGPU);
@@ -63,7 +65,7 @@ export function CodeTabs({
             onValueChange={setActiveId}
           />
         </div>
-        <CopyButton text={active.source} />
+        <CopyButton sourceUrl={"url" in active ? active.url : undefined} text={"source" in active ? active.source : undefined} />
       </div>
       <div className="flex items-center justify-between border-b border-border/40 px-4 py-2">
         <span className="text-[12px] text-muted-foreground">
@@ -73,10 +75,7 @@ export function CodeTabs({
           {renderer === "webgpu" ? "WebGPU · WGSL" : "WebGL · GLSL"}
         </span>
       </div>
-      <div
-        className="docs-code max-h-[480px] overflow-y-auto text-[13px] leading-6"
-        dangerouslySetInnerHTML={{ __html: active.html }}
-      />
+      {"url" in active ? <DeferredCode url={active.url} /> : <div className="docs-code max-h-[480px] overflow-auto text-[13px] leading-6" dangerouslySetInnerHTML={{ __html: active.html }} />}
     </div>
   );
 }

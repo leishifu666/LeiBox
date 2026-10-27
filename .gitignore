@@ -64,6 +64,13 @@ cloudflare-env.d.ts
 
 # generated shadcn registry (built by scripts/build-registry.mts on prebuild)
 /public/r/
+/public/motion-frameworks/
+/public/doc-assets/
+/public/doc-assets-index.json
+/public/ai/packages/
+/public/.well-known/agent-skills/
+/public/.well-known/skills/
+/work/performance-tools/
 
 # Local research captures, archives, logs and host-specific audit helpers
 /docs/research/
@@ -83,3 +90,13 @@ cloudflare-env.d.ts
 /scripts/i18n-*.cjs
 /scripts/localize-*.cjs
 *.log
+
+# Local Netlify folder
+.netlify
+
+# Local agent sessions, experiments and verification artifacts
+/.agents/
+/.claude/
+/.codex/
+/work/
+/outputs/

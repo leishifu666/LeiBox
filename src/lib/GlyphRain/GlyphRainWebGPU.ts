@@ -1,5 +1,5 @@
 import { getCanvasPixelRatio, createCanvasResizeObserver } from "../canvas-viewport";
-import { prepareHtmlInCanvas, drawHtmlInCanvas } from "../html-in-canvas";
+import { prepareHtmlInCanvas, drawHtmlInCanvas, createFallbackCapture } from "../html-in-canvas";
 import {
   effect,
   frame as gpuFrame,
@@ -410,6 +410,7 @@ export function createGlyphRain(
   if (!supportsWebGPU()) return null;
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
+  const fallbackCapture = createFallbackCapture(source, content, output);
 
   const sourceCtx = source.getContext("2d") as ElementImageContext | null;
   const paintable = source as PaintableCanvas;
@@ -973,6 +974,7 @@ export function createGlyphRain(
       start();
     },
     destroy() {
+      fallbackCapture?.destroy();
       destroyed = true;
       cancelAnimationFrame(raf);
       observer.disconnect();

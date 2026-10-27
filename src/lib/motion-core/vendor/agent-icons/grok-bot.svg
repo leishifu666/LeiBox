@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-9.375 -9.375 168.75 168.75" fill="none">
+  <title>Grok Bot</title>
+  <circle cx="75" cy="75" r="75" fill="#fff" stroke="#fff" stroke-width="18.75" />
+  <circle cx="75" cy="75" r="75" fill="#000" />
+  <path d="M76 33C81 31 87 33 90 39L99 56C102 61 99 67 95 69C90 72 85 70 82 65L71 45C68 40 71 35 76 33Z" fill="#fff" />
+  <path d="M111 20C115 18 119 21 122 25C128 33 132 43 133 49C134 54 131 58 127 57C124 57 122 54 121 51L109 29C107 25 108 22 111 20Z" fill="#fff" />
+</svg>

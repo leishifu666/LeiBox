@@ -2,6 +2,10 @@ import { commonTranslations } from "./common";
 import { landingTranslations } from "./landing";
 import { docsTranslations } from "./docs";
 import { effectsTranslations } from "./effects";
+import { contactTranslations } from "./contact";
+import { aiTranslations } from "./ai";
+import { interactionTranslations } from "./interactions";
+import { privacyTranslations } from "./privacy";
 
 export type Locale = "zh" | "en";
 export const LOCALE_STORAGE_KEY = "canvasui:locale";
@@ -10,6 +14,10 @@ const rawTranslations: Readonly<Record<string, string>> = {
   ...landingTranslations,
   ...docsTranslations,
   ...effectsTranslations,
+  ...contactTranslations,
+  ...aiTranslations,
+  ...interactionTranslations,
+  ...privacyTranslations,
 };
 const entities: Record<string, string> = { apos: "'", quot: '"', amp: "&", lt: "<", gt: ">", nbsp: " ", lsquo: "‘", rsquo: "’", ldquo: "“", rdquo: "”", middot: "·", larr: "←", rarr: "→", ndash: "–", mdash: "—" };
 export function normalizeCopy(text: string): string {

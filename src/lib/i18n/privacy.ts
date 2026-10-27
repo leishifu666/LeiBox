@@ -1,0 +1,18 @@
+export const privacyTranslations: Record<string, string> = {
+  "Last updated: October 22, 2026": "更新日期：2026 年 10 月 22 日",
+  "LeiBox is a personal website maintained by Lei Shifu to collect UI inspiration, components, and interaction examples. This policy applies to LeiBox; linked websites have their own privacy policies.": "LeiBox 是雷师傅维护的个人网站，用于收藏 UI 灵感、组件和交互案例。本政策适用于 LeiBox，本站链接的外部网站另有各自的隐私政策。",
+  "Messages and component submissions": "留言与组件投稿",
+  "When you contact me, you choose to provide a reply email, optional name, message, and reference link. I use them to read your submission, evaluate the suggested component, and reply. Sending a message does not subscribe you to a mailing list.": "联系我时，您会主动提供回复邮箱、选填称呼、留言内容及参考链接。我用这些信息阅读投稿、评估推荐的组件并回复您。提交留言不会自动订阅邮件。",
+  "If email delivery is configured, Resend forwards your message to my inbox. If delivery is unavailable, the page reports the failure and offers an email-app link. LeiBox does not save contact messages in a site database; messages may remain in my mailbox and the email provider’s records.": "发信服务配置完成后，Resend 会将留言转发到我的邮箱。无法发送时，页面会提示失败，并提供邮件客户端联系入口。LeiBox 不将留言保存到网站数据库；留言可能保留在我的邮箱及邮件服务商的记录中。",
+  "Browser preferences and component previews": "浏览器偏好与组件演示",
+  "Language, theme, code-file selection, framework, and similar display preferences are saved in your browser. Clearing this website’s data in your browser resets these choices.": "语言、主题、源码文件选择、框架等界面偏好保存在您的浏览器中。您可以在浏览器设置中清除本站数据，清除后这些偏好会重置。",
+  "Emails and members entered in the Share & Invite preview stay in the current page. The preview does not send invitation emails or change real permissions. Reloading or resetting it clears that demo state.": "“分享与邀请”演示中的邮箱和成员仅保存在当前页面，不会发送邀请邮件，也不会修改真实权限。刷新页面或重置演示后，这些状态会清除。",
+  "Copy buttons and external services": "复制功能与外部服务",
+  "A copy button writes the selected prompt, code, or link to your clipboard. LeiBox does not read other clipboard contents. If your browser blocks access, the page reports the failure.": "点击复制按钮时，页面会将您选择的提示词、代码或链接写入剪贴板。LeiBox 不读取剪贴板中的其他内容。浏览器拒绝访问时，页面会提示复制失败。",
+  "Source links, GitHub, ChatGPT, and Claude open the relevant external service. AI shortcuts open the prompt you selected; LeiBox does not call an AI API to send messages for you. External images, fonts, and videos may contact their providers when loaded; those providers apply their own privacy policies.": "打开来源链接、GitHub、ChatGPT 或 Claude 时，会进入对应的外部服务。AI 快捷入口会打开您选择的提示词，LeiBox 不调用 AI 接口代您发送消息。外部图片、字体和视频在加载时可能向其服务商发起请求，相应服务商依其隐私政策处理这些请求。",
+  "Website operation": "网站运行所需的信息",
+  "Your browser sends ordinary connection information, including its IP address and request details, to the hosting server. Hosting providers may process it to serve pages, prevent abuse, and diagnose faults. Contact requests use temporary request counters to limit repeated submissions. The current website includes no advertising trackers or user-profiling scripts.": "访问本站时，浏览器会向托管服务器发送 IP 地址、请求详情等正常连接信息。托管服务商可能将其用于提供页面、防范滥用和排查故障。联系接口使用临时请求计数，限制重复提交。本站当前未接入广告追踪或用户画像脚本。",
+  "Your choices and contact": "您的选择与联系",
+  "You can browse without submitting a message. To ask about information you sent, request a correction, or ask me to remove a message from my mailbox, contact the address below. I will check the request and handle information within my control; third-party providers may retain records under their own policies.": "您可以不提交任何留言，直接浏览组件收藏。如需查询已提交的信息、申请更正，或请我从邮箱中删除留言，可通过下方邮箱联系。我会核实请求并处理我能控制的信息；第三方服务商可能依其政策保留自身记录。",
+  "I will update this page when the website’s information-handling features change. The date above identifies the current version.": "网站的信息处理功能发生变化时，我会相应更新本页。上方日期为当前版本的更新时间。",
+};

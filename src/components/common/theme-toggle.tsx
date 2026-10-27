@@ -22,8 +22,10 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
+      data-theme-toggle
       aria-label={t(isDark ? "Switch to light mode" : "Switch to dark mode")}
-      onClick={toggleTheme}
+      aria-pressed={isDark}
+      onClick={(event) => toggleTheme(event.currentTarget)}
       className="grid size-8 place-items-center rounded-full border border-border/70 text-muted-foreground transition-[color,transform] duration-150 ease-out hover:text-foreground active:scale-95 motion-reduce:transition-none sm:border-transparent"
     >
       <Sun

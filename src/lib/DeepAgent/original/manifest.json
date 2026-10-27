@@ -1,0 +1,272 @@
+{
+  "source": "Deep Agent desktop source",
+  "files": [
+    {
+      "file": "components/Composer.tsx",
+      "sha256": "3061ed7c3635505bc7fad0451576eee764b7c11186aa9906565a021e5b318076",
+      "bytes": 67748
+    },
+    {
+      "file": "components/ui/HoverInfo.tsx",
+      "sha256": "0f2bd618089688ecbdb0a321f40e110a9e2ee7292ec9fe685c592cc62e50b1d2",
+      "bytes": 4498
+    },
+    {
+      "file": "components/shadcn/hover-card.tsx",
+      "sha256": "661fbe94b95c45e9642822bda7d4adbaa91d0248d289cb73c9602df2d2204e9e",
+      "bytes": 2591
+    },
+    {
+      "file": "components/shadcn/utils.ts",
+      "sha256": "c0adf27efbfa148d5abcf99e860f8e3e6c8fc77a1f99e023c08ef4f12e6ece29",
+      "bytes": 175
+    },
+    {
+      "file": "components/ui/SpringSurface.tsx",
+      "sha256": "8a9491b262ea2c1da9ad0c6d77b77bb92fa85cb51b3dfc2e4b690154f87a5bea",
+      "bytes": 17142
+    },
+    {
+      "file": "theme/continuousCorners.ts",
+      "sha256": "7cdd2ff0332d8279b4c7161abff0df381b1d0850750090fea53d1d89a2a7e96c",
+      "bytes": 1769
+    },
+    {
+      "file": "components/ui/springMotion.ts",
+      "sha256": "f2c799c9c0d0850bedc969e6db2b2eb8b98f2c7b45545a9b00cdc1749c6b2ecd",
+      "bytes": 1703
+    },
+    {
+      "file": "components/ui/menuSurface.css",
+      "sha256": "21ce96ec107bc5dfef77f1502d741ee5cbb39feee118243d6173a56d0c70bff2",
+      "bytes": 664
+    },
+    {
+      "file": "components/ui/useHintPositionMotion.ts",
+      "sha256": "136307d819ae37fdf35fa3f7438b3a5189205d240e09abfa6f3c7b1344b60677",
+      "bytes": 1930
+    },
+    {
+      "file": "components/ui/MorphPanelLayoutContext.tsx",
+      "sha256": "e83748217bf31c93303d5591e6673937d4abcadba5ea9066c5f0b273e1f29bb2",
+      "bytes": 455
+    },
+    {
+      "file": "components/ContextCapacityIndicator.tsx",
+      "sha256": "0278112e28646aeed49a5b9b00a606e5e846528a5afac28e2ab07451771d18f2",
+      "bytes": 8008
+    },
+    {
+      "file": "components/shadcn/button.tsx",
+      "sha256": "fcb6ec544f5f3d2fe534bbedac5a4a429a3feb9b35dcb264af2c6dc5978d5ba9",
+      "bytes": 1680
+    },
+    {
+      "file": "components/ui/useSpringPress.ts",
+      "sha256": "e597399ef7eccf2572b7d7d8d30e6529ff4dcfb1a7e9f08f371cab00313b4143",
+      "bytes": 1734
+    },
+    {
+      "file": "components/chat-timeline/format.ts",
+      "sha256": "44e1335aeac093927315c9fa1029a97f024e640cc23e9c040f3690221c68c6ce",
+      "bytes": 1403
+    },
+    {
+      "file": "components/ui/motion.ts",
+      "sha256": "b9bdc69fce350cefb8676c959bf51b10cb0f2ca8b461136cc8343ac3b357fa9f",
+      "bytes": 2462
+    },
+    {
+      "file": "components/ComposerSuggestPanel.tsx",
+      "sha256": "ce190e949289b7d82e2eccb90acbe71d022158b2e5da88902e7f30b67ab57e0d",
+      "bytes": 4872
+    },
+    {
+      "file": "components/ui/Panel.tsx",
+      "sha256": "bd91784bf10998950b2fb823c5e1c9bd49969c2b3599ae0888d0123397a232b2",
+      "bytes": 774
+    },
+    {
+      "file": "components/ui/SlidingMenuList.tsx",
+      "sha256": "0b94108f7a0397b9cd17b70655a7b88404428516f1c7ff7c91ed398f9520f7b2",
+      "bytes": 1271
+    },
+    {
+      "file": "components/ui/SlidingPill.tsx",
+      "sha256": "51272803185667843f31840c32128c742d8d59947f9fbcfa4e29c365f78833ff",
+      "bytes": 8277
+    },
+    {
+      "file": "components/ModelThinkingSelector.tsx",
+      "sha256": "5e6926fd47780fd7977255f997226b8a13a234cac3cac3683d2627eced4ce7ff",
+      "bytes": 5511
+    },
+    {
+      "file": "components/ui/EffortSlider.tsx",
+      "sha256": "d5f6bc4a829aa2fdca121677f6c2f3ac0257a820700012c7cdd16fb80659efa3",
+      "bytes": 6117
+    },
+    {
+      "file": "components/shadcn/slider.tsx",
+      "sha256": "574612f1a7ae603fccae8023a351adc1a8ddf9f9e2a6c7e8fb8d06c3010d4d22",
+      "bytes": 1603
+    },
+    {
+      "file": "components/ui/effortMotion.ts",
+      "sha256": "49f87a7098c84e2e18ef520398c54eccace5d74ceef5a15a964cc088c5852bb8",
+      "bytes": 4911
+    },
+    {
+      "file": "components/ui/effortField.ts",
+      "sha256": "5518873bb82caae654895b423e6e36fdccbcfb223d07c2d2bbc8c717090169d0",
+      "bytes": 3684
+    },
+    {
+      "file": "components/ui/ListItem.tsx",
+      "sha256": "6b37ab90dc15d2c4ef87dc8b1cf457e594026d92abe9dd995824018226b9810f",
+      "bytes": 1075
+    },
+    {
+      "file": "components/ui/TintButton.tsx",
+      "sha256": "401c85d7320b6db702ce1760744eece8eb4454a49919ab8837cd3f8107282c3c",
+      "bytes": 1041
+    },
+    {
+      "file": "components/ui/MorphingMenuShell.tsx",
+      "sha256": "70d3e7d2898bcb3e7c89b0d5258177986ae05c1b185667db11a33f88928c2963",
+      "bytes": 12336
+    },
+    {
+      "file": "components/ui/InputSurface.tsx",
+      "sha256": "b7953cd138b3f8e63e92d158457e93c2e7d30e48232ce004f4b677f1b9562f5f",
+      "bytes": 681
+    },
+    {
+      "file": "components/ui/MessageSendMotionContext.tsx",
+      "sha256": "ef313a23bea029b66cd0a61f09abc4e9f9dc9ae4203271b24b2ef2178f83d83d",
+      "bytes": 1166
+    },
+    {
+      "file": "components/ui/messageSendMotion.ts",
+      "sha256": "fad6078596729a1b05cebc538b56b1ffbb6faefcf69950032d3a8745eb2ef5b0",
+      "bytes": 6798
+    },
+    {
+      "file": "components/ui/messageSendFlight.ts",
+      "sha256": "60efe4b61ca0f8e62837cb2e23c37c0da60017985982a407f00d44360b454a79",
+      "bytes": 4457
+    },
+    {
+      "file": "components/ui/messageSendMotion.css",
+      "sha256": "44e2c23ae55bc1250bc4e249a0794a5ca0e308bf61f2f4315f44e461cd52dd6a",
+      "bytes": 372
+    },
+    {
+      "file": "components/ComposerAttachButton.tsx",
+      "sha256": "6e901cbceb8584121795564ab48a05283ea91948ddbb1b6ee8e0d8a15bfa4565",
+      "bytes": 1444
+    },
+    {
+      "file": "components/ComposerAttachmentList.tsx",
+      "sha256": "f87eec74ef38ca5db99d1e3b8c0f884fa29bf701390248e29c36ff99675e803f",
+      "bytes": 7377
+    },
+    {
+      "file": "components/ImagePreviewTrigger.tsx",
+      "sha256": "df188af48ef47b0ae0fc16b52b5ec5e153d0b01dcca3819bcbcb13f1cec766b4",
+      "bytes": 2260
+    },
+    {
+      "file": "components/shadcn/dialog.tsx",
+      "sha256": "861e4cb12da5ee2db664e2f1d920e7c46d24aaf542be798c578698317c8e2ce6",
+      "bytes": 6256
+    },
+    {
+      "file": "components/ui/GlobalModal.tsx",
+      "sha256": "888a99dd9a45b6693e5e67368eee16fcb31f49c9df34869a67b61717eb72a37e",
+      "bytes": 6393
+    },
+    {
+      "file": "components/ui/modalFromOriginMotion.ts",
+      "sha256": "639524f0669815c8152b087a36e193c09fff58c70f73ae9754049b7943247070",
+      "bytes": 3126
+    },
+    {
+      "file": "components/ui/IconButton.tsx",
+      "sha256": "8441e89fb66d94d047d0529737da2999e82755c93d12d8b5d271c5531aaff117",
+      "bytes": 987
+    },
+    {
+      "file": "components/ui/SpringDisclosure.tsx",
+      "sha256": "e3428445ed16330bbfc1294dcb3fc3ab6c0f5736efbc7bfba2c4df454408c269",
+      "bytes": 3142
+    },
+    {
+      "file": "components/message.tsx",
+      "sha256": "6c10339bf3215e88d096b2e11d72d599246a99382f54da30582c33a308a90246",
+      "bytes": 3228
+    },
+    {
+      "file": "types.ts",
+      "sha256": "d8cd71c710e6bd3d2fcef75cde87255508319ee2b76cbda08f50a776b6ec123b",
+      "bytes": 54152
+    },
+    {
+      "file": "styles.css",
+      "sha256": "525105efc9ea809969db6d537ef33ada4a8c892b6bbf0be2c9ccdbc014e22c6a",
+      "bytes": 75524
+    },
+    {
+      "file": "theme/themePresets.ts",
+      "sha256": "9fe013e86b0502c94158b3b245a15c2f42f37e52247aafb920668ca4c6a9d46b",
+      "bytes": 7974
+    },
+    {
+      "file": "theme/themeTokens.ts",
+      "sha256": "84f12a635a81715c0f3283d0e3de02f0287cd28762b507378caa45627976d752",
+      "bytes": 2475
+    },
+    {
+      "file": "theme/themeTypes.ts",
+      "sha256": "09984375dd953369cdaee7e28d7cdbb70be0e59ec8650adf08393aecaa79db12",
+      "bytes": 1620
+    },
+    {
+      "file": "theme/colorUtils.ts",
+      "sha256": "7d6c3b9b0ff276ba621f37c7c45c2cf3a4e8fc0b2e5f0a9647276c5cc733e770",
+      "bytes": 1745
+    },
+    {
+      "file": "locales/zh.json",
+      "sha256": "a72b36a5b9ecedc92ce0a7dee0a761fba1d1e299c018451ff87c0fd8dfe36bdd",
+      "bytes": 66900
+    },
+    {
+      "file": "locales/en.json",
+      "sha256": "9a879e7d57091508dee0a8e8e1dc552f5b627818c5deb37af5ec2348e5350de8",
+      "bytes": 67611
+    }
+  ],
+  "external": [
+    "react",
+    "@base-ui/react/preview-card",
+    "clsx",
+    "tailwind-merge",
+    "gsap",
+    "@fortawesome/react-fontawesome",
+    "lucide-react",
+    "react-i18next",
+    "react-circular-progressbar",
+    "@radix-ui/react-slider",
+    "react-dom",
+    "react-dom/client"
+  ],
+  "compiler": {
+    "tailwind": "3.4.19"
+  },
+  "adapters": [
+    "api.ts",
+    "api/index.ts"
+  ],
+  "visualChanges": []
+}

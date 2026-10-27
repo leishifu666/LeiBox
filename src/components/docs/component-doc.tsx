@@ -7,16 +7,17 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { HtmlInCanvasBanner } from "@/components/common/html-in-canvas-banner";
 import { ApiReference, type ApiProp } from "@/components/docs/api-reference";
 import { CodeTabs, type CodeVariant } from "@/components/docs/code-tabs";
-import { CopyMenu } from "@/components/docs/copy-menu";
+import { CopyMenu, type StandaloneCopyContent } from "@/components/docs/copy-menu";
+import { CopyButton } from "@/components/docs/copy-button";
 import { DependencyTabs } from "@/components/docs/dependency-tabs";
-import { highlight } from "@/components/docs/highlight";
 import { InstallNote, InstallTabs } from "@/components/docs/install-tabs";
 import {
   getComponentDependencies,
-  getComponentSources,
-  getDemoSource,
 } from "@/lib/registry";
-import { COMPONENTS } from "@/data/components";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import type { MotionPackageRef } from "@/lib/doc-asset-types";
+import { getDocAssets } from "@/lib/doc-assets";
+import { MotionPrompt } from "@/components/docs/motion-framework-tabs";
 import { cn } from "@/lib/utils";
 
 export interface ComponentDocProps {
@@ -40,19 +41,13 @@ export interface ComponentDocProps {
   requiresHtmlInCanvas?: boolean;
   /** Props table shown in the API reference section. */
   apiReference?: ApiProp[];
-}
-
-/** Pre-highlights the WebGPU (vgpu) sources; empty when the component has none. */
-async function getWebGPUVariants(installItem: string): Promise<CodeVariant[]> {
-  return Promise.all(
-    getComponentSources(installItem, "webgpu").map(async (file) => ({
-      id: file.id,
-      label: file.label,
-      fileName: file.fileName,
-      source: file.source,
-      html: await highlight(file.source, file.lang),
-    })),
-  );
+  /** Local sources use the same document layout without a registry install. */
+  copyContent?: StandaloneCopyContent;
+  installation?: ReactNode;
+  code?: ReactNode;
+  afterCode?: ReactNode;
+  recreationPrompt?: string;
+  motionPackages?: MotionPackageRef[];
 }
 
 export async function ComponentDoc({
@@ -60,21 +55,27 @@ export async function ComponentDoc({
   description,
   preview,
   beforeInstall,
-  variants,
   installItem,
   tags,
   apiReference,
+  copyContent,
+  installation,
+  code,
+  afterCode,
+  recreationPrompt,
+  motionPackages,
   requiresHtmlInCanvas = false,
 }: ComponentDocProps) {
   const { dependencies, devDependencies } =
     getComponentDependencies(installItem);
   const webgpuDeps = getComponentDependencies(installItem, "webgpu");
-  const demoSource = getDemoSource(installItem);
-  const webgpuVariants = await getWebGPUVariants(installItem);
+  const assets = copyContent ? undefined : getDocAssets().canvas[installItem];
+  const webglVariants = assets?.webgl ?? [];
+  const webgpuVariants = assets?.webgpu ?? [];
   const hasWebGPU = webgpuVariants.length > 0;
 
   return (
-    <article className="mx-auto w-full max-w-3xl">
+    <article className="mx-auto w-full max-w-3xl" data-component-document={installItem}>
       <div className="flex items-start justify-between gap-4">
         <h1 className="min-w-0 text-3xl font-semibold tracking-[-0.02em]">
           <TranslatedText>{title}</TranslatedText>
@@ -83,14 +84,16 @@ export async function ComponentDoc({
           title={title}
           description={description}
           installItem={installItem}
-          variants={variants}
+          variants={webglVariants}
           webgpuVariants={webgpuVariants}
           apiReference={apiReference}
           dependencies={dependencies}
           devDependencies={devDependencies}
           webgpuDependencies={webgpuDeps.dependencies}
           webgpuDevDependencies={webgpuDeps.devDependencies}
-          demoSource={demoSource}
+          demoSourceUrl={assets?.demoUrl}
+          standalone={copyContent}
+          motionPackages={motionPackages}
         />
       </div>
       <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
@@ -105,7 +108,7 @@ export async function ComponentDoc({
               key={tag}
               className="rounded-full border border-border/60 px-2.5 py-0.5 text-[11.5px] text-muted-foreground"
             >
-              {tag}
+              <TranslatedText>{tag}</TranslatedText>
             </span>
           ))}
         </div>
@@ -115,7 +118,7 @@ export async function ComponentDoc({
 
       {preview ? (
         <section className="mt-8" aria-label="Preview">
-          <div className="relative h-105 touch-none overflow-hidden rounded-xl border border-border/60 bg-background">
+          <div data-component-demo-panel className="relative h-105 touch-none overflow-hidden rounded-xl border border-border/60 bg-background">
             {preview}
           </div>
         </section>
@@ -131,9 +134,9 @@ export async function ComponentDoc({
           Install
         </TranslatedText></h2>
         <div className="mt-3">
-          <InstallTabs item={installItem} hasWebGPU={hasWebGPU} />
+          {installation ?? <InstallTabs item={installItem} hasWebGPU={hasWebGPU} />}
         </div>
-        <InstallNote hasWebGPU={hasWebGPU} />
+        {!installation ? <InstallNote hasWebGPU={hasWebGPU} /> : null}
       </section>
 
       {dependencies.length > 0 || devDependencies.length > 0 || hasWebGPU ? (
@@ -169,9 +172,21 @@ export async function ComponentDoc({
           Code
         </TranslatedText></h2>
         <div className="mt-3">
-          <CodeTabs variants={variants} webgpuVariants={webgpuVariants} />
+          {code ?? <CodeTabs variants={webglVariants} webgpuVariants={webgpuVariants} />}
         </div>
       </section>
+
+      {afterCode}
+
+      {motionPackages ? <MotionPrompt packages={motionPackages} /> : recreationPrompt ? (
+        <section className="mt-8" aria-label="Recreation prompt">
+          <div className="flex items-center justify-between gap-3">
+            <h2 id="prompt" className="scroll-mt-24 text-lg font-semibold tracking-[-0.01em]"><TranslatedText>Recreation prompt</TranslatedText></h2>
+            <CopyButton text={recreationPrompt} label="Copy prompt" />
+          </div>
+          <pre translate="no" className="mt-3 max-h-64 overflow-y-auto rounded-xl border border-border/60 p-4 font-sans text-[13px] leading-6 whitespace-pre-wrap">{recreationPrompt}</pre>
+        </section>
+      ) : null}
 
       {apiReference && apiReference.length > 0 ? (
         <section className="mt-8" aria-label="API reference">
@@ -193,12 +208,11 @@ export async function ComponentDoc({
 }
 
 function ComponentPager({ slug }: { slug: string }) {
-  const index = COMPONENTS.findIndex(
-    (entry) => entry.href === `/docs/components/${slug}`,
-  );
+  const entries = COMPONENT_CATALOG;
+  const index = entries.findIndex((entry) => entry.href.endsWith(`/${slug}`));
   if (index === -1) return null;
-  const prev = index > 0 ? COMPONENTS[index - 1] : null;
-  const next = index < COMPONENTS.length - 1 ? COMPONENTS[index + 1] : null;
+  const prev = index > 0 ? entries[index - 1] : null;
+  const next = index < entries.length - 1 ? entries[index + 1] : null;
 
   return (
     <nav
@@ -215,7 +229,7 @@ function PagerLink({
   entry,
   direction,
 }: {
-  entry: (typeof COMPONENTS)[number];
+  entry: { href: string; name: string };
   direction: "prev" | "next";
 }) {
   const isPrev = direction === "prev";
@@ -234,7 +248,7 @@ function PagerLink({
   );
 
   return (
-    <Link
+    <Link prefetch={false}
       href={entry.href}
       rel={direction}
       className={cn(

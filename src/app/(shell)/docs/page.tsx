@@ -9,13 +9,13 @@ import { Footer } from "@/components/landing/footer";
 export const metadata: Metadata = {
   title: "Introduction",
   description:
-    "Canvas UI is a free, open source component library of creative canvas effects for React, Solid, Preact, Vue, Svelte, and vanilla JS, with WebGL and WebGPU (via vgpu) builds of every effect.",
+    "LeiBox collects UI inspiration and component references with source credits, live demos, and AI-readable metadata.",
   alternates: { canonical: "/docs" },
 };
 
 const PAGE_MARKDOWN = `# Introduction
 
-Canvas UI is an open source library of creative components drawn on canvas. Real HTML, rendered inside a canvas element, with GPU effects running over it in WebGL or WebGPU. Copy, paste, and ship.
+LeiBox is a personal collection of UI inspiration and component references. The current effects come from Canvas UI by David Haz, with source and license information preserved. Reference and preview do not grant redistribution rights.
 
 ## What is this?
 
@@ -42,7 +42,7 @@ The html-in-canvas API is an experimental Chrome feature, currently in origin tr
 ## Next steps
 
 - Read the installation guide: https://canvasui.dev/docs/installation
-- Try Liquid, the first component: https://canvasui.dev/docs/components/liquid
+- Try ASCII Object: https://canvasui.dev/docs/components/ascii-object
 `;
 
 export default function DocsPage() {
@@ -58,10 +58,9 @@ export default function DocsPage() {
           />
         </div>
         <p className="max-w-xl text-muted-foreground"><TranslatedText>
-          Canvas UI is an open source library of creative components drawn on
-          canvas. Real HTML, rendered inside a canvas element, with GPU
-          effects running over it in WebGL or WebGPU. Copy, paste, and ship.
+          LeiBox is a personal collection of UI inspiration and component references. The current effects come from Canvas UI by David Haz, with source and license information preserved.
         </TranslatedText></p>
+        <p className="text-sm text-muted-foreground"><TranslatedText>Use the AI integration guide for the catalog, CLI, and Skill. Follow each component's original license before copying or installing its source.</TranslatedText></p>
 
         <h2><TranslatedText>What is this?</TranslatedText></h2>
         <p><TranslatedText>
@@ -121,10 +120,10 @@ export default function DocsPage() {
                 description: "Requirements, the CLI, and manual setup.",
               },
               {
-                href: "/docs/components/liquid",
-                title: "Liquid",
+                href: "/docs/components/ascii-object",
+                title: "ASCII Object",
                 description:
-                  "A pointer-driven fluid simulation over live HTML.",
+                  "A floating 3D object rendered as ASCII characters.",
               },
             ]}
           />
