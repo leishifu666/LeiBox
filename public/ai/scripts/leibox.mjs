@@ -4,7 +4,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 
-const DEFAULT_ORIGIN = 'https://leibox-ui.netlify.app';
+const DEFAULT_ORIGIN = 'https://leibox.pantoria.cn';
 const FRAMEWORKS = ['react', 'vue', 'svelte', 'solid', 'preact', 'vanilla'];
 const normalized = (value) => value.normalize('NFKC').toLocaleLowerCase('en-US').trim();
 

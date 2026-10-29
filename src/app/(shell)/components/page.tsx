@@ -24,17 +24,17 @@ export default function ComponentsPage() {
       </T></p>
 
       <section id="interaction" className="mt-10 scroll-mt-24" aria-labelledby="components-title">
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {COMPONENT_CATALOG.map((component) => (
-            <li key={component.href} data-preview-card data-component-card={component.href} className="group relative flex h-full flex-col rounded-2xl border border-border/60 bg-muted/30 p-2 transition-colors duration-150 hover:bg-muted/50">
-                <div className="relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border/40 bg-[#f4f4f4]">
+            <li key={component.href} data-preview-card data-component-card={component.href} className="group relative flex h-full flex-col gap-4">
+                <div className="relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f4f4]">
                   {component.kind === "interaction" ? (
                   <InteractionPreview slug={component.slug} poster={component.preview} source={component.sourceFile ? `/motion/${component.slug}.html` : undefined} width={component.canvasWidth} height={component.canvasHeight} />
                   ) : (
                     <PreviewVideo src={component.video} className="absolute inset-0 size-full object-cover" />
                   )}
                 </div>
-                <Link prefetch={false} href={component.href} className="block px-2.5 pt-3.5 pb-2.5 after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4">
+                <Link prefetch={false} href={component.href} className="block px-1 after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4">
                   <h2 className="text-[15px] font-medium tracking-tight"><T>{component.name}</T></h2>
                   <p className="mt-1 text-sm leading-6 text-pretty text-muted-foreground"><T>{component.description}</T></p>
                 </Link>

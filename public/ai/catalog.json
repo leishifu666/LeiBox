@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
   "revision": "52333701a703207df86aa830f2112a18155820602d46e8a9d6c32c258c554320",
+  "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
     "searchSchema": "/ai/search-index.schema.json",

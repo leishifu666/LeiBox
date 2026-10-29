@@ -1,10 +1,12 @@
-# LeiBox 的 Netlify 部署
+# LeiBox 的 Netlify 部署历史
 
-- 正式网站：https://leibox-ui.netlify.app
+- 当前正式域名：https://leibox.pantoria.cn
 - 项目管理：https://app.netlify.com/projects/leibox-ui
 - 项目 ID：`dadbc431-b78f-44e6-8d25-bf20d77f31d8`
 - 已发布版本：`6adde5699d2189d35e6faeab`（LeiBox Skill 主动推荐与任务检索索引，2026-10-25 北京时间）。本次在汉化版 `6adde1073c516ab5a7bf7dad` 上新增轻量索引、Schema 和 Agent 访问说明，更新 Skill、完整目录、组件详情及 llms.txt；新增 3 个文件、更新 50 个文件，源码包未改。前次 Skill 及数据发布以 `6addce5e7b66fc6774e40054` 为基底，经 `6addd78e874717898a1c54a8` 和 `6addd90a62d54fa2d15afb58` 发布全站源码检索并修正 SKILL.md 大小写路径。页面文件及 API 函数代码、路由和限流配置保持一致。生产网站已设为公开访问，预览仍保留默认私有设置。GitHub Star 自动更新版本为 `6add3beae9fdb7fe79d8944c`；Logo 恢复原 25px 显示高度的版本为 `6adb3203352195a391a0fb16`；ei 连字初次发布为 `6adb27b845dd22480c98c31d`，MiSans 字体更新为 `6adb10f64b3060ef9e8eee5c`。
 - 本地项目仍为 `F:\雷师傅\ui组件网站`，没有创建 worktree，也没有提交或推送 Git。
+
+2026-10-29 起，当前部署位于腾讯云宝塔，见 [腾讯云部署记录](./DEPLOY-TENCENT.md)。以下保留 Netlify 的原部署方式和历史验证结果，不代表新域名的验收状态。
 
 ## 架构与存储
 
@@ -31,7 +33,7 @@ netlify deploy --prod
 首页的入口用于安装 Skill，让 AI 搜索并拉取全站组件，命令固定使用正式网站：
 
 ```sh
-npx skills add https://leibox-ui.netlify.app --skill leibox
+npx skills add https://leibox.pantoria.cn --skill leibox
 ```
 
 `scripts/build-ai-catalog.mts` 从网站组件集合及真实框架包生成完整目录、组件详情、168 个本站框架源码包和两个兼容的 well-known Skill discovery 入口。当前覆盖 37 个组件；Skill 自带独立的 Node.js 搜索与源码拉取工具。旧的单组件注册表仍保留，但不再是首页主安装方式。

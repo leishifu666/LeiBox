@@ -3,10 +3,12 @@
 安装 Skill 后，在支持自动发现的 AI 客户端中，Agent 会按当前界面任务主动检索适合的 LeiBox 组件，说明推荐理由，再按项目实际框架接入完整源码。用户不必先提 LeiBox 或知道组件名字。使用方不需要克隆 LeiBox 仓库、启动开发服务器或配置 MCP 服务。
 
 ```sh
-npx skills add https://leibox-ui.netlify.app --skill leibox
+npx skills add https://leibox.pantoria.cn --skill leibox
 ```
 
 安装器会让使用者选择 AI 客户端和安装范围。该命令使用公开的 Skill discovery 地址，安装 `SKILL.md`、`scripts/leibox.mjs` 和 `agents/openai.yaml`，其中启用了隐式调用。安装不会启动后台任务，是否自动选择此 Skill 仍取决于宿主的 Skill 发现机制。
+
+2026-10-29 起使用新域名 `https://leibox.pantoria.cn`。之前安装过旧版 Skill 的客户端，需要从上面的新地址更新安装一次；仅修改网页上的复制命令不会更新已经安装到客户端的默认查询地址。之后新增组件仍由实时目录提供，无需逐次重新安装。
 
 安装后可以直接向 AI 说：
 

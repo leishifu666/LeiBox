@@ -10,7 +10,7 @@ const result = spawnSync(process.execPath, [npmCli, "run", "build"], {
   stdio: "inherit",
   env: {
     ...process.env,
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || "https://leibox-ui.netlify.app",
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://leibox.pantoria.cn",
   },
 });
 if (result.status !== 0) process.exit(result.status || 1);

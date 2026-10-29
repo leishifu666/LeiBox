@@ -4,49 +4,49 @@
 
 ## Machine-readable entry points
 
-- [Task search index](/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
-- [Index schema](/ai/search-index.schema.json): Versioned field contract for agents and indexers.
-- [Agent guide](/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](/ai/catalog.json): All 30 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
-- [Component list](/components): Human-facing previews.
-- [Documentation](/docs): Usage and browser capabilities.
-- [AI integration guide](/docs/mcp): Skill installation, search and source downloads.
-- [LeiBox Skill](/ai/SKILL.md): Install with npx skills add https://leibox-ui.netlify.app --skill leibox.
+- [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
+- [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
+- [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 30 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
+- [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
+- [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
+- [LeiBox Skill](https://leibox.pantoria.cn/ai/SKILL.md): Install with npx skills add https://leibox.pantoria.cn --skill leibox.
 
 Paths beginning with / are relative to the origin serving this file. When only a local preview is running, remote AI services cannot fetch it; use the local CLI or paste the copied metadata/prompt.
 
 ## Components
 
-- [Fluid Tooltip / 流体提示气泡](/ai/components/fluid-tooltip.md): One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.
-- [Spider Track Switcher / 蜘蛛牵引切歌](/ai/components/spider-music-player.md): An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.
-- [Collection Layout Morph / 列表卡片堆叠切换](/ai/components/collection-layout-morph.md): The same three Claude, Codex and Grok SVG images smoothly move between a list, a card row and an overlapping pack.
-- [Brand Poster Cards / 品牌海报三联卡片](/ai/components/brand-poster-cards.md): Three portrait posters pair a small corner symbol, a centered brand wordmark, and a shared introduction. The photographs gently zoom while the branding stays fixed.
-- [Dot Matrix Ripple and Spiral / 点阵波纹与旋涡](/ai/components/dot-matrix-trio.md): Three synchronized dot grids form expanding two-color ripples, a rotating spiral, and a growing circular pulse on printed cards.
-- [Text Selection Flowers / 文字选区开花](/ai/components/selection-flower.md): Drag to select real text and grow seeded, outlined flowers around each character; release to fold the petals, leaves, and stems back into the page.
-- [Inline Phrase Morph / 内联词组变形](/ai/components/inline-text-morph.md): Click three inline pills to morph shared letters, resize the sentence, and swap illustrated stickers with a spring.
-- [Brain Particle Effort Slider / 脑形滑块粒子增强](/ai/components/galaxy-effort-slider.md): A pink brain gains more folds as effort increases through six levels, then glows with a twinkling pixel track, dotted rays, and a brief shake in Galaxy mode.
-- [Notes Text Color / 文字选区调色器](/ai/components/notes-text-color.md): Select note text to open a frosted nine-color palette, tint a real multiline selection, and return to recently colored passages.
-- [Bounding Box Resize / 选框拖拽缩放](/ai/components/bounding-box-resize.md): Eight square handles morph into directional arrows, with live size pills, editable dimensions, and guides as the selection resizes.
-- [Soft Action Wheel / 柔光环形菜单展开](/ai/components/soft-action-wheel.md): Six monochrome actions spring inward with a short clockwise stagger, framed by fine grey rims, white highlights, and soft shadows; all scatter out together on close.
-- [Staggered Radial Menu / 环形菜单交错展开](/ai/components/staggered-radial-menu.md): Six coloured actions arrive from the outside in clockwise order, spring into a ring, then scatter outwards in reverse with soft blur.
-- [Elastic Panel Resize / 弹性面板缩放](/ai/components/elastic-panel-resize.md): A resizable blank panel with a hidden handle, directional bending, and a short resisted stretch beyond its width limits.
-- [Blue Fluted Glass Background / 蓝色棱纹流动背景](/ai/components/blue-fluted-glass.md): Slow blue fluid folds refract through vertical frosted-glass ribs behind a fixed white LeiBox logo.
-- [Reasoning Effort Slider / 模型思考强度滑块](/ai/components/reasoning-effort-slider.md): A three-stop thinking slider with a flowing star field, velocity-driven jelly deformation, and soft snapping from Simple to Deep.
-- [Deep Agent Composer / Agent 对话输入框](/ai/components/deep-agent-composer.md): The original Deep Agent Composer, including permission controls, context capacity, attachments, model selection, and the thinking-effort slider.
-- [ASCII Shark Price Paths / 字符鲨鱼追踪价格路径](/ai/components/hammerhead-chart.md): An ASCII hammerhead swims along three forecast price paths and tags each with its odds, volatility and dealer gamma; the pointer steers it to the nearest path, or lets it swim freely over the candle history.
-- [Glass Tab Menu / 玻璃标签栏展开菜单](/ai/components/glass-tab-menu.md): A frosted four-tab bar expands into six creation actions, with a translucent sliding selection and a rotating plus button.
-- [Crumpled Paper Unfold / 揉皱纸张展开](/ai/components/crumpled-paper.md): Three crumpled paper meshes unfold into a handwritten letter, a blue mountain photograph, and a printed note as you hover.
-- [Sailing Scroll Contents / 帆船滚动目录](/ai/components/sailing-toc.md): A sailing ship follows the current section along a bending dashed route, with scroll tracking and smooth contents navigation.
-- [Thinking Step Particle Morph / 思考步骤粒子变形](/ai/components/thinking-particles.md): Particles morph through five thinking steps, then collapse into a streamed answer with replay and copy controls.
-- [Glass Folder Cards / 玻璃文件夹展开](/ai/components/glass-folder.md): Frosted folders open into a fan of real files, with generated artwork, a drop-in add action, and keyboard menus.
-- [Orbit & Halftone Animation / 轨道与点阵动效](/ai/components/cosmic-panels.md): Orbital loading, flowing halftone clouds, and floating isometric servers form a three-panel cosmic visual system.
-- [Interactive Gradient Cards / 渐变卡片跟随](/ai/components/gradient-cover-wall.md): Six grainy gradient covers with fine SVG patterns, drifting colours, and spring-driven pointer light.
-- [OTP Input Verification / 验证码输入验证](/ai/components/otp-verification.md): A six-digit code unfolds from a pill, contracts to verify, and responds with an error shake or a green confirmation.
-- [Pointer Line Cards / 鼠标感应线条](/ai/components/brand-line-cards.md): Apple, Google, and Tesla emerge from flowing vertical lines, with spring motion and pointer-driven detection boxes.
-- [Share Invite Panel / 分享邀请面板](/ai/components/share-invite.md): An expandable sharing panel with email invitations, member roles, and a real copy-link action.
-- [Expandable Access Request / 访问申请展开](/ai/components/bouncy-access.md): A compact access request expands into an avatar list with staggered spring motion.
-- [Inertial Calendar Drag / 日历惯性拖拽](/ai/components/velocity-drag.md): Calendar events turn into a floating focus card that stretches and follows drag velocity.
-- [Dot Grid Loader / 点阵加载](/ai/components/ai-generating.md): A restrained 20-by-20 dot field pulses around two moving focal points while an image is generating.
+- [Fluid Tooltip / 流体提示气泡](https://leibox.pantoria.cn/ai/components/fluid-tooltip.md): One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.
+- [Spider Track Switcher / 蜘蛛牵引切歌](https://leibox.pantoria.cn/ai/components/spider-music-player.md): An eight-legged spider spins a web around an album cover and carries it between the queue and player, with real album artwork and working local controls.
+- [Collection Layout Morph / 列表卡片堆叠切换](https://leibox.pantoria.cn/ai/components/collection-layout-morph.md): The same three Claude, Codex and Grok SVG images smoothly move between a list, a card row and an overlapping pack.
+- [Brand Poster Cards / 品牌海报三联卡片](https://leibox.pantoria.cn/ai/components/brand-poster-cards.md): Three portrait posters pair a small corner symbol, a centered brand wordmark, and a shared introduction. The photographs gently zoom while the branding stays fixed.
+- [Dot Matrix Ripple and Spiral / 点阵波纹与旋涡](https://leibox.pantoria.cn/ai/components/dot-matrix-trio.md): Three synchronized dot grids form expanding two-color ripples, a rotating spiral, and a growing circular pulse on printed cards.
+- [Text Selection Flowers / 文字选区开花](https://leibox.pantoria.cn/ai/components/selection-flower.md): Drag to select real text and grow seeded, outlined flowers around each character; release to fold the petals, leaves, and stems back into the page.
+- [Inline Phrase Morph / 内联词组变形](https://leibox.pantoria.cn/ai/components/inline-text-morph.md): Click three inline pills to morph shared letters, resize the sentence, and swap illustrated stickers with a spring.
+- [Brain Particle Effort Slider / 脑形滑块粒子增强](https://leibox.pantoria.cn/ai/components/galaxy-effort-slider.md): A pink brain gains more folds as effort increases through six levels, then glows with a twinkling pixel track, dotted rays, and a brief shake in Galaxy mode.
+- [Notes Text Color / 文字选区调色器](https://leibox.pantoria.cn/ai/components/notes-text-color.md): Select note text to open a frosted nine-color palette, tint a real multiline selection, and return to recently colored passages.
+- [Bounding Box Resize / 选框拖拽缩放](https://leibox.pantoria.cn/ai/components/bounding-box-resize.md): Eight square handles morph into directional arrows, with live size pills, editable dimensions, and guides as the selection resizes.
+- [Soft Action Wheel / 柔光环形菜单展开](https://leibox.pantoria.cn/ai/components/soft-action-wheel.md): Six monochrome actions spring inward with a short clockwise stagger, framed by fine grey rims, white highlights, and soft shadows; all scatter out together on close.
+- [Staggered Radial Menu / 环形菜单交错展开](https://leibox.pantoria.cn/ai/components/staggered-radial-menu.md): Six coloured actions arrive from the outside in clockwise order, spring into a ring, then scatter outwards in reverse with soft blur.
+- [Elastic Panel Resize / 弹性面板缩放](https://leibox.pantoria.cn/ai/components/elastic-panel-resize.md): A resizable blank panel with a hidden handle, directional bending, and a short resisted stretch beyond its width limits.
+- [Blue Fluted Glass Background / 蓝色棱纹流动背景](https://leibox.pantoria.cn/ai/components/blue-fluted-glass.md): Slow blue fluid folds refract through vertical frosted-glass ribs behind a fixed white LeiBox logo.
+- [Reasoning Effort Slider / 模型思考强度滑块](https://leibox.pantoria.cn/ai/components/reasoning-effort-slider.md): A three-stop thinking slider with a flowing star field, velocity-driven jelly deformation, and soft snapping from Simple to Deep.
+- [Deep Agent Composer / Agent 对话输入框](https://leibox.pantoria.cn/ai/components/deep-agent-composer.md): The original Deep Agent Composer, including permission controls, context capacity, attachments, model selection, and the thinking-effort slider.
+- [ASCII Shark Price Paths / 字符鲨鱼追踪价格路径](https://leibox.pantoria.cn/ai/components/hammerhead-chart.md): An ASCII hammerhead swims along three forecast price paths and tags each with its odds, volatility and dealer gamma; the pointer steers it to the nearest path, or lets it swim freely over the candle history.
+- [Glass Tab Menu / 玻璃标签栏展开菜单](https://leibox.pantoria.cn/ai/components/glass-tab-menu.md): A frosted four-tab bar expands into six creation actions, with a translucent sliding selection and a rotating plus button.
+- [Crumpled Paper Unfold / 揉皱纸张展开](https://leibox.pantoria.cn/ai/components/crumpled-paper.md): Three crumpled paper meshes unfold into a handwritten letter, a blue mountain photograph, and a printed note as you hover.
+- [Sailing Scroll Contents / 帆船滚动目录](https://leibox.pantoria.cn/ai/components/sailing-toc.md): A sailing ship follows the current section along a bending dashed route, with scroll tracking and smooth contents navigation.
+- [Thinking Step Particle Morph / 思考步骤粒子变形](https://leibox.pantoria.cn/ai/components/thinking-particles.md): Particles morph through five thinking steps, then collapse into a streamed answer with replay and copy controls.
+- [Glass Folder Cards / 玻璃文件夹展开](https://leibox.pantoria.cn/ai/components/glass-folder.md): Frosted folders open into a fan of real files, with generated artwork, a drop-in add action, and keyboard menus.
+- [Orbit & Halftone Animation / 轨道与点阵动效](https://leibox.pantoria.cn/ai/components/cosmic-panels.md): Orbital loading, flowing halftone clouds, and floating isometric servers form a three-panel cosmic visual system.
+- [Interactive Gradient Cards / 渐变卡片跟随](https://leibox.pantoria.cn/ai/components/gradient-cover-wall.md): Six grainy gradient covers with fine SVG patterns, drifting colours, and spring-driven pointer light.
+- [OTP Input Verification / 验证码输入验证](https://leibox.pantoria.cn/ai/components/otp-verification.md): A six-digit code unfolds from a pill, contracts to verify, and responds with an error shake or a green confirmation.
+- [Pointer Line Cards / 鼠标感应线条](https://leibox.pantoria.cn/ai/components/brand-line-cards.md): Apple, Google, and Tesla emerge from flowing vertical lines, with spring motion and pointer-driven detection boxes.
+- [Share Invite Panel / 分享邀请面板](https://leibox.pantoria.cn/ai/components/share-invite.md): An expandable sharing panel with email invitations, member roles, and a real copy-link action.
+- [Expandable Access Request / 访问申请展开](https://leibox.pantoria.cn/ai/components/bouncy-access.md): A compact access request expands into an avatar list with staggered spring motion.
+- [Inertial Calendar Drag / 日历惯性拖拽](https://leibox.pantoria.cn/ai/components/velocity-drag.md): Calendar events turn into a floating focus card that stretches and follows drag velocity.
+- [Dot Grid Loader / 点阵加载](https://leibox.pantoria.cn/ai/components/ai-generating.md): A restrained 20-by-20 dot field pulses around two moving focal points while an image is generating.
 
 ## Use with an AI assistant
 

@@ -11,7 +11,7 @@ LeiBox 是雷师傅维护的网页组件与交互灵感收藏。支持中英双�
 
 [![GitHub Stars](https://img.shields.io/github/stars/leishifu666/LeiBox?style=social)](https://github.com/leishifu666/LeiBox)
 
-[在线网站](https://leibox-ui.netlify.app/) · [浏览组件](https://leibox-ui.netlify.app/components) · [使用说明](https://leibox-ui.netlify.app/copyright)
+[在线网站](https://leibox.pantoria.cn/) · [浏览组件](https://leibox.pantoria.cn/components) · [使用说明](https://leibox.pantoria.cn/copyright)
 
 ## 当前项目截图
 
@@ -43,7 +43,7 @@ LeiBox 是雷师傅维护的网页组件与交互灵感收藏。支持中英双�
 ## AI 检索
 
 ~~~sh
-npx skills add https://leibox-ui.netlify.app --skill leibox
+npx skills add https://leibox.pantoria.cn --skill leibox
 ~~~
 
 详见 [AI 接入指南](docs/AI-INTEGRATION.md) 与 [Skill](integrations/skills/leibox/SKILL.md)。索引以实际生成的条目为准，不承诺未提供的组件或能力。

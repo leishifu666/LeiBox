@@ -11,7 +11,7 @@ const bundle = await build({
   bundle: true, write: false, platform: "node", format: "esm",
 });
 const { default: api } = await import(`data:text/javascript;base64,${Buffer.from(bundle.outputFiles[0].text).toString("base64")}`);
-const origin = "https://leibox-ui.netlify.app";
+const origin = "https://leibox.pantoria.cn";
 const request = (pathname, body = {}, headers = {}) => new Request(origin + pathname, {
   method: "POST", headers: { "content-type": "application/json", origin, ...headers },
   body: JSON.stringify(body),

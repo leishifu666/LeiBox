@@ -8,12 +8,13 @@ import { getMotionPackages } from "../src/lib/motion-packages.ts";
 import { interactionTranslations } from "../src/lib/i18n/interactions.ts";
 import { docsTranslations } from "../src/lib/i18n/docs.ts";
 import { AI_DISCOVERY, type Discovery } from "../src/data/ai-discovery.ts";
+import { PUBLIC_SITE_URL } from "../src/lib/site-url.ts";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = path.join(ROOT, "public", "ai");
 const frameworks = ["react", "vue", "svelte", "solid", "preact", "vanilla"] as const;
 
-const configuredBase = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const configuredBase = PUBLIC_SITE_URL;
 let siteBase = "";
 if (configuredBase) {
   const parsed = new URL(configuredBase);
@@ -175,7 +176,7 @@ const llms = [
   `- [Component list](${localLink("/components")}): Human-facing previews.`,
   `- [Documentation](${localLink("/docs")}): Usage and browser capabilities.`,
   `- [AI integration guide](${localLink("/docs/mcp")}): Skill installation, search and source downloads.`,
-  `- [LeiBox Skill](${localLink("/ai/SKILL.md")}): Install with npx skills add https://leibox-ui.netlify.app --skill leibox.`,
+  `- [LeiBox Skill](${localLink("/ai/SKILL.md")}): Install with npx skills add ${siteBase} --skill leibox.`,
   "",
   "Paths beginning with / are relative to the origin serving this file. When only a local preview is running, remote AI services cannot fetch it; use the local CLI or paste the copied metadata/prompt.",
   "",

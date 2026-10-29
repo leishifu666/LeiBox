@@ -4,11 +4,14 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Readable } from 'node:stream';
+import { isIP } from 'node:net';
 import { createContactHandler } from './contact-mail.mjs';
 
 // Local preview of the static Next export. No upstream form submissions.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'out');
 const port = Number(process.env.PORT || 3000);
+// Enable only behind a local proxy that overwrites these forwarded headers.
+const trustProxy = process.env.TRUST_PROXY === 'true';
 const contact = createContactHandler();
 const mime = {'.html':'text/html; charset=utf-8','.txt':'text/x-component; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.avif':'image/avif','.ico':'image/x-icon','.woff2':'font/woff2','.mp4':'video/mp4','.webm':'video/webm','.glb':'model/gltf-binary','.wasm':'application/wasm'};
 const json=(res,status,body)=>{res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});res.end(JSON.stringify(body));};
@@ -21,11 +24,14 @@ const server=http.createServer(async(req,res)=>{
     if(Array.isArray(value))for(const item of value)headers.append(name,item);
     else if(value!==undefined)headers.set(name,value);
    }
-   const request=new Request(new URL(req.url,`http://${req.headers.host||`127.0.0.1:${port}`}`),{
+   const protocol=trustProxy&&req.headers['x-forwarded-proto']==='https'?'https':'http';
+   const request=new Request(new URL(req.url,`${protocol}://${req.headers.host||`127.0.0.1:${port}`}`),{
     method:req.method,headers,
     ...(req.method!=='GET'&&req.method!=='HEAD'?{body:Readable.toWeb(req),duplex:'half'}:{}),
    });
-   const response=await contact(request,process.env,{clientKey:req.socket.remoteAddress||'local'});
+   const realIP=req.headers['x-real-ip'];
+   const clientKey=trustProxy&&typeof realIP==='string'&&isIP(realIP)?realIP:req.socket.remoteAddress||'local';
+   const response=await contact(request,process.env,{clientKey});
    res.writeHead(response.status,Object.fromEntries(response.headers));
    return res.end(await response.text());
   }

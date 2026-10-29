@@ -6,7 +6,7 @@
 [build.environment]
   NODE_VERSION = "24"
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NEXT_PUBLIC_SITE_URL = "https://leibox-ui.netlify.app"
+  NEXT_PUBLIC_SITE_URL = "https://leibox.pantoria.cn"
 
 [functions]
   node_bundler = "esbuild"

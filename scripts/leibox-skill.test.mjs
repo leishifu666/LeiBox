@@ -180,3 +180,15 @@ test('skill discovery installs Chinese instructions, UI metadata and the source 
     for (const filename of index.skills[0].files) assert.equal(await fs.readFile(path.join(folder, 'leibox', filename), 'utf8'), await fs.readFile(path.join('integrations/skills/leibox', filename), 'utf8'));
   }
 });
+
+test('installed helper and discovery packages use the current public domain', async () => {
+  const expected = 'https://leibox.pantoria.cn';
+  assert.equal((await run(['help'])).origin, expected);
+  for (const prefix of ['ai', '.well-known/agent-skills/leibox', '.well-known/skills/leibox']) {
+    const folder = path.join(publicRoot, prefix);
+    const instructions = await fs.readFile(path.join(folder, 'SKILL.md'), 'utf8');
+    assert(instructions.includes(expected + '/ai/search-index.json'));
+    const helper = await import(new URL('../' + path.join('public', prefix, 'scripts/leibox.mjs').replaceAll('\\', '/'), import.meta.url));
+    assert.equal((await helper.run(['help'])).origin, expected);
+  }
+});

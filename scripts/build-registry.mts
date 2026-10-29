@@ -4,6 +4,7 @@ import path from "node:path";
 import { getMotionPackages } from "../src/lib/motion-packages.ts";
 import { LEIBOX_HERO_COMPONENT, LEIBOX_HERO_REGISTRY_NAME } from "../src/lib/leibox-install.ts";
 import { INTERACTION_COMPONENTS } from "../src/data/interaction-components.ts";
+import { PUBLIC_SITE_URL } from "../src/lib/site-url.ts";
 
 const OUT_DIR = path.join(process.cwd(), "public/r");
 
@@ -36,7 +37,7 @@ fs.writeFileSync(path.join(OUT_DIR, `${LEIBOX_HERO_REGISTRY_NAME}.json`), JSON.s
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
   name: "leibox",
-  homepage: process.env.NEXT_PUBLIC_SITE_URL || "https://leibox-ui.netlify.app",
+  homepage: PUBLIC_SITE_URL,
   items: [leiboxItem].map((item) => ({
     name: item.name,
     type: item.type,
