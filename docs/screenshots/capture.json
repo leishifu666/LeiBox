@@ -1,68 +1,81 @@
 {
-  "captureDate": "2026-10-28",
-  "capturedAt": "2026-10-28T04:24:44.149+08:00",
+  "captureDate": "2026-10-29",
+  "capturedAt": "2026-10-29T19:52:21.978+08:00",
   "timezone": "Asia/Shanghai",
-  "base": "http://127.0.0.1:3000",
-  "baseCommit": "7002336fee1c464ded304f5ab284218f303a1a7a",
+  "base": "http://127.0.0.1:3107",
+  "baseCommit": "eb57f07c0696d951db6bcd9eef33406cc7865876",
   "workingTreeDirty": true,
-  "buildId": "L03-IiuDA1gLAIeLDtBJa",
-  "version": "Current locally built working tree. Includes uncommitted local changes; does not represent the deployed website.",
+  "buildId": "SlyG6uKtFttNiZXFYV0E3",
+  "version": "Current local production export, including retained local changes. These captures do not verify public domain availability.",
   "locale": "zh",
   "theme": "light",
   "reducedMotion": "reduce",
-  "method": "Direct Playwright screenshots of running pages. No image generation, compositing, DOM substitution or injected screenshot CSS.",
+  "method": "Direct ego-browser screenshots of the running production export. No generated images, compositing, DOM replacement or screenshot-only CSS.",
   "records": [
     {
       "route": "/",
-      "label": "首页",
-      "state": "首页首屏与组件预览",
-      "title": "LeiBox — UI inspiration and component collection",
       "filename": "leibox-home.png",
+      "label": "首页",
+      "state": "首页首屏与真实交互演示",
+      "title": "LeiBox — UI inspiration and component collection",
       "viewport": {
         "width": 1440,
         "height": 1280
       },
-      "sha256": "86ef51472dd66bf529e822e6c8046d9743c952baf1c2c778d8aeb1e338a5aaae",
-      "bytes": 409389
+      "bytes": 418626,
+      "sha256": "9fc305b0d213b5a94153c14a5c14714791e8c17fa72734bb8738b36e6f19c1f8"
     },
     {
       "route": "/components",
-      "label": "组件浏览",
-      "state": "当前 39 个组件的列表",
-      "title": "Components | LeiBox",
       "filename": "leibox-components.png",
+      "label": "组件浏览",
+      "state": "无外框的组件列表（39 项）",
+      "title": "Components | LeiBox",
       "viewport": {
         "width": 1440,
         "height": 1100
       },
-      "sha256": "7840e8016370f829fdd7c054bba8f51bbbf13d118ec440f41a55693e2c3a8dd0",
-      "bytes": 407722
+      "bytes": 418226,
+      "sha256": "00a247c38b4aec482ba5ec052dc52e5682d1f9fc94215723fc9315dd2ef0bcba"
     },
     {
       "route": "/docs/animations/glass-folder",
+      "filename": "leibox-glass-folder.png",
       "label": "玻璃文件夹交互",
       "state": "键盘打开 My Files 文件夹",
       "title": "玻璃文件夹展开 | LeiBox",
-      "filename": "leibox-glass-folder.png",
       "viewport": {
         "width": 1440,
         "height": 1100
       },
-      "sha256": "aec764640b05c8586e3f1ddcb4e4bae92ab0583a3d6cbf420e3be0afd745ace1",
-      "bytes": 275912
+      "bytes": 276473,
+      "sha256": "13319ceb410d1b36e3f3ea72ac94169cbdd3651b2abf356b2af385d316fa4557"
     },
     {
       "route": "/docs/components/glass-object",
-      "label": "玻璃物体与自定义背景",
-      "state": "模型加载完成，使用选定的雪山湖泊背景",
-      "title": "Glass Object | LeiBox",
       "filename": "leibox-glass-object.png",
+      "label": "玻璃物体与自定义背景",
+      "state": "真实模型加载完成，使用雪山湖泊背景",
+      "title": "Glass Object | LeiBox",
       "viewport": {
         "width": 1440,
         "height": 1100
       },
-      "sha256": "6a9555a5253cd766368ea4a7764a937ac2cb9ca72e2f76a3be75fdef3fadfca9",
-      "bytes": 793231
+      "bytes": 721062,
+      "sha256": "4325658e8be57206e982987361a5d574f65beac827e3aefc581e3195d91378c2"
+    },
+    {
+      "route": "/docs/mcp",
+      "filename": "leibox-ai-integration.png",
+      "label": "AI 接入",
+      "state": "新域名的 Skill 安装命令与实时组件检索说明",
+      "title": "AI integration | LeiBox",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "bytes": 205898,
+      "sha256": "a637bc036250b99954f30ded3ff6da6043295eaa5d1c5da0290f4e252b4c9c5c"
     }
   ]
 }

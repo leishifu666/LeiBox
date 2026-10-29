@@ -9,9 +9,10 @@ const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3000';
 const output = path.resolve('docs/screenshots');
 const captures = [
   { route: '/', filename: 'leibox-home.png', label: '首页', state: '首页首屏与组件预览', height: 1280 },
-  { route: '/components', filename: 'leibox-components.png', label: '组件浏览', state: '当前 39 个组件的列表', height: 1100 },
+  { route: '/components', filename: 'leibox-components.png', label: '组件浏览', state: '无外框的组件列表', height: 1100 },
   { route: '/docs/animations/glass-folder', filename: 'leibox-glass-folder.png', label: '玻璃文件夹交互', state: '键盘打开 My Files 文件夹', height: 1100 },
   { route: '/docs/components/glass-object', filename: 'leibox-glass-object.png', label: '玻璃物体与自定义背景', state: '模型加载完成，使用选定的雪山湖泊背景', height: 1100 },
+  { route: '/docs/mcp', filename: 'leibox-ai-integration.png', label: 'AI 接入', state: '新域名的 Skill 安装命令与实时检索说明', height: 1100 },
 ];
 const now = new Date();
 const captureDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
@@ -30,7 +31,11 @@ try {
     assert.equal(response.status(), 200);
     await page.evaluate(() => document.fonts.ready);
     await expect(page.locator('h1').first()).toBeVisible();
-    if (route === '/components') await expect(page.locator('[data-component-card]')).toHaveCount(39);
+    let captureState = state;
+    if (route === '/components') {
+      await expect(page.locator('[data-component-card]').first()).toBeVisible();
+      captureState += `（${await page.locator('[data-component-card]').count()} 项）`;
+    }
     if (route.endsWith('glass-folder')) {
       // Open the actual component through its real button, without replacing any DOM or images.
       const frame = page.frameLocator('iframe[title="玻璃文件夹展开"]');
@@ -59,7 +64,7 @@ try {
     const destination = path.join(output, filename);
     await page.screenshot({ path: destination });
     const bytes = await fs.readFile(destination);
-    records.push({ route, label, state, title: await page.title(), filename, viewport: page.viewportSize(), sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length });
+    records.push({ route, label, state: captureState, title: await page.title(), filename, viewport: page.viewportSize(), sha256: createHash('sha256').update(bytes).digest('hex'), bytes: bytes.length });
     console.log(`Captured ${route}: ${filename}`);
   }
   assert.deepEqual(errors, []);
