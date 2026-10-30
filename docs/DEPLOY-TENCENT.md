@@ -54,3 +54,17 @@ Let's Encrypt 文件验证失败，返回 `Error reading HTTP response body: rea
 本地生产导出页面实测：首页、安装及 AI 接入均显示新安装命令；安装命令复制与 AI 文档 Markdown 复制均进入成功状态。375 / 768 / 1440 宽度截图自查通过，页面未产生横向溢出。历史 Netlify 适配器另有 4 项回归测试通过。
 
 此前已安装的 Skill 副本仍可能保存旧地址，需要从新域名更新或重装一次；之后组件目录继续实时读取。公网 HTTPS 证书问题仍未解决，本次服务器内验证不能替代公网 HTTPS 验收。
+
+## 安装复制、HTTPS 与公网 Skill 验证（2026-10-31）
+
+复制修复提交为 `362de2f`，已推送至 GitHub `main`。公网 HTTP 页面实际复现了 `isSecureContext=false`、`navigator.clipboard` 不存在的问题；共享复制函数增加仅在 Clipboard API 不可用时使用的兼容复制，保留焦点和选区。浏览器明确拒绝现代 API 时仍提示失败，不改用旧 API 绕过权限。安装命令、延迟加载的源码复制、真实失败反馈共四项浏览器回归通过。
+
+通过宝塔为 `leibox.pantoria.cn` 申请并部署 Let's Encrypt 证书，到期日为 **2027-01-28**。公网 HTTPS、Skill 发现索引、Skill 文件及组件接口已实际访问成功；此前另一个域名的证书不匹配问题已消除。未开启强制 HTTP 跳转，HTTP 复制兼容路径也单独进行了线上验证。
+
+发布包从上述 Git 提交对应的暂存树单独导出、构建，未将工作区其他未提交组件改动混入本次发布。服务器校验 2,504 个文件，更新 1,397 个文件；更改前的文件备份位于 `/opt/Project/leibox/backups/copy-skill-362de2f`。发布包 SHA-256 为 `cf29d18eb2a692b02b158eebad92481fd30dec9e40323f424f95163ec4ee4c8b`。保留服务端 `.env.local`，未重启 Node 服务。
+
+Skill 源文件在 `integrations/skills/leibox/`，公开下载在 `/ai/`，两个安装发现入口为 `/.well-known/agent-skills/` 和 `/.well-known/skills/`。使用 `skills` **1.7.4**、Node **24.22.1** 从干净目录通过公开 HTTPS 地址安装，三个文件 `SKILL.md`、`scripts/leibox.mjs`、`agents/openai.yaml` 均落盘；默认安装和 `--copy` 模式均成功。安装后的工具实际搜索、查询详情、校验并下载了玻璃文件夹的四个 React 源文件。
+
+本机旧 Node 24.11.0 曾在安装器显示完成后出现 Windows libuv 退出断言；没有把该进程算作成功。换用已安装的 Node 24.22.1 后退出码为 0。用户使用旧 Node 遇到相同退出断言时应更新 Node 维护版本，不应关闭 TLS 校验。
+
+独立发布构建与相关 15 项回归检查通过。公网 HTTP、HTTPS 页面均复制出完整且精确的安装命令，HTTPS 组件页也实际复制了 211,629 字符的异步代码包。内部回执位于 `outputs/skill-install-fix-20261031/`；未发送真实邮件或提交网站表单。
