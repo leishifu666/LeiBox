@@ -17,13 +17,14 @@ test('client catalog excludes reconstruction prompts and their source data',asyn
 });
 
 test('detail HTML and route data stay below 450 KB without embedding all source versions',async()=>{
- for(const file of ['out/docs/animations/glass-folder.html','out/docs/animations/spider-music-player.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
+ for(const file of ['out/docs/animations/gradient-ring-cards.html','out/docs/animations/glass-folder.html','out/docs/animations/spider-music-player.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
   const html=await read(file);
   assert(Buffer.byteLength(html)<450_000,`${file}: ${Buffer.byteLength(html)} bytes`);
   assert(!html.includes('data:font/woff2;base64,'),`${file} embeds a downloadable font`);
  }
  const page='out/docs/animations/glass-folder.txt';
  assert((await fs.stat(path.join(root,page))).size<300_000,'Component RSC payload exceeds 300 KB');
+ assert((await fs.stat(path.join(root,'out/docs/animations/gradient-ring-cards.txt'))).size<300_000,'Large reconstruction prompts must not be in the route payload');
 });
 
 test('project packages retain complete content-addressed code without retired canvas bundles',async()=>{
@@ -39,9 +40,12 @@ test('project packages retain complete content-addressed code without retired ca
    assert(data.html.includes('<pre'));
   }
  }
- for(const packs of Object.values(index.motion)){
+ for(const [slug,packs] of Object.entries(index.motion)){
+  const originals=JSON.parse(await read('public/motion-frameworks/'+slug+'/packages.json'));
   assert.equal(packs.length,6);
   for(const pack of packs){
+   assert(!('prompt' in pack),'Complete prompts must stay outside initial route props');
+   assert.equal(JSON.parse(await read('public'+pack.promptUrl)).source,originals.find(original=>original.framework===pack.framework).prompt,'Deferred prompts must retain the full framework-specific specification');
    assert.equal(pack.files.length,4);
    const bundle=JSON.parse(await read('public'+pack.bundleUrl)).source;
    for(const file of pack.files){

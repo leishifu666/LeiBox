@@ -10,7 +10,7 @@ import { copyText as writeCopyText } from "@/lib/copy-text";
 import { usePreference } from "@/hooks/use-preference";
 import { cn } from "@/lib/utils";
 import { siteUrl } from "@/lib/site-url";
-export interface StandaloneCopyContent { href: string; prompt: string; code: string; codeLabel: string; markdown: string; bundleUrl?: string }
+export interface StandaloneCopyContent { href: string; prompt?: string; promptUrl?: string; code: string; codeLabel: string; markdown: string; bundleUrl?: string }
 interface CopyMenuProps { title: string; standalone: StandaloneCopyContent; motionPackages?: MotionPackageRef[] }
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -37,7 +37,8 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
   const [storedFramework] = usePreference("framework", "react", ["react", "vue", "svelte", "solid", "preact", "vanilla"]);
   const motionPackage = motionPackages?.find(pack => pack.framework === storedFramework) ?? motionPackages?.[0];
   const docsUrl = siteUrl(standalone.href);
-  const aiPrompt = motionPackage?.prompt ?? standalone.prompt ?? `Help me use the ${title} example from LeiBox. Reference: ${docsUrl}`;
+  const promptUrl = motionPackage?.promptUrl ?? standalone.promptUrl;
+  const aiPrompt = motionPackage?.prompt ?? standalone.prompt ?? `Help me use the ${title} example from LeiBox. Reference: ${docsUrl}${promptUrl ? `\nRead the complete recreation specification: ${siteUrl(promptUrl)}` : ""}`;
   const [open, setOpen] = useState(false), [copiedId, setCopiedId] = useState<string | null>(null), [failedId, setFailedId] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement | null>(null), timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
@@ -67,10 +68,11 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
 
 
   const source = async () => { const url = motionPackage?.bundleUrl ?? standalone.bundleUrl; return url ? (await loadDocAsset<CodeContent>(url)).source : standalone.code; };
+  const prompt = () => promptUrl ? loadDocAsset<CodeContent>(promptUrl).then(data => data.source) : motionPackage?.prompt ?? standalone.prompt ?? "";
   const items: { id: string; label: string; icon: IconComponent; action: { copy: () => string | Promise<string> } | { open: string } }[] = [
-    { id: "prompt", label: "Copy prompt", icon: Sparkles, action: { copy: () => motionPackage?.prompt ?? standalone.prompt } },
+    { id: "prompt", label: "Copy prompt", icon: Sparkles, action: { copy: prompt } },
     { id: "source", label: "Copy full code bundle", icon: SquareCode, action: { copy: source } },
-    { id: "markdown", label: "Copy page as markdown", icon: FileText, action: { copy: async () => (await source()) + "\n\n## Recreation prompt\n" + (motionPackage?.prompt ?? standalone.prompt) } },
+    { id: "markdown", label: "Copy page as markdown", icon: FileText, action: { copy: async () => { const [code, specification] = await Promise.all([source(), prompt()]); return code + "\n\n## Recreation prompt\n" + specification; } } },
     { id: "chatgpt", label: "Open in ChatGPT", icon: OpenAiIcon, action: { open: `https://chatgpt.com/?q=${encodeURIComponent(aiPrompt)}` } },
     { id: "claude", label: "Open in Claude", icon: ClaudeIcon, action: { open: `https://claude.ai/new?q=${encodeURIComponent(aiPrompt)}` } },
   ];

@@ -22,14 +22,14 @@ async function asset(value: unknown) {
 for (const entry of INTERACTION_COMPONENTS) {
   index.motion[entry.slug] = [];
   for (const pack of await getMotionPackages(entry.slug)) {
-    const { bundle, files, ...meta } = pack;
+    const { bundle, files, prompt, ...meta } = pack;
     const refs: CodeAsset[] = [];
     for (const [i, file] of files.entries()) {
       const lang = pack.framework === "vue" ? "vue" : pack.framework === "svelte" ? "svelte" : file.fileName.endsWith("tsx") ? "tsx" : "typescript";
       refs.push({ id: file.id, label: file.label, fileName: file.fileName,
         url: await asset({ source: file.source, ...(i === 0 ? { html: await highlight(file.source, lang) } : {}) }) });
     }
-    index.motion[entry.slug].push({ ...meta, files: refs, bundleUrl: await asset({ source: bundle }) });
+    index.motion[entry.slug].push({ ...meta, promptUrl: await asset({ source: prompt }), files: refs, bundleUrl: await asset({ source: bundle }) });
   }
 }
 for (const file of await fs.readdir(root)) {

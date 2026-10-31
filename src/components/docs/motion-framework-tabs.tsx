@@ -6,6 +6,7 @@ import { SnippetTabs } from "@/components/docs/snippet-tabs";
 import { CodeBlock } from "@/components/docs/code-block";
 import { CopyButton } from "@/components/docs/copy-button";
 import { usePreference } from "@/hooks/use-preference";
+import { DeferredCode } from "./deferred-code";
 import type { MotionPackageRef as MotionPackage } from "@/lib/doc-asset-types";
 
 function usePackage(packages: MotionPackage[]) {
@@ -41,7 +42,7 @@ export function MotionUsage({ packages }: { packages: MotionPackage[] }) {
 export function MotionPrompt({ packages }: { packages: MotionPackage[] }) {
   const { active } = usePackage(packages);
   return <section className="mt-8" aria-label="Recreation prompt">
-    <div className="flex items-center justify-between gap-3"><h2 id="prompt" className="scroll-mt-24 text-lg font-semibold tracking-[-0.01em]"><T>Recreation prompt</T></h2><CopyButton text={active.prompt} label="Copy prompt" /></div>
-    <pre translate="no" className="mt-3 max-h-64 overflow-y-auto rounded-xl border border-border/60 p-4 font-sans text-[13px] leading-6 whitespace-pre-wrap">{active.prompt}</pre>
+    <div className="flex items-center justify-between gap-3"><h2 id="prompt" className="scroll-mt-24 text-lg font-semibold tracking-[-0.01em]"><T>Recreation prompt</T></h2><CopyButton text={active.prompt} sourceUrl={active.promptUrl} label="Copy prompt" /></div>
+    {active.promptUrl ? <div className="mt-3 overflow-hidden rounded-xl border border-border/60"><DeferredCode url={active.promptUrl} prose /></div> : <pre translate="no" className="mt-3 max-h-64 overflow-y-auto rounded-xl border border-border/60 p-4 font-sans text-[13px] leading-6 whitespace-pre-wrap">{active.prompt}</pre>}
   </section>;
 }

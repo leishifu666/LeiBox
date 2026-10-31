@@ -1,4 +1,6 @@
 export const commonTranslations: Record<string, string> = {
+  "Loading prompt…": "正在加载提示词…",
+  "Prompt could not be loaded.": "提示词加载失败。",
   "Loading code…": "正在加载代码…",
   "Code could not be loaded.": "代码加载失败。",
   "Retry": "重试",

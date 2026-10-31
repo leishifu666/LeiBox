@@ -18,7 +18,8 @@ export interface MotionPackageRef {
   dependencies: string[];
   install: string;
   usage: string;
-  prompt: string;
+  prompt?: string;
+  promptUrl?: string;
   bundleUrl: string;
   files: CodeAsset[];
 }

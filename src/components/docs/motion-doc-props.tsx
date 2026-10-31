@@ -9,7 +9,7 @@ export async function getMotionDocProps(slug: string): Promise<Pick<ComponentDoc
   const first = packages[0];
   return {
     variants: [],
-    copyContent: { href: INTERACTION_COMPONENTS.find(entry => entry.slug === slug)!.href, prompt: first.prompt, code: "", codeLabel: "Copy full code bundle", markdown: "", bundleUrl: first.bundleUrl },
+    copyContent: { href: INTERACTION_COMPONENTS.find(entry => entry.slug === slug)!.href, prompt: first.prompt, promptUrl: first.promptUrl, code: "", codeLabel: "Copy full code bundle", markdown: "", bundleUrl: first.bundleUrl },
     motionPackages: packages,
     installation: <MotionInstallTabs packages={packages} />,
     code: <MotionCodeTabs packages={packages} />,
