@@ -56,7 +56,11 @@ function applyTitle(node: HTMLElement, state: TitleState) {
 
 /** Freeze existing posters/video frames; never mount a second interactive demo. */
 function snapshot(source: HTMLElement): HTMLElement {
-  const copy = source.cloneNode(true) as HTMLElement;
+  // Template contents stay inert while media attributes are sanitized. A live
+  // document clone can start image requests before we remove their sources.
+  const template = document.createElement("template");
+  template.innerHTML = source.outerHTML;
+  const copy = template.content.firstElementChild as HTMLElement;
   copy.removeAttribute("id");
   copy.querySelectorAll("[id]").forEach(node => node.removeAttribute("id"));
   const tracks = copy.querySelectorAll<HTMLElement>(".marquee-track");
@@ -68,9 +72,18 @@ function snapshot(source: HTMLElement): HTMLElement {
   const images = copy.querySelectorAll("img");
   source.querySelectorAll("img").forEach((image, index) => {
     const target = images[index];
-    if (!target || !image.currentSrc) return;
+    if (!target) return;
+    const bounds = image.getBoundingClientRect();
+    const visible = bounds.width > 0 && bounds.height > 0 && bounds.bottom > 0 && bounds.top < window.innerHeight && bounds.right > 0 && bounds.left < window.innerWidth;
     target.removeAttribute("srcset");
     target.removeAttribute("sizes");
+    // A transition freezes the painted viewport. Loading off-screen images in
+    // its clone competes with the destination route for the same connection.
+    if (!visible || !image.complete || !image.naturalWidth || !image.currentSrc) {
+      target.removeAttribute("src");
+      target.style.visibility = "hidden";
+      return;
+    }
     target.src = image.currentSrc;
     target.loading = "eager";
   });

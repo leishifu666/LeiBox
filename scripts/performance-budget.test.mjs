@@ -10,6 +10,12 @@ const read=file=>fs.readFile(path.join(root,file),'utf8');
 const index=JSON.parse(await read('public/doc-assets-index.json'));
 const media=JSON.parse(await read('src/data/optimized-media.json'));
 
+test('client catalog excludes reconstruction prompts and their source data',async()=>{
+ const result=await build({entryPoints:[path.join(root,'src/data/component-catalog.ts')],bundle:true,write:false,format:'esm',platform:'browser',metafile:true});
+ assert(result.outputFiles[0].contents.length<70_000,'Navigation metadata must stay below 70 KB');
+ assert(!Object.keys(result.metafile.inputs).some(file=>/motion-prompts|gradient-ring-fields|folded-emoji-scroll\.mjs/.test(file)),'Client navigation must not import full reconstruction data');
+});
+
 test('detail HTML and route data stay below 450 KB without embedding all source versions',async()=>{
  for(const file of ['out/docs/animations/glass-folder.html','out/docs/animations/spider-music-player.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
   const html=await read(file);

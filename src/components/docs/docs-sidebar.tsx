@@ -22,14 +22,14 @@ import {
   type ComponentEntry,
 } from "@/data/components";
 import { cn } from "@/lib/utils";
-import { INTERACTION_COMPONENTS, type MotionEntry } from "@/data/interaction-components";
+import { INTERACTION_PREVIEWS, type InteractionPreviewEntry } from "@/data/interaction-previews";
 import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
 
-type NavPreview = { kind: "canvas"; entry: ComponentEntry } | { kind: "interaction"; entry: MotionEntry };
+type NavPreview = { kind: "canvas"; entry: ComponentEntry } | { kind: "interaction"; entry: InteractionPreviewEntry };
 const PREVIEWS = new Map<string, NavPreview>([
   ...COMPONENTS.map((entry): [string, NavPreview] => [entry.href, { kind: "canvas", entry }]),
-  ...INTERACTION_COMPONENTS.map((entry): [string, NavPreview] => [entry.href, { kind: "interaction", entry }]),
+  ...INTERACTION_PREVIEWS.map((entry): [string, NavPreview] => [entry.href, { kind: "interaction", entry }]),
 ]);
 const PREVIEW_W = 224;
 const PREVIEW_H = 168;

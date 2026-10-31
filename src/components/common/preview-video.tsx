@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 import { isLightVideo } from "@/data/components";
-import { previewPoster } from "@/lib/optimized-image";
+import { optimizedImage, previewPoster } from "@/lib/optimized-image";
 
 export function PreviewVideo({
   src,
@@ -93,7 +93,7 @@ export function PreviewVideo({
 
   if (isImage) return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt="" loading="lazy" className={className} />
+    <img {...optimizedImage(src)} alt="" loading="lazy" decoding="async" className={className} />
   );
   return (
     <video

@@ -21,8 +21,10 @@ import { buildSpiderMusicPlayerSource } from "./build-spider-music-player-source
 import { buildFluidTooltipSource } from "./build-fluid-tooltip-source.mjs";
 import { buildFoldedEmojiScrollSource } from "./build-folded-emoji-scroll-source.mjs";
 import { buildGradientRingCardsSource } from "./build-gradient-ring-cards-source.mjs";
+import { buildInteractionPreviews } from "./build-interaction-previews.mts";
 
 const ROOT=process.cwd();
+await buildInteractionPreviews(INTERACTION_COMPONENTS);
 const OUT=path.join(ROOT,"public/motion-frameworks");
 const PREVIEWS=path.join(ROOT,"src/lib/motion-core/site-previews");
 const SITE_PREVIEWS=new Set(["glass-folder"]);

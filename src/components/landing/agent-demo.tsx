@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { DocsNavList } from "@/components/docs/docs-sidebar";
 import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
-import { INTERACTION_COMPONENTS, type MotionEntry } from "@/data/interaction-components";
+import { INTERACTION_PREVIEWS as INTERACTION_COMPONENTS, type InteractionPreviewEntry } from "@/data/interaction-previews";
 import { optimizedImage } from "@/lib/optimized-image";
 
 type Agent = "claude" | "codex";
@@ -16,7 +16,7 @@ type TaskState = "wait" | "run" | "done";
 interface Cursor { kind: "pointer" | "text"; x: number; y: number; ms: number; down: boolean; show: boolean }
 interface App { agent: Agent; picked: boolean; on: boolean; typed: number; pasted: boolean; lines: number }
 interface Scene { cursor: Cursor; card: number; modal: boolean; copied: boolean; scroll: number; app: App }
-type Piece = MotionEntry;
+type Piece = InteractionPreviewEntry;
 interface DemoCode {
   component: string;
   bundle: string;

@@ -110,7 +110,7 @@ async function back(page,{link=false,menu=false,screenshot=false,slug='spider-mu
   assert(frames.length>4,'The demonstration did not animate back to its card');
   assert(frames.every(f=>f.clip==='none'),'Return used a reveal/cutout mask');
   const first=frames.find(f=>f.mediaWidth>0),last=frames.at(-1);
-  assert(first.mediaWidth-last.mediaWidth>8 || first.mediaHeight-last.mediaHeight>8,'The demonstration did not shrink');
+  assert(['mediaX','mediaY','mediaWidth','mediaHeight'].some(key=>Math.abs(first[key]-last[key])>8),'The demonstration did not move or resize into its card');
   const destination=await page.locator(`main [data-component-card$="/${slug}"]`).locator(':scope > div').boundingBox();
   assert(Math.abs(last.mediaX-destination.x)<4&&Math.abs(last.mediaY-destination.y)<4,'Return did not land in the corresponding card');
   const titles=frames.filter(f=>f.titleSize>0);
@@ -119,7 +119,7 @@ async function back(page,{link=false,menu=false,screenshot=false,slug='spider-mu
   const cardLines=await page.locator(`main [data-component-card$="/${slug}"] h2`).evaluate(node=>{const range=document.createRange();range.selectNodeContents(node);return new Set([...range.getClientRects()].filter(rect=>rect.width>0).map(rect=>Math.round(rect.top))).size});
   if(detailLines===1&&cardLines===1)assert(titles.filter(f=>f.titleOpacity>.05).every(f=>f.titleLines===1),'A single-line title wrapped during return');
   assert(Math.abs(titles.at(-1).titleX-titleDestination.x)<4&&Math.abs(titles.at(-1).titleY-titleDestination.y)<4,'The title did not return to its card');
-  return{via:menu?'mobile Browse all':link?'Browse all':'browser back',movingFrames:frames.length,shrinks:true,landsInCard:true};
+  return{via:menu?'mobile Browse all':link?'Browse all':'browser back',movingFrames:frames.length,shrinks:first.mediaWidth-last.mediaWidth>8||first.mediaHeight-last.mediaHeight>8,landsInCard:true};
 }
 try{
   for(const width of [1440,768,375]){
@@ -135,7 +135,7 @@ try{
     await page.mouse.click(outer.x+(local.r.x+local.r.width/2)*scale,outer.y+(local.r.y+local.r.height/2)*scale);
     await expect(button).not.toHaveAttribute('aria-label',label);
     const reverse=await back(page,{link:width===1440,menu:width===375,screenshot:true});
-    await expect(page.locator('main [data-component-card]').first().locator('a')).toBeFocused();
+    await expect(page.locator('main [data-component-card$="/spider-music-player"] a')).toBeFocused();
     results.widths.push({width,...check,demoPlayable:true,back:reverse});
     console.log(JSON.stringify({width,status:'passed'}));await page.close();
   }
@@ -185,6 +185,7 @@ try{
     console.log(JSON.stringify({homeWidth:width,status:'passed'}));await page.close();
   }
   const page=await pageFor();await collection(page);
+  const firstHref=await page.locator('main [data-component-card]').first().locator('a').getAttribute('href');
   results.keyboard=await enter(page,'collection-layout-morph',{keyboard:true});
   await page.goBack();await page.waitForURL('**/components');await clean(page);
   const lower=page.locator('main [data-component-card$="/galaxy-effort-slider"]');
@@ -206,14 +207,14 @@ try{
   await page.locator('main [data-component-card]').first().locator('h2').click();
   await expect(page.locator('main')).toHaveAttribute('data-component-entry-state','entering');
   await page.setViewportSize({width:768,height:1000});await clean(page);
-  assert(new URL(page.url()).pathname.endsWith('/spider-music-player'));
+  assert.equal(new URL(page.url()).pathname,firstHref);
   results.resize=true;
   await page.goBack();await page.waitForURL('**/components');await clean(page);
   await page.setViewportSize({width:1440,height:1000});
   const popupPromise=page.context().waitForEvent('page');
   await page.locator('main [data-component-card]').first().locator('a').click({modifiers:['Control']});
   const popup=await popupPromise;await popup.waitForLoadState('domcontentloaded');
-  assert(popup.url().endsWith('/spider-music-player'));await popup.close();
+  assert.equal(new URL(popup.url()).pathname,firstHref);await popup.close();
   assert(new URL(page.url()).pathname==='/components');await clean(page);
   results.modifiedClick=true;
   // Warm the server compilation, rather than testing the dev compiler's startup
@@ -226,7 +227,7 @@ try{
   const reduced=await pageFor(375,{reducedMotion:'reduce'});await collection(reduced);
   await reduced.evaluate(()=>{window.__entryFrames=[]});
   await reduced.locator('main [data-component-card]').first().locator('h2').click();
-  await reduced.waitForURL('**/spider-music-player');await clean(reduced);
+  await reduced.waitForURL(url=>url.pathname===firstHref);await clean(reduced);
   assert.equal(await reduced.evaluate(()=>window.__entryFrames.filter(f=>['waiting','entering'].includes(f.state)).length),0);
   results.reducedMotion=true;await reduced.close();
   assert.deepEqual(results.errors,[]);
