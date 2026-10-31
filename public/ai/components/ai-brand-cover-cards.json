@@ -1,0 +1,166 @@
+{
+  "slug": "ai-brand-cover-cards",
+  "name": {
+    "en": "AI Brand Cover Cards",
+    "zh": "AI 品牌封面三联卡片"
+  },
+  "description": {
+    "en": "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.",
+    "zh": "Claude、Codex、Cursor 三张竖版封面，保留选定配图、真实 SVG 标志与独立中文介绍。"
+  },
+  "keywords": "AI Claude Codex Cursor 品牌 封面 三联 卡片 海报",
+  "docsPath": "/docs/animations/ai-brand-cover-cards",
+  "detailPath": "/ai/components/ai-brand-cover-cards.json",
+  "markdownPath": "/ai/components/ai-brand-cover-cards.md",
+  "previewPath": "/assets/components/ai-brand-cover-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "AI 品牌封面",
+      "产品三联海报"
+    ],
+    "searchTerms": [
+      "Claude",
+      "Codex",
+      "Cursor",
+      "AI",
+      "品牌",
+      "封面",
+      "三联",
+      "poster"
+    ],
+    "visualTags": [
+      "portrait",
+      "artwork",
+      "brand"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard"
+    ],
+    "caveat": "展示卡片，不调用真实 AI 服务；品牌标志不代表官方合作。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox native implementation reusing the existing poster-card lifecycle and interaction core.",
+    "designReference": null,
+    "designAuthor": "雷师傅",
+    "license": "User-supplied artwork. Claude and Cursor marks follow their brand terms; Codex vectors retain the bundled Lobe Icons MIT notice. No affiliation implied."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/ai-brand-cover-cards/react.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { AiBrandCoverCards } from \"./AiBrandCoverCards\";\n\nexport default function App() {\n  return <AiBrandCoverCards />;\n}",
+      "files": [
+        "AiBrandCoverCards.tsx",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/ai-brand-cover-cards/vue.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "vue",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport AiBrandCoverCards from \"./AiBrandCoverCards.vue\";\n</script>\n<template><AiBrandCoverCards /></template>",
+      "files": [
+        "AiBrandCoverCards.vue",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/ai-brand-cover-cards/svelte.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "svelte",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport AiBrandCoverCards from \"./AiBrandCoverCards.svelte\";\n</script>\n<AiBrandCoverCards />",
+      "files": [
+        "AiBrandCoverCards.svelte",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/ai-brand-cover-cards/solid.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "solid-js",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { AiBrandCoverCards } from \"./AiBrandCoverCards.solid\";\n\nexport default function App() {\n  return <AiBrandCoverCards />;\n}",
+      "files": [
+        "AiBrandCoverCards.solid.tsx",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/ai-brand-cover-cards/preact.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "preact",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { AiBrandCoverCards } from \"./AiBrandCoverCards.preact\";\n\nexport default function App() {\n  return <AiBrandCoverCards />;\n}",
+      "files": [
+        "AiBrandCoverCards.preact.tsx",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/ai-brand-cover-cards/vanilla.json",
+      "component": "AiBrandCoverCards",
+      "dependencies": [
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./AiBrandCoverCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "AiBrandCoverCards.ts",
+        "AiBrandCoverCardsEngine.js",
+        "motion-runtime.ts",
+        "AiBrandCoverCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus a cover to reveal its image response. Click to select; arrow keys move focus and Escape clears the selection.",
+    "zh": "悬停或聚焦查看图片反馈，点击选择；方向键移动焦点，Escape 清空选择。"
+  }
+}

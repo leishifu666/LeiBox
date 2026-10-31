@@ -7,6 +7,10 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'ai-brand-cover-cards') {
+      const ready=()=>{const root=document.querySelector('[data-motion-surface]')?.shadowRoot;if(!root||document.body.dataset.motionReady!=='true')return;observer.disconnect();root.querySelector('.bp-scene').style.background='#f4f4f4';parent.postMessage({type:'leibox-preview-ready',slug},'*');const cards=[...root.querySelectorAll('.bp-card')];let i=0;repeat(()=>{cards.forEach(card=>card.dispatchEvent(new PointerEvent('pointerleave')));cards[i++%3].dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));},1800);};
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'folded-emoji-scroll') {
       const ready=()=>{
         const root=document.querySelector('#folded-emoji-scroll [data-motion-surface]')?.shadowRoot;

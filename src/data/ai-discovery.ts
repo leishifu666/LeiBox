@@ -9,6 +9,7 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "ai-brand-cover-cards": { category: "cards", useCases: ["AI 品牌封面", "产品三联海报"], searchTerms: ["Claude", "Codex", "Cursor", "AI", "品牌", "封面", "三联", "poster"], visualTags: ["portrait", "artwork", "brand"], interactions: ["hover", "click", "keyboard"], caveat: "展示卡片，不调用真实 AI 服务；品牌标志不代表官方合作。" },
   "folded-emoji-scroll": {
     category: "input", useCases: ["折边滚动表情选择", "带几何变形的滚动边缘", "folded emoji picker"],
     searchTerms: ["表情", "滚动", "折边", "折叠", "emoji", "picker", "fold", "scroll", "canvas"],

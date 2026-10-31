@@ -1,0 +1,11 @@
+{
+  "host": "1.12.37.50",
+  "port": 22,
+  "user": "root",
+  "key": "~/.ssh/leibox_deploy_ed25519",
+  "knownHosts": "~/.ssh/leibox_known_hosts",
+  "python": "python",
+  "ssh": "ssh",
+  "siteUrl": "https://leibox.pantoria.cn",
+  "verifyRoutes": ["/components", "/ai/catalog.json", "/docs/animations/ai-brand-cover-cards"]
+}

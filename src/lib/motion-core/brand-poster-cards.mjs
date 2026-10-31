@@ -2,7 +2,7 @@ import {gsap} from 'gsap';
 import {createSurface} from './motion-runtime';
 
 export function createBrandPosterCards(target,initial,CSS,markup,defaults){
- const scope=createSurface(target,{css:CSS,markup,width:1200,height:675},initial);
+ const scope=createSurface(target,{css:CSS,markup,width:1200,height:defaults.layout?.height??675},initial);
  const {root,on}=scope,scene=root.querySelector('.bp-scene'),row=root.querySelector('.bp-row');
  const cards=[...root.querySelectorAll('.bp-card')],photos=cards.map(card=>card.querySelector('.bp-photo'));
  const animations=new Map();let options={...initial},selected=-1,hovered=-1,focused=-1,dead=false,loadVersion=0;
@@ -18,7 +18,7 @@ export function createBrandPosterCards(target,initial,CSS,markup,defaults){
    else{const animation=gsap.to(photo,{scale,duration:active ? .65 : .55,ease:'power2.out',onComplete(){if(animations.get(photo)===animation)animations.delete(photo);}});animations.set(photo,animation);}
   });
  }
- function fit(){const scale=Math.min(1,Math.max(.1,(scene.clientHeight-48)/383.2065));row.style.transform=`scale(${scale})`;}
+ function fit(){const scale=Math.min(1,Math.max(.1,(scene.clientHeight-48)/(defaults.layout?.cardHeight??383.2065)));row.style.transform=`scale(${scale})`;}
  function render(){
   const images=options.images??defaults.images;
   cards.forEach((card,index)=>{
@@ -26,9 +26,11 @@ export function createBrandPosterCards(target,initial,CSS,markup,defaults){
    const alt=image.alt??defaults.images[index].alt;card.setAttribute('aria-label',alt);
    photo.alt=alt;photo.style.objectPosition=image.position??'center';
    if(photo.getAttribute('src')!==image.src){photo.dataset.state='loading';photo.src=image.src;}
-   card.querySelector('.bp-logo').src=options.logoSrc??defaults.logo;
-   card.querySelector('.bp-symbol').src=options.symbolSrc??defaults.symbol;
-   card.querySelector('.bp-copy').textContent=options.description??defaults.description;
+   const brand=defaults.brands?.[index];
+   card.querySelector('.bp-logo').src=options.logoSrc??brand?.logo??defaults.logo;
+   card.querySelector('.bp-logo').alt=brand?.name??'LeiBox';
+   card.querySelector('.bp-symbol').src=options.symbolSrc??brand?.symbol??defaults.symbol;
+   card.querySelector('.bp-copy').textContent=options.description??brand?.description??defaults.description;
   });
   const version=++loadVersion;scene.dataset.ready='false';
   Promise.all([...scene.querySelectorAll('img')].map(image=>image.decode().catch(()=>{}))).then(()=>{

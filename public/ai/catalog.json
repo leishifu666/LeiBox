@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "4afa4b5e4a8b14ce5842fb57380ab7b64721199bdaadbed575ff156131512d5d",
+  "revision": "43200c47c4c587b7406283f511ab16bc180802711040466b1f5ef284708269a7",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,76 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "ai-brand-cover-cards",
+      "name": {
+        "en": "AI Brand Cover Cards",
+        "zh": "AI 品牌封面三联卡片"
+      },
+      "description": {
+        "en": "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.",
+        "zh": "Claude、Codex、Cursor 三张竖版封面，保留选定配图、真实 SVG 标志与独立中文介绍。"
+      },
+      "keywords": "AI Claude Codex Cursor 品牌 封面 三联 卡片 海报",
+      "docsPath": "/docs/animations/ai-brand-cover-cards",
+      "detailPath": "/ai/components/ai-brand-cover-cards.json",
+      "markdownPath": "/ai/components/ai-brand-cover-cards.md",
+      "previewPath": "/assets/components/ai-brand-cover-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "AI 品牌封面",
+          "产品三联海报"
+        ],
+        "searchTerms": [
+          "Claude",
+          "Codex",
+          "Cursor",
+          "AI",
+          "品牌",
+          "封面",
+          "三联",
+          "poster"
+        ],
+        "visualTags": [
+          "portrait",
+          "artwork",
+          "brand"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "展示卡片，不调用真实 AI 服务；品牌标志不代表官方合作。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox native implementation reusing the existing poster-card lifecycle and interaction core.",
+        "designReference": null,
+        "designAuthor": "雷师傅",
+        "license": "User-supplied artwork. Claude and Cursor marks follow their brand terms; Codex vectors retain the bundled Lobe Icons MIT notice. No affiliation implied."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "folded-emoji-scroll",
       "name": {

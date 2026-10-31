@@ -100,3 +100,5 @@ cloudflare-env.d.ts
 /.codex/
 /work/
 /outputs/
+/.deploy/
+__pycache__/

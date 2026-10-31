@@ -74,7 +74,7 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
 }) {
   const [painted, setPainted] = useState(false);
   const iframe = useRef<HTMLIFrameElement>(null);
-  const waitsForDraw = slug === "gradient-ring-cards" || slug === "folded-emoji-scroll" || slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
+  const waitsForDraw = slug === "ai-brand-cover-cards" || slug === "gradient-ring-cards" || slug === "folded-emoji-scroll" || slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
   const frames = useRef<number[]>([]);
   const reveal = useCallback(() => {
     frames.current.forEach(cancelAnimationFrame);

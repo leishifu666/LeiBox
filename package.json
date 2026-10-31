@@ -28,7 +28,8 @@
     "ui": "node scripts/collection-cli.mjs",
     "test:ai": "node --test scripts/collection-cli.test.mjs scripts/leibox-skill.test.mjs",
     "test:actions": "node scripts/test-ai-actions.cjs",
-    "test:locale": "node scripts/test-localization.cjs"
+    "test:locale": "node scripts/test-localization.cjs",
+    "deploy:server": "node scripts/deploy/server.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

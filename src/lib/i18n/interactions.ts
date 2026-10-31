@@ -1,4 +1,7 @@
 export const interactionTranslations: Record<string, string> = {
+  "AI Brand Cover Cards": "AI 品牌封面三联卡片", "Brand cards": "品牌卡片",
+  "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.": "Claude、Codex、Cursor 三张竖版封面，保留选定配图、真实 SVG 标志与独立中文介绍。",
+  "Hover or focus a cover to reveal its image response. Click to select; arrow keys move focus and Escape clears the selection.": "悬停或聚焦查看图片反馈，点击选择；方向键移动焦点，Escape 清空选择。",
   "Folded Emoji Scroll": "折边滚动表情选择器",
   "Scroll interaction": "滚动交互",
   "A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.": "表情网格滚入上下边缘时向内弯折、压缩，搜索栏保持固定，支持搜索与选择。",

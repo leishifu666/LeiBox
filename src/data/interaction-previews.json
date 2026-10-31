@@ -1,5 +1,17 @@
 [
   {
+    "slug": "ai-brand-cover-cards",
+    "href": "/docs/animations/ai-brand-cover-cards",
+    "name": "AI Brand Cover Cards",
+    "category": "Brand cards",
+    "description": "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.",
+    "keywords": "AI Claude Codex Cursor 品牌 封面 三联 卡片 海报",
+    "preview": "/assets/components/ai-brand-cover-cards.png",
+    "sourceFile": "ai-brand-cover-cards.html",
+    "canvasWidth": 1200,
+    "canvasHeight": 800
+  },
+  {
     "slug": "folded-emoji-scroll",
     "href": "/docs/animations/folded-emoji-scroll",
     "name": "Folded Emoji Scroll",

@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 32 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 33 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -17,6 +17,7 @@ Paths beginning with / are relative to the origin serving this file. When only a
 
 ## Components
 
+- [AI Brand Cover Cards / AI 品牌封面三联卡片](https://leibox.pantoria.cn/ai/components/ai-brand-cover-cards.md): Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.
 - [Folded Emoji Scroll / 折边滚动表情选择器](https://leibox.pantoria.cn/ai/components/folded-emoji-scroll.md): A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.
 - [Gradient Ring Cards / 渐变卡片环形轮播](https://leibox.pantoria.cn/ai/components/gradient-ring-cards.md): Five gradient cards rotate around a 3D ring, with mirrored backs, fine particle graphics and curved chromatic trails at the edges.
 - [Fluid Tooltip / 流体提示气泡](https://leibox.pantoria.cn/ai/components/fluid-tooltip.md): One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.

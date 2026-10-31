@@ -1,3 +1,4 @@
+import { AI_BRAND_COVER_PROMPT } from "./ai-brand-cover-cards.mjs";
 import { MOTION_PROMPTS } from "./motion-prompts.mjs";
 import { FOLDED_EMOJI_PROMPT } from "./folded-emoji-scroll.mjs";
 import { GRADIENT_RING_PROMPT } from "./gradient-ring-cards.mjs";
@@ -49,6 +50,12 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  { slug: "ai-brand-cover-cards", href: "/docs/animations/ai-brand-cover-cards", name: "AI Brand Cover Cards", category: "Brand cards",
+    description: "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.",
+    keywords: "AI Claude Codex Cursor 品牌 封面 三联 卡片 海报", preview: "/assets/components/ai-brand-cover-cards.png", sourceFile: "ai-brand-cover-cards.html", canvasWidth: 1200, canvasHeight: 800,
+    instructions: "Hover or focus a cover to reveal its image response. Click to select; arrow keys move focus and Escape clears the selection.", prompt: AI_BRAND_COVER_PROMPT, recreatedHtml: true,
+    referenceAuthor: "雷师傅", referenceNotes: "User-selected Claude 04, Codex 01 and Cursor 04 from the brand-card selection chat, using that approved layout and copy. Original generative artwork supplied by the user. Brand SVG assets retain their own attribution.",
+    codeSource: "LeiBox native implementation reusing the existing poster-card lifecycle and interaction core.", referenceLicense: "User-supplied artwork. Claude and Cursor marks follow their brand terms; Codex vectors retain the bundled Lobe Icons MIT notice. No affiliation implied." },
   {
     slug: "folded-emoji-scroll", href: "/docs/animations/folded-emoji-scroll", name: "Folded Emoji Scroll", category: "Scroll interaction",
     description: "A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.",

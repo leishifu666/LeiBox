@@ -63,7 +63,7 @@ export default async function MotionPage({params}:Props){
         ...(slug === "collection-layout-morph" ? [
           {name:"options.view",type:'"list" | "card" | "pack"',defaultValue:'"list"',description:"Initial or updated collection layout; the three image nodes remain mounted."},
         ] : []),
-        ...(slug === "brand-poster-cards" ? [
+        ...((slug === "brand-poster-cards" || slug === "ai-brand-cover-cards") ? [
           {name:"options.images",type:"(string | { src: string; alt?: string; position?: string })[]",description:"Three image URLs or objects with src, alt and position. Default portraits are embedded."},
           {name:"options.description",type:"string",description:"Shared introduction shown at the bottom of all three posters."},
           {name:"options.logoSrc",type:"string",description:"Full centered wordmark image. The default uses the existing LeiBox vector artwork."},

@@ -22,6 +22,7 @@ import { verifyCollectionLayoutMorph } from './test-collection-layout-morph.mjs'
 import { verifyGalaxyEffortSlider } from './test-galaxy-effort-slider.mjs';
 import { verifyBlueFlutedGlass } from './test-blue-fluted-glass.mjs';
 import { verifyNotesTextColor } from './test-notes-text-color.mjs';
+import { verifyAiBrandCovers } from './test-ai-brand-cover-cards.mjs';
 import { verifyBrandPosterCards } from './test-brand-poster-cards.mjs';
 import { verifyBoundingBoxResize } from './test-bounding-box-resize.mjs';
 import { verifyDotMatrixTrio } from './test-dot-matrix-trio.mjs';
@@ -110,6 +111,7 @@ try{
   if(item.slug==='gradient-ring-cards')await verifyGradientRingCards(page,item,ROOT,OUT);
   if(item.slug==='crumpled-paper')await verifyCrumpledPaper(page,item,ROOT,OUT);
   if(item.slug==='notes-text-color')await verifyNotesTextColor(page,item,ROOT,OUT);
+  if(item.slug==='ai-brand-cover-cards')await verifyAiBrandCovers(page);
   if(item.slug==='brand-poster-cards')await verifyBrandPosterCards(page,item,ROOT,OUT);
   if(item.slug==='elastic-panel-resize')await verifyElasticPanel(page);
   if(item.slug==='inline-text-morph')await verifyInlineTextMorph(page);
@@ -389,7 +391,7 @@ try{
   if(item.slug==='gradient-ring-cards')assert(await page.evaluate(()=>window.__grContexts.every(gl=>gl.isContextLost())),'gradient carousel releases its WebGL context');
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
-  await page.waitForTimeout(['gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
+  await page.waitForTimeout(['ai-brand-cover-cards','gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
   if(item.slug==='elastic-panel-resize'){
    await page.evaluate(()=>{document.getElementById('demo').style.display='none';window.__mount();});
    await page.evaluate(()=>{document.getElementById('demo').style.display='block';});
