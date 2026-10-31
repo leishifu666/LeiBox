@@ -13,6 +13,10 @@ export async function verifyGradientRingCards(page,item,rootDir,outDir){
  await canvas.focus();await canvas.press('ArrowRight');await expect(scene).toHaveAttribute('data-active','rerank');await page.waitForTimeout(850);assert.deepEqual(await page.evaluate(()=>window.__grEvents),['rerank']);
  await canvas.press('End');await expect(scene).toHaveAttribute('data-active','embedded');await canvas.press('Home');await expect(scene).toHaveAttribute('data-active','command');
  await canvas.press(' ');await expect(scene).toHaveAttribute('data-paused','false');await canvas.press(' ');await expect(scene).toHaveAttribute('data-paused','true');
+ await canvas.press('End');await expect(scene).toHaveAttribute('data-phase','2.51327');
+ await page.evaluate(()=>{window.__grEvents=[];});await canvas.press('Home');await canvas.press('ArrowRight');
+ await expect(scene).toHaveAttribute('data-phase','0.62832');assert.deepEqual(await page.evaluate(()=>window.__grEvents),['command','rerank'],'rapid navigation follows the pending destination, not a passing card');
+ await canvas.press('Home');await expect(scene).toHaveAttribute('data-phase','0.00000');
  await page.waitForTimeout(850);const box=await canvas.boundingBox();await page.mouse.move(box.x+box.width*.45,box.y+box.height*.5);await page.mouse.down();await page.mouse.move(box.x+box.width*.75,box.y+box.height*.5,{steps:12});await page.mouse.up();await expect(scene).toHaveAttribute('data-active','rerank');
  for(const key of ['ArrowRight','ArrowRight','ArrowLeft','Home','End'])await canvas.press(key);await expect(scene).toHaveAttribute('data-active','embedded');await page.waitForTimeout(850);
  await page.emulateMedia({reducedMotion:'reduce'});await canvas.press('Home');await expect(scene).toHaveAttribute('data-active','command');const frozen=await scene.getAttribute('data-phase');await page.waitForTimeout(150);assert.equal(await scene.getAttribute('data-phase'),frozen);

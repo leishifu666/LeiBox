@@ -68,7 +68,7 @@ function paintCard(card,ctx,bg,artImage){
 export function createGradientRingCards(target,initial,CSS,MARKUP,CARDS){
  const scope=createSurface(target,{css:CSS,markup:MARKUP,width:1280,height:1024},initial),{root,on}=scope,scene=root.querySelector('.gr-scene'),canvas=root.querySelector('canvas'),status=root.querySelector('.gr-status'),pause=root.querySelector('[data-action=pause]');
  const view=target.ownerDocument.defaultView;
- let options={autoRotate:true,speed:1,distortion:1,...initial},dead=false,drag=null,tween=null,raf=0,last=0,lastPaint=0,focused=false,visible=!target.ownerDocument.hidden,inView=true,dirty=true,embedScale=1,lastActive='',lastPaused='',lastAuto=null;
+ let options={autoRotate:true,speed:1,distortion:1,...initial},dead=false,drag=null,tween=null,targetIndex=null,raf=0,last=0,lastPaint=0,focused=false,visible=!target.ownerDocument.hidden,inView=true,dirty=true,embedScale=1,lastActive='',lastPaused='',lastAuto=null;
  const state={phase:Math.max(0,Math.min(4,Math.round(options.active||0)))*STEP},textures=[],cards=[],backgrounds=[],artImages=[];
  for(const card of CARDS){const c=scope.document.createElement('canvas');c.width=1024;c.height=1280;c.getContext('2d').scale(2,2);const bg=background(scope.document,card),art=artwork(scope.document,card.art);backgrounds.push(bg);artImages.push(art);paintCard(card,c.getContext('2d'),bg,art);textures.push(new THREE.CanvasTexture(c));}
  const scene3=new THREE.Scene();scene3.background=new THREE.Color('#f1f2f5');const camera=new THREE.PerspectiveCamera(55,1280/1024,.1,100);camera.position.z=8.1;
@@ -100,26 +100,29 @@ export function createGradientRingCards(target,initial,CSS,MARKUP,CARDS){
   if(dirty||auto()||tween)raf=view.requestAnimationFrame(tick);
  }
  function start(){dirty=true;if(!dead&&visible&&!raf){last=0;raf=view.requestAnimationFrame(tick);}}
- function go(index,notify=true){tween?.kill();tween=null;const value=Math.round(index)*STEP;
-  if(scope.reduced()||!visible){state.phase=value;start();}else tween=gsap.to(state,{phase:value,duration:.8,ease:'expo.out',onUpdate:start,onComplete:()=>{tween=null;start();}});
+ function go(index,notify=true){tween?.kill();tween=null;targetIndex=Math.round(index);const value=targetIndex*STEP;
+  if(scope.reduced()||!visible){state.phase=value;targetIndex=null;start();}else tween=gsap.to(state,{phase:value,duration:.8,ease:'expo.out',onUpdate:start,onComplete:()=>{tween=null;targetIndex=null;start();}});
   if(notify)options.onSelect?.(CARDS[mod(Math.round(index))].id);start();
  }
- on(canvas,'pointerdown',e=>{if(e.button!==0)return;tween?.kill();tween=null;drag={x:e.clientX,phase:state.phase,moved:0};canvas.setPointerCapture(e.pointerId);canvas.focus({preventScroll:true});start();});
+ on(canvas,'pointerdown',e=>{if(e.button!==0)return;tween?.kill();tween=null;targetIndex=null;drag={x:e.clientX,phase:state.phase,moved:0};canvas.setPointerCapture(e.pointerId);canvas.focus({preventScroll:true});start();});
  on(canvas,'pointermove',e=>{if(!drag)return;const dx=(e.clientX-drag.x)/(scope.element.getBoundingClientRect().width/1280);drag.moved=Math.max(drag.moved,Math.abs(dx));state.phase=drag.phase+dx*.00175;start();});
  on(canvas,'pointerup',e=>{if(!drag)return;const moved=drag.moved;drag=null;if(canvas.hasPointerCapture(e.pointerId))canvas.releasePointerCapture(e.pointerId);
   let index=Math.round(state.phase/STEP);
   if(moved<6&&renderer){const box=canvas.getBoundingClientRect(),ray=new THREE.Raycaster(),x=(e.clientX-box.left)/box.width*2-1,y=-((e.clientY-box.top)/box.height)*2+1,t=Math.max(0,Math.min(1,(Math.abs(x)-.2)/.75)),edge=t*t*(3-2*t);ray.setFromCamera(new THREE.Vector2(x*(1-.16*edge*edge),y/(1+0.9*edge**3)),camera);const hit=ray.intersectObjects(cards)[0];if(hit){const card=hit.object.userData.index;index=Math.round((state.phase-card*STEP)/TAU)*10+card;}}
   go(index);});
  on(canvas,'pointercancel',()=>{if(drag){drag=null;go(state.phase/STEP,false);}});
- on(scene,'keydown',e=>{if(e.target.closest('button')&&(e.key===' '||e.key==='Enter'))return;let index=Math.round(state.phase/STEP);if(e.key==='ArrowRight')index++;else if(e.key==='ArrowLeft')index--;else if(e.key==='Home')index=0;else if(e.key==='End')index=4;else if(e.key===' '){e.preventDefault();options.autoRotate=!options.autoRotate;if(options.autoRotate)focused=false;start();return;}else if(e.key==='Escape'){drag=null;go(index,false);return;}else return;e.preventDefault();go(index);});
- on(scene,'wheel',e=>{if(!e.shiftKey&&Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();go(Math.round(state.phase/STEP)+Math.sign(e.deltaX||e.deltaY));},{passive:false});
- root.querySelectorAll('.gr-controls button').forEach(button=>on(button,'click',()=>{const a=button.dataset.action;if(a==='pause'){options.autoRotate=!options.autoRotate;if(options.autoRotate)focused=false;start();}else go(Math.round(state.phase/STEP)+(a==='next'?1:-1));}));
+ // Repeated navigation follows the requested card while a tween is in flight.
+ // The visible ring can cross several duplicate card faces on the way there.
+ const navigationIndex=()=>targetIndex??Math.round(state.phase/STEP);
+ on(scene,'keydown',e=>{if(e.target.closest('button')&&(e.key===' '||e.key==='Enter'))return;let index=navigationIndex();if(e.key==='ArrowRight')index++;else if(e.key==='ArrowLeft')index--;else if(e.key==='Home')index=0;else if(e.key==='End')index=4;else if(e.key===' '){e.preventDefault();options.autoRotate=!options.autoRotate;if(options.autoRotate)focused=false;start();return;}else if(e.key==='Escape'){drag=null;go(index,false);return;}else return;e.preventDefault();go(index);});
+ on(scene,'wheel',e=>{if(!e.shiftKey&&Math.abs(e.deltaX)<=Math.abs(e.deltaY))return;e.preventDefault();go(navigationIndex()+Math.sign(e.deltaX||e.deltaY));},{passive:false});
+ root.querySelectorAll('.gr-controls button').forEach(button=>on(button,'click',()=>{const a=button.dataset.action;if(a==='pause'){options.autoRotate=!options.autoRotate;if(options.autoRotate)focused=false;start();}else go(navigationIndex()+(a==='next'?1:-1));}));
  if(fallback)on(fallback,'click',e=>{const image=e.target.closest('img[data-index]');if(image)go(Number(image.dataset.index));});
  on(scene,'focusin',e=>{focused=e.target!==canvas||canvas.matches(':focus-visible');start();});on(scene,'focusout',()=>{focused=false;start();});
  function visibility(){visible=!target.ownerDocument.hidden&&inView;if(!visible){view.cancelAnimationFrame(raf);raf=0;last=0;tween?.pause();}else{tween?.resume();start();}}
  on(scope.document,'visibilitychange',visibility);
  const intersection=new scope.IntersectionObserver(entries=>{inView=entries[entries.length-1].isIntersecting;visibility();});intersection.observe(scope.element);scope.addCleanup(()=>intersection.disconnect());
- on(scope.matchMedia('(prefers-reduced-motion: reduce)'),'change',()=>{tween?.kill();tween=null;start();});
+ on(scope.matchMedia('(prefers-reduced-motion: reduce)'),'change',()=>{tween?.kill();tween=null;targetIndex=null;start();});
  function resize(){
   if(dead)return;camera.aspect=scene.clientWidth/scene.clientHeight;camera.updateProjectionMatrix();scene3.background.set(view.getComputedStyle(scene).backgroundColor);
   if(renderer){const box=scene.getBoundingClientRect(),ratio=Math.min(view.devicePixelRatio||1,1.5),width=Math.max(1,Math.round(box.width*embedScale*ratio)),height=Math.max(1,Math.round(box.height*embedScale*ratio));if(canvas.width!==width||canvas.height!==height){renderer.setSize(width,height,false);renderTarget.setSize(width,height);}}
