@@ -36,6 +36,19 @@ export default async function MotionPage({params}:Props){
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "folded-emoji-scroll" ? [
+          {name:"options.query",type:"string",defaultValue:'""',description:"Initial or updated emoji query."},
+          {name:"options.value",type:"string",description:"Selected emoji character. User selection calls onSelect."},
+          {name:"options.foldSize",type:"number",defaultValue:"42",description:"Fold band width in design pixels, from 0 to 72."},
+          {name:"options.onSelect",type:"(emoji: string) => void",description:"Called when the user selects an emoji."},
+        ] : []),
+        ...(slug === "gradient-ring-cards" ? [
+          {name:"options.active",type:"number",defaultValue:"0",description:"Initial or updated card index, from 0 to 4."},
+          {name:"options.autoRotate",type:"boolean",defaultValue:"true",description:"Automatically rotate the card ring."},
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Rotation speed multiplier, from 0 to 3."},
+          {name:"options.distortion",type:"number",defaultValue:"1",description:"Chromatic separation strength, from 0 to 2."},
+          {name:"options.onSelect",type:"(id: string) => void",description:"Called when the user selects a card; automatic rotation does not emit it."},
+        ] : []),
         ...(slug === "fluid-tooltip" ? [
           {name:"options.active",type:'"today" | "tasks" | "calendar" | "focus" | "settings" | "profile"',defaultValue:'"today"',description:"Selected navigation item; hovering only changes the tooltip."},
           {name:"options.onSelect",type:"(id: string) => void",description:"Called when a different navigation item is selected."},

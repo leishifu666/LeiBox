@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { ExternalLink, RotateCcw } from "lucide-react";
 import { T, useLanguage } from "@/components/common/language-provider";
+import { sendMotionRenderSize } from "@/lib/motion-render-size";
 
 export function MotionPreview({ slug, name, width, height, responsive = false }: {
   slug: string; name: string; width: number; height: number; responsive?: boolean;
 }) {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
+  const iframe = useRef<HTMLIFrameElement>(null);
   const [available, setAvailable] = useState(width);
   const [version, setVersion] = useState(0);
   useEffect(() => {
@@ -18,11 +20,12 @@ export function MotionPreview({ slug, name, width, height, responsive = false }:
     return () => observer.disconnect();
   }, []);
   const scale = responsive ? 1 : Math.min(1, available / width);
+  useEffect(() => sendMotionRenderSize(iframe.current, slug), [available, version, slug]);
   return (
     <div>
       <div data-component-demo-panel className="overflow-hidden rounded-xl border border-border/60">
         <div ref={ref} className="overflow-hidden bg-white" style={{ height: height * scale }}>
-          <iframe key={version} src={`/motion/${slug}.html`} title={t(name)} sandbox={slug === "spider-music-player" ? "allow-scripts allow-popups allow-popups-to-escape-sandbox" : "allow-scripts"} allow="clipboard-write" loading="lazy" style={{ width: responsive ? "100%" : Math.max(width, available), height, border: 0, display: "block", transform: `scale(${scale})`, transformOrigin: "top left" }} />
+          <iframe ref={iframe} key={version} src={`/motion/${slug}.html`} onLoad={() => sendMotionRenderSize(iframe.current, slug)} title={t(name)} sandbox={slug === "spider-music-player" ? "allow-scripts allow-popups allow-popups-to-escape-sandbox" : "allow-scripts"} allow="clipboard-write" loading="lazy" style={{ width: responsive ? "100%" : Math.max(width, available), height, border: 0, display: "block", transform: `scale(${scale})`, transformOrigin: "top left" }} />
         </div>
       </div>
       <div className="mt-3 flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">

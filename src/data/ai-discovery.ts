@@ -9,6 +9,18 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "folded-emoji-scroll": {
+    category: "input", useCases: ["折边滚动表情选择", "带几何变形的滚动边缘", "folded emoji picker"],
+    searchTerms: ["表情", "滚动", "折边", "折叠", "emoji", "picker", "fold", "scroll", "canvas"],
+    visualTags: ["dark", "folded", "canvas", "emoji"], interactions: ["scroll", "search", "click", "keyboard", "touch"],
+    caveat: "纯本地选择器；系统 Emoji 字形有差异，HTML-in-Canvas 不可用时使用 Canvas2D 捕获兼容路径。",
+  },
+  "gradient-ring-cards": {
+    category: "cards", useCases: ["立体卡片轮播", "渐变作品展示", "3D gradient card carousel"],
+    searchTerms: ["渐变", "卡片", "轮播", "环形", "粒子", "色散", "gradient", "ring", "carousel", "3d"],
+    visualTags: ["gradient", "3d", "particles", "chromatic"], interactions: ["drag", "keyboard", "click", "pause"],
+    caveat: "卡片内容为本地视觉演示；渐变与图形由程序独立绘制，WebGL 不可用时提供平面切换。",
+  },
   "fluid-tooltip": {
     category: "navigation", useCases: ["侧栏导航提示", "头像提示气泡", "fluid navigation tooltip"],
     searchTerms: ["流体", "提示", "气泡", "胶囊", "导航", "头像", "logo", "fluid", "tooltip", "sidebar", "hover"],

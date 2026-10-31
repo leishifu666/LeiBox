@@ -1,0 +1,164 @@
+{
+  "slug": "folded-emoji-scroll",
+  "name": {
+    "en": "Folded Emoji Scroll",
+    "zh": "折边滚动表情选择器"
+  },
+  "description": {
+    "en": "A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.",
+    "zh": "表情网格滚入上下边缘时向内弯折、压缩，搜索栏保持固定，支持搜索与选择。"
+  },
+  "keywords": "折边 折叠 滚动 表情 选择器 上下 边缘 emoji scroll folded edges canvas html drawElementImage Enes",
+  "docsPath": "/docs/animations/folded-emoji-scroll",
+  "detailPath": "/ai/components/folded-emoji-scroll.json",
+  "markdownPath": "/ai/components/folded-emoji-scroll.md",
+  "previewPath": "/assets/components/folded-emoji-scroll.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "折边滚动表情选择",
+      "带几何变形的滚动边缘",
+      "folded emoji picker"
+    ],
+    "searchTerms": [
+      "表情",
+      "滚动",
+      "折边",
+      "折叠",
+      "emoji",
+      "picker",
+      "fold",
+      "scroll",
+      "canvas"
+    ],
+    "visualTags": [
+      "dark",
+      "folded",
+      "canvas",
+      "emoji"
+    ],
+    "interactions": [
+      "scroll",
+      "search",
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "纯本地选择器；系统 Emoji 字形有差异，HTML-in-Canvas 不可用时使用 Canvas2D 捕获兼容路径。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent accessible DOM picker and Canvas2D fold resampler; reuses the project's HTML-in-Canvas preparation/drawing helpers and instance lifecycle. Source geometry and hit testing share the same inverse projection.",
+    "designReference": "https://x.com/enesozturkdev/status/2115816197266477213/video/1",
+    "designAuthor": "Enes",
+    "license": "Original design/source license not supplied or independently verified. No original video, screenshots, Apple emoji artwork or proprietary font files are redistributed. Embedded Inter retains its OFL notice; Unicode emoji are rendered by installed system fonts."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/folded-emoji-scroll/react.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { FoldedEmojiScroll } from \"./FoldedEmojiScroll\";\n\nexport default function App() {\n  return <FoldedEmojiScroll />;\n}",
+      "files": [
+        "FoldedEmojiScroll.tsx",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/folded-emoji-scroll/vue.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport FoldedEmojiScroll from \"./FoldedEmojiScroll.vue\";\n</script>\n<template><FoldedEmojiScroll /></template>",
+      "files": [
+        "FoldedEmojiScroll.vue",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/folded-emoji-scroll/svelte.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport FoldedEmojiScroll from \"./FoldedEmojiScroll.svelte\";\n</script>\n<FoldedEmojiScroll />",
+      "files": [
+        "FoldedEmojiScroll.svelte",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/folded-emoji-scroll/solid.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { FoldedEmojiScroll } from \"./FoldedEmojiScroll.solid\";\n\nexport default function App() {\n  return <FoldedEmojiScroll />;\n}",
+      "files": [
+        "FoldedEmojiScroll.solid.tsx",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/folded-emoji-scroll/preact.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { FoldedEmojiScroll } from \"./FoldedEmojiScroll.preact\";\n\nexport default function App() {\n  return <FoldedEmojiScroll />;\n}",
+      "files": [
+        "FoldedEmojiScroll.preact.tsx",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/folded-emoji-scroll/vanilla.json",
+      "component": "FoldedEmojiScroll",
+      "dependencies": [],
+      "usage": "import { mount } from \"./FoldedEmojiScroll\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "FoldedEmojiScroll.ts",
+        "FoldedEmojiScrollEngine.js",
+        "motion-runtime.ts",
+        "FoldedEmojiScrollEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Scroll the emoji grid, search for a character or category, and click to select. Arrow keys navigate; Home/End jump, and Escape clears the search.",
+    "zh": "滚动表情网格，按字符或类别搜索并点击选择。方向键移动，Home/End 跳转，Escape 清空搜索。"
+  }
+}

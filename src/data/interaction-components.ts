@@ -1,4 +1,6 @@
 import { MOTION_PROMPTS } from "./motion-prompts.mjs";
+import { FOLDED_EMOJI_PROMPT } from "./folded-emoji-scroll.mjs";
+import { GRADIENT_RING_PROMPT } from "./gradient-ring-cards.mjs";
 import { FLUID_TOOLTIP_PROMPT } from "./fluid-tooltip.mjs";
 import { BRAND_POSTER_CARDS_PROMPT } from "./brand-poster-cards.mjs";
 import { COLLECTION_LAYOUT_PROMPT } from "./collection-layout-morph.mjs";
@@ -41,11 +43,36 @@ export interface MotionEntry {
   referenceLicense?: string;
   codeSource?: string;
   responsive?: boolean;
+  renderers?: string[];
   suppliedSource?: string;
   recreatedHtml?: boolean;
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug: "folded-emoji-scroll", href: "/docs/animations/folded-emoji-scroll", name: "Folded Emoji Scroll", category: "Scroll interaction",
+    description: "A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.",
+    keywords: "折边 折叠 滚动 表情 选择器 上下 边缘 emoji scroll folded edges canvas html drawElementImage Enes",
+    preview: "/assets/components/folded-emoji-scroll.png", sourceFile: "折边滚动表情选择器.html", canvasWidth: 1280, canvasHeight: 960,
+    instructions: "Scroll the emoji grid, search for a character or category, and click to select. Arrow keys navigate; Home/End jump, and Escape clears the search.",
+    prompt: FOLDED_EMOJI_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/enesozturkdev/status/2115816197266477213/video/1", referenceAuthor: "Enes", referenceAuthorUrl: "https://x.com/enesozturkdev",
+    referenceNotes: "Decoded all 1058 frames of the 2880×2160, 60fps, 17.633s clip titled Folded scroll edges with HTML-in-Canvas. Measured a 1336×1781 picker at x776/y216, a pinned search field, nine emoji columns, and horizontal compression/curvature at both scrolling boundaries. Video zoom changes the recorded scale midway. Reconstructed the fold by resampling the real grid texture along a cylindrical profile; native HTML-in-Canvas capture is used when available with a computed-DOM Canvas2D fallback. Fold parameters, searchable labels, selection and keyboard controls are local reconstruction/adaptations. Emoji glyphs follow the host colour font and differ from the original Apple artwork.",
+    referenceLicense: "Original design/source license not supplied or independently verified. No original video, screenshots, Apple emoji artwork or proprietary font files are redistributed. Embedded Inter retains its OFL notice; Unicode emoji are rendered by installed system fonts.",
+    codeSource: "Independent accessible DOM picker and Canvas2D fold resampler; reuses the project's HTML-in-Canvas preparation/drawing helpers and instance lifecycle. Source geometry and hit testing share the same inverse projection.",
+  },
+  {
+    slug: "gradient-ring-cards", href: "/docs/animations/gradient-ring-cards", name: "Gradient Ring Cards", category: "3D carousel",
+    description: "Five gradient cards rotate around a 3D ring, with mirrored backs, fine particle graphics and curved chromatic trails at the edges.",
+    keywords: "渐变 卡片 环形 旋转 轮播 立体 粒子 球体 色散 弯曲 Basit gradient ring cards carousel 3d chromatic",
+    preview: "/assets/components/gradient-ring-cards.png", sourceFile: "渐变卡片环形轮播.html", canvasWidth: 1280, canvasHeight: 1024,
+    instructions: "Drag to rotate, or use arrow keys to choose a card. Space pauses rotation; Home and End select the first and last card.",
+    prompt: GRADIENT_RING_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/basit_designs/status/2114733820155134045/video/1", referenceAuthor: "Basit A. Khan", referenceAuthorUrl: "https://x.com/basit_designs",
+    referenceNotes: "Decoded all 2045 frames of the 2700×2160, 60fps, 34.083s source. Observed five double-sided gradient UI cards rotating along a horizontal 3D ring, mirrored rear text, wire/particle spheres, a hollow particle ring, a dot-matrix slider and a compass dial. Strong edge expansion, bending, chromatic separation and trails are reconstructed with curved meshes and a postprocess shader. Camera, gradient fields, point geometry and timing are measured estimates; drag, keyboard, pause, callbacks and the WebGL fallback are local additions.",
+    referenceLicense: "Original design and gradient/source license not supplied or verified. Reference footage stays internal; original images and source code are not redistributed.",
+    codeSource: "Three.js, Canvas and GSAP reconstruction with measured color fields and reference-derived white vector shapes. Rendering, typography, optical effects and interactions are implemented locally; no original author source code or reference video is included.",
+  },
   {
     slug: "fluid-tooltip", href: "/docs/animations/fluid-tooltip", name: "Fluid Tooltip", category: "Tooltip interaction",
     description: "One dark capsule follows six navigation items, changes width, and reveals anchored labels through a moving crop. The profile uses the LeiBox logo.",

@@ -1,0 +1,177 @@
+{
+  "slug": "gradient-ring-cards",
+  "name": {
+    "en": "Gradient Ring Cards",
+    "zh": "渐变卡片环形轮播"
+  },
+  "description": {
+    "en": "Five gradient cards rotate around a 3D ring, with mirrored backs, fine particle graphics and curved chromatic trails at the edges.",
+    "zh": "五张渐变卡片沿立体圆环旋转，背面镜像显示，搭配精细粒子图形和边缘弯曲色散拖影。"
+  },
+  "keywords": "渐变 卡片 环形 旋转 轮播 立体 粒子 球体 色散 弯曲 Basit gradient ring cards carousel 3d chromatic",
+  "docsPath": "/docs/animations/gradient-ring-cards",
+  "detailPath": "/ai/components/gradient-ring-cards.json",
+  "markdownPath": "/ai/components/gradient-ring-cards.md",
+  "previewPath": "/assets/components/gradient-ring-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "立体卡片轮播",
+      "渐变作品展示",
+      "3D gradient card carousel"
+    ],
+    "searchTerms": [
+      "渐变",
+      "卡片",
+      "轮播",
+      "环形",
+      "粒子",
+      "色散",
+      "gradient",
+      "ring",
+      "carousel",
+      "3d"
+    ],
+    "visualTags": [
+      "gradient",
+      "3d",
+      "particles",
+      "chromatic"
+    ],
+    "interactions": [
+      "drag",
+      "keyboard",
+      "click",
+      "pause"
+    ],
+    "caveat": "卡片内容为本地视觉演示；渐变与图形由程序独立绘制，WebGL 不可用时提供平面切换。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Three.js, Canvas and GSAP reconstruction with measured color fields and reference-derived white vector shapes. Rendering, typography, optical effects and interactions are implemented locally; no original author source code or reference video is included.",
+    "designReference": "https://x.com/basit_designs/status/2114733820155134045/video/1",
+    "designAuthor": "Basit A. Khan",
+    "license": "Original design and gradient/source license not supplied or verified. Reference footage stays internal; original images and source code are not redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/gradient-ring-cards/react.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { GradientRingCards } from \"./GradientRingCards\";\n\nexport default function App() {\n  return <GradientRingCards />;\n}",
+      "files": [
+        "GradientRingCards.tsx",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/gradient-ring-cards/vue.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "vue",
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GradientRingCards from \"./GradientRingCards.vue\";\n</script>\n<template><GradientRingCards /></template>",
+      "files": [
+        "GradientRingCards.vue",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/gradient-ring-cards/svelte.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "svelte",
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GradientRingCards from \"./GradientRingCards.svelte\";\n</script>\n<GradientRingCards />",
+      "files": [
+        "GradientRingCards.svelte",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/gradient-ring-cards/solid.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "solid-js",
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { GradientRingCards } from \"./GradientRingCards.solid\";\n\nexport default function App() {\n  return <GradientRingCards />;\n}",
+      "files": [
+        "GradientRingCards.solid.tsx",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/gradient-ring-cards/preact.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "preact",
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { GradientRingCards } from \"./GradientRingCards.preact\";\n\nexport default function App() {\n  return <GradientRingCards />;\n}",
+      "files": [
+        "GradientRingCards.preact.tsx",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/gradient-ring-cards/vanilla.json",
+      "component": "GradientRingCards",
+      "dependencies": [
+        "three@0.185.1",
+        "gsap@3.12.7"
+      ],
+      "usage": "import { mount } from \"./GradientRingCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GradientRingCards.ts",
+        "GradientRingCardsEngine.js",
+        "motion-runtime.ts",
+        "GradientRingCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag to rotate, or use arrow keys to choose a card. Space pauses rotation; Home and End select the first and last card.",
+    "zh": "拖动旋转，或用方向键切换卡片；空格暂停，Home 和 End 选择首尾卡片。"
+  }
+}

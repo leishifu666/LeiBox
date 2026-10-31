@@ -5,6 +5,8 @@ import { SITE_URL } from "@/lib/site-url";
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
+  { path: "/docs/animations/gradient-ring-cards", priority: 0.8 },
+  { path: "/docs/animations/folded-emoji-scroll", priority: 0.8 },
   ...COMPONENTS.map(entry => ({path: entry.href, priority: 0.8})),
   { path: "/docs/animations/collection-layout-morph", priority: 0.8 },
   { path: "/docs/animations/brand-poster-cards", priority: 0.8 },

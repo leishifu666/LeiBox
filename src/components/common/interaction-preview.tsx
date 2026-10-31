@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { interactionPreviewDocument } from "./interaction-preview-player";
 import { optimizedImage } from "@/lib/optimized-image";
+import { sendMotionRenderSize } from "@/lib/motion-render-size";
 import { SiteNativePreview, hasSiteNativePreview, type SitePreviewSlug } from "./site-native-preview";
 
 const ShareInvite = dynamic(() => import("@/lib/ShareInvite/ShareInvite").then(module => module.ShareInvite), { ssr: false });
@@ -73,7 +74,7 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
 }) {
   const [painted, setPainted] = useState(false);
   const iframe = useRef<HTMLIFrameElement>(null);
-  const waitsForDraw = slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
+  const waitsForDraw = slug === "gradient-ring-cards" || slug === "folded-emoji-scroll" || slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
   const frames = useRef<number[]>([]);
   const reveal = useCallback(() => {
     frames.current.forEach(cancelAnimationFrame);
@@ -84,6 +85,7 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
     })];
   }, []);
   useEffect(() => () => frames.current.forEach(cancelAnimationFrame), []);
+  useEffect(() => sendMotionRenderSize(iframe.current, slug), [scale, width, height, slug]);
   useEffect(() => {
     if (!waitsForDraw) return;
     const receive = (event: MessageEvent) => {
@@ -95,7 +97,7 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
   return (
     <div data-scene-ready={painted} className="absolute top-1/2 left-1/2 bg-[#f4f4f4] transition-opacity duration-150" style={{ width, height, opacity: painted ? 1 : 0, transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: "center" }}>
       {siteSlug ? <SiteNativePreview slug={siteSlug} height={height} onReady={reveal} /> : native ? <NativePreview slug={slug} onReady={reveal} /> : (
-        <iframe ref={iframe} srcDoc={html} title={`${slug} animated preview`} sandbox="allow-scripts" tabIndex={-1} width={width} height={height} onLoad={() => { if (!waitsForDraw) reveal(); }} className="block border-0" />
+        <iframe ref={iframe} srcDoc={html} title={`${slug} animated preview`} sandbox="allow-scripts" tabIndex={-1} width={width} height={height} onLoad={() => { sendMotionRenderSize(iframe.current, slug); if (!waitsForDraw) reveal(); }} className="block border-0" />
       )}
     </div>
   );

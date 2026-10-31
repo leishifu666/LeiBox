@@ -17,6 +17,7 @@ import { verifyHammerheadChart } from './test-hammerhead-chart.mjs';
 import { verifyDeepAgent } from './test-deep-agent.mjs';
 import { verifyElasticPanel } from './test-elastic-panel-resize.mjs';
 import { verifyInlineTextMorph } from './test-inline-text-morph.mjs';
+import { verifyFoldedEmojiScroll } from './test-folded-emoji-scroll.mjs';
 import { verifyCollectionLayoutMorph } from './test-collection-layout-morph.mjs';
 import { verifyGalaxyEffortSlider } from './test-galaxy-effort-slider.mjs';
 import { verifyBlueFlutedGlass } from './test-blue-fluted-glass.mjs';
@@ -27,6 +28,7 @@ import { verifyDotMatrixTrio } from './test-dot-matrix-trio.mjs';
 import { verifySelectionFlower } from './test-selection-flower.mjs';
 import { verifySpiderMusicPlayer } from './test-spider-music-player.mjs';
 import { verifyFluidTooltip } from './test-fluid-tooltip.mjs';
+import { verifyGradientRingCards } from './test-gradient-ring-cards.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -105,11 +107,13 @@ try{
   if(item.slug==='selection-flower')await verifySelectionFlower(page,item,ROOT,OUT);
   if(item.slug==='spider-music-player')await verifySpiderMusicPlayer(page,item,ROOT,OUT);
   if(item.slug==='fluid-tooltip')await verifyFluidTooltip(page,item,ROOT,OUT);
+  if(item.slug==='gradient-ring-cards')await verifyGradientRingCards(page,item,ROOT,OUT);
   if(item.slug==='crumpled-paper')await verifyCrumpledPaper(page,item,ROOT,OUT);
   if(item.slug==='notes-text-color')await verifyNotesTextColor(page,item,ROOT,OUT);
   if(item.slug==='brand-poster-cards')await verifyBrandPosterCards(page,item,ROOT,OUT);
   if(item.slug==='elastic-panel-resize')await verifyElasticPanel(page);
   if(item.slug==='inline-text-morph')await verifyInlineTextMorph(page);
+  if(item.slug==='folded-emoji-scroll')await verifyFoldedEmojiScroll(page);
   if(item.slug==='collection-layout-morph')await verifyCollectionLayoutMorph(page);
   if(item.slug==='galaxy-effort-slider')await verifyGalaxyEffortSlider(page,item,ROOT,OUT);
   if(item.slug==='blue-fluted-glass')await verifyBlueFlutedGlass(page,item,ROOT,OUT);
@@ -382,9 +386,10 @@ try{
    assert.deepEqual(await page.evaluate(()=>window.__collectionDetached.map(node=>node.getAttribute('style'))),frozen,'unmount immediately freezes interrupted image transitions');
   }
   if(item.slug==='inline-text-morph')assert.equal(await page.evaluate(()=>window.__inlineAnimations.filter(animation=>animation.playState==='running'||animation.playState==='paused').length),0,'unmount cancels detached glyph animations too');
+  if(item.slug==='gradient-ring-cards')assert(await page.evaluate(()=>window.__grContexts.every(gl=>gl.isContextLost())),'gradient carousel releases its WebGL context');
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
-  await page.waitForTimeout(['share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
+  await page.waitForTimeout(['gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
   if(item.slug==='elastic-panel-resize'){
    await page.evaluate(()=>{document.getElementById('demo').style.display='none';window.__mount();});
    await page.evaluate(()=>{document.getElementById('demo').style.display='block';});

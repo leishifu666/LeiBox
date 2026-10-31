@@ -7,6 +7,29 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'folded-emoji-scroll') {
+      const ready=()=>{
+        const root=document.querySelector('#folded-emoji-scroll [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.fe-scene').style.background='#f4f4f4';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        later(()=>{
+          const port=root.querySelector('.fe-scroll'),began=performance.now();
+          const move=now=>{const t=((now-began)%9000)/9000,u=t<.5?t*2:2-t*2;port.scrollTop=(port.scrollHeight-port.clientHeight)*.4*(.5-.5*Math.cos(u*Math.PI));requestAnimationFrame(move);};
+          requestAnimationFrame(move);
+        },650);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
+    if (slug === 'gradient-ring-cards') {
+      const ready=()=>{
+        const root=document.querySelector('#gradient-ring-cards [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.gr-scene').style.background='#f4f4f4';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'fluid-tooltip') {
       const ready=()=>{
         const root=document.querySelector('#fluid-tooltip [data-motion-surface]')?.shadowRoot;

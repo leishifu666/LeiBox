@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "52333701a703207df86aa830f2112a18155820602d46e8a9d6c32c258c554320",
+  "revision": "4afa4b5e4a8b14ce5842fb57380ab7b64721199bdaadbed575ff156131512d5d",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,156 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "folded-emoji-scroll",
+      "name": {
+        "en": "Folded Emoji Scroll",
+        "zh": "折边滚动表情选择器"
+      },
+      "description": {
+        "en": "A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.",
+        "zh": "表情网格滚入上下边缘时向内弯折、压缩，搜索栏保持固定，支持搜索与选择。"
+      },
+      "keywords": "折边 折叠 滚动 表情 选择器 上下 边缘 emoji scroll folded edges canvas html drawElementImage Enes",
+      "docsPath": "/docs/animations/folded-emoji-scroll",
+      "detailPath": "/ai/components/folded-emoji-scroll.json",
+      "markdownPath": "/ai/components/folded-emoji-scroll.md",
+      "previewPath": "/assets/components/folded-emoji-scroll.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "折边滚动表情选择",
+          "带几何变形的滚动边缘",
+          "folded emoji picker"
+        ],
+        "searchTerms": [
+          "表情",
+          "滚动",
+          "折边",
+          "折叠",
+          "emoji",
+          "picker",
+          "fold",
+          "scroll",
+          "canvas"
+        ],
+        "visualTags": [
+          "dark",
+          "folded",
+          "canvas",
+          "emoji"
+        ],
+        "interactions": [
+          "scroll",
+          "search",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "纯本地选择器；系统 Emoji 字形有差异，HTML-in-Canvas 不可用时使用 Canvas2D 捕获兼容路径。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent accessible DOM picker and Canvas2D fold resampler; reuses the project's HTML-in-Canvas preparation/drawing helpers and instance lifecycle. Source geometry and hit testing share the same inverse projection.",
+        "designReference": "https://x.com/enesozturkdev/status/2115816197266477213/video/1",
+        "designAuthor": "Enes",
+        "license": "Original design/source license not supplied or independently verified. No original video, screenshots, Apple emoji artwork or proprietary font files are redistributed. Embedded Inter retains its OFL notice; Unicode emoji are rendered by installed system fonts."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "gradient-ring-cards",
+      "name": {
+        "en": "Gradient Ring Cards",
+        "zh": "渐变卡片环形轮播"
+      },
+      "description": {
+        "en": "Five gradient cards rotate around a 3D ring, with mirrored backs, fine particle graphics and curved chromatic trails at the edges.",
+        "zh": "五张渐变卡片沿立体圆环旋转，背面镜像显示，搭配精细粒子图形和边缘弯曲色散拖影。"
+      },
+      "keywords": "渐变 卡片 环形 旋转 轮播 立体 粒子 球体 色散 弯曲 Basit gradient ring cards carousel 3d chromatic",
+      "docsPath": "/docs/animations/gradient-ring-cards",
+      "detailPath": "/ai/components/gradient-ring-cards.json",
+      "markdownPath": "/ai/components/gradient-ring-cards.md",
+      "previewPath": "/assets/components/gradient-ring-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "立体卡片轮播",
+          "渐变作品展示",
+          "3D gradient card carousel"
+        ],
+        "searchTerms": [
+          "渐变",
+          "卡片",
+          "轮播",
+          "环形",
+          "粒子",
+          "色散",
+          "gradient",
+          "ring",
+          "carousel",
+          "3d"
+        ],
+        "visualTags": [
+          "gradient",
+          "3d",
+          "particles",
+          "chromatic"
+        ],
+        "interactions": [
+          "drag",
+          "keyboard",
+          "click",
+          "pause"
+        ],
+        "caveat": "卡片内容为本地视觉演示；渐变与图形由程序独立绘制，WebGL 不可用时提供平面切换。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Three.js, Canvas and GSAP reconstruction with measured color fields and reference-derived white vector shapes. Rendering, typography, optical effects and interactions are implemented locally; no original author source code or reference video is included.",
+        "designReference": "https://x.com/basit_designs/status/2114733820155134045/video/1",
+        "designAuthor": "Basit A. Khan",
+        "license": "Original design and gradient/source license not supplied or verified. Reference footage stays internal; original images and source code are not redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "fluid-tooltip",
       "name": {

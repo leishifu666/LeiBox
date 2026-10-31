@@ -1,0 +1,12 @@
+.fe-scene{position:relative;width:100%;height:var(--motion-height,960px);background:#151515;overflow:hidden;color:#ddd;font-family:FoldEmojiInter,Inter,Arial,Helvetica,system-ui,sans-serif}
+.fe-stage{position:absolute;left:50%;top:50%;width:1280px;height:960px;transform:translate(-50%,-50%);transform-origin:center}
+.fe-panel{position:absolute;left:344px;top:96px;width:592px;height:792px;border:1px solid #363636;border-radius:22px;background:#222;overflow:hidden;box-shadow:inset 0 1px 1px #ffffff08}
+.fe-header{position:absolute;inset:0 0 auto;height:88px;padding:0 24px;border-bottom:1px solid #383838;background:#222;z-index:3}
+.fe-search{display:block;width:100%;height:100%;padding:0;border:0;outline:none;background:transparent;color:#ddd;font:400 28px/36px FoldEmojiInter,Inter,Arial,Helvetica,system-ui,sans-serif}.fe-search::placeholder{color:#8f8f8f;opacity:1}.fe-search:focus-visible{outline:2px solid #777;outline-offset:-6px;border-radius:10px}.fe-search::-webkit-search-cancel-button{display:none}
+.fe-surface{position:absolute;left:0;right:0;top:88px;bottom:0;overflow:hidden}
+.fe-output{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+.fe-scroll{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:none;touch-action:pan-y;outline:none}.fe-scroll::-webkit-scrollbar{display:none}
+.fe-content{position:relative;padding:24px;opacity:0}.fe-section{position:relative;margin:0 0 40px}.fe-heading{position:relative;margin:0 0 18px;font:500 24px/32px FoldEmojiInter,Inter,Arial,Helvetica,system-ui,sans-serif;color:#ddd}.fe-grid{position:relative;display:grid;grid-template-columns:repeat(9,minmax(0,1fr))}
+.fe-emoji{position:relative;display:block;width:100%;height:62px;margin:0;padding:0;border:0;border-radius:8px;background:transparent;color:#fff;cursor:pointer;outline:none;font:400 40px/62px 'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;text-align:center;-webkit-tap-highlight-color:transparent;touch-action:pan-y}.fe-emoji:hover,.fe-emoji[aria-pressed=true]{background:#363636}.fe-emoji:focus-visible{outline:2px solid #aaa;outline-offset:-2px}
+.fe-emoji[data-hover=true]{background:#363636}.fe-emoji[data-focused=true]{outline:2px solid #aaa;outline-offset:-2px}
+.fe-empty{margin:0;padding:32px 0;font:400 22px/32px Arial,sans-serif;color:#aaa;text-align:center}.fe-capture{position:absolute;left:-10000px;top:0;pointer-events:none}.fe-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

@@ -52,6 +52,10 @@
       "src": "/assets/optimized/fluid-tooltip-1df520f8a6e2-960.webp",
       "srcSet": "/assets/optimized/fluid-tooltip-1df520f8a6e2-320.webp 320w, /assets/optimized/fluid-tooltip-1df520f8a6e2-640.webp 640w, /assets/optimized/fluid-tooltip-1df520f8a6e2-960.webp 960w"
     },
+    "/assets/components/folded-emoji-scroll.png": {
+      "src": "/assets/optimized/folded-emoji-scroll-5dcda494a41f-1200.webp",
+      "srcSet": "/assets/optimized/folded-emoji-scroll-5dcda494a41f-320.webp 320w, /assets/optimized/folded-emoji-scroll-5dcda494a41f-640.webp 640w, /assets/optimized/folded-emoji-scroll-5dcda494a41f-960.webp 960w, /assets/optimized/folded-emoji-scroll-5dcda494a41f-1200.webp 1200w"
+    },
     "/assets/components/galaxy-effort-slider.png": {
       "src": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp",
       "srcSet": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-320.webp 320w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-640.webp 640w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp 945w"
@@ -68,6 +72,10 @@
       "src": "/assets/optimized/gradient-cover-wall-bf32d9d76606-1200.webp",
       "srcSet": "/assets/optimized/gradient-cover-wall-bf32d9d76606-320.webp 320w, /assets/optimized/gradient-cover-wall-bf32d9d76606-640.webp 640w, /assets/optimized/gradient-cover-wall-bf32d9d76606-960.webp 960w, /assets/optimized/gradient-cover-wall-bf32d9d76606-1200.webp 1200w"
     },
+    "/assets/components/gradient-ring-cards.png": {
+      "src": "/assets/optimized/gradient-ring-cards-054c455bea47-960.webp",
+      "srcSet": "/assets/optimized/gradient-ring-cards-054c455bea47-320.webp 320w, /assets/optimized/gradient-ring-cards-054c455bea47-640.webp 640w, /assets/optimized/gradient-ring-cards-054c455bea47-960.webp 960w"
+    },
     "/assets/components/hammerhead-chart.png": {
       "src": "/assets/optimized/hammerhead-chart-55720a189153-1200.webp",
       "srcSet": "/assets/optimized/hammerhead-chart-55720a189153-320.webp 320w, /assets/optimized/hammerhead-chart-55720a189153-640.webp 640w, /assets/optimized/hammerhead-chart-55720a189153-960.webp 960w, /assets/optimized/hammerhead-chart-55720a189153-1200.webp 1200w"
@@ -83,6 +91,42 @@
     "/assets/components/notes-text-color.png": {
       "src": "/assets/optimized/notes-text-color-bed022555fe4-900.webp",
       "srcSet": "/assets/optimized/notes-text-color-bed022555fe4-320.webp 320w, /assets/optimized/notes-text-color-bed022555fe4-640.webp 640w, /assets/optimized/notes-text-color-bed022555fe4-900.webp 900w"
+    },
+    "/assets/components/original-ascii-object.png": {
+      "src": "/assets/optimized/original-ascii-object-36b063d51642-768.webp",
+      "srcSet": "/assets/optimized/original-ascii-object-36b063d51642-320.webp 320w, /assets/optimized/original-ascii-object-36b063d51642-640.webp 640w, /assets/optimized/original-ascii-object-36b063d51642-768.webp 768w"
+    },
+    "/assets/components/original-asciify.png": {
+      "src": "/assets/optimized/original-asciify-d9d6f169a0be-768.webp",
+      "srcSet": "/assets/optimized/original-asciify-d9d6f169a0be-320.webp 320w, /assets/optimized/original-asciify-d9d6f169a0be-640.webp 640w, /assets/optimized/original-asciify-d9d6f169a0be-768.webp 768w"
+    },
+    "/assets/components/original-frost.png": {
+      "src": "/assets/optimized/original-frost-7d94d274daaa-768.webp",
+      "srcSet": "/assets/optimized/original-frost-7d94d274daaa-320.webp 320w, /assets/optimized/original-frost-7d94d274daaa-640.webp 640w, /assets/optimized/original-frost-7d94d274daaa-768.webp 768w"
+    },
+    "/assets/components/original-glass-object.png": {
+      "src": "/assets/optimized/original-glass-object-e431c55f52be-768.webp",
+      "srcSet": "/assets/optimized/original-glass-object-e431c55f52be-320.webp 320w, /assets/optimized/original-glass-object-e431c55f52be-640.webp 640w, /assets/optimized/original-glass-object-e431c55f52be-768.webp 768w"
+    },
+    "/assets/components/original-glass.png": {
+      "src": "/assets/optimized/original-glass-06ee63a1e90c-768.webp",
+      "srcSet": "/assets/optimized/original-glass-06ee63a1e90c-320.webp 320w, /assets/optimized/original-glass-06ee63a1e90c-640.webp 640w, /assets/optimized/original-glass-06ee63a1e90c-768.webp 768w"
+    },
+    "/assets/components/original-glyph-rain.png": {
+      "src": "/assets/optimized/original-glyph-rain-ee2698b950e6-768.webp",
+      "srcSet": "/assets/optimized/original-glyph-rain-ee2698b950e6-320.webp 320w, /assets/optimized/original-glyph-rain-ee2698b950e6-640.webp 640w, /assets/optimized/original-glyph-rain-ee2698b950e6-768.webp 768w"
+    },
+    "/assets/components/original-liquid-object.png": {
+      "src": "/assets/optimized/original-liquid-object-1c2eacb9e793-768.webp",
+      "srcSet": "/assets/optimized/original-liquid-object-1c2eacb9e793-320.webp 320w, /assets/optimized/original-liquid-object-1c2eacb9e793-640.webp 640w, /assets/optimized/original-liquid-object-1c2eacb9e793-768.webp 768w"
+    },
+    "/assets/components/original-particle-object.png": {
+      "src": "/assets/optimized/original-particle-object-0a55156ebb96-768.webp",
+      "srcSet": "/assets/optimized/original-particle-object-0a55156ebb96-320.webp 320w, /assets/optimized/original-particle-object-0a55156ebb96-640.webp 640w, /assets/optimized/original-particle-object-0a55156ebb96-768.webp 768w"
+    },
+    "/assets/components/original-particle-scroll.png": {
+      "src": "/assets/optimized/original-particle-scroll-09be555ba970-768.webp",
+      "srcSet": "/assets/optimized/original-particle-scroll-09be555ba970-320.webp 320w, /assets/optimized/original-particle-scroll-09be555ba970-640.webp 640w, /assets/optimized/original-particle-scroll-09be555ba970-768.webp 768w"
     },
     "/assets/components/otp-verification.png": {
       "src": "/assets/optimized/otp-verification-eeec5a945ac9-546.webp",
@@ -127,42 +171,6 @@
     "/landing/agent-demo/alpine-lake.png": {
       "src": "/assets/optimized/alpine-lake-a6d766f87344-1200.webp",
       "srcSet": "/assets/optimized/alpine-lake-a6d766f87344-320.webp 320w, /assets/optimized/alpine-lake-a6d766f87344-640.webp 640w, /assets/optimized/alpine-lake-a6d766f87344-960.webp 960w, /assets/optimized/alpine-lake-a6d766f87344-1200.webp 1200w"
-    },
-    "/assets/components/original-ascii-object.png": {
-      "src": "/assets/optimized/original-ascii-object-36b063d51642-768.webp",
-      "srcSet": "/assets/optimized/original-ascii-object-36b063d51642-320.webp 320w, /assets/optimized/original-ascii-object-36b063d51642-640.webp 640w, /assets/optimized/original-ascii-object-36b063d51642-768.webp 768w"
-    },
-    "/assets/components/original-asciify.png": {
-      "src": "/assets/optimized/original-asciify-d9d6f169a0be-768.webp",
-      "srcSet": "/assets/optimized/original-asciify-d9d6f169a0be-320.webp 320w, /assets/optimized/original-asciify-d9d6f169a0be-640.webp 640w, /assets/optimized/original-asciify-d9d6f169a0be-768.webp 768w"
-    },
-    "/assets/components/original-frost.png": {
-      "src": "/assets/optimized/original-frost-7d94d274daaa-768.webp",
-      "srcSet": "/assets/optimized/original-frost-7d94d274daaa-320.webp 320w, /assets/optimized/original-frost-7d94d274daaa-640.webp 640w, /assets/optimized/original-frost-7d94d274daaa-768.webp 768w"
-    },
-    "/assets/components/original-glass.png": {
-      "src": "/assets/optimized/original-glass-06ee63a1e90c-768.webp",
-      "srcSet": "/assets/optimized/original-glass-06ee63a1e90c-320.webp 320w, /assets/optimized/original-glass-06ee63a1e90c-640.webp 640w, /assets/optimized/original-glass-06ee63a1e90c-768.webp 768w"
-    },
-    "/assets/components/original-glass-object.png": {
-      "src": "/assets/optimized/original-glass-object-e431c55f52be-768.webp",
-      "srcSet": "/assets/optimized/original-glass-object-e431c55f52be-320.webp 320w, /assets/optimized/original-glass-object-e431c55f52be-640.webp 640w, /assets/optimized/original-glass-object-e431c55f52be-768.webp 768w"
-    },
-    "/assets/components/original-glyph-rain.png": {
-      "src": "/assets/optimized/original-glyph-rain-ee2698b950e6-768.webp",
-      "srcSet": "/assets/optimized/original-glyph-rain-ee2698b950e6-320.webp 320w, /assets/optimized/original-glyph-rain-ee2698b950e6-640.webp 640w, /assets/optimized/original-glyph-rain-ee2698b950e6-768.webp 768w"
-    },
-    "/assets/components/original-particle-object.png": {
-      "src": "/assets/optimized/original-particle-object-0a55156ebb96-768.webp",
-      "srcSet": "/assets/optimized/original-particle-object-0a55156ebb96-320.webp 320w, /assets/optimized/original-particle-object-0a55156ebb96-640.webp 640w, /assets/optimized/original-particle-object-0a55156ebb96-768.webp 768w"
-    },
-    "/assets/components/original-particle-scroll.png": {
-      "src": "/assets/optimized/original-particle-scroll-09be555ba970-768.webp",
-      "srcSet": "/assets/optimized/original-particle-scroll-09be555ba970-320.webp 320w, /assets/optimized/original-particle-scroll-09be555ba970-640.webp 640w, /assets/optimized/original-particle-scroll-09be555ba970-768.webp 768w"
-    },
-    "/assets/components/original-liquid-object.png": {
-      "src": "/assets/optimized/original-liquid-object-1c2eacb9e793-768.webp",
-      "srcSet": "/assets/optimized/original-liquid-object-1c2eacb9e793-320.webp 320w, /assets/optimized/original-liquid-object-1c2eacb9e793-640.webp 640w, /assets/optimized/original-liquid-object-1c2eacb9e793-768.webp 768w"
     }
   },
   "video": {},
