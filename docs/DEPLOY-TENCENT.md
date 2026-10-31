@@ -82,3 +82,13 @@ Skill 源文件在 `integrations/skills/leibox/`，公开下载在 `/ai/`，两�
 最终发布版本为 `abca2f5e77f5c210280aa61b112050f6f31370a2`，校验 2,835 个文件，更新 730 个文件。增量包 SHA-256 为 `5d191d739c1bc11aa84ca69a603124085e7e79236bac84bbb302680d2dbb4ba0`，备份位于 `/opt/Project/leibox/backups/deferred-prompts-abca2f5`；此前导航资源及 Nginx 配置变更记录位于 `/opt/Project/leibox/backups/navigation-performance-47d79e1`。服务端 `.env.local` 摘要保持一致。
 
 生产构建、28 项性能/复制/Skill/下载检查通过；375、768、1440 三种宽度下验证进入、返回、首页卡片、键盘、滚动恢复、打断和减少动态效果。提示词首次进入不下载，复制与滚动显示的内容均与完整原文一致。公网重新安装 Skill 后，实际下载并校验了两个新组件的全部 12 套框架包，共 48 个源码文件。公网复测未出现额外原图请求，测量期间未发现主线程长任务；本地 3000 预览也已重新构建。首次打开仍包含字体与演示资源下载，实测时间受缓存及网络条件影响，不承诺所有场景秒开。内部证据位于 `outputs/new-components-release-20261031/`。
+
+## AI 品牌封面卡片与一键部署（2026-10-31）
+
+按“🎨 品牌卡片｜制作与挑选”对话最终选择，新增 `ai-brand-cover-cards`：Claude 04、Codex 01、Cursor 04，保留该组三张配图、真实品牌 SVG 和中文介绍。三个封面作为一个可替换内容的三联组件收录，AI 目录共 33 项；React、Vue、Svelte、Solid、Preact、Vanilla 六种原生入口齐全，图片和 SVG 随代码打包，提示词包含完整矢量规格。
+
+发布命令现在为 `npm run deploy:server`，使用说明见 `scripts/deploy/README.md`。发布器构建 main 当前已提交版本，检查后推送 GitHub，通过专用受限 SSH 密钥上传增量，再核对公网内容摘要。机器配置在被忽略的 `.deploy/server.json`，私钥只保存在用户 SSH 目录。主机指纹已通过宝塔管理员终端核对并固定；实际验证专用密钥允许发布清单查询，拒绝 `id` 等任意 shell 命令。服务端接收器只接受 `out` 内常规文件，保留 `.env.local`，写入或校验失败可恢复已替换的文件。
+
+首次真实一键发布的源码提交为 `2289f4bcc2c4758d852856eefcddc8028eb9591c`，回执 `outputs/deploy-server/2289f4bcc2c4-1a191f7c663/receipt.json`：校验 2,911 个文件，更新 685 个文件，公网核对通过；服务器备份为 `/opt/Project/leibox/backups/2289f4bcc2c4-1a191f7c663`。此后发布沿用同一命令，每次生成独立回执和备份。
+
+新卡片及复用核心的原品牌海报共 12 套框架包运行通过，132 个入口严格类型检查通过；24 项性能、Skill、下载检查和 5 项发布端回归通过。实际 Chrome 验证本地与公网 375 / 768 / 1440、侧栏和列表动态预览及释放、完整提示词复制；公开 AI 接口实际下载四个 React 源文件，图片与 MIT 声明完整内嵌。内部检查记录位于 `outputs/ai-brand-release-20261031/`。

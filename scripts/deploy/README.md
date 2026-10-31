@@ -8,7 +8,7 @@ npm run deploy:server
 
 脚本发布 **main 当前已提交的 Git 版本**，未提交的修改不上传。它导出该提交到 `outputs/deploy-server/` 下的构建目录，复用本机依赖，构建并运行性能、Skill 和下载检查，再推送 GitHub、打包增量、通过 SSH 发布，最后核对公网页面和 AI 目录摘要。它不创建 worktree、不自动提交文件。
 
-发布端先校验完整清单、路径及 SHA-256，再备份旧文件、优先更新静态资源，最后更新 HTML。失败时恢复本次已经替换的文件；`.env.local` 不在发布范围。回执保存在本机该发布目录的 `receipt.json`，服务器备份位于 `/opt/Project/leibox/backups/<release>`。旧哈希资源保留以兼容仍打开的页面。
+发布端先校验完整清单、路径及 SHA-256，再备份旧文件、优先更新静态资源，最后更新 HTML。服务端写入或校验失败时恢复本次已经替换的文件；`.env.local` 不在发布范围。公网检查失败时保留服务端回执并报错，供核对，不因临时网络错误自动更换线上版本。回执保存在本机该发布目录的 `receipt.json`，服务器备份位于 `/opt/Project/leibox/backups/<release>`。旧哈希资源保留以兼容仍打开的页面。
 
 ## 当前机器
 

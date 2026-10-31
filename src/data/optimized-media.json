@@ -1,8 +1,8 @@
 {
   "images": {
     "/assets/components/ai-brand-cover-cards.png": {
-      "src": "/assets/optimized/ai-brand-cover-cards-dba1b9c7c0c4-1200.webp",
-      "srcSet": "/assets/optimized/ai-brand-cover-cards-dba1b9c7c0c4-320.webp 320w, /assets/optimized/ai-brand-cover-cards-dba1b9c7c0c4-640.webp 640w, /assets/optimized/ai-brand-cover-cards-dba1b9c7c0c4-960.webp 960w, /assets/optimized/ai-brand-cover-cards-dba1b9c7c0c4-1200.webp 1200w"
+      "src": "/assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-1200.webp",
+      "srcSet": "/assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-320.webp 320w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-640.webp 640w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-960.webp 960w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-1200.webp 1200w"
     },
     "/assets/components/ai-generating.png": {
       "src": "/assets/optimized/ai-generating-5b80f735c260-546.webp",
