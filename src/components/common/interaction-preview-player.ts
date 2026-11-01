@@ -25,6 +25,10 @@ const PLAYER = String.raw`
       };
       const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
     }
+    if (slug === 'matcha-powder-reveal') {
+      const ready=()=>{const root=document.querySelector('#matcha-powder-reveal [data-motion-surface]')?.shadowRoot;if(!root||document.body.dataset.motionReady!=='true')return;observer.disconnect();root.querySelector('.mp-scene').style.background='#f4f4f4';root.querySelector('.mp-grip').style.display='none';root.querySelector('.mp-controls').style.display='none';requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));};
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'gradient-ring-cards') {
       const ready=()=>{
         const root=document.querySelector('#gradient-ring-cards [data-motion-surface]')?.shadowRoot;
@@ -373,6 +377,7 @@ export function interactionPreviewCss(slug: string) {
 }
 
 export function interactionPreviewDocument(source: string, slug: string) {
+  if (slug === "matcha-powder-reveal") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = PLAYER.replace('__SLUG__', JSON.stringify(slug));
   const style = `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares

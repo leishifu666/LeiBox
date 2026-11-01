@@ -1,0 +1,172 @@
+{
+  "slug": "matcha-powder-reveal",
+  "name": {
+    "en": "Package Tear and Powder Reveal",
+    "zh": "包装撕开粒子消散"
+  },
+  "description": {
+    "en": "Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.",
+    "zh": "从右上角拖开立体金属包装，可停在半途并继续拉动弯折封条，完全撕开后释放抹茶粉末。"
+  },
+  "keywords": "包装 撕开 撕口 抹茶 粉末 粒子 消散 金属 产品 package tear matcha powder reveal Andreas",
+  "docsPath": "/docs/animations/matcha-powder-reveal",
+  "detailPath": "/ai/components/matcha-powder-reveal.json",
+  "markdownPath": "/ai/components/matcha-powder-reveal.md",
+  "previewPath": "/assets/components/matcha-powder-reveal.png",
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "产品包装撕开",
+      "粉末粒子文字揭示",
+      "product powder reveal"
+    ],
+    "searchTerms": [
+      "包装",
+      "撕开",
+      "粉末",
+      "粒子",
+      "消散",
+      "抹茶",
+      "package",
+      "tear",
+      "powder",
+      "reveal"
+    ],
+    "visualTags": [
+      "3d",
+      "foil",
+      "particles",
+      "green"
+    ],
+    "interactions": [
+      "play",
+      "pause",
+      "seek",
+      "drag",
+      "keyboard"
+    ],
+    "caveat": "本地程序化产品动效；无真实商品购买或上传功能。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent procedural Three.js foil geometry, Canvas lettering, staged surface erosion, mass-dependent Gaussian grain transport and instanced turbulent dust, with tear-velocity feedback, scoped lifecycle and a Canvas2D fallback.",
+    "designReference": "https://x.com/andreaskruszaki/status/2115308820687950002/video/1",
+    "designAuthor": "Andreas Kruszakin-Liboska",
+    "license": "Original design/model/source license not supplied or independently verified. No reference video, screenshots, original 3D assets or proprietary fonts are redistributed. Embedded Inter retains OFL and controls retain the Lucide MIT notice."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/matcha-powder-reveal/react.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "three@0.185.1"
+      ],
+      "usage": "import { MatchaPowderReveal } from \"./MatchaPowderReveal\";\n\nexport default function App() {\n  return <MatchaPowderReveal />;\n}",
+      "files": [
+        "MatchaPowderReveal.tsx",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/matcha-powder-reveal/vue.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "vue",
+        "three@0.185.1"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport MatchaPowderReveal from \"./MatchaPowderReveal.vue\";\n</script>\n<template><MatchaPowderReveal /></template>",
+      "files": [
+        "MatchaPowderReveal.vue",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/matcha-powder-reveal/svelte.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "svelte",
+        "three@0.185.1"
+      ],
+      "usage": "<script lang=\"ts\">\nimport MatchaPowderReveal from \"./MatchaPowderReveal.svelte\";\n</script>\n<MatchaPowderReveal />",
+      "files": [
+        "MatchaPowderReveal.svelte",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/matcha-powder-reveal/solid.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "solid-js",
+        "three@0.185.1"
+      ],
+      "usage": "import { MatchaPowderReveal } from \"./MatchaPowderReveal.solid\";\n\nexport default function App() {\n  return <MatchaPowderReveal />;\n}",
+      "files": [
+        "MatchaPowderReveal.solid.tsx",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/matcha-powder-reveal/preact.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "preact",
+        "three@0.185.1"
+      ],
+      "usage": "import { MatchaPowderReveal } from \"./MatchaPowderReveal.preact\";\n\nexport default function App() {\n  return <MatchaPowderReveal />;\n}",
+      "files": [
+        "MatchaPowderReveal.preact.tsx",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/matcha-powder-reveal/vanilla.json",
+      "component": "MatchaPowderReveal",
+      "dependencies": [
+        "three@0.185.1"
+      ],
+      "usage": "import { mount } from \"./MatchaPowderReveal\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "MatchaPowderReveal.ts",
+        "MatchaPowderRevealEngine.js",
+        "motion-runtime.ts",
+        "MatchaPowderRevealEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Grab the upper-right notch and drag left to tear. Release halfway and continue from the strip. Move over the pouch to tilt it; R resets and Enter on the notch opens it.",
+    "zh": "抓住右上角向左拖动撕开，中途松手后可从封条继续。鼠标移动可查看立体反光；R 重置，聚焦撕口后按 Enter 打开。"
+  }
+}

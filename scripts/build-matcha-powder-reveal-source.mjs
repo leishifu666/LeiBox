@@ -1,0 +1,19 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {build} from 'esbuild';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {Pause,Play,RotateCcw} from 'lucide-react';
+export async function buildMatchaPowderRevealSource(){
+ const base=await fs.readFile('src/lib/ShareInvite/share-invite.css','utf8');
+ const css=base.match(/@font-face\s*\{[^}]*\}/g).join('\n').replaceAll('ShareInviteInter','MatchaInter')+'\n'+await fs.readFile('src/lib/motion-core/matcha-powder-reveal.css','utf8');
+ const icon=c=>renderToStaticMarkup(createElement(c,{'aria-hidden':true}));
+ const markup=`<main class="mp-scene" aria-label="Package tear and powder reveal"><canvas class="mp-canvas" tabindex="0" role="region" aria-label="Drag from the upper-right notch to the left to tear the pouch. Space opens, R resets, arrows seek."></canvas><button type="button" class="mp-grip" aria-label="Drag left to tear package"><span aria-hidden="true"></span></button><p class="mp-caption">it's just matcha.</p><div class="mp-controls"><button type="button" data-action="play" aria-label="Pause animation"><span data-icon="pause">${icon(Pause)}</span><span data-icon="play">${icon(Play)}</span></button><button type="button" data-action="replay" aria-label="Replay animation">${icon(RotateCcw)}</button><input type="range" min="0" max="100" step="1" value="0" aria-label="Animation progress"></div></main>`;
+ const license=await fs.readFile('node_modules/lucide-react/LICENSE','utf8');
+ const entry='/*!\n'+base.slice(2,base.indexOf('*/'))+'\n'+license+'\nVisual reference: Andreas Kruszakin-Liboska, https://x.com/andreaskruszaki/status/2115308820687950002/video/1\nIndependent procedural reconstruction; no original footage, model, artwork or author source code included.\n*/\n'+`import {createMatchaPowderReveal} from './matcha-powder-reveal.mjs';const CSS=${JSON.stringify(css)},MARKUP=${JSON.stringify(markup)};export function mountMatchaPowderReveal(target,options={}){return createMatchaPowderReveal(target,options,CSS,MARKUP);}`;
+ const settings={stdin:{contents:entry,sourcefile:'matcha-powder-reveal-entry.js',resolveDir:path.resolve('src/lib/motion-core')},write:false,bundle:true,platform:'browser',target:'es2020',legalComments:'inline',logLevel:'silent'};
+ const packaged=await build({...settings,format:'esm',external:['three','./motion-runtime']});
+ const standalone=await build({...settings,stdin:{...settings.stdin,contents:entry+`\nconst component=mountMatchaPowderReveal(document.getElementById('matcha-powder-reveal'),{height:window.innerHeight,autoTear:document.documentElement.hasAttribute('data-leibox-motion-preview'),loop:document.documentElement.hasAttribute('data-leibox-motion-preview'),progress:document.documentElement.hasAttribute('data-leibox-motion-preview')?.25:undefined});const resize=()=>component.update({height:window.innerHeight});window.addEventListener('resize',resize);const announce=()=>{if(Number(component.root.querySelector('.mp-scene').dataset.progress)>.07){document.body.dataset.motionReady='true';observer.disconnect();}};const observer=new MutationObserver(announce);observer.observe(component.root.querySelector('.mp-scene'),{attributes:true,attributeFilter:['data-progress']});announce();window.addEventListener('pagehide',()=>{window.removeEventListener('resize',resize);observer.disconnect();component.destroy();},{once:true});`},format:'iife',minify:true});
+ await fs.writeFile('public/motion/matcha-powder-reveal.html',`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Package Tear and Powder Reveal</title><style>html,body{margin:0;background:#ececed}</style></head><body><div id="matcha-powder-reveal"></div><script>${standalone.outputFiles[0].text.replaceAll('</script','<\\/script')}</script></body></html>`);
+ return packaged.outputFiles[0].text;
+}

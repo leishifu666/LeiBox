@@ -9,6 +9,7 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "matcha-powder-reveal": { category: "hero", useCases: ["产品包装撕开", "粉末粒子文字揭示", "product powder reveal"], searchTerms: ["包装", "撕开", "粉末", "粒子", "消散", "抹茶", "package", "tear", "powder", "reveal"], visualTags: ["3d", "foil", "particles", "green"], interactions: ["play", "pause", "seek", "drag", "keyboard"], caveat: "本地程序化产品动效；无真实商品购买或上传功能。" },
   "ai-brand-cover-cards": { category: "cards", useCases: ["AI 品牌封面", "产品三联海报"], searchTerms: ["Claude", "Codex", "Cursor", "AI", "品牌", "封面", "三联", "poster"], visualTags: ["portrait", "artwork", "brand"], interactions: ["hover", "click", "keyboard"], caveat: "展示卡片，不调用真实 AI 服务；品牌标志不代表官方合作。" },
   "folded-emoji-scroll": {
     category: "input", useCases: ["折边滚动表情选择", "带几何变形的滚动边缘", "folded emoji picker"],

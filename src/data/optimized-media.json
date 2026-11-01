@@ -88,6 +88,10 @@
       "src": "/assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp",
       "srcSet": "/assets/optimized/inline-text-morph-8daecfa57f4c-320.webp 320w, /assets/optimized/inline-text-morph-8daecfa57f4c-640.webp 640w, /assets/optimized/inline-text-morph-8daecfa57f4c-960.webp 960w, /assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp 1044w"
     },
+    "/assets/components/matcha-powder-reveal.png": {
+      "src": "/assets/optimized/matcha-powder-reveal-31a1d8dafe39-960.webp",
+      "srcSet": "/assets/optimized/matcha-powder-reveal-31a1d8dafe39-320.webp 320w, /assets/optimized/matcha-powder-reveal-31a1d8dafe39-640.webp 640w, /assets/optimized/matcha-powder-reveal-31a1d8dafe39-960.webp 960w"
+    },
     "/assets/components/morphing-timer.png": {
       "src": "/assets/optimized/morphing-timer-daf9fb769107-546.webp",
       "srcSet": "/assets/optimized/morphing-timer-daf9fb769107-320.webp 320w, /assets/optimized/morphing-timer-daf9fb769107-546.webp 546w"

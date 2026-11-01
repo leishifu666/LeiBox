@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "43200c47c4c587b7406283f511ab16bc180802711040466b1f5ef284708269a7",
+  "revision": "f3bde0360de67c39e29554447e7e6c99037c0f069ec43a1850800f175894c8d7",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,82 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "matcha-powder-reveal",
+      "name": {
+        "en": "Package Tear and Powder Reveal",
+        "zh": "包装撕开粒子消散"
+      },
+      "description": {
+        "en": "Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.",
+        "zh": "从右上角拖开立体金属包装，可停在半途并继续拉动弯折封条，完全撕开后释放抹茶粉末。"
+      },
+      "keywords": "包装 撕开 撕口 抹茶 粉末 粒子 消散 金属 产品 package tear matcha powder reveal Andreas",
+      "docsPath": "/docs/animations/matcha-powder-reveal",
+      "detailPath": "/ai/components/matcha-powder-reveal.json",
+      "markdownPath": "/ai/components/matcha-powder-reveal.md",
+      "previewPath": "/assets/components/matcha-powder-reveal.png",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "产品包装撕开",
+          "粉末粒子文字揭示",
+          "product powder reveal"
+        ],
+        "searchTerms": [
+          "包装",
+          "撕开",
+          "粉末",
+          "粒子",
+          "消散",
+          "抹茶",
+          "package",
+          "tear",
+          "powder",
+          "reveal"
+        ],
+        "visualTags": [
+          "3d",
+          "foil",
+          "particles",
+          "green"
+        ],
+        "interactions": [
+          "play",
+          "pause",
+          "seek",
+          "drag",
+          "keyboard"
+        ],
+        "caveat": "本地程序化产品动效；无真实商品购买或上传功能。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent procedural Three.js foil geometry, Canvas lettering, staged surface erosion, mass-dependent Gaussian grain transport and instanced turbulent dust, with tear-velocity feedback, scoped lifecycle and a Canvas2D fallback.",
+        "designReference": "https://x.com/andreaskruszaki/status/2115308820687950002/video/1",
+        "designAuthor": "Andreas Kruszakin-Liboska",
+        "license": "Original design/model/source license not supplied or independently verified. No reference video, screenshots, original 3D assets or proprietary fonts are redistributed. Embedded Inter retains OFL and controls retain the Lucide MIT notice."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "ai-brand-cover-cards",
       "name": {

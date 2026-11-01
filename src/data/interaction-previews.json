@@ -1,5 +1,17 @@
 [
   {
+    "slug": "matcha-powder-reveal",
+    "href": "/docs/animations/matcha-powder-reveal",
+    "name": "Package Tear and Powder Reveal",
+    "category": "Particle transition",
+    "description": "Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.",
+    "keywords": "包装 撕开 撕口 抹茶 粉末 粒子 消散 金属 产品 package tear matcha powder reveal Andreas",
+    "preview": "/assets/components/matcha-powder-reveal.png",
+    "sourceFile": "包装撕开粒子消散.html",
+    "canvasWidth": 1280,
+    "canvasHeight": 720
+  },
+  {
     "slug": "ai-brand-cover-cards",
     "href": "/docs/animations/ai-brand-cover-cards",
     "name": "AI Brand Cover Cards",

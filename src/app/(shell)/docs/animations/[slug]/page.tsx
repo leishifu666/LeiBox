@@ -36,6 +36,14 @@ export default async function MotionPage({params}:Props){
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "matcha-powder-reveal" ? [
+          {name:"options.progress",type:"number",description:"Initial or updated animation progress, from 0 to 1."},
+          {name:"options.playing",type:"boolean",defaultValue:"true",description:"Play or pause the animation."},
+          {name:"options.autoTear",type:"boolean",defaultValue:"false",description:"Automatically tear without input. Disabled by default."},
+          {name:"options.loop",type:"boolean",defaultValue:"false",description:"Repeat after the final message."},
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Playback speed multiplier, from 0.25 to 2."},
+          {name:"options.onProgress",type:"(progress: number) => void",description:"Called when the user seeks; controlled updates do not emit it."},
+        ] : []),
         ...(slug === "folded-emoji-scroll" ? [
           {name:"options.query",type:"string",defaultValue:'""',description:"Initial or updated emoji query."},
           {name:"options.value",type:"string",description:"Selected emoji character. User selection calls onSelect."},

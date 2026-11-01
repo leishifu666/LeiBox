@@ -30,6 +30,7 @@ import { verifySelectionFlower } from './test-selection-flower.mjs';
 import { verifySpiderMusicPlayer } from './test-spider-music-player.mjs';
 import { verifyFluidTooltip } from './test-fluid-tooltip.mjs';
 import { verifyGradientRingCards } from './test-gradient-ring-cards.mjs';
+import { verifyMatchaPowderReveal } from './test-matcha-powder-reveal.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -109,6 +110,7 @@ try{
   if(item.slug==='spider-music-player')await verifySpiderMusicPlayer(page,item,ROOT,OUT);
   if(item.slug==='fluid-tooltip')await verifyFluidTooltip(page,item,ROOT,OUT);
   if(item.slug==='gradient-ring-cards')await verifyGradientRingCards(page,item,ROOT,OUT);
+  if(item.slug==='matcha-powder-reveal')await verifyMatchaPowderReveal(page,item);
   if(item.slug==='crumpled-paper')await verifyCrumpledPaper(page,item,ROOT,OUT);
   if(item.slug==='notes-text-color')await verifyNotesTextColor(page,item,ROOT,OUT);
   if(item.slug==='ai-brand-cover-cards')await verifyAiBrandCovers(page);
@@ -389,6 +391,7 @@ try{
   }
   if(item.slug==='inline-text-morph')assert.equal(await page.evaluate(()=>window.__inlineAnimations.filter(animation=>animation.playState==='running'||animation.playState==='paused').length),0,'unmount cancels detached glyph animations too');
   if(item.slug==='gradient-ring-cards')assert(await page.evaluate(()=>window.__grContexts.every(gl=>gl.isContextLost())),'gradient carousel releases its WebGL context');
+  if(item.slug==='matcha-powder-reveal')assert(await page.evaluate(()=>window.__mpContexts.every(gl=>gl.isContextLost())),'powder scene releases its WebGL context');
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
   await page.waitForTimeout(['ai-brand-cover-cards','gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');

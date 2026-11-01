@@ -1,3 +1,4 @@
+import { MATCHA_POWDER_PROMPT } from "./matcha-powder-reveal.mjs";
 import { AI_BRAND_COVER_PROMPT } from "./ai-brand-cover-cards.mjs";
 import { MOTION_PROMPTS } from "./motion-prompts.mjs";
 import { FOLDED_EMOJI_PROMPT } from "./folded-emoji-scroll.mjs";
@@ -50,6 +51,13 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  { slug: "matcha-powder-reveal", href: "/docs/animations/matcha-powder-reveal", name: "Package Tear and Powder Reveal", category: "Particle transition",
+    description: "Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.",
+    keywords: "包装 撕开 撕口 抹茶 粉末 粒子 消散 金属 产品 package tear matcha powder reveal Andreas", preview: "/assets/components/matcha-powder-reveal.png", sourceFile: "包装撕开粒子消散.html", canvasWidth: 1280, canvasHeight: 720,
+    instructions: "Grab the upper-right notch and drag left to tear. Release halfway and continue from the strip. Move over the pouch to tilt it; R resets and Enter on the notch opens it.", prompt: MATCHA_POWDER_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/andreaskruszaki/status/2115308820687950002/video/1", referenceAuthor: "Andreas Kruszakin-Liboska", referenceAuthorUrl: "https://x.com/andreaskruszaki",
+    referenceNotes: "Downloaded and decoded all 420 frames of the 1920×1080, 60fps, seven-second silent clip. Observed foil pouch entry, a jagged opening and detached heat-sealed strip, downward material breakup, green powder and dust, and the phrase it's just matcha. Geometry, lighting, typography, particle motion and timing are reconstruction estimates. At the user's request, opening is controlled by pointer or touch dragging at the upper-right notch, with partial-tear continuation; a closed, thick double-surface pouch, perspective camera, mouse tilt and a continuously bent seal replace the initial shallow surfaces. These interactions are locally implemented; the source clip did not establish an original interactive API.",
+    referenceLicense: "Original design/model/source license not supplied or independently verified. No reference video, screenshots, original 3D assets or proprietary fonts are redistributed. Embedded Inter retains OFL and controls retain the Lucide MIT notice.", codeSource: "Independent procedural Three.js foil geometry, Canvas lettering, staged surface erosion, mass-dependent Gaussian grain transport and instanced turbulent dust, with tear-velocity feedback, scoped lifecycle and a Canvas2D fallback." },
   { slug: "ai-brand-cover-cards", href: "/docs/animations/ai-brand-cover-cards", name: "AI Brand Cover Cards", category: "Brand cards",
     description: "Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.",
     keywords: "AI Claude Codex Cursor 品牌 封面 三联 卡片 海报", preview: "/assets/components/ai-brand-cover-cards.png", sourceFile: "ai-brand-cover-cards.html", canvasWidth: 1200, canvasHeight: 800,
