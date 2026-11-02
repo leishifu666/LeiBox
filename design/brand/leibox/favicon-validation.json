@@ -1,0 +1,38 @@
+{
+  "svg": {
+    "size": 32,
+    "cornerAlpha": 0,
+    "letterAlpha": 0,
+    "opaque": 425,
+    "nonWhite": 0,
+    "pass": true
+  },
+  "ico": [
+    {
+      "size": 16,
+      "cornerAlpha": 0,
+      "letterAlpha": 2,
+      "opaque": 104,
+      "nonWhite": 0,
+      "pass": true
+    },
+    {
+      "size": 32,
+      "cornerAlpha": 0,
+      "letterAlpha": 0,
+      "opaque": 425,
+      "nonWhite": 0,
+      "pass": true
+    },
+    {
+      "size": 48,
+      "cornerAlpha": 0,
+      "letterAlpha": 0,
+      "opaque": 967,
+      "nonWhite": 0,
+      "pass": true
+    }
+  ],
+  "served": true,
+  "pass": true
+}

@@ -1,0 +1,10 @@
+{
+  "parameterRebuildIdentical": true,
+  "files": {
+    "logo.svg": "286d06513a44221549ec787e7273521a499c0ac63e9db7130e0f2de453305d1a",
+    "logo-white.svg": "cd30edac77c9e64786ea29b149ea3f7779fc867701a743f824b21c5521ebb114",
+    "wordmark.svg": "d3a388169dd7c7130a35ebe99e2e3ae45d078d05e44df7ae407ba445a8a3bf2b",
+    "construction.svg": "94e3e32c523129786140d5ff67ccae14c06a5d50a638712a67d1ba09cc4a5840",
+    "lettering-construction.svg": "ce669505a2e56a0233491d4b367c9d833d92128cea69829c31e025c0637ac967"
+  }
+}

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeiBox 联系与投稿 - 交互优化设计</title>
+    <style>
+        :root {
+            /* 视觉基准变量 */
+            --lb-c-bg: #f4f4f5; /* 页面底色，柔和暖灰 */
+            --lb-c-surface: #ffffff; /* 弹窗底色 */
+            --lb-c-text-primary: #111111; /* 主文本 */
+            --lb-c-text-secondary: #666666; /* 辅助文本 */
+            --lb-c-text-tertiary: #999999; /* 提示/弱化文本 */
+            --lb-c-border: #e4e4e7; /* 边框 */
+            --lb-c-border-hover: #d4d4d8;
+            --lb-c-focus: #111111; /* 焦点色 */
+            --lb-c-error: #dc2626; /* 错误色，克制 */
+            --lb-c-error-bg: #fef2f2;
+            
+            --lb-font-family: "MiSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --lb-radius-lg: 16px;
+            --lb-radius-md: 8px;
+            --lb-radius-sm: 6px;
+            
+            --lb-transition: 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                --lb-transition: 0s;
+            }
+        }
+
+        /* 基础重置与排版 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--lb-font-family);
+            background-color: var(--lb-c-bg);
+            color: var(--lb-c-text-primary);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* 演示用触发按钮 */
+        .trigger-btn {
+            padding: 12px 24px;
+            background: var(--lb-c-text-primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--lb-radius-md);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity var(--lb-transition);
+        }
+        .trigger-btn:hover { opacity: 0.85; }
+        .trigger-btn:focus-visible {
+            outline: 2px solid var(--lb-c-focus);
+            outline-offset: 2px;
+        }
+
+        /* 原生 Dialog 样式 */
+        dialog {
+            margin: auto;
+            border: none;
+            border-radius: var(--lb-radius-lg);
+            background: var(--lb-c-surface);
+            color: var(--lb-c-text-primary);
+            width: 100%;
+            max-width: 580px;
+            max-height: calc(100vh - 40px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            
+            /* CSS 动画：优雅的弹出效果 */
+            opacity: 0;
+            transform: scale(0.96) translateY(10px);
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        dialog[open] {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        dialog[open]::backdrop { opacity: 1; }
+
+        /* 弹窗内部结构 */
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 32px 32px 24px;
+            flex-shrink: 0;
+        }
+        .header-content h2 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        .header-content p {
+            font-size: 14px;
+            color: var(--lb-c-text-secondary);
+            line-height: 1.5;
+        }
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--lb-c-text-tertiary);
+            cursor: pointer;
+            padding: 8px;
+            margin: -8px -8px 0 0;
+            border-radius: var(--lb-radius-sm);
+            transition: color var(--lb-transition), background var(--lb-transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover {
+            color: var(--lb-c-text-primary);
+            background: var(--lb-c-bg);
+        }
+        .close-btn:focus-visible {
+            outline: 2px solid var(--lb-c-focus);
+            outline-offset: -2px;
+        }
+
+        .modal-body {
+            padding: 0 32px 32px;
+            overflow-y: auto;
+            flex-grow: 1;
+            overscroll-behavior: contain;
+        }
+
+        /* 核心表单区域 */
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Segmented Control 双选控件 */
+        .segment-control {
+            display: flex;
+            background: var(--lb-c-bg);
+            border-radius: var(--lb-radius-md);
+            padding: 4px;
+            position: relative;
+        }
+        .segment-label {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .segment-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .segment-text {
+            display: block;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--lb-c-text-secondary);
+            border-radius: calc(var(--lb-radius-md) - 2px);
+            cursor: pointer;
+            transition: color var(--lb-transition);
+        }
+        .segment-input:checked + .segment-text {
+            color: var(--lb-c-text-primary);
+            background: var(--lb-c-surface);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .segment-input:focus-visible + .segment-text {
+            outline: 2px solid var(--lb-c-focus);
+            outline-offset: -2px;
+        }
+
+        /* 表单控件基础样式 */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-row {
+            display: flex;
+            gap: 16px;
+        }
+        .form-row .form-group { flex: 1; }
+
+        label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--lb-c-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .label-opt {
+            color: var(--lb-c-text-tertiary);
+            font-weight: 400;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 12px 16px;
+            background: var(--lb-c-surface);
+            border: 1px solid var(--lb-c-border);
+            border-radius: var(--lb-radius-md);
+            color: var(--lb-c-text-primary);
+            transition: border-color var(--lb-transition), box-shadow var(--lb-transition);
+        }
+        .input-field::placeholder { color: var(--lb-c-text-tertiary); }
+        .input-field:hover:not(:disabled) { border-color: var(--lb-c-border-hover); }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--lb-c-focus);
+            box-shadow: 0 0 0 1px var(--lb-c-focus);
+        }
+        textarea.input-field {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.5;
+        }
+
+        /* 错误状态与内联提示 */
+        .form-group.has-error .input-field {
+            border-color: var(--lb-c-error);
+            background: var(--lb-c-error-bg);
+        }
+        .form-group.has-error .input-field:focus { box-shadow: 0 0 0 1px var(--lb-c-error); }
+        .error-msg {
+            font-size: 12px;
+            color: var(--lb-c-error);
+            min-height: 18px; /* 占位避免抖动 */
+            display: none;
+            margin-top: 4px;
+        }
+        .form-group.has-error .error-msg { display: block; }
+
+        /* 字符计数 */
+        .char-count {
+            font-size: 12px;
+            color: var(--lb-c-text-tertiary);
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            background: var(--lb-c-surface); /* 遮挡下方文本 */
+            padding-left: 4px;
+            pointer-events: none;
+        }
+        .char-count.limit-reached { color: var(--lb-c-error); }
+
+        /* 提交与辅助区域 */
+        .submit-section {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--lb-c-text-primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--lb-radius-md);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color var(--lb-transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .submit-btn:hover { background-color: #333; }
+        .submit-btn:focus-visible { outline: 2px solid var(--lb-c-focus); outline-offset: 2px; }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        /* Mock 提示 */
+        .mock-notice {
+            font-size: 12px;
+            color: var(--lb-c-text-tertiary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .mock-notice svg { width: 14px; height: 14px; }
+
+        /* 底部兜底与隐私 */
+        .modal-footer {
+            padding: 16px 32px 24px;
+            background: var(--lb-c-surface);
+            border-top: 1px solid var(--lb-c-border);
+            font-size: 12px;
+            color: var(--lb-c-text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mailto-link {
+            color: var(--lb-c-text-primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+            transition: opacity var(--lb-transition);
+        }
+        .mailto-link:hover { opacity: 0.7; text-decoration: underline; }
+        
+        /* 提交完成状态视图 */
+        .success-view {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeIn 0.4s ease;
+        }
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            color: var(--lb-c-text-primary);
+            margin-bottom: 16px;
+        }
+        .success-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .success-desc {
+            font-size: 14px;
+            color: var(--lb-c-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+        .btn-secondary {
+            padding: 10px 20px;
+            background: var(--lb-c-bg);
+            color: var(--lb-c-text-primary);
+            border: 1px solid var(--lb-c-border);
+            border-radius: var(--lb-radius-md);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--lb-transition);
+        }
+        .btn-secondary:hover { background: var(--lb-c-border); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .modal-header { padding: 24px 20px 16px; }
+            .modal-body { padding: 0 20px 24px; }
+            .modal-footer { padding: 16px 20px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .form-row { flex-direction: column; gap: 20px; }
+        }
+        
+        .spinner {
+            animation: rotate 2s linear infinite;
+            width: 18px;
+            height: 18px;
+            display: none;
+        }
+        .spinner circle {
+            stroke: currentColor;
+            stroke-width: 3;
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            animation: dash 1.5s ease-in-out infinite;
+            stroke-linecap: round;
+            fill: none;
+        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        @keyframes dash {
+            0% { stroke-dasharray: 1, 200; stroke-dashoffset: 0; }
+            50% { stroke-dasharray: 90, 200; stroke-dashoffset: -35px; }
+            100% { stroke-dasharray: 90, 200; stroke-dashoffset: -124px; }
+        }
+        .is-submitting .spinner { display: block; }
+        .is-submitting .submit-text, .is-submitting .submit-icon { display: none; }
+        
+        /* 辅助无障碍隐藏 */
+        .sr-only { 
+            position: absolute; 
+            width: 1px; height: 1px; 
+            padding: 0; margin: -1px; 
+            overflow: hidden; 
+            clip: rect(0, 0, 0, 0); 
+            white-space: nowrap; 
+            border-width: 0; 
+        }
+    /* Adapt Gemini's visual direction to the existing LeiBox form and tokens. */
+:root{--lb-c-bg:#f6f6f4;--lb-c-text-tertiary:#70706d;--lb-c-border:#e4e4e1;--lb-font-family:"MiSans VF","MiSans","Microsoft YaHei UI",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--lb-radius-lg:22px;--lb-radius-md:11px}
+body{min-height:100svh;background:#e9e9e5;padding:16px}
+[hidden],dialog:not([open]){display:none!important}
+button,input,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+dialog{width:calc(100% - 32px);max-width:580px;max-height:calc(100svh - 32px);opacity:1;transform:none;transition:none;box-shadow:0 32px 110px #15171326,0 2px 10px #1517130a;border:1px solid #ffffffb3}
+dialog[open]{opacity:1;transform:none}
+dialog::backdrop{background:#343a3438;opacity:1;backdrop-filter:blur(6px);transition:none}
+.modal-header{padding:30px 30px 24px;gap:16px}
+.header-content h2{font-size:25px;font-weight:650;letter-spacing:-.8px;outline:none;margin-bottom:9px}
+.header-content p{font-size:13px;line-height:1.7;max-width:410px;color:#666762}
+.close-btn{flex:none;width:40px;height:40px;color:#70706d;border-radius:50%;margin:-6px -8px 0 0}
+.close-btn svg{width:19px;height:19px}
+.modal-body{padding:0 30px 24px;min-height:0;scrollbar-width:thin}
+.form-section{gap:19px}
+.segment-control{isolation:isolate;border:1px solid #e9e9e5;background:#f3f3f0;border-radius:12px}
+.segment-indicator{position:absolute;z-index:-1;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/2);border-radius:8px;background:#fff;box-shadow:0 1px 4px #1a1a1a12,0 0 0 1px #18181805}
+.segment-label{display:block;min-width:0}
+.segment-text{height:42px;line-height:22px;padding:10px 8px;font-size:13px;letter-spacing:.2px}
+.segment-input:checked+.segment-text{background:transparent;box-shadow:none}
+.segment-input{inset:0;width:100%;height:100%;margin:0}
+.form-group{gap:8px;min-width:0}
+label{font-size:12px;font-weight:600;gap:6px}
+.label-opt{font-size:11px;font-weight:400;color:#70706d}
+.is-required{font-size:10px;font-weight:400;color:#74746f}
+.input-field{height:45px;padding:11px 13px;font-size:13px;line-height:21px;border-radius:10px;background:#fff;box-shadow:0 1px 2px #16161602}
+.input-field::placeholder{color:#74746f}
+textarea.input-field{height:126px;min-height:110px;max-height:260px;padding:13px 14px 30px;line-height:1.75;resize:vertical}
+.char-count{font-size:10px;right:14px;bottom:12px;background:#fff;pointer-events:none}
+.error-msg{font-size:11px;line-height:1.6}
+.submit-section{margin-top:1px;gap:9px}
+.submit-btn{min-height:46px;border-radius:11px;font-size:13px;letter-spacing:.4px;background:#181a18}
+.submit-btn:hover{background:#303330}
+.submit-btn:focus-visible,.btn-secondary:focus-visible,.mailto-link:focus-visible{outline:2px solid #353a35;outline-offset:3px}
+.mock-notice{font-size:10px;color:#70706d;gap:5px;line-height:1.5}
+.mock-notice svg{width:11px;height:11px}
+.modal-footer{padding:17px 30px 20px;display:flex;gap:16px;font-size:11px;border-color:#ededea;background:#fcfcfa;align-items:center;justify-content:space-between}
+.footer-copy{display:flex;flex-direction:column;gap:4px}
+.footer-privacy{color:#70706d;font-size:10px}
+.mailto-link{flex:none;font-size:11px;gap:3px}
+.mailto-link svg{width:13px;height:13px}
+.success-view{display:flex;min-height:310px;padding:44px 12px;animation:none}
+.success-title{font-size:21px;font-weight:600;outline:none}
+.success-desc{font-size:13px;line-height:1.8;max-width:340px}
+.success-icon{width:46px;height:46px;margin-bottom:20px}
+.btn-secondary{font-size:12px;padding:11px 20px;transition:background-color .15s}
+.spinner{animation:none;width:18px;height:18px}
+.spinner circle{animation:none;stroke-dasharray:80 126;stroke-width:2.5}
+.is-submitting .submit-text{display:inline}
+.is-submitting .submit-icon{display:none}
+.loading-copy{display:none;font-size:13px}
+.is-submitting .loading-copy{display:inline}
+.is-submitting .submit-text{display:none}
+@media(max-width:600px){
+  dialog{width:calc(100% - 24px);max-height:calc(100svh - 24px);border-radius:20px}
+  .modal-header{padding:24px 22px 20px}
+  .header-content h2{font-size:23px}
+  .header-content p{font-size:12px;max-width:240px}
+  .modal-body{padding:0 22px 22px}
+  .form-row{flex-direction:column;gap:17px}
+  .form-section{gap:17px}
+  .modal-footer{padding:15px 22px 17px;flex-direction:row;flex-wrap:wrap;gap:10px}
+  .footer-copy{gap:4px}
+  textarea.input-field{height:120px}
+  .close-btn{margin:-5px -8px 0 0}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+</style>
+</head>
+<body>
+
+    <button id="openModalBtn" class="trigger-btn" type="button" aria-haspopup="dialog">联系与投稿</button>
+
+    <dialog id="contactModal" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+        <!-- 弹窗头部 -->
+        <div class="modal-header">
+            <div class="header-content">
+                <h2 id="modalTitle" tabindex="-1">联系与投稿</h2>
+                <p id="modalDescription">分享一个好设计，或聊聊你的想法</p>
+            </div>
+            <button id="closeModalBtn" class="close-btn" aria-label="关闭弹窗">
+                <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 弹窗主体区 -->
+        <div class="modal-body">
+            <!-- 正常表单视图 -->
+            <div id="formView">
+                <form id="contactForm" class="form-section" novalidate>
+                    <!-- 内容类型 -->
+                    <fieldset class="form-group" style="border:none; padding:0; margin:0;">
+                        <legend class="sr-only">内容类型</legend>
+                        <div class="segment-control" role="radiogroup" aria-label="内容类型"><span class="segment-indicator" aria-hidden="true"></span>
+                            <label class="segment-label">
+                                <input type="radio" name="topic" value="message" class="segment-input" checked>
+                                <span class="segment-text">留言与建议</span>
+                            </label>
+                            <label class="segment-label">
+                                <input type="radio" name="topic" value="submission" class="segment-input">
+                                <span class="segment-text">推荐组件</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- 正文 -->
+                    <div class="form-group">
+                        <label for="msgInput"><span class="field-title">留言内容</span> <span class="is-required">必填</span></label>
+                        <div class="input-wrapper">
+                            <textarea id="msgInput" name="message" aria-describedby="messageError" class="input-field" minlength="10" maxlength="6000" required></textarea>
+                            <div id="charCount" class="char-count">0 / 6,000</div>
+                        </div>
+                        <div class="error-msg" id="messageError" role="alert"></div>
+                    </div>
+
+                    <!-- 双列：称呼与邮箱 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nameInput">称呼 <span class="label-opt">(选填)</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="nameInput" name="name" class="input-field" placeholder="怎么称呼你" maxlength="80" autocomplete="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailInput">回复邮箱 <span class="is-required">必填</span></label>
+                            <div class="input-wrapper">
+                                <input type="email" id="emailInput" name="email" placeholder="name@example.com" inputmode="email" aria-describedby="emailError" class="input-field" maxlength="254" autocomplete="email" required>
+                            </div>
+                            <div class="error-msg" id="emailError" role="alert"></div>
+                        </div>
+                    </div>
+
+                    <!-- 链接 -->
+                    <div class="form-group">
+                        <label for="urlInput">
+                            <span id="urlLabelText">参考或组件链接</span> 
+                            <span id="urlLabelOpt" class="label-opt">(选填)</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="url" id="urlInput" name="url" inputmode="url" aria-describedby="urlError" class="input-field" placeholder="https://" maxlength="2048">
+                        </div>
+                        <div class="error-msg" id="urlError" role="alert"></div>
+                    </div>
+
+                    <!-- 提交区 -->
+                    <div class="submit-section">
+                        <button type="submit" id="submitBtn" class="submit-btn">
+                            <span class="submit-text">发送留言</span><span class="loading-copy">正在预览提交</span>
+                            <svg aria-hidden="true" focusable="false" class="submit-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>
+                            </svg>
+                            <svg aria-hidden="true" focusable="false" class="spinner" viewBox="25 25 50 50">
+                                <circle cx="50" cy="50" r="20"></circle>
+                            </svg>
+                        </button>
+                        <div class="mock-notice">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+                            </svg>
+                            交互预览，不会发送邮件
+                        </div>
+                    </div>
+                <span id="formStatus" class="sr-only" role="status" aria-live="polite"></span></form>
+            </div>
+
+            <!-- 成功反馈视图 -->
+            <div id="successView" class="success-view" hidden>
+                <svg aria-hidden="true" focusable="false" class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>
+                </svg>
+                <h3 class="success-title" id="successTitle" tabindex="-1">预览完成</h3>
+                <div class="success-desc">填写与提交效果已演示完成<br>这次预览没有发送邮件，内容仍为你保留</div>
+                <button id="resetBtn" class="btn-secondary" type="button">返回编辑</button>
+            </div>
+        </div>
+
+        <!-- 弹窗底栏 -->
+        <div class="modal-footer">
+            <div class="footer-copy"><span>更习惯用邮件？</span><span class="footer-privacy">你的邮箱仅用于回复这条留言</span></div>
+            <a href="mailto:2934546967@qq.com" id="mailtoLink" class="mailto-link">
+                2934546967@qq.com
+                <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/>
+                </svg>
+            </a>
+        </div>
+    </dialog>
+<!-- GSAP vendor omitted for review; the form works without it. -->
+<script>document.addEventListener('DOMContentLoaded', () => {
+  const dialog = document.querySelector('#contactModal');
+  const form = document.querySelector('#contactForm');
+  const openButton = document.querySelector('#openModalBtn');
+  const closeButton = document.querySelector('#closeModalBtn');
+  const submitButton = document.querySelector('#submitBtn');
+  const formView = document.querySelector('#formView');
+  const successView = document.querySelector('#successView');
+  const radios = [...form.querySelectorAll('[name="topic"]')];
+  const fields = Object.fromEntries(['name', 'email', 'url', 'message'].map(name => [name, form.elements.namedItem(name)]));
+  const counter = document.querySelector('#charCount');
+  const mailLink = document.querySelector('#mailtoLink');
+  const status = document.querySelector('#formStatus');
+  const indicator = document.querySelector('.segment-indicator');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const animations = new Set();
+  let timer;
+  let busy = false;
+  let closing = false;
+  let previousOverflow = '';
+
+  function animate(target, values) {
+    if (!window.gsap || reduce.matches) {
+      values.onComplete?.();
+      return;
+    }
+    let animation;
+    animation = gsap.to(target, {...values, overwrite:'auto', onComplete:()=>{
+      animations.delete(animation);
+      values.onComplete?.();
+    }});
+    animations.add(animation);
+    return animation;
+  }
+
+  function enter(target) {
+    if (!window.gsap || reduce.matches) return;
+    gsap.set(target, {opacity:0, y:8});
+    animate(target, {opacity:1, y:0, duration:.28, ease:'power2.out', clearProps:'opacity,transform'});
+  }
+
+  function clearError(input) {
+    input.removeAttribute('aria-invalid');
+    const group = input.closest('.form-group');
+    group.classList.remove('has-error');
+    const error = group.querySelector('.error-msg');
+    if (error) error.textContent = '';
+  }
+
+  function showError(input, message) {
+    input.setAttribute('aria-invalid','true');
+    const group = input.closest('.form-group');
+    group.classList.add('has-error');
+    group.querySelector('.error-msg').textContent = message;
+  }
+
+  function updateMailLink() {
+    const topic = form.elements.namedItem('topic').value === 'submission' ? '推荐组件' : '留言与建议';
+    const body = `称呼：${fields.name.value}\n回复邮箱：${fields.email.value}\n参考链接：${fields.url.value}\n\n${fields.message.value}`;
+    mailLink.href = `mailto:2934546967@qq.com?subject=${encodeURIComponent('LeiBox · '+topic)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function updateTopic(withMotion = true) {
+    const submission = radios[1].checked;
+    fields.url.required = submission;
+    document.querySelector('#urlLabelText').textContent = submission ? '组件或设计链接' : '参考链接';
+    document.querySelector('#urlLabelOpt').textContent = submission ? '必填' : '选填';
+    document.querySelector('#urlLabelOpt').classList.toggle('is-required', submission);
+    document.querySelector('label[for="msgInput"] .field-title').textContent = submission ? '推荐理由' : '留言内容';
+    fields.message.placeholder = submission ? '这个组件有哪些值得关注的交互或设计细节？' : '有什么想法，想和我聊聊？至少填写 10 个字符';
+    submitButton.querySelector('.submit-text').textContent = submission ? '提交推荐' : '发送留言';
+    clearError(fields.url);
+    if (window.gsap && !reduce.matches && withMotion) {
+      animate(indicator,{xPercent:submission?100:0,duration:.26,ease:'power3.out'});
+    } else if(window.gsap) {
+      gsap.set(indicator,{xPercent:submission?100:0});
+    } else indicator.style.transform = `translateX(${submission?100:0}%)`;
+    updateMailLink();
+  }
+
+  function setBusy(value) {
+    busy = value;
+    form.setAttribute('aria-busy',String(value));
+    submitButton.classList.toggle('is-submitting',value);
+    form.querySelectorAll('input,textarea,button').forEach(control => {control.disabled = value;});
+    status.textContent = value ? '正在预览提交效果，不会发送邮件' : '';
+    const spinner = document.querySelector('.spinner');
+    if(value && window.gsap && !reduce.matches) animate(spinner,{rotation:360,duration:.8,ease:'none',repeat:-1});
+    else if(window.gsap) gsap.killTweensOf(spinner);
+  }
+
+  function open() {
+    if(dialog.open) return;
+    closing = false;
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+    document.querySelector('#modalTitle').focus({preventScroll:true});
+    enter(dialog);
+  }
+
+  function close() {
+    if(closing || !dialog.open) return;
+    closing = true;
+    clearTimeout(timer);
+    setBusy(false);
+    animate(dialog,{opacity:0,y:6,duration:.14,ease:'power2.in',onComplete:()=>dialog.close()});
+  }
+
+  dialog.addEventListener('close',()=>{
+    clearTimeout(timer);
+    setBusy(false);
+    animations.forEach(animation=>animation.kill());
+    animations.clear();
+    if(window.gsap) gsap.set([dialog,formView,successView],{clearProps:'opacity,transform'});
+    document.body.style.overflow = previousOverflow;
+    formView.hidden = false;
+    successView.hidden = true;
+    closing = false;
+    openButton.focus({preventScroll:true});
+  });
+  dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
+  let pointerStartedOutside = false;
+  function outside(event) {
+    const r = dialog.getBoundingClientRect();
+    return event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom;
+  }
+  dialog.addEventListener('pointerdown',event=>{pointerStartedOutside = event.target===dialog && outside(event);});
+  dialog.addEventListener('click',event=>{if(pointerStartedOutside && event.target===dialog && outside(event)) close();pointerStartedOutside=false;});
+  openButton.addEventListener('click',open);
+  closeButton.addEventListener('click',close);
+  radios.forEach(radio=>radio.addEventListener('change',()=>updateTopic()));
+  Object.values(fields).forEach(input=>input.addEventListener('input',()=>{
+    clearError(input);
+    counter.textContent = `${fields.message.value.length.toLocaleString()} / 6,000`;
+    updateMailLink();
+  }));
+
+  form.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(busy) return;
+    Object.values(fields).forEach(clearError);
+    const errors = [];
+    const email = fields.email.value.trim();
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push([fields.email,'请填写有效的回复邮箱，如 name@example.com']);
+    const link = fields.url.value.trim();
+    if(fields.url.required && !link) errors.push([fields.url,'请附上组件或设计的原始链接']);
+    if(link) {
+      try {const url=new URL(link);if(!['http:','https:'].includes(url.protocol)||!url.hostname) throw new Error();}
+      catch {errors.push([fields.url,'请填写完整的 http:// 或 https:// 链接']);}
+    }
+    const length = fields.message.value.trim().length;
+    if(length<10||length>6000) errors.push([fields.message,'请填写 10 至 6,000 个字符，再试一次']);
+    errors.forEach(([input,message])=>showError(input,message));
+    if(errors.length){errors[0][0].focus();return;}
+    setBusy(true);
+    timer=setTimeout(()=>{
+      setBusy(false);
+      formView.hidden=true;
+      successView.hidden=false;
+      document.querySelector('#successTitle').focus({preventScroll:true});
+      enter(successView);
+    },700);
+  });
+  document.querySelector('#resetBtn').addEventListener('click',()=>{
+    successView.hidden=true;
+    formView.hidden=false;
+    fields.message.focus({preventScroll:true});
+    enter(formView);
+  });
+  reduce.addEventListener('change',()=>{
+    if(!reduce.matches) return;
+    [...animations].forEach(animation=>{if(animation.repeat()===-1) animation.kill();else animation.progress(1).kill();});
+    animations.clear();
+    if(window.gsap) gsap.set('.spinner',{rotation:0});
+  });
+  updateTopic(false);
+  open();
+});
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { chromium, expect } from 'playwright/test';
+import { verifyInkSpreadCarouselDoc, verifyInkSpreadPreviews } from './test-ink-spread-carousel.mjs';
+import { verifyAsciiSharksDoc, verifyAsciiSharksPreviews } from './test-ascii-sharks.mjs';
 import {verifyCrumpledPaperDoc} from './test-crumpled-paper.mjs';
 import {verifyGlassTabMenuDoc} from './test-glass-tab-menu.mjs';
 import {verifyStaggeredRadialMenuDoc} from './test-staggered-radial-menu.mjs';
@@ -54,6 +56,8 @@ try{
   if(slug==='glass-tab-menu')await verifyGlassTabMenuDoc(page,out);
   if(slug==='staggered-radial-menu'||slug==='soft-action-wheel')await verifyStaggeredRadialMenuDoc(page,out,slug);
   if(slug==='galaxy-effort-slider')await verifyGalaxyEffortSliderDoc(page,out);
+  if(slug==='ink-spread-carousel')await verifyInkSpreadCarouselDoc(page);
+  if(slug==='ascii-sharks')await verifyAsciiSharksDoc(page);
   if(slug==='hammerhead-chart'){
    await verifyHammerheadChartDoc(page);checks.push({slug,shark:true});
    console.log('PASS DOC hammerhead-chart: shark chase and author-only attribution');
@@ -120,6 +124,8 @@ try{
  const card=page.locator('[data-preview-card]').first();await card.hover();
  await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(1);
  await page.mouse.move(300,20);await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(0);
+ if(slugs.includes('ink-spread-carousel'))await verifyInkSpreadPreviews(page,base,out);
+ if(slugs.includes('ascii-sharks'))await verifyAsciiSharksPreviews(page,base,out);
  assert.deepEqual(errors,[]);
  await fs.writeFile(path.join(out,filters.length?'partial-results.json':'results.json'),JSON.stringify({checks,previewHover:true,pageErrors:errors},null,2));
 }catch(error){await page.screenshot({path:path.join(out,'failure.png')});await fs.writeFile(path.join(out,'failure.json'),JSON.stringify({slug:active,error:String(error),pageErrors:errors},null,2));throw error;}finally{await browser.close();}

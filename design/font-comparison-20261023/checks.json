@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "width": 375,
+      "scrollWidth": 375,
+      "fonts": "4 款真实字体已载入"
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "fonts": "4 款真实字体已载入"
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "fonts": "4 款真实字体已载入"
+    }
+  ],
+  "themeToggle": true,
+  "fontSwitch": true,
+  "source": "isolated local artifact rendering"
+}

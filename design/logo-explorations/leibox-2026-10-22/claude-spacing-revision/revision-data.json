@@ -1,0 +1,139 @@
+{
+  "originalSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox\"><title>LeiBox</title><defs><mask id=\"leibox-original-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 248 L282 388 L403.244 318\" fill=\"none\" stroke=\"#000\" stroke-width=\"54\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-original-mask)\"/></svg>",
+  "revisedSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox\"><title>LeiBox</title><defs><mask id=\"leibox-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M274.000000000 273.618802154 L274.000000000 392.618802154 L377.057023050 333.118802154\" fill=\"none\" stroke=\"#000\" stroke-width=\"54\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-mask)\"/></svg>",
+  "original": {
+    "elbow": {
+      "x": 282,
+      "y": 388
+    },
+    "A": {
+      "x": 282,
+      "y": 248
+    },
+    "B": {
+      "x": 403.244,
+      "y": 318
+    },
+    "length": 140,
+    "strokeWidth": 54,
+    "capRadius": 27,
+    "verticalLength": 140,
+    "diagonalLength": 140.0003840566161,
+    "shellD": "M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z",
+    "lD": "M282 248 L282 388 L403.244 318",
+    "viewBox": "0 0 512 512",
+    "rightGap": 17.976026493995093,
+    "rightGapToCornerArc": 17.976026493995093,
+    "bottomGap": 37.9425690051182,
+    "topGap": 139.25800000031518,
+    "exact": {
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "A": {
+        "x": 282,
+        "y": 248
+      },
+      "B": {
+        "x": 403.24355652982143,
+        "y": 318
+      }
+    }
+  },
+  "revised": {
+    "elbow": {
+      "x": 274,
+      "y": 392.618802154
+    },
+    "A": {
+      "x": 274,
+      "y": 273.618802154
+    },
+    "B": {
+      "x": 377.05702305,
+      "y": 333.118802154
+    },
+    "length": 119,
+    "strokeWidth": 54,
+    "capRadius": 27,
+    "verticalLength": 119,
+    "diagonalLength": 118.99999999969845,
+    "shellD": "M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z",
+    "lD": "M274.000000000 273.618802154 L274.000000000 392.618802154 L377.057023050 333.118802154",
+    "viewBox": "0 0 512 512",
+    "rightGap": 37.152611731831485,
+    "rightGapToCornerArc": 37.152611731831485,
+    "bottomGap": 37.94260991505979,
+    "topGap": 140.99936945815367,
+    "exact": {
+      "elbow": {
+        "x": 274,
+        "y": 392.618802153517
+      },
+      "A": {
+        "x": 274,
+        "y": 273.618802153517
+      },
+      "B": {
+        "x": 377.0570230503482,
+        "y": 333.118802153517
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "外壳 path 与锁定字符串一致",
+      "pass": true
+    },
+    {
+      "name": "原版 L 与给定 path 一致",
+      "pass": true
+    },
+    {
+      "name": "外壳由 6 段 r=88 圆弧构成",
+      "pass": true
+    },
+    {
+      "name": "右下圆角圆心 ≈ (360.258, 316.193)",
+      "pass": true
+    },
+    {
+      "name": "修正版两臂等长 119",
+      "pass": true
+    },
+    {
+      "name": "修正版坐标 ≥ 9 位小数",
+      "pass": true
+    },
+    {
+      "name": "线宽 54 / 圆头半径 27 未变",
+      "pass": true
+    },
+    {
+      "name": "平移量 = (−8, +8/√3)，沿右下边方向",
+      "pass": true
+    },
+    {
+      "name": "下方留白不变（外壳坐标为三位小数，容差 1e-3）",
+      "pass": true
+    },
+    {
+      "name": "右端黑边 ≥ 下方黑边 − 1",
+      "pass": true
+    },
+    {
+      "name": "L 完全在外壳内（所有端点间距 > 0）",
+      "pass": true
+    },
+    {
+      "name": "预览与导出 SVG 同源",
+      "pass": true
+    },
+    {
+      "name": "viewBox 保持 0 0 512 512",
+      "pass": true
+    }
+  ],
+  "allPass": true
+}

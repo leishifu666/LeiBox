@@ -5,8 +5,10 @@ import { SITE_URL } from "@/lib/site-url";
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
-  { path: "/docs/animations/matcha-powder-reveal", priority: 0.8 },
+  { path: "/docs/animations/ascii-sharks", priority: 0.8 },
+  { path: "/docs/animations/particle-texture-trio", priority: 0.8 },
   { path: "/docs/animations/ai-brand-cover-cards", priority: 0.8 },
+  { path: "/docs/animations/matcha-powder-reveal", priority: 0.8 },
   { path: "/docs/animations/gradient-ring-cards", priority: 0.8 },
   { path: "/docs/animations/folded-emoji-scroll", priority: 0.8 },
   ...COMPONENTS.map(entry => ({path: entry.href, priority: 0.8})),

@@ -30,7 +30,10 @@ import { verifySelectionFlower } from './test-selection-flower.mjs';
 import { verifySpiderMusicPlayer } from './test-spider-music-player.mjs';
 import { verifyFluidTooltip } from './test-fluid-tooltip.mjs';
 import { verifyGradientRingCards } from './test-gradient-ring-cards.mjs';
+import { verifyInkSpreadCarousel } from './test-ink-spread-carousel.mjs';
+import { verifyAsciiSharks } from './test-ascii-sharks.mjs';
 import { verifyMatchaPowderReveal } from './test-matcha-powder-reveal.mjs';
+import { verifyParticleTextureTrio } from './test-particle-texture-trio.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -107,9 +110,12 @@ try{
   }
   await page.setViewportSize({width:1200,height:1000});
   if(item.slug==='selection-flower')await verifySelectionFlower(page,item,ROOT,OUT);
+  if(item.slug==='particle-texture-trio')await verifyParticleTextureTrio(page,item,ROOT,OUT);
   if(item.slug==='spider-music-player')await verifySpiderMusicPlayer(page,item,ROOT,OUT);
   if(item.slug==='fluid-tooltip')await verifyFluidTooltip(page,item,ROOT,OUT);
   if(item.slug==='gradient-ring-cards')await verifyGradientRingCards(page,item,ROOT,OUT);
+  if(item.slug==='ink-spread-carousel')await verifyInkSpreadCarousel(page,item,ROOT,OUT);
+  if(item.slug==='ascii-sharks')await verifyAsciiSharks(page,item,ROOT,OUT);
   if(item.slug==='matcha-powder-reveal')await verifyMatchaPowderReveal(page,item);
   if(item.slug==='crumpled-paper')await verifyCrumpledPaper(page,item,ROOT,OUT);
   if(item.slug==='notes-text-color')await verifyNotesTextColor(page,item,ROOT,OUT);
@@ -316,6 +322,18 @@ try{
   }
   await page.evaluate(()=>window.__update({height:620}));await page.waitForFunction(()=>document.querySelector('#demo').querySelector('[data-motion-surface]').style.getPropertyValue('--motion-height')==='620px');
   await page.evaluate(()=>window.__mount('second'));await page.locator('#second [data-motion-surface]').waitFor();assert.equal(await page.locator('[data-motion-surface]').count(),2);
+  if(item.slug==='ascii-sharks'){
+   await page.locator('#second .ao-scene[data-ready=true]').waitFor();
+   assert.equal(await page.locator('#second .ao-scene').getAttribute('data-sharks'),'4');assert.equal(await page.locator('#demo .ao-scene').getAttribute('data-sharks'),'1');
+   await page.locator('#second .ao-input').fill('Second ocean');assert.equal(await page.locator('#demo .ao-input').inputValue(),'Keep this draft');
+  }
+  if(item.slug==='ink-spread-carousel'){
+   await page.locator('#second .ib-scene[data-ready=true]').waitFor();
+   await page.evaluate(()=>window.__update({reducedMotion:true,index:3},'second'));
+   assert.equal(await page.locator('#second .ib-scene').getAttribute('data-index'),'3');
+   assert.equal(await page.locator('#demo .ib-scene').getAttribute('data-index'),'0','carousel instances keep independent photos');
+   await page.evaluate(()=>{const root=document.querySelector('#demo [data-motion-surface]').shadowRoot;window.__inkGLContexts.push(document.querySelector('#second [data-motion-surface]').shadowRoot.querySelector('canvas').getContext('webgl'));window.__update({reducedMotion:false});root.querySelector('.ib-nav--next').click();});
+  }
   if(item.slug==='dot-matrix-trio'){
    await page.locator('#second .dm-poster').first().click();
    assert.equal(await page.locator('#second .dm-scene').getAttribute('data-paused'),'true');
@@ -394,6 +412,7 @@ try{
   if(item.slug==='matcha-powder-reveal')assert(await page.evaluate(()=>window.__mpContexts.every(gl=>gl.isContextLost())),'powder scene releases its WebGL context');
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
+  if(item.slug==='ink-spread-carousel')assert(await page.evaluate(()=>window.__inkGLContexts.every(gl=>gl.isContextLost())),'unmount releases all carousel WebGL contexts');
   await page.waitForTimeout(['ai-brand-cover-cards','gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
   if(item.slug==='elastic-panel-resize'){
    await page.evaluate(()=>{document.getElementById('demo').style.display='none';window.__mount();});
@@ -408,6 +427,11 @@ try{
    await page.locator('#demo .dm-scene').waitFor();
    assert.equal(await page.locator('#demo .dm-scene').getAttribute('data-time'),'0.000','remount starts with the initial phase');
    assert.equal(await page.locator('#demo .dm-scene').getAttribute('data-paused'),'false');
+   await page.evaluate(()=>window.__unmount());assert.equal(await page.locator('[data-motion-surface]').count(),0);
+  }
+  if(item.slug==='ascii-sharks'){
+   await page.evaluate(()=>window.__mount());await page.locator('#demo .ao-scene[data-ready=true]').waitFor();
+   assert.equal(await page.locator('#demo .ao-scene').getAttribute('data-sharks'),'4');assert.equal(await page.locator('#demo .ao-input').inputValue(),'','remount starts with a fresh local draft');
    await page.evaluate(()=>window.__unmount());assert.equal(await page.locator('[data-motion-surface]').count(),0);
   }
   assert.deepEqual(errors,[]);

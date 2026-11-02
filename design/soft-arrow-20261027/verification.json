@@ -1,0 +1,106 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "theme": "light",
+      "width": 375,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    },
+    {
+      "theme": "light",
+      "width": 1440,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 375,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    },
+    {
+      "theme": "dark",
+      "width": 1440,
+      "render": "live",
+      "motion": "playing",
+      "rect": {
+        "width": 32,
+        "height": 32
+      },
+      "canvas": [
+        64,
+        64
+      ],
+      "overflow": false
+    }
+  ],
+  "href": "/docs",
+  "accessibleText": "开始使用",
+  "maxFrameDifference": 45.12419651056015,
+  "reducedFrameDifference": 0.0,
+  "offscreenMotion": "paused",
+  "resumeMotion": "playing",
+  "keyboardFocus": true,
+  "navigationWorks": true,
+  "remountWorks": true,
+  "noWebglFallback": true,
+  "passed": true
+}

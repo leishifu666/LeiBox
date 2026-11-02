@@ -1,0 +1,143 @@
+{
+  "source_svg_path_unchanged": true,
+  "source_svg_sha256": "5bd33be0cd6deeed9089b1ffa7df883eaaddafab1eba4dc25f1e380f3eff7999",
+  "logo_has_no_fonts_or_embedded_rasters": true,
+  "drawing_svg_ids_unique": true,
+  "curve_tangencies_from_exported_paths": {
+    "letter-L": {
+      "max_join_gap_u": 0.0,
+      "max_tangent_angle_degrees": 0.0
+    },
+    "e-bowl": {
+      "max_join_gap_u": 0.0,
+      "max_tangent_angle_degrees": 0.013951710617641284
+    },
+    "ei-shared-stroke": {
+      "max_join_gap_u": 0.0,
+      "max_tangent_angle_degrees": 1.7075472925031877e-06
+    }
+  },
+  "wordmark_topology": {
+    "components": 6,
+    "holes": 4,
+    "smallest_hole_pixels": 9411
+  },
+  "merged_outline_checks": {
+    "e_end_cap_to_lower_bar_tangent_error_u": 7.105427357601002e-15,
+    "i_top_and_bar_end_share_exact_cap": true
+  },
+  "black_and_white_alpha_identical": true,
+  "background_is_transparent": true,
+  "sizes": [
+    {
+      "height": 16,
+      "width": 46,
+      "thresholds": {
+        "96": {
+          "components": 4,
+          "holes": 9,
+          "smallest_hole_pixels": 1
+        },
+        "128": {
+          "components": 6,
+          "holes": 6,
+          "smallest_hole_pixels": 1
+        },
+        "160": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 1
+        }
+      }
+    },
+    {
+      "height": 24,
+      "width": 70,
+      "thresholds": {
+        "96": {
+          "components": 5,
+          "holes": 6,
+          "smallest_hole_pixels": 2
+        },
+        "128": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 6
+        },
+        "160": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 9
+        }
+      }
+    },
+    {
+      "height": 25,
+      "width": 73,
+      "thresholds": {
+        "96": {
+          "components": 5,
+          "holes": 6,
+          "smallest_hole_pixels": 7
+        },
+        "128": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 8
+        },
+        "160": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 9
+        }
+      }
+    },
+    {
+      "height": 32,
+      "width": 93,
+      "thresholds": {
+        "96": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 11
+        },
+        "128": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 12
+        },
+        "160": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 14
+        }
+      }
+    },
+    {
+      "height": 48,
+      "width": 139,
+      "thresholds": {
+        "96": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 28
+        },
+        "128": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 30
+        },
+        "160": {
+          "components": 7,
+          "holes": 5,
+          "smallest_hole_pixels": 31
+        }
+      }
+    }
+  ],
+  "recommended_minimum_height_px": 32,
+  "limitations": [
+    "Source wordmark is only 92x25 pixels; exact original typeface and historical construction rules are unknown.",
+    "No external recognition test or print production test was performed."
+  ]
+}

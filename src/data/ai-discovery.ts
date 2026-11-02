@@ -9,6 +9,9 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "ascii-sharks": { category: "background", useCases: ["字符鲨鱼与鱼群", "交互式海洋背景", "ASCII shark ocean"], searchTerms: ["ASCII", "字符", "鲨鱼", "鱼群", "海洋", "shark", "ocean", "fish"], visualTags: ["ascii", "grid", "light"], interactions: ["hover", "click", "keyboard", "touch"], caveat: "本地动画与可选输入界面；语音输入需要调用方回调。" },
+  "ink-spread-carousel": { category: "cards", useCases: ["墨水扩散图片轮播", "点击位置图片揭示", "ink spread carousel"], searchTerms: ["墨水", "扩散", "晕染", "轮播", "折射", "ink", "spread", "carousel"], visualTags: ["image", "ink", "refraction"], interactions: ["click", "keyboard", "touch"], caveat: "本地图片过渡重建；不包含付费组件原始源码。" },
+  "particle-texture-trio": { category: "background", useCases: ["点阵品牌动效", "三联粒子纹理", "particle field study"], searchTerms: ["粒子", "纹理", "点阵", "三联", "空心", "流动", "Sarvam", "Anushka", "particle", "texture"], visualTags: ["particles", "dark", "noise", "dot-matrix"], interactions: ["play", "pause", "keyboard", "touch"], caveat: "本地点阵视觉重建；非原作者生成工具，不包含真实 AI 接口。" },
   "matcha-powder-reveal": { category: "hero", useCases: ["产品包装撕开", "粉末粒子文字揭示", "product powder reveal"], searchTerms: ["包装", "撕开", "粉末", "粒子", "消散", "抹茶", "package", "tear", "powder", "reveal"], visualTags: ["3d", "foil", "particles", "green"], interactions: ["play", "pause", "seek", "drag", "keyboard"], caveat: "本地程序化产品动效；无真实商品购买或上传功能。" },
   "ai-brand-cover-cards": { category: "cards", useCases: ["AI 品牌封面", "产品三联海报"], searchTerms: ["Claude", "Codex", "Cursor", "AI", "品牌", "封面", "三联", "poster"], visualTags: ["portrait", "artwork", "brand"], interactions: ["hover", "click", "keyboard"], caveat: "展示卡片，不调用真实 AI 服务；品牌标志不代表官方合作。" },
   "folded-emoji-scroll": {

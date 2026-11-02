@@ -1,0 +1,862 @@
+{
+  "checks": [
+    "Initially aligned selected background",
+    "Single shared indicator",
+    "Squeeze animation visibly moves and compresses",
+    "Right settles without deformation",
+    "Reverse also compresses",
+    "Left settles without deformation",
+    "Rapid reversal retains latest topic and alignment",
+    "Native keyboard topic selection and focus",
+    "Keyboard focus outline visible",
+    "Draft preserved and reference link optional",
+    "Dynamic reduced motion immediately settles",
+    "Reduced motion still switches instantly",
+    "Motion resumes after restoring preference",
+    "Close/reopen retains correct topic and indicator",
+    "375 light fits viewport",
+    "375 light selected alignment",
+    "375-light uses search glass opacity and filter",
+    "375-light frosted overlay actually applies",
+    "375-light text contrast >=4.5 with light or dark content behind glass",
+    "375-light resize retains correct final state",
+    "375 dark fits viewport",
+    "375 dark selected alignment",
+    "375-dark uses search glass opacity and filter",
+    "375-dark frosted overlay actually applies",
+    "375-dark text contrast >=4.5 with light or dark content behind glass",
+    "375-dark resize retains correct final state",
+    "768 light fits viewport",
+    "768 light selected alignment",
+    "768-light uses search glass opacity and filter",
+    "768-light frosted overlay actually applies",
+    "768-light text contrast >=4.5 with light or dark content behind glass",
+    "768-light resize retains correct final state",
+    "768 dark fits viewport",
+    "768 dark selected alignment",
+    "768-dark uses search glass opacity and filter",
+    "768-dark frosted overlay actually applies",
+    "768-dark text contrast >=4.5 with light or dark content behind glass",
+    "768-dark resize retains correct final state",
+    "1440 light fits viewport",
+    "1440 light selected alignment",
+    "1440-light uses search glass opacity and filter",
+    "1440-light frosted overlay actually applies",
+    "1440-light text contrast >=4.5 with light or dark content behind glass",
+    "1440-light resize retains correct final state",
+    "1440 dark fits viewport",
+    "1440 dark selected alignment",
+    "1440-dark uses search glass opacity and filter",
+    "1440-dark frosted overlay actually applies",
+    "1440-dark text contrast >=4.5 with light or dark content behind glass",
+    "1440-dark resize retains correct final state",
+    "English short phone tabs align and submit remains available",
+    "No real form submission during motion and appearance tests",
+    "No uncaught page errors"
+  ],
+  "errors": [],
+  "motion": {
+    "right": [
+      {
+        "x": 164.7994384765625,
+        "width": 181.3643798828125,
+        "height": 28.12481689453125,
+        "transform": "matrix(0.9596, 0, 0, 0.8789, 156.982, 0)"
+      },
+      {
+        "x": 176.42608642578125,
+        "width": 183.25439453125,
+        "height": 29.08477783203125,
+        "transform": "matrix(0.9696, 0, 0, 0.9089, 169.553, 0)"
+      },
+      {
+        "x": 196.915283203125,
+        "width": 189.037841796875,
+        "height": 32.019195556640625,
+        "transform": "matrix(1.0002, 0, 0, 1.0006, 192.934, 0)"
+      },
+      {
+        "x": 196.8204345703125,
+        "width": 189.359130859375,
+        "height": 32.182373046875,
+        "transform": "matrix(1.0019, 0, 0, 1.0057, 193, 0)"
+      },
+      {
+        "x": 196.6976318359375,
+        "width": 189.60479736328125,
+        "height": 32.30718994140625,
+        "transform": "matrix(1.0032, 0, 0, 1.0096, 193, 0)"
+      },
+      {
+        "x": 196.6597900390625,
+        "width": 189.680419921875,
+        "height": 32.3455810546875,
+        "transform": "matrix(1.0036, 0, 0, 1.0108, 193, 0)"
+      },
+      {
+        "x": 196.6314697265625,
+        "width": 189.737060546875,
+        "height": 32.3712158203125,
+        "transform": "matrix(1.0039, 0, 0, 1.0116, 193, 0)"
+      },
+      {
+        "x": 196.62200927734375,
+        "width": 189.7559814453125,
+        "height": 32.384002685546875,
+        "transform": "matrix(1.004, 0, 0, 1.012, 193, 0)"
+      },
+      {
+        "x": 196.6314697265625,
+        "width": 189.737060546875,
+        "height": 32.3712158203125,
+        "transform": "matrix(1.0039, 0, 0, 1.0116, 193, 0)"
+      },
+      {
+        "x": 196.65032958984375,
+        "width": 189.6993408203125,
+        "height": 32.355224609375,
+        "transform": "matrix(1.0037, 0, 0, 1.0111, 193, 0)"
+      },
+      {
+        "x": 196.6787109375,
+        "width": 189.642578125,
+        "height": 32.32958984375,
+        "transform": "matrix(1.0034, 0, 0, 1.0103, 193, 0)"
+      },
+      {
+        "x": 196.70703125,
+        "width": 189.5859375,
+        "height": 32.297607421875,
+        "transform": "matrix(1.0031, 0, 0, 1.0093, 193, 0)"
+      },
+      {
+        "x": 196.744873046875,
+        "width": 189.51025390625,
+        "height": 32.26239013671875,
+        "transform": "matrix(1.0027, 0, 0, 1.0082, 193, 0)"
+      },
+      {
+        "x": 196.78265380859375,
+        "width": 189.4346923828125,
+        "height": 32.2239990234375,
+        "transform": "matrix(1.0023, 0, 0, 1.007, 193, 0)"
+      },
+      {
+        "x": 196.8204345703125,
+        "width": 189.359130859375,
+        "height": 32.18560791015625,
+        "transform": "matrix(1.0019, 0, 0, 1.0058, 193, 0)"
+      },
+      {
+        "x": 196.8582763671875,
+        "width": 189.283447265625,
+        "height": 32.147216796875,
+        "transform": "matrix(1.0015, 0, 0, 1.0046, 193, 0)"
+      },
+      {
+        "x": 196.89605712890625,
+        "width": 189.2078857421875,
+        "height": 32.108795166015625,
+        "transform": "matrix(1.0011, 0, 0, 1.0034, 193, 0)"
+      },
+      {
+        "x": 196.9244384765625,
+        "width": 189.15118408203125,
+        "height": 32.0767822265625,
+        "transform": "matrix(1.0008, 0, 0, 1.0024, 193, 0)"
+      },
+      {
+        "x": 196.9527587890625,
+        "width": 189.094482421875,
+        "height": 32.0447998046875,
+        "transform": "matrix(1.0005, 0, 0, 1.0014, 193, 0)"
+      },
+      {
+        "x": 196.9810791015625,
+        "width": 189.037841796875,
+        "height": 32.02239990234375,
+        "transform": "matrix(1.0002, 0, 0, 1.0007, 193, 0)"
+      },
+      {
+        "x": 196.99053955078125,
+        "width": 189.0189208984375,
+        "height": 32.00640869140625,
+        "transform": "matrix(1.0001, 0, 0, 1.0002, 193, 0)"
+      },
+      {
+        "x": 197,
+        "width": 189,
+        "height": 32,
+        "transform": "matrix(1, 0, 0, 1, 193, 0)"
+      }
+    ],
+    "left": [
+      {
+        "x": 197.555419921875,
+        "width": 187.7904052734375,
+        "height": 31.38238525390625,
+        "transform": "matrix(0.9936, 0, 0, 0.9807, 192.951, 0)"
+      },
+      {
+        "x": 197.77978515625,
+        "width": 186.8642578125,
+        "height": 30.91839599609375,
+        "transform": "matrix(0.9887, 0, 0, 0.9662, 192.712, 0)"
+      },
+      {
+        "x": 197.7061767578125,
+        "width": 186.2216796875,
+        "height": 30.5855712890625,
+        "transform": "matrix(0.9853, 0, 0, 0.9558, 192.317, 0)"
+      },
+      {
+        "x": 197.36700439453125,
+        "width": 185.5980224609375,
+        "height": 30.27197265625,
+        "transform": "matrix(0.982, 0, 0, 0.946, 191.666, 0)"
+      },
+      {
+        "x": 196.688720703125,
+        "width": 185.01214599609375,
+        "height": 29.97119140625,
+        "transform": "matrix(0.9789, 0, 0, 0.9366, 190.695, 0)"
+      },
+      {
+        "x": 195.39642333984375,
+        "width": 184.3505859375,
+        "height": 29.6416015625,
+        "transform": "matrix(0.9754, 0, 0, 0.9263, 189.072, 0)"
+      },
+      {
+        "x": 194.07794189453125,
+        "width": 183.9158935546875,
+        "height": 29.4207763671875,
+        "transform": "matrix(0.9731, 0, 0, 0.9194, 187.536, 0)"
+      },
+      {
+        "x": 192.00775146484375,
+        "width": 183.42449951171875,
+        "height": 29.164794921875,
+        "transform": "matrix(0.9705, 0, 0, 0.9114, 185.22, 0)"
+      },
+      {
+        "x": 189.35186767578125,
+        "width": 182.9520263671875,
+        "height": 28.927978515625,
+        "transform": "matrix(0.968, 0, 0, 0.904, 182.328, 0)"
+      },
+      {
+        "x": 186.0367431640625,
+        "width": 182.517333984375,
+        "height": 28.7039794921875,
+        "transform": "matrix(0.9657, 0, 0, 0.897, 178.795, 0)"
+      },
+      {
+        "x": 181.25701904296875,
+        "width": 182.0447998046875,
+        "height": 28.4639892578125,
+        "transform": "matrix(0.9632, 0, 0, 0.8895, 173.779, 0)"
+      },
+      {
+        "x": 177.1915283203125,
+        "width": 181.7235107421875,
+        "height": 28.30718994140625,
+        "transform": "matrix(0.9615, 0, 0, 0.8846, 169.553, 0)"
+      },
+      {
+        "x": 170.4940185546875,
+        "width": 181.3265380859375,
+        "height": 28.1024169921875,
+        "transform": "matrix(0.9594, 0, 0, 0.8782, 162.657, 0)"
+      },
+      {
+        "x": 163.76495361328125,
+        "width": 181.00531005859375,
+        "height": 27.9423828125,
+        "transform": "matrix(0.9577, 0, 0, 0.8732, 155.768, 0)"
+      },
+      {
+        "x": 156.0457763671875,
+        "width": 180.7218017578125,
+        "height": 27.79840087890625,
+        "transform": "matrix(0.9562, 0, 0, 0.8687, 147.907, 0)"
+      },
+      {
+        "x": 147.2724609375,
+        "width": 180.47607421875,
+        "height": 27.67041015625,
+        "transform": "matrix(0.9549, 0, 0, 0.8647, 139.01, 0)"
+      },
+      {
+        "x": 137.39056396484375,
+        "width": 180.249267578125,
+        "height": 27.55841064453125,
+        "transform": "matrix(0.9537, 0, 0, 0.8612, 129.015, 0)"
+      },
+      {
+        "x": 126.326416015625,
+        "width": 180.060302734375,
+        "height": 27.46240234375,
+        "transform": "matrix(0.9527, 0, 0, 0.8582, 117.857, 0)"
+      },
+      {
+        "x": 114.01617431640625,
+        "width": 179.90911865234375,
+        "height": 27.37921142578125,
+        "transform": "matrix(0.9519, 0, 0, 0.8556, 105.471, 0)"
+      },
+      {
+        "x": 100.5533447265625,
+        "width": 179.7767333984375,
+        "height": 27.31201171875,
+        "transform": "matrix(0.9512, 0, 0, 0.8535, 91.9417, 0)"
+      },
+      {
+        "x": 87.80078125,
+        "width": 179.6634521484375,
+        "height": 27.26080322265625,
+        "transform": "matrix(0.9506, 0, 0, 0.8519, 79.1325, 0)"
+      },
+      {
+        "x": 26.610595703125,
+        "width": 183.8214111328125,
+        "height": 29.36962890625,
+        "transform": "matrix(0.9726, 0, 0, 0.9178, 20.0213, 0)"
+      },
+      {
+        "x": 16.40142822265625,
+        "width": 185.54132080078125,
+        "height": 30.24639892578125,
+        "transform": "matrix(0.9817, 0, 0, 0.9452, 10.6721, 0)"
+      },
+      {
+        "x": 11.39501953125,
+        "width": 186.56195068359375,
+        "height": 30.7615966796875,
+        "transform": "matrix(0.9871, 0, 0, 0.9613, 6.176, 0)"
+      },
+      {
+        "x": 9.16326904296875,
+        "width": 187.091064453125,
+        "height": 31.0303955078125,
+        "transform": "matrix(0.9899, 0, 0, 0.9697, 4.2088, 0)"
+      },
+      {
+        "x": 7.4293212890625,
+        "width": 187.5635986328125,
+        "height": 31.2672119140625,
+        "transform": "matrix(0.9924, 0, 0, 0.9771, 2.7111, 0)"
+      },
+      {
+        "x": 6.1292724609375,
+        "width": 187.97943115234375,
+        "height": 31.4783935546875,
+        "transform": "matrix(0.9946, 0, 0, 0.9837, 1.619, 0)"
+      },
+      {
+        "x": 5.19915771484375,
+        "width": 188.3385009765625,
+        "height": 31.66400146484375,
+        "transform": "matrix(0.9965, 0, 0, 0.9895, 0.8684, 0)"
+      },
+      {
+        "x": 4.5654296875,
+        "width": 188.6597900390625,
+        "height": 31.823974609375,
+        "transform": "matrix(0.9982, 0, 0, 0.9945, 0.3953, 0)"
+      },
+      {
+        "x": 4.17340087890625,
+        "width": 188.92437744140625,
+        "height": 31.9583740234375,
+        "transform": "matrix(0.9996, 0, 0, 0.9987, 0.1356, 0)"
+      },
+      {
+        "x": 3.94970703125,
+        "width": 189.15118408203125,
+        "height": 32.0736083984375,
+        "transform": "matrix(1.0008, 0, 0, 1.0023, 0.0253, 0)"
+      },
+      {
+        "x": 3.8397216796875,
+        "width": 189.3212890625,
+        "height": 32.1663818359375,
+        "transform": "matrix(1.0017, 0, 0, 1.0052, 0.0004, 0)"
+      },
+      {
+        "x": 3.76373291015625,
+        "width": 189.4725341796875,
+        "height": 32.243194580078125,
+        "transform": "matrix(1.0025, 0, 0, 1.0076, 0, 0)"
+      },
+      {
+        "x": 3.70703125,
+        "width": 189.5859375,
+        "height": 32.30078125,
+        "transform": "matrix(1.0031, 0, 0, 1.0094, 0, 0)"
+      },
+      {
+        "x": 3.6597900390625,
+        "width": 189.680419921875,
+        "height": 32.3424072265625,
+        "transform": "matrix(1.0036, 0, 0, 1.0107, 0, 0)"
+      },
+      {
+        "x": 3.640869140625,
+        "width": 189.71826171875,
+        "height": 32.36798095703125,
+        "transform": "matrix(1.0038, 0, 0, 1.0115, 0, 0)"
+      },
+      {
+        "x": 3.62200927734375,
+        "width": 189.7559814453125,
+        "height": 32.38079833984375,
+        "transform": "matrix(1.004, 0, 0, 1.0119, 0, 0)"
+      },
+      {
+        "x": 3.62200927734375,
+        "width": 189.7559814453125,
+        "height": 32.384002685546875,
+        "transform": "matrix(1.004, 0, 0, 1.012, 0, 0)"
+      },
+      {
+        "x": 3.6314697265625,
+        "width": 189.737060546875,
+        "height": 32.3712158203125,
+        "transform": "matrix(1.0039, 0, 0, 1.0116, 0, 0)"
+      },
+      {
+        "x": 3.65032958984375,
+        "width": 189.6993408203125,
+        "height": 32.3583984375,
+        "transform": "matrix(1.0037, 0, 0, 1.0112, 0, 0)"
+      },
+      {
+        "x": 3.6787109375,
+        "width": 189.642578125,
+        "height": 32.32958984375,
+        "transform": "matrix(1.0034, 0, 0, 1.0103, 0, 0)"
+      },
+      {
+        "x": 3.70703125,
+        "width": 189.5859375,
+        "height": 32.297607421875,
+        "transform": "matrix(1.0031, 0, 0, 1.0093, 0, 0)"
+      },
+      {
+        "x": 3.744873046875,
+        "width": 189.51025390625,
+        "height": 32.26239013671875,
+        "transform": "matrix(1.0027, 0, 0, 1.0082, 0, 0)"
+      },
+      {
+        "x": 3.78265380859375,
+        "width": 189.4346923828125,
+        "height": 32.2239990234375,
+        "transform": "matrix(1.0023, 0, 0, 1.007, 0, 0)"
+      },
+      {
+        "x": 3.8204345703125,
+        "width": 189.359130859375,
+        "height": 32.18560791015625,
+        "transform": "matrix(1.0019, 0, 0, 1.0058, 0, 0)"
+      },
+      {
+        "x": 3.8582763671875,
+        "width": 189.283447265625,
+        "height": 32.147216796875,
+        "transform": "matrix(1.0015, 0, 0, 1.0046, 0, 0)"
+      },
+      {
+        "x": 3.89605712890625,
+        "width": 189.2078857421875,
+        "height": 32.108795166015625,
+        "transform": "matrix(1.0011, 0, 0, 1.0034, 0, 0)"
+      },
+      {
+        "x": 3.9810791015625,
+        "width": 189.037841796875,
+        "height": 32.019195556640625,
+        "transform": "matrix(1.0002, 0, 0, 1.0006, 0, 0)"
+      },
+      {
+        "x": 3.99053955078125,
+        "width": 189.0189208984375,
+        "height": 32.00640869140625,
+        "transform": "matrix(1.0001, 0, 0, 1.0002, 0, 0)"
+      },
+      {
+        "x": 4,
+        "width": 189,
+        "height": 32,
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    ]
+  },
+  "screenshots": [
+    "site-glass-375-light.png",
+    "site-glass-375-dark.png",
+    "site-glass-768-light.png",
+    "site-glass-768-dark.png",
+    "site-glass-1440-light.png",
+    "site-glass-1440-dark.png"
+  ],
+  "materials": {
+    "375-light": {
+      "surface": [
+        255,
+        255,
+        255,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        255,
+        255,
+        255,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        10,
+        10,
+        10,
+        1
+      ],
+      "muted": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "track": [
+        245,
+        245,
+        245,
+        0.8
+      ],
+      "selected": [
+        254,
+        255,
+        255,
+        0.9019607843137255
+      ],
+      "input": [
+        253,
+        255,
+        255,
+        0.5019607843137255
+      ],
+      "border": [
+        229,
+        229,
+        229,
+        1
+      ],
+      "placeholder": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "minimumTextContrast": 4.9122767425450755
+    },
+    "375-dark": {
+      "surface": [
+        11,
+        11,
+        11,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        0,
+        0,
+        0,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        250,
+        250,
+        250,
+        1
+      ],
+      "muted": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "track": [
+        255,
+        255,
+        255,
+        0.054901960784313725
+      ],
+      "selected": [
+        255,
+        255,
+        255,
+        0.1607843137254902
+      ],
+      "input": [
+        255,
+        255,
+        255,
+        0.043137254901960784
+      ],
+      "border": [
+        255,
+        255,
+        255,
+        0.34901960784313724
+      ],
+      "placeholder": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "minimumTextContrast": 6.048117443089902
+    },
+    "768-light": {
+      "surface": [
+        255,
+        255,
+        255,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        255,
+        255,
+        255,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        10,
+        10,
+        10,
+        1
+      ],
+      "muted": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "track": [
+        245,
+        245,
+        245,
+        0.8
+      ],
+      "selected": [
+        254,
+        255,
+        255,
+        0.9019607843137255
+      ],
+      "input": [
+        253,
+        255,
+        255,
+        0.5019607843137255
+      ],
+      "border": [
+        229,
+        229,
+        229,
+        1
+      ],
+      "placeholder": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "minimumTextContrast": 4.9122767425450755
+    },
+    "768-dark": {
+      "surface": [
+        11,
+        11,
+        11,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        0,
+        0,
+        0,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        250,
+        250,
+        250,
+        1
+      ],
+      "muted": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "track": [
+        255,
+        255,
+        255,
+        0.054901960784313725
+      ],
+      "selected": [
+        255,
+        255,
+        255,
+        0.1607843137254902
+      ],
+      "input": [
+        255,
+        255,
+        255,
+        0.043137254901960784
+      ],
+      "border": [
+        255,
+        255,
+        255,
+        0.34901960784313724
+      ],
+      "placeholder": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "minimumTextContrast": 6.048117443089902
+    },
+    "1440-light": {
+      "surface": [
+        255,
+        255,
+        255,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        255,
+        255,
+        255,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        10,
+        10,
+        10,
+        1
+      ],
+      "muted": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "track": [
+        245,
+        245,
+        245,
+        0.8
+      ],
+      "selected": [
+        254,
+        255,
+        255,
+        0.9019607843137255
+      ],
+      "input": [
+        253,
+        255,
+        255,
+        0.5019607843137255
+      ],
+      "border": [
+        229,
+        229,
+        229,
+        1
+      ],
+      "placeholder": [
+        99,
+        99,
+        99,
+        1
+      ],
+      "minimumTextContrast": 4.9122767425450755
+    },
+    "1440-dark": {
+      "surface": [
+        11,
+        11,
+        11,
+        0.8509803921568627
+      ],
+      "backdrop": [
+        0,
+        0,
+        0,
+        0.4
+      ],
+      "filter": "blur(24px) saturate(1.5)",
+      "overlayFilter": "blur(12px)",
+      "text": [
+        250,
+        250,
+        250,
+        1
+      ],
+      "muted": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "track": [
+        255,
+        255,
+        255,
+        0.054901960784313725
+      ],
+      "selected": [
+        255,
+        255,
+        255,
+        0.1607843137254902
+      ],
+      "input": [
+        255,
+        255,
+        255,
+        0.043137254901960784
+      ],
+      "border": [
+        255,
+        255,
+        255,
+        0.34901960784313724
+      ],
+      "placeholder": [
+        171,
+        171,
+        171,
+        1
+      ],
+      "minimumTextContrast": 6.048117443089902
+    }
+  },
+  "requests": [],
+  "result": "passed"
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "key": "01-balanced",
+    "vertical": 140,
+    "diagonal": 140.0003840566161,
+    "ratio": 0.9999972567459819,
+    "strokeWidths": [
+      54
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  },
+  {
+    "key": "02-flat",
+    "vertical": 140,
+    "diagonal": 140.0003840566161,
+    "ratio": 0.9999972567459819,
+    "strokeWidths": [
+      54
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  },
+  {
+    "key": "03-bold",
+    "vertical": 132,
+    "diagonal": 131.99969403373632,
+    "ratio": 1.0000023179316129,
+    "strokeWidths": [
+      66
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  },
+  {
+    "key": "04-thin",
+    "vertical": 148,
+    "diagonal": 148.00020805390784,
+    "ratio": 0.9999985942323286,
+    "strokeWidths": [
+      38
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  },
+  {
+    "key": "05-sharp",
+    "vertical": 140,
+    "diagonal": 140.0003840566161,
+    "ratio": 0.9999972567459819,
+    "strokeWidths": [
+      54
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  },
+  {
+    "key": "06-compact",
+    "vertical": 128,
+    "diagonal": 127.99978203497065,
+    "ratio": 1.0000017028546915,
+    "strokeWidths": [
+      58
+    ],
+    "alpha": {
+      "hole": 0,
+      "body": 255,
+      "exterior": 0
+    },
+    "pass": true
+  }
+]

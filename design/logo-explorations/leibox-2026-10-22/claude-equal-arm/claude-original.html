@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LeiBox Logo 探索</title>
+<style>
+  :root {
+    --ink: #111111;
+    --muted: #6b6b6b;
+    --line: #e4e4e4;
+    --card: #ffffff;
+    --ok: #1a7f37;
+    --bad: #c62828;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: #fafafa;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+  header {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 20px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; font-weight: 650; letter-spacing: .01em; }
+  .sub { margin: 0; color: var(--muted); font-size: 13px; }
+  .status { font-size: 13px; font-weight: 600; }
+  .status.ok { color: var(--ok); }
+  .status.bad { color: var(--bad); }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .toolbar-label { color: var(--muted); font-size: 13px; margin-right: 2px; }
+  button {
+    font: inherit;
+    font-size: 13px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    min-height: 32px;
+  }
+  button:hover { border-color: #888; }
+  button:focus-visible { outline: 2px solid #2f6fed; outline-offset: 2px; }
+  button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .card h2 { font-size: 15px; margin: 0; font-weight: 650; }
+  .idx { color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+  .spec { color: var(--muted); font-size: 12px; margin: 0; }
+  .stage {
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    padding: 18px 12px;
+    border: 1px solid var(--line);
+  }
+  .stage svg { display: block; }
+  .main-preview svg { width: 160px; height: 160px; }
+  .sizes {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .size { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .size span { font-size: 11px; color: var(--muted); }
+  .bg-dark .size span { color: #c9cfdc; }
+  .measure {
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 10px;
+  }
+  .measure dt { color: var(--muted); }
+  .measure dd { margin: 0; text-align: right; }
+  .check { font-size: 12px; font-weight: 600; }
+  .check.ok { color: var(--ok); }
+  .check.bad { color: var(--bad); }
+  .card-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  /* 预览背景 */
+  .bg-white .stage { background: #ffffff; }
+  .bg-gray .stage { background: #ececec; }
+  .bg-dark .stage { background: #1f2a44; border-color: #1f2a44; }
+  .bg-checker .stage {
+    background-color: #ffffff;
+    background-image: conic-gradient(#d9d9d9 25%, #ffffff 0 50%, #d9d9d9 0 75%, #ffffff 0);
+    background-size: 16px 16px;
+  }
+
+  @media (max-width: 420px) {
+    header { padding: 20px 14px 4px; }
+    main { padding: 10px 14px 32px; grid-template-columns: 1fr; }
+    .main-preview svg { width: 140px; height: 140px; }
+    .sizes { gap: 12px; }
+  }
+</style>
+</head>
+<body class="bg-white">
+<header>
+  <div>
+    <h1>LeiBox Logo 探索</h1>
+    <p class="sub">黑色圆角盒 + 镂空折角 L · 两臂等长等粗 · 斜臂 −30°</p>
+    <p class="status" id="globalStatus" aria-live="polite">校验中…</p>
+  </div>
+  <div class="toolbar" role="group" aria-label="预览背景">
+    <span class="toolbar-label">背景</span>
+    <button type="button" data-bg="white" aria-pressed="true">白色</button>
+    <button type="button" data-bg="gray" aria-pressed="false">浅灰</button>
+    <button type="button" data-bg="dark" aria-pressed="false">深色</button>
+    <button type="button" data-bg="checker" aria-pressed="false">透明格</button>
+  </div>
+</header>
+
+<main id="grid" aria-label="Logo 方案"></main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- 共享参数 ---------- */
+  var SHELL = { cx: 256, cy: 256, R: 222, radius: 88 };   // 外壳：尖顶六边形外接圆半径 R，共享圆角半径
+  var BASE = {
+    elbow: { x: 282, y: 388 },   // L 的转折点
+    angleDeg: -30,               // 斜臂方向（屏幕坐标，y 向下）
+    canvas: 512,                 // viewBox 边长（以外壳中心居中）
+    minClearance: 12             // L 外轮廓距外壳边缘的最小距离
+  };
+  var VARIANTS = [
+    { key: '01-balanced', name: '均衡圆角', strokeWidth: 54, length: 140, cap: 'round', join: 'round' },
+    { key: '02-flat',     name: '平切端头', strokeWidth: 54, length: 140, cap: 'butt',  join: 'round' },
+    { key: '03-bold',     name: '厚实圆角', strokeWidth: 66, length: 132, cap: 'round', join: 'round' },
+    { key: '04-thin',     name: '纤细圆角', strokeWidth: 38, length: 148, cap: 'round', join: 'round' },
+    { key: '05-sharp',    name: '尖角折箭', strokeWidth: 54, length: 140, cap: 'butt',  join: 'miter' },
+    { key: '06-compact',  name: '紧凑版',   strokeWidth: 58, length: 128, cap: 'round', join: 'round', canvas: 440 }
+  ];
+  var CAP_LABEL = { round: '圆端', butt: '平切' };
+  var JOIN_LABEL = { round: '圆转角', miter: '尖转角' };
+  var EPS = 1e-6;
+
+  /* ---------- 基础几何 ---------- */
+  function f(n) { return (Math.round(n * 1000) / 1000).toString(); }
+  function sub(a, b) { return { x: a.x - b.x, y: a.y - b.y }; }
+  function add(a, b) { return { x: a.x + b.x, y: a.y + b.y }; }
+  function mul(a, k) { return { x: a.x * k, y: a.y * k }; }
+  function len(a) { return Math.hypot(a.x, a.y); }
+  function unit(a) { var l = len(a); return { x: a.x / l, y: a.y / l }; }
+  function dist(a, b) { return len(sub(a, b)); }
+
+  // 尖顶六边形顶点（顺时针：上、右上、右下、下、左下、左上）
+  function hexVertices(cx, cy, R) {
+    var v = [];
+    for (var i = 0; i < 6; i++) {
+      var a = (-90 + 60 * i) * Math.PI / 180;
+      v.push({ x: cx + R * Math.cos(a), y: cy + R * Math.sin(a) });
+    }
+    return v;
+  }
+
+  // 6 个顶点 + 共享半径 → 直线 + 圆弧
+  function shellPath(s) {
+    var v = hexVertices(s.cx, s.cy, s.R);
+    var d = s.radius / Math.tan(Math.PI / 3);   // 内角 120°：切点距顶点 r / tan(60°)
+    var parts = [];
+    for (var i = 0; i < 6; i++) {
+      var V = v[i], P = v[(i + 5) % 6], N = v[(i + 1) % 6];
+      var t1 = add(V, mul(unit(sub(P, V)), d));
+      var t2 = add(V, mul(unit(sub(N, V)), d));
+      parts.push((i === 0 ? 'M' : 'L') + f(t1.x) + ' ' + f(t1.y));
+      parts.push('A' + f(s.radius) + ' ' + f(s.radius) + ' 0 0 1 ' + f(t2.x) + ' ' + f(t2.y));
+    }
+    return parts.join(' ') + ' Z';
+  }
+
+  // 圆角六边形 = 内缩六边形 ⊕ 半径 r 的圆盘；据此求点到外壳边缘的精确距离
+  function innerHex(s) {
+    var apo = s.R * Math.cos(Math.PI / 6) - s.radius;
+    return hexVertices(s.cx, s.cy, apo / Math.cos(Math.PI / 6));
+  }
+  function segDist(p, a, b) {
+    var ab = sub(b, a), t = ((p.x - a.x) * ab.x + (p.y - a.y) * ab.y) / (ab.x * ab.x + ab.y * ab.y);
+    t = Math.max(0, Math.min(1, t));
+    return dist(p, add(a, mul(ab, t)));
+  }
+  function signedDistConvex(p, poly) {
+    var inside = true, m = Infinity;
+    for (var i = 0; i < poly.length; i++) {
+      var a = poly[i], b = poly[(i + 1) % poly.length];
+      var cross = (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
+      if (cross < 0) inside = false;
+      m = Math.min(m, segDist(p, a, b));
+    }
+    return inside ? -m : m;
+  }
+  function clearance(p, s, inner) { return s.radius - signedDistConvex(p, inner); }
+
+  /* ---------- 统一几何函数（预览与导出共用） ---------- */
+  function computeGeometry(v) {
+    var w = v.strokeWidth, L = v.length, h = w / 2;
+    var rad = BASE.angleDeg * Math.PI / 180;
+    var E = { x: BASE.elbow.x, y: BASE.elbow.y };
+    var uV = { x: 0, y: -1 };                               // 竖臂方向
+    var uD = { x: Math.cos(rad), y: Math.sin(rad) };        // 斜臂方向
+    var A = add(E, mul(uV, L));                             // 竖臂端点
+    var B = add(E, mul(uD, L));                             // 斜臂端点（同一 length）
+    var canvas = v.canvas || BASE.canvas;
+    var vb = [SHELL.cx - canvas / 2, SHELL.cy - canvas / 2, canvas, canvas];
+
+    // L 外轮廓采样点（凸部件的外包点）
+    var pts = [];
+    function circle(c) { for (var i = 0; i < 36; i++) { var a = i * Math.PI / 18; pts.push({ x: c.x + h * Math.cos(a), y: c.y + h * Math.sin(a) }); } }
+    [[A, uV], [B, uD]].forEach(function (arm) {
+      var n = { x: -arm[1].y, y: arm[1].x };
+      if (v.cap === 'round') circle(arm[0]);
+      else { pts.push(add(arm[0], mul(n, h)), add(arm[0], mul(n, -h))); }
+      pts.push(add(E, mul(n, h)), add(E, mul(n, -h)));
+    });
+    var bis = unit(add(uV, uD));
+    var halfAngle = Math.acos(uV.x * uD.x + uV.y * uD.y) / 2;
+    if (v.join === 'round') circle(E);
+    else pts.push(add(E, mul(bis, -h / Math.sin(halfAngle))));  // 斜接尖点
+    var inner = innerHex(SHELL);
+    var minClear = Infinity;
+    pts.forEach(function (p) { minClear = Math.min(minClear, clearance(p, SHELL, inner)); });
+
+    // 外壳右下边方向（下顶点 → 右下顶点）
+    var hv = hexVertices(SHELL.cx, SHELL.cy, SHELL.R);
+    var edgeDeg = Math.atan2(hv[2].y - hv[3].y, hv[2].x - hv[3].x) * 180 / Math.PI;
+
+    return {
+      key: v.key, name: v.name,
+      params: { strokeWidth: w, length: L, cap: v.cap, join: v.join, canvas: canvas, elbow: E, angleDeg: BASE.angleDeg },
+      viewBox: vb.map(f).join(' '),
+      shellD: shellPath(SHELL),
+      lD: 'M' + f(A.x) + ' ' + f(A.y) + ' L' + f(E.x) + ' ' + f(E.y) + ' L' + f(B.x) + ' ' + f(B.y),
+      points: { verticalEnd: A, elbow: E, diagonalEnd: B },
+      armAngleDeg: halfAngle * 2 * 180 / Math.PI,
+      shellEdgeDeg: edgeDeg,
+      minClearance: minClear,
+      maskRect: vb
+    };
+  }
+
+  function buildSvg(v, idPrefix) {
+    var g = computeGeometry(v);
+    var id = idPrefix + '-mask';
+    var r = g.maskRect;
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="' + g.viewBox + '" role="img" aria-label="LeiBox ' + g.name + '">' +
+      '<title>LeiBox</title>' +
+      '<defs><mask id="' + id + '" maskUnits="userSpaceOnUse" x="' + f(r[0]) + '" y="' + f(r[1]) + '" width="' + f(r[2]) + '" height="' + f(r[3]) + '">' +
+        '<rect x="' + f(r[0]) + '" y="' + f(r[1]) + '" width="' + f(r[2]) + '" height="' + f(r[3]) + '" fill="#fff"/>' +
+        '<path data-role="l-centerline" d="' + g.lD + '" fill="none" stroke="#000" stroke-width="' + f(v.strokeWidth) + '" stroke-linecap="' + v.cap + '" stroke-linejoin="' + v.join + '" stroke-miterlimit="4"/>' +
+      '</mask></defs>' +
+      '<path d="' + g.shellD + '" fill="#000" mask="url(#' + id + ')"/>' +
+      '</svg>';
+  }
+
+  // 从最终写入的 path d 中回读坐标并测量（不使用中间值）
+  function measureFromD(d) {
+    var n = d.match(/-?\d+(\.\d+)?/g).map(Number);
+    var A = { x: n[0], y: n[1] }, E = { x: n[2], y: n[3] }, B = { x: n[4], y: n[5] };
+    return { vertical: dist(A, E), diagonal: dist(E, B), A: A, E: E, B: B };
+  }
+
+  /* ---------- 断言 ---------- */
+  var results = [];
+  var allPass = true;
+
+  VARIANTS.forEach(function (v) {
+    var g = computeGeometry(v);
+    var m = measureFromD(g.lD);
+    var exportSvg = buildSvg(v, 'leibox-' + v.key);
+    var previewSvg = buildSvg(v, 'p-' + v.key);
+    var checks = {
+      lengthEqual: Math.abs(m.vertical - m.diagonal) < 1e-2 && Math.abs(m.vertical / m.diagonal - 1) < 1e-4,
+      lengthMatchesParam: Math.abs(m.vertical - v.length) < 1e-2 && Math.abs(m.diagonal - v.length) < 1e-2,
+      singleStrokeWidth: (exportSvg.match(/stroke-width="/g) || []).length === 1,
+      verticalArmVertical: Math.abs(m.A.x - m.E.x) < EPS && m.A.y < m.E.y,
+      diagonalAngle: Math.abs(Math.atan2(m.B.y - m.E.y, m.B.x - m.E.x) * 180 / Math.PI - BASE.angleDeg) < 1e-2,
+      followsShellEdge: Math.abs(g.shellEdgeDeg - BASE.angleDeg) < 1e-9,
+      continuousJoint: /^M[^ML]+ L[^ML]+ L[^ML]+$/.test(g.lD),
+      insideShell: g.minClearance >= BASE.minClearance,
+      previewEqualsExport: previewSvg.split('p-' + v.key).join('X') === exportSvg.split('leibox-' + v.key).join('X')
+    };
+    var pass = Object.keys(checks).every(function (k) { return checks[k]; });
+    Object.keys(checks).forEach(function (k) { console.assert(checks[k], v.key + ' 断言失败: ' + k); });
+    if (!pass) allPass = false;
+    results.push({
+      key: v.key, name: v.name, params: g.params,
+      viewBox: g.viewBox, shellD: g.shellD, lD: g.lD,
+      points: g.points,
+      measured: { verticalLength: m.vertical, diagonalLength: m.diagonal, ratio: m.vertical / m.diagonal, strokeWidthVertical: v.strokeWidth, strokeWidthDiagonal: v.strokeWidth, widthRatio: 1 },
+      armAngleDeg: g.armAngleDeg,
+      minClearance: g.minClearance,
+      screen: null,
+      checks: checks,
+      pass: pass,
+      svg: exportSvg
+    });
+  });
+
+  window.logoGeometry = {
+    shell: SHELL,
+    base: BASE,
+    variants: results,
+    allPass: allPass,
+    buildSvg: function (key) { var v = VARIANTS.filter(function (x) { return x.key === key; })[0]; return v ? buildSvg(v, 'leibox-' + v.key) : null; }
+  };
+
+  /* ---------- 渲染 ---------- */
+  var grid = document.getElementById('grid');
+  var SIZES = [24, 48, 96];
+
+  VARIANTS.forEach(function (v, i) {
+    var r = results[i];
+    var card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('aria-labelledby', 'title-' + v.key);
+    var sizesHtml = SIZES.map(function (s) {
+      return '<div class="size"><div style="width:' + s + 'px;height:' + s + 'px" data-size="' + s + '">' +
+        buildSvg(v, 'p-' + v.key + '-' + s).replace('<svg ', '<svg width="' + s + '" height="' + s + '" ') +
+        '</div><span>' + s + 'px</span></div>';
+    }).join('');
+    card.innerHTML =
+      '<div class="card-head"><h2 id="title-' + v.key + '">' + v.name + '</h2><span class="idx">' + v.key.slice(0, 2) + '</span></div>' +
+      '<p class="spec">线宽 ' + v.strokeWidth + ' · 臂长 ' + v.length + ' · ' + CAP_LABEL[v.cap] + ' · ' + JOIN_LABEL[v.join] + (v.canvas ? ' · 留白收紧' : '') + '</p>' +
+      '<div class="stage main-preview">' + buildSvg(v, 'p-' + v.key) + '</div>' +
+      '<div class="stage sizes" aria-label="使用尺寸预览">' + sizesHtml + '</div>' +
+      '<dl class="measure">' +
+        '<dt>竖臂长度</dt><dd>' + r.measured.verticalLength.toFixed(3) + '</dd>' +
+        '<dt>斜臂长度</dt><dd>' + r.measured.diagonalLength.toFixed(3) + '</dd>' +
+        '<dt>长度比</dt><dd>' + r.measured.ratio.toFixed(4) + ' : 1</dd>' +
+        '<dt>宽度比</dt><dd>' + v.strokeWidth + ' / ' + v.strokeWidth + ' = 1 : 1</dd>' +
+        '<dt>屏幕测量</dt><dd data-screen>—</dd>' +
+        '<dt>距外壳最小间距</dt><dd>' + r.minClearance.toFixed(1) + '</dd>' +
+      '</dl>' +
+      '<div class="card-foot"><span class="check ' + (r.pass ? 'ok' : 'bad') + '">' + (r.pass ? '✓ 几何校验通过' : '✗ 几何校验未通过') + '</span>' +
+      '<button type="button" data-download="' + v.key + '">下载 SVG</button></div>';
+    grid.appendChild(card);
+  });
+
+  // 最终屏幕坐标测量：用主预览 svg 的 CTM 变换三个点
+  function measureScreen() {
+    var ok = true;
+    results.forEach(function (r) {
+      var svg = grid.querySelector('#title-' + r.key).closest('.card').querySelector('.main-preview svg');
+      var path = svg.querySelector('[data-role="l-centerline"]');
+      var ctm = svg.getScreenCTM();
+      var cell = grid.querySelector('#title-' + r.key).closest('.card').querySelector('[data-screen]');
+      if (!ctm) { cell.textContent = '不可用'; return; }
+      var m = measureFromD(path.getAttribute('d'));
+      function tp(p) { var q = svg.createSVGPoint(); q.x = p.x; q.y = p.y; return q.matrixTransform(ctm); }
+      var A = tp(m.A), E = tp(m.E), B = tp(m.B);
+      var sv = Math.hypot(A.x - E.x, A.y - E.y), sd = Math.hypot(B.x - E.x, B.y - E.y);
+      var total = null;
+      try { total = path.getTotalLength(); } catch (e) { total = null; }
+      r.screen = { verticalPx: sv, diagonalPx: sd, ratio: sv / sd, pathTotalLength: total, strokeWidthPx: r.params.strokeWidth * ctm.a };
+      var pass = Math.abs(sv / sd - 1) < 1e-3 && (total === null || Math.abs(total - 2 * r.params.length) < 0.05);
+      r.checks.screenEqual = pass;
+      console.assert(pass, r.key + ' 断言失败: screenEqual');
+      if (!pass) { r.pass = false; ok = false; }
+      cell.textContent = sv.toFixed(2) + ' / ' + sd.toFixed(2) + ' px';
+    });
+    window.logoGeometry.allPass = window.logoGeometry.allPass && ok;
+    var st = document.getElementById('globalStatus');
+    st.className = 'status ' + (window.logoGeometry.allPass ? 'ok' : 'bad');
+    st.textContent = window.logoGeometry.allPass ? '6 款几何断言全部通过' : '有方案几何断言未通过，详见控制台';
+  }
+  requestAnimationFrame(function () { requestAnimationFrame(measureScreen); });
+
+  /* ---------- 交互 ---------- */
+  grid.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-download]');
+    if (!btn) return;
+    var key = btn.getAttribute('data-download');
+    var svg = '<?xml version="1.0" encoding="UTF-8"?>\n' + window.logoGeometry.buildSvg(key) + '\n';
+    var url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'leibox-logo-' + key + '.svg';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  });
+
+  var bgButtons = document.querySelectorAll('[data-bg]');
+  bgButtons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.body.className = 'bg-' + b.getAttribute('data-bg');
+      bgButtons.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
+})();
+</script>
+</body>
+</html>

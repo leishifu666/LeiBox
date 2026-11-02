@@ -1,0 +1,38 @@
+{
+  "appmsgid": "100000338",
+  "account": "LSF 设计日常",
+  "coverFile": "leibox-wechat-cover-pingfang.png",
+  "savedAndReloaded": true,
+  "contentUnchanged": true,
+  "checks": {
+    "title": true,
+    "author": true,
+    "digest": true,
+    "videoIds": true,
+    "images": true,
+    "bodyTextExactSha256": false,
+    "bodyTextUnchangedExceptWhitespace": true
+  },
+  "cover": {
+    "style": "background-image: url(\"https://mmbiz.qpic.cn/mmbiz_jpg/LBQRANlpSzQbuyrNPxKloKrxJNk0D3JKJ3jj5TlfbTyBVRdfQE4JBLw61SlJSyf1wSHT8pYibZGFH64N031tOHspQZutHW1v4GcWMbagDdcs/0?wx_fmt=jpeg\");",
+    "url": "url(\"https://mmbiz.qpic.cn/mmbiz_jpg/LBQRANlpSzQbuyrNPxKloKrxJNk0D3JKJ3jj5TlfbTyBVRdfQE4JBLw61SlJSyf1wSHT8pYibZGFH64N031tOHspQZutHW1v4GcWMbagDdcs/0?wx_fmt=jpeg\")",
+    "selectedFile": [],
+    "saveStatus": [
+      "          已保存        ",
+      "                    已保存        ",
+      "                    已保存        "
+    ]
+  },
+  "checkedAt": "2026-10-31T01:36:52.772Z",
+  "published": false,
+  "textVerification": "draft-text-verification.json",
+  "onlyTextDifference": {
+    "position": 3,
+    "context": "video caption leading space",
+    "before": "U+0020",
+    "after": "U+00A0",
+    "cause": "WeChat editor save/reload whitespace normalization"
+  },
+  "squareCrop": "title region at left; native crop, original PNG unchanged",
+  "screenshot": "wechat-draft-cover-saved.png"
+}

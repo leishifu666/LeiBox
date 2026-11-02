@@ -1,0 +1,2652 @@
+{
+  "views": [
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "bounds": [
+        500,
+        213,
+        440,
+        574
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 1440,
+      "theme": "light",
+      "frames": [
+        {
+          "x": 1053.3125,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1049.2550048828125,
+          "y": 13.473999977111816,
+          "width": 35,
+          "height": 36,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1045.3411865234375,
+          "y": 14.895700454711914,
+          "width": 38,
+          "height": 40,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1040.92529296875,
+          "y": 16.499799728393555,
+          "width": 41,
+          "height": 44,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 939.9940795898438,
+          "y": 53.164798736572266,
+          "width": 116.00006103515625,
+          "height": 143,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 918.17822265625,
+          "y": 61.08980178833008,
+          "width": 132,
+          "height": 164,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 529.6159057617188,
+          "y": 202.2415008544922,
+          "width": 418,
+          "height": 545,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 520.8577270507812,
+          "y": 205.423095703125,
+          "width": 425,
+          "height": 554,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 501.7998046875,
+          "y": 212.34620666503906,
+          "width": 439,
+          "height": 572,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 500.5588073730469,
+          "y": 212.7969970703125,
+          "width": 440.0000305175781,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 500.3456115722656,
+          "y": 212.87449645996094,
+          "width": 439.9999694824219,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 500,
+          "y": 213,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-1440-light.png",
+      "focusRestored": true
+    },
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "bounds": [
+        500,
+        213,
+        440,
+        574
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 1440,
+      "theme": "dark",
+      "frames": [
+        {
+          "x": 1058.03125,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1054.47509765625,
+          "y": 13.280900001525879,
+          "width": 35,
+          "height": 35,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1047.18798828125,
+          "y": 15.905699729919434,
+          "width": 40,
+          "height": 43,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 1040.0279541015625,
+          "y": 18.484699249267578,
+          "width": 45,
+          "height": 48.999996185302734,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 996.9577026367188,
+          "y": 33.9984016418457,
+          "width": 77.00006103515625,
+          "height": 91,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 913.7493286132812,
+          "y": 63.969600677490234,
+          "width": 136.99993896484375,
+          "height": 172,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 655.4832153320312,
+          "y": 156.99569702148438,
+          "width": 326,
+          "height": 423.0000305175781,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 623.7055053710938,
+          "y": 168.44189453125,
+          "width": 350,
+          "height": 454,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 599.1055297851562,
+          "y": 177.30270385742188,
+          "width": 368,
+          "height": 478.0000305175781,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 574.9822998046875,
+          "y": 185.99180603027344,
+          "width": 385,
+          "height": 501,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 566.99169921875,
+          "y": 188.8699951171875,
+          "width": 391,
+          "height": 509,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 558.2659912109375,
+          "y": 192.0128936767578,
+          "width": 397,
+          "height": 517,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 547.9923095703125,
+          "y": 195.71339416503906,
+          "width": 405,
+          "height": 527,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 529.0416870117188,
+          "y": 202.539306640625,
+          "width": 419,
+          "height": 546,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 522.3499145507812,
+          "y": 204.94970703125,
+          "width": 424,
+          "height": 552,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 517.4384765625,
+          "y": 206.7187957763672,
+          "width": 427,
+          "height": 557,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 514.811279296875,
+          "y": 207.6649932861328,
+          "width": 429,
+          "height": 560,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 500,
+          "y": 213,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 500,
+          "y": 213,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-1440-dark.png",
+      "focusRestored": true
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "bounds": [
+        164,
+        225,
+        440,
+        574
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 768,
+      "theme": "light",
+      "frames": [
+        {
+          "x": 530.0313110351562,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 528.2969970703125,
+          "y": 13.009200096130371,
+          "width": 34,
+          "height": 35,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 526.8184204101562,
+          "y": 13.869600296020508,
+          "width": 36,
+          "height": 37,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 524.7579956054688,
+          "y": 15.068599700927734,
+          "width": 38,
+          "height": 40,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 521.8367919921875,
+          "y": 16.76849937438965,
+          "width": 41,
+          "height": 44,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 517.4545288085938,
+          "y": 19.318599700927734,
+          "width": 46,
+          "height": 51.000003814697266,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 512.0325927734375,
+          "y": 22.47369956970215,
+          "width": 52,
+          "height": 59,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 505.6736145019531,
+          "y": 26.1742000579834,
+          "width": 58.999969482421875,
+          "height": 68,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 496.1387939453125,
+          "y": 31.72260093688965,
+          "width": 70,
+          "height": 82,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 484.0456848144531,
+          "y": 38.75979995727539,
+          "width": 82.99996948242188,
+          "height": 100,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 462.28790283203125,
+          "y": 51.42100143432617,
+          "width": 108,
+          "height": 132,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 445.65948486328125,
+          "y": 61.0974006652832,
+          "width": 126,
+          "height": 157,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 420.277587890625,
+          "y": 75.86759948730469,
+          "width": 154,
+          "height": 195.00001525878906,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 382.2152099609375,
+          "y": 98.0167007446289,
+          "width": 197,
+          "height": 251,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 363.96270751953125,
+          "y": 108.63819885253906,
+          "width": 217,
+          "height": 278,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 330.068603515625,
+          "y": 128.36180114746094,
+          "width": 255,
+          "height": 328,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 302.0867004394531,
+          "y": 144.6448974609375,
+          "width": 285.9999694824219,
+          "height": 370,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 275.7627868652344,
+          "y": 159.9633026123047,
+          "width": 315.0000305175781,
+          "height": 409,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 251.69630432128906,
+          "y": 173.96800231933594,
+          "width": 342,
+          "height": 444,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 234.5655975341797,
+          "y": 183.9365997314453,
+          "width": 361,
+          "height": 470,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 218.88009643554688,
+          "y": 193.06430053710938,
+          "width": 379.0000305175781,
+          "height": 493.0000305175781,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 212.09950256347656,
+          "y": 197.01010131835938,
+          "width": 386,
+          "height": 503.0000305175781,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 205.9674072265625,
+          "y": 200.57839965820312,
+          "width": 393,
+          "height": 511.9999694824219,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 199.5762939453125,
+          "y": 204.29750061035156,
+          "width": 400,
+          "height": 521,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 194.70489501953125,
+          "y": 207.13229370117188,
+          "width": 406,
+          "height": 529,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 191.04299926757812,
+          "y": 209.26319885253906,
+          "width": 409.9999694824219,
+          "height": 534,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 187.0926055908203,
+          "y": 211.56199645996094,
+          "width": 414,
+          "height": 540,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 183.59170532226562,
+          "y": 213.5991973876953,
+          "width": 417.9999694824219,
+          "height": 545,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 180.0281982421875,
+          "y": 215.6728973388672,
+          "width": 422,
+          "height": 550,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 177.3813934326172,
+          "y": 217.21310424804688,
+          "width": 425,
+          "height": 554,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 174.7238006591797,
+          "y": 218.7595977783203,
+          "width": 428,
+          "height": 558,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 172.7794952392578,
+          "y": 219.89100646972656,
+          "width": 430,
+          "height": 561,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 171.37229919433594,
+          "y": 220.7100067138672,
+          "width": 432,
+          "height": 563,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 169.9149932861328,
+          "y": 221.55799865722656,
+          "width": 433,
+          "height": 565,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 168.50059509277344,
+          "y": 222.38099670410156,
+          "width": 435,
+          "height": 567,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 167.6580047607422,
+          "y": 222.87139892578125,
+          "width": 436,
+          "height": 569,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 166.8096923828125,
+          "y": 223.36500549316406,
+          "width": 437,
+          "height": 570,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 166.11830139160156,
+          "y": 223.76730346679688,
+          "width": 438,
+          "height": 571,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 165.56309509277344,
+          "y": 224.09039306640625,
+          "width": 438,
+          "height": 572,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 165.12489318847656,
+          "y": 224.34539794921875,
+          "width": 439,
+          "height": 572,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.78599548339844,
+          "y": 224.5426025390625,
+          "width": 439,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.5301971435547,
+          "y": 224.69149780273438,
+          "width": 439,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.3426055908203,
+          "y": 224.8007049560547,
+          "width": 440,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.2097930908203,
+          "y": 224.87789916992188,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.0977020263672,
+          "y": 224.94320678710938,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.05560302734375,
+          "y": 224.9676971435547,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.02490234375,
+          "y": 224.98550415039062,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.00909423828125,
+          "y": 224.9947052001953,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.0030975341797,
+          "y": 224.99819946289062,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.00050354003906,
+          "y": 224.99969482421875,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-768-light.png",
+      "focusRestored": true
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "bounds": [
+        164,
+        225,
+        440,
+        574
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 768,
+      "theme": "dark",
+      "frames": [
+        {
+          "x": 530.0313110351562,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 529.0870971679688,
+          "y": 12.549400329589844,
+          "width": 33,
+          "height": 33,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 527.8076782226562,
+          "y": 13.293899536132812,
+          "width": 34,
+          "height": 35,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 525.1558227539062,
+          "y": 14.8371000289917,
+          "width": 37,
+          "height": 39,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 521.5479736328125,
+          "y": 16.936500549316406,
+          "width": 41,
+          "height": 45,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 519.6519775390625,
+          "y": 18.039899826049805,
+          "width": 44,
+          "height": 47,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 514.4692993164062,
+          "y": 21.05579948425293,
+          "width": 49,
+          "height": 55,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 508.15380859375,
+          "y": 24.730899810791016,
+          "width": 56,
+          "height": 63.999996185302734,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 494.4549865722656,
+          "y": 32.70249938964844,
+          "width": 71.99996948242188,
+          "height": 85,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 480.847900390625,
+          "y": 40.62070083618164,
+          "width": 87,
+          "height": 105,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 465.0246887207031,
+          "y": 49.82849884033203,
+          "width": 103.99996948242188,
+          "height": 127.99999237060547,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 448.8887023925781,
+          "y": 59.218299865722656,
+          "width": 121.99996948242188,
+          "height": 152,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 428.0445861816406,
+          "y": 71.3478012084961,
+          "width": 145.99996948242188,
+          "height": 183,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 407.8056945800781,
+          "y": 83.12519836425781,
+          "width": 167.99996948242188,
+          "height": 212.99998474121094,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 374.58758544921875,
+          "y": 102.45539855957031,
+          "width": 205,
+          "height": 262,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 347.0155944824219,
+          "y": 118.5,
+          "width": 236.00003051757812,
+          "height": 303,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 322.0506896972656,
+          "y": 133.02760314941406,
+          "width": 263.9999694824219,
+          "height": 340,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 302.0867004394531,
+          "y": 144.6448974609375,
+          "width": 285.9999694824219,
+          "height": 370,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 288.4031982421875,
+          "y": 152.60760498046875,
+          "width": 301,
+          "height": 390,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 273.75360107421875,
+          "y": 161.1324005126953,
+          "width": 318,
+          "height": 411,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 251.69630432128906,
+          "y": 173.96800231933594,
+          "width": 342,
+          "height": 444,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 242.0070037841797,
+          "y": 179.6063995361328,
+          "width": 353,
+          "height": 458,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 227.66969299316406,
+          "y": 187.94949340820312,
+          "width": 369,
+          "height": 479.9999694824219,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 217.70309448242188,
+          "y": 193.74920654296875,
+          "width": 380.0000305175781,
+          "height": 494,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 211.03359985351562,
+          "y": 197.6302947998047,
+          "width": 387.9999694824219,
+          "height": 504,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 205.0054931640625,
+          "y": 201.13819885253906,
+          "width": 394,
+          "height": 513,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 199.5762939453125,
+          "y": 204.29750061035156,
+          "width": 400,
+          "height": 521,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 194.70489501953125,
+          "y": 207.13229370117188,
+          "width": 406,
+          "height": 529,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 190.351806640625,
+          "y": 209.6654052734375,
+          "width": 411,
+          "height": 535,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 186.47889709472656,
+          "y": 211.91909790039062,
+          "width": 415,
+          "height": 541,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 183.0493927001953,
+          "y": 213.914794921875,
+          "width": 419,
+          "height": 546,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 180.0281982421875,
+          "y": 215.6728973388672,
+          "width": 422,
+          "height": 550,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 177.3813934326172,
+          "y": 217.21310424804688,
+          "width": 425,
+          "height": 554,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 175.07679748535156,
+          "y": 218.55419921875,
+          "width": 428,
+          "height": 558,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 173.08360290527344,
+          "y": 219.71409606933594,
+          "width": 430,
+          "height": 561,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 171.37229919433594,
+          "y": 220.7100067138672,
+          "width": 432,
+          "height": 563,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 169.9149932861328,
+          "y": 221.55799865722656,
+          "width": 433,
+          "height": 565,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 168.68519592285156,
+          "y": 222.2736053466797,
+          "width": 435,
+          "height": 567,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 167.6580047607422,
+          "y": 222.87139892578125,
+          "width": 436,
+          "height": 569,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 166.8096923828125,
+          "y": 223.36500549316406,
+          "width": 437,
+          "height": 570,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 166.0167999267578,
+          "y": 223.82640075683594,
+          "width": 438,
+          "height": 571,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 165.48240661621094,
+          "y": 224.1374053955078,
+          "width": 438,
+          "height": 572,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 165.06199645996094,
+          "y": 224.3820037841797,
+          "width": 439,
+          "height": 572,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.73809814453125,
+          "y": 224.57049560546875,
+          "width": 439,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.49459838867188,
+          "y": 224.7122039794922,
+          "width": 439.0000305175781,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.31700134277344,
+          "y": 224.8155975341797,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.1920928955078,
+          "y": 224.88819885253906,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.1083984375,
+          "y": 224.93690490722656,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.05560302734375,
+          "y": 224.9676971435547,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.02490234375,
+          "y": 224.98550415039062,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164.00070190429688,
+          "y": 224.99960327148438,
+          "width": 440.0000305175781,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 164,
+          "y": 225,
+          "width": 440,
+          "height": 574,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-768-dark.png",
+      "focusRestored": true
+    },
+    {
+      "viewport": [
+        375,
+        812
+      ],
+      "bounds": [
+        16,
+        83.5,
+        343,
+        645
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 375,
+      "theme": "light",
+      "frames": [
+        {
+          "x": 174,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.8632049560547,
+          "y": 12.06190013885498,
+          "width": 32,
+          "height": 33,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.72000122070312,
+          "y": 12.126700401306152,
+          "width": 33,
+          "height": 33,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.61630249023438,
+          "y": 12.173700332641602,
+          "width": 33,
+          "height": 33,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.4564971923828,
+          "y": 12.24590015411377,
+          "width": 33,
+          "height": 34,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.25140380859375,
+          "y": 12.338800430297852,
+          "width": 33,
+          "height": 35,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 172.99310302734375,
+          "y": 12.455699920654297,
+          "width": 34,
+          "height": 36,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 172.673095703125,
+          "y": 12.600500106811523,
+          "width": 35,
+          "height": 37,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 171.81089782714844,
+          "y": 12.990599632263184,
+          "width": 36,
+          "height": 40,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 171.24850463867188,
+          "y": 13.245100021362305,
+          "width": 37,
+          "height": 43,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 170.58419799804688,
+          "y": 13.545700073242188,
+          "width": 39,
+          "height": 45,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 169.664794921875,
+          "y": 13.961799621582031,
+          "width": 41,
+          "height": 49,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 168.73880004882812,
+          "y": 14.380800247192383,
+          "width": 42,
+          "height": 52,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 166.4503936767578,
+          "y": 15.416500091552734,
+          "width": 47,
+          "height": 61.000003814697266,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 163.4857940673828,
+          "y": 16.757999420166016,
+          "width": 53,
+          "height": 73,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 161.71240234375,
+          "y": 17.56049919128418,
+          "width": 56,
+          "height": 80,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 159.72360229492188,
+          "y": 18.460500717163086,
+          "width": 60,
+          "height": 87,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 157.50270080566406,
+          "y": 19.465599060058594,
+          "width": 64,
+          "height": 96,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 155.0321044921875,
+          "y": 20.583599090576172,
+          "width": 69,
+          "height": 106,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 152.2938995361328,
+          "y": 21.82270050048828,
+          "width": 75,
+          "height": 115.99999237060547,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 149.26950073242188,
+          "y": 23.191299438476562,
+          "width": 81,
+          "height": 128,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 145.9394073486328,
+          "y": 24.698299407958984,
+          "width": 87,
+          "height": 141,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 142.28390502929688,
+          "y": 26.352500915527344,
+          "width": 94,
+          "height": 155,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 138.2823944091797,
+          "y": 28.163400650024414,
+          "width": 102,
+          "height": 171,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 133.91360473632812,
+          "y": 30.140399932861328,
+          "width": 111,
+          "height": 188,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 129.1558074951172,
+          "y": 32.293399810791016,
+          "width": 120,
+          "height": 206,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 123.98660278320312,
+          "y": 34.6327018737793,
+          "width": 130,
+          "height": 225.99998474121094,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 118.38279724121094,
+          "y": 37.16849899291992,
+          "width": 141.00001525878906,
+          "height": 247.99998474121094,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 112.32080078125,
+          "y": 39.911800384521484,
+          "width": 153,
+          "height": 271,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 105.77629852294922,
+          "y": 42.8734016418457,
+          "width": 166,
+          "height": 297,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 98.72429656982422,
+          "y": 46.06460189819336,
+          "width": 180,
+          "height": 324,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 91.27570343017578,
+          "y": 49.43539810180664,
+          "width": 195,
+          "height": 353,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 84.22370147705078,
+          "y": 52.6265983581543,
+          "width": 209,
+          "height": 380,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 75.6061019897461,
+          "y": 56.52640151977539,
+          "width": 226,
+          "height": 414,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 65.12229919433594,
+          "y": 61.270599365234375,
+          "width": 246.00001525878906,
+          "height": 454.0000305175781,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 60.02320098876953,
+          "y": 63.57809829711914,
+          "width": 256,
+          "height": 474.0000305175781,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 55.3317985534668,
+          "y": 65.70110321044922,
+          "width": 266,
+          "height": 492,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 50.34400177001953,
+          "y": 67.95819854736328,
+          "width": 275,
+          "height": 512,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 47.08330154418945,
+          "y": 69.43379974365234,
+          "width": 282,
+          "height": 524,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 43.48350143432617,
+          "y": 71.06279754638672,
+          "width": 289,
+          "height": 538,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 40.2057991027832,
+          "y": 72.54609680175781,
+          "width": 295,
+          "height": 551,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 37.23030090332031,
+          "y": 73.8926010131836,
+          "width": 301,
+          "height": 563,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 34.53810119628906,
+          "y": 75.11090087890625,
+          "width": 307,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 32.11029815673828,
+          "y": 76.20960235595703,
+          "width": 311,
+          "height": 582,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 29.92919921875,
+          "y": 77.19660186767578,
+          "width": 316,
+          "height": 591,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 27.977500915527344,
+          "y": 78.07980346679688,
+          "width": 319,
+          "height": 599,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 26.238399505615234,
+          "y": 78.8667984008789,
+          "width": 323,
+          "height": 605,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 24.456899642944336,
+          "y": 79.6729965209961,
+          "width": 326,
+          "height": 612,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 23.124399185180664,
+          "y": 80.2760009765625,
+          "width": 329,
+          "height": 617,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 21.95599937438965,
+          "y": 80.80470275878906,
+          "width": 331,
+          "height": 622,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 20.9375,
+          "y": 81.2656021118164,
+          "width": 333,
+          "height": 626,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 20.055599212646484,
+          "y": 81.66470336914062,
+          "width": 335,
+          "height": 629,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 19.297500610351562,
+          "y": 82.00779724121094,
+          "width": 337,
+          "height": 632,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 18.650999069213867,
+          "y": 82.30039978027344,
+          "width": 338,
+          "height": 635,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 18.10449981689453,
+          "y": 82.54759979248047,
+          "width": 339,
+          "height": 637,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 17.647300720214844,
+          "y": 82.75460052490234,
+          "width": 340,
+          "height": 639,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 17.26889991760254,
+          "y": 82.92579650878906,
+          "width": 341,
+          "height": 640,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.959800720214844,
+          "y": 83.0656967163086,
+          "width": 341,
+          "height": 641,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.710899353027344,
+          "y": 83.17829895019531,
+          "width": 342,
+          "height": 642,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.513900756835938,
+          "y": 83.26740264892578,
+          "width": 342,
+          "height": 643,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.361000061035156,
+          "y": 83.33660125732422,
+          "width": 342,
+          "height": 644,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.245100021362305,
+          "y": 83.38909912109375,
+          "width": 343,
+          "height": 644,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.15959930419922,
+          "y": 83.42780303955078,
+          "width": 343,
+          "height": 644,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.09869956970215,
+          "y": 83.4552993774414,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.051799774169922,
+          "y": 83.47660064697266,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.03030014038086,
+          "y": 83.48629760742188,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.012399673461914,
+          "y": 83.49440002441406,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.005699157714844,
+          "y": 83.49739837646484,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.001300811767578,
+          "y": 83.49939727783203,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.000200271606445,
+          "y": 83.4999008178711,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-375-light.png",
+      "focusRestored": true
+    },
+    {
+      "viewport": [
+        375,
+        812
+      ],
+      "bounds": [
+        16,
+        83.5,
+        343,
+        645
+      ],
+      "centerOffset": [
+        0,
+        0
+      ],
+      "nativeContinuous": true,
+      "shape": "superellipse(1)",
+      "shellRadius": "18px",
+      "focusInside": true,
+      "controls": [
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "svg",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "FIELDSET",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "SPAN",
+          "name": null,
+          "radius": "10px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "TEXTAREA",
+          "name": "message",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "url",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "email",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "INPUT",
+          "name": "name",
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "DIV",
+          "name": null,
+          "radius": "0px",
+          "shape": "superellipse(1)"
+        },
+        {
+          "tag": "BUTTON",
+          "name": null,
+          "radius": "14px",
+          "shape": "superellipse(1)"
+        }
+      ],
+      "width": 375,
+      "theme": "dark",
+      "frames": [
+        {
+          "x": 174,
+          "y": 12,
+          "width": 32,
+          "height": 32,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 173.59249877929688,
+          "y": 12.184399604797363,
+          "width": 33,
+          "height": 34,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 172.78720092773438,
+          "y": 12.548800468444824,
+          "width": 34,
+          "height": 37,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 171.5417938232422,
+          "y": 13.11240005493164,
+          "width": 37,
+          "height": 42,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 170.46279907226562,
+          "y": 13.600700378417969,
+          "width": 39,
+          "height": 46,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 169.664794921875,
+          "y": 13.961799621582031,
+          "width": 41,
+          "height": 49,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 167.47940063476562,
+          "y": 14.950799942016602,
+          "width": 45,
+          "height": 57,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 160.07080078125,
+          "y": 18.30340003967285,
+          "width": 59,
+          "height": 86,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 153.2375030517578,
+          "y": 21.395700454711914,
+          "width": 73,
+          "height": 113.00000762939453,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 145.35330200195312,
+          "y": 24.963499069213867,
+          "width": 88,
+          "height": 143,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 137.58030700683594,
+          "y": 28.48110008239746,
+          "width": 104,
+          "height": 173,
+          "radius": "16px",
+          "power": ""
+        },
+        {
+          "x": 132.3719940185547,
+          "y": 30.83799934387207,
+          "width": 114,
+          "height": 194,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 123.98660278320312,
+          "y": 34.6327018737793,
+          "width": 130,
+          "height": 225.99998474121094,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 115.41059875488281,
+          "y": 38.51359939575195,
+          "width": 146.99998474121094,
+          "height": 259,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 101.13289642333984,
+          "y": 44.974700927734375,
+          "width": 175,
+          "height": 315,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 87.68470001220703,
+          "y": 51.06039810180664,
+          "width": 202,
+          "height": 367,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 76.63600158691406,
+          "y": 56.060298919677734,
+          "width": 223.99998474121094,
+          "height": 410,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 68.7594985961914,
+          "y": 59.62459945678711,
+          "width": 239,
+          "height": 440,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 60.02320098876953,
+          "y": 63.57809829711914,
+          "width": 256,
+          "height": 474.0000305175781,
+          "radius": "17px",
+          "power": ""
+        },
+        {
+          "x": 54.5880012512207,
+          "y": 66.0376968383789,
+          "width": 267,
+          "height": 495.0000305175781,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 51.02579879760742,
+          "y": 67.64969635009766,
+          "width": 274,
+          "height": 509.0000305175781,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 47.08330154418945,
+          "y": 69.43379974365234,
+          "width": 282,
+          "height": 524,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 43.48350143432617,
+          "y": 71.06279754638672,
+          "width": 289,
+          "height": 538,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 40.2057991027832,
+          "y": 72.54609680175781,
+          "width": 295,
+          "height": 551,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 37.23030090332031,
+          "y": 73.8926010131836,
+          "width": 301,
+          "height": 563,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 34.53810119628906,
+          "y": 75.11090087890625,
+          "width": 307,
+          "height": 573,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 31.730199813842773,
+          "y": 76.38159942626953,
+          "width": 312,
+          "height": 584,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 29.253999710083008,
+          "y": 77.5020980834961,
+          "width": 317,
+          "height": 594,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 27.67329978942871,
+          "y": 78.21749877929688,
+          "width": 320,
+          "height": 600,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 25.96809959411621,
+          "y": 78.98909759521484,
+          "width": 323,
+          "height": 606,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 24.456899642944336,
+          "y": 79.6729965209961,
+          "width": 326,
+          "height": 612,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 23.124399185180664,
+          "y": 80.2760009765625,
+          "width": 329,
+          "height": 617,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 21.95599937438965,
+          "y": 80.80470275878906,
+          "width": 331,
+          "height": 622,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 20.9375,
+          "y": 81.2656021118164,
+          "width": 333,
+          "height": 626,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 19.661800384521484,
+          "y": 81.84290313720703,
+          "width": 336,
+          "height": 631,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 18.75149917602539,
+          "y": 82.25489807128906,
+          "width": 338,
+          "height": 634,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 18.02239990234375,
+          "y": 82.58480072021484,
+          "width": 339,
+          "height": 637,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 17.57900047302246,
+          "y": 82.7854995727539,
+          "width": 340,
+          "height": 639,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 17.212799072265625,
+          "y": 82.95120239257812,
+          "width": 341,
+          "height": 640,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.43239974975586,
+          "y": 83.3042984008789,
+          "width": 342,
+          "height": 643,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.318599700927734,
+          "y": 83.35579681396484,
+          "width": 342,
+          "height": 644,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.19890022277832,
+          "y": 83.41000366210938,
+          "width": 343,
+          "height": 644,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.126399993896484,
+          "y": 83.44280242919922,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.0757999420166,
+          "y": 83.4656982421875,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.034000396728516,
+          "y": 83.4845962524414,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.018699645996094,
+          "y": 83.49150085449219,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.00790023803711,
+          "y": 83.49639892578125,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.00320053100586,
+          "y": 83.49849700927734,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.000999450683594,
+          "y": 83.49949645996094,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16.000099182128906,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        },
+        {
+          "x": 16,
+          "y": 83.5,
+          "width": 343,
+          "height": 645,
+          "radius": "18px",
+          "power": ""
+        }
+      ],
+      "screenshot": "F:\\雷师傅\\ui组件网站\\design\\contact-ui-20261025\\contact-corners-matched-20261026\\contact-375-dark.png",
+      "focusRestored": true
+    }
+  ],
+  "errors": [],
+  "recommendationSelected": true,
+  "validationFocus": true,
+  "searchCorners": {
+    "radius": "18px",
+    "shape": "superellipse(1)"
+  },
+  "reducedMotionShape": "superellipse(1)"
+}

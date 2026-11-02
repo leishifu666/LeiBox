@@ -1,0 +1,14 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+const dir=path.dirname(fileURLToPath(import.meta.url));
+const names=["logo.svg","logo-white.svg","wordmark.svg","construction.svg","lettering-construction.svg"];
+const hashes=async()=>Object.fromEntries(await Promise.all(names.map(async name=>[name,createHash("sha256").update(await fs.readFile(path.join(dir,name))).digest("hex")])));
+const before=await hashes();
+execFileSync(process.execPath,[path.join(dir,"build.mjs")],{stdio:"pipe"});
+const after=await hashes();
+if(JSON.stringify(before)!==JSON.stringify(after))throw new Error("Rebuilding from parameters changed the deliverables.");
+await fs.writeFile(path.join(dir,"rebuild-check.json"),JSON.stringify({parameterRebuildIdentical:true,files:after},null,2)+"\n");
+console.log({parameterRebuildIdentical:true,files:names.length});

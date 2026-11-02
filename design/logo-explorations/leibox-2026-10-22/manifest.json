@@ -1,0 +1,156 @@
+{
+  "brand": "LeiBox",
+  "date": "2026-10-22",
+  "tool": "built-in image_gen",
+  "latestBrief": "主图形以大写L为主，借鉴用户参考的圆角、厚黑、盒体与白色负形。",
+  "originalBoards": [
+    {
+      "board": 1,
+      "title": "LB 字母共构",
+      "file": "01-lb-monograms.png",
+      "prompt": "prompts/01-lb-monograms.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 2,
+      "title": "收藏与容器",
+      "file": "02-collection-containers.png",
+      "prompt": "prompts/02-collection-containers.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 3,
+      "title": "UI 模块与组件",
+      "file": "03-ui-modular.png",
+      "prompt": "prompts/03-ui-modular.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 4,
+      "title": "参考风格：B／LB 负形",
+      "file": "04-negative-space.png",
+      "prompt": "prompts/04-negative-space.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 5,
+      "title": "LeiBox 字标实验",
+      "file": "05-experimental-wordmarks.png",
+      "prompt": "prompts/05-experimental-wordmarks.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 6,
+      "title": "连接与 AI 工具",
+      "file": "06-connected-tools.png",
+      "prompt": "prompts/06-connected-tools.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 7,
+      "title": "书签与设计档案",
+      "file": "07-editorial-archives.png",
+      "prompt": "prompts/07-editorial-archives.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 8,
+      "title": "参考风格：圆角空间盒形",
+      "file": "08-folds-and-space.png",
+      "prompt": "prompts/08-folds-and-space.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 9,
+      "title": "亲和型抽象角色",
+      "file": "09-friendly-curators.png",
+      "prompt": "prompts/09-friendly-curators.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": 10,
+      "title": "参考风格：成熟品牌符号",
+      "file": "10-bold-signatures.png",
+      "prompt": "prompts/10-bold-signatures.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    }
+  ],
+  "lFocusRevisions": [
+    {
+      "board": "L-A",
+      "title": "L 主识别 A：圆角盒体与白色 L",
+      "file": "11-l-negative-space-v2.png",
+      "prompt": "prompts/11-l-negative-space-v2.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    },
+    {
+      "board": "L-B",
+      "title": "L 主识别 B：L 构成收藏容器",
+      "file": "12-l-container-v2.png",
+      "prompt": "prompts/12-l-container-v2.txt",
+      "grid": {
+        "columns": 4,
+        "rows": 6,
+        "cells": 24
+      },
+      "stage": "concept-raster"
+    }
+  ],
+  "reference": "style-reference.png",
+  "selection": "板号/版本 + 第1—6行 + 第1—4列；选定后再规整。当前未替换网站Logo。"
+}

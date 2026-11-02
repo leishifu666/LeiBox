@@ -1,0 +1,15 @@
+{
+  "model": "Hark / Claude Opus 5.5（站点默认）",
+  "projectUrl": "https://hark.com/project/bb8312f5-3b32-46b5-b6d5-eec50a18d3a0",
+  "submittedAt": "2026-10-22T15:24:56.538Z",
+  "selected": "01-balanced",
+  "revision": "equal-arm-spacing",
+  "code": "claude-original.html",
+  "htmlModifiedByCodex": false,
+  "siteAssetsUpdated": true,
+  "localPreviewUpdated": true,
+  "productionSource": "design/brand/leibox/master.svg",
+  "validation": "design/brand/leibox/validation.json",
+  "committed": false,
+  "published": false
+}

@@ -1,0 +1,300 @@
+{
+  "checks": [
+    {
+      "width": 1440,
+      "variant": "1",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=1",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 1440,
+      "variant": "2",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=2",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 1440,
+      "variant": "3",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=3",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 1440,
+      "variant": "4",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=4",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 1440,
+      "variant": "5",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=5",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 1440,
+      "variant": "6",
+      "columns": 3,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=6",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "1",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=1",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "2",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=2",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "3",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=3",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "4",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=4",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "5",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=5",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 768,
+      "variant": "6",
+      "columns": 2,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=6",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "1",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=1",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "2",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=2",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "3",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=3",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "4",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=4",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "5",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=5",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "width": 375,
+      "variant": "6",
+      "columns": 1,
+      "overflow": false,
+      "cards": 6,
+      "images": true,
+      "textClipped": false,
+      "imageFit": "contain",
+      "url": "?variant=6",
+      "colors": {
+        "text": "rgb(113, 113, 122)",
+        "page": "rgb(255, 255, 255)"
+      }
+    }
+  ],
+  "keyboardEnter": {
+    "selected": "2",
+    "focus": "2",
+    "focusShadow": "rgba(255, 255, 255, 0.65) 0px 0px 0px 1.30196px, rgba(24, 24, 27, 0.65) 0px 0px 0px 2.60392px"
+  },
+  "keyboardSpace": true,
+  "historyBack": {
+    "selected": "2",
+    "url": "?variant=2"
+  },
+  "invalidVariant": {
+    "selected": "1",
+    "url": "?variant=1"
+  },
+  "focus": {
+    "sidebar": {
+      "visible": true,
+      "outline": "rgb(24, 24, 27) solid 1.71429px"
+    },
+    "card": {
+      "visible": true,
+      "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px"
+    }
+  },
+  "descriptionContrastOnWhite": 4.83,
+  "allExpectedColumns": true
+}

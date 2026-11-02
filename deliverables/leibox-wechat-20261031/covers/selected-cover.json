@@ -1,0 +1,27 @@
+{
+  "selected_style": "design-share",
+  "final_file": "leibox-wechat-cover-pingfang.png",
+  "size": [
+    1922,
+    818
+  ],
+  "aspect_ratio": 2.349633251833741,
+  "font_family": "PingFang SC Regular",
+  "font_size": 26,
+  "header_footer_same_font": true,
+  "avatar_original": true,
+  "avatar_left": 62,
+  "headline_left": 62,
+  "title_and_product_pixels_unchanged": true,
+  "method": "用户明确要求后，本地清除原页眉页脚文字，同一字体重排，技能脚本合成原头像",
+  "sha256": "f0103950254105cc3e35d1527f26d0ef2e44599ac3d07a8c4cb7c3b7e38dcbe4",
+  "wechat_draft_cover_updated": true,
+  "wechat_appmsgid": "100000338",
+  "saved_and_reloaded": true,
+  "upload_verification": "wechat-cover-upload.json",
+  "font_metadata_name": [
+    "PingFang SC",
+    "Regular"
+  ],
+  "font_sha256": "3a4f9a72db34a2f17421dbda9355b683cd5158d9868961f8efbf80463007aaaf"
+}

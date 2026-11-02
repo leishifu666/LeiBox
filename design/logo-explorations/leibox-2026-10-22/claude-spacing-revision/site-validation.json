@@ -1,0 +1,55 @@
+{
+  "dark": {
+    "theme": "geistsans_d5a4f12f-module__Ur3q_a__variable geistmono_157ca88a-module__iaM1Ya__variable h-full antialiased dark",
+    "logos": [
+      {
+        "width": 112.00000762939453,
+        "height": 25.000001907348633,
+        "filter": "invert(0)"
+      },
+      {
+        "width": 112.00000762939453,
+        "height": 25.000001907348633,
+        "filter": "invert(0)"
+      }
+    ]
+  },
+  "widths": [
+    {
+      "width": 375,
+      "overflow": false,
+      "logos": [
+        {
+          "loaded": true,
+          "width": 103.1339340209961,
+          "height": 23.017858505249023,
+          "filter": "invert(1)"
+        },
+        {
+          "loaded": true,
+          "width": 112.00000762939453,
+          "height": 25.000001907348633,
+          "filter": "invert(1)"
+        }
+      ]
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "logos": [
+        {
+          "loaded": true,
+          "width": 104.00000762939453,
+          "height": 23.21428680419922,
+          "filter": "invert(1)"
+        },
+        {
+          "loaded": true,
+          "width": 112.00000762939453,
+          "height": 25.000001907348633,
+          "filter": "invert(1)"
+        }
+      ]
+    }
+  ]
+}

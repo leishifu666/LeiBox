@@ -1,5 +1,8 @@
-import { MATCHA_POWDER_PROMPT } from "./matcha-powder-reveal.mjs";
+import { PARTICLE_TEXTURE_TRIO_PROMPT } from "./particle-texture-trio.mjs";
 import { AI_BRAND_COVER_PROMPT } from "./ai-brand-cover-cards.mjs";
+import { INK_SPREAD_CAROUSEL_PROMPT } from "./ink-spread-carousel.mjs";
+import { ASCII_SHARKS_PROMPT } from "./ascii-sharks.mjs";
+import { MATCHA_POWDER_PROMPT } from "./matcha-powder-reveal.mjs";
 import { MOTION_PROMPTS } from "./motion-prompts.mjs";
 import { FOLDED_EMOJI_PROMPT } from "./folded-emoji-scroll.mjs";
 import { GRADIENT_RING_PROMPT } from "./gradient-ring-cards.mjs";
@@ -51,6 +54,39 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug: "ascii-sharks", href: "/docs/animations/ascii-sharks", name: "ASCII Shark Ocean", category: "ASCII animation",
+    description: "Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.",
+    keywords: "ASCII 字符 鲨鱼 鱼群 游动 海洋 捕食 追逐 避让 水波 网格 背景 输入框 shark ocean fish boids stacked drewdi",
+    preview: "/assets/components/ascii-sharks.png", sourceFile: "字符鲨鱼与鱼群.html", canvasWidth: 972, canvasHeight: 880, responsive: true,
+    instructions: "Move or tap the water to scatter fish. Focus the water: Space pauses, R restarts, arrows move and Enter splashes. Messages stay in local history; voice input needs a callback.",
+    prompt: ASCII_SHARKS_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/stackedlol/status/2112257760628986188/video/1", referenceAuthor: "stacked", referenceAuthorUrl: "https://x.com/stackedlol",
+    referenceNotes: "Decoded all 1411 frames of the 1944×1760, approximately 57.533fps, 24.525s clip titled full demo of shark ascii animation. Observed a light fine grid, multiple character-cell shark species and small fish schools, a centered what's on your mind heading, translucent composer and History button. The supplied repository's World, species, math and AsciiRenderer are reused unchanged at commit a0074c16a106f0abc665fe9712ca445f8f98ad8e. Its default is dark; CSS inversion produces the observed light presentation. Mixed default species, local composer/history/attachments, callback-only voice integration, seeded per-instance randomness, native framework wrappers and lifecycle are LeiBox adaptations. The UI font, haze, dimensions and recorded initial state are reconstruction estimates; the fish and shark algorithms are the licensed original source.",
+    referenceLicense: "MIT License, Copyright (c) 2026 drewdi; full notice retained in the vendored source and every generated engine/HTML. Geist fonts retain their OFL notice, Lucide controls their ISC notice. Original video and raw reference frames remain internal.",
+    codeSource: "https://github.com/stackedlol/ascii-sharks/tree/a0074c16a106f0abc665fe9712ca445f8f98ad8e — original World, AsciiRenderer, math and species modules, MIT. LeiBox supplies the instance-scoped lifecycle and optional local UI; no original backend is included.",
+  },
+  {
+    slug: "ink-spread-carousel", href: "/docs/animations/ink-spread-carousel", name: "Ink Spread Carousel", category: "Image transition",
+    description: "A new photo spreads from your press with a rippling ink edge and a thin lens distortion, while a soft image shadow changes behind the white card.",
+    keywords: "墨水 扩散 晕染 图片 轮播 点击 液态 遮罩 折射 ink bloom spread carousel WebGL Lorenzo Cabra Bencho",
+    preview: "/assets/components/ink-spread-carousel.png", sourceFile: "墨水扩散图片轮播.html", canvasWidth: 940, canvasHeight: 876,
+    instructions: "Click the photo or the arrows to spread the next image from your press. Use Left/Right, Home or End; touch supports tapping, and rapid clicks continue from the current frame.",
+    prompt: INK_SPREAD_CAROUSEL_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/cabralorenzo/status/2114082220566860026/video/1", referenceAuthor: "Lorenzo Cabra", referenceAuthorUrl: "https://x.com/cabralorenzo",
+    referenceNotes: "Decoded all 997 frames of the 1410×1316, approximately 57.026fps, 17.483s clip titled Ink Bloom Interactive Component. Measured a 680×880 white card with a 20px border, 60px outer corners and approximately 85px circular controls. Observed an irregular radial image reveal from pressed points, narrow lens refraction and a blurred companion image shadow. The linked Bencho page confirms the public interaction description; the interactive preview and implementation are Pro locked and were not accessed. Shader, noise field, 900ms duration, interruption snapshots, touch/keyboard controls and fallback are independent reconstruction estimates/adaptations. Four generated alpine artworks match the subjects and broad palette but are not the original photographs. The video player's tabs, save, sound and play controls belong to the source site's shell and are not part of this carousel.",
+    referenceLicense: "Original design and image/source license not supplied or independently verified. Original footage, photos and Pro source are not redistributed. Four new images were generated for this reconstruction. Lucide icons retain their ISC notice.",
+    codeSource: "Independent instance-scoped WebGL1 shader, Canvas2D fallback and DOM controls, reusing the existing native six-framework lifecycle. Includes generated inline artwork and licensed Lucide icons; no paid Bencho source code.",
+  },
+  { slug: "particle-texture-trio", href: "/docs/animations/particle-texture-trio", name: "Particle Texture Trio", category: "Particle animation",
+    description: "Three fixed dot-matrix shapes reveal flowing blue-green particles, hollow white contours and warm orange-pink textures.",
+    keywords: "粒子 纹理 点阵 三联 流动 空心 圆弧 蓝绿 橙红 Sarvam Anushka particle texture trio noise flow field",
+    preview: "/assets/components/particle-texture-trio.png", sourceFile: "粒子纹理三联.html", canvasWidth: 960, canvasHeight: 540,
+    instructions: "Click any shape to pause or resume. Arrow keys step through frames; Home or Escape restarts the animation.", prompt: PARTICLE_TEXTURE_TRIO_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/anushka_dzn/status/2115406152167297211/video/1", referenceAuthor: "Anushka", referenceAuthorUrl: "https://x.com/anushka_dzn",
+    referenceNotes: "Decoded all 360 frames of the 3840×2160, 60fps, six-second video. Measured centers near x730/1920/3118, y1080, a 488px radius and 17.94px lattice pitch. Temporal correlation identifies a 180-frame, three-second cycle. Tracked one complete cycle: the left dots follow larger, narrow local ellipses with mixed signed circulation; right dots follow smaller predominantly clockwise orbits; monochrome rows remain almost fixed with subpixel horizontal movement. Compact continuous coefficient fields are fitted to the colored trajectories, with held-out coefficient errors about 0.30 and 0.16 design pixels; optical-flow and field fitting are estimates. Monochrome contours are measured vector polygons. The original tool/source was unavailable. Color and size noise, pause, stepping, touch and reduced motion are local reconstruction/adaptations; pointer repulsion is removed.",
+    referenceLicense: "Original design and Sarvam mark rights remain with their respective owners; source license not supplied or verified. No original video, raster artwork, font files or author source code is redistributed.",
+    codeSource: "Independent Canvas2D renderer with compact Chebyshev motion fields fitted to tracked particle paths, seeded color/size noise, analytic colored silhouettes and measured monochrome contours. Reuses the existing LeiBox lifecycle. No reference video or raster texture is played at runtime; this is a reconstruction, not the author's generator or Sarvam source code." },
   { slug: "matcha-powder-reveal", href: "/docs/animations/matcha-powder-reveal", name: "Package Tear and Powder Reveal", category: "Particle transition",
     description: "Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.",
     keywords: "包装 撕开 撕口 抹茶 粉末 粒子 消散 金属 产品 package tear matcha powder reveal Andreas", preview: "/assets/components/matcha-powder-reveal.png", sourceFile: "包装撕开粒子消散.html", canvasWidth: 1280, canvasHeight: 720,

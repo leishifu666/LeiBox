@@ -1,0 +1,56 @@
+{
+  "source": "F:\\雷师傅\\ui组件网站\\deliverables\\leibox-wechat-20261031\\covers\\references\\selected-design-share.png",
+  "prepared_base": "F:\\雷师傅\\ui组件网站\\deliverables\\leibox-wechat-20261031\\covers\\references\\header-footer-typeset-base.png",
+  "method": "用户指定的页眉页脚原文字清除与本机真实字体重排",
+  "author_avatar_left": 62,
+  "headline_left": 62,
+  "avatar_box": [
+    62,
+    54,
+    126,
+    118
+  ],
+  "name_gap": 16,
+  "font_family": "Microsoft YaHei Regular",
+  "font_file": "C:/Windows/Fonts/msyh.ttc",
+  "font_size": 26,
+  "text_placements": [
+    {
+      "text": "LSF 设计日常",
+      "ink_box": [
+        142,
+        74,
+        296,
+        99
+      ],
+      "baseline": 96,
+      "font": "C:/Windows/Fonts/msyh.ttc",
+      "size": 26
+    },
+    {
+      "text": "@LSF 设计日常",
+      "ink_box": [
+        62,
+        744,
+        243,
+        769
+      ],
+      "baseline": 766,
+      "font": "C:/Windows/Fonts/msyh.ttc",
+      "size": 26
+    },
+    {
+      "text": "2026",
+      "ink_box": [
+        1800,
+        746,
+        1860,
+        766
+      ],
+      "baseline": 766,
+      "font": "C:/Windows/Fonts/msyh.ttc",
+      "size": 26
+    }
+  ],
+  "outside_header_footer_pixels_unchanged": true
+}

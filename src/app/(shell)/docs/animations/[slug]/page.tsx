@@ -27,7 +27,7 @@ export default async function MotionPage({params}:Props){
       beforeInstall={<section className="mt-8" aria-label="Demo">
         <h2 className="text-lg font-semibold tracking-[-0.01em]"><T>Demo</T></h2>
         <p className="mt-2 text-[13px] text-muted-foreground"><T>{entry.instructions!}</T></p>
-        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
+        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
       </section>}
       afterCode={<>{doc.afterCode}<div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
         <a href={"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
@@ -36,6 +36,29 @@ export default async function MotionPage({params}:Props){
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "ascii-sharks" ? [
+          {name:"options.theme",type:'"light" | "dark"',defaultValue:'"light"',description:"Light video-style presentation or the original dark rendering."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause the simulation while keeping keyboard and local controls usable."},
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Simulation speed multiplier from 0.25 to 2."},
+          {name:"options.seed",type:"number",defaultValue:"7",description:"Independent deterministic seed; updating it restarts this ocean only."},
+          {name:"options.fishCount",type:"number",description:"Override the area-based fish population, from 0 to 340."},
+          {name:"options.sharks",type:'{ kind: "classic" | "hammerhead" | "zebra" | "tiger" | "greathammer" | "mako" | "thresher" | "nurse"; size: number }[]',description:"One to eight shark species and relative sizes. Defaults to a mixed group."},
+          {name:"options.showComposer",type:"boolean",defaultValue:"true",description:"Show the local composer, haze and history layer."},
+          {name:"options.onSubmit",type:"(message: { text: string; attachments: File[] }) => void",description:"Receives local text and selected File objects; nothing uploads automatically."},
+          {name:"options.onVoiceInput",type:"() => void",description:"Enable the microphone button with your own voice handler."},
+        ] : []),
+        ...(slug === "ink-spread-carousel" ? [
+          {name:"options.index",type:"number",defaultValue:"0",description:"Initial or updated photo index; indices wrap around the collection."},
+          {name:"options.duration",type:"number",defaultValue:"900",description:"Image transition duration in milliseconds, from 250 to 2400."},
+          {name:"options.roughness",type:"number",defaultValue:"0.6",description:"Irregularity of the ink edge, from 0 to 1."},
+          {name:"options.images",type:"(string | { src: string; alt?: string })[]",description:"Two to twelve image URLs or objects with src and alt. The default generated artwork is embedded."},
+          {name:"options.onIndexChange",type:"(index: number) => void",description:"Called once when the user's final image transition completes; external updates do not emit it."},
+        ] : []),
+        ...(slug === "particle-texture-trio" ? [
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Playback speed multiplier, from 0 to 3; zero stops rendering."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause or resume all three particle fields."},
+          {name:"options.background",type:'"#000" | "#f4f4f4"',defaultValue:'"#000"',description:"Scene background; use black for the original composition or light grey for previews."},
+        ] : []),
         ...(slug === "matcha-powder-reveal" ? [
           {name:"options.progress",type:"number",description:"Initial or updated animation progress, from 0 to 1."},
           {name:"options.playing",type:"boolean",defaultValue:"true",description:"Play or pause the animation."},

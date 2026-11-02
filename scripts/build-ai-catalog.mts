@@ -48,7 +48,7 @@ for (const component of INTERACTION_COMPONENTS) {
     docsPath: component.href, detailPath, markdownPath,
     previewPath: component.preview,
     discovery: discovery(component.slug),
-    frameworks: packages.map((pack) => pack.framework), renderers: [],
+    frameworks: packages.map((pack) => pack.framework), renderers: component.renderers ?? [],
     source: {
       kind: "project-source", provider: "LeiBox", implementation: component.codeSource ?? "LeiBox component package",
       designReference: component.referenceUrl ?? null, designAuthor: component.referenceAuthor ?? null,

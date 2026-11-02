@@ -1,0 +1,159 @@
+{
+  "method": "segmented masks; uniform bbox-center registration; bidirectional boundary-pixel distance",
+  "mask": "luminance",
+  "threshold": 128,
+  "canvas": [
+    1160,
+    1160
+  ],
+  "D_pixels": 1000,
+  "boundary_points_original": [
+    7046,
+    5617
+  ],
+  "boundary_points_used": [
+    7046,
+    5617
+  ],
+  "sampled": false,
+  "iou": 0.8485545785647887,
+  "mean_px": 3.0385570058257816,
+  "p95_px": 9.848857801796104,
+  "max_px": 18.681541692269406,
+  "original_topology": {
+    "components": 6,
+    "holes": 4
+  },
+  "rebuilt_topology": {
+    "components": 6,
+    "holes": 4
+  },
+  "topology_equal": true,
+  "mean_pct_D": 0.30385570058257816,
+  "p95_pct_D": 0.9848857801796105,
+  "max_pct_D": 1.8681541692269406,
+  "checks": {
+    "topology_equal": true,
+    "source_topology_equal": true,
+    "original_topology_survived_normalization": true,
+    "rebuilt_topology_survived_normalization": true
+  },
+  "diff_legend": {
+    "dark": "intersection",
+    "red": "original only",
+    "blue": "rebuilt only"
+  },
+  "source_threshold": 128,
+  "sources": {
+    "original": {
+      "path": "F:\\雷师傅\\ui组件网站\\design\\brand\\leibox-ei-20261023\\selected-reference.png",
+      "sha256": "eb0f0af0bdf824759bf0dee1e647f23577a3d830628f8ff180731597549e86a1",
+      "input_size": [
+        170,
+        79
+      ],
+      "crop": [
+        68,
+        34,
+        160,
+        59
+      ],
+      "mask": "luminance",
+      "threshold": 128,
+      "foreground_bbox_in_input": [
+        68,
+        34,
+        160,
+        59
+      ],
+      "foreground_dimensions": [
+        92,
+        25
+      ],
+      "source_topology": {
+        "components": 6,
+        "holes": 4
+      },
+      "registration": {
+        "uniform_scale": 10.869565217391305,
+        "translation_from_input": [
+          -659.1304347826087,
+          74.56521739130432
+        ],
+        "rotation_degrees": 0,
+        "source_D_pixels": 92,
+        "target_D_pixels": 1000,
+        "resampling": "nearest neighbor of the segmented mask"
+      }
+    },
+    "rebuilt": {
+      "path": "F:\\雷师傅\\ui组件网站\\design\\brand\\leibox-ei-20261023\\wordmark.png",
+      "sha256": "249860c5db9a7953eee3c261d2ffa3ecfa03349fc00410100fdd7190ad6cf206",
+      "input_size": [
+        1488,
+        404
+      ],
+      "crop": [
+        0,
+        0,
+        1488,
+        404
+      ],
+      "mask": "alpha",
+      "threshold": 128,
+      "foreground_bbox_in_input": [
+        1,
+        0,
+        1487,
+        404
+      ],
+      "foreground_dimensions": [
+        1486,
+        404
+      ],
+      "source_topology": {
+        "components": 6,
+        "holes": 4
+      },
+      "registration": {
+        "uniform_scale": 0.6729475100942126,
+        "translation_from_input": [
+          79.32705248990584,
+          444.06460296096907
+        ],
+        "rotation_degrees": 0,
+        "source_D_pixels": 1486,
+        "target_D_pixels": 1000,
+        "resampling": "nearest neighbor of the segmented mask"
+      }
+    }
+  },
+  "registration": {
+    "rotation_degrees": 0,
+    "local_warp": false,
+    "nominal_D_pixels": 1000,
+    "margin_pixels": 80
+  },
+  "numeric_checks_passed": true,
+  "numeric_attention": [],
+  "configured_limits": {
+    "min_iou": null,
+    "max_mean_pct": null,
+    "max_p95_pct": null
+  },
+  "visual_review_required": true,
+  "design_acceptance": "not_evaluated",
+  "area": {
+    "original": 121236,
+    "rebuilt": 121372,
+    "intersection": 111366,
+    "union": 131242,
+    "original_only": 9870,
+    "rebuilt_only": 10006,
+    "original_area_removed_fraction": 0.08141146194199743,
+    "rebuilt_area_added_fraction": 0.08244076063672016
+  },
+  "mean_original_pixel_equivalent": 0.2795472445359719,
+  "p95_original_pixel_equivalent": 0.9060949177652415,
+  "max_original_pixel_equivalent": 1.7187018356887853
+}

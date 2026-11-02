@@ -1,0 +1,116 @@
+[
+  {
+    "key": "01-balanced",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox 均衡圆角\"><title>LeiBox</title><defs><mask id=\"leibox-01-balanced-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 248 L282 388 L403.244 318\" fill=\"none\" stroke=\"#000\" stroke-width=\"54\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-01-balanced-mask)\"/></svg>",
+    "viewBox": "0 0 512 512",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 248
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 403.24355652982143,
+        "y": 318
+      }
+    }
+  },
+  {
+    "key": "02-flat",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox 平切端头\"><title>LeiBox</title><defs><mask id=\"leibox-02-flat-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 248 L282 388 L403.244 318\" fill=\"none\" stroke=\"#000\" stroke-width=\"54\" stroke-linecap=\"butt\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-02-flat-mask)\"/></svg>",
+    "viewBox": "0 0 512 512",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 248
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 403.24355652982143,
+        "y": 318
+      }
+    }
+  },
+  {
+    "key": "03-bold",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox 厚实圆角\"><title>LeiBox</title><defs><mask id=\"leibox-03-bold-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 256 L282 388 L396.315 322\" fill=\"none\" stroke=\"#000\" stroke-width=\"66\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-03-bold-mask)\"/></svg>",
+    "viewBox": "0 0 512 512",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 256
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 396.3153532995459,
+        "y": 322
+      }
+    }
+  },
+  {
+    "key": "04-thin",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox 纤细圆角\"><title>LeiBox</title><defs><mask id=\"leibox-04-thin-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 240 L282 388 L410.172 314\" fill=\"none\" stroke=\"#000\" stroke-width=\"38\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-04-thin-mask)\"/></svg>",
+    "viewBox": "0 0 512 512",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 240
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 410.17175976009696,
+        "y": 314
+      }
+    }
+  },
+  {
+    "key": "05-sharp",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" role=\"img\" aria-label=\"LeiBox 尖角折箭\"><title>LeiBox</title><defs><mask id=\"leibox-05-sharp-mask\" maskUnits=\"userSpaceOnUse\" x=\"0\" y=\"0\" width=\"512\" height=\"512\"><rect x=\"0\" y=\"0\" width=\"512\" height=\"512\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 248 L282 388 L403.244 318\" fill=\"none\" stroke=\"#000\" stroke-width=\"54\" stroke-linecap=\"butt\" stroke-linejoin=\"miter\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-05-sharp-mask)\"/></svg>",
+    "viewBox": "0 0 512 512",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 248
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 403.24355652982143,
+        "y": 318
+      }
+    }
+  },
+  {
+    "key": "06-compact",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"36 36 440 440\" role=\"img\" aria-label=\"LeiBox 紧凑版\"><title>LeiBox</title><defs><mask id=\"leibox-06-compact-mask\" maskUnits=\"userSpaceOnUse\" x=\"36\" y=\"36\" width=\"440\" height=\"440\"><rect x=\"36\" y=\"36\" width=\"440\" height=\"440\" fill=\"#fff\"/><path data-role=\"l-centerline\" d=\"M282 260 L282 388 L392.851 324\" fill=\"none\" stroke=\"#000\" stroke-width=\"58\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\"/></mask></defs><path d=\"M212 59.403 A88 88 0 0 1 300 59.403 L404.258 119.597 A88 88 0 0 1 448.258 195.807 L448.258 316.193 A88 88 0 0 1 404.258 392.403 L300 452.597 A88 88 0 0 1 212 452.597 L107.742 392.403 A88 88 0 0 1 63.742 316.193 L63.742 195.807 A88 88 0 0 1 107.742 119.597 Z\" fill=\"#000\" mask=\"url(#leibox-06-compact-mask)\"/></svg>",
+    "viewBox": "36 36 440 440",
+    "points": {
+      "verticalEnd": {
+        "x": 282,
+        "y": 260
+      },
+      "elbow": {
+        "x": 282,
+        "y": 388
+      },
+      "diagonalEnd": {
+        "x": 392.85125168440817,
+        "y": 324
+      }
+    }
+  }
+]

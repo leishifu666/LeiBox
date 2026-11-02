@@ -1,0 +1,114 @@
+{
+  "geometry": {
+    "lengths": [
+      119,
+      118.99999999969845
+    ],
+    "ratio": 1.000000000002534,
+    "width": 54,
+    "elbow": {
+      "x": 274,
+      "y": 392.618802154
+    },
+    "rightGap": 37.15277890422486,
+    "bottomGap": 37.94228634018123,
+    "gapRatio": 0.9791918855685755,
+    "shellUnchanged": true
+  },
+  "raster": {
+    "size": 1024,
+    "alphaIoU": 0.9999526882108033,
+    "meanAlphaDifference": 0.0034112930297851562,
+    "maxAlphaDifference": 21
+  },
+  "topologyMethod": {
+    "alphaThreshold": 128,
+    "inkNeighbors": 8,
+    "transparentNeighbors": 4
+  },
+  "sizes": [
+    {
+      "size": 16,
+      "components": 1,
+      "holes": 1
+    },
+    {
+      "size": 24,
+      "components": 1,
+      "holes": 1
+    },
+    {
+      "size": 32,
+      "components": 1,
+      "holes": 1
+    },
+    {
+      "size": 48,
+      "components": 1,
+      "holes": 1
+    },
+    {
+      "size": 96,
+      "components": 1,
+      "holes": 1
+    }
+  ],
+  "served": [
+    {
+      "file": "leibox-mark.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "leibox-logo.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "logo.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "logo-icon.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "favicon.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "favicon.ico",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "apple-touch-icon.png",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "icon-192.png",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "icon-512.png",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "leibox-og.svg",
+      "status": 200,
+      "matches": true
+    },
+    {
+      "file": "leibox-og.png",
+      "status": 200,
+      "matches": true
+    }
+  ],
+  "pass": true
+}

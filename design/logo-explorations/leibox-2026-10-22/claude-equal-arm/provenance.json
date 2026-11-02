@@ -1,0 +1,16 @@
+{
+  "model": "Hark / Claude Opus 5.5（站点默认）",
+  "projectUrl": "https://hark.com/project/bb8312f5-3b32-46b5-b6d5-eec50a18d3a0",
+  "submittedAt": "2026-10-22T13:28:17.568Z",
+  "originalCode": "claude-original.html",
+  "runnableCode": "index.html",
+  "htmlModifiedByCodex": false,
+  "verification": [
+    "Actual browser rendering",
+    "375/768/1440 screenshot inspection",
+    "Equal arm screen-coordinate measurement",
+    "Independent exported SVG geometry and alpha-channel checks"
+  ],
+  "downloadButtonConfirmation": "not confirmed: browser download event timed out",
+  "siteLogoReplaced": false
+}

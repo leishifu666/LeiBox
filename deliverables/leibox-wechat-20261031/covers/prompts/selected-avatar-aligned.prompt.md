@@ -1,0 +1,9 @@
+LOCAL HEADER ALIGNMENT CORRECTION ONLY. Edit the selected LeiBox cover from Image1. Use Image2 only as the exact photographic creator avatar.
+
+The previous avatar placement was NOT left-aligned. Correct it: the LEFTMOST EDGE of the circular avatar must align with the LEFTMOST INK EDGE of the first headline character “给” and the footer author signature, at approximately x=64px on this1922×818 canvas (about3.3% of the canvas width). This shared vertical alignment is the main requirement. Do NOT place the avatar at x108 or x116. Do NOT center the avatar on the old author label position.
+
+Recompose only the small top-left author group: circular avatar diameter64px, its left edge at x64, top at y54, centerline y86. Move the existing “LSF 设计日常” name LEFT so it begins at x144px, exactly16px to the right of the avatar. Keep the existing name's same black sans-serif lettering, same24px size and vertical centerline. Whole group aligned on one horizontal centerline. Use the exact original photo appearance, circular crop, no redraw of the person, no border or shadow.
+
+Image1 is the ORIGINAL SELECTED COVER without the avatar. Keep every other part visually unchanged: complete exact headline “给 AI 做的网页，减点 AI 味，加点设计感”, its three lines and original positions/font shapes, blue highlight, right-side glass-folder artwork, real logo sticker, blue-to-white gradient, footer signature, line and2026. Only move the tiny top author name and add the correctly aligned original-photo avatar. No new text, no recropping, no changes to body typography, components, branding or colors.
+
+Return one complete corrected cover with the same1922×818 ultra-wide composition. Verify before output: a vertical line through the avatar's left edge also touches the main title's left edge. Avatar and author name must form a single left-aligned header group.

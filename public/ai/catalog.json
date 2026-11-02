@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "f3bde0360de67c39e29554447e7e6c99037c0f069ec43a1850800f175894c8d7",
+  "revision": "b329691e3de199610100bcb6cc4b09c98ffd2a7da995c36a6ee3e334ec65f3fa",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,224 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "ascii-sharks",
+      "name": {
+        "en": "ASCII Shark Ocean",
+        "zh": "字符鲨鱼与鱼群"
+      },
+      "description": {
+        "en": "Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.",
+        "zh": "字符鲨鱼在细网格上摆尾游动、追逐鱼群，支持指针避让与点击惊散，并可叠加半透明本地输入框。"
+      },
+      "keywords": "ASCII 字符 鲨鱼 鱼群 游动 海洋 捕食 追逐 避让 水波 网格 背景 输入框 shark ocean fish boids stacked drewdi",
+      "docsPath": "/docs/animations/ascii-sharks",
+      "detailPath": "/ai/components/ascii-sharks.json",
+      "markdownPath": "/ai/components/ascii-sharks.md",
+      "previewPath": "/assets/components/ascii-sharks.png",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "字符鲨鱼与鱼群",
+          "交互式海洋背景",
+          "ASCII shark ocean"
+        ],
+        "searchTerms": [
+          "ASCII",
+          "字符",
+          "鲨鱼",
+          "鱼群",
+          "海洋",
+          "shark",
+          "ocean",
+          "fish"
+        ],
+        "visualTags": [
+          "ascii",
+          "grid",
+          "light"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "本地动画与可选输入界面；语音输入需要调用方回调。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "https://github.com/stackedlol/ascii-sharks/tree/a0074c16a106f0abc665fe9712ca445f8f98ad8e — original World, AsciiRenderer, math and species modules, MIT. LeiBox supplies the instance-scoped lifecycle and optional local UI; no original backend is included.",
+        "designReference": "https://x.com/stackedlol/status/2112257760628986188/video/1",
+        "designAuthor": "stacked",
+        "license": "MIT License, Copyright (c) 2026 drewdi; full notice retained in the vendored source and every generated engine/HTML. Geist fonts retain their OFL notice, Lucide controls their ISC notice. Original video and raw reference frames remain internal."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "ink-spread-carousel",
+      "name": {
+        "en": "Ink Spread Carousel",
+        "zh": "墨水扩散图片轮播"
+      },
+      "description": {
+        "en": "A new photo spreads from your press with a rippling ink edge and a thin lens distortion, while a soft image shadow changes behind the white card.",
+        "zh": "新图从点击位置沿不规则墨水边缘向外晕开，边界带有轻微透镜折射，白色卡片后的柔焦色影同步换色。"
+      },
+      "keywords": "墨水 扩散 晕染 图片 轮播 点击 液态 遮罩 折射 ink bloom spread carousel WebGL Lorenzo Cabra Bencho",
+      "docsPath": "/docs/animations/ink-spread-carousel",
+      "detailPath": "/ai/components/ink-spread-carousel.json",
+      "markdownPath": "/ai/components/ink-spread-carousel.md",
+      "previewPath": "/assets/components/ink-spread-carousel.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "墨水扩散图片轮播",
+          "点击位置图片揭示",
+          "ink spread carousel"
+        ],
+        "searchTerms": [
+          "墨水",
+          "扩散",
+          "晕染",
+          "轮播",
+          "折射",
+          "ink",
+          "spread",
+          "carousel"
+        ],
+        "visualTags": [
+          "image",
+          "ink",
+          "refraction"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "本地图片过渡重建；不包含付费组件原始源码。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent instance-scoped WebGL1 shader, Canvas2D fallback and DOM controls, reusing the existing native six-framework lifecycle. Includes generated inline artwork and licensed Lucide icons; no paid Bencho source code.",
+        "designReference": "https://x.com/cabralorenzo/status/2114082220566860026/video/1",
+        "designAuthor": "Lorenzo Cabra",
+        "license": "Original design and image/source license not supplied or independently verified. Original footage, photos and Pro source are not redistributed. Four new images were generated for this reconstruction. Lucide icons retain their ISC notice."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "particle-texture-trio",
+      "name": {
+        "en": "Particle Texture Trio",
+        "zh": "粒子纹理三联"
+      },
+      "description": {
+        "en": "Three fixed dot-matrix shapes reveal flowing blue-green particles, hollow white contours and warm orange-pink textures.",
+        "zh": "三个固定点阵轮廓，分别呈现蓝绿粒子流、黑白空心圆弧与橙红纹理。"
+      },
+      "keywords": "粒子 纹理 点阵 三联 流动 空心 圆弧 蓝绿 橙红 Sarvam Anushka particle texture trio noise flow field",
+      "docsPath": "/docs/animations/particle-texture-trio",
+      "detailPath": "/ai/components/particle-texture-trio.json",
+      "markdownPath": "/ai/components/particle-texture-trio.md",
+      "previewPath": "/assets/components/particle-texture-trio.png",
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "点阵品牌动效",
+          "三联粒子纹理",
+          "particle field study"
+        ],
+        "searchTerms": [
+          "粒子",
+          "纹理",
+          "点阵",
+          "三联",
+          "空心",
+          "流动",
+          "Sarvam",
+          "Anushka",
+          "particle",
+          "texture"
+        ],
+        "visualTags": [
+          "particles",
+          "dark",
+          "noise",
+          "dot-matrix"
+        ],
+        "interactions": [
+          "play",
+          "pause",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "本地点阵视觉重建；非原作者生成工具，不包含真实 AI 接口。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent Canvas2D renderer with compact Chebyshev motion fields fitted to tracked particle paths, seeded color/size noise, analytic colored silhouettes and measured monochrome contours. Reuses the existing LeiBox lifecycle. No reference video or raster texture is played at runtime; this is a reconstruction, not the author's generator or Sarvam source code.",
+        "designReference": "https://x.com/anushka_dzn/status/2115406152167297211/video/1",
+        "designAuthor": "Anushka",
+        "license": "Original design and Sarvam mark rights remain with their respective owners; source license not supplied or verified. No original video, raster artwork, font files or author source code is redistributed."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "matcha-powder-reveal",
       "name": {

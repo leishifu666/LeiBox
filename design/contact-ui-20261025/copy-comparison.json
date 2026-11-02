@@ -1,0 +1,11 @@
+{
+  "claude.html": {
+    "characters": 196,
+    "visible_text": "联系与投稿\n\n给 LeiBox 留言，分享 UI 灵感或推荐组件。\n\n内容类型\n留言与建议\n想法、建议或发现的问题\n推荐组件\n分享一个好组件或 UI 灵感\n内容\n留言内容\n必填\n至少 10 字\n参考链接\n选填\n完整的 http:// 或 https:// 地址\n怎么回复你\n邮箱仅用于回复这条内容\n回复邮箱\n必填\n称呼\n选填\n交互预览，不会发送邮件\n改用邮件\n提交留言   想法、建议或发现的问题，至少 10 个字符 https:// name@example.com 怎么称呼你"
+  },
+  "refined.html": {
+    "characters": 59,
+    "visible_text": "联系与投稿\n留言\n推荐组件\n留言内容\n参考链接\n选填\n回复邮箱\n称呼\n选填\n改用邮件\n提交    https:// name@example.com "
+  },
+  "reduction": 0.699
+}

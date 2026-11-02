@@ -1,0 +1,43 @@
+{
+  "dark": {
+    "background": "bg-dark",
+    "pressed": "true"
+  },
+  "widths": [
+    {
+      "width": 375,
+      "overflow": false,
+      "logoSizes": [
+        {
+          "w": 266.2857360839844,
+          "h": 266.2857360839844
+        },
+        {
+          "w": 266.2857360839844,
+          "h": 266.2857360839844
+        }
+      ],
+      "allPass": true
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "logoSizes": [
+        {
+          "w": 289.71429443359375,
+          "h": 289.71429443359375
+        },
+        {
+          "w": 289.71429443359375,
+          "h": 289.71429443359375
+        }
+      ],
+      "allPass": true
+    }
+  ],
+  "focus": {
+    "tag": "BUTTON",
+    "text": "深色",
+    "outline": "solid"
+  }
+}

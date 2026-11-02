@@ -1,0 +1,164 @@
+{
+  "slug": "particle-texture-trio",
+  "name": {
+    "en": "Particle Texture Trio",
+    "zh": "粒子纹理三联"
+  },
+  "description": {
+    "en": "Three fixed dot-matrix shapes reveal flowing blue-green particles, hollow white contours and warm orange-pink textures.",
+    "zh": "三个固定点阵轮廓，分别呈现蓝绿粒子流、黑白空心圆弧与橙红纹理。"
+  },
+  "keywords": "粒子 纹理 点阵 三联 流动 空心 圆弧 蓝绿 橙红 Sarvam Anushka particle texture trio noise flow field",
+  "docsPath": "/docs/animations/particle-texture-trio",
+  "detailPath": "/ai/components/particle-texture-trio.json",
+  "markdownPath": "/ai/components/particle-texture-trio.md",
+  "previewPath": "/assets/components/particle-texture-trio.png",
+  "discovery": {
+    "category": "background",
+    "useCases": [
+      "点阵品牌动效",
+      "三联粒子纹理",
+      "particle field study"
+    ],
+    "searchTerms": [
+      "粒子",
+      "纹理",
+      "点阵",
+      "三联",
+      "空心",
+      "流动",
+      "Sarvam",
+      "Anushka",
+      "particle",
+      "texture"
+    ],
+    "visualTags": [
+      "particles",
+      "dark",
+      "noise",
+      "dot-matrix"
+    ],
+    "interactions": [
+      "play",
+      "pause",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "本地点阵视觉重建；非原作者生成工具，不包含真实 AI 接口。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent Canvas2D renderer with compact Chebyshev motion fields fitted to tracked particle paths, seeded color/size noise, analytic colored silhouettes and measured monochrome contours. Reuses the existing LeiBox lifecycle. No reference video or raster texture is played at runtime; this is a reconstruction, not the author's generator or Sarvam source code.",
+    "designReference": "https://x.com/anushka_dzn/status/2115406152167297211/video/1",
+    "designAuthor": "Anushka",
+    "license": "Original design and Sarvam mark rights remain with their respective owners; source license not supplied or verified. No original video, raster artwork, font files or author source code is redistributed."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/particle-texture-trio/react.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ParticleTextureTrio } from \"./ParticleTextureTrio\";\n\nexport default function App() {\n  return <ParticleTextureTrio />;\n}",
+      "files": [
+        "ParticleTextureTrio.tsx",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/particle-texture-trio/vue.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ParticleTextureTrio from \"./ParticleTextureTrio.vue\";\n</script>\n<template><ParticleTextureTrio /></template>",
+      "files": [
+        "ParticleTextureTrio.vue",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/particle-texture-trio/svelte.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ParticleTextureTrio from \"./ParticleTextureTrio.svelte\";\n</script>\n<ParticleTextureTrio />",
+      "files": [
+        "ParticleTextureTrio.svelte",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/particle-texture-trio/solid.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ParticleTextureTrio } from \"./ParticleTextureTrio.solid\";\n\nexport default function App() {\n  return <ParticleTextureTrio />;\n}",
+      "files": [
+        "ParticleTextureTrio.solid.tsx",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/particle-texture-trio/preact.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ParticleTextureTrio } from \"./ParticleTextureTrio.preact\";\n\nexport default function App() {\n  return <ParticleTextureTrio />;\n}",
+      "files": [
+        "ParticleTextureTrio.preact.tsx",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/particle-texture-trio/vanilla.json",
+      "component": "ParticleTextureTrio",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ParticleTextureTrio\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ParticleTextureTrio.ts",
+        "ParticleTextureTrioEngine.js",
+        "motion-runtime.ts",
+        "ParticleTextureTrioEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click any shape to pause or resume. Arrow keys step through frames; Home or Escape restarts the animation.",
+    "zh": "点击任一图形暂停或继续，左右方向键逐帧查看，Home 或 Escape 重新播放。"
+  }
+}

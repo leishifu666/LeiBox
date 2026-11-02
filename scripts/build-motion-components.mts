@@ -22,7 +22,10 @@ import { buildFluidTooltipSource } from "./build-fluid-tooltip-source.mjs";
 import { buildFoldedEmojiScrollSource } from "./build-folded-emoji-scroll-source.mjs";
 import { buildMatchaPowderRevealSource } from "./build-matcha-powder-reveal-source.mjs";
 import { buildGradientRingCardsSource } from "./build-gradient-ring-cards-source.mjs";
+import { buildInkSpreadCarouselSource } from "./build-ink-spread-carousel-source.mjs";
+import { buildAsciiSharksSource } from "./build-ascii-sharks-source.mjs";
 import { buildInteractionPreviews } from "./build-interaction-previews.mts";
+import { buildParticleTextureTrioSource } from "./build-particle-texture-trio-source.mjs";
 
 const aiBrandCoverEngine = await (await import("./build-ai-brand-cover-cards-source.mjs")).buildAiBrandCoverCardsSource();
 const ROOT=process.cwd();
@@ -51,6 +54,9 @@ const fluidTooltipEngine = await buildFluidTooltipSource();
 const foldedEmojiScrollEngine = await buildFoldedEmojiScrollSource();
 const matchaPowderRevealEngine = await buildMatchaPowderRevealSource();
 const gradientRingCardsEngine = await buildGradientRingCardsSource();
+const inkSpreadCarouselEngine = await buildInkSpreadCarouselSource();
+const asciiSharksEngine = await buildAsciiSharksSource();
+const particleTextureTrioEngine = await buildParticleTextureTrioSource();
 await fs.mkdir(OUT,{recursive:true});
 await fs.mkdir(PREVIEWS,{recursive:true});
 
@@ -63,7 +69,7 @@ function wrapper(name:string,slug:string,framework:string){
  if(framework==="vue")return `<script setup lang="ts">\nimport { ref, onMounted, onBeforeUnmount, watch } from "vue";\n${imports}\nconst props = defineProps<{ options?: ${name}Options }>();\nconst host = ref<HTMLDivElement | null>(null);\nlet controller: MotionController | undefined;\nonMounted(() => { controller = mount${name}(host.value!, props.options); });\nwatch(() => props.options, value => controller?.update(value ?? {}), { deep: true });\nonBeforeUnmount(() => controller?.destroy());\n</script>\n\n<template><div ref="host" data-motion-component="${slug}" /></template>\n`;
  if(framework==="svelte")return `<script lang="ts">\nimport { onMount } from "svelte";\n${imports}\nexport let options: ${name}Options = {};\nlet host: HTMLDivElement;\nlet controller: MotionController | undefined;\nonMount(() => {\n  const instance = mount${name}(host, options);\n  controller = instance;\n  return () => { instance.destroy(); controller = undefined; };\n});\n$: controller?.update(options);\n</script>\n\n<div bind:this={host} data-motion-component="${slug}"></div>\n`;
  if(framework==="solid")return `/** @jsxImportSource solid-js */\nimport { onMount, onCleanup, createEffect } from "solid-js";\n${imports}\n\nexport function ${name}(props: { options?: ${name}Options; class?: string }) {\n  let host!: HTMLDivElement;\n  let controller: MotionController | undefined;\n  onMount(() => { controller = mount${name}(host, props.options); });\n  createEffect(() => { const options = props.options; controller?.update(options ?? {}); });\n  onCleanup(() => controller?.destroy());\n  return <div ref={host} class={props.class} data-motion-component="${slug}" />;\n}\n`;
- const controller = slug === "matcha-powder-reveal" || slug === "ai-brand-cover-cards" || slug === "gradient-ring-cards" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer" || slug === "brand-poster-cards" || slug === "collection-layout-morph" || slug === "spider-music-player" || slug === "fluid-tooltip" || slug === "folded-emoji-scroll" ? `ReturnType<typeof mount${name}>` : "MotionController";
+ const controller = slug === "ascii-sharks" || slug === "ink-spread-carousel" || slug === "particle-texture-trio" || slug === "matcha-powder-reveal" || slug === "ai-brand-cover-cards" || slug === "gradient-ring-cards" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer" || slug === "brand-poster-cards" || slug === "collection-layout-morph" || slug === "spider-music-player" || slug === "fluid-tooltip" || slug === "folded-emoji-scroll" ? `ReturnType<typeof mount${name}>` : "MotionController";
  return `${imports}\n\n/** Mount into any DOM node. Call update() for options and destroy() on removal. */\nexport function mount(target: HTMLElement, options: ${name}Options = {}): ${controller} {\n  return mount${name}(target, options);\n}\nexport type { ${name}Options };\n`;
 }
 function usage(name:string,fileName:string,framework:string){
@@ -80,8 +86,14 @@ for(const entry of INTERACTION_COMPONENTS){
  const deepAgent = entry.slug === "reasoning-effort-slider" || entry.slug === "deep-agent-composer";
  const native=entry.slug==="share-invite"||entry.slug==="otp-verification";
  let engine:string;
- if(entry.slug === "matcha-powder-reveal"){
+ if(entry.slug === "particle-texture-trio"){
+  engine=particleTextureTrioEngine;
+ }else if(entry.slug === "matcha-powder-reveal"){
   engine=matchaPowderRevealEngine;
+ }else if(entry.slug === "ascii-sharks"){
+  engine=asciiSharksEngine;
+ }else if(entry.slug === "ink-spread-carousel"){
+  engine=inkSpreadCarouselEngine;
  }else if(entry.slug === "ai-brand-cover-cards"){
   engine=aiBrandCoverEngine;
  }else if(entry.slug === "folded-emoji-scroll"){
@@ -139,12 +151,12 @@ for(const entry of INTERACTION_COMPONENTS){
   const extension=framework.id==="vue"?".vue":framework.id==="svelte"?".svelte":framework.id==="solid"?".solid.tsx":framework.id==="preact"?".preact.tsx":framework.id==="vanilla"?".ts":".tsx";
   const fileName=name+extension;
   const extra=deepAgent?' & { value?: "simple" | "medium" | "deep"; onValueChange?: (value: "simple" | "medium" | "deep") => void; disabled?: boolean; models?: string[]; selectedModel?: string; onModelChange?: (model: string) => void; busy?: boolean; stopping?: boolean; onStop?: () => void; onPermissionChange?: (permission: string) => void; onSubmit?: (message: { text: string; model: string; thinking: "simple" | "medium" | "deep"; attachments: { id: string; name: string; kind: string; status: string; dataUrl?: string; extractedText?: string }[]; skills: unknown[]; mentions: unknown[]; permission: string }) => void }':entry.slug==="otp-verification"?" & { autoPlay?: boolean; onReplayComplete?: () => void }":entry.slug==="share-invite"?' & { locale?: "en" | "zh" }':"";
-  const optionsExtra=entry.slug==="matcha-powder-reveal"?' & { progress?: number; playing?: boolean; autoTear?: boolean; loop?: boolean; speed?: number; onProgress?: (progress: number) => void }':entry.slug==="folded-emoji-scroll"?' & { query?: string; value?: string; foldSize?: number; onSelect?: (emoji: string) => void }':entry.slug==="gradient-ring-cards"?' & { active?: number; autoRotate?: boolean; speed?: number; distortion?: number; onSelect?: (id: string) => void }':entry.slug==="fluid-tooltip"?' & { active?: "today" | "tasks" | "calendar" | "focus" | "settings" | "profile"; onSelect?: (id: string) => void; profileLabel?: string; logoSrc?: string }':entry.slug==="spider-music-player"?' & { track?: number; playing?: boolean; onTrackChange?: (index: number) => void }':(entry.slug==="brand-poster-cards"||entry.slug==="ai-brand-cover-cards")?' & { images?: (string | { src: string; alt?: string; position?: string })[]; description?: string; logoSrc?: string; symbolSrc?: string }':entry.slug==="collection-layout-morph"?' & { view?: "list" | "card" | "pack" }':extra;
+  const optionsExtra=entry.slug==="ascii-sharks"?' & { theme?: "light" | "dark"; paused?: boolean; speed?: number; seed?: number; fishCount?: number; sharks?: { kind: "classic" | "hammerhead" | "zebra" | "tiger" | "greathammer" | "mako" | "thresher" | "nurse"; size: number }[]; showComposer?: boolean; onSubmit?: (message: { text: string; attachments: File[] }) => void; onVoiceInput?: () => void }':entry.slug==="ink-spread-carousel"?' & { index?: number; duration?: number; roughness?: number; images?: (string | { src: string; alt?: string })[]; onIndexChange?: (index: number) => void }':entry.slug==="particle-texture-trio"?' & { speed?: number; paused?: boolean; background?: "#000" | "#f4f4f4" }':entry.slug==="matcha-powder-reveal"?' & { progress?: number; playing?: boolean; autoTear?: boolean; loop?: boolean; speed?: number; onProgress?: (progress: number) => void }':entry.slug==="folded-emoji-scroll"?' & { query?: string; value?: string; foldSize?: number; onSelect?: (emoji: string) => void }':entry.slug==="gradient-ring-cards"?' & { active?: number; autoRotate?: boolean; speed?: number; distortion?: number; onSelect?: (id: string) => void }':entry.slug==="fluid-tooltip"?' & { active?: "today" | "tasks" | "calendar" | "focus" | "settings" | "profile"; onSelect?: (id: string) => void; profileLabel?: string; logoSrc?: string }':entry.slug==="spider-music-player"?' & { track?: number; playing?: boolean; onTrackChange?: (index: number) => void }':(entry.slug==="brand-poster-cards"||entry.slug==="ai-brand-cover-cards")?' & { images?: (string | { src: string; alt?: string; position?: string })[]; description?: string; logoSrc?: string; symbolSrc?: string }':entry.slug==="collection-layout-morph"?' & { view?: "list" | "card" | "pack" }':extra;
   const files=[
    {id:fileName,label:fileName,fileName,source:wrapper(name,entry.slug,framework.id)},
    {id:`${name}Engine.js`,label:`${name}Engine.js`,fileName:`${name}Engine.js`,source:engine},
    {id:"motion-runtime.ts",label:"motion-runtime.ts",fileName:"motion-runtime.ts",source:runtime},
-   {id:`${name}Engine.d.ts`,label:`${name}Engine.d.ts`,fileName:`${name}Engine.d.ts`,source:`import type { MotionOptions, MotionController } from "./motion-runtime";\nexport type ${name}Options = MotionOptions${optionsExtra};\nexport function mount${name}(target: HTMLElement, options?: ${name}Options): ${entry.slug==="matcha-powder-reveal"||entry.slug==="folded-emoji-scroll"||entry.slug==="gradient-ring-cards"||deepAgent||(entry.slug==="brand-poster-cards"||entry.slug==="ai-brand-cover-cards")||entry.slug==="collection-layout-morph"||(entry.slug==="spider-music-player"||entry.slug==="fluid-tooltip")?`Omit<MotionController, "update"> & { update(options: ${name}Options): void }`:"MotionController"};\n`},
+   {id:`${name}Engine.d.ts`,label:`${name}Engine.d.ts`,fileName:`${name}Engine.d.ts`,source:`import type { MotionOptions, MotionController } from "./motion-runtime";\nexport type ${name}Options = MotionOptions${optionsExtra};\nexport function mount${name}(target: HTMLElement, options?: ${name}Options): ${entry.slug==="ascii-sharks"||entry.slug==="ink-spread-carousel"||entry.slug==="particle-texture-trio"||entry.slug==="matcha-powder-reveal"||entry.slug==="folded-emoji-scroll"||entry.slug==="gradient-ring-cards"||deepAgent||(entry.slug==="brand-poster-cards"||entry.slug==="ai-brand-cover-cards")||entry.slug==="collection-layout-morph"||(entry.slug==="spider-music-player"||entry.slug==="fluid-tooltip")?`Omit<MotionController, "update"> & { update(options: ${name}Options): void }`:"MotionController"};\n`},
   ];
   const deps=[...new Set([...dependencies[framework.id],...(entry.slug==="matcha-powder-reveal"?["three@0.185.1"]:entry.slug==="gradient-ring-cards"?["three@0.185.1","gsap@3.12.7"]:deepAgent?["react","react-dom","gsap@3.12.7","deep-agent-base-ui@npm:@base-ui/react@1.8.0","deep-agent-lucide@npm:lucide-react@1.43.0","@fortawesome/fontawesome-svg-core@6.7.2","@fortawesome/free-solid-svg-icons@6.7.2","@fortawesome/react-fontawesome@0.2.6","@radix-ui/react-slider@1.4.7","react-circular-progressbar@2.2.0","clsx","tailwind-merge"]:native||entry.slug==="notes-text-color"||(entry.slug==="brand-poster-cards"||entry.slug==="ai-brand-cover-cards")||entry.slug==="collection-layout-morph"||(entry.slug==="spider-music-player"||entry.slug==="fluid-tooltip")?["gsap@3.12.7"]:[])])];
   const install=deps.length?`npm install ${deps.join(" ")}`:"No runtime dependencies. Use TypeScript or a bundler to compile the entry file.";

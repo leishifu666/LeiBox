@@ -1,9 +1,9 @@
-.ft-scene{position:relative;width:100%;height:var(--motion-height,1080px);overflow:hidden;isolation:isolate;background:linear-gradient(163deg,#224d6b 0%,#52778c 57%,#a1adb7 100%);color:#f2f2f3;font-family:FluidTooltipInter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
-.ft-stage{position:absolute;left:50%;top:50%;width:1288px;height:1080px;transform:translate(-50%,-50%) scale(var(--ft-fit,1));transform-origin:center;isolation:isolate}
-.ft-panel{position:absolute;inset:0 0 0 194px;border-left:2px solid #ffffff20;background:linear-gradient(145deg,#43536f 0%,#4b566b 100%);box-shadow:-20px 0 46px #112a3e30}
+.ft-scene{position:relative;width:100%;height:var(--motion-height,1080px);overflow:hidden;isolation:isolate;background:#35363a;color:#f2f2f3;font-family:FluidTooltipInter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+.ft-stage{position:absolute;left:50%;top:50%;width:1288px;height:1080px;background:var(--ft-painting,none) center/cover no-repeat;transform:translate(-50%,-50%) scale(var(--ft-fit,1));transform-origin:center;isolation:isolate}
+.ft-panel{position:absolute;inset:0 0 0 194px;border-left:2px solid #ffffff20;background:#35363a;box-shadow:-20px 0 46px #00000030}
 .ft-grain{position:absolute;inset:0;pointer-events:none;opacity:.024;z-index:4;background-image:var(--ft-grain)}
 .ft-rail{position:absolute;left:236px;top:218px;display:flex;flex-direction:column;gap:9px;width:100px}
-.ft-trigger{position:relative;display:grid;place-items:center;flex:0 0 100px;width:100px;height:100px;padding:0;border:0;border-radius:35px;background:transparent;color:#d6dbe3;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ft-trigger{position:relative;display:grid;place-items:center;flex:0 0 100px;width:100px;height:100px;padding:0;border:0;border-radius:35px;background:transparent;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .ft-trigger:focus-visible{outline:3px solid #e9edf7;outline-offset:5px}.ft-trigger svg{width:44px;height:44px;pointer-events:none}.ft-trigger[data-item=tasks] svg path:first-child{fill:currentColor;stroke:none}.ft-trigger[data-item=tasks] svg path:last-child{stroke-dasharray:36 3 1.7 3 1.7 3}.ft-trigger[data-item=focus] svg circle:last-child{fill:currentColor}
 .ft-logo{display:block;width:66px;height:66px;object-fit:contain;border:1px solid #ffffff50;border-radius:50%;background:#fff;padding:4px;pointer-events:none}
 .ft-tooltip{position:absolute;left:356px;top:0;width:252px;height:86px;overflow:hidden;border-radius:43px;background:#1e1e23;box-shadow:0 6px 22px #1b203a12;pointer-events:none;opacity:0;will-change:transform,width,opacity}

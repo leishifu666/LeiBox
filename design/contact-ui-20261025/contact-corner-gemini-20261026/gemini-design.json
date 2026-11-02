@@ -1,0 +1,59 @@
+{
+  "diagnosis": "14px圆角在40px高的控件上产生了非方非圆的尴尬比例（香肠般膨胀感）；内外元素未遵循合理的同心递减规律，且内部组件与已被认可的搜索面板（10px）产生视觉断层，导致整体显得笨重、别扭。",
+  "radii": {
+    "panel": 16,
+    "field": 10,
+    "segmentedTrack": 10,
+    "segmentedThumb": 6,
+    "submit": 10,
+    "closeHover": 8
+  },
+  "submitPaddingX": 24,
+  "changes": [
+    {
+      "target": "sharedSurface (面板外框)",
+      "replace": "rounded-2xl",
+      "with": "rounded-[16px]"
+    },
+    {
+      "target": "inputClass (所有输入框)",
+      "replace": "rounded-xl",
+      "with": "rounded-lg"
+    },
+    {
+      "target": "fieldset.topicTrackRef (分段器轨道)",
+      "replace": "rounded-xl",
+      "with": "rounded-lg"
+    },
+    {
+      "target": "span.topicIndicatorRef (分段器选中背景块)",
+      "replace": "rounded-lg",
+      "with": "rounded-[6px]"
+    },
+    {
+      "target": "span.block.py-1.5 (分段器文字区块)",
+      "replace": "rounded-lg",
+      "with": "rounded-[6px]"
+    },
+    {
+      "target": "button[type=\"submit\"] (提交按钮圆角)",
+      "replace": "rounded-xl",
+      "with": "rounded-lg"
+    },
+    {
+      "target": "button[type=\"submit\"] (提交按钮内边距)",
+      "replace": "px-5",
+      "with": "px-6"
+    },
+    {
+      "target": "header button (关闭按钮)",
+      "replace": "rounded-lg",
+      "with": "rounded-[8px]"
+    }
+  ],
+  "reason": [
+    "消除曲率尴尬：将高度约40px的表单控件圆角从14px统一降至10px，剔除臃肿感，恢复表单应有的干练与克制。",
+    "视觉基准对齐：抛弃多余的第二套视觉语言，使联系面板内部组件完全向用户已认可的搜索面板列表（10px）对齐。",
+    "建立科学嵌套：面板外框微收至16px，分段内部滑块降至6px，强制形成外>中>内（16>10>6）的同心递减关系，彻底解决边缘与内部曲线打架的问题。"
+  ]
+}

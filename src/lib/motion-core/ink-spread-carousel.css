@@ -1,0 +1,20 @@
+.ib-scene{position:relative;display:grid;place-items:center;width:100%;height:var(--motion-height,876px);min-height:620px;overflow:hidden;background:#eaeaea;color:#171717;font-family:Inter,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+.ib-stage{position:relative;width:453.333px;height:586.667px;isolation:isolate}
+.ib-halo{position:absolute;inset:20px -45px -12px 45px;border-radius:44px;background-size:200% 200%;filter:blur(38px);opacity:.18;pointer-events:none;transform:translate(44px,8px) scale(.94)}
+.ib-halo--next{opacity:0}
+.ib-card{position:relative;width:100%;height:100%;border:13.333px solid #fff;border-radius:40px;isolation:isolate;background:#1c432a;box-shadow:0 1px 0 #ffffff90;overflow:hidden}
+.ib-fallback,.ib-canvas,.ib-photo{position:absolute;inset:0;width:100%;height:100%;border-radius:26px}
+.ib-fallback{background-size:200% 200%;background-repeat:no-repeat}
+.ib-canvas{display:block;pointer-events:none}
+.ib-photo{z-index:1;cursor:pointer;touch-action:manipulation;border:0;background:transparent;color:inherit;padding:0}
+.ib-nav{position:absolute;z-index:2;top:50%;display:grid;place-items:center;width:64px;height:64px;transform:translateY(-50%);border:0;border-radius:50%;padding:0;background:#fff;color:#111;cursor:pointer;touch-action:manipulation;transition:background-color .14s}
+.ib-nav--prev{left:20px}.ib-nav--next{right:20px}
+.ib-nav::after{content:"";position:absolute;inset:-4px;border-radius:50%}
+.ib-nav svg{width:30px;height:30px;stroke-width:2.5;pointer-events:none}
+.ib-nav:hover{background:#ededed}.ib-nav:active{background:#dedede}
+.ib-nav:focus-visible{outline:3px solid #191919;outline-offset:4px;box-shadow:0 0 0 7px #fff}
+.ib-photo:focus-visible{outline:4px solid #fff;outline-offset:-7px;box-shadow:inset 0 0 0 10px #171717}
+.ib-nav:disabled,.ib-photo:disabled{cursor:wait}
+.ib-error{position:absolute;top:calc(100% + 22px);left:-50px;right:-50px;margin:0;text-align:center;color:#5b2424;font-size:16px;line-height:1.4}
+.ib-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.ib-nav{transition:none}}

@@ -1,0 +1,192 @@
+{
+  "allPass": true,
+  "variants": [
+    {
+      "key": "01-balanced",
+      "measured": {
+        "verticalLength": 140,
+        "diagonalLength": 140.0003840566161,
+        "ratio": 0.9999972567459819,
+        "strokeWidthVertical": 54,
+        "strokeWidthDiagonal": 54,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 43.75,
+        "diagonalPx": 43.75013164646276,
+        "ratio": 0.9999969909470484,
+        "pathTotalLength": 280.0003662109375,
+        "strokeWidthPx": 16.875000754371285
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 17.990763646996953
+    },
+    {
+      "key": "02-flat",
+      "measured": {
+        "verticalLength": 140,
+        "diagonalLength": 140.0003840566161,
+        "ratio": 0.9999972567459819,
+        "strokeWidthVertical": 54,
+        "strokeWidthDiagonal": 54,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 43.75,
+        "diagonalPx": 43.75010521744099,
+        "ratio": 0.9999975950357041,
+        "pathTotalLength": 280.0003662109375,
+        "strokeWidthPx": 16.875000754371285
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 26.152039643204347
+    },
+    {
+      "key": "03-bold",
+      "measured": {
+        "verticalLength": 132,
+        "diagonalLength": 131.99969403373632,
+        "ratio": 1.0000023179316129,
+        "strokeWidthVertical": 66,
+        "strokeWidthDiagonal": 66,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 41.25,
+        "diagonalPx": 41.249862099185826,
+        "ratio": 1.0000033430612165,
+        "pathTotalLength": 263.99969482421875,
+        "strokeWidthPx": 20.62500092200935
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 18.479620996681675
+    },
+    {
+      "key": "04-thin",
+      "measured": {
+        "verticalLength": 148,
+        "diagonalLength": 148.00020805390784,
+        "ratio": 0.9999985942323286,
+        "strokeWidthVertical": 38,
+        "strokeWidthDiagonal": 38,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 46.25,
+        "diagonalPx": 46.25005761672351,
+        "ratio": 0.9999987542345571,
+        "pathTotalLength": 296.00018310546875,
+        "strokeWidthPx": 11.875000530853868
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 19.085879880048424
+    },
+    {
+      "key": "05-sharp",
+      "measured": {
+        "verticalLength": 140,
+        "diagonalLength": 140.0003840566161,
+        "ratio": 0.9999972567459819,
+        "strokeWidthVertical": 54,
+        "strokeWidthDiagonal": 54,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 43.75,
+        "diagonalPx": 43.75010521744099,
+        "ratio": 0.9999975950357041,
+        "pathTotalLength": 280.0003662109375,
+        "strokeWidthPx": 16.875000754371285
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 26.152039643204347
+    },
+    {
+      "key": "06-compact",
+      "measured": {
+        "verticalLength": 128,
+        "diagonalLength": 127.99978203497065,
+        "ratio": 1.0000017028546915,
+        "strokeWidthVertical": 58,
+        "strokeWidthDiagonal": 58,
+        "widthRatio": 1
+      },
+      "screen": {
+        "verticalPx": 46.54547119140625,
+        "diagonalPx": 46.54535872934033,
+        "ratio": 1.0000024161821714,
+        "pathTotalLength": 255.99978637695312,
+        "strokeWidthPx": 21.090910033746198
+      },
+      "checks": {
+        "lengthEqual": true,
+        "lengthMatchesParam": true,
+        "singleStrokeWidth": true,
+        "verticalArmVertical": true,
+        "diagonalAngle": true,
+        "followsShellEdge": true,
+        "continuousJoint": true,
+        "insideShell": true,
+        "previewEqualsExport": true,
+        "screenEqual": true
+      },
+      "minClearance": 25.512986709950745
+    }
+  ],
+  "overflow": false
+}

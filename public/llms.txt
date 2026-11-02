@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 34 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 37 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -17,6 +17,9 @@ Paths beginning with / are relative to the origin serving this file. When only a
 
 ## Components
 
+- [ASCII Shark Ocean / 字符鲨鱼与鱼群](https://leibox.pantoria.cn/ai/components/ascii-sharks.md): Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.
+- [Ink Spread Carousel / 墨水扩散图片轮播](https://leibox.pantoria.cn/ai/components/ink-spread-carousel.md): A new photo spreads from your press with a rippling ink edge and a thin lens distortion, while a soft image shadow changes behind the white card.
+- [Particle Texture Trio / 粒子纹理三联](https://leibox.pantoria.cn/ai/components/particle-texture-trio.md): Three fixed dot-matrix shapes reveal flowing blue-green particles, hollow white contours and warm orange-pink textures.
 - [Package Tear and Powder Reveal / 包装撕开粒子消散](https://leibox.pantoria.cn/ai/components/matcha-powder-reveal.md): Drag the upper-right notch to peel open a solid 3D foil pouch. Stop halfway, regrab the bent strip and finish tearing to release the powder.
 - [AI Brand Cover Cards / AI 品牌封面三联卡片](https://leibox.pantoria.cn/ai/components/ai-brand-cover-cards.md): Three portrait covers for Claude, Codex and Cursor, with user-selected artwork, real SVG brand marks and independent Chinese captions.
 - [Folded Emoji Scroll / 折边滚动表情选择器](https://leibox.pantoria.cn/ai/components/folded-emoji-scroll.md): A searchable emoji grid folds its actual content into the top and bottom edges as you scroll, while the search field stays fixed.

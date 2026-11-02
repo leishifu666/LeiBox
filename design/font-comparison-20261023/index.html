@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LeiBox 中文字体对比</title>
+  <link rel="stylesheet" href="./misans.css"><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <div><p class="eyebrow">LEIBOX · TYPE STUDY</p><h1 style="word-break:keep-all;text-wrap:balance">为收藏箱，<wbr>选一套中文字体</h1><p class="intro">用你网站里的真实文案对照。英文与数字沿用 Geist，标题 500 字重，正文 400 字重</p></div>
+    <button class="theme-button" id="theme" type="button" aria-pressed="false">切换深色</button>
+  </header>
+  <main>
+    <div class="section-heading"><span>01 / 四款并排看</span><span id="font-status" role="status">正在载入真实字体…</span></div>
+    <section class="comparison-grid" aria-label="四款中文字体并排对比">
+      <article class="font-card" data-font="mi">
+        <div class="card-top"><div><span class="letter">A</span><h2>MiSans</h2></div><span class="recommend">优先推荐</span></div>
+        <p class="font-note">笔画利落，转角柔和，与圆角和留白协调</p>
+        <div class="specimen" style="--sample-font:'MiSans Preview'">
+          <p class="sample-label">首页标题 · 32 px</p><h3 class="sample-title">装下你的 UI 灵感与组件</h3>
+          <p class="sample-description">LeiBox 是我的 UI 灵感、交互细节与实用组件收藏箱。查看真实演示，追溯原始来源，为下一个界面找到灵感。</p>
+          <nav class="sample-nav" aria-label="MiSans 菜单样张"><span class="selected">浏览全部</span><span>入门指南</span><span>AI 接入</span></nav>
+          <div class="component-sample"><h4>玻璃文件夹展开</h4><p>磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。</p><span class="pill">六框架</span><span class="pill">TypeScript</span></div>
+        </div><button class="preview-button" data-select="mi" type="button">用 A 看页面效果 <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="font-card" data-font="harmony">
+        <div class="card-top"><div><span class="letter">B</span><h2>HarmonyOS Sans SC</h2></div><span class="recommend">同样推荐</span></div>
+        <p class="font-note">字面舒展，小字清楚，侧栏与说明文字读起来更松弛</p>
+        <div class="specimen" style="--sample-font:'Harmony Preview'">
+          <p class="sample-label">首页标题 · 32 px</p><h3 class="sample-title">装下你的 UI 灵感与组件</h3>
+          <p class="sample-description">LeiBox 是我的 UI 灵感、交互细节与实用组件收藏箱。查看真实演示，追溯原始来源，为下一个界面找到灵感。</p>
+          <nav class="sample-nav" aria-label="鸿蒙黑体菜单样张"><span class="selected">浏览全部</span><span>入门指南</span><span>AI 接入</span></nav>
+          <div class="component-sample"><h4>玻璃文件夹展开</h4><p>磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。</p><span class="pill">六框架</span><span class="pill">TypeScript</span></div>
+        </div><button class="preview-button" data-select="harmony" type="button">用 B 看页面效果 <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="font-card" data-font="alibaba">
+        <div class="card-top"><div><span class="letter">C</span><h2>阿里巴巴普惠体 3.0</h2></div><span class="tone">亲切自然</span></div>
+        <p class="font-note">带一点人文笔意，正文温和，个人收藏站的气质更明显</p>
+        <div class="specimen" style="--sample-font:'Alibaba Preview'">
+          <p class="sample-label">首页标题 · 32 px</p><h3 class="sample-title">装下你的 UI 灵感与组件</h3>
+          <p class="sample-description">LeiBox 是我的 UI 灵感、交互细节与实用组件收藏箱。查看真实演示，追溯原始来源，为下一个界面找到灵感。</p>
+          <nav class="sample-nav" aria-label="普惠体菜单样张"><span class="selected">浏览全部</span><span>入门指南</span><span>AI 接入</span></nav>
+          <div class="component-sample"><h4>玻璃文件夹展开</h4><p>磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。</p><span class="pill">六框架</span><span class="pill">TypeScript</span></div>
+        </div><button class="preview-button" data-select="alibaba" type="button">用 C 看页面效果 <span aria-hidden="true">↗</span></button>
+      </article>
+      <article class="font-card" data-font="noto">
+        <div class="card-top"><div><span class="letter">D</span><h2>思源黑体 · Noto Sans SC</h2></div><span class="tone">中性稳妥</span></div>
+        <p class="font-note">骨架规整，横竖关系明确，组件文档与密集菜单更有秩序</p>
+        <div class="specimen" style="--sample-font:'Noto Preview'">
+          <p class="sample-label">首页标题 · 32 px</p><h3 class="sample-title">装下你的 UI 灵感与组件</h3>
+          <p class="sample-description">LeiBox 是我的 UI 灵感、交互细节与实用组件收藏箱。查看真实演示，追溯原始来源，为下一个界面找到灵感。</p>
+          <nav class="sample-nav" aria-label="思源黑体菜单样张"><span class="selected">浏览全部</span><span>入门指南</span><span>AI 接入</span></nav>
+          <div class="component-sample"><h4>玻璃文件夹展开</h4><p>磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。</p><span class="pill">六框架</span><span class="pill">TypeScript</span></div>
+        </div><button class="preview-button" data-select="noto" type="button">用 D 看页面效果 <span aria-hidden="true">↗</span></button>
+      </article>
+    </section>
+    <section id="page-preview" class="page-preview-section" aria-label="切换字体查看页面效果">
+      <div class="section-heading"><span>02 / 放回你的页面里</span><label>当前字体 <select id="font-select"><option value="mi">A · MiSans</option><option value="harmony">B · HarmonyOS Sans SC</option><option value="alibaba">C · 阿里巴巴普惠体 3.0</option><option value="noto">D · Noto Sans SC</option><option value="system">当前系统字体（对照）</option></select></label></div>
+      <div class="site-preview" id="site-preview" style="--sample-font:'MiSans Preview'">
+        <aside><div class="preview-logo">LeiBox</div><p class="nav-label">入门指南</p><span>简介</span><span>安装</span><span>渲染</span><span>AI 接入</span><p class="nav-label">组件</p><span class="active">浏览全部</span><span>玻璃文件夹展开</span><span>轨道与点阵动效</span><span>渐变卡片跟随</span><span>验证码输入验证</span></aside>
+        <div class="preview-content"><div class="preview-topbar"><span>EN</span><span>GitHub</span></div><h2>组件</h2><p class="page-description">将这些创意组件直接用在你的项目中。浏览组件库，按自己的需要调整，更多效果正在加入。</p><div class="mock-cards"><article><span class="mock-number">01</span><h3>玻璃文件夹展开</h3><p>磨砂文件夹展开为扇形文件，支持生成纹理、添加落入动效和键盘菜单。</p></article><article><span class="mock-number">02</span><h3>轨道与点阵动效</h3><p>轨道加载、流动半色调星云和悬浮服务器组成三联宇宙视觉。</p></article><article><span class="mock-number">03</span><h3>渐变卡片跟随</h3><p>六张颗粒渐变封面，搭配细线纹样、缓慢漂移的色团和弹簧柔光交互。</p></article></div><div class="preview-actions"><button type="button">浏览组件</button><span>安装命令与代码继续使用原来的等宽字体</span></div></div>
+      </div>
+    </section>
+    <footer><p>这是选字体用的独立预览，正式站尚未换字。选定后会统一标题、正文、导航和表单中的中文</p><div><a href="https://hyperos.mi.com/font/zh/" target="_blank" rel="noreferrer">MiSans 来源</a><a href="https://developer.huawei.com/consumer/cn/design/resource/" target="_blank" rel="noreferrer">HarmonyOS 来源</a><a href="https://www.alibabafonts.com/" target="_blank" rel="noreferrer">普惠体来源</a><a href="https://github.com/notofonts/noto-cjk" target="_blank" rel="noreferrer">Noto / 思源来源</a></div></footer>
+  </main>
+  <script src="./preview.js"></script>
+</body>
+</html>

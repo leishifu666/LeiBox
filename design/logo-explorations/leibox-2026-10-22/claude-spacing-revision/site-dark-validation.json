@@ -1,0 +1,14 @@
+{
+  "dark": true,
+  "background": "lab(2.75381 0 0)",
+  "logos": [
+    {
+      "filter": "invert(0)",
+      "loaded": true
+    },
+    {
+      "filter": "invert(0)",
+      "loaded": true
+    }
+  ]
+}

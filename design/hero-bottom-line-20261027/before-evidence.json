@@ -1,0 +1,432 @@
+[
+  {
+    "theme": "dark",
+    "rows": [
+      {
+        "offset": -2,
+        "topColors": [
+          [
+            [
+              10,
+              10,
+              10
+            ],
+            719
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            28
+          ],
+          [
+            [
+              9,
+              9,
+              9
+            ],
+            20
+          ]
+        ]
+      },
+      {
+        "offset": -1,
+        "topColors": [
+          [
+            [
+              10,
+              10,
+              10
+            ],
+            719
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            28
+          ],
+          [
+            [
+              9,
+              9,
+              9
+            ],
+            20
+          ]
+        ]
+      },
+      {
+        "offset": 0,
+        "topColors": [
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            29
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            12
+          ],
+          [
+            [
+              0,
+              141,
+              253
+            ],
+            7
+          ]
+        ]
+      },
+      {
+        "offset": 1,
+        "topColors": [
+          [
+            [
+              10,
+              10,
+              10
+            ],
+            720
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            29
+          ],
+          [
+            [
+              9,
+              9,
+              9
+            ],
+            20
+          ]
+        ]
+      }
+    ],
+    "styles": [
+      {
+        "class": "agent-demo",
+        "box": [
+          168,
+          79.796875,
+          1104,
+          820
+        ],
+        "border": "0px solid lab(100 0 0 / 0.1)",
+        "borderBottom": "0px solid lab(100 0 0 / 0.1)",
+        "shadow": "none",
+        "outline": "oklab(0.555999 -0.00000530481 0.000012964 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-plate",
+        "box": [
+          168,
+          79.796875,
+          1104,
+          820
+        ],
+        "border": "1px solid rgba(0, 0, 0, 0)",
+        "borderBottom": "1px solid rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "oklab(0.555999 -0.00000530481 0.000012964 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-desk pointer-events-none select-none",
+        "box": [
+          169,
+          80.796875,
+          1102,
+          818
+        ],
+        "border": "0px solid lab(100 0 0 / 0.1)",
+        "borderBottom": "0px solid lab(100 0 0 / 0.1)",
+        "shadow": "none",
+        "outline": "oklab(0.555999 -0.00000530481 0.000012964 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-app relative flex overflow-hidden",
+        "box": [
+          205,
+          116.796875,
+          1030,
+          782
+        ],
+        "border": "",
+        "borderBottom": "0px none lab(100 0 0 / 0.1)",
+        "shadow": "none",
+        "outline": "oklab(0.555999 -0.00000530481 0.000012964 / 0.5) none 3px",
+        "background": "lab(2.75381 0 0)",
+        "overflow": "hidden"
+      }
+    ]
+  },
+  {
+    "theme": "light",
+    "rows": [
+      {
+        "offset": -2,
+        "topColors": [
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            702
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              254,
+              254,
+              254
+            ],
+            16
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            12
+          ]
+        ]
+      },
+      {
+        "offset": -1,
+        "topColors": [
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            702
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              254,
+              254,
+              254
+            ],
+            16
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            12
+          ]
+        ]
+      },
+      {
+        "offset": 0,
+        "topColors": [
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            29
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            12
+          ],
+          [
+            [
+              0,
+              141,
+              253
+            ],
+            7
+          ]
+        ]
+      },
+      {
+        "offset": 1,
+        "topColors": [
+          [
+            [
+              255,
+              255,
+              255
+            ],
+            704
+          ],
+          [
+            [
+              22,
+              22,
+              24
+            ],
+            48
+          ],
+          [
+            [
+              254,
+              254,
+              254
+            ],
+            14
+          ],
+          [
+            [
+              0,
+              0,
+              0
+            ],
+            12
+          ]
+        ]
+      }
+    ],
+    "styles": [
+      {
+        "class": "agent-demo",
+        "box": [
+          168,
+          79.796875,
+          1104,
+          820
+        ],
+        "border": "0px solid lab(90.952 -0.0000596046 0)",
+        "borderBottom": "0px solid lab(90.952 -0.0000596046 0)",
+        "shadow": "none",
+        "outline": "oklab(0.707999 -0.00000712276 0.0000166297 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-plate",
+        "box": [
+          168,
+          79.796875,
+          1104,
+          820
+        ],
+        "border": "1px solid rgba(0, 0, 0, 0)",
+        "borderBottom": "1px solid rgba(0, 0, 0, 0)",
+        "shadow": "none",
+        "outline": "oklab(0.707999 -0.00000712276 0.0000166297 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-desk pointer-events-none select-none",
+        "box": [
+          169,
+          80.796875,
+          1102,
+          818
+        ],
+        "border": "0px solid lab(90.952 -0.0000596046 0)",
+        "borderBottom": "0px solid lab(90.952 -0.0000596046 0)",
+        "shadow": "none",
+        "outline": "oklab(0.707999 -0.00000712276 0.0000166297 / 0.5) none 3px",
+        "background": "rgba(0, 0, 0, 0)",
+        "overflow": "visible"
+      },
+      {
+        "class": "g4-app relative flex overflow-hidden",
+        "box": [
+          205,
+          116.796875,
+          1030,
+          782
+        ],
+        "border": "",
+        "borderBottom": "0px none lab(90.952 -0.0000596046 0)",
+        "shadow": "none",
+        "outline": "oklab(0.707999 -0.00000712276 0.0000166297 / 0.5) none 3px",
+        "background": "lab(100 0 0)",
+        "overflow": "hidden"
+      }
+    ]
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "short_mobile": "Header, scrollable body, submit and footer reachable at 375x667",
+  "segment_animation": {
+    "first": "matrix(1, 0, 0, 1, 87.3506, 0)",
+    "middle": "matrix(1, 0, 0, 1, 221.918, 0)",
+    "final": "matrix(1, 0, 0, 1, 254, 0)"
+  },
+  "without_gsap": "Open, topic switch and close work with GSAP unavailable",
+  "contrast": {
+    "body": 18.88,
+    "secondary": 5.7,
+    "placeholder": 4.7,
+    "subtle": 4.84,
+    "button": 17.5
+  }
+}

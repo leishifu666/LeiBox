@@ -1,0 +1,35 @@
+{
+  "title": "给 AI 做的网页，减点 AI 味，加点设计感",
+  "alternative_titles": [
+    "别只让 AI 帮你排版，来挑几个带设计感的网页组件",
+    "给 AI 做的网页加点设计感，从一个交互细节开始"
+  ],
+  "digest": "在 LeiBox 试玩交互组件，再把具体的源码交给 AI，给页面加入你的审美。",
+  "author": "LSF 设计日常",
+  "tags": [
+    "LeiBox",
+    "AI 编程",
+    "网页设计",
+    "交互动效"
+  ],
+  "date": "2026-10-31",
+  "destination_url": "https://leibox.pantoria.cn/",
+  "screenshot_source": "http://127.0.0.1:3000/",
+  "published": false,
+  "copywriting_provider": {
+    "entry": "Google AI Studio",
+    "model": "gemini-3.1-pro-preview",
+    "thinking": "High",
+    "rounds": 2,
+    "reviewed_by": "Codex"
+  },
+  "images_style": "Kuang 日落 / 经典居中 / 2× PNG",
+  "draft_saved": true,
+  "wechat_account": "LSF 设计日常",
+  "appmsgid": "100000338",
+  "native_video_id": "wxv_4761572963508928513",
+  "verified_after_reload": true,
+  "selected_cover": "covers/leibox-wechat-cover-pingfang.png",
+  "wechat_draft_cover_updated": true,
+  "cover_upload_verification": "covers/wechat-cover-upload.json"
+}

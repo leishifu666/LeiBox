@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeiBox 明暗切换 · 六种方案</title>
+    <script src="./gsap.min.js"></script>
+    <style>
+        :root {
+            /* 全局非预览区基础变量 */
+            --app-bg: #fafafa;
+            --app-text: #111;
+            --app-border: #e5e5e5;
+            --app-card: #fff;
+            --app-brand: #0a0a0a;
+            --app-weak: #666;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--app-bg); color: var(--app-text); font-family: var(--font-family); -webkit-font-smoothing: antialiased; padding-bottom: 60px; }
+
+        /* 顶部控制面板区 */
+        .controls-panel { max-width: 1152px; margin: 40px auto 24px; padding: 0 24px; }
+        .controls-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px; }
+        .controls-title-area h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.02em; }
+        .controls-title-area p { font-size: 14px; color: var(--app-weak); }
+        
+        .global-controls { display: flex; gap: 12px; }
+        .btn-tool { padding: 8px 16px; font-size: 13px; font-weight: 500; background: var(--app-card); border: 1px solid var(--app-border); border-radius: var(--radius-sm); cursor: pointer; color: var(--app-text); transition: background 0.2s; }
+        .btn-tool:hover { background: #f0f0f0; }
+        .btn-tool:focus-visible { outline: 2px solid var(--app-brand); outline-offset: 2px; }
+
+        .schemes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 40px; }
+        .scheme-btn { display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding: 16px; background: var(--app-card); border: 1px solid var(--app-border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .scheme-btn:hover:not([aria-pressed="true"]) { border-color: #ccc; }
+        .scheme-btn[aria-pressed="true"] { border-color: var(--app-brand); box-shadow: 0 4px 12px rgba(0,0,0,0.08); outline: 1px solid var(--app-brand); }
+        .scheme-btn:focus-visible { outline: 2px solid var(--app-brand); outline-offset: 2px; }
+        
+        .scheme-btn .num { font-size: 12px; font-weight: 600; color: #999; margin-bottom: 12px; }
+        .scheme-btn[aria-pressed="true"] .num { color: var(--app-brand); }
+        .scheme-btn .title { font-size: 15px; font-weight: 600; color: var(--app-brand); margin-bottom: 6px; }
+        .scheme-btn .desc { font-size: 12px; color: var(--app-weak); line-height: 1.5; }
+
+        /* 预览区外层容器 */
+        #preview-wrapper { position: relative; width: 100%; max-width: 1152px; margin: 0 auto; border: 1px solid #e5e5e5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
+        
+        /* 核心预览内容及克隆层共享样式 */
+        .preview-content {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            /* 禁止常规 CSS 渐变，由 GSAP 与克隆层全权接管 */
+            transition: background 0s, color 0s, border-color 0s;
+        }
+
+        /* 浅色主题令牌 */
+        .preview-content[data-theme="light"] {
+            --bg: #fff;
+            --text: #0a0a0a;
+            --card: #fff;
+            --secondary: #f4f4f4;
+            --weak: #737373;
+            --border: #e5e5e5;
+            --logo-invert: 1;
+            --sun-op: 0;
+            --moon-op: 1;
+        }
+
+        /* 深色主题令牌 */
+        .preview-content[data-theme="dark"] {
+            --bg: #0a0a0a;
+            --text: #fafafa;
+            --card: #191919;
+            --secondary: #262626;
+            --weak: #a3a3a3;
+            --border: rgba(255, 255, 255, 0.10);
+            --logo-invert: 0;
+            --sun-op: 1;
+            --moon-op: 0;
+        }
+
+        /* 应用主题背景 */
+        .preview-content { background: var(--bg); color: var(--text); }
+
+        /* 预览区内部布局 */
+        .preview-header { height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; border-bottom: 1px solid var(--border); transition: border-color 0s; }
+        .header-left { display: flex; align-items: center; gap: 40px; }
+        .logo { height: 25px; filter: invert(var(--logo-invert)); transition: filter 0s; display: block; }
+        .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--text); font-weight: 500; }
+        
+        .header-right { display: flex; align-items: center; gap: 12px; color: var(--weak); }
+        .lang-text { font-size: 13px; font-weight: 600; padding: 0 8px; cursor: pointer; color: var(--text); }
+        .icon-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); cursor: pointer; background: transparent; border: none; color: var(--text); position: relative; }
+        .icon-btn:hover { background: var(--secondary); }
+        
+        /* 主题切换按钮内的图标 */
+        .theme-toggle svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: none; }
+        .theme-toggle .sun { opacity: var(--sun-op); }
+        .theme-toggle .moon { opacity: var(--moon-op); }
+        
+        /* 确保克隆层在动画过程中不会闪烁图标 */
+        .transition-clones .theme-toggle svg { transition: none !important; }
+
+        .main-content { padding: 60px 24px; max-width: 900px; margin: 0 auto; flex: 1; width: 100%; }
+        .hero { text-align: center; margin-bottom: 64px; }
+        .hero-title { font-size: 40px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; color: var(--text); }
+        .hero-desc { font-size: 16px; color: var(--weak); max-width: 580px; margin: 0 auto 32px; line-height: 1.6; }
+        .hero-actions { display: flex; justify-content: center; gap: 16px; }
+        
+        .btn-primary { background: var(--text); color: var(--bg); padding: 12px 28px; border-radius: var(--radius-sm); font-weight: 500; font-size: 14px; border: none; cursor: pointer; }
+        .btn-secondary { background: transparent; color: var(--text); padding: 12px 28px; border-radius: var(--radius-sm); font-weight: 500; font-size: 14px; border: 1px solid var(--border); cursor: pointer; }
+
+        /* 组件卡片预览区 */
+        .lb-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+        .lb-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: background 0s, border-color 0s; }
+        .lb-card-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .lb-card-desc { font-size: 13px; color: var(--weak); margin-bottom: 32px; }
+
+        /* UI Mockups */
+        .mock-switch { width: 44px; height: 24px; background: var(--text); border-radius: 12px; position: relative; }
+        .mock-switch::after { content: ''; position: absolute; right: 2px; top: 2px; width: 20px; height: 20px; background: var(--bg); border-radius: 50%; }
+
+        .mock-skeleton { display: flex; flex-direction: column; gap: 12px; }
+        .mock-sk-bar { height: 12px; background: var(--secondary); border-radius: var(--radius-sm); }
+        .mock-sk-bar.w-70 { width: 70%; }
+        .mock-sk-bar.w-40 { width: 40%; }
+
+        .mock-avatar-row { display: flex; align-items: center; gap: 16px; }
+        .mock-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); border: 1px solid var(--border); }
+        .mock-lines { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 32px; }
+            .schemes-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .schemes-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 26px; line-height: 1.3; letter-spacing: -0.025em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls-panel">
+        <div class="controls-header">
+            <div class="controls-title-area">
+                <h1>明暗切换 · 六种方案</h1>
+                <p>点击选择方案，随后在下方场景右上角操作主题切换进行预览比较。</p>
+            </div>
+            <div class="global-controls">
+                <button id="replay" class="btn-tool">重播当前</button>
+                <button id="reset" class="btn-tool">恢复浅色</button>
+            </div>
+        </div>
+        
+        <div class="schemes-grid" role="group" aria-label="Theme transition schemes">
+            <button class="scheme-btn" data-scheme="1" aria-pressed="true">
+                <span class="num">01</span>
+                <div class="title">径向漫游</div>
+                <div class="desc">点位扩散，硬边缘水波式圆</div>
+            </button>
+            <button class="scheme-btn" data-scheme="2" aria-pressed="false">
+                <span class="num">02</span>
+                <div class="title">纵向快门</div>
+                <div class="desc">水平分割，眼睑式极简拉伸</div>
+            </button>
+            <button class="scheme-btn" data-scheme="3" aria-pressed="false">
+                <span class="num">03</span>
+                <div class="title">错落百叶</div>
+                <div class="desc">五列纵队，阶梯上升式揭示</div>
+            </button>
+            <button class="scheme-btn" data-scheme="4" aria-pressed="false">
+                <span class="num">04</span>
+                <div class="title">丝滑下卷</div>
+                <div class="desc">方向覆盖，全屏单向丝滑推移</div>
+            </button>
+            <button class="scheme-btn" data-scheme="5" aria-pressed="false">
+                <span class="num">05</span>
+                <div class="title">焦点渐透</div>
+                <div class="desc">超大羽化，镜头失焦式柔和</div>
+            </button>
+            <button class="scheme-btn" data-scheme="6" aria-pressed="false">
+                <span class="num">06</span>
+                <div class="title">斜向流光</div>
+                <div class="desc">45度角光束，几何切割感横扫</div>
+            </button>
+        </div>
+    </div>
+
+    <div id="preview-wrapper">
+        <div id="preview" class="preview-content" data-theme="light" data-running="false">
+            <header class="preview-header">
+                <div class="header-left">
+                    <img src="./leibox-logo.svg" alt="LeiBox" class="logo">
+                    <nav class="nav-links">
+                        <span>文档</span>
+                        <span>组件</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <span class="lang-text">EN</span>
+                    <button class="icon-btn" aria-label="Mail">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </button>
+                    <button class="icon-btn" aria-label="Search">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <!-- 主题切换入口 -->
+                    <button class="icon-btn theme-toggle" id="theme-toggle" aria-label="切换到深色模式" aria-pressed="false">
+                        <svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                    <button class="icon-btn" aria-label="GitHub">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </button>
+                </div>
+            </header>
+            
+            <main class="main-content">
+                <section class="hero">
+                    <h2 class="hero-title">装下你的 UI 灵感与组件</h2>
+                    <p class="hero-desc">LeiBox 是我的 UI 灵感、交互细节与实用组件收藏箱。查看真实演示，追溯原始来源，为下一个界面找到灵感。</p>
+                    <div class="hero-actions">
+                        <button class="btn-primary">开始使用</button>
+                        <button class="btn-secondary">浏览组件</button>
+                    </div>
+                </section>
+
+                <section class="lb-cards">
+                    <div class="lb-card">
+                        <div class="lb-card-title">Theme Switcher</div>
+                        <div class="lb-card-desc">Interactive toggle state</div>
+                        <div class="mock-switch"></div>
+                    </div>
+                    <div class="lb-card">
+                        <div class="lb-card-title">Skeleton Loader</div>
+                        <div class="lb-card-desc">Content loading layout</div>
+                        <div class="mock-skeleton">
+                            <div class="mock-sk-bar"></div>
+                            <div class="mock-sk-bar w-70"></div>
+                            <div class="mock-sk-bar w-40"></div>
+                        </div>
+                    </div>
+                    <div class="lb-card">
+                        <div class="lb-card-title">User Avatar Card</div>
+                        <div class="lb-card-desc">Profile representation</div>
+                        <div class="mock-avatar-row">
+                            <div class="mock-avatar"></div>
+                            <div class="mock-lines">
+                                <div class="mock-sk-bar w-70"></div>
+                                <div class="mock-sk-bar w-40"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let currentScheme = '1';
+        let currentTl = null;
+
+        function applyTheme(theme) {
+            document.getElementById('preview').dataset.theme = theme;
+            const button = document.getElementById('theme-toggle');
+            button.setAttribute('aria-label', theme === 'light' ? '切换到深色模式' : '切换到浅色模式');
+            button.setAttribute('aria-pressed', String(theme === 'dark'));
+        }
+
+        // 全局清理：终止动画，销毁过渡层，确保持续可用
+        function cleanup() {
+            if (currentTl) {
+                // 若被中断，立即赋予其目标状态给原DOM
+                const intendedTheme = document.querySelector('.transition-clones')?.firstChild?.dataset?.theme;
+                if (intendedTheme) applyTheme(intendedTheme);
+                currentTl.kill();
+                currentTl = null;
+            }
+            document.querySelectorAll('.transition-clones').forEach(el => el.remove());
+            document.getElementById('preview').dataset.running = 'false';
+        }
+
+        // 重置至浅色
+        function resetToLight() {
+            cleanup();
+            applyTheme('light');
+        }
+
+        // 方案选择逻辑
+        document.querySelectorAll('.scheme-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.scheme-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+                const target = e.currentTarget;
+                target.setAttribute('aria-pressed', 'true');
+                currentScheme = target.dataset.scheme;
+                resetToLight(); // 切换方案时重置为浅色以供无干扰预览
+            });
+        });
+
+        // 顶层按钮监听
+        document.getElementById('reset').addEventListener('click', resetToLight);
+        document.getElementById('replay').addEventListener('click', () => {
+            cleanup();
+            const preview = document.getElementById('preview');
+            const startTheme = preview.dataset.theme === 'light' ? 'dark' : 'light';
+            applyTheme(startTheme);
+            // 同步启动，避免重置或切方案后还触发上一轮重播。
+            runTransition(currentScheme, startTheme === 'light', document.getElementById('theme-toggle'));
+        });
+
+        // 绑定主题切换按钮
+        document.getElementById('preview-wrapper').addEventListener('click', (e) => {
+            const toggleBtn = e.target.closest('#theme-toggle');
+            if (!toggleBtn) return;
+            
+            // 先结算被中断的目标，再决定本次反向；连续点击不会丢失意图。
+            cleanup();
+            const preview = document.getElementById('preview');
+            const isCurrentlyLight = preview.dataset.theme === 'light';
+            runTransition(currentScheme, isCurrentlyLight, toggleBtn);
+        });
+
+        // 核心动效引擎
+        function runTransition(schemeId, isCurrentlyLight, toggleBtn) {
+            const preview = document.getElementById('preview');
+            const wrapper = document.getElementById('preview-wrapper');
+            const newTheme = isCurrentlyLight ? 'dark' : 'light';
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                applyTheme(newTheme);
+                preview.dataset.running = 'false';
+                return;
+            }
+
+            // 1. 创建顶层克隆容器避免污染主 DOM，保证交互可读
+            const cloneContainer = document.createElement('div');
+            cloneContainer.className = 'transition-clones';
+            cloneContainer.style.cssText = 'position: absolute; inset: 0; pointer-events: none; z-index: 100; overflow: hidden;';
+            cloneContainer.setAttribute('aria-hidden', 'true');
+            cloneContainer.setAttribute('inert', ''); // 完全禁用焦点
+            wrapper.appendChild(cloneContainer);
+
+            // 工具方法：生成带有新目标主题的克隆镜像
+            function makeClone() {
+                const clone = preview.cloneNode(true);
+                clone.dataset.theme = newTheme;
+                // 深度清除 id 防止重复
+                clone.removeAttribute('id');
+                clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+                clone.style.cssText = 'position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;';
+                return clone;
+            }
+
+            // 初始化 GSAP Timeline，结束后更新原 DOM 并销毁克隆层
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    applyTheme(newTheme);
+                    preview.dataset.running = 'false';
+                    cloneContainer.remove();
+                    currentTl = null;
+                }
+            });
+            currentTl = tl;
+            preview.dataset.running = 'true';
+
+            // 获取绝对圆心（规避滚动条导致的坐标偏移）
+            const rect = toggleBtn.getBoundingClientRect();
+            const wrapRect = wrapper.getBoundingClientRect();
+            const cx = rect.left - wrapRect.left + rect.width / 2;
+            const cy = rect.top - wrapRect.top + rect.height / 2;
+            const maxDist = Math.hypot(Math.max(cx, wrapRect.width - cx), Math.max(cy, wrapRect.height - cy));
+
+            switch (schemeId) {
+                case '1': // 01 径向漫游 - 圆形扩展
+                    const c1 = makeClone();
+                    cloneContainer.appendChild(c1);
+                    tl.fromTo(c1,
+                        { clipPath: `circle(0px at ${cx}px ${cy}px)` },
+                        { clipPath: `circle(${maxDist}px at ${cx}px ${cy}px)`, duration: 0.7, ease: "power2.inOut" }
+                    );
+                    break;
+                case '2': // 02 纵向快门 - 眼睑拉伸
+                    const c2 = makeClone();
+                    cloneContainer.appendChild(c2);
+                    tl.fromTo(c2,
+                        { clipPath: 'polygon(0% 50%, 100% 50%, 100% 50%, 0% 50%)' },
+                        { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)', duration: 0.65, ease: "power3.inOut" }
+                    );
+                    break;
+                case '3': // 03 错落百叶 - 阶梯遮罩
+                    // 使用五个克隆切片进行 stagger，实现百叶窗
+                    for (let i = 0; i < 5; i++) {
+                        let clone = makeClone();
+                        cloneContainer.appendChild(clone);
+                        let left = i * 20;
+                        let right = 100 - (i + 1) * 20;
+                        tl.fromTo(clone,
+                            { clipPath: `inset(100% ${right}% 0% ${left}%)` },
+                            { clipPath: `inset(0% ${right}% 0% ${left}%)`, duration: 0.55, ease: "power2.out" },
+                            i * 0.08 // stagger 偏移
+                        );
+                    }
+                    break;
+                case '4': // 04 丝滑下卷 - 方向推移
+                    const c4 = makeClone();
+                    cloneContainer.appendChild(c4);
+                    if (!isCurrentlyLight) {
+                        // 进光：自下而上覆盖
+                        tl.fromTo(c4, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.75, ease: "power3.inOut" });
+                    } else {
+                        // 入夜：自上而下覆盖
+                        tl.fromTo(c4, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.75, ease: "power3.inOut" });
+                    }
+                    break;
+                case '5': // 05 焦点渐透 - 超大羽化遮罩
+                    const c5 = makeClone();
+                    cloneContainer.appendChild(c5);
+                    const md = maxDist + 260; // 实心区域需跨过最远角，覆盖250px羽化带。
+                    let proxy5 = { r: 0 };
+                    c5.style.maskImage = c5.style.webkitMaskImage = `radial-gradient(circle at ${cx}px ${cy}px, black 0px, transparent 0px)`;
+                    tl.to(proxy5, {
+                        r: md, duration: 0.9, ease: "power2.inOut",
+                        onUpdate: () => {
+                            let r1 = Math.max(0, proxy5.r - 250); // 内层实心半径跟随外层扩张产生羽化差
+                            let mask = `radial-gradient(circle at ${cx}px ${cy}px, black ${r1}px, transparent ${proxy5.r}px)`;
+                            c5.style.maskImage = mask;
+                            c5.style.webkitMaskImage = mask;
+                        }
+                    });
+                    break;
+                case '6': // 06 斜向流光 - 45度光束扫描
+                    const c6 = makeClone();
+                    cloneContainer.appendChild(c6);
+                    let proxy6 = { p: -20 }; // 控制百分比位置
+                    c6.style.maskImage = c6.style.webkitMaskImage = 'linear-gradient(135deg, black -20%, transparent -19.9%)';
+                    tl.to(proxy6, {
+                        p: 130, duration: 0.85, ease: "power2.inOut",
+                        onUpdate: () => {
+                            let mask = `linear-gradient(135deg, black ${proxy6.p}%, transparent ${proxy6.p + 0.1}%)`;
+                            c6.style.maskImage = mask;
+                            c6.style.webkitMaskImage = mask;
+                        }
+                    });
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

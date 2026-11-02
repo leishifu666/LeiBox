@@ -1,0 +1,160 @@
+{
+  "slug": "ink-spread-carousel",
+  "name": {
+    "en": "Ink Spread Carousel",
+    "zh": "墨水扩散图片轮播"
+  },
+  "description": {
+    "en": "A new photo spreads from your press with a rippling ink edge and a thin lens distortion, while a soft image shadow changes behind the white card.",
+    "zh": "新图从点击位置沿不规则墨水边缘向外晕开，边界带有轻微透镜折射，白色卡片后的柔焦色影同步换色。"
+  },
+  "keywords": "墨水 扩散 晕染 图片 轮播 点击 液态 遮罩 折射 ink bloom spread carousel WebGL Lorenzo Cabra Bencho",
+  "docsPath": "/docs/animations/ink-spread-carousel",
+  "detailPath": "/ai/components/ink-spread-carousel.json",
+  "markdownPath": "/ai/components/ink-spread-carousel.md",
+  "previewPath": "/assets/components/ink-spread-carousel.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "墨水扩散图片轮播",
+      "点击位置图片揭示",
+      "ink spread carousel"
+    ],
+    "searchTerms": [
+      "墨水",
+      "扩散",
+      "晕染",
+      "轮播",
+      "折射",
+      "ink",
+      "spread",
+      "carousel"
+    ],
+    "visualTags": [
+      "image",
+      "ink",
+      "refraction"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "本地图片过渡重建；不包含付费组件原始源码。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independent instance-scoped WebGL1 shader, Canvas2D fallback and DOM controls, reusing the existing native six-framework lifecycle. Includes generated inline artwork and licensed Lucide icons; no paid Bencho source code.",
+    "designReference": "https://x.com/cabralorenzo/status/2114082220566860026/video/1",
+    "designAuthor": "Lorenzo Cabra",
+    "license": "Original design and image/source license not supplied or independently verified. Original footage, photos and Pro source are not redistributed. Four new images were generated for this reconstruction. Lucide icons retain their ISC notice."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/ink-spread-carousel/react.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { InkSpreadCarousel } from \"./InkSpreadCarousel\";\n\nexport default function App() {\n  return <InkSpreadCarousel />;\n}",
+      "files": [
+        "InkSpreadCarousel.tsx",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/ink-spread-carousel/vue.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport InkSpreadCarousel from \"./InkSpreadCarousel.vue\";\n</script>\n<template><InkSpreadCarousel /></template>",
+      "files": [
+        "InkSpreadCarousel.vue",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/ink-spread-carousel/svelte.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport InkSpreadCarousel from \"./InkSpreadCarousel.svelte\";\n</script>\n<InkSpreadCarousel />",
+      "files": [
+        "InkSpreadCarousel.svelte",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/ink-spread-carousel/solid.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { InkSpreadCarousel } from \"./InkSpreadCarousel.solid\";\n\nexport default function App() {\n  return <InkSpreadCarousel />;\n}",
+      "files": [
+        "InkSpreadCarousel.solid.tsx",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/ink-spread-carousel/preact.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { InkSpreadCarousel } from \"./InkSpreadCarousel.preact\";\n\nexport default function App() {\n  return <InkSpreadCarousel />;\n}",
+      "files": [
+        "InkSpreadCarousel.preact.tsx",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/ink-spread-carousel/vanilla.json",
+      "component": "InkSpreadCarousel",
+      "dependencies": [],
+      "usage": "import { mount } from \"./InkSpreadCarousel\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "InkSpreadCarousel.ts",
+        "InkSpreadCarouselEngine.js",
+        "motion-runtime.ts",
+        "InkSpreadCarouselEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click the photo or the arrows to spread the next image from your press. Use Left/Right, Home or End; touch supports tapping, and rapid clicks continue from the current frame.",
+    "zh": "点击图片或左右按钮，从落点扩散切换。支持方向键、Home、End 和触屏轻点，快速连点时从当前画面继续。"
+  }
+}

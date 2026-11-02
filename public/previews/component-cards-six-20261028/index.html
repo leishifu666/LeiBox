@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeiBox 组件卡片 · 六种方案</title>
+<style>
+  :root {
+    --bg-main: #ffffff;
+    --text-primary: #09090b;
+    --text-secondary: #71717a;
+    --border-color: #e4e4e7;
+    --bg-muted: #f4f4f5;
+    --ring: #18181b;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    color: var(--text-primary);
+    background: var(--bg-main);
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+  }
+
+  .app-container {
+    display: flex;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+    padding: 32px 24px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar::-webkit-scrollbar { display: none; }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .logo img {
+    height: 28px;
+    filter: brightness(0);
+  }
+
+  .nav-group { margin-bottom: 32px; }
+  .nav-title {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    padding-left: 12px;
+  }
+  .nav-item {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .nav-item:hover, .nav-item:focus-visible {
+    background: var(--bg-muted);
+    color: var(--text-primary);
+    outline: none;
+  }
+  .nav-item.active {
+    background: var(--bg-muted);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .nav-item.sub-item {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 48px 64px 80px;
+  }
+
+  .page-header {
+    margin-bottom: 40px;
+  }
+  .page-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+  }
+  .page-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0;
+  }
+
+  /* Variant Selector */
+  .variant-toolbar {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .variant-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+  }
+  .variant-selector::-webkit-scrollbar { display: none; }
+  
+  .variant-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .variant-btn:hover {
+    border-color: #a1a1aa;
+    color: var(--text-primary);
+  }
+  .variant-btn.active {
+    background: var(--text-primary);
+    color: var(--bg-main);
+    border-color: var(--text-primary);
+    font-weight: 500;
+  }
+  .variant-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px var(--ring);
+  }
+  .variant-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Base Grid & Card Styles */
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .component-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    outline: none;
+  }
+  .component-card:focus-visible {
+    box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px var(--ring) !important;
+    border-radius: inherit;
+    z-index: 10;
+  }
+  
+  .card-image-wrap {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-muted);
+  }
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    color: var(--text-primary);
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* --- 01: 无界留白 (Borderless Minimalist) --- */
+  .v-1 .component-grid { gap: 48px 32px; }
+  .v-1 .component-card { gap: 16px; }
+  .v-1 .card-image-wrap { border-radius: 12px; border: 1px solid rgba(0,0,0,0.06); }
+  .v-1 .card-text-wrap { padding: 0 4px; }
+  .v-1 .component-card:hover .card-image-wrap { border-color: rgba(0,0,0,0.15); }
+
+  /* --- 02: 通体白卡 (Unified Card) --- */
+  .v-2 .component-card {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    background: var(--bg-main);
+  }
+  .v-2 .card-image-wrap { border-bottom: 1px solid var(--border-color); border-radius: 16px 16px 0 0; }
+  .v-2 .card-text-wrap { padding: 20px; }
+  .v-2 .component-card:hover { border-color: #a1a1aa; }
+
+  /* --- 03: 画框内衬 (Gallery Frame) --- */
+  .v-3 .component-card {
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px;
+    background: var(--bg-main);
+    gap: 12px;
+  }
+  .v-3 .card-image-wrap { border-radius: 12px; }
+  .v-3 .card-text-wrap { padding: 4px 12px 12px; }
+  .v-3 .component-card:hover { background: #fafafa; border-color: #d4d4d8; }
+
+  /* --- 04: 左侧线柱 (Left Accent Line) --- */
+  .v-4 .component-grid { gap: 48px 32px; }
+  .v-4 .component-card { gap: 16px; }
+  .v-4 .card-image-wrap { border-radius: 12px; border: 1px solid rgba(0,0,0,0.04); }
+  .v-4 .card-text-wrap {
+    border-left: 3px solid var(--border-color);
+    padding-left: 16px;
+    margin-left: 4px;
+    transition: border-color 0.2s;
+  }
+  .v-4 .component-card:hover .card-text-wrap { border-color: var(--text-primary); }
+
+  /* --- 05: 悬浮覆盖 (Overlay Info) --- */
+  .v-5 .component-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+  .v-5 .card-text-wrap {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.2s;
+  }
+  .v-5 .component-card:hover { border-color: #a1a1aa; }
+  .v-5 .component-card:hover .card-text-wrap { background: rgba(255, 255, 255, 0.95); }
+
+  /* --- 06: 错位拼贴 (Offset Tab) --- */
+  .v-6 .component-grid { gap: 48px 32px; }
+  .v-6 .component-card { padding-bottom: 24px; }
+  .v-6 .card-image-wrap {
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .v-6 .card-text-wrap {
+    margin: -24px 20px 0;
+    position: relative;
+    z-index: 2;
+    background: var(--bg-main);
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+  .v-6 .component-card:hover .card-text-wrap {
+    border-color: #d4d4d8;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .component-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1024px) {
+    .main-content { padding: 48px 40px; }
+  }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main-content { padding: 32px 24px; }
+    .component-grid { grid-template-columns: 1fr; }
+  }
+
+/* 修正：预览图片比例保持真实，防止裁切 */
+.card-image {
+  object-fit: contain !important;
+}
+
+/* 修正：让网格间距选择器正确命中目标 */
+.component-grid.v-1,
+.component-grid.v-4,
+.component-grid.v-6 {
+  gap: 48px 32px !important;
+}
+
+/* 修正：01 版真正去掉描边 */
+.component-grid.v-1 .card-image-wrap {
+  border: none !important;
+}
+.component-grid.v-1 .component-card:hover .card-image-wrap {
+  border-color: transparent !important;
+}
+
+/* 修正：05 版图文独立分配，文字悬浮但不遮挡预览主体 */
+.component-grid.v-5 .card-image-wrap {
+  margin-bottom: 104px !important; /* 为绝对定位的文本留出底部空间 */
+}
+.component-grid.v-5 .card-text-wrap {
+  border-top: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+/* 修正：侧栏焦点可见性 */
+.logo:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.nav-item:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* 修正：全断点响应式适配 (1440:3列, 1024:2列并隐藏侧栏, 640:1列) */
+@media (min-width: 1025px) {
+  .component-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .sidebar { display: block !important; }
+}
+@media (max-width: 1024px) {
+  .sidebar { display: none !important; }
+  .main-content { padding: 48px 40px !important; }
+  .component-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 640px) {
+  .main-content { padding: 32px 24px !important; }
+  .component-grid { grid-template-columns: 1fr !important; }
+}
+/* 覆盖原代码中导致 768px 单列的错误规则 */
+@media (min-width: 641px) and (max-width: 768px) {
+  .component-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <aside class="sidebar">
+    <a href="/" class="logo">
+      <img src="assets/leibox-logo.svg" alt="LeiBox Logo">
+    </a>
+    
+    <div class="nav-group">
+      <div class="nav-title">入门指南</div>
+      <a href="http://127.0.0.1:3000/docs" class="nav-item">简介</a>
+      <a href="http://127.0.0.1:3000/docs/installation" class="nav-item">安装</a>
+      <a href="http://127.0.0.1:3000/docs/rendering" class="nav-item">渲染</a>
+      <a href="http://127.0.0.1:3000/docs/mcp" class="nav-item">AI 接入</a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">组件</div>
+      <a href="http://127.0.0.1:3000/components" class="nav-item active">浏览全部</a>
+      <div id="nav-components-list" style="margin-top: 8px;"></div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1 class="page-title">组件</h1>
+      <p class="page-desc">将这些创意组件直接用在你的项目中。浏览组件库，按自己的需要调整，更多效果正在加入。</p>
+    </header>
+
+    <div class="variant-toolbar">
+      <div class="variant-selector" id="variant-selector">
+        <!-- Buttons injected by JS -->
+      </div>
+      <p class="variant-desc" id="variant-desc"></p>
+    </div>
+
+    <div id="grid-container" class="component-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </main>
+</div>
+
+<script>
+const components = [
+  { id: 1, title: '流体提示气泡', desc: '黑色胶囊随六个导航入口移动、变宽，通过裁切切换文字；头像使用 LeiBox Logo。', img: 'assets/fluid-tooltip.png', href: 'http://127.0.0.1:3000/docs/animations/fluid-tooltip' },
+  { id: 2, title: '蜘蛛牵引切歌', desc: '八足蜘蛛结网牵引专辑封面，在队列与播放区之间连续搬运，搭配真实专辑图片和可操作的本地播放控件。', img: 'assets/spider-music-player.png', href: 'http://127.0.0.1:3000/docs/animations/spider-music-player' },
+  { id: 3, title: '列表卡片堆叠切换', desc: 'Claude、Codex、Grok 三张 SVG 在列表、并排卡片与叠放之间连续移动、缩放和重排。', img: 'assets/collection-layout-morph.png', href: 'http://127.0.0.1:3000/docs/animations/collection-layout-morph' },
+  { id: 4, title: '品牌海报三联卡片', desc: '三张人像海报搭配 LeiBox 标志与字标，悬停或聚焦时照片轻轻放大。', img: 'assets/brand-poster-cards.png', href: 'http://127.0.0.1:3000/docs/animations/brand-poster-cards' },
+  { id: 5, title: '点阵波纹与旋涡', desc: '三块点阵同步呈现波纹、旋涡和圆形脉冲，点击可以暂停与继续。', img: 'assets/dot-matrix-trio.png', href: 'http://127.0.0.1:3000/docs/animations/dot-matrix-trio' },
+  { id: 6, title: '文字选区开花', desc: '拖选真实文字，让彩色花朵沿字符生长，松开后花瓣、叶片与茎干依次收回。', img: 'assets/selection-flower.png', href: 'http://127.0.0.1:3000/docs/animations/selection-flower' }
+];
+
+const variants = [
+  { id: 1, name: '01. 无界留白', desc: '完全移除外层包裹边框，仅靠背景色块与留白自然划分组件区域。' },
+  { id: 2, name: '02. 通体白卡', desc: '使用单层白色卡片包裹图片与文本，共享底层背景，消除多层嵌套感。' },
+  { id: 3, name: '03. 画框内衬', desc: '外部使用带内边距的线框，如同画廊展框般将预览主体独立陈列。' },
+  { id: 4, name: '04. 左侧线柱', desc: '去掉包围外框，采用左侧强调线锚定文本，使卡片右侧完全开放。' },
+  { id: 5, name: '05. 悬浮覆盖', desc: '文本框半透明覆盖在卡片底部，为上方的完整组件预览留出专属独立空间。' },
+  { id: 6, name: '06. 错位拼贴', desc: '文本区域向上错位叠加在背景底板上，打破常规网格的平齐边界。' }
+];
+
+document.getElementById('nav-components-list').innerHTML = components.map(item => 
+  `<a href="${item.href}" class="nav-item sub-item">${item.title}</a>`
+).join('');
+
+function renderGrid() {
+  const container = document.getElementById('grid-container');
+  container.innerHTML = components.map(item => `
+    <a href="${item.href}" class="component-card">
+      <div class="card-image-wrap">
+        <img src="${item.img}" alt="${item.title}" class="card-image" loading="lazy">
+      </div>
+      <div class="card-text-wrap">
+        <h3 class="card-title">${item.title}</h3>
+        <p class="card-desc">${item.desc}</p>
+      </div>
+    </a>
+  `).join('');
+}
+
+function setVariant(id, pushToHistory = true) {
+  const container = document.getElementById('grid-container');
+  container.className = `component-grid v-${id}`;
+
+  const selector = document.getElementById('variant-selector');
+  document.querySelectorAll('.variant-btn').forEach(btn => {
+    const isActive = btn.dataset.id == id;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', isActive);
+    
+    if (isActive) {
+      const btnRect = btn.getBoundingClientRect();
+      const selectorRect = selector.getBoundingClientRect();
+      // 仅当按钮在可视区外或边缘时，横向平滑滚动使其居中，不影响页面上下滚动
+      if (btnRect.left < selectorRect.left || btnRect.right > selectorRect.right) {
+        selector.scrollBy({
+          left: btnRect.left - selectorRect.left - (selectorRect.width / 2) + (btnRect.width / 2),
+          behavior: 'smooth'
+        });
+      }
+    }
+  });
+
+  const variant = variants.find(v => v.id == id);
+  if (variant) {
+    document.getElementById('variant-desc').textContent = variant.desc;
+  }
+
+  if (pushToHistory) {
+    try {
+      const url = new URL(window.location);
+      url.searchParams.set('variant', id);
+      window.history.pushState({ variant: id }, '', url);
+    } catch (e) {
+      // 忽略 file:// 等协议下 History API 的报错
+    }
+  }
+}
+
+function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let initialVariant = parseInt(urlParams.get('variant'), 10);
+  if (isNaN(initialVariant) || initialVariant < 1 || initialVariant > 6) {
+    initialVariant = 1;
+  }
+
+  const selector = document.getElementById('variant-selector');
+  selector.innerHTML = variants.map(v => `
+    <button class="variant-btn" data-id="${v.id}" onclick="setVariant(${v.id})" aria-pressed="false">${v.name}</button>
+  `).join('');
+
+  renderGrid();
+  
+  // 初始化渲染不压入新历史栈，仅替换当前 URL 参数
+  setVariant(initialVariant, false);
+  try {
+    const url = new URL(window.location);
+    url.searchParams.set('variant', initialVariant);
+    window.history.replaceState({ variant: initialVariant }, '', url);
+  } catch (e) {}
+
+  window.addEventListener('popstate', (e) => {
+    const v = (e.state && e.state.variant) || new URLSearchParams(window.location.search).get('variant') || 1;
+    let id = parseInt(v, 10);
+    if (isNaN(id) || id < 1 || id > 6) id = 1;
+    // 返回历史时不 push 新记录
+    setVariant(id, false);
+  });
+}
+
+init();
+</script>
+</body>
+</html>

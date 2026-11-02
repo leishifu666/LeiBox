@@ -1,0 +1,23 @@
+import fs from 'node:fs/promises';import http from 'node:http';import path from 'node:path';import {chromium,expect} from 'playwright/test';
+import assert from 'node:assert/strict';
+const label=process.argv[2]||'after',out=path.resolve('outputs/basit-2114733820155134045/performance');await fs.mkdir(out,{recursive:true});
+const source=await fs.readFile('public/motion/gradient-ring-cards.html','utf8');if(label==='before')await fs.writeFile(path.join(out,'before.html'),source);
+const probe=`<script>window.__bench={start:performance.now(),posts:[],long:[],intersection:[]};const IO=IntersectionObserver;window.IntersectionObserver=class extends IO{constructor(cb,options){super((entries,observer)=>{__bench.intersection=entries.map(e=>({visible:e.isIntersecting,ratio:e.intersectionRatio,rect:e.boundingClientRect.toJSON()}));cb(entries,observer)},options)}};new PerformanceObserver(list=>{for(const e of list.getEntries())__bench.long.push(e.duration)}).observe({entryTypes:['longtask']});const draw=WebGL2RenderingContext.prototype.drawElements;WebGL2RenderingContext.prototype.drawElements=function(mode,count,...args){if(count===6)__bench.posts.push(performance.now());return draw.call(this,mode,count,...args)};</script>`;
+const html=source.replace('<script>',probe+'<script>');
+const server=http.createServer((req,res)=>{res.setHeader('content-type','text/html');if(req.url==='/scene')res.end(html);else{const width=Number(req.url.slice(1))||768;res.end(`<!doctype html><style>body{margin:0}iframe{width:1280px;height:1024px;border:0;transform:scale(${width/1280});transform-origin:top left}#wrap{width:${width}px;height:${width*.8}px;overflow:hidden}</style><div id="wrap"><iframe src="/scene" sandbox="allow-scripts"></iframe></div><script>document.querySelector('iframe').onload=function(){const r=this.getBoundingClientRect();this.contentWindow.postMessage({type:'leibox-render-size',slug:'gradient-ring-cards',width:r.width,height:r.height},'*')}</script>`);}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({channel:'chrome',headless:true}),results=[];
+try{for(const width of [768,224]){
+ const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('http://127.0.0.1:'+server.address().port+'/'+width);const frame=page.frameLocator('iframe');await expect(frame.locator('.gr-scene')).toHaveAttribute('data-ready','true');
+ const startup=await frame.locator('canvas').evaluate(c=>({readyMs:performance.now()-window.__bench.start,buffer:[c.width,c.height],display:[c.getBoundingClientRect().width,c.getBoundingClientRect().height],renderer:c.getContext('webgl2').getParameter(c.getContext('webgl2').getExtension('WEBGL_debug_renderer_info').UNMASKED_RENDERER_WEBGL)}));await page.waitForTimeout(250);
+ const reset=()=>frame.locator('canvas').evaluate(()=>window.__bench.posts=[]);const read=()=>frame.locator('canvas').evaluate(()=>{const t=window.__bench.posts,d=t.slice(1).map((x,i)=>x-t[i]).sort((a,b)=>a-b);return {submittedFrames:t.length,medianIntervalMs:d[Math.floor(d.length*.5)]||0,p95IntervalMs:d[Math.floor(d.length*.95)]||0,visibility:document.visibilityState,intersection:window.__bench.intersection,phase:document.querySelector('[data-motion-surface]').shadowRoot.querySelector('.gr-scene').dataset.phase}});
+ await reset();await page.waitForTimeout(1800);const playing=await read();await frame.locator('canvas').press(' ');await page.waitForTimeout(200);await reset();await page.waitForTimeout(500);const paused=await read();await reset();await frame.locator('canvas').press('ArrowRight');await page.waitForTimeout(1100);const snapping=await read();
+ await frame.locator('canvas').press(' ');await page.evaluate(()=>document.getElementById('wrap').style.marginTop='3000px');await page.waitForTimeout(250);await reset();await page.waitForTimeout(500);const offscreen=await read();
+ if(label!=='before'){
+  assert.deepEqual(startup.buffer,[width,Math.round(width*.8)]);
+  assert(playing.submittedFrames>=80&&playing.submittedFrames<=115,'Playback must keep moving without duplicate high-refresh draws');
+  assert.equal(paused.submittedFrames,0,'A paused carousel must not keep drawing');
+  assert(snapping.submittedFrames>20&&snapping.submittedFrames<=55,'Snapping must use the same single render loop');
+  assert.equal(offscreen.submittedFrames,0);assert.deepEqual(errors,[]);
+ }
+ results.push({width,startup,playing,paused,snapping,offscreen,errors});await page.close();
+ }await fs.writeFile(path.join(out,label+'.json'),JSON.stringify(results,null,2));console.log(JSON.stringify(results,null,2));}finally{await browser.close();await new Promise(r=>server.close(r));}

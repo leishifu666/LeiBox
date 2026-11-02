@@ -1,5 +1,42 @@
 [
   {
+    "slug": "ascii-sharks",
+    "href": "/docs/animations/ascii-sharks",
+    "name": "ASCII Shark Ocean",
+    "category": "ASCII animation",
+    "description": "Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.",
+    "keywords": "ASCII 字符 鲨鱼 鱼群 游动 海洋 捕食 追逐 避让 水波 网格 背景 输入框 shark ocean fish boids stacked drewdi",
+    "preview": "/assets/components/ascii-sharks.png",
+    "sourceFile": "字符鲨鱼与鱼群.html",
+    "canvasWidth": 972,
+    "canvasHeight": 880,
+    "responsive": true
+  },
+  {
+    "slug": "ink-spread-carousel",
+    "href": "/docs/animations/ink-spread-carousel",
+    "name": "Ink Spread Carousel",
+    "category": "Image transition",
+    "description": "A new photo spreads from your press with a rippling ink edge and a thin lens distortion, while a soft image shadow changes behind the white card.",
+    "keywords": "墨水 扩散 晕染 图片 轮播 点击 液态 遮罩 折射 ink bloom spread carousel WebGL Lorenzo Cabra Bencho",
+    "preview": "/assets/components/ink-spread-carousel.png",
+    "sourceFile": "墨水扩散图片轮播.html",
+    "canvasWidth": 940,
+    "canvasHeight": 876
+  },
+  {
+    "slug": "particle-texture-trio",
+    "href": "/docs/animations/particle-texture-trio",
+    "name": "Particle Texture Trio",
+    "category": "Particle animation",
+    "description": "Three fixed dot-matrix shapes reveal flowing blue-green particles, hollow white contours and warm orange-pink textures.",
+    "keywords": "粒子 纹理 点阵 三联 流动 空心 圆弧 蓝绿 橙红 Sarvam Anushka particle texture trio noise flow field",
+    "preview": "/assets/components/particle-texture-trio.png",
+    "sourceFile": "粒子纹理三联.html",
+    "canvasWidth": 960,
+    "canvasHeight": 540
+  },
+  {
     "slug": "matcha-powder-reveal",
     "href": "/docs/animations/matcha-powder-reveal",
     "name": "Package Tear and Powder Reveal",

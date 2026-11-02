@@ -8,6 +8,10 @@
       "src": "/assets/optimized/ai-generating-5b80f735c260-546.webp",
       "srcSet": "/assets/optimized/ai-generating-5b80f735c260-320.webp 320w, /assets/optimized/ai-generating-5b80f735c260-546.webp 546w"
     },
+    "/assets/components/ascii-sharks.png": {
+      "src": "/assets/optimized/ascii-sharks-da85d8407873-1173.webp",
+      "srcSet": "/assets/optimized/ascii-sharks-da85d8407873-320.webp 320w, /assets/optimized/ascii-sharks-da85d8407873-640.webp 640w, /assets/optimized/ascii-sharks-da85d8407873-960.webp 960w, /assets/optimized/ascii-sharks-da85d8407873-1173.webp 1173w"
+    },
     "/assets/components/blue-fluted-glass.png": {
       "src": "/assets/optimized/blue-fluted-glass-671d8aaa6981-1200.webp",
       "srcSet": "/assets/optimized/blue-fluted-glass-671d8aaa6981-320.webp 320w, /assets/optimized/blue-fluted-glass-671d8aaa6981-640.webp 640w, /assets/optimized/blue-fluted-glass-671d8aaa6981-960.webp 960w, /assets/optimized/blue-fluted-glass-671d8aaa6981-1200.webp 1200w"
@@ -53,8 +57,8 @@
       "srcSet": "/assets/optimized/elastic-panel-resize-9282c19c34b5-320.webp 320w, /assets/optimized/elastic-panel-resize-9282c19c34b5-640.webp 640w, /assets/optimized/elastic-panel-resize-9282c19c34b5-960.webp 960w, /assets/optimized/elastic-panel-resize-9282c19c34b5-1200.webp 1200w"
     },
     "/assets/components/fluid-tooltip.png": {
-      "src": "/assets/optimized/fluid-tooltip-1df520f8a6e2-960.webp",
-      "srcSet": "/assets/optimized/fluid-tooltip-1df520f8a6e2-320.webp 320w, /assets/optimized/fluid-tooltip-1df520f8a6e2-640.webp 640w, /assets/optimized/fluid-tooltip-1df520f8a6e2-960.webp 960w"
+      "src": "/assets/optimized/fluid-tooltip-06951f011c5d-960.webp",
+      "srcSet": "/assets/optimized/fluid-tooltip-06951f011c5d-320.webp 320w, /assets/optimized/fluid-tooltip-06951f011c5d-640.webp 640w, /assets/optimized/fluid-tooltip-06951f011c5d-960.webp 960w"
     },
     "/assets/components/folded-emoji-scroll.png": {
       "src": "/assets/optimized/folded-emoji-scroll-5dcda494a41f-1200.webp",
@@ -83,6 +87,10 @@
     "/assets/components/hammerhead-chart.png": {
       "src": "/assets/optimized/hammerhead-chart-55720a189153-1200.webp",
       "srcSet": "/assets/optimized/hammerhead-chart-55720a189153-320.webp 320w, /assets/optimized/hammerhead-chart-55720a189153-640.webp 640w, /assets/optimized/hammerhead-chart-55720a189153-960.webp 960w, /assets/optimized/hammerhead-chart-55720a189153-1200.webp 1200w"
+    },
+    "/assets/components/ink-spread-carousel.png": {
+      "src": "/assets/optimized/ink-spread-carousel-beadc3c131ba-1168.webp",
+      "srcSet": "/assets/optimized/ink-spread-carousel-beadc3c131ba-320.webp 320w, /assets/optimized/ink-spread-carousel-beadc3c131ba-640.webp 640w, /assets/optimized/ink-spread-carousel-beadc3c131ba-960.webp 960w, /assets/optimized/ink-spread-carousel-beadc3c131ba-1168.webp 1168w"
     },
     "/assets/components/inline-text-morph.png": {
       "src": "/assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp",
@@ -139,6 +147,10 @@
     "/assets/components/otp-verification.png": {
       "src": "/assets/optimized/otp-verification-eeec5a945ac9-546.webp",
       "srcSet": "/assets/optimized/otp-verification-eeec5a945ac9-320.webp 320w, /assets/optimized/otp-verification-eeec5a945ac9-546.webp 546w"
+    },
+    "/assets/components/particle-texture-trio.png": {
+      "src": "/assets/optimized/particle-texture-trio-324731fc5f0b-960.webp",
+      "srcSet": "/assets/optimized/particle-texture-trio-324731fc5f0b-320.webp 320w, /assets/optimized/particle-texture-trio-324731fc5f0b-640.webp 640w, /assets/optimized/particle-texture-trio-324731fc5f0b-960.webp 960w"
     },
     "/assets/components/reasoning-effort-slider.png": {
       "src": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp",

@@ -7,6 +7,30 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'ascii-sharks') {
+      const ready=()=>{
+        const root=document.querySelector('#ascii-sharks [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.ao-scene').dataset.preview='true';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
+    if (slug === 'ink-spread-carousel') {
+      const ready=()=>{
+        const root=document.querySelector('#ink-spread-carousel [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.ib-scene').style.background='#f4f4f4';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        let step=0;
+        later(()=>repeat(()=>{
+          const photo=root.querySelector('.ib-photo'),box=photo.getBoundingClientRect();
+          const positions=[[.82,.5],[.24,.3],[.65,.8],[.15,.52]],point=positions[step++%positions.length];
+          photo.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1,clientX:box.left+box.width*point[0],clientY:box.top+box.height*point[1]}));
+        },2000),550);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'ai-brand-cover-cards') {
       const ready=()=>{const root=document.querySelector('[data-motion-surface]')?.shadowRoot;if(!root||document.body.dataset.motionReady!=='true')return;observer.disconnect();root.querySelector('.bp-scene').style.background='#f4f4f4';parent.postMessage({type:'leibox-preview-ready',slug},'*');const cards=[...root.querySelectorAll('.bp-card')];let i=0;repeat(()=>{cards.forEach(card=>card.dispatchEvent(new PointerEvent('pointerleave')));cards[i++%3].dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));},1800);};
       const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
@@ -43,7 +67,7 @@ const PLAYER = String.raw`
         const root=document.querySelector('#fluid-tooltip [data-motion-surface]')?.shadowRoot;
         if(!root||document.body.dataset.motionReady!=='true')return;
         observer.disconnect();
-        const style=document.createElement('style');style.textContent='.ft-scene{background:#f4f4f4!important;height:100vh!important}.ft-stage{background:linear-gradient(163deg,#224d6b,#52778c 57%,#a1adb7);border-radius:32px;overflow:hidden;transform:translate(-50%,-50%) scale(calc(var(--ft-fit,1)*.84))!important;box-shadow:0 18px 45px #0002}';root.append(style);
+        const style=document.createElement('style');style.textContent='.ft-scene{background:#f4f4f4!important;height:100vh!important}.ft-stage{border-radius:32px;overflow:hidden;transform:translate(-50%,-50%) scale(calc(var(--ft-fit,1)*.84))!important;box-shadow:0 18px 45px #0002}';root.append(style);
         const buttons=[...root.querySelectorAll('.ft-trigger')];let current=5,step=0;
         buttons[current].dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));
         const announce=()=>{
@@ -80,7 +104,7 @@ const PLAYER = String.raw`
       };
       const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
     }
-    if (slug === 'dot-matrix-trio') {
+    if (slug === 'dot-matrix-trio' || slug === 'particle-texture-trio') {
       const ready = () => {
         if (document.body.dataset.motionReady !== 'true') return;
         observer.disconnect();

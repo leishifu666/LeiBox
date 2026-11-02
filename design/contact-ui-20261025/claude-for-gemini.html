@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LeiBox · 联系与投稿</title>
+<style>
+:root{
+  --ink:#141414;--ink-2:#55554f;--ink-3:#76766f;--line:#e3e3df;--line-2:#cfcfc9;
+  --bg:#ececea;--card:#fff;--soft:#f6f6f4;--accent:#2f5bff;--err:#c4321c;--err-bg:#fdf4f2;
+  --r:14px;--r-s:9px;--ease:cubic-bezier(.2,0,0,1);
+  font-family:"MiSans VF","MiSans","PingFang SC","Microsoft YaHei UI",-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100svh;display:grid;place-items:center;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;padding:24px}
+button,input,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--r-s);border:1px solid transparent;font-size:14px;font-weight:550;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background-color .15s,border-color .15s,color .15s}
+.btn-pri{background:var(--ink);color:#fff}
+.btn-pri:hover{background:#2e2e2b}
+.btn-pri[aria-disabled=true]{background:#5a5a55;cursor:progress}
+.btn-sec{background:var(--card);border-color:var(--line-2)}
+.btn-sec:hover{background:var(--soft)}
+.btn-ghost{background:none;color:var(--ink-2);padding:0 10px}
+.btn-ghost:hover{background:var(--soft);color:var(--ink)}
+
+dialog{margin:auto;width:min(600px,calc(100% - 48px));max-height:min(760px,calc(100svh - 48px));padding:0;border:0;border-radius:var(--r);background:var(--card);color:var(--ink);box-shadow:0 0 0 1px #0000000d,0 24px 64px -12px #0000002e;overflow:hidden}
+dialog[open]{display:flex;flex-direction:column}
+dialog::backdrop{background:#1414144d}
+.hd{display:flex;align-items:flex-start;gap:16px;padding:24px 24px 18px}
+.hd h2{outline:0;font-size:20px;line-height:28px;font-weight:650;letter-spacing:-.2px}
+.hd p{margin-top:4px;font-size:13.5px;line-height:21px;color:var(--ink-2)}
+.draft{margin-top:8px;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-3)}
+.link{background:none;border:0;padding:0;font-size:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2);cursor:pointer}
+.link:hover{text-decoration-color:var(--ink)}
+.x{margin:-6px -8px 0 auto;width:36px;height:36px;padding:0;border-radius:8px;color:var(--ink-2)}
+.bd{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:2px 24px 20px}
+fieldset{border:0;padding:0;min-width:0}
+
+.types{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.type{position:relative;display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:border-color .15s,background-color .15s}
+.type:hover{border-color:var(--line-2)}
+.type input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.type .i{margin-top:2px;color:var(--ink-3)}
+.type b{font-size:14px;line-height:20px;font-weight:600}
+.type small{grid-column:2;font-size:12.5px;line-height:18px;color:var(--ink-3)}
+.dot{width:16px;height:16px;margin-top:2px;border-radius:50%;border:1.5px solid var(--line-2);display:grid;place-items:center}
+.type:has(input:checked){border-color:var(--ink);background:var(--soft);box-shadow:inset 0 0 0 .5px var(--ink)}
+.type:has(input:checked) .i{color:var(--ink)}
+.type:has(input:checked) .dot{border-color:var(--ink);background:var(--ink)}
+.type:has(input:checked) .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+.type:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+
+.sec{margin-top:22px}
+.sec>legend{float:left;width:100%;display:flex;align-items:baseline;justify-content:space-between;padding:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.4px;color:var(--ink-3)}
+.sec>legend+*{clear:both}
+.legend-note{font-weight:400;letter-spacing:0}
+.stack{display:grid;gap:16px}
+.row{display:grid;grid-template-columns:1.25fr 1fr;gap:12px}
+.f{display:grid;gap:6px;min-width:0;align-content:start}
+.f label{display:flex;align-items:baseline;gap:8px;font-size:13.5px;font-weight:550;line-height:20px}
+.tag{font-size:12px;font-weight:400;color:var(--ink-3)}
+.tag.req{color:var(--ink)}
+.in{width:100%;height:40px;padding:0 12px;border:1px solid var(--line-2);border-radius:var(--r-s);background:var(--card);font-size:14px;transition:border-color .15s,box-shadow .15s}
+.in::placeholder{color:#74746f}
+.in:hover{border-color:#b5b5ae}
+.in:focus{outline:0;border-color:var(--ink);box-shadow:0 0 0 3px #2f5bff2e}
+.in:focus-visible{outline:0}
+textarea.in{height:auto;min-height:120px;max-height:320px;padding:10px 12px;line-height:22px;resize:vertical;display:block}
+.in[aria-invalid=true]{border-color:var(--err);background:var(--err-bg)}
+.in[aria-invalid=true]:focus{box-shadow:0 0 0 3px #c4321c24}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;line-height:18px;color:var(--ink-3)}
+.count{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+.count.warn{color:#9a5b00}
+.err{display:flex;gap:6px;align-items:flex-start;color:var(--err);font-size:12.5px;line-height:18px}
+.err .i{width:14px;height:14px;margin-top:2px}
+.err:empty{display:none}
+.err:not(:empty)+.hint{display:none}
+.hint{font-size:12.5px;line-height:18px;color:var(--ink-3)}
+
+.ft{display:flex;align-items:center;gap:12px;padding:14px 24px;border-top:1px solid var(--line);background:var(--card)}
+.note{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-3);margin-right:auto}
+.note .i{width:14px;height:14px}
+.spin{display:none}
+[aria-disabled=true] .spin{display:block;animation:r .8s linear infinite}
+[aria-disabled=true] .send,.busy{display:none}
+[aria-disabled=true] .busy{display:inline}
+@keyframes r{to{transform:rotate(1turn)}}
+
+.done{padding:6px 0 4px}
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:99px;background:var(--soft);border:1px solid var(--line);font-size:12px;color:var(--ink-2)}
+.done h3{outline:0;margin-top:14px;font-size:18px;line-height:26px;font-weight:650}
+.done>p{margin-top:6px;font-size:13.5px;line-height:22px;color:var(--ink-2);max-width:460px}
+.recap{margin-top:18px;border:1px solid var(--line);border-radius:12px;display:grid;font-size:13.5px}
+.recap div{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:10px 14px}
+.recap div+div{border-top:1px solid var(--line)}
+.recap dt{color:var(--ink-3)}
+.recap dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.acts{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.opener{height:44px;padding:0 20px}
+
+@media (max-width:560px){
+  body{padding:16px;place-items:end center}
+  dialog{width:100%;max-width:none;max-height:calc(100dvh - 12px);margin:auto 0 0;border-radius:18px 18px 0 0}
+  .hd{padding:20px 18px 14px}
+  .bd{padding:2px 18px 18px}
+  .types{gap:8px}
+  .type{padding:12px;column-gap:8px}
+  .type small{display:none}
+  .row{grid-template-columns:1fr;gap:16px}
+  .in{font-size:16px;height:44px}
+  textarea.in{font-size:16px;min-height:120px}
+  .ft{flex-wrap:wrap;padding:12px 18px calc(12px + env(safe-area-inset-bottom))}
+  .ft .btn-pri{order:-1;flex:1 1 100%;height:46px}
+  .note{flex:1 1 auto}
+  .acts .btn{flex:1 1 auto}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-cmp" viewBox="0 0 24 24"><path d="M15.536 11.293a1 1 0 0 0 0 1.414l2.376 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/><path d="M2.297 11.293a1 1 0 0 0 0 1.414l2.377 2.377a1 1 0 0 0 1.414 0l2.377-2.377a1 1 0 0 0 0-1.414L6.088 8.916a1 1 0 0 0-1.414 0z"/><path d="M8.916 17.912a1 1 0 0 0 0 1.415l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.415l-2.377-2.376a1 1 0 0 0-1.414 0z"/><path d="M8.916 4.674a1 1 0 0 0 0 1.414l2.377 2.376a1 1 0 0 0 1.414 0l2.377-2.376a1 1 0 0 0 0-1.414l-2.377-2.377a1 1 0 0 0-1.414 0z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-load" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></symbol>
+</svg>
+
+<button class="btn btn-pri opener" id="opener" type="button" aria-haspopup="dialog">联系与投稿</button>
+
+<dialog id="dlg" aria-labelledby="t" aria-describedby="d">
+  <header class="hd">
+    <div>
+      <h2 id="t" tabindex="-1">联系与投稿</h2>
+      <p id="d">给 LeiBox 留言，分享 UI 灵感或推荐组件。</p>
+      <p class="draft" id="draft" hidden><span id="draftText">已保留上次填写的内容</span><button type="button" class="link" id="clear">清空</button></p>
+    </div>
+    <button type="button" class="btn btn-ghost x" id="close" aria-label="关闭"><svg class="i"><use href="#i-x"/></svg></button>
+  </header>
+
+  <div class="bd" id="bd">
+    <form id="form" novalidate>
+      <fieldset id="fs">
+        <fieldset>
+          <legend class="sr">内容类型</legend>
+          <div class="types">
+            <label class="type"><input type="radio" name="topic" value="message" checked aria-describedby="td1">
+              <svg class="i"><use href="#i-msg"/></svg><b>留言与建议</b><span class="dot" aria-hidden="true"></span>
+              <small id="td1">想法、建议或发现的问题</small></label>
+            <label class="type"><input type="radio" name="topic" value="component" aria-describedby="td2">
+              <svg class="i"><use href="#i-cmp"/></svg><b>推荐组件</b><span class="dot" aria-hidden="true"></span>
+              <small id="td2">分享一个好组件或 UI 灵感</small></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="sec">
+          <legend><span>内容</span></legend>
+          <div class="stack" id="content">
+            <div class="f" id="fMsg">
+              <label for="msg"><span id="msgLabel">留言内容</span><span class="tag req">必填</span></label>
+              <textarea class="in" id="msg" name="message" rows="5" maxlength="6000" required aria-describedby="msgErr msgCount"></textarea>
+              <div class="meta"><span class="err" id="msgErr" aria-live="off"></span><span class="count" id="msgCount">至少 10 字</span></div>
+            </div>
+            <div class="f" id="fUrl">
+              <label for="url"><span id="urlLabel">参考链接</span><span class="tag" id="urlTag">选填</span></label>
+              <input class="in" id="url" name="url" type="url" inputmode="url" maxlength="2048" placeholder="https://" autocomplete="url" spellcheck="false" aria-describedby="urlErr urlHint">
+              <span class="err" id="urlErr"></span>
+              <span class="hint" id="urlHint">完整的 http:// 或 https:// 地址</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="sec">
+          <legend><span>怎么回复你</span><span class="legend-note">邮箱仅用于回复这条内容</span></legend>
+          <div class="row">
+            <div class="f">
+              <label for="email">回复邮箱<span class="tag req">必填</span></label>
+              <input class="in" id="email" name="email" type="email" inputmode="email" maxlength="254" required autocomplete="email" spellcheck="false" placeholder="name@example.com" aria-describedby="emailErr">
+              <span class="err" id="emailErr"></span>
+            </div>
+            <div class="f">
+              <label for="name">称呼<span class="tag">选填</span></label>
+              <input class="in" id="name" name="name" maxlength="80" autocomplete="nickname" placeholder="怎么称呼你">
+            </div>
+          </div>
+        </fieldset>
+      </fieldset>
+    </form>
+
+    <section class="done" id="done" hidden aria-labelledby="doneT">
+      <span class="badge"><svg class="i" style="width:14px;height:14px"><use href="#i-check"/></svg>演示完成</span>
+      <h3 id="doneT" tabindex="-1">这是一次交互预览，内容没有发出</h3>
+      <p>表单校验和提交流程已走完，但没有发送邮件，也没有上传到任何服务器。你填写的内容仍保留在这里，可以返回修改，或用自己的邮件客户端发出。</p>
+      <dl class="recap" id="recap"></dl>
+      <div class="acts">
+        <button type="button" class="btn btn-sec" id="back">返回编辑</button>
+        <a class="btn btn-pri mailto" href="mailto:2934546967@qq.com"><svg class="i"><use href="#i-mail"/></svg>用邮件客户端发送</a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="ft" id="ft">
+    <span class="note"><svg class="i"><use href="#i-info"/></svg>交互预览，不会发送邮件</span>
+    <a class="btn btn-ghost mailto" href="mailto:2934546967@qq.com" title="打开邮件客户端，写给 2934546967@qq.com，并带上已填内容"><svg class="i"><use href="#i-mail"/></svg>改用邮件</a>
+    <button type="submit" form="form" class="btn btn-pri" id="submit"><svg class="i spin"><use href="#i-load"/></svg><span class="send" id="submitText">提交留言</span><span class="busy">正在模拟提交…</span></button>
+  </footer>
+  <p class="sr" id="live" role="status" aria-live="polite"></p>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script>
+(()=>{
+const $=s=>document.querySelector(s), MAIL='2934546967@qq.com';
+const dlg=$('#dlg'),form=$('#form'),fs=$('#fs'),opener=$('#opener'),submit=$('#submit'),live=$('#live');
+const F={msg:$('#msg'),url:$('#url'),email:$('#email'),name:$('#name')};
+const radios=[...form.querySelectorAll('[name=topic]')];
+const rm=matchMedia('(prefers-reduced-motion: reduce)');
+const G=()=>window.gsap&&!rm.matches?window.gsap:null;
+const isComp=()=>radios[1].checked;
+const touched=new Set();let busy=false,timer=0,snap=null,returnFocus=opener;
+
+const len=s=>s.trim().length;
+const rules={
+  msg(v){const n=len(v);if(!n)return isComp()?'请写下推荐理由':'请写下留言内容';if(n<10)return`至少 10 个字符，还差 ${10-n} 个`;if(v.length>6000)return'最多 6,000 个字符';},
+  email(v){v=v.trim();if(!v)return'请填写回复邮箱';if(v.length>254||!/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/.test(v))return'邮箱格式不完整，例如 name@example.com';},
+  url(v){v=v.trim();if(!v)return isComp()?'推荐组件需要附上它的原始链接':'';try{const u=new URL(v);if(!/^https?:$/.test(u.protocol)||!u.hostname||!/^https?:\/\//i.test(v))throw 0}catch{return'请填写以 http:// 或 https:// 开头的完整链接'}if(v.length>2048)return'链接最多 2,048 个字符';}
+};
+function setErr(k,msg){const el=F[k],box=$('#'+k+'Err');
+  if(msg){el.setAttribute('aria-invalid','true');box.innerHTML='<svg class="i"><use href="#i-alert"/></svg><span></span>';box.lastChild.textContent=msg}
+  else{el.removeAttribute('aria-invalid');box.textContent=''}}
+function check(k){if(!rules[k])return'';const m=rules[k](F[k].value)||'';setErr(k,m);return m}
+
+function count(){const n=len(F.msg.value),c=$('#msgCount');
+  c.classList.toggle('warn',F.msg.value.length>5400);
+  c.textContent=n<10?(n?`还差 ${10-n} 字`:'至少 10 字'):F.msg.value.length>5400?`${F.msg.value.length.toLocaleString()} / 6,000`:`${n.toLocaleString()} 字`;}
+
+function mailHref(){const t=isComp()?'推荐组件':'留言与建议',v=k=>F[k].value.trim()||'（未填）';
+  const body=`类型：${t}\n称呼：${v('name')}\n回复邮箱：${v('email')}\n${isComp()?'组件链接':'参考链接'}：${v('url')}\n\n${F.msg.value.trim()}`;
+  return`mailto:${MAIL}?subject=${encodeURIComponent('LeiBox · '+t)}&body=${encodeURIComponent(body)}`}
+function syncMail(){const h=mailHref();document.querySelectorAll('.mailto').forEach(a=>a.href=h)}
+
+function setTopic(anim){const c=isComp(),fU=$('#fUrl'),fM=$('#fMsg'),box=$('#content');
+  $('#msgLabel').textContent=c?'推荐理由':'留言内容';
+  F.msg.placeholder=c?'它好在哪里？例如交互细节、动效、适用场景':'想法、建议或发现的问题，至少 10 个字符';
+  $('#urlLabel').textContent=c?'组件链接':'参考链接';
+  const tag=$('#urlTag');tag.textContent=c?'必填':'选填';tag.classList.toggle('req',c);F.url.required=c;
+  $('#urlHint').textContent=c?'组件或作品的原始出处页面，完整的 http(s) 地址':'完整的 http:// 或 https:// 地址';
+  $('#submitText').textContent=c?'提交推荐':'提交留言';
+  const want=c?fU:fM;
+  if(box.firstElementChild!==want){box.insertBefore(want,box.firstElementChild);const g=G();if(anim&&g)g.from(box.children,{opacity:0,y:6,duration:.22,stagger:.04,ease:'power2.out',clearProps:'all'})}
+  if(touched.has('url')||F.url.hasAttribute('aria-invalid'))check('url');else setErr('url','');
+  if(F.msg.hasAttribute('aria-invalid'))check('msg');
+  syncMail()}
+
+const hasDraft=()=>Object.values(F).some(e=>e.value.trim());
+function open(){if(dlg.open)return;const a=document.activeElement;returnFocus=a&&a!==document.body?a:opener;
+  $('#draft').hidden=!hasDraft();$('#draftText').textContent='已保留上次填写的内容';$('#clear').textContent='清空';snap=null;
+  dlg.showModal();document.documentElement.style.overflow='hidden';
+  $('#t').focus({preventScroll:true});
+  const g=G();if(g)g.fromTo(dlg,{opacity:0,y:matchMedia('(max-width:560px)').matches?40:10},{opacity:1,y:0,duration:.26,ease:'power2.out',clearProps:'opacity,transform'})}
+function close(){if(!dlg.open||dlg.dataset.closing)return;const g=G();
+  if(g){dlg.dataset.closing=1;g.to(dlg,{opacity:0,y:6,duration:.14,ease:'power1.in',onComplete:()=>dlg.close()})}else dlg.close()}
+dlg.addEventListener('close',()=>{delete dlg.dataset.closing;clearTimeout(timer);setBusy(false);
+  window.gsap&&gsap.set(dlg,{clearProps:'all'});document.documentElement.style.overflow='';
+  if(!$('#done').hidden)showForm(false);
+  (returnFocus&&returnFocus.isConnected?returnFocus:opener).focus()});
+dlg.addEventListener('cancel',e=>{e.preventDefault();close()});
+let downOut=false;const out=e=>{const r=dlg.getBoundingClientRect();return e.target===dlg&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)};
+dlg.addEventListener('pointerdown',e=>downOut=out(e));
+dlg.addEventListener('click',e=>{if(downOut&&out(e))close();downOut=false});
+dlg.addEventListener('keydown',e=>{if(e.key!=='Tab')return;
+  const els=[...dlg.querySelectorAll('button,a[href],input,textarea,[tabindex="0"]')].filter(x=>!x.disabled&&x.offsetParent&&!(x.type==='radio'&&!x.checked));
+  const a=els[0],z=els[els.length-1];
+  if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}});
+opener.addEventListener('click',open);$('#close').addEventListener('click',close);
+
+radios.forEach(r=>r.addEventListener('change',()=>setTopic(true)));
+Object.entries(F).forEach(([k,el])=>{
+  el.addEventListener('input',()=>{if(k==='msg')count();if(el.hasAttribute('aria-invalid'))check(k);syncMail()});
+  el.addEventListener('blur',()=>{if(k==='name')return;if(el.value.trim()){touched.add(k);check(k)}});
+});
+
+$('#clear').addEventListener('click',()=>{
+  if(snap){Object.entries(snap.v).forEach(([k,v])=>F[k].value=v);radios[snap.t].checked=true;snap=null;$('#draftText').textContent='已恢复';$('#clear').textContent='清空'}
+  else{snap={v:Object.fromEntries(Object.entries(F).map(([k,e])=>[k,e.value])),t:isComp()?1:0};Object.values(F).forEach(e=>e.value='');Object.keys(rules).forEach(k=>setErr(k,''));touched.clear();$('#draftText').textContent='已清空';$('#clear').textContent='撤销'}
+  setTopic(false);count();live.textContent=$('#draftText').textContent});
+
+function setBusy(v){busy=v;fs.disabled=v;form.setAttribute('aria-busy',v);
+  v?submit.setAttribute('aria-disabled','true'):submit.removeAttribute('aria-disabled');
+  if(v)live.textContent='正在模拟提交，不会发送邮件'}
+form.addEventListener('submit',e=>{e.preventDefault();if(busy)return;
+  const bad=['msg','url','email'].filter(k=>check(k));
+  if(bad.length){F[bad[0]].focus();live.textContent=`有 ${bad.length} 处需要修改：`+bad.map(k=>$('#'+k+'Err').textContent).join('；');return}
+  submit.focus();setBusy(true);timer=setTimeout(()=>{setBusy(false);showDone()},900)});
+
+function showDone(){const c=isComp(),rows=[['类型',c?'推荐组件':'留言与建议'],['回复邮箱',F.email.value.trim()],['称呼',F.name.value.trim()||'未填写'],[c?'组件链接':'参考链接',F.url.value.trim()||'未填写'],[c?'推荐理由':'留言内容',len(F.msg.value).toLocaleString()+' 个字符']];
+  const dl=$('#recap');dl.textContent='';rows.forEach(([k,v])=>{const d=document.createElement('div');d.innerHTML='<dt></dt><dd></dd>';d.firstChild.textContent=k;d.lastChild.textContent=v;dl.append(d)});
+  form.hidden=true;$('#ft').hidden=true;$('#draft').hidden=true;$('#done').hidden=false;$('#bd').scrollTop=0;
+  $('#doneT').focus({preventScroll:true});live.textContent='演示完成，没有发送邮件';
+  const g=G();if(g)g.from('#done>*',{opacity:0,y:8,duration:.26,stagger:.04,ease:'power2.out',clearProps:'all'})}
+function showForm(focus){$('#done').hidden=true;form.hidden=false;$('#ft').hidden=false;if(focus){F.msg.focus();const g=G();if(g)g.from(form,{opacity:0,duration:.2,clearProps:'opacity'})}}
+$('#back').addEventListener('click',()=>showForm(true));
+
+rm.addEventListener('change',()=>{if(rm.matches&&window.gsap)gsap.globalTimeline.progress(1)});
+setTopic(false);count();open();
+})();
+</script>
+</body>
+</html>

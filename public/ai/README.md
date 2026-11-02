@@ -2,7 +2,7 @@
 
 面向正在制作或优化网页、应用界面的 Agent。无需用户知道组件名称，先根据页面的具体用途检索并比较少量候选。
 
-当前有 34 个组件；内容版本 revision 为 f3bde0360de67c39e29554447e7e6c99037c0f069ec43a1850800f175894c8d7。以后以实时 total/items 为准，不把列表复制进 Skill。
+当前有 37 个组件；内容版本 revision 为 b329691e3de199610100bcb6cc4b09c98ffd2a7da995c36a6ee3e334ec65f3fa。以后以实时 total/items 为准，不把列表复制进 Skill。
 
 ## 按需读取
 

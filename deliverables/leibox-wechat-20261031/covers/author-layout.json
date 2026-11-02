@@ -1,0 +1,29 @@
+{
+  "source": "F:\\雷师傅\\ui组件网站\\deliverables\\leibox-wechat-20261031\\covers\\references\\selected-design-share.png",
+  "base": "F:\\雷师傅\\ui组件网站\\deliverables\\leibox-wechat-20261031\\covers\\references\\author-typeset-base.png",
+  "font": "C:/Windows/Fonts/msyh.ttc",
+  "font_size": 26,
+  "name": "LSF 设计日常",
+  "original_name_removed": [
+    178,
+    64,
+    358,
+    108
+  ],
+  "name_ink_box": [
+    142,
+    74,
+    296,
+    99
+  ],
+  "avatar_box": [
+    62,
+    54,
+    126,
+    118
+  ],
+  "headline_left_ink": 62,
+  "alignment_delta_px": 0,
+  "header_outside_pixels_unchanged": true,
+  "method": "用户明确要求清除原署名后用真实字体重新排版；原头像另由技能合成脚本加入"
+}

@@ -1,0 +1,161 @@
+{
+  "slug": "ascii-sharks",
+  "name": {
+    "en": "ASCII Shark Ocean",
+    "zh": "字符鲨鱼与鱼群"
+  },
+  "description": {
+    "en": "Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.",
+    "zh": "字符鲨鱼在细网格上摆尾游动、追逐鱼群，支持指针避让与点击惊散，并可叠加半透明本地输入框。"
+  },
+  "keywords": "ASCII 字符 鲨鱼 鱼群 游动 海洋 捕食 追逐 避让 水波 网格 背景 输入框 shark ocean fish boids stacked drewdi",
+  "docsPath": "/docs/animations/ascii-sharks",
+  "detailPath": "/ai/components/ascii-sharks.json",
+  "markdownPath": "/ai/components/ascii-sharks.md",
+  "previewPath": "/assets/components/ascii-sharks.png",
+  "discovery": {
+    "category": "background",
+    "useCases": [
+      "字符鲨鱼与鱼群",
+      "交互式海洋背景",
+      "ASCII shark ocean"
+    ],
+    "searchTerms": [
+      "ASCII",
+      "字符",
+      "鲨鱼",
+      "鱼群",
+      "海洋",
+      "shark",
+      "ocean",
+      "fish"
+    ],
+    "visualTags": [
+      "ascii",
+      "grid",
+      "light"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "本地动画与可选输入界面；语音输入需要调用方回调。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "https://github.com/stackedlol/ascii-sharks/tree/a0074c16a106f0abc665fe9712ca445f8f98ad8e — original World, AsciiRenderer, math and species modules, MIT. LeiBox supplies the instance-scoped lifecycle and optional local UI; no original backend is included.",
+    "designReference": "https://x.com/stackedlol/status/2112257760628986188/video/1",
+    "designAuthor": "stacked",
+    "license": "MIT License, Copyright (c) 2026 drewdi; full notice retained in the vendored source and every generated engine/HTML. Geist fonts retain their OFL notice, Lucide controls their ISC notice. Original video and raw reference frames remain internal."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/ascii-sharks/react.json",
+      "component": "AsciiSharks",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { AsciiSharks } from \"./AsciiSharks\";\n\nexport default function App() {\n  return <AsciiSharks />;\n}",
+      "files": [
+        "AsciiSharks.tsx",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/ascii-sharks/vue.json",
+      "component": "AsciiSharks",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport AsciiSharks from \"./AsciiSharks.vue\";\n</script>\n<template><AsciiSharks /></template>",
+      "files": [
+        "AsciiSharks.vue",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/ascii-sharks/svelte.json",
+      "component": "AsciiSharks",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport AsciiSharks from \"./AsciiSharks.svelte\";\n</script>\n<AsciiSharks />",
+      "files": [
+        "AsciiSharks.svelte",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/ascii-sharks/solid.json",
+      "component": "AsciiSharks",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { AsciiSharks } from \"./AsciiSharks.solid\";\n\nexport default function App() {\n  return <AsciiSharks />;\n}",
+      "files": [
+        "AsciiSharks.solid.tsx",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/ascii-sharks/preact.json",
+      "component": "AsciiSharks",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { AsciiSharks } from \"./AsciiSharks.preact\";\n\nexport default function App() {\n  return <AsciiSharks />;\n}",
+      "files": [
+        "AsciiSharks.preact.tsx",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/ascii-sharks/vanilla.json",
+      "component": "AsciiSharks",
+      "dependencies": [],
+      "usage": "import { mount } from \"./AsciiSharks\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "AsciiSharks.ts",
+        "AsciiSharksEngine.js",
+        "motion-runtime.ts",
+        "AsciiSharksEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Move or tap the water to scatter fish. Focus the water: Space pauses, R restarts, arrows move and Enter splashes. Messages stay in local history; voice input needs a callback.",
+    "zh": "移动或轻点水面惊散鱼群。聚焦水面后，空格暂停，R重置，方向键移动，回车制造水波。输入仅保存在本地历史，语音需接入回调。"
+  }
+}

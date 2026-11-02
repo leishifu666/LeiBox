@@ -1,12 +1,15 @@
 import {gsap} from 'gsap';
 import {createSurface} from './motion-runtime';
 
-export function createFluidTooltip(target,initial,CSS,MARKUP,ITEMS,LOGO){
+export function createFluidTooltip(target,initial,CSS,MARKUP,ITEMS,LOGO,PAINTING){
  const scope=createSurface(target,{css:CSS,markup:MARKUP,width:1288,height:1080},initial);
  const {root,on}=scope,scene=root.querySelector('.ft-scene'),stage=root.querySelector('.ft-stage');
  const rail=root.querySelector('.ft-rail'),tip=root.querySelector('.ft-tooltip'),track=root.querySelector('.ft-label-track');
  const buttons=[...root.querySelectorAll('.ft-trigger')],rows=[...root.querySelectorAll('.ft-label-row')],logo=root.querySelector('.ft-logo');
  const state={y:0,width:252,opacity:0},centers=[],widths=[];
+ scene.style.setProperty('--ft-painting',`url("${PAINTING}")`);
+ const painting=new scope.window.Image();painting.src=PAINTING;
+ const paintingReady=painting.decode().catch(()=>{});
  let options={...initial},active=ITEMS.some(item=>item.id===initial?.active)?initial.active:'today';
  let hint=-1,tween=null,hideTimer=0,dead=false,ready=false;
  tip.id='ft-tip-'+Math.random().toString(36).slice(2,10);
@@ -79,7 +82,7 @@ export function createFluidTooltip(target,initial,CSS,MARKUP,ITEMS,LOGO){
  on(scope.document,'visibilitychange',()=>{if(scope.document.hidden){cancelHide();tween?.pause();}else tween?.resume();});
  const resize=new scope.ResizeObserver(fit);resize.observe(scene);scope.addCleanup(()=>resize.disconnect());
  profile();fit();highlight(true);scene.dataset.active=active;scene.dataset.hint='none';tip.setAttribute('aria-hidden','true');scope.ready();
- scope.document.fonts.ready.then(()=>{if(dead)return;ready=true;fit();scene.dataset.ready='true';scope.body.dataset.motionReady='true';});
+ Promise.all([scope.document.fonts.ready,paintingReady]).then(()=>{if(dead)return;ready=true;fit();scene.dataset.ready='true';scope.body.dataset.motionReady='true';});
  scope.addCleanup(()=>{dead=true;cancelHide();tween?.kill();gsap.killTweensOf([state,...buttons]);});
  return {...scope.controller,update(next){
   if(dead)return;options={...options,...next};scope.controller.update(next);
