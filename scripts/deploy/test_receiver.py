@@ -27,6 +27,12 @@ class PublicationTests(unittest.TestCase):
   self.assertEqual((self.root/'out/index.html').read_bytes(),b'previous');self.assertEqual((self.root/'.env.local').read_bytes(),b'TEST_ONLY_PRIVATE_VALUE')
  def test_publish_backups_and_preserves_environment(self):
   result=receiver.deploy(self.archive());self.assertEqual(result['updatedFiles'],1);self.assertTrue(result['environmentPreserved']);self.assertEqual((self.root/'out/index.html').read_bytes(),b'next');self.assertEqual((self.root/'backups/abcdef12-1234/out/index.html').read_bytes(),b'previous');self.assertTrue(receiver.STATE.exists())
+ def test_publish_keeps_the_actual_previous_snapshot_for_cleanup_and_rollback(self):
+  receiver.STATE.parent.mkdir(parents=True)
+  before={'files':[{'path':'out/index.html','sha256':sha(b'previous'),'size':8}]}
+  receiver.STATE.write_text(json.dumps(before))
+  receiver.deploy(self.archive())
+  self.assertEqual(json.loads((self.root/'backups/abcdef12-1234/previous-manifest.json').read_text()),before)
  def test_path_escape_is_rejected_before_writes(self):
   with self.assertRaises(ValueError):receiver.deploy(self.archive('out/../.env.local'))
   self.intact()
@@ -44,4 +50,13 @@ class PublicationTests(unittest.TestCase):
   with patch.object(receiver.os,'replace',side_effect=replace):
    with self.assertRaises(OSError):receiver.deploy(self.archive(two=True))
   self.intact();self.assertFalse((self.root/'out/new.html').exists());self.assertFalse((self.root/'out/new.html.deploy-new').exists());self.assertFalse(receiver.STATE.exists())
+ def test_failed_manifest_commit_does_not_leave_a_successful_backup_marker(self):
+  actual=receiver.os.replace
+  def replace(source,target):
+   if pathlib.Path(target)==receiver.STATE:raise OSError('Injected state write failure')
+   return actual(source,target)
+  with patch.object(receiver.os,'replace',side_effect=replace):
+   with self.assertRaises(OSError):receiver.deploy(self.archive())
+  self.intact()
+  self.assertFalse((self.root/'backups/abcdef12-1234/manifest.json').exists())
 if __name__=='__main__':unittest.main()

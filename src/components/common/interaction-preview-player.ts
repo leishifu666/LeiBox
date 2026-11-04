@@ -7,6 +7,51 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'stacked-metadata') {
+      const ready=()=>{
+        const root=document.querySelector('#stacked-metadata [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        const rows=[...root.querySelectorAll('.sm-row')];let previous=-1,index=0;
+        later(()=>repeat(()=>{
+          if(previous>=0)rows[previous].dispatchEvent(new PointerEvent('pointerout',{bubbles:true,pointerType:'mouse'}));
+          previous=index++%rows.length;
+          rows[previous].dispatchEvent(new PointerEvent('pointerover',{bubbles:true,pointerType:'mouse'}));
+        },1400),600);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
+    if (slug === 'transfer-glow') {
+      const ready=()=>{
+        const root=document.querySelector('#transfer-glow [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.tg-scene').dataset.preview='true';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        later(()=>repeat(()=>{
+          const scene=root.querySelector('.tg-scene');
+          if(scene.dataset.open!=='true'){root.querySelector('.tg-launch').click();later(()=>root.querySelector('.tg-send').click(),700);}
+          else if(scene.dataset.state==='success'){root.querySelector('.tg-send').click();later(()=>{root.querySelector('.tg-launch').click();later(()=>root.querySelector('.tg-send').click(),700);},500);}
+          else if(scene.dataset.state==='confirm')root.querySelector('.tg-send').click();
+        },6200),850);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
+    if (slug === 'shader-flood') {
+      const ready=()=>{
+        const root=document.querySelector('#shader-flood [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();root.querySelector('.sf-scene').style.background='#f4f4f4';
+        const cards=[...root.querySelectorAll('.sf-card')];let previous=0,step=1;
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        later(()=>repeat(()=>{
+          if(previous>=0){const card=cards[previous],r=card.getBoundingClientRect();card.dispatchEvent(new PointerEvent('pointerout',{bubbles:true,pointerType:'mouse',clientX:r.right+2,clientY:r.top+r.height*.45}));}
+          const index=[0,3,1,4,2,5][step++%6],card=cards[index],r=card.getBoundingClientRect();
+          card.dispatchEvent(new PointerEvent('pointerover',{bubbles:true,pointerType:'mouse',clientX:r.left+1,clientY:r.top+r.height*.45}));previous=index;
+        },1900),650);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'ascii-sharks') {
       const ready=()=>{
         const root=document.querySelector('#ascii-sharks [data-motion-surface]')?.shadowRoot;
@@ -401,7 +446,7 @@ export function interactionPreviewCss(slug: string) {
 }
 
 export function interactionPreviewDocument(source: string, slug: string) {
-  if (slug === "matcha-powder-reveal") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  if (slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = PLAYER.replace('__SLUG__', JSON.stringify(slug));
   const style = `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares

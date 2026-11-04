@@ -1,0 +1,14 @@
+[Unit]
+Description=Expire unused LeiBox build assets and release backups
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/Project/leibox
+ExecStart=/usr/bin/python3 /opt/Project/leibox/scripts/leibox-release-cleanup.py --apply
+Nice=10
+IOSchedulingClass=idle
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/Project/leibox

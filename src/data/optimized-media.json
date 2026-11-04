@@ -164,6 +164,10 @@
       "src": "/assets/optimized/selection-flower-7797a6f018b5-822.webp",
       "srcSet": "/assets/optimized/selection-flower-7797a6f018b5-320.webp 320w, /assets/optimized/selection-flower-7797a6f018b5-640.webp 640w, /assets/optimized/selection-flower-7797a6f018b5-822.webp 822w"
     },
+    "/assets/components/shader-flood.png": {
+      "src": "/assets/optimized/shader-flood-849f40876fff-1120.webp",
+      "srcSet": "/assets/optimized/shader-flood-849f40876fff-320.webp 320w, /assets/optimized/shader-flood-849f40876fff-640.webp 640w, /assets/optimized/shader-flood-849f40876fff-960.webp 960w, /assets/optimized/shader-flood-849f40876fff-1120.webp 1120w"
+    },
     "/assets/components/share-invite.png": {
       "src": "/assets/optimized/share-invite-2e45dac61dff-546.webp",
       "srcSet": "/assets/optimized/share-invite-2e45dac61dff-320.webp 320w, /assets/optimized/share-invite-2e45dac61dff-546.webp 546w"
@@ -176,6 +180,10 @@
       "src": "/assets/optimized/spider-music-player-2052b7bac279-960.webp",
       "srcSet": "/assets/optimized/spider-music-player-2052b7bac279-320.webp 320w, /assets/optimized/spider-music-player-2052b7bac279-640.webp 640w, /assets/optimized/spider-music-player-2052b7bac279-960.webp 960w"
     },
+    "/assets/components/stacked-metadata.png": {
+      "src": "/assets/optimized/stacked-metadata-0386559271b0-800.webp",
+      "srcSet": "/assets/optimized/stacked-metadata-0386559271b0-320.webp 320w, /assets/optimized/stacked-metadata-0386559271b0-640.webp 640w, /assets/optimized/stacked-metadata-0386559271b0-800.webp 800w"
+    },
     "/assets/components/staggered-radial-menu.png": {
       "src": "/assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp",
       "srcSet": "/assets/optimized/staggered-radial-menu-ef5939c3f398-320.webp 320w, /assets/optimized/staggered-radial-menu-ef5939c3f398-640.webp 640w, /assets/optimized/staggered-radial-menu-ef5939c3f398-960.webp 960w, /assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp 1200w"
@@ -183,6 +191,10 @@
     "/assets/components/thinking-particles.png": {
       "src": "/assets/optimized/thinking-particles-f108db0f714f-1200.webp",
       "srcSet": "/assets/optimized/thinking-particles-f108db0f714f-320.webp 320w, /assets/optimized/thinking-particles-f108db0f714f-640.webp 640w, /assets/optimized/thinking-particles-f108db0f714f-960.webp 960w, /assets/optimized/thinking-particles-f108db0f714f-1200.webp 1200w"
+    },
+    "/assets/components/transfer-glow.png": {
+      "src": "/assets/optimized/transfer-glow-e1d9820fb883-1120.webp",
+      "srcSet": "/assets/optimized/transfer-glow-e1d9820fb883-320.webp 320w, /assets/optimized/transfer-glow-e1d9820fb883-640.webp 640w, /assets/optimized/transfer-glow-e1d9820fb883-960.webp 960w, /assets/optimized/transfer-glow-e1d9820fb883-1120.webp 1120w"
     },
     "/assets/components/velocity-drag.png": {
       "src": "/assets/optimized/velocity-drag-d0fca960906f-546.webp",

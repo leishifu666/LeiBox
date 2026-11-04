@@ -1,0 +1,164 @@
+{
+  "slug": "transfer-glow",
+  "name": {
+    "en": "Transfer Glow Confirmation",
+    "zh": "转账光雾确认"
+  },
+  "description": {
+    "en": "Payment details blur behind drifting pink and gold light, with floating particles and two processing steps before a crisp success state.",
+    "zh": "转账详情在粉金色光雾与上浮粒子后逐渐虚化，经过两段处理提示，再恢复为清晰的成功状态。"
+  },
+  "keywords": "转账 确认 弹窗 光雾 模糊 粒子 处理 成功 transfer confirm payment glow blur dialog Gabriel",
+  "docsPath": "/docs/animations/transfer-glow",
+  "detailPath": "/ai/components/transfer-glow.json",
+  "markdownPath": "/ai/components/transfer-glow.md",
+  "previewPath": "/assets/components/transfer-glow.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "转账光雾确认",
+      "处理状态弹窗",
+      "payment confirmation glow"
+    ],
+    "searchTerms": [
+      "转账",
+      "确认",
+      "弹窗",
+      "光雾",
+      "模糊",
+      "粒子",
+      "成功",
+      "transfer",
+      "payment",
+      "glow",
+      "blur"
+    ],
+    "visualTags": [
+      "glow",
+      "particles",
+      "blur",
+      "dialog"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "仅为本地视觉演示，不执行真实转账；处理完成可通过回调连接自己的业务。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Independently authored scoped DOM state machine, procedural Canvas2D light haze and particle renderer, with six native framework lifecycle wrappers. Local visual demo only.",
+    "designReference": "https://x.com/gabriell_lab/status/2117982465415389633/video/1",
+    "designAuthor": "Gabriel",
+    "license": "Design reference by Gabriel; no author code or redistribution permission is claimed. Independently written DOM/Canvas2D implementation. Lucide icons retain ISC and embedded Inter retains OFL. Original clip and extracted frames remain internal."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/transfer-glow/react.json",
+      "component": "TransferGlow",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { TransferGlow } from \"./TransferGlow\";\n\nexport default function App() {\n  return <TransferGlow />;\n}",
+      "files": [
+        "TransferGlow.tsx",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/transfer-glow/vue.json",
+      "component": "TransferGlow",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport TransferGlow from \"./TransferGlow.vue\";\n</script>\n<template><TransferGlow /></template>",
+      "files": [
+        "TransferGlow.vue",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/transfer-glow/svelte.json",
+      "component": "TransferGlow",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport TransferGlow from \"./TransferGlow.svelte\";\n</script>\n<TransferGlow />",
+      "files": [
+        "TransferGlow.svelte",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/transfer-glow/solid.json",
+      "component": "TransferGlow",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { TransferGlow } from \"./TransferGlow.solid\";\n\nexport default function App() {\n  return <TransferGlow />;\n}",
+      "files": [
+        "TransferGlow.solid.tsx",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/transfer-glow/preact.json",
+      "component": "TransferGlow",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { TransferGlow } from \"./TransferGlow.preact\";\n\nexport default function App() {\n  return <TransferGlow />;\n}",
+      "files": [
+        "TransferGlow.preact.tsx",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/transfer-glow/vanilla.json",
+      "component": "TransferGlow",
+      "dependencies": [],
+      "usage": "import { mount } from \"./TransferGlow\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "TransferGlow.ts",
+        "TransferGlowEngine.js",
+        "motion-runtime.ts",
+        "TransferGlowEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Send to play the local confirmation, processing and success sequence. Close or press Escape to cancel; reopen from Convert to replay. No real payment is made.",
+    "zh": "点击发送，体验确认、处理与成功流程；关闭或按 Escape 取消，从 Convert 重新打开。仅为本地动效演示。"
+  }
+}

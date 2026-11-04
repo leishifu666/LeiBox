@@ -27,7 +27,7 @@ export default async function MotionPage({params}:Props){
       beforeInstall={<section className="mt-8" aria-label="Demo">
         <h2 className="text-lg font-semibold tracking-[-0.01em]"><T>Demo</T></h2>
         <p className="mt-2 text-[13px] text-muted-foreground"><T>{entry.instructions!}</T></p>
-        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
+        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "stacked-metadata" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
       </section>}
       afterCode={<>{doc.afterCode}<div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
         <a href={"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
@@ -36,6 +36,30 @@ export default async function MotionPage({params}:Props){
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "stacked-metadata" ? [
+          {name:"options.heading",type:"string",defaultValue:'"In Progress"',description:"List heading."},
+          {name:"options.items",type:'{ title: string; priority: string; date: string; assignee: string; team?: boolean }[]',description:"One to twelve local task rows; an empty list restores the defaults."},
+          {name:"options.theme",type:'"dark" | "light"',defaultValue:'"dark"',description:"Dark original presentation or light preview surfaces."},
+          {name:"options.expanded",type:"number",defaultValue:"-1",description:"Initially pinned or externally selected row; -1 collapses all rows."},
+          {name:"options.onExpandChange",type:"(index: number) => void",description:"Called when user input changes the visible expanded row; external updates do not emit it."},
+        ] : []),
+        ...(slug === "transfer-glow" ? [
+          {name:"options.open",type:"boolean",defaultValue:"true",description:"Open or close the local dialog; reopening resets the sequence."},
+          {name:"options.amount",type:"string",defaultValue:'"100,000.00"',description:"Displayed transfer amount; no money is moved."},
+          {name:"options.account",type:"string",defaultValue:'"Grain USD account"',description:"Source account label."},
+          {name:"options.recipient",type:"string",defaultValue:'"Müller Logistik GmbH"',description:"Recipient name in the details and success message."},
+          {name:"options.receivedAmount",type:"string",defaultValue:'"€92,000.00"',description:"Formatted recipient amount, without the EUR suffix."},
+          {name:"options.duration",type:"number",defaultValue:"5200",description:"Local processing duration in milliseconds, from 1200 to 15000."},
+          {name:"options.onComplete",type:"() => void",description:"Called once when a local processing sequence completes; cancelled runs do not emit it."},
+          {name:"options.onOpenChange",type:"(open: boolean) => void",description:"Called when the user opens or closes the dialog."},
+        ] : []),
+        ...(slug === "shader-flood" ? [
+          {name:"options.items",type:'{ title: string; description: string; icon?: string; colors?: [string, string, string] }[]',description:"Feature cards with an icon name and optional dark/mid/light palette. Omitted palettes cycle through five presets."},
+          {name:"options.seed",type:"number",defaultValue:"0",description:"Reshape the liquid independently from the card colors."},
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Liquid speed from zero to three; zero freezes texture while preserving interaction."},
+          {name:"options.theme",type:'"light" | "dark"',defaultValue:'"light"',description:"Light or dark card surfaces."},
+          {name:"options.background",type:"string",description:"Optional hexadecimal scene background."},
+        ] : []),
         ...(slug === "ascii-sharks" ? [
           {name:"options.theme",type:'"light" | "dark"',defaultValue:'"light"',description:"Light video-style presentation or the original dark rendering."},
           {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause the simulation while keeping keyboard and local controls usable."},

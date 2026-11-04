@@ -1,3 +1,6 @@
+import { STACKED_METADATA_PROMPT } from "./stacked-metadata.mjs";
+import { TRANSFER_GLOW_PROMPT } from "./transfer-glow.mjs";
+import { SHADER_FLOOD_PROMPT } from "./shader-flood.mjs";
 import { PARTICLE_TEXTURE_TRIO_PROMPT } from "./particle-texture-trio.mjs";
 import { AI_BRAND_COVER_PROMPT } from "./ai-brand-cover-cards.mjs";
 import { INK_SPREAD_CAROUSEL_PROMPT } from "./ink-spread-carousel.mjs";
@@ -54,6 +57,42 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug:"stacked-metadata",href:"/docs/animations/stacked-metadata",name:"Stacked Metadata Tags",category:"List interaction",
+    description:"Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.",
+    keywords:"标签 叠放 展开 任务 列表 元数据 优先级 日期 负责人 hover stacked metadata tags task Gabriel",
+    preview:"/assets/components/stacked-metadata.png",sourceFile:"标签叠放展开.html",canvasWidth:800,canvasHeight:600,responsive:true,
+    instructions:"Hover a row or focus it to spread its tags. Tap to pin a row; use Up/Down, Home/End to navigate and Escape to collapse.",
+    prompt:STACKED_METADATA_PROMPT,recreatedHtml:true,
+    referenceUrl:"https://x.com/gabriell_lab/status/2117611847805272267/video/1",referenceAuthor:"Gabriel",referenceAuthorUrl:"https://x.com/gabriell_lab",
+    referenceNotes:"Decoded the full 1600×1200, 60fps, 420-frame, seven-second reference and read the author's post. Observed three fixed task rows, yellow segmented progress marks, three overlapping grey metadata pills, a fixed rightmost assignee, leftward spreading on row hover, title-edge fading and simultaneous outgoing/incoming rows. Layout is reconstructed at half-resolution: 800×600 scene, 700px list, 80px rows, 44px pills and about 55px overlap. Tracked isolated opening and closing pill edges frame by frame: both have an accelerating onset, about 2.7% overshoot and a settling tail. A mass-1, stiffness-175, damping-20 analytic spring fits three clear transitions to roughly 0.31–0.38 source-pixel RMS after subframe trigger alignment. Priority and date move in a 2:1 ratio with at most one source pixel of disagreement and no observed stagger. Original author spring settings remain unknown. The fitted continuous-velocity spring, responsive layout, native keyboard/touch controls, pin state, API and lifecycle are independent reconstruction/adaptations. The recorded grey pointer halo is not a component element. No original source was supplied.",
+    referenceLicense:"Design reference by Gabriel; no author code or redistribution permission is claimed. Independently written DOM/CSS implementation. Lucide icons retain ISC and embedded Inter retains OFL. Original footage and extracted frames stay internal.",
+    codeSource:"Independent scoped DOM/CSS implementation with a measured analytic damped spring, velocity-preserving interruptions and six framework lifecycle wrappers. No original footage, remote assets or author implementation is distributed.",
+  },
+  {
+    slug:"transfer-glow",href:"/docs/animations/transfer-glow",name:"Transfer Glow Confirmation",category:"Dialog transition",
+    description:"Payment details blur behind drifting pink and gold light, with floating particles and two processing steps before a crisp success state.",
+    keywords:"转账 确认 弹窗 光雾 模糊 粒子 处理 成功 transfer confirm payment glow blur dialog Gabriel",
+    preview:"/assets/components/transfer-glow.png",sourceFile:"转账光雾确认.html",canvasWidth:1120,canvasHeight:840,responsive:true,
+    instructions:"Send to play the local confirmation, processing and success sequence. Close or press Escape to cancel; reopen from Convert to replay. No real payment is made.",
+    prompt:TRANSFER_GLOW_PROMPT,recreatedHtml:true,
+    referenceUrl:"https://x.com/gabriell_lab/status/2117982465415389633/video/1",referenceAuthor:"Gabriel",referenceAuthorUrl:"https://x.com/gabriell_lab",
+    referenceNotes:"Observed the original 1600×1200, 60fps, 490-frame, 8.166-second clip and the author's post. Confirmation details, soft card geometry, backdrop dashboard, persistent sharp close button, blur/white veil, bottom pink-gold-violet cloud, sparse upward white particles, two central status labels, green success amount and full-width Done are reconstructed. 5200ms timing, independent early/late blur, moving pink-gold-violet haze, a full-height exit sweep, status sheen, deterministic particles, responsive layout, keyboard/touch, interruption, API and lifecycle are independent reconstruction/adaptations. No original source was supplied or used.",
+    referenceLicense:"Design reference by Gabriel; no author code or redistribution permission is claimed. Independently written DOM/Canvas2D implementation. Lucide icons retain ISC and embedded Inter retains OFL. Original clip and extracted frames remain internal.",
+    codeSource:"Independently authored scoped DOM state machine, procedural Canvas2D light haze and particle renderer, with six native framework lifecycle wrappers. Local visual demo only.",
+  },
+  {
+    slug:"shader-flood",href:"/docs/animations/shader-flood",name:"Liquid Flood Cards",category:"Shader interaction",
+    description:"Live marbled liquid fills each feature card from your entry point and drains toward your exit. Each card has its own three-color palette.",
+    keywords:"液体 注入 卡片 网格 三色 着色器 悬浮 方向 shader flood liquid feature cards hover palette seed Planes Ashish Gogula",
+    preview:"/assets/components/shader-flood.png",sourceFile:"液体注入卡片.html",canvasWidth:1120,canvasHeight:720,responsive:true,renderers:["webgl"],
+    instructions:"Hover from any side to fill a card and move out to drain it. On touch screens, tap to toggle; use Tab and arrow keys to navigate, Escape to close.",
+    prompt:SHADER_FLOOD_PROMPT,recreatedHtml:true,
+    referenceUrl:"https://x.com/Ashishgogula/status/2111150387227156670/video/1",referenceAuthor:"Ashish Gogula",referenceAuthorUrl:"https://x.com/Ashishgogula",
+    referenceNotes:"Decoded all 819 frames of the 3484×2160, 60fps, 13.65-second clip and exercised the public Planes preview. Observed a three-by-two grid, 28px corners, 28px padding, 48px icon boxes, 24px headings, independent circular reveals from entry/exit coordinates, simultaneous outgoing/incoming cards and continuously marbled interiors. Public preview geometry and color uniform values were measured; five default palettes and six demo colors are preserved. The independent four-octave domain-warp shader, lighting, 520/420ms cubic easing, shared scissored WebGL context, touch/keyboard behavior and lifecycle are reconstruction estimates/adaptations. The reference's video zoom and desktop wallpaper are recording context, not component content.",
+    referenceLicense:"Original design rights remain with Ashish Gogula / Planes. Pro source is not included or accessed; no redistribution permission is claimed. Independently authored rendering and lifecycle. Lucide icons retain their ISC notice. Reference video and extracted frames stay internal.",
+    codeSource:"Independent framework-neutral DOM/WebGL1 renderer with procedural domain-warp noise, Canvas2D fallback and six native framework lifecycle wrappers. No author shader, paid source, footage, raster texture or remote font is distributed.",
+  },
   {
     slug: "ascii-sharks", href: "/docs/animations/ascii-sharks", name: "ASCII Shark Ocean", category: "ASCII animation",
     description: "Character-built sharks swim, hunt and bend through schools of fish on a fine grid, with pointer avoidance, splash reactions and an optional translucent local composer.",

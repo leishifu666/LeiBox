@@ -1,5 +1,44 @@
 [
   {
+    "slug": "stacked-metadata",
+    "href": "/docs/animations/stacked-metadata",
+    "name": "Stacked Metadata Tags",
+    "category": "List interaction",
+    "description": "Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.",
+    "keywords": "标签 叠放 展开 任务 列表 元数据 优先级 日期 负责人 hover stacked metadata tags task Gabriel",
+    "preview": "/assets/components/stacked-metadata.png",
+    "sourceFile": "标签叠放展开.html",
+    "canvasWidth": 800,
+    "canvasHeight": 600,
+    "responsive": true
+  },
+  {
+    "slug": "transfer-glow",
+    "href": "/docs/animations/transfer-glow",
+    "name": "Transfer Glow Confirmation",
+    "category": "Dialog transition",
+    "description": "Payment details blur behind drifting pink and gold light, with floating particles and two processing steps before a crisp success state.",
+    "keywords": "转账 确认 弹窗 光雾 模糊 粒子 处理 成功 transfer confirm payment glow blur dialog Gabriel",
+    "preview": "/assets/components/transfer-glow.png",
+    "sourceFile": "转账光雾确认.html",
+    "canvasWidth": 1120,
+    "canvasHeight": 840,
+    "responsive": true
+  },
+  {
+    "slug": "shader-flood",
+    "href": "/docs/animations/shader-flood",
+    "name": "Liquid Flood Cards",
+    "category": "Shader interaction",
+    "description": "Live marbled liquid fills each feature card from your entry point and drains toward your exit. Each card has its own three-color palette.",
+    "keywords": "液体 注入 卡片 网格 三色 着色器 悬浮 方向 shader flood liquid feature cards hover palette seed Planes Ashish Gogula",
+    "preview": "/assets/components/shader-flood.png",
+    "sourceFile": "液体注入卡片.html",
+    "canvasWidth": 1120,
+    "canvasHeight": 720,
+    "responsive": true
+  },
+  {
     "slug": "ascii-sharks",
     "href": "/docs/animations/ascii-sharks",
     "name": "ASCII Shark Ocean",

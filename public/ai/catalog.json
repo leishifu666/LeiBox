@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "b329691e3de199610100bcb6cc4b09c98ffd2a7da995c36a6ee3e334ec65f3fa",
+  "revision": "e861c1345023cf9a5e0120c7ce76ab56a1e82d7765b1bbe68ca6a7a23c5d7116",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,235 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "stacked-metadata",
+      "name": {
+        "en": "Stacked Metadata Tags",
+        "zh": "标签叠放展开"
+      },
+      "description": {
+        "en": "Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.",
+        "zh": "优先级、日期和负责人标签相互叠放，为任务标题留出空间；悬停或聚焦时向左展开。"
+      },
+      "keywords": "标签 叠放 展开 任务 列表 元数据 优先级 日期 负责人 hover stacked metadata tags task Gabriel",
+      "docsPath": "/docs/animations/stacked-metadata",
+      "detailPath": "/ai/components/stacked-metadata.json",
+      "markdownPath": "/ai/components/stacked-metadata.md",
+      "previewPath": "/assets/components/stacked-metadata.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "任务列表元数据",
+          "悬停展开标签",
+          "compact task metadata"
+        ],
+        "searchTerms": [
+          "标签",
+          "叠放",
+          "任务",
+          "列表",
+          "展开",
+          "metadata",
+          "stacked",
+          "tags",
+          "hover"
+        ],
+        "visualTags": [
+          "pills",
+          "overlap",
+          "list",
+          "dark"
+        ],
+        "interactions": [
+          "hover",
+          "focus",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "独立DOM/CSS重建；仅展开本地标签，不连接真实任务服务。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent scoped DOM/CSS implementation with a measured analytic damped spring, velocity-preserving interruptions and six framework lifecycle wrappers. No original footage, remote assets or author implementation is distributed.",
+        "designReference": "https://x.com/gabriell_lab/status/2117611847805272267/video/1",
+        "designAuthor": "Gabriel",
+        "license": "Design reference by Gabriel; no author code or redistribution permission is claimed. Independently written DOM/CSS implementation. Lucide icons retain ISC and embedded Inter retains OFL. Original footage and extracted frames stay internal."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "transfer-glow",
+      "name": {
+        "en": "Transfer Glow Confirmation",
+        "zh": "转账光雾确认"
+      },
+      "description": {
+        "en": "Payment details blur behind drifting pink and gold light, with floating particles and two processing steps before a crisp success state.",
+        "zh": "转账详情在粉金色光雾与上浮粒子后逐渐虚化，经过两段处理提示，再恢复为清晰的成功状态。"
+      },
+      "keywords": "转账 确认 弹窗 光雾 模糊 粒子 处理 成功 transfer confirm payment glow blur dialog Gabriel",
+      "docsPath": "/docs/animations/transfer-glow",
+      "detailPath": "/ai/components/transfer-glow.json",
+      "markdownPath": "/ai/components/transfer-glow.md",
+      "previewPath": "/assets/components/transfer-glow.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "转账光雾确认",
+          "处理状态弹窗",
+          "payment confirmation glow"
+        ],
+        "searchTerms": [
+          "转账",
+          "确认",
+          "弹窗",
+          "光雾",
+          "模糊",
+          "粒子",
+          "成功",
+          "transfer",
+          "payment",
+          "glow",
+          "blur"
+        ],
+        "visualTags": [
+          "glow",
+          "particles",
+          "blur",
+          "dialog"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "仅为本地视觉演示，不执行真实转账；处理完成可通过回调连接自己的业务。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independently authored scoped DOM state machine, procedural Canvas2D light haze and particle renderer, with six native framework lifecycle wrappers. Local visual demo only.",
+        "designReference": "https://x.com/gabriell_lab/status/2117982465415389633/video/1",
+        "designAuthor": "Gabriel",
+        "license": "Design reference by Gabriel; no author code or redistribution permission is claimed. Independently written DOM/Canvas2D implementation. Lucide icons retain ISC and embedded Inter retains OFL. Original clip and extracted frames remain internal."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "shader-flood",
+      "name": {
+        "en": "Liquid Flood Cards",
+        "zh": "液体注入卡片"
+      },
+      "description": {
+        "en": "Live marbled liquid fills each feature card from your entry point and drains toward your exit. Each card has its own three-color palette.",
+        "zh": "实时液体纹理从鼠标进入的位置铺满卡片，再向离开的位置收拢。每张卡片拥有独立的三色色板。"
+      },
+      "keywords": "液体 注入 卡片 网格 三色 着色器 悬浮 方向 shader flood liquid feature cards hover palette seed Planes Ashish Gogula",
+      "docsPath": "/docs/animations/shader-flood",
+      "detailPath": "/ai/components/shader-flood.json",
+      "markdownPath": "/ai/components/shader-flood.md",
+      "previewPath": "/assets/components/shader-flood.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "液体注入卡片",
+          "功能网格悬停揭示",
+          "directional liquid feature cards"
+        ],
+        "searchTerms": [
+          "液体",
+          "注入",
+          "卡片",
+          "着色器",
+          "三色",
+          "方向",
+          "shader",
+          "flood",
+          "liquid",
+          "palette",
+          "seed"
+        ],
+        "visualTags": [
+          "liquid",
+          "marble",
+          "shader",
+          "cards"
+        ],
+        "interactions": [
+          "hover",
+          "focus",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "独立程序化重建；支持自定义项目和三色色板，不包含付费原始源码。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Independent framework-neutral DOM/WebGL1 renderer with procedural domain-warp noise, Canvas2D fallback and six native framework lifecycle wrappers. No author shader, paid source, footage, raster texture or remote font is distributed.",
+        "designReference": "https://x.com/Ashishgogula/status/2111150387227156670/video/1",
+        "designAuthor": "Ashish Gogula",
+        "license": "Original design rights remain with Ashish Gogula / Planes. Pro source is not included or accessed; no redistribution permission is claimed. Independently authored rendering and lifecycle. Lucide icons retain their ISC notice. Reference video and extracted frames stay internal."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "ascii-sharks",
       "name": {

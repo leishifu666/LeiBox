@@ -34,6 +34,9 @@ import { verifyInkSpreadCarousel } from './test-ink-spread-carousel.mjs';
 import { verifyAsciiSharks } from './test-ascii-sharks.mjs';
 import { verifyMatchaPowderReveal } from './test-matcha-powder-reveal.mjs';
 import { verifyParticleTextureTrio } from './test-particle-texture-trio.mjs';
+import { verifyShaderFlood } from './test-shader-flood.mjs';
+import { verifyTransferGlow } from './test-transfer-glow.mjs';
+import { verifyStackedMetadata } from './test-stacked-metadata.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -89,7 +92,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 let activePage,activeItem;
 try{
  for(const item of selected){
-  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
+  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   activePage=page;activeItem=item;page.setDefaultTimeout(10000);
   if(item.slug==='inline-text-morph')await page.addInitScript(()=>{
@@ -109,6 +112,9 @@ try{
    if(item.framework==='react')await page.screenshot({path:path.join(OUT,`${item.slug}-native-${width}.png`)});
   }
   await page.setViewportSize({width:1200,height:1000});
+  if(item.slug==='stacked-metadata')await verifyStackedMetadata(page,item,ROOT,OUT);
+  if(item.slug==='transfer-glow')await verifyTransferGlow(page,item,ROOT,OUT);
+  if(item.slug==='shader-flood')await verifyShaderFlood(page,item,ROOT,OUT);
   if(item.slug==='selection-flower')await verifySelectionFlower(page,item,ROOT,OUT);
   if(item.slug==='particle-texture-trio')await verifyParticleTextureTrio(page,item,ROOT,OUT);
   if(item.slug==='spider-music-player')await verifySpiderMusicPlayer(page,item,ROOT,OUT);
@@ -322,6 +328,18 @@ try{
   }
   await page.evaluate(()=>window.__update({height:620}));await page.waitForFunction(()=>document.querySelector('#demo').querySelector('[data-motion-surface]').style.getPropertyValue('--motion-height')==='620px');
   await page.evaluate(()=>window.__mount('second'));await page.locator('#second [data-motion-surface]').waitFor();assert.equal(await page.locator('[data-motion-surface]').count(),2);
+  if(item.slug==='transfer-glow'){
+   await page.evaluate(()=>window.__update({amount:'42.00',recipient:'Second recipient'},'second'));
+   await page.waitForFunction(()=>document.querySelector('#second [data-motion-surface]').shadowRoot.querySelector('.tg-number').textContent==='42.00');
+   assert.notEqual(await page.locator('#demo .tg-number').textContent(),'42.00','dialog instances keep independent data');
+   await page.locator('#second .tg-send').click();
+  }
+  if(item.slug==='shader-flood'){
+   await page.locator('#second .sf-scene[data-ready=true]').waitFor();
+   await page.evaluate(()=>{window.__floodContexts.push(document.querySelector('#second [data-motion-surface]').shadowRoot.querySelector('canvas').getContext('webgl'));window.__update({items:[{title:'First only',description:'Independent',icon:'globe'}]});});
+   await page.waitForFunction(()=>document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelectorAll('.sf-card').length===1);
+   assert.equal(await page.locator('#second .sf-card').count(),6,'liquid grids keep independent items');
+  }
   if(item.slug==='ascii-sharks'){
    await page.locator('#second .ao-scene[data-ready=true]').waitFor();
    assert.equal(await page.locator('#second .ao-scene').getAttribute('data-sharks'),'4');assert.equal(await page.locator('#demo .ao-scene').getAttribute('data-sharks'),'1');
@@ -394,7 +412,14 @@ try{
    await page.locator('#demo .ft-trigger[data-item=today]').hover();
    await page.evaluate(()=>window.__ftDetached=[...document.querySelectorAll('[data-motion-surface]')].flatMap(host=>[...host.shadowRoot.querySelectorAll('.ft-tooltip,.ft-label-track,.ft-trigger')]));
   }
+  if(item.slug==='stacked-metadata'){
+   await page.evaluate(()=>window.__update({expanded:1},'second'));
+   await page.locator('#second .sm-scene[data-active="1"]').waitFor();
+   assert.equal(await page.locator('#demo .sm-scene').getAttribute('data-active'),'-1','metadata expansion is instance-local');
+   await page.evaluate(()=>{window.__update({expanded:2});window.__stackedAnimations=[...document.querySelectorAll('[data-motion-surface]')].flatMap(n=>n.shadowRoot.getAnimations());});
+  }
   await page.evaluate(()=>window.__unmount('second'));await page.evaluate(()=>window.__unmount());assert.equal(await page.locator('[data-motion-surface]').count(),0);
+  if(item.slug==='stacked-metadata')assert(await page.evaluate(()=>window.__stackedAnimations.every(a=>a.playState!=='running')),'unmount cancels in-flight pill transitions');
   if(item.slug==='spider-music-player'){
    const frozen=await page.evaluate(()=>window.__smDetached.map(node=>node.getAttribute('style')));await page.waitForTimeout(150);
    assert.deepEqual(await page.evaluate(()=>window.__smDetached.map(node=>node.getAttribute('style'))),frozen,'unmount immediately freezes covers and spider during a transfer');
@@ -412,6 +437,7 @@ try{
   if(item.slug==='matcha-powder-reveal')assert(await page.evaluate(()=>window.__mpContexts.every(gl=>gl.isContextLost())),'powder scene releases its WebGL context');
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
+  if(item.slug==='shader-flood')assert(await page.evaluate(()=>window.__floodContexts.every(gl=>gl.isContextLost())),'unmount releases both liquid grid contexts');
   if(item.slug==='ink-spread-carousel')assert(await page.evaluate(()=>window.__inkGLContexts.every(gl=>gl.isContextLost())),'unmount releases all carousel WebGL contexts');
   await page.waitForTimeout(['ai-brand-cover-cards','gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
   if(item.slug==='elastic-panel-resize'){

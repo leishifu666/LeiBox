@@ -16,6 +16,16 @@ def path_for(name):
 
 def deploy(stream):
  releases=ROOT/'.releases';releases.mkdir(exist_ok=True)
+ with (releases/'publish.lock').open('a+b') as lock:
+  if os.name=='posix':
+   import fcntl
+   fcntl.flock(lock.fileno(),fcntl.LOCK_EX)
+  try:return publish(stream)
+  finally:
+   if os.name=='posix':fcntl.flock(lock.fileno(),fcntl.LOCK_UN)
+
+def publish(stream):
+ releases=ROOT/'.releases';releases.mkdir(exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='incoming-',dir=releases) as temporary:
   tmp=pathlib.Path(temporary);archive=tmp/'release.tar.gz'
   total=0
@@ -58,6 +68,7 @@ def deploy(stream):
   backup=ROOT/'backups'/release
   if backup.exists():raise ValueError('Release identity already used')
   backup.mkdir(parents=True)
+  previous=STATE.read_bytes() if STATE.exists() else None
   account=pwd.getpwnam('www');changed=[]
   try:
    for item in sorted(files,key=lambda f:(not f['path'].startswith('out/_next/'),f['path'].endswith('.html'),f['path'])):
@@ -75,11 +86,14 @@ def deploy(stream):
    if not all(digest(path_for(item['path']))==item['sha256'] for item in files):raise ValueError('Post-deployment verification failed')
    if (digest(env) if env.exists() else None)!=env_hash:raise ValueError('Environment changed')
    (backup/'manifest.json').write_text(json.dumps(manifest))
+   if previous is not None:(backup/'previous-manifest.json').write_bytes(previous)
    pending=STATE.with_suffix('.new');pending.write_text(json.dumps(manifest));os.replace(pending,STATE)
   except BaseException:
    for target,saved,existed in reversed(changed):
     if existed:shutil.copy2(saved,target)
     else:target.unlink(missing_ok=True)
+   (backup/'manifest.json').unlink(missing_ok=True)
+   (backup/'previous-manifest.json').unlink(missing_ok=True)
    raise
   return {'release':release,'commit':revision,'verifiedFiles':len(files),'updatedFiles':len(changed),'archiveSha256':digest(archive),'backup':str(backup),'environmentPreserved':True}
 

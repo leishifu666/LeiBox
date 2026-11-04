@@ -31,7 +31,7 @@ try{
  const npm=process.env.npm_execpath;if(!npm)throw new Error('Use npm run deploy:server');
  await run(process.execPath,[npm,'run','build'],{cwd:source,env:{...process.env,NEXT_PUBLIC_SITE_URL:config.siteUrl}});
  await run(process.execPath,['--test','scripts/performance-budget.test.mjs','scripts/leibox-skill.test.mjs','scripts/collection-cli.test.mjs'],{cwd:source});
- await run(config.python||'python',['scripts/deploy/test_receiver.py'],{cwd:source});
+ await run(config.python||'python',['-m','unittest','discover','-s','scripts/deploy','-p','test_*.py'],{cwd:source});
  const baseline=await run(config.ssh||'ssh',[...ssh,'manifest'],{capture:true});JSON.parse(baseline);await fs.writeFile(path.join(folder,'baseline.json'),baseline);
  await run(config.python||'python',[path.join(root,'scripts/deploy/package.py'),source,folder,commit,release]);
  if(dry){console.log(`Prepared and checked: ${folder}`);process.exit(0);}
