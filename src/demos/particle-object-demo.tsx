@@ -15,6 +15,7 @@ import {
 import { ColorRow, DemoControls } from "@/components/demos/demo-controls";
 import { useDemoControls } from "@/hooks/use-demo-controls";
 import { ParticleObject } from "@/lib/ParticleObject/ParticleObject";
+import { optimizedImage } from "@/lib/optimized-image";
 
 const DEFAULT_MODEL = "/assets/models/leibox-particle.glb";
 const AUTO_COLOR = "auto";
@@ -133,7 +134,7 @@ export function ParticleObjectDemo() {
 
   return (
     <>
-      <div className="relative h-[420px] overflow-hidden rounded-xl border border-border/60 sm:h-[520px]" style={{backgroundImage:"url(/landing/agent-demo/alpine-lake.png)",backgroundSize:"cover",backgroundPosition:"center"}}>
+      <div className="relative h-[420px] overflow-hidden rounded-xl border border-border/60 sm:h-[520px]" style={{backgroundImage:`url("${optimizedImage("/landing/agent-demo/alpine-lake.png").src}")`,backgroundSize:"cover",backgroundPosition:"center"}}>
         <ParticleObject
           src={src}
           {...values}

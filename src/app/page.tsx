@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./landing.css";
 import { SITE_URL } from "@/lib/site-url";
 import { getMotionPackages } from "@/lib/motion-packages";
 

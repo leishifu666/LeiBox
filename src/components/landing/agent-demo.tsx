@@ -222,7 +222,7 @@ export function AgentDemo({ code }: { code: DemoCode }) {
   const { cursor, app } = current;
   return <figure className="agent-demo" data-playing={activity.playing} data-reduced-motion={activity.reduced} aria-label={t("The GlassFolder React code copied into Claude Code and Codex, then added step by step.")}>
     <figcaption className="sr-only"><T>The GlassFolder React code copied into Claude Code and Codex, then added step by step.</T></figcaption>
-    <div className="g4-plate"><div ref={rootRef} data-ap-root data-agent={app.agent} data-lines={app.lines} data-source-component={piece.slug} data-code-lines={code.lineCount} inert aria-hidden className="g4-desk pointer-events-none select-none">
+    <div className="g4-plate" style={{ backgroundImage: `url("${optimizedImage("/landing/agent-demo/alpine-lake.png").src}")` }}><div ref={rootRef} data-ap-root data-agent={app.agent} data-lines={app.lines} data-source-component={piece.slug} data-code-lines={code.lineCount} inert aria-hidden className="g4-desk pointer-events-none select-none">
       <div className="g4-app relative flex overflow-hidden"><LibrarySidebar /><div className="relative flex min-w-0 flex-1 flex-col overflow-hidden"><div className="relative z-10 bg-background"><LibraryBar /></div><div className="g5-ap-scroll space-y-9 px-4 pt-6 pb-10 md:px-7 md:pt-7" style={{ transform: `translateY(${-current.scroll}px)` }}>
         <ComponentRail rail="top" title="Components" subtitle="Creative components you can drop into any project." pieces={TOP} />
         <ComponentRail rail="fresh" title="Live demos" subtitle="Inspect before you use" pieces={FRESH} />

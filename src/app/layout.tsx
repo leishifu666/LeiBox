@@ -10,6 +10,7 @@ import { LanguageProvider } from "@/components/common/language-provider";
 import { LogoTransitionProvider } from "@/components/common/logo-transition-provider";
 import { ComponentEntryTransition } from "@/components/common/component-entry-transition";
 import { SITE_URL } from "@/lib/site-url";
+import { FONT_BOOTSTRAP_SCRIPT } from "@/lib/site-fonts";
 const DESCRIPTION =
   "LeiBox is a personal collection of UI inspiration, interaction experiments and design references for learning and research.";
 
@@ -87,6 +88,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FONT_BOOTSTRAP_SCRIPT }} />
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-css-tags -- Font fallback when the locale bootstrap cannot run. */}
+          <link rel="stylesheet" href="/fonts/misans.css" />
+        </noscript>
+      </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <ThemeProvider>
           <ThemeFavicon />

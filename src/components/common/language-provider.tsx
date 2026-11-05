@@ -3,6 +3,7 @@
 import { Children, cloneElement, createContext, isValidElement, useContext, useLayoutEffect, useMemo, useSyncExternalStore, type ReactElement, type ReactNode } from "react";
 import { LOCALE_STORAGE_KEY, translateText, type Locale } from "@/lib/i18n/translate";
 import { useLanguageTransition } from "@/hooks/use-language-transition";
+import { loadChineseFonts } from "@/lib/site-fonts";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -41,7 +42,13 @@ function commitLocale(next: Locale) {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const locale = useSyncExternalStore(subscribeLocale, readLocale, serverLocale);
   const setLocale = useLanguageTransition(locale, commitLocale);
-  useLayoutEffect(() => { document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"; document.documentElement.dataset.locale = locale; }, [locale]);
+  useLayoutEffect(() => {
+    // Hydration first uses the Chinese server snapshot, even for a saved English visit.
+    if (locale !== readLocale()) return;
+    document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
+    document.documentElement.dataset.locale = locale;
+    if (locale === "zh") loadChineseFonts(document);
+  }, [locale]);
   const value = useMemo(() => ({ locale, setLocale, t: (text: string) => translateText(text, locale) }), [locale, setLocale]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

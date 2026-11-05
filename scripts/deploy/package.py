@@ -5,7 +5,7 @@ files=[]
 for p in sorted((source/'out').rglob('*')):
  if not p.is_file():continue
  rel=p.relative_to(source).as_posix()
- if rel.startswith('out/previews/') or any(rel.startswith('out/'+name) for name in ['404-preview','logo-transition-preview','submit-state-preview']):continue
+ if rel.startswith(('out/previews/', 'out/motion-frameworks/')) or any(rel.startswith('out/'+name) for name in ['404-preview','logo-transition-preview','submit-state-preview']):continue
  assert not p.is_symlink() and p.suffix not in ['.pem','.key'] and '.env' not in p.name
  data=p.read_bytes();assert b'-----BEGIN PRIVATE KEY-----' not in data
  checksum=hashlib.sha256(data).hexdigest()

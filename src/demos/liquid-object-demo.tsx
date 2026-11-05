@@ -1,4 +1,5 @@
 "use client";
+import { optimizedImage } from "@/lib/optimized-image";
 
 import { T, useLanguage } from "@/components/common/language-provider";
 
@@ -133,7 +134,7 @@ export function LiquidObjectDemo() {
 
   return (
     <>
-      <div className="relative h-[420px] overflow-hidden rounded-xl border border-border/60 sm:h-[520px]" style={{backgroundImage:"url(/landing/agent-demo/alpine-lake.png)",backgroundSize:"cover",backgroundPosition:"center"}}>
+      <div className="relative h-[420px] overflow-hidden rounded-xl border border-border/60 sm:h-[520px]" style={{backgroundImage:`url("${optimizedImage("/landing/agent-demo/alpine-lake.png").src}")`,backgroundSize:"cover",backgroundPosition:"center"}}>
         <LiquidObject
           src={displaySrc}
           {...values}

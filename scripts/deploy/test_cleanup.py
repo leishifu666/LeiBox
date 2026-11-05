@@ -137,6 +137,64 @@ class CleanupTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.run_cleanup(True)
 
+    def test_optimized_images_respect_current_rollback_and_grace_period(self):
+        active = 'out/assets/optimized/active-aaaaaaaaaaaa-640.webp'
+        stale = 'out/assets/optimized/obsolete-bbbbbbbbbbbb-640.webp'
+        recent = 'out/assets/optimized/recent-cccccccccccc-320.webp'
+        rollback = 'out/assets/optimized/rollback-dddddddddddd-320.webp'
+        for name in [active, stale, recent, rollback]:
+            self.write(name, b'image')
+        self.state['files'].append(self.entry(active, b'image'))
+        self.write('.releases/current-manifest.json', json.dumps(self.state).encode())
+        backup, predecessor = self.backup('new', 1)
+        predecessor['files'].append(self.entry(rollback, b'image'))
+        (backup / 'previous-manifest.json').write_text(json.dumps(predecessor))
+        os.utime(self.root / recent, (self.now - 60, self.now - 60))
+        self.write('out/assets/optimized/manual.webp', b'keep')
+        report = self.run_cleanup(True)
+        self.assertIn(stale, [item['path'] for item in report['assets']])
+        self.assertFalse((self.root / stale).exists())
+        for name in [active, recent, rollback, 'out/assets/optimized/manual.webp']:
+            self.assertTrue((self.root / name).exists(), name)
+
+    def test_retired_framework_files_require_verified_publication_history(self):
+        stale = 'out/motion-frameworks/retired/react/RetiredEngine.js'
+        unknown = 'out/motion-frameworks/custom/react/CustomEngine.js'
+        self.write(stale, b'engine')
+        self.write(unknown, b'keep')
+        for name, age in [('new', 1), ('previous', 10), ('old', 100)]:
+            self.backup(name, age)
+        history = self.root / 'backups/old/manifest.json'
+        snapshot = json.loads(history.read_text())
+        snapshot['release'] = 'abcdef123456-1234'
+        snapshot['files'].append(self.entry(stale, b'engine'))
+        history.write_text(json.dumps(snapshot))
+        os.utime(history, (self.now - 100, self.now - 100))
+        first = self.run_cleanup(True)
+        self.assertNotIn(stale, [item['path'] for item in first['assets']])
+        later = cleanup.clean(self.root, now=self.now + 86400, apply=True)
+        self.assertIn(stale, [item['path'] for item in later['assets']])
+        self.assertFalse((self.root / stale).exists())
+        self.assertTrue((self.root / unknown).exists())
+
+    def test_framework_retirement_survives_rollback_snapshot_pruning(self):
+        retired = 'out/motion-frameworks/retired/react/RetiredEngine.js'
+        self.write(retired, b'engine')
+        backup, predecessor = self.backup('new', 1)
+        predecessor['files'].append(self.entry(retired, b'engine'))
+        previous = backup / 'previous-manifest.json'
+        previous.write_text(json.dumps(predecessor))
+        self.run_cleanup(True)
+        self.assertTrue((self.root / retired).exists())
+        timestamps = json.loads((self.root / '.releases/retired-assets.json').read_text())
+        self.assertIn(retired, timestamps)
+        # Later retained rollbacks no longer refer to that framework directory.
+        predecessor['files'] = [item for item in predecessor['files'] if item['path'] != retired]
+        previous.write_text(json.dumps(predecessor))
+        later = cleanup.clean(self.root, now=self.now + 86400, apply=True)
+        self.assertIn(retired, [item['path'] for item in later['assets']])
+        self.assertFalse((self.root / retired).exists())
+
     @unittest.skipUnless(os.name == 'posix', 'POSIX symlink permissions')
     def test_asset_symlink_aborts_without_following_or_deleting_target(self):
         target = self.root / 'out/uploads/user.txt'

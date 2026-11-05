@@ -12,10 +12,15 @@ import time
 
 ROOT = pathlib.Path('/opt/Project/leibox')
 POLICY = {'assetGraceHours': 24, 'keepBackups': 2}
-ASSET_PREFIXES = ('out/_next/static/', 'out/doc-assets/')
+ASSET_PREFIXES = ('out/_next/static/', 'out/doc-assets/',
+                  'out/assets/optimized/', 'out/motion-frameworks/')
 
 
 def build_asset(name):
+    if name.startswith('out/assets/optimized/'):
+        return re.fullmatch(r'out/assets/optimized/[\w-]+-[a-f0-9]{12}-\d+\.webp', name) is not None
+    if name.startswith('out/motion-frameworks/'):
+        return re.fullmatch(r'out/motion-frameworks/(?:manifest\.json|[a-z0-9-]+/(?:packages\.json|(?:react|vue|svelte|solid|preact|vanilla)/[\w.-]+\.(?:js|ts|tsx|vue|svelte|css|json)))', name) is not None
     if name.startswith('out/doc-assets/'):
         return re.fullmatch(r'out/doc-assets/[a-f0-9]{24}\.json', name) is not None
     if name.startswith('out/_next/static/chunks/'):
@@ -189,13 +194,21 @@ def clean(root=ROOT, *, apply=False, now=None):
                 for file in folder.rglob('*'):
                     contained(root, file)
                     name = file.relative_to(root).as_posix()
-                    if not file.is_file() or name in protected or not build_asset(name):
+                    if not file.is_file() or name in entries or not build_asset(name):
                         continue
                     info = file.stat()
                     last_present = max((i for i, (_, names) in enumerate(history) if name in names), default=-1)
+                    # Only retire framework files recorded by our publisher; leave unknown files alone.
+                    if (prefix == 'out/motion-frameworks/' and last_present < 0 and
+                            name not in retired_before and name not in protected):
+                        continue
                     first_absent = history[last_present + 1][0] if last_present + 1 < len(history) else now
                     since = max(retired_before.get(name, first_absent), info.st_mtime)
                     retired[name] = since
+                    # Remember verified retirement while rollback snapshots still protect the file.
+                    # Those snapshots may be pruned before the file becomes eligible for removal.
+                    if name in protected:
+                        continue
                     if now - since < policy['assetGraceHours'] * 3600:
                         recent += 1
                         continue

@@ -4,6 +4,7 @@ import { T, useLanguage } from "@/components/common/language-provider";
 
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { optimizedImage } from "@/lib/optimized-image";
 
 const EASE = "cubic-bezier(0.23, 1, 0.32, 1)";
 
@@ -86,7 +87,7 @@ export function DemoImageCycler({
           // eslint-disable-next-line @next/next/no-img-element
           <img
             key={src}
-            src={src}
+            {...optimizedImage(src, "(min-width: 1024px) 768px, 100vw")}
             crossOrigin="anonymous"
             alt={isActive ? t(alt) : ""}
             aria-hidden={!isActive}
