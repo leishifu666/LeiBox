@@ -13,6 +13,19 @@
     "responsive": true
   },
   {
+    "slug": "album-cover-tunnel",
+    "href": "/docs/animations/album-cover-tunnel",
+    "name": "Album Cover Tunnel",
+    "category": "3D interaction",
+    "description": "A three-dimensional wall of real album covers: hover to lift, click to fly a cover into the center, then scroll or drag through the endless tunnel.",
+    "keywords": "专辑 封面 隧道 飞入 原创 雷师傅 三维 厚度 雾 光 专辑墙 album cover tunnel wall fly hover scroll drag LeiShiFu original",
+    "preview": "/assets/components/album-cover-tunnel.png",
+    "sourceFile": "专辑封面隧道.html",
+    "canvasWidth": 1200,
+    "canvasHeight": 675,
+    "responsive": true
+  },
+  {
     "slug": "stacked-metadata",
     "href": "/docs/animations/stacked-metadata",
     "name": "Stacked Metadata Tags",

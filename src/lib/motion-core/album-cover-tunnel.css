@@ -1,0 +1,13 @@
+.aw-scene{position:relative;width:100%;height:var(--motion-height,675px);min-height:180px;overflow:hidden;background:#05060f;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.aw-scene #stage{position:absolute;inset:0;margin:auto;aspect-ratio:16/9;max-width:100%;max-height:100%;width:min(100%,calc(var(--motion-height,675px)*16/9));touch-action:none;overflow:hidden}
+.aw-scene canvas{display:block;width:100%!important;height:100%!important;outline:none}
+.aw-scene canvas:focus-visible{outline:2px solid #e2d8ff;outline-offset:-4px}
+.aw-scene #hint{position:absolute;bottom:16px;left:24px;right:24px;text-align:center;color:#ffffffa0;font-size:12px;line-height:1.6;letter-spacing:.03em;text-shadow:0 1px 8px #0008;transition:opacity 1.2s;pointer-events:none}
+.aw-scene #fps{display:none}
+.aw-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.aw-error{position:absolute;inset:0;display:grid;place-items:center;color:#dcd8eb;font-size:14px}
+.aw-scene[data-theme=light]{background:#f4f4f4}
+.aw-scene[data-theme=light] #stage{width:min(94%,calc(var(--motion-height,675px)*.94*16/9));border-radius:20px;box-shadow:0 14px 35px #0002}
+.aw-scene[data-theme=light] #hint{display:none}
+@media(max-width:600px){.aw-scene #hint{bottom:12px;left:16px;right:16px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.aw-scene #hint{transition:none}}

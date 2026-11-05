@@ -23,7 +23,7 @@ export default async function MotionPage({params}:Props){
   if(!entry)notFound();
   const doc=await getMotionDocProps(slug);
   return <div className="page-enter">
-    <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={[entry.category,"6 frameworks","TypeScript"]}
+    <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={[entry.category,"6 frameworks","TypeScript",...(entry.original?["LeiShiFu original"]:[])]}
       beforeInstall={<section className="mt-8" aria-label="Demo">
         <h2 className="text-lg font-semibold tracking-[-0.01em]"><T>Demo</T></h2>
         <p className="mt-2 text-[13px] text-muted-foreground"><T>{entry.instructions!}</T></p>
@@ -34,7 +34,7 @@ export default async function MotionPage({params}:Props){
         {slug === "multi-cursor-builder" ? <a href="/motion/multi-cursor-builder.html" download="多光标页面搭建-独立演示.html" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download standalone HTML</T></a> : null}
         {slug === "deep-agent-composer" || slug === "reasoning-effort-slider" ? <a href="/motion/deep-agent-original-source.txt" download="DeepAgent-原版源码.txt" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download original Deep Agent source</T></a> : null}
         {entry.suppliedSource?<a href={entry.suppliedSource} download="GlassFolder.tsx" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
-        {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
+        {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
         ...(slug === "multi-cursor-builder" ? [
@@ -44,6 +44,13 @@ export default async function MotionPage({params}:Props){
           {name:"options.showToolbar",type:"boolean",defaultValue:"true",description:"Show the tool status, scroll percentage, pause and replay controls."},
           {name:"options.onPhaseChange",type:'(phase: "intro" | "burst" | "board" | "build") => void',description:"Called when the animation changes between intro, burst, board and build."},
           {name:"options.onReplay",type:"() => void",description:"Called only when the user replays with the button or keyboard."},
+        ] : []),
+        ...(slug === "album-cover-tunnel" ? [
+          {name:"options.images",type:'(string | { src: string; alt?: string })[]',description:"One to ninety-six image URLs or objects with src and alt. The default 55 covers are embedded."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause the simulation while keeping keyboard and local controls usable."},
+          {name:"options.autoTravel",type:"boolean",defaultValue:"true",description:"Enable automatic travel after five seconds of inactivity."},
+          {name:"options.active",type:"number",description:"Select an image by its zero-based index without emitting onSelect."},
+          {name:"options.onSelect",type:"(index: number) => void",description:"Called with the image index when a user chooses a cover."},
         ] : []),
         ...(slug === "stacked-metadata" ? [
           {name:"options.heading",type:"string",defaultValue:'"In Progress"',description:"List heading."},

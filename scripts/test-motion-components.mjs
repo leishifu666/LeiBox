@@ -38,6 +38,7 @@ import { verifyShaderFlood } from './test-shader-flood.mjs';
 import { verifyTransferGlow } from './test-transfer-glow.mjs';
 import { verifyStackedMetadata } from './test-stacked-metadata.mjs';
 import { verifyMultiCursorBuilder } from './test-multi-cursor-builder.mjs';
+import { verifyAlbumCoverTunnel } from './test-album-cover-tunnel.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -77,7 +78,8 @@ function entrySource(pack,entry){
   create=`const [options,setOptions]=createSignal({});const dispose=render(()=>createComponent(${name},{get options(){return options();}}),host);return {update:value=>setOptions(value),destroy:dispose};`;
  }else{imports=`import {mount} from ${file};`;create='return mount(host);';}
  const clock=pack.slug==='spider-music-player'?`import {gsap} from 'gsap';window.__spiderMotionClock={pause:()=>{gsap.globalTimeline.pause();},resume:()=>{gsap.globalTimeline.resume();}};`:'';
- return `${imports}\n${clock}\nwindow.__instances={};window.__mount=(id='demo')=>{let host=document.getElementById(id);if(!host){host=document.createElement('div');host.id=id;document.body.appendChild(host);}window.__instances[id]=(()=>{${create}})();};window.__update=(value,id='demo')=>window.__instances[id].update(value);window.__unmount=async(id='demo')=>{await window.__instances[id].destroy();delete window.__instances[id];};`;
+ const album=pack.slug==='album-cover-tunnel'?`import * as AlbumThree from 'three';window.__albumPoses=[];window.__albumContexts=[];const albumMatrix=AlbumThree.InstancedMesh.prototype.setMatrixAt;AlbumThree.InstancedMesh.prototype.setMatrixAt=function(index,matrix){const result=albumMatrix.call(this,index,matrix);if(index===this.count-1&&this.geometry.getAttribute('aTex'))queueMicrotask(()=>{const tex=this.geometry.getAttribute('aTex');for(let i=0;i<this.count;i++)if(tex.getX(i)===0){const e=this.instanceMatrix.array,o=i*16;window.__albumPoses.push({time:performance.now(),scale:Math.hypot(e[o],e[o+1],e[o+2]),x:e[o+12],y:e[o+13],z:e[o+14]});if(window.__albumPoses.length>600)window.__albumPoses.shift();break;}});return result;};const albumContext=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(...args){const context=albumContext.apply(this,args);if(args[0]==='webgl2'&&context&&!window.__albumContexts.includes(context))window.__albumContexts.push(context);return context;};`:'';
+ return `${imports}\n${clock}\n${album}\nwindow.__instances={};window.__mount=(id='demo')=>{let host=document.getElementById(id);if(!host){host=document.createElement('div');host.id=id;document.body.appendChild(host);}window.__instances[id]=(()=>{${create}})();};window.__update=(value,id='demo')=>window.__instances[id].update(value);window.__unmount=async(id='demo')=>{await window.__instances[id].destroy();delete window.__instances[id];};`;
 }
 for(const item of selected){
  const folder=path.join(SOURCE,item.slug,item.framework),pack=JSON.parse(await fs.readFile(path.join(folder,'package.json'),'utf8'));
@@ -114,6 +116,7 @@ try{
   }
   await page.setViewportSize({width:1200,height:1000});
   if(item.slug==='multi-cursor-builder')await verifyMultiCursorBuilder(page,item,ROOT,OUT);
+  if(item.slug==='album-cover-tunnel')await verifyAlbumCoverTunnel(page,item,ROOT,OUT);
   if(item.slug==='stacked-metadata')await verifyStackedMetadata(page,item,ROOT,OUT);
   if(item.slug==='transfer-glow')await verifyTransferGlow(page,item,ROOT,OUT);
   if(item.slug==='shader-flood')await verifyShaderFlood(page,item,ROOT,OUT);
@@ -450,6 +453,7 @@ try{
   if(item.slug==='crumpled-paper')assert(await page.evaluate(()=>window.__crumpleGL.every(gl=>gl.isContextLost())),'unmount explicitly releases the WebGL context');
   if(item.slug==='blue-fluted-glass')assert(await page.evaluate(()=>window.__bfgContexts.every(gl=>gl.isContextLost())),'unmount releases the blue fluid WebGL contexts');
   if(item.slug==='shader-flood')assert(await page.evaluate(()=>window.__floodContexts.every(gl=>gl.isContextLost())),'unmount releases both liquid grid contexts');
+  if(item.slug==='album-cover-tunnel')assert(await page.evaluate(()=>window.__albumContexts.every(gl=>gl.isContextLost())),'unmount releases album tunnel GPU contexts');
   if(item.slug==='ink-spread-carousel')assert(await page.evaluate(()=>window.__inkGLContexts.every(gl=>gl.isContextLost())),'unmount releases all carousel WebGL contexts');
   await page.waitForTimeout(['ai-brand-cover-cards','gradient-ring-cards','share-invite','otp-verification','reasoning-effort-slider','deep-agent-composer','notes-text-color','brand-poster-cards','collection-layout-morph','spider-music-player','fluid-tooltip'].includes(item.slug)?2400:250);const before=await page.evaluate(()=>window.__motionFrames);await page.waitForTimeout(150);assert.equal(await page.evaluate(()=>window.__motionFrames),before,'animation callbacks stop after unmount');
   if(item.slug==='elastic-panel-resize'){

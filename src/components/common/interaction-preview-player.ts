@@ -17,6 +17,17 @@ const PLAYER = String.raw`
       };
       ready();return;
     }
+    if (slug === 'album-cover-tunnel') {
+      const ready=()=>{
+        const root=document.querySelector('#album-cover-tunnel [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true')return;
+        observer.disconnect();
+        const canvas=root.querySelector('canvas');
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        later(()=>repeat(()=>canvas.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true})),2300),700);
+      };
+      const observer=new MutationObserver(ready);observer.observe(document.body,{attributes:true,attributeFilter:['data-motion-ready']});ready();return;
+    }
     if (slug === 'stacked-metadata') {
       const ready=()=>{
         const root=document.querySelector('#stacked-metadata [data-motion-surface]')?.shadowRoot;
@@ -456,7 +467,7 @@ export function interactionPreviewCss(slug: string) {
 }
 
 export function interactionPreviewDocument(source: string, slug: string) {
-  if (slug === "multi-cursor-builder" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  if (slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = PLAYER.replace('__SLUG__', JSON.stringify(slug));
   const style = `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares

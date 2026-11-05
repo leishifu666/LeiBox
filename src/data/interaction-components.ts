@@ -1,4 +1,5 @@
 import { MULTI_CURSOR_BUILDER_PROMPT } from "./multi-cursor-builder.mjs";
+import { ALBUM_COVER_TUNNEL_PROMPT } from "./album-cover-tunnel.mjs";
 import { STACKED_METADATA_PROMPT } from "./stacked-metadata.mjs";
 import { TRANSFER_GLOW_PROMPT } from "./transfer-glow.mjs";
 import { SHADER_FLOOD_PROMPT } from "./shader-flood.mjs";
@@ -51,6 +52,7 @@ export interface MotionEntry {
   referenceNotes?: string;
   referenceLicense?: string;
   codeSource?: string;
+  original?: boolean;
   originalHtml?: string;
   responsive?: boolean;
   renderers?: string[];
@@ -69,6 +71,17 @@ export const INTERACTION_COMPONENTS: MotionEntry[] = [
     referenceNotes:"Native DOM/Canvas2D port of the supplied lei_figma.html, retaining twelve cursors, all six block operations, inline images, text, typography popup, selection/spacing guides and reversible scheduling. LeiBox vectors replace the placeholder L. Local improvements include native scrolling, capped raster/paint frequency, batched fractional geometry, scrollbar stability, exact canvas mapping, instance-scoped scroll/keyboard/anchors, controls, offscreen pause and font lifetime management. No public original author URL was supplied or independently verified.",
     referenceLicense:"Supplied HTML used with the user's instruction to collect it. Image provenance and original upstream code license were not supplied or independently verified. Font copyright and SIL OFL notices are retained. LeiBox vector branding belongs to its owner; no third-party attribution or redistribution permission is invented.",
     codeSource:"User-supplied HTML with local performance, geometry and native lifecycle adaptations. Six native framework wrappers share the same DOM/Canvas2D core; no iframe implementation or remote runtime assets.",
+  },
+  {
+    slug:"album-cover-tunnel",href:"/docs/animations/album-cover-tunnel",name:"Album Cover Tunnel",category:"3D interaction",
+    description:"A three-dimensional wall of real album covers: hover to lift, click to fly a cover into the center, then scroll or drag through the endless tunnel.",
+    keywords:"专辑 封面 隧道 飞入 原创 雷师傅 三维 厚度 雾 光 专辑墙 album cover tunnel wall fly hover scroll drag LeiShiFu original",
+    preview:"/assets/components/album-cover-tunnel.png",sourceFile:"专辑封面隧道.html",canvasWidth:1200,canvasHeight:675,responsive:true,renderers:["webgl"],
+    instructions:"Hover to lift a cover, click to make it the main album, and scroll or drag vertically to travel. Focus the scene for arrow-key navigation; Space pauses or resumes.",
+    prompt:ALBUM_COVER_TUNNEL_PROMPT,original:true,originalHtml:"/motion/album-cover-tunnel-original.html",recreatedHtml:true,referenceAuthor:"雷师傅",
+    referenceNotes:"Original interaction and supplied HTML by LeiShiFu, as declared by the author. Preserved the supplied Three.js scene, instanced thick album boxes, foil highlights, soft shadows, depth fog, bloom, hover displacement, curved cover exchanges and inertial layer travel. Embedded the author's selected 47 candidate covers plus eight subsequently supplied covers. Added scoped native lifecycles, six framework adapters, keyboard focus, pause/reduced-motion, lazy previews and GPU cleanup.",
+    referenceLicense:"Interaction credited to LeiShiFu. Album artwork is demonstration content; rights remain with the respective artwork owners. Three.js retains its MIT notice. Original attribution applies to the interaction, not album artwork.",
+    codeSource:"LeiShiFu original HTML and interaction, ported into a scoped native Three.js core shared by six framework lifecycles.",
   },
   {
     slug:"stacked-metadata",href:"/docs/animations/stacked-metadata",name:"Stacked Metadata Tags",category:"List interaction",

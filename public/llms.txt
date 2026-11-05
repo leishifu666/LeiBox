@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 41 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 42 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -18,6 +18,7 @@ Paths beginning with / are relative to the origin serving this file. When only a
 ## Components
 
 - [Multi Cursor Page Builder / 多光标页面搭建](https://leibox.pantoria.cn/ai/components/multi-cursor-builder.md): Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.
+- [Album Cover Tunnel / 专辑封面隧道](https://leibox.pantoria.cn/ai/components/album-cover-tunnel.md): A three-dimensional wall of real album covers: hover to lift, click to fly a cover into the center, then scroll or drag through the endless tunnel.
 - [Stacked Metadata Tags / 标签叠放展开](https://leibox.pantoria.cn/ai/components/stacked-metadata.md): Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.
 - [Transfer Glow Confirmation / 转账光雾确认](https://leibox.pantoria.cn/ai/components/transfer-glow.md): Payment details blur behind drifting pink and gold light, with floating particles and two processing steps before a crisp success state.
 - [Liquid Flood Cards / 液体注入卡片](https://leibox.pantoria.cn/ai/components/shader-flood.md): Live marbled liquid fills each feature card from your entry point and drains toward your exit. Each card has its own three-color palette.
