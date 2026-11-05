@@ -5,6 +5,7 @@ import { SITE_URL } from "@/lib/site-url";
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
+  { path: "/docs/animations/multi-cursor-builder", priority: 0.8 },
   { path: "/docs/animations/stacked-metadata", priority: 0.8 },
   { path: "/docs/animations/transfer-glow", priority: 0.8 },
   { path: "/docs/animations/shader-flood", priority: 0.8 },

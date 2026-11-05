@@ -104,6 +104,10 @@
       "src": "/assets/optimized/morphing-timer-daf9fb769107-546.webp",
       "srcSet": "/assets/optimized/morphing-timer-daf9fb769107-320.webp 320w, /assets/optimized/morphing-timer-daf9fb769107-546.webp 546w"
     },
+    "/assets/components/multi-cursor-builder.png": {
+      "src": "/assets/optimized/multi-cursor-builder-3d9293b89563-1120.webp",
+      "srcSet": "/assets/optimized/multi-cursor-builder-3d9293b89563-320.webp 320w, /assets/optimized/multi-cursor-builder-3d9293b89563-640.webp 640w, /assets/optimized/multi-cursor-builder-3d9293b89563-960.webp 960w, /assets/optimized/multi-cursor-builder-3d9293b89563-1120.webp 1120w"
+    },
     "/assets/components/notes-text-color.png": {
       "src": "/assets/optimized/notes-text-color-bed022555fe4-900.webp",
       "srcSet": "/assets/optimized/notes-text-color-bed022555fe4-320.webp 320w, /assets/optimized/notes-text-color-bed022555fe4-640.webp 640w, /assets/optimized/notes-text-color-bed022555fe4-900.webp 900w"

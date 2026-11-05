@@ -1,0 +1,165 @@
+{
+  "slug": "multi-cursor-builder",
+  "name": {
+    "en": "Multi Cursor Page Builder",
+    "zh": "多光标页面搭建"
+  },
+  "description": {
+    "en": "Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.",
+    "zh": "12个彩色光标随滚动打字、画框、搬入图片并排版，选框实时跟随，上滚可撤回搭建。"
+  },
+  "keywords": "多光标 页面 搭建 自动 排版 选框 滚动 回退 字体 Figma cursor builder page scroll construction",
+  "docsPath": "/docs/animations/multi-cursor-builder",
+  "detailPath": "/ai/components/multi-cursor-builder.json",
+  "markdownPath": "/ai/components/multi-cursor-builder.md",
+  "previewPath": "/assets/components/multi-cursor-builder.png",
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "多光标搭建演示",
+      "页面自动排版动画",
+      "scrolling page construction"
+    ],
+    "searchTerms": [
+      "多光标",
+      "搭建",
+      "页面",
+      "选框",
+      "排版",
+      "回退",
+      "Figma",
+      "cursor",
+      "builder",
+      "construction"
+    ],
+    "visualTags": [
+      "cursors",
+      "canvas",
+      "typography",
+      "scroll"
+    ],
+    "interactions": [
+      "scroll",
+      "keyboard",
+      "touch",
+      "pause",
+      "replay"
+    ],
+    "caveat": "用户提供HTML的本地演示；内层独立滚动，不是多人协作编辑器或真实建站后台。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "User-supplied HTML with local performance, geometry and native lifecycle adaptations. Six native framework wrappers share the same DOM/Canvas2D core; no iframe implementation or remote runtime assets.",
+    "designReference": null,
+    "designAuthor": "User-provided HTML",
+    "license": "Supplied HTML used with the user's instruction to collect it. Image provenance and original upstream code license were not supplied or independently verified. Font copyright and SIL OFL notices are retained. LeiBox vector branding belongs to its owner; no third-party attribution or redistribution permission is invented."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/multi-cursor-builder/react.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { MultiCursorBuilder } from \"./MultiCursorBuilder\";\n\nexport default function App() {\n  return <MultiCursorBuilder />;\n}",
+      "files": [
+        "MultiCursorBuilder.tsx",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/multi-cursor-builder/vue.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport MultiCursorBuilder from \"./MultiCursorBuilder.vue\";\n</script>\n<template><MultiCursorBuilder /></template>",
+      "files": [
+        "MultiCursorBuilder.vue",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/multi-cursor-builder/svelte.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport MultiCursorBuilder from \"./MultiCursorBuilder.svelte\";\n</script>\n<MultiCursorBuilder />",
+      "files": [
+        "MultiCursorBuilder.svelte",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/multi-cursor-builder/solid.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { MultiCursorBuilder } from \"./MultiCursorBuilder.solid\";\n\nexport default function App() {\n  return <MultiCursorBuilder />;\n}",
+      "files": [
+        "MultiCursorBuilder.solid.tsx",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/multi-cursor-builder/preact.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { MultiCursorBuilder } from \"./MultiCursorBuilder.preact\";\n\nexport default function App() {\n  return <MultiCursorBuilder />;\n}",
+      "files": [
+        "MultiCursorBuilder.preact.tsx",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/multi-cursor-builder/vanilla.json",
+      "component": "MultiCursorBuilder",
+      "dependencies": [],
+      "usage": "import { mount } from \"./MultiCursorBuilder\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "MultiCursorBuilder.ts",
+        "MultiCursorBuilderEngine.js",
+        "motion-runtime.ts",
+        "MultiCursorBuilderEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Scroll inside the demo to build or undo the page. Pause or replay with the toolbar; focus the scroll area and press Space/P to pause or R to restart.",
+    "zh": "在演示内滚动，继续或撤回页面搭建。工具条可暂停、重播；聚焦滚动区后，空格或 P 暂停，R 重新开始。"
+  }
+}

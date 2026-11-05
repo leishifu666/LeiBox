@@ -1,5 +1,18 @@
 [
   {
+    "slug": "multi-cursor-builder",
+    "href": "/docs/animations/multi-cursor-builder",
+    "name": "Multi Cursor Page Builder",
+    "category": "Scroll animation",
+    "description": "Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.",
+    "keywords": "多光标 页面 搭建 自动 排版 选框 滚动 回退 字体 Figma cursor builder page scroll construction",
+    "preview": "/assets/components/multi-cursor-builder.png",
+    "sourceFile": "多光标页面搭建.html",
+    "canvasWidth": 1120,
+    "canvasHeight": 760,
+    "responsive": true
+  },
+  {
     "slug": "stacked-metadata",
     "href": "/docs/animations/stacked-metadata",
     "name": "Stacked Metadata Tags",

@@ -37,6 +37,7 @@ import { verifyParticleTextureTrio } from './test-particle-texture-trio.mjs';
 import { verifyShaderFlood } from './test-shader-flood.mjs';
 import { verifyTransferGlow } from './test-transfer-glow.mjs';
 import { verifyStackedMetadata } from './test-stacked-metadata.mjs';
+import { verifyMultiCursorBuilder } from './test-multi-cursor-builder.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -92,7 +93,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 let activePage,activeItem;
 try{
  for(const item of selected){
-  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
+  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='multi-cursor-builder'||item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   activePage=page;activeItem=item;page.setDefaultTimeout(10000);
   if(item.slug==='inline-text-morph')await page.addInitScript(()=>{
@@ -112,6 +113,7 @@ try{
    if(item.framework==='react')await page.screenshot({path:path.join(OUT,`${item.slug}-native-${width}.png`)});
   }
   await page.setViewportSize({width:1200,height:1000});
+  if(item.slug==='multi-cursor-builder')await verifyMultiCursorBuilder(page,item,ROOT,OUT);
   if(item.slug==='stacked-metadata')await verifyStackedMetadata(page,item,ROOT,OUT);
   if(item.slug==='transfer-glow')await verifyTransferGlow(page,item,ROOT,OUT);
   if(item.slug==='shader-flood')await verifyShaderFlood(page,item,ROOT,OUT);
@@ -418,7 +420,17 @@ try{
    assert.equal(await page.locator('#demo .sm-scene').getAttribute('data-active'),'-1','metadata expansion is instance-local');
    await page.evaluate(()=>{window.__update({expanded:2});window.__stackedAnimations=[...document.querySelectorAll('[data-motion-surface]')].flatMap(n=>n.shadowRoot.getAnimations());});
   }
+  if(item.slug==='multi-cursor-builder'){
+   await page.locator('#second .mc-scene[data-ready=true]').waitFor();
+   assert.equal(await page.evaluate(()=>[...document.fonts].filter(f=>f.family.startsWith('LeiBoxBuilder')).length),6,'two instances share six leased fonts');
+   await page.evaluate(()=>{window.__update({playing:false},'second');window.__update({playing:true});window.__builderDetached=[...document.querySelectorAll('[data-motion-surface]')].map(n=>n.shadowRoot.querySelector('canvas'));});
+   await page.waitForTimeout(100);const frozen=await page.locator('#second .mc-scene').getAttribute('data-frame');await page.waitForTimeout(120);assert.equal(await page.locator('#second .mc-scene').getAttribute('data-frame'),frozen,'pause is instance-local');
+  }
   await page.evaluate(()=>window.__unmount('second'));await page.evaluate(()=>window.__unmount());assert.equal(await page.locator('[data-motion-surface]').count(),0);
+  if(item.slug==='multi-cursor-builder'){
+   assert.equal(await page.evaluate(()=>[...document.fonts].filter(f=>f.family.startsWith('LeiBoxBuilder')).length),0,'last unmount releases its font faces');
+   assert(await page.evaluate(()=>window.__builderDetached.every(c=>c.width===0&&c.height===0)),'unmount releases canvas backing stores');
+  }
   if(item.slug==='stacked-metadata')assert(await page.evaluate(()=>window.__stackedAnimations.every(a=>a.playState!=='running')),'unmount cancels in-flight pill transitions');
   if(item.slug==='spider-music-player'){
    const frozen=await page.evaluate(()=>window.__smDetached.map(node=>node.getAttribute('style')));await page.waitForTimeout(150);

@@ -7,6 +7,16 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'multi-cursor-builder') {
+      const ready=()=>{
+        const root=document.querySelector('#multi-cursor-builder [data-motion-surface]')?.shadowRoot;
+        if(!root||document.body.dataset.motionReady!=='true'||Number(root.querySelector('.art')?.style.opacity)!==1){later(ready,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));
+        const port=root.querySelector('.mc-port');let step=0;
+        later(()=>repeat(()=>{const positions=[650,1350,2100,2800,0];port.scrollTo({top:positions[step++%positions.length],behavior:'smooth'});},3200),2200);
+      };
+      ready();return;
+    }
     if (slug === 'stacked-metadata') {
       const ready=()=>{
         const root=document.querySelector('#stacked-metadata [data-motion-surface]')?.shadowRoot;
@@ -446,7 +456,7 @@ export function interactionPreviewCss(slug: string) {
 }
 
 export function interactionPreviewDocument(source: string, slug: string) {
-  if (slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  if (slug === "multi-cursor-builder" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = PLAYER.replace('__SLUG__', JSON.stringify(slug));
   const style = `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares

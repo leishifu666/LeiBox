@@ -33,7 +33,8 @@ try{
  await run(process.execPath,['--test','scripts/performance-budget.test.mjs','scripts/leibox-skill.test.mjs','scripts/collection-cli.test.mjs'],{cwd:source});
  await run(config.python||'python',['-m','unittest','discover','-s','scripts/deploy','-p','test_*.py'],{cwd:source});
  const baseline=await run(config.ssh||'ssh',[...ssh,'manifest'],{capture:true});JSON.parse(baseline);await fs.writeFile(path.join(folder,'baseline.json'),baseline);
- await run(config.python||'python',[path.join(root,'scripts/deploy/package.py'),source,folder,commit,release]);
+ // Packaging rules must come from the same committed snapshot as the site.
+ await run(config.python||'python',[path.join(source,'scripts/deploy/package.py'),source,folder,commit,release]);
  if(dry){console.log(`Prepared and checked: ${folder}`);process.exit(0);}
  if(await run('git',['rev-parse','HEAD'],{capture:true})!==commit)throw new Error('HEAD changed during the build; rerun deployment');
  await run('git',['push','origin','main']);

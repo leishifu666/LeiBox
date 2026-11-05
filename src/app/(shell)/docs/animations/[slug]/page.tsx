@@ -27,15 +27,24 @@ export default async function MotionPage({params}:Props){
       beforeInstall={<section className="mt-8" aria-label="Demo">
         <h2 className="text-lg font-semibold tracking-[-0.01em]"><T>Demo</T></h2>
         <p className="mt-2 text-[13px] text-muted-foreground"><T>{entry.instructions!}</T></p>
-        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "stacked-metadata" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
+        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "multi-cursor-builder" || slug === "stacked-metadata" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
       </section>}
       afterCode={<>{doc.afterCode}<div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-        <a href={"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
+        <a href={entry.originalHtml??"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.originalHtml?"Download original HTML":entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
+        {slug === "multi-cursor-builder" ? <a href="/motion/multi-cursor-builder.html" download="多光标页面搭建-独立演示.html" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download standalone HTML</T></a> : null}
         {slug === "deep-agent-composer" || slug === "reasoning-effort-slider" ? <a href="/motion/deep-agent-original-source.txt" download="DeepAgent-原版源码.txt" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download original Deep Agent source</T></a> : null}
         {entry.suppliedSource?<a href={entry.suppliedSource} download="GlassFolder.tsx" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
         {entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "multi-cursor-builder" ? [
+          {name:"options.playing",type:"boolean",defaultValue:"true",description:"Play or pause the local construction and cursor motion."},
+          {name:"options.speed",type:"number",defaultValue:"1",description:"Construction speed multiplier, from 0.25 to 2."},
+          {name:"options.skipIntro",type:"boolean",defaultValue:"false",description:"Start directly with page construction, skipping the orbit and frame intro."},
+          {name:"options.showToolbar",type:"boolean",defaultValue:"true",description:"Show the tool status, scroll percentage, pause and replay controls."},
+          {name:"options.onPhaseChange",type:'(phase: "intro" | "burst" | "board" | "build") => void',description:"Called when the animation changes between intro, burst, board and build."},
+          {name:"options.onReplay",type:"() => void",description:"Called only when the user replays with the button or keyboard."},
+        ] : []),
         ...(slug === "stacked-metadata" ? [
           {name:"options.heading",type:"string",defaultValue:'"In Progress"',description:"List heading."},
           {name:"options.items",type:'{ title: string; priority: string; date: string; assignee: string; team?: boolean }[]',description:"One to twelve local task rows; an empty list restores the defaults."},

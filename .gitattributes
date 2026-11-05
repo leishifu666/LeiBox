@@ -1,0 +1,3 @@
+# Preserve the supplied HTML byte-for-byte in Git archives and downloads.
+/src/lib/motion-core/MultiCursorBuilder/original.html -text
+/public/motion/multi-cursor-builder-original.html -text

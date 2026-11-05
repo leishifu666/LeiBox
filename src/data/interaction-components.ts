@@ -1,3 +1,4 @@
+import { MULTI_CURSOR_BUILDER_PROMPT } from "./multi-cursor-builder.mjs";
 import { STACKED_METADATA_PROMPT } from "./stacked-metadata.mjs";
 import { TRANSFER_GLOW_PROMPT } from "./transfer-glow.mjs";
 import { SHADER_FLOOD_PROMPT } from "./shader-flood.mjs";
@@ -50,6 +51,7 @@ export interface MotionEntry {
   referenceNotes?: string;
   referenceLicense?: string;
   codeSource?: string;
+  originalHtml?: string;
   responsive?: boolean;
   renderers?: string[];
   suppliedSource?: string;
@@ -57,6 +59,17 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug:"multi-cursor-builder",href:"/docs/animations/multi-cursor-builder",name:"Multi Cursor Page Builder",category:"Scroll animation",
+    description:"Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.",
+    keywords:"多光标 页面 搭建 自动 排版 选框 滚动 回退 字体 Figma cursor builder page scroll construction",
+    preview:"/assets/components/multi-cursor-builder.png",sourceFile:"多光标页面搭建.html",originalHtml:"/motion/multi-cursor-builder-original.html",canvasWidth:1120,canvasHeight:760,responsive:true,recreatedHtml:true,
+    instructions:"Scroll inside the demo to build or undo the page. Pause or replay with the toolbar; focus the scroll area and press Space/P to pause or R to restart.",
+    prompt:MULTI_CURSOR_BUILDER_PROMPT,referenceAuthor:"User-provided HTML",
+    referenceNotes:"Native DOM/Canvas2D port of the supplied lei_figma.html, retaining twelve cursors, all six block operations, inline images, text, typography popup, selection/spacing guides and reversible scheduling. LeiBox vectors replace the placeholder L. Local improvements include native scrolling, capped raster/paint frequency, batched fractional geometry, scrollbar stability, exact canvas mapping, instance-scoped scroll/keyboard/anchors, controls, offscreen pause and font lifetime management. No public original author URL was supplied or independently verified.",
+    referenceLicense:"Supplied HTML used with the user's instruction to collect it. Image provenance and original upstream code license were not supplied or independently verified. Font copyright and SIL OFL notices are retained. LeiBox vector branding belongs to its owner; no third-party attribution or redistribution permission is invented.",
+    codeSource:"User-supplied HTML with local performance, geometry and native lifecycle adaptations. Six native framework wrappers share the same DOM/Canvas2D core; no iframe implementation or remote runtime assets.",
+  },
   {
     slug:"stacked-metadata",href:"/docs/animations/stacked-metadata",name:"Stacked Metadata Tags",category:"List interaction",
     description:"Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.",
