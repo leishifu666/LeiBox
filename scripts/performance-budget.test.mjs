@@ -72,10 +72,11 @@ test('retired video assets are not published',async()=>{ assert.deepEqual(media.
 
 test('the album card stages the full cover selection behind a small versioned preview',async()=>{
  const full=await read('out/motion/album-cover-tunnel.html');
- const mediaDir='out/_next/static/media';
- const file=(await fs.readdir(path.join(root,mediaDir))).find(name=>/^album-cover-tunnel-preview\.[\w-]+\.html$/.test(name));
- assert(file,'The bundled preview must have a versioned URL');
- const preview=await read(`${mediaDir}/${file}`);
+ const manifest=JSON.parse(await read('public/site-motion-manifest.json'));
+ const item=manifest.components['album-cover-tunnel'];
+ const document=await read('out'+item.previewUrl);
+ assert.match(item.previewUrl,/-[a-f0-9]{24}\.html$/);
+ const preview=document+(await Promise.all(item.resources.filter(url=>url.endsWith('.js')).map(url=>read('out'+url)))).join('\n');
  const coverCount=html=>[...html.matchAll(/data:image\/webp;base64,/g)].length;
  assert(coverCount(full)>0);
  assert.equal(coverCount(preview),coverCount(full));
@@ -86,6 +87,25 @@ test('the album card stages the full cover selection behind a small versioned pr
   const body=await read('out'+url);
   assert.equal(createHash('sha256').update(body).digest('hex').slice(0,12),hash);
  }
+});
+
+test('website delivery budgets include scripts and fonts, not just the small HTML shell',async()=>{
+ const manifest=JSON.parse(await read('public/site-motion-manifest.json'));
+ for(const [slug,item]of Object.entries(manifest.components)){
+  const html=await read('out'+item.documentUrl);
+  assert(gzipSync(html).length<16_000,`${slug}: HTML shell exceeds 16 KB gzip`);
+  assert(!html.includes(';base64,'),`${slug}: binary content belongs outside the initial HTML`);
+  assert(item.initialGzipBytes<1_000_000,`${slug}: initial delivery exceeds 1 MB gzip`);
+  for(const url of [item.documentUrl,...item.resources]){
+   const bytes=await fs.readFile(path.join(root,'out',url));
+   assert(url.includes(createHash('sha256').update(bytes).digest('hex').slice(0,24)),`${slug}: invalid resource hash`);
+  }
+ }
+ const paper=manifest.components['crumpled-paper'];
+ assert(paper.totalGzipBytes<150_000,'Paper document, CSS and JS together exceed 150 KB gzip');
+ assert(paper.totalGzipBytes<paper.originalGzipBytes*.25,'Paper delivery must shrink by at least 75%');
+ assert(manifest.components['album-cover-tunnel'].initialGzipBytes<600_000);
+ assert.deepEqual(await fs.readFile(path.join(root,'out',manifest.chineseFontStylesheet)),await fs.readFile(path.join(root,'public/fonts/misans.css')),'Original MiSans CSS and notices must be byte-identical');
 });
 
 test('the homepage points to the demo bundle without embedding it in its route data',async()=>{
@@ -99,7 +119,9 @@ test('the guided homepage preview shares the downloadable native engine',async()
  const site=await read('src/lib/motion-core/site-previews/glass-folder.generated.js');
  const downloadable=await read('public/motion-frameworks/glass-folder/react/GlassFolderEngine.js');
  const source=site.slice(site.indexOf('\n')+1).replaceAll('from "../motion-runtime"','from "./motion-runtime"');
- assert.equal(source,downloadable,'the website preview must stay in sync with the delivered component');
+ // Windows checkouts can serialize CSS newlines as \\r\\n inside JS strings.
+ const normalized=value=>value.replaceAll('\r\n','\n').replaceAll('\\r\\n','\\n');
+ assert.equal(normalized(source),normalized(downloadable),'the website preview must stay in sync with the delivered component');
 });
 
 test('concurrent code reads share one fetch and failed requests remain retryable',async()=>{

@@ -13,7 +13,7 @@ const port = Number(process.env.PORT || 3000);
 // Enable only behind a local proxy that overwrites these forwarded headers.
 const trustProxy = process.env.TRUST_PROXY === 'true';
 const contact = createContactHandler();
-const mime = {'.html':'text/html; charset=utf-8','.txt':'text/x-component; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.avif':'image/avif','.ico':'image/x-icon','.woff2':'font/woff2','.mp4':'video/mp4','.webm':'video/webm','.glb':'model/gltf-binary','.wasm':'application/wasm'};
+const mime = {'.html':'text/html; charset=utf-8','.txt':'text/x-component; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.avif':'image/avif','.ico':'image/x-icon','.woff':'font/woff','.woff2':'font/woff2','.mp4':'video/mp4','.webm':'video/webm','.glb':'model/gltf-binary','.wasm':'application/wasm'};
 const json=(res,status,body)=>{res.writeHead(status,{'content-type':'application/json; charset=utf-8','cache-control':'no-store'});res.end(JSON.stringify(body));};
 const server=http.createServer(async(req,res)=>{
  try{
@@ -60,8 +60,20 @@ const server=http.createServer(async(req,res)=>{
   let file,stat;for(const candidate of candidates){try{const s=await fsp.stat(candidate);if(s.isFile()){file=candidate;stat=s;break;}}catch{}}
   if(!file){file=path.join(root,'404.html');try{stat=await fsp.stat(file);}catch{res.writeHead(503,{'content-type':'text/plain; charset=utf-8'});return res.end('Run npm run build before npm start.');}res.statusCode=404;}
   res.setHeader('content-type',mime[path.extname(file)]||'application/octet-stream');
-  const immutable=file.includes(`${path.sep}_next${path.sep}static${path.sep}`)||file.includes(`${path.sep}assets${path.sep}optimized${path.sep}`)||file.includes(`${path.sep}fonts${path.sep}misans${path.sep}`)||(/[/\\]doc-assets[/\\][a-f0-9]{24}\.json$/.test(file));
-  res.setHeader('cache-control',immutable?'public,max-age=31536000,immutable':'no-cache');
+  const relative=path.relative(root,file).split(path.sep).join('/');
+  const runtime=/^assets\/motion\/(?:[\w-]+-)?[a-f0-9]{24}\.(?:html|js|css|woff2?)$/.test(relative);
+  const immutable=runtime||relative.startsWith('_next/static/')||relative.startsWith('assets/optimized/')||relative.startsWith('fonts/misans/')||/^doc-assets\/[a-f0-9]{24}\.json$/.test(relative);
+  const mutableStatic=/^(?:assets|landing|motion|fonts)\//.test(relative)||/\.(?:svg|ico|png|webmanifest)$/.test(relative);
+  res.setHeader('cache-control',res.statusCode===404?'no-store':immutable?'public,max-age=31536000,immutable':mutableStatic?'public,max-age=3600':'no-cache');
+  if(runtime)res.setHeader('access-control-allow-origin','*');
+  // Weak validators describe this file version, independently of proxy compression.
+  const etag=`W/"${stat.size.toString(16)}-${stat.mtimeMs.toString(16)}"`;
+  res.setHeader('etag',etag);
+  res.setHeader('last-modified',stat.mtime.toUTCString());
+  const noneMatch=req.headers['if-none-match'];
+  const unchanged=noneMatch?noneMatch.split(',').some(value=>value.trim()==='*'||value.trim().replace(/^W\//,'')===etag.replace(/^W\//,'')):
+   req.headers['if-modified-since']&&Math.floor(stat.mtimeMs/1000)<=Date.parse(req.headers['if-modified-since'])/1000;
+  if(res.statusCode!==404&&unchanged){res.writeHead(304);return res.end();}
   res.setHeader('accept-ranges','bytes');
   const range=req.headers.range?.match(/^bytes=(\d*)-(\d*)$/);
   if(range){const start=range[1]?Number(range[1]):Math.max(0,stat.size-Number(range[2]));const end=range[1]?(range[2]?Math.min(Number(range[2]),stat.size-1):stat.size-1):stat.size-1;

@@ -12,7 +12,11 @@ npm run deploy:server
 
 `public/motion-frameworks` 保留在本地用于生成文档与安装包，不再放入服务器发布清单；线上源码复制使用 `doc-assets`，AI/CLI 安装使用 `ai/packages`。预览方案页也不进入发布包。
 
+2026-11-06 起网站演示使用 `/assets/motion/` 下的哈希资源。仅上传 `out/` 不会更新服务器正在运行的 `scripts/serve-local.mjs`。首次发布性能修复时，需通过管理员通道同步新版服务脚本并在宝塔重启 LeiBox 项目，或先安装 [Nginx 演示资源配置](../../docs/nginx/leibox-motion-static.conf)；完整操作和 CDN 规则见 [修复说明](../../docs/PERFORMANCE-FIX-20261106.md)。发布密钥继续只更新 `out/`。
+
 ## 过期资源和备份
+
+新版清理器还识别 `assets/motion/` 中带 24 位内容哈希的 HTML、JS、CSS 和字体。须通过管理员通道更新服务器的 `leibox-release-cleanup.py` 后才会退休这些文件；同样保留 24 小时宽限、当前清单和两份可回滚备份。
 
 `cleanup.py` 默认只预览；`--apply` 才删除。规则为：构建资源保留至少 24 小时，已识别的发布备份保留最近两次。当前清单和这两次备份恢复时需要的全部文件始终保留，不因文件年龄被删除。只清理 `_next/static` 中已识别的构建文件、`doc-assets` 中的哈希源码包、`assets/optimized` 中已退出清单的哈希 WebP，以及发布历史中已记录并退出清单的 `motion-frameworks` 文件；上传文件、环境配置、证书、管理配置备份和无法识别的文件不纳入清理。
 

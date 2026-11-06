@@ -38,18 +38,27 @@ function writeCache(value: number) {
 }
 
 let inflight: Promise<number | null> | null = null;
+let nextAttemptAt = 0;
+function deferRetry(response?: Response) {
+  const now = Date.now();
+  const retryAfter = Number(response?.headers.get("retry-after")) * 1000;
+  const resetAfter = Number(response?.headers.get("x-ratelimit-reset")) * 1000 - now;
+  const delay = Math.max(60_000, Number.isFinite(retryAfter) ? retryAfter : 0, Number.isFinite(resetAfter) ? resetAfter : 0);
+  nextAttemptAt = now + Math.min(delay, 60 * 60 * 1000);
+}
 
 async function fetchStars(): Promise<number | null> {
+  if (Date.now() < nextAttemptAt) return null;
   inflight ??= (async () => {
     try {
       const res = await fetch(`https://api.github.com/repos/${REPO}`, { cache: "no-cache" });
-      if (!res.ok) return null;
+      if (!res.ok) { deferRetry(res); return null; }
       const data = (await res.json()) as { stargazers_count?: unknown };
       const value = data.stargazers_count;
-      return typeof value === "number" && Number.isSafeInteger(value) && value >= 0
-        ? value
-        : null;
+      if (typeof value === "number" && Number.isSafeInteger(value) && value >= 0) return value;
+      deferRetry(); return null;
     } catch {
+      deferRetry();
       return null;
     } finally {
       setTimeout(() => {
@@ -79,7 +88,7 @@ export function GitHubStars() {
     };
     void refresh();
     const interval = window.setInterval(() => { void refresh(true); }, CACHE_TTL);
-    const onFocus = () => { void refresh(true); };
+    const onFocus = () => { void refresh(); };
     window.addEventListener("focus", onFocus);
     return () => {
       cancelled = true;

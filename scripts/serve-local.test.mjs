@@ -12,7 +12,7 @@ test('exported pages and nested RSC segments resolve',async()=>{
 test('removed playground is unavailable',async()=>{
  assert.equal((await fetch(base+'/playground')).status,404);
 });
-test('retired effect and video URLs no longer resolve',async()=>{for(const url of ['/docs/components/glass','/r/glass-react.json','/assets/fallback-hero.mp4'])assert.equal((await fetch(base+url)).status,404,url);});
+test('restored effect is available while retired distribution and video URLs stay unavailable',async()=>{assert.equal((await fetch(base+'/docs/components/glass')).status,200);for(const url of ['/r/glass-react.json','/assets/fallback-hero.mp4'])assert.equal((await fetch(base+url)).status,404,url);});
 test('newsletter exercises local states without sending to a provider',async()=>{
  for(const [email,status,message] of [['',400,'Please enter your email address.'],['invalid',400,'Please enter a valid email address.'],['preview@example.test',200,undefined]]){
   const r=await fetch(base+'/api/subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email})});assert.equal(r.status,status);const json=await r.json();if(message)assert.equal(json.error,message);else assert.deepEqual(json,{ok:true,localPreview:true});

@@ -1,5 +1,27 @@
 # 性能维护
 
+## 2026-11-06：演示分发与 CDN 缓存
+
+网站演示由 `npm run motion:site` 生成到 `public/assets/motion/`，已接入 `motion:build` 和生产构建。40 个 HTML 演示使用内容哈希地址，HTML、脚本、样式和共享字体可长期缓存；两个原生 React 预览沿用原入口。中文字体 CSS 也使用哈希地址，MiSans 字体字节和许可保持原样。原始 HTML 和六框架源码包继续从原目录生成，网站版本不回写它们。
+
+列表与详情共用 `motion-document.ts`：共享下载、支持有时限的导航交接、最后一个消费者离开时取消、失败重试、最多四个空闲文档缓存。图片按演示尺寸生成；专辑隧道使用已有的渐进纹理加载。预算计算脚本、CSS、字体和后续纹理批次，不以 HTML 壳大小代替整体流量。
+
+腾讯云部署必须同时设置真实服务的缓存头。`public/_headers` 不会自动作用于 Node；新版 `serve-local.mjs` 提供分类缓存、ETag、Last-Modified 和 304。也可安装 [Nginx 静态配置](nginx/leibox-motion-static.conf)，直接服务哈希资源并为沙箱内字体提供 CORS。方案、TDD 证据和上线验收见 [修复说明](PERFORMANCE-FIX-20261106.md)。
+
+```powershell
+npm run build
+npm run test:delivery
+npm run test:performance
+# 另一终端启动 npm start 后：
+$env:TEST_BASE_URL='http://127.0.0.1:3000'
+npm run test:delivery:browser
+npm run test:delivery:site
+npm run test:delivery:bandwidth
+npm run test:delivery:github
+```
+
+以下保留早期记录；其中后续移除的视频、素材及实验脚本不再属于当前首屏流程。
+
 组件页面只把框架名、文件名和内容哈希地址发送给浏览器。静态源码、高亮和完整复制包由 `npm run docs:assets` 生成到 `public/doc-assets/`，已接入 dev/prebuild。代码区接近视口时读取当前文件；切换框架或渲染器时读取所选版本；复制完整页面时才读取所需的其他源码。请求共享最近使用的 24 项缓存，失败可重试，快速切换不会把旧响应显示成新文件。交互预览源码只缓存最近 4 项，预览停止后释放组件持有的源码及生成文档。
 
 重组件卡片、文档侧栏、相邻组件链接及首页组件跑马灯禁用自动路由预取。后续新增组件请保持此约束，避免一次浏览加载整套源码。

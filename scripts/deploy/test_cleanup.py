@@ -13,6 +13,14 @@ sha = lambda data: hashlib.sha256(data).hexdigest()
 
 
 class CleanupTests(unittest.TestCase):
+    def test_content_addressed_motion_assets_are_managed_but_manual_files_are_not(self):
+        for name in ['out/assets/motion/' + 'a' * 24 + '.js',
+                     'out/assets/motion/example-' + 'b' * 24 + '.html',
+                     'out/assets/motion/' + 'c' * 24 + '.woff2']:
+            self.assertTrue(cleanup.build_asset(name), name)
+        for name in ['out/assets/motion/manual.js', 'out/assets/motion/' + 'a' * 24 + '.pem']:
+            self.assertFalse(cleanup.build_asset(name), name)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = pathlib.Path(self.temp.name).resolve()

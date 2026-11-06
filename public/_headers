@@ -1,6 +1,19 @@
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
 
+/assets/motion/*
+  Cache-Control: public,max-age=31536000,immutable
+  Access-Control-Allow-Origin: *
+
+/motion/*
+  Cache-Control: public,max-age=3600
+
+/fonts/misans.css
+  Cache-Control: public,max-age=3600
+
+/landing/*
+  Cache-Control: public,max-age=3600
+
 /assets/community/*
   Cache-Control: public,max-age=86400,stale-while-revalidate=604800
 

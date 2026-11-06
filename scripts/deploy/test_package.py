@@ -16,7 +16,9 @@ class PackageTests(unittest.TestCase):
             target.mkdir()
             (target / 'baseline.json').write_text('{"files":[]}')
             kept = ['out/index.html', 'out/doc-assets/source.json',
-                    'out/ai/packages/example-react.json', 'out/fonts/misans.css']
+                    'out/ai/packages/example-react.json', 'out/fonts/misans.css',
+                    'out/assets/motion/' + 'a' * 24 + '.js',
+                    'out/assets/motion/example-' + 'b' * 24 + '.html']
             omitted = ['out/motion-frameworks/manifest.json',
                        'out/motion-frameworks/example/react/ExampleEngine.js',
                        'out/previews/test.html', 'out/404-preview.html']

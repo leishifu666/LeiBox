@@ -6,6 +6,8 @@ import { interactionPreviewDocument } from "./interaction-preview-player";
 import { optimizedImage } from "@/lib/optimized-image";
 import { sendMotionRenderSize } from "@/lib/motion-render-size";
 import { SiteNativePreview, hasSiteNativePreview, type SitePreviewSlug } from "./site-native-preview";
+import { motionDocuments } from "@/lib/motion-document";
+import { siteMotionUrl } from "@/lib/site-motion";
 
 const ShareInvite = dynamic(() => import("@/lib/ShareInvite/ShareInvite").then(module => module.ShareInvite), { ssr: false });
 const OtpVerification = dynamic(() => import("@/lib/OtpVerification/OtpVerification").then(module => module.OtpVerification), { ssr: false });
@@ -17,26 +19,6 @@ function subscribeMotion(callback: () => void) {
 }
 const readMotion = () => window.matchMedia(MOTION_QUERY).matches;
 const serverMotion = () => true;
-
-// Share one request per preview file. A card that loses hover before the file
-// arrives simply ignores the result instead of aborting, so the next hover (or
-// another card with the same source) reuses it without a second download.
-const previewSources = new Map<string, Promise<string>>();
-const MAX_PREVIEW_SOURCES = 4;
-function loadPreviewSource(source: string) {
-  let request = previewSources.get(source);
-  if (!request) {
-    request = fetch(source).then(response => {
-      if (!response.ok) throw new Error("Preview unavailable");
-      return response.text();
-    });
-    request.catch(() => { if (previewSources.get(source) === request) previewSources.delete(source); });
-  }
-  previewSources.delete(source);
-  previewSources.set(source, request);
-  while (previewSources.size > MAX_PREVIEW_SOURCES) previewSources.delete(previewSources.keys().next().value!);
-  return request;
-}
 
 function NativePreview({ slug, onReady }: { slug: string; onReady: () => void }) {
   const root = useRef<HTMLDivElement>(null);
@@ -143,6 +125,13 @@ export function InteractionPreview({ slug, poster, source, width, height, active
     const blur = (event: FocusEvent) => {
       if (!card.contains(event.relatedTarget as Node | null)) { focused = false; update(); }
     };
+    const navigate = (event: MouseEvent | KeyboardEvent) => {
+      if (event instanceof KeyboardEvent && event.key !== "Enter") return;
+      if (event instanceof MouseEvent && event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]");
+      if (link && link.origin === location.origin && link.pathname.endsWith(`/${slug}`)) motionDocuments.prepareNavigation(siteMotionUrl(slug));
+    };
     const intersection = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: .05 });
     const resize = new ResizeObserver(([entry]) => setSize({ width: entry.contentRect.width, height: entry.contentRect.height }));
     const visibility = () => setPageVisible(!window.document.hidden);
@@ -152,6 +141,8 @@ export function InteractionPreview({ slug, poster, source, width, height, active
     card.addEventListener("pointerleave", leave);
     card.addEventListener("focusin", focus);
     card.addEventListener("focusout", blur);
+    card.addEventListener("pointerdown", navigate, true);
+    card.addEventListener("keydown", navigate, true);
     return () => {
       window.clearTimeout(hoverTimer);
       intersection.disconnect(); resize.disconnect();
@@ -160,8 +151,10 @@ export function InteractionPreview({ slug, poster, source, width, height, active
       card.removeEventListener("pointerleave", leave);
       card.removeEventListener("focusin", focus);
       card.removeEventListener("focusout", blur);
+      card.removeEventListener("pointerdown", navigate, true);
+      card.removeEventListener("keydown", navigate, true);
     };
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     if (!active || !native) return;
@@ -172,15 +165,13 @@ export function InteractionPreview({ slug, poster, source, width, height, active
   useEffect(() => {
     if (!active || !source || siteSlug) return;
     let current = true;
-    const previewSource = source === "/motion/album-cover-tunnel.html"
-      ? new URL("../../../public/motion/album-cover-tunnel-preview.html", import.meta.url).href
-      : source;
-    loadPreviewSource(previewSource).then(
+    const lease = motionDocuments.acquire(siteMotionUrl(slug, true));
+    lease.promise.then(
       text => { if (current) setHtml(text); },
       () => { /* Retain the poster if the source cannot be loaded. */ },
     );
-    return () => { current = false; setHtml(""); };
-  }, [active, source, siteSlug]);
+    return () => { current = false; setHtml(""); lease.release(); };
+  }, [active, source, siteSlug, slug]);
 
   return (
     <div ref={root} aria-hidden="true" data-motion-preview={slug} data-preview-state={ready ? "playing" : "poster"} className="pointer-events-none relative size-full overflow-hidden bg-[#f4f4f4]">

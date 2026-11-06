@@ -13,10 +13,12 @@ import time
 ROOT = pathlib.Path('/opt/Project/leibox')
 POLICY = {'assetGraceHours': 24, 'keepBackups': 2}
 ASSET_PREFIXES = ('out/_next/static/', 'out/doc-assets/',
-                  'out/assets/optimized/', 'out/motion-frameworks/')
+                  'out/assets/optimized/', 'out/assets/motion/', 'out/motion-frameworks/')
 
 
 def build_asset(name):
+    if name.startswith('out/assets/motion/'):
+        return re.fullmatch(r'out/assets/motion/(?:[a-z0-9-]+-)?[a-f0-9]{24}\.(?:html|js|css|woff2?)', name) is not None
     if name.startswith('out/assets/optimized/'):
         return re.fullmatch(r'out/assets/optimized/[\w-]+-[a-f0-9]{12}-\d+\.webp', name) is not None
     if name.startswith('out/motion-frameworks/'):

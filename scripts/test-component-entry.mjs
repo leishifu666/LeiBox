@@ -126,10 +126,10 @@ try{
     const page=await pageFor(width);await collection(page);
     await page.screenshot({path:path.join(output,`${width}-listing.png`)});
     const check=await enter(page,'spider-music-player',{screenshots:true});
-    const demo=page.frameLocator('iframe[src^="/motion/"]');
+    const demo=page.frameLocator('section[aria-label="Demo"] iframe');
     await expect(demo.locator('.sm-scene')).toHaveAttribute('data-ready','true');
     const button=demo.locator('[data-action=play]'),label=await button.getAttribute('aria-label');
-    const outer=await page.locator('iframe[src^="/motion/"]').boundingBox();
+    const outer=await page.locator('section[aria-label="Demo"] iframe').boundingBox();
     const local=await button.evaluate(n=>({r:n.getBoundingClientRect().toJSON(),width:innerWidth}));
     const scale=outer.width/local.width;
     await page.mouse.click(outer.x+(local.r.x+local.r.width/2)*scale,outer.y+(local.r.y+local.r.height/2)*scale);
