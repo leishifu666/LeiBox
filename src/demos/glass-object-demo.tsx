@@ -37,7 +37,7 @@ const CONTROLS = {
   depth: scrub("Depth", 0.1, { min: 0.04, max: 0.8, step: 0.01 }),
   bevel: scrub("Bevel", 1, { min: 0, max: 1, step: 0.05 }),
   environmentIntensity: scrub("Lighting", 1, { min: 0, max: 3, step: 0.05 }),
-  scale: scrub("Scale", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
+  scale: scrub("Object size", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
   xOffset: scrub("X offset", 0, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   yOffset: scrub("Y offset", 0, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   floatIntensity: scrub("Float", 1, { min: 0, max: 6, step: 0.1, decimals: 1 }),

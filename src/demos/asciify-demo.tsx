@@ -20,7 +20,7 @@ const CONTROLS = {
   ]),
   radius: scrub("Radius", 0.4, { min: 0.1, max: 0.8, step: 0.01 }),
   softness: scrub("Softness", 1, { min: 0, max: 1, step: 0.05 }),
-  scale: scrub("Scale", 2, { min: 1, max: 6, step: 0.5, decimals: 1 }),
+  scale: scrub("Character scale", 2, { min: 1, max: 6, step: 0.5, decimals: 1 }),
   spacing: scrub("Spacing", 1, { min: 0, max: 3, step: 1, decimals: 0 }),
   backgroundOpacity: scrub("Bg opacity", 0, { min: 0, max: 1, step: 0.05 }),
   contrast: scrub("Contrast", 1, { min: 0.5, max: 2, step: 0.05 }),

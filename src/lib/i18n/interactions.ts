@@ -1,5 +1,8 @@
 export const interactionTranslations: Record<string, string> = {
   "Orbit 404 Page":"组件环游 404",
+  "ERROR 404":"404 错误",
+  "404 EXPLORATIONS":"404 设计探索",
+  "EVERY GOOD IDEA STARTS SOMEWHERE":"每个好点子都有一个起点",
   "Page template":"页面模板",
   "A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.":"把组件预览排成环形轨道的 404 页面。悬停或聚焦卡片时暂停转动，选中卡片即可打开对应组件。",
   "Hover over a card or focus it with Tab to pause the orbit. Select it to view the component.":"悬停在卡片上，或用 Tab 聚焦卡片，即可暂停转动。选中卡片可查看对应组件。",

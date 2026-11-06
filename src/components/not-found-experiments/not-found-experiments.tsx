@@ -40,15 +40,15 @@ export function NotFoundExperiments({ items }: { items: NotFoundPreviewItem[] })
   return <NotFoundDesign key={design} design={design} typography={typography} items={items} />;
 }
 
-export function OrbitNotFound({ items, embedded = false }: { items: NotFoundPreviewItem[]; embedded?: boolean }) {
-  return <NotFoundDesign design="orbit" typography="reference" items={items} embedded={embedded} />;
+export function OrbitNotFound({ items, preview = false }: { items: NotFoundPreviewItem[]; preview?: boolean }) {
+  return <NotFoundDesign design="orbit" typography="reference" items={items} preview={preview} />;
 }
 
-function NotFoundDesign({ design, typography, items, embedded = false }: {
+function NotFoundDesign({ design, typography, items, preview = false }: {
   design: "brand" | "orbit";
   typography: "reference" | "site";
   items: NotFoundPreviewItem[];
-  embedded?: boolean;
+  preview?: boolean;
 }) {
   const { locale, t } = useLanguage();
   const zh = locale === "zh";
@@ -57,19 +57,18 @@ function NotFoundDesign({ design, typography, items, embedded = false }: {
   const rotation = useRef<gsap.core.Tween | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
   const [focused, setFocused] = useState<number | null>(null);
-  const [visible, setVisible] = useState(!embedded);
+  const [visible, setVisible] = useState(!preview);
   const reducedMotion = useSyncExternalStore(subscribeMotion, readMotion, serverMotion);
   const active = hovered ?? focused;
   const stopped = active !== null || reducedMotion || !visible;
-  const OrbitContent = embedded ? "div" : "main";
-  const OrbitHeading = embedded ? "h3" : "h1";
+  const target = preview ? "_top" : undefined;
 
   useEffect(() => {
-    if (!embedded || !root.current) return;
+    if (!preview || !root.current) return;
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
     observer.observe(root.current);
     return () => observer.disconnect();
-  }, [embedded]);
+  }, [preview]);
 
   useEffect(() => {
     if (!root.current || reducedMotion) return;
@@ -93,10 +92,10 @@ function NotFoundDesign({ design, typography, items, embedded = false }: {
   }, [stopped, reducedMotion]);
 
   return (
-    <div ref={root} className={`${styles.page} ${orbit ? styles.orbit : styles.brand} ${embedded ? styles.embedded : ""}`} data-404-design={design} data-404-font={typography}>
+    <div ref={root} className={`${styles.page} ${orbit ? styles.orbit : styles.brand}`} data-404-design={design} data-404-font={typography}>
       <header className={styles.header}>
-        <Link href="/" prefetch={embedded ? false : undefined} aria-label={zh ? "LeiBox 首页" : "LeiBox home"} className={styles.logoLink}>
-          <SiteLogo navigation={!embedded} className={styles.wordmark} />
+        <Link href="/" target={target} prefetch={preview ? false : undefined} aria-label={zh ? "LeiBox 首页" : "LeiBox home"} className={styles.logoLink}>
+          <SiteLogo navigation className={styles.wordmark} />
         </Link>
         {!orbit && <nav aria-label={zh ? "404 设计对比" : "404 design comparison"} className={styles.switcher}>
           <Link href="/404-preview?design=brand" replace prefetch={false} aria-current={!orbit ? "page" : undefined}>
@@ -107,23 +106,23 @@ function NotFoundDesign({ design, typography, items, embedded = false }: {
           </Link>
         </nav>}
         {orbit ? <div className={styles.themeControls}>
-          <span className={styles.headerNote}>ERROR 404</span>
+          <span className={styles.headerNote}><T>ERROR 404</T></span>
           <ThemeToggle />
-        </div> : <span className={styles.headerNote}>404 EXPLORATIONS</span>}
+        </div> : <span className={styles.headerNote}><T>404 EXPLORATIONS</T></span>}
       </header>
 
       {orbit ? (
-        <OrbitContent className={styles.orbitMain}>
-          <OrbitHeading className={styles.srOnly}>404 · <T>Nothing here yet.</T></OrbitHeading>
+        <main className={styles.orbitMain}>
+          <h1 className={styles.srOnly}>404 · <T>Nothing here yet.</T></h1>
           <div className={styles.orbitComposition}>
-            <span aria-hidden="true" className={`${styles.expressiveFour} ${styles.leftFour}`} data-arrive>4</span>
-            <span aria-hidden="true" className={`${styles.expressiveFour} ${styles.rightFour}`} data-arrive>4</span>
+            <span aria-hidden="true" className={`${styles.expressiveFour} ${styles.leftFour}`}><span data-arrive>4</span></span>
+            <span aria-hidden="true" className={`${styles.expressiveFour} ${styles.rightFour}`}><span data-arrive>4</span></span>
             <div className={styles.orbitStage}>
               <div className={styles.orbitRing} data-orbit-ring data-paused={stopped}>
                 {items.map((item, index) => (
                   <div key={item.slug} className={styles.orbitPosition} style={{ "--angle": `${index * 360 / items.length}deg` } as CSSProperties}>
                     <Link
-                      href={item.href} prefetch={false} data-preview-card data-orbit-card
+                      href={item.href} target={target} prefetch={false} data-preview-card data-orbit-card
                       aria-label={`${t(item.name)} · ${zh ? "查看组件" : "View component"}`}
                       className={styles.componentCard} data-active={active === index}
                       onPointerEnter={(event) => { if (event.pointerType !== "touch") setHovered(index); }}
@@ -138,14 +137,16 @@ function NotFoundDesign({ design, typography, items, embedded = false }: {
                   </div>
                 ))}
               </div>
-              <div className={styles.orbitCenter} data-arrive>
-                <p className={styles.eyebrow}>ERROR 404</p>
-                <p className={styles.orbitTitle}>{zh ? "这一页，走丢了" : "Page not found"}</p>
-                <Link href="/" prefetch={embedded ? false : undefined} className={styles.orbitHome}><T>Back home</T><ArrowUpRight size={14} aria-hidden="true" /></Link>
+              <div className={styles.orbitCenter}>
+                <div data-arrive>
+                  <p className={styles.eyebrow}><T>ERROR 404</T></p>
+                  <p className={styles.orbitTitle}>{zh ? "这一页，走丢了" : "Page not found"}</p>
+                  <Link href="/" target={target} prefetch={preview ? false : undefined} className={styles.orbitHome}><T>Back home</T><ArrowUpRight size={14} aria-hidden="true" /></Link>
+                </div>
               </div>
             </div>
           </div>
-        </OrbitContent>
+        </main>
       ) : (
         <main className={styles.brandMain}>
           <p className={styles.brandIntro} data-arrive><T>The page you are looking for does not exist or has moved.</T></p>
@@ -165,7 +166,7 @@ function NotFoundDesign({ design, typography, items, embedded = false }: {
 
       {!orbit && <footer className={styles.footer}>
         <span>© LEIBOX</span>
-        <span className={styles.footerCenter}>EVERY GOOD IDEA STARTS SOMEWHERE</span>
+        <span className={styles.footerCenter}><T>EVERY GOOD IDEA STARTS SOMEWHERE</T></span>
         <span className={styles.footerIndex}>01 <span>/</span> 02 <ArrowDownRight size={14} aria-hidden="true" /></span>
       </footer>}
     </div>

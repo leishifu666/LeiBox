@@ -4,10 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 
 import { T } from "@/components/common/language-provider";
 import { ComponentDocHeader, MotionDemoSection } from "@/components/docs/component-doc-chrome";
+import { OrbitNotFoundPreview } from "@/components/docs/orbit-not-found-preview";
 import { Footer } from "@/components/landing/footer";
-import { OrbitNotFound } from "@/components/not-found-experiments/not-found-experiments";
 import { ORBIT_NOT_FOUND } from "@/data/interaction-previews";
-import { getNotFoundItems } from "@/lib/not-found-items";
 
 export const metadata: Metadata = {
   title: "组件环游 404",
@@ -25,9 +24,7 @@ export default function OrbitNotFoundDoc() {
           tags={[ORBIT_NOT_FOUND.category, "Next.js", "GSAP"]}
         />
         <MotionDemoSection instructions="Hover over a card or focus it with Tab to pause the orbit. Select it to view the component.">
-          <div data-component-demo-panel className="overflow-hidden rounded-xl border border-border/60">
-            <OrbitNotFound items={getNotFoundItems()} embedded />
-          </div>
+          <OrbitNotFoundPreview />
           <div className="mt-3 flex justify-center">
             <Link href="/demos/orbit-not-found" prefetch={false} className="inline-flex items-center gap-1.5 rounded px-1 py-1 text-xs text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2">
               <T>Open full preview</T><ArrowUpRight aria-hidden className="size-3.5" />

@@ -48,7 +48,7 @@ const CONTROLS = {
     step: 0.1,
     decimals: 1,
   }),
-  scale: scrub("Scale", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
+  scale: scrub("Object size", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
   xOffset: scrub("X offset", 0, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   yOffset: scrub("Y offset", -0.2, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   floatIntensity: scrub("Float", 1, { min: 0, max: 6, step: 0.1, decimals: 1 }),

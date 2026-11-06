@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function OrbitNotFoundDemo() {
-  return <OrbitNotFound items={getNotFoundItems()} />;
+  return <OrbitNotFound items={getNotFoundItems()} preview />;
 }

@@ -50,7 +50,7 @@ const CONTROLS = {
   spring: scrub("Spring", 1, { min: 0.1, max: 4, step: 0.05 }),
   damping: scrub("Damping", 0.35, { min: 0, max: 1, step: 0.02 }),
   drift: scrub("Drift", 0.6, { min: 0, max: 3, step: 0.1, decimals: 1 }),
-  scale: scrub("Scale", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
+  scale: scrub("Object size", 3, { min: 0.5, max: 6, step: 0.1, decimals: 1 }),
   xOffset: scrub("X offset", 0, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   yOffset: scrub("Y offset", 0, { min: -3, max: 3, step: 0.1, decimals: 1 }),
   floatIntensity: scrub("Float", 2, { min: 0, max: 6, step: 0.1, decimals: 1 }),
