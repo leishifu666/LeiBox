@@ -25,7 +25,7 @@ export const commonTranslations: Record<string, string> = {
   "Pick a component": "选择组件", "Close picker": "关闭组件选择器",
   "Back to Docs": "返回文档", "Back to docs": "返回文档",
   "Privacy policy": "隐私政策", "Privacy Policy": "隐私政策",
-  "Copy to clipboard": "复制到剪贴板", "Copied": "已复制",
+  "Copy to clipboard": "复制到剪贴板", "Copying": "正在复制", "Copied": "已复制",
   "Copy": "复制", "Reset": "重置", "Controls": "参数设置",
   "Copy for AI": "复制给 AI", "Copy code": "复制代码",
   "Copy JSX": "复制 JSX", "Copy source": "复制源码",

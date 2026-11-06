@@ -2,7 +2,7 @@
 import { T as TranslatedText, useLanguage } from "@/components/common/language-provider";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { play } from "cuelume";
-import { Check, ChevronDown, FileText, Sparkles, SquareCode } from "lucide-react";
+import { Check, ChevronDown, FileText, LoaderCircle, Sparkles, SquareCode } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
 import type { CodeContent, MotionPackageRef } from "@/lib/doc-asset-types";
 import { loadDocAsset } from "@/lib/load-doc-asset";
@@ -13,6 +13,11 @@ import { siteUrl } from "@/lib/site-url";
 export interface StandaloneCopyContent { href: string; prompt?: string; promptUrl?: string; code: string; codeLabel: string; markdown: string; bundleUrl?: string }
 interface CopyMenuProps { title: string; standalone: StandaloneCopyContent; motionPackages?: MotionPackageRef[] }
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+const copyFeedbackLabels = {
+  copying: "Copying",
+  copied: "Copied",
+  failed: "Copy failed, try again",
+};
 
 function OpenAiIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -39,8 +44,10 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
   const docsUrl = siteUrl(standalone.href);
   const promptUrl = motionPackage?.promptUrl ?? standalone.promptUrl;
   const aiPrompt = motionPackage?.prompt ?? standalone.prompt ?? `Help me use the ${title} example from LeiBox. Reference: ${docsUrl}${promptUrl ? `\nRead the complete recreation specification: ${siteUrl(promptUrl)}` : ""}`;
-  const [open, setOpen] = useState(false), [copiedId, setCopiedId] = useState<string | null>(null), [failedId, setFailedId] = useState<string | null>(null);
-  const rootRef = useRef<HTMLDivElement | null>(null), timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [open, setOpen] = useState(false);
+  const [feedback, setFeedback] = useState<{ id: string; status: keyof typeof copyFeedbackLabels } | null>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const copyInFlight = useRef(false);
   useEffect(() => {
     if (!open) return;
     const pointer = (event: PointerEvent) => { if (!rootRef.current?.contains(event.target as Node)) setOpen(false); };
@@ -48,22 +55,26 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
     document.addEventListener("pointerdown", pointer); document.addEventListener("keydown", key);
     return () => { document.removeEventListener("pointerdown", pointer); document.removeEventListener("keydown", key); };
   }, [open]);
-  useEffect(() => () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); }, []);
-  const copyText = async (id: string, text: string | Promise<string>) => {
-    try {
-      await writeCopyText(text);
-      setCopiedId(id);
-      setFailedId(null);
-    } catch {
-      setFailedId(id);
-      setCopiedId(null);
-      return;
-    }
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setCopiedId(null);
+  useEffect(() => {
+    if (feedback?.status !== "copied") return;
+    const timeout = setTimeout(() => {
+      setFeedback(null);
       setOpen(false);
     }, 900);
+    return () => clearTimeout(timeout);
+  }, [feedback]);
+
+  const copyItem = async (id: string, getText: () => string | Promise<string>) => {
+    copyInFlight.current = true;
+    setFeedback({ id, status: "copying" });
+    try {
+      await writeCopyText(getText());
+      setFeedback({ id, status: "copied" });
+    } catch {
+      setFeedback({ id, status: "failed" });
+    } finally {
+      copyInFlight.current = false;
+    }
   };
 
 
@@ -78,11 +89,13 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
   ];
   const handleSelect = (item: (typeof items)[number]) => {
     if ("copy" in item.action) {
-      void copyText(item.id, item.action.copy());
+      if (copyInFlight.current) return;
+      void copyItem(item.id, item.action.copy);
     } else {
       window.open(item.action.open, "_blank", "noopener,noreferrer");
       setOpen(false);
     }
+    play("bloom");
   };
 
   return (
@@ -128,24 +141,27 @@ export function CopyMenu({ title, standalone, motionPackages }: CopyMenuProps) {
             className="absolute right-0 top-full z-40 mt-2 w-56 origin-top-right rounded-xl border border-border/70 bg-background p-1 shadow-lg"
           >
             {items.map((item) => {
-              const copied = "copy" in item.action && copiedId === item.id;
-              const Icon = copied ? Check : item.icon;
+              const status = feedback?.id === item.id ? feedback.status : undefined;
+              const copying = status === "copying";
+              const Icon = copying ? LoaderCircle : status === "copied" ? Check : item.icon;
               return (
                 <button
                   key={item.id}
                   role="menuitem"
                   type="button"
-                  onClick={() => { handleSelect(item); play('bloom'); }}
-                  className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-muted-foreground transition-colors duration-100 hover:bg-muted/60 hover:text-foreground"
+                  aria-disabled={(feedback?.status === "copying" && "copy" in item.action) || undefined}
+                  onClick={() => handleSelect(item)}
+                  className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] text-muted-foreground transition-colors duration-100 hover:bg-muted/60 hover:text-foreground aria-disabled:cursor-progress"
                 >
-                  <Icon aria-hidden className="size-4 shrink-0" />
-                  <TranslatedText>{failedId === item.id ? "Copy failed, try again" : copied ? "Copied" : item.label}</TranslatedText>
+                  <Icon aria-hidden className={cn("size-4 shrink-0", copying && "motion-safe:animate-spin")} />
+                  <TranslatedText>{status ? copyFeedbackLabels[status] : item.label}</TranslatedText>
                 </button>
               );
             })}
           </motion.div>
         )}
       </AnimatePresence>
+      <span role="status" className="sr-only">{feedback ? t(copyFeedbackLabels[feedback.status]) : ""}</span>
     </div>
   );
 }
