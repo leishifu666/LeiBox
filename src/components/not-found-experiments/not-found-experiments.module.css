@@ -144,3 +144,14 @@
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after { transition: none !important; }
 }
+
+.embedded { height: clamp(400px, 70vw, 540px); }
+.embedded .header { height: 64px; padding: 0 20px; }
+.embedded .orbitMain { padding: 8px 12px 18px; }
+.embedded .orbitStage {
+  --diameter: min(390px, 86cqw, 86cqh);
+  --card-width: calc(var(--diameter) * .256);
+}
+.embedded .expressiveFour { font-size: min(37cqw, 68cqh); }
+.embedded .leftFour { left: 0; }
+.embedded .rightFour { right: 2%; }

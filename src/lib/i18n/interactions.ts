@@ -1,4 +1,10 @@
 export const interactionTranslations: Record<string, string> = {
+  "Orbit 404 Page":"组件环游 404",
+  "Page template":"页面模板",
+  "A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.":"把组件预览排成环形轨道的 404 页面。悬停或聚焦卡片时暂停转动，选中卡片即可打开对应组件。",
+  "Hover over a card or focus it with Tab to pause the orbit. Select it to view the component.":"悬停在卡片上，或用 Tab 聚焦卡片，即可暂停转动。选中卡片可查看对应组件。",
+  "LeiBox renders this component from Next.js app/not-found.tsx. The items prop supplies the previews and destination links.":"LeiBox 在 Next.js 的 app/not-found.tsx 中使用这个组件。用 items 属性传入预览卡片和跳转链接。",
+  "View source on GitHub":"在 GitHub 查看源码",
   "Tactile Push Button":"立体按压按钮",
   "Button interaction":"按钮交互",
   "A sculpted CSS button that sinks on hover and compresses while pressed.":"纯 CSS 立体按钮，悬停时下沉，按住时表面内缩。",

@@ -5,6 +5,7 @@ import { SITE_URL } from "@/lib/site-url";
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
+  { path: "/docs/components/orbit-not-found", priority: 0.8 },
   { path: "/docs/animations/tactile-push-button", priority: 0.8 },
   { path: "/docs/animations/multi-cursor-builder", priority: 0.8 },
   { path: "/docs/animations/album-cover-tunnel", priority: 0.8 },
