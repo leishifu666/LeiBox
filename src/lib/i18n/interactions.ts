@@ -1,4 +1,10 @@
 export const interactionTranslations: Record<string, string> = {
+  "Tactile Push Button":"立体按压按钮",
+  "Button interaction":"按钮交互",
+  "A sculpted CSS button that sinks on hover and compresses while pressed.":"纯 CSS 立体按钮，悬停时下沉，按住时表面内缩。",
+  "Hover to see the surface sink. Press and hold, or focus the button and hold Space.":"悬停查看下沉效果。按住按钮，或聚焦后按住空格键。",
+  "Community submission":"用户投稿",
+  "少荃 (Douyin: 宝龙体育优品小铺)":"少荃（抖音：宝龙体育优品小铺）",
   "Multi Cursor Page Builder":"多光标页面搭建",
   "Scroll animation":"滚动动效",
   "User-provided HTML":"用户提供的 HTML",

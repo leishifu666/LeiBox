@@ -1,0 +1,160 @@
+{
+  "slug": "tactile-push-button",
+  "name": {
+    "en": "Tactile Push Button",
+    "zh": "立体按压按钮"
+  },
+  "description": {
+    "en": "A sculpted CSS button that sinks on hover and compresses while pressed.",
+    "zh": "纯 CSS 立体按钮，悬停时下沉，按住时表面内缩。"
+  },
+  "keywords": "按压 按钮 立体 触感 投稿 少荃 tactile button press css",
+  "docsPath": "/docs/animations/tactile-push-button",
+  "detailPath": "/ai/components/tactile-push-button.json",
+  "markdownPath": "/ai/components/tactile-push-button.md",
+  "previewPath": "/assets/components/tactile-push-button.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "立体按钮",
+      "按压反馈",
+      "tactile push button"
+    ],
+    "searchTerms": [
+      "按钮",
+      "按压",
+      "触感",
+      "立体",
+      "button",
+      "press",
+      "css"
+    ],
+    "visualTags": [
+      "3d",
+      "silver",
+      "gradient"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "少荃投稿。按压效果由 HTML 和 CSS 实现，可通过 CSS 变量调整外观和过渡。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Original HTML and CSS submitted by 少荃 (Douyin: 宝龙体育优品小铺), adapted for the LeiBox demo.",
+    "designReference": null,
+    "designAuthor": "少荃 (Douyin: 宝龙体育优品小铺)",
+    "license": "Community submission by 少荃 (Douyin: 宝龙体育优品小铺). No separate license was supplied."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/tactile-push-button/react.json",
+      "component": "TactilePushButton",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { TactilePushButton } from \"./TactilePushButton\";\n\nexport default function App() {\n  return <TactilePushButton />;\n}",
+      "files": [
+        "TactilePushButton.tsx",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/tactile-push-button/vue.json",
+      "component": "TactilePushButton",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport TactilePushButton from \"./TactilePushButton.vue\";\n</script>\n<template><TactilePushButton /></template>",
+      "files": [
+        "TactilePushButton.vue",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/tactile-push-button/svelte.json",
+      "component": "TactilePushButton",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport TactilePushButton from \"./TactilePushButton.svelte\";\n</script>\n<TactilePushButton />",
+      "files": [
+        "TactilePushButton.svelte",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/tactile-push-button/solid.json",
+      "component": "TactilePushButton",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { TactilePushButton } from \"./TactilePushButton.solid\";\n\nexport default function App() {\n  return <TactilePushButton />;\n}",
+      "files": [
+        "TactilePushButton.solid.tsx",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/tactile-push-button/preact.json",
+      "component": "TactilePushButton",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { TactilePushButton } from \"./TactilePushButton.preact\";\n\nexport default function App() {\n  return <TactilePushButton />;\n}",
+      "files": [
+        "TactilePushButton.preact.tsx",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/tactile-push-button/vanilla.json",
+      "component": "TactilePushButton",
+      "dependencies": [],
+      "usage": "import { mount } from \"./TactilePushButton\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "TactilePushButton.ts",
+        "TactilePushButtonEngine.js",
+        "motion-runtime.ts",
+        "TactilePushButtonEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover to see the surface sink. Press and hold, or focus the button and hold Space.",
+    "zh": "悬停查看下沉效果。按住按钮，或聚焦后按住空格键。"
+  }
+}

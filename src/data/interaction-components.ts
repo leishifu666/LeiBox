@@ -48,6 +48,7 @@ export interface MotionEntry {
   prompt?: string;
   referenceUrl?: string;
   referenceAuthor?: string;
+  communitySubmission?: boolean;
   referenceAuthorUrl?: string;
   referenceNotes?: string;
   referenceLicense?: string;
@@ -61,6 +62,18 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug:"tactile-push-button",href:"/docs/animations/tactile-push-button",name:"Tactile Push Button",category:"Button interaction",
+    description:"A sculpted CSS button that sinks on hover and compresses while pressed.",
+    keywords:"按压 按钮 立体 触感 投稿 少荃 tactile button press css",
+    preview:"/assets/components/tactile-push-button.png",sourceFile:"tactile-push-button.html",canvasWidth:720,canvasHeight:540,recreatedHtml:true,
+    instructions:"Hover to see the surface sink. Press and hold, or focus the button and hold Space.",
+    prompt:"制作一个纯 HTML 和 CSS 的立体按压按钮，文字为小写 button。将按钮居中放在 #e1e1e1 背景上，使用 48px 字号、胶囊形深色底座、浅银色 135 度渐变表面、左上高光和右下投影。悬停时用 300ms 收起投影并加强内阴影，用 250ms 将表面裁剪内收 2px、文字缩到 97.5%。按住时表面缩到 93%，松手时复位。使用原生 button、可见键盘焦点、CSS 变量和 prefers-reduced-motion。",
+    referenceAuthor:"少荃 (Douyin: 宝龙体育优品小铺)",communitySubmission:true,
+    referenceNotes:"Submitted by 少荃. LeiBox changes the demo label to button and adapts the surrounding demo layout.",
+    referenceLicense:"Community submission by 少荃 (Douyin: 宝龙体育优品小铺). No separate license was supplied.",
+    codeSource:"Original HTML and CSS submitted by 少荃 (Douyin: 宝龙体育优品小铺), adapted for the LeiBox demo.",
+  },
   {
     slug:"multi-cursor-builder",href:"/docs/animations/multi-cursor-builder",name:"Multi Cursor Page Builder",category:"Scroll animation",
     description:"Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.",

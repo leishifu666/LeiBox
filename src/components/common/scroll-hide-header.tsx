@@ -4,6 +4,8 @@ import { gsap } from "gsap";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 
+export const syncScrollHeaderEvent = "leibox:sync-scroll-header";
+
 export function ScrollHideHeader({
   children,
   className,
@@ -125,6 +127,7 @@ export function ScrollHideHeader({
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", reveal);
+    window.addEventListener(syncScrollHeaderEvent, reveal);
     document.addEventListener("keydown", onKeyDown);
     header.addEventListener("focusin", onFocusIn);
     reducedMotion.addEventListener("change", onMotionChange);
@@ -132,11 +135,14 @@ export function ScrollHideHeader({
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", reveal);
+      window.removeEventListener(syncScrollHeaderEvent, reveal);
       document.removeEventListener("keydown", onKeyDown);
       header.removeEventListener("focusin", onFocusIn);
       reducedMotion.removeEventListener("change", onMotionChange);
       observer.disconnect();
       context.revert();
+      // A canceled hide tween can leave its old offset in the context's snapshot.
+      gsap.set([header, ...content], { clearProps: "transform" });
       header.inert = false;
       header.style.removeProperty("pointer-events");
       header.removeAttribute("aria-hidden");

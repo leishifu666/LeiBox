@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 42 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 43 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -17,6 +17,7 @@ Paths beginning with / are relative to the origin serving this file. When only a
 
 ## Components
 
+- [Tactile Push Button / 立体按压按钮](https://leibox.pantoria.cn/ai/components/tactile-push-button.md): A sculpted CSS button that sinks on hover and compresses while pressed.
 - [Multi Cursor Page Builder / 多光标页面搭建](https://leibox.pantoria.cn/ai/components/multi-cursor-builder.md): Twelve colorful cursors type, draw, carry images and arrange a page as you scroll, with live selection boxes and reversible construction.
 - [Album Cover Tunnel / 专辑封面隧道](https://leibox.pantoria.cn/ai/components/album-cover-tunnel.md): A three-dimensional wall of real album covers: hover to lift, click to fly a cover into the center, then scroll or drag through the endless tunnel.
 - [Stacked Metadata Tags / 标签叠放展开](https://leibox.pantoria.cn/ai/components/stacked-metadata.md): Overlapping priority, date and assignee tags leave room for task titles, then spread to the left when a row is hovered or focused.

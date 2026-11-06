@@ -6,6 +6,12 @@ import { Footer } from "@/components/landing/footer";
 import { PreviewVideo } from "@/components/common/preview-video";
 import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
+import { motionDocLayout } from "@/lib/motion-doc-layout";
+
+const motionLayouts = new Map(INTERACTION_COMPONENTS
+  .filter(entry => entry.href.startsWith("/docs/animations/"))
+  .map(entry => [entry.href, JSON.stringify(motionDocLayout(entry))]));
 
 export const metadata: Metadata = {
   title: "Components",
@@ -26,7 +32,7 @@ export default function ComponentsPage() {
       <section id="interaction" className="mt-10 scroll-mt-24" aria-labelledby="components-title">
         <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {COMPONENT_CATALOG.map((component) => (
-            <li key={component.href} data-preview-card data-component-card={component.href} className="group relative flex h-full flex-col gap-4">
+            <li key={component.href} data-preview-card data-component-card={component.href} data-component-doc-layout={motionLayouts.get(component.href)} className="group relative flex h-full flex-col gap-4">
                 <div className="relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f4f4]">
                   {component.kind === "interaction" ? (
                   <InteractionPreview slug={component.slug} poster={component.preview} source={component.sourceFile ? `/motion/${component.slug}.html` : undefined} width={component.canvasWidth} height={component.canvasHeight} />

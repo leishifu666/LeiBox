@@ -1,5 +1,17 @@
 [
   {
+    "slug": "tactile-push-button",
+    "href": "/docs/animations/tactile-push-button",
+    "name": "Tactile Push Button",
+    "category": "Button interaction",
+    "description": "A sculpted CSS button that sinks on hover and compresses while pressed.",
+    "keywords": "按压 按钮 立体 触感 投稿 少荃 tactile button press css",
+    "preview": "/assets/components/tactile-push-button.png",
+    "sourceFile": "tactile-push-button.html",
+    "canvasWidth": 720,
+    "canvasHeight": 540
+  },
+  {
     "slug": "multi-cursor-builder",
     "href": "/docs/animations/multi-cursor-builder",
     "name": "Multi Cursor Page Builder",

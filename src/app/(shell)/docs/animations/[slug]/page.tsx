@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { Download } from "lucide-react";
 import { T } from "@/components/common/language-provider";
 import { ComponentDoc } from "@/components/docs/component-doc";
+import { MotionDemoSection } from "@/components/docs/component-doc-chrome";
 import { getMotionDocProps } from "@/components/docs/motion-doc-props";
 import { MotionPreview } from "@/components/docs/motion-preview";
 import { Footer } from "@/components/landing/footer";
 import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { interactionTranslations } from "@/lib/i18n/interactions";
+import { motionDocLayout } from "@/lib/motion-doc-layout";
 import { DEEP_AGENT_API, DEEP_AGENT_COMPOSER_API } from "@/data/deep-agent.mjs";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -22,19 +24,23 @@ export default async function MotionPage({params}:Props){
   const entry=INTERACTION_COMPONENTS.find(item=>item.slug===slug&&item.sourceFile);
   if(!entry)notFound();
   const doc=await getMotionDocProps(slug);
+  const {width,height,responsive,instructions,tags}=motionDocLayout(entry);
   return <div className="page-enter">
-    <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={[entry.category,"6 frameworks","TypeScript",...(entry.original?["LeiShiFu original"]:[])]}
-      beforeInstall={<section className="mt-8" aria-label="Demo">
-        <h2 className="text-lg font-semibold tracking-[-0.01em]"><T>Demo</T></h2>
-        <p className="mt-2 text-[13px] text-muted-foreground"><T>{entry.instructions!}</T></p>
-        <div className="mt-3"><MotionPreview slug={slug} name={entry.name} width={entry.canvasWidth!} height={entry.canvasHeight!} responsive={slug === "multi-cursor-builder" || slug === "stacked-metadata" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "reasoning-effort-slider" || slug === "deep-agent-composer"}/></div>
-      </section>}
+    <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={tags}
+      beforeInstall={<MotionDemoSection instructions={instructions}>
+        <MotionPreview slug={slug} name={entry.name} width={width} height={height} poster={entry.preview} responsive={responsive} />
+        {entry.communitySubmission && entry.referenceAuthor && (
+          <p className="mt-2 text-center text-xs leading-relaxed text-muted-foreground">
+            <T>Community submission</T> · <T>{entry.referenceAuthor}</T>
+          </p>
+        )}
+      </MotionDemoSection>}
       afterCode={<>{doc.afterCode}<div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
         <a href={entry.originalHtml??"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.originalHtml?"Download original HTML":entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
         {slug === "multi-cursor-builder" ? <a href="/motion/multi-cursor-builder.html" download="多光标页面搭建-独立演示.html" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download standalone HTML</T></a> : null}
         {slug === "deep-agent-composer" || slug === "reasoning-effort-slider" ? <a href="/motion/deep-agent-original-source.txt" download="DeepAgent-原版源码.txt" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download original Deep Agent source</T></a> : null}
         {entry.suppliedSource?<a href={entry.suppliedSource} download="GlassFolder.tsx" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
-        {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
+        {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
         ...(slug === "multi-cursor-builder" ? [

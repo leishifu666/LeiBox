@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "dc5c13ff8659f422f402d033fb299b5fa2dd1badd3ae7020d449a4bbbf246c59",
+  "revision": "cd726a07cd02b0cc360d999cfaad24d5d1d6144cbfae0d0ef71700a2cb51f251",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,77 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "tactile-push-button",
+      "name": {
+        "en": "Tactile Push Button",
+        "zh": "立体按压按钮"
+      },
+      "description": {
+        "en": "A sculpted CSS button that sinks on hover and compresses while pressed.",
+        "zh": "纯 CSS 立体按钮，悬停时下沉，按住时表面内缩。"
+      },
+      "keywords": "按压 按钮 立体 触感 投稿 少荃 tactile button press css",
+      "docsPath": "/docs/animations/tactile-push-button",
+      "detailPath": "/ai/components/tactile-push-button.json",
+      "markdownPath": "/ai/components/tactile-push-button.md",
+      "previewPath": "/assets/components/tactile-push-button.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "立体按钮",
+          "按压反馈",
+          "tactile push button"
+        ],
+        "searchTerms": [
+          "按钮",
+          "按压",
+          "触感",
+          "立体",
+          "button",
+          "press",
+          "css"
+        ],
+        "visualTags": [
+          "3d",
+          "silver",
+          "gradient"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "少荃投稿。按压效果由 HTML 和 CSS 实现，可通过 CSS 变量调整外观和过渡。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Original HTML and CSS submitted by 少荃 (Douyin: 宝龙体育优品小铺), adapted for the LeiBox demo.",
+        "designReference": null,
+        "designAuthor": "少荃 (Douyin: 宝龙体育优品小铺)",
+        "license": "Community submission by 少荃 (Douyin: 宝龙体育优品小铺). No separate license was supplied."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "multi-cursor-builder",
       "name": {

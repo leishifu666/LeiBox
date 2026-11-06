@@ -342,14 +342,15 @@ const PLAYER = String.raw`
             later(() => handle('se').dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })), 5700);
           }, 6500), 650);
         }
-        if (slug === 'soft-action-wheel') later(() => repeat(() => {
-          click('.rm-toggle');
-          later(() => click('.rm-toggle'), 1500);
-        }, 3000), 450);
-        if (slug === 'staggered-radial-menu') later(() => repeat(() => {
-          click('.rm-toggle');
-          later(() => click('.rm-toggle'), 1800);
-        }, 3600), 450);
+        if (slug === 'soft-action-wheel' || slug === 'staggered-radial-menu') {
+          const closeDelay = slug === 'soft-action-wheel' ? 1500 : 1800;
+          // These demos move focus on a keyboard click. Autoplay must leave it on the card.
+          const toggle = () => document.querySelector('.rm-toggle')?.dispatchEvent(new MouseEvent('click', { bubbles: true, detail: 1 }));
+          later(() => repeat(() => {
+            toggle();
+            later(toggle, closeDelay);
+          }, closeDelay * 2), 450);
+        }
         if (slug === 'glass-tab-menu') later(() => repeat(() => {
           click('.gt-tab:nth-of-type(2)');
           later(() => click('.gt-tab:nth-of-type(3)'), 700);

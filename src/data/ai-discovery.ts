@@ -9,6 +9,12 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "tactile-push-button": {
+    category: "input", useCases: ["立体按钮", "按压反馈", "tactile push button"],
+    searchTerms: ["按钮", "按压", "触感", "立体", "button", "press", "css"],
+    visualTags: ["3d", "silver", "gradient"], interactions: ["hover", "click", "keyboard", "touch"],
+    caveat: "少荃投稿。按压效果由 HTML 和 CSS 实现，可通过 CSS 变量调整外观和过渡。",
+  },
   "multi-cursor-builder":{category:"hero",useCases:["多光标搭建演示","页面自动排版动画","scrolling page construction"],searchTerms:["多光标","搭建","页面","选框","排版","回退","Figma","cursor","builder","construction"],visualTags:["cursors","canvas","typography","scroll"],interactions:["scroll","keyboard","touch","pause","replay"],caveat:"用户提供HTML的本地演示；内层独立滚动，不是多人协作编辑器或真实建站后台。"},
   "album-cover-tunnel":{category:"media",useCases:["三维专辑封面墙","专辑封面隧道穿行","interactive album cover tunnel"],searchTerms:["专辑","封面","隧道","飞入","三维","原创","雷师傅","album","cover","tunnel","3d"],visualTags:["3d","photography","bloom","depth","dark"],interactions:["hover","click","scroll","drag","keyboard","touch","pause"],caveat:"雷师傅原创交互，默认55张真实专辑封面；封面图片版权归各自权利人，支持自定义图片。"},
   "stacked-metadata":{category:"navigation",useCases:["任务列表元数据","悬停展开标签","compact task metadata"],searchTerms:["标签","叠放","任务","列表","展开","metadata","stacked","tags","hover"],visualTags:["pills","overlap","list","dark"],interactions:["hover","focus","click","keyboard","touch"],caveat:"独立DOM/CSS重建；仅展开本地标签，不连接真实任务服务。"},

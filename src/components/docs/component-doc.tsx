@@ -8,6 +8,7 @@ import { ApiReference, type ApiProp } from "@/components/docs/api-reference";
 import { CodeTabs, type CodeVariant } from "@/components/docs/code-tabs";
 import { CopyMenu, type StandaloneCopyContent } from "@/components/docs/copy-menu";
 import { CopyButton } from "@/components/docs/copy-button";
+import { ComponentDocHeader } from "@/components/docs/component-doc-chrome";
 import { DependencyTabs } from "@/components/docs/dependency-tabs";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import type { MotionPackageRef } from "@/lib/doc-asset-types";
@@ -67,29 +68,12 @@ export async function ComponentDoc({
 
   return (
     <article className="mx-auto w-full max-w-3xl" data-component-document={installItem}>
-      <div className="flex items-start justify-between gap-4">
-        <h1 className="min-w-0 text-3xl font-semibold tracking-[-0.02em]">
-          <TranslatedText>{title}</TranslatedText>
-        </h1>
-        {copyContent ? <CopyMenu title={title} standalone={copyContent} motionPackages={motionPackages} /> : null}
-      </div>
-      <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground">
-        <TranslatedText>{description}</TranslatedText>
-      </p>
-      {(tags && tags.length > 0) || hasWebGPU ? (
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {Array.from(
-            new Set([...(tags ?? []), ...(hasWebGPU ? ["webgl", "webgpu"] : [])]),
-          ).map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-border/60 px-2.5 py-0.5 text-[11.5px] text-muted-foreground"
-            >
-              <TranslatedText>{tag}</TranslatedText>
-            </span>
-          ))}
-        </div>
-      ) : null}
+      <ComponentDocHeader
+        title={title}
+        description={description}
+        tags={hasWebGPU ? [...(tags ?? []), "webgl", "webgpu"] : tags}
+        actions={copyContent ? <CopyMenu title={title} standalone={copyContent} motionPackages={motionPackages} /> : null}
+      />
 
 
       {preview ? (

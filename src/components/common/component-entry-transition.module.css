@@ -1,5 +1,10 @@
 .main[data-component-entry-state="waiting"] { visibility: hidden; }
 
+.main[data-component-entry-preview-active] > :not([data-component-entry-preview]),
+.main:not([data-component-entry-preview-active]) > [data-component-entry-preview] {
+  display: none;
+}
+
 .main[data-component-entry-state="entering"],
 .main[data-component-entry-state="returning"] {
   position: relative;
@@ -7,6 +12,9 @@
   background: var(--background);
   will-change: opacity;
 }
+
+/* On return the outgoing snapshot covers the collection until its fade starts. */
+.main[data-component-entry-state="returning"] { z-index: 29; }
 
 /* Keep the selected route from replaying its ordinary page-in after handoff. */
 .main :global([data-component-entry-page]) { animation: none !important; }
