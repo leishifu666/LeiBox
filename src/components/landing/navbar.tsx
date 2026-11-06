@@ -33,6 +33,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
+                prefetch={false}
                 className="rounded-full px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 hover:bg-muted hover:text-foreground"
               >
                 <T>{link.label}</T>

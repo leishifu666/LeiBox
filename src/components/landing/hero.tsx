@@ -1,20 +1,14 @@
 import { T } from "@/components/common/language-provider";
 import Link from "next/link";
-import { preload } from "react-dom";
 
 import { HeroReveal } from "@/components/landing/hero-reveal";
 import { HeroInstallCommand } from "@/components/landing/hero-install-command";
 import { HeroText } from "@/components/landing/hero-text";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
-import { optimizedImage } from "@/lib/optimized-image";
 import { SoftArrow } from "@/components/landing/soft-arrow";
 import styles from "./hero-english.module.css";
 
 export function Hero() {
-  preload(optimizedImage("/landing/agent-demo/alpine-lake.png").src, {
-    as: "image",
-    fetchPriority: "high",
-  });
   return (
     <section className="flex min-h-svh w-full flex-col px-5 pt-28 pb-2.5 sm:px-8 sm:pt-36">
       <div data-hero-copy className={`mx-auto flex w-full max-w-2xl flex-col items-start px-2.5 text-left sm:items-center sm:text-center ${styles.copy}`}>
@@ -37,6 +31,7 @@ export function Hero() {
         >
           <Link
             href="/docs"
+            prefetch={false}
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-foreground px-6 text-[15px] font-medium tracking-[-0.01em] text-background transition-[opacity,transform] duration-150 ease-out hover:opacity-85 active:scale-[0.98]"
           ><span data-language-label className="inline-block whitespace-nowrap"><T>
             Get started
@@ -44,6 +39,7 @@ export function Hero() {
           </Link>
           <Link
             href="/components"
+            prefetch={false}
             className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-[15px] font-medium text-foreground transition-colors duration-150 hover:bg-muted active:scale-[0.98] sm:h-auto sm:border-0 sm:px-0 sm:hover:bg-transparent sm:hover:text-muted-foreground sm:active:scale-100"
           ><span data-language-label className="inline-block whitespace-nowrap"><T>
             Browse components

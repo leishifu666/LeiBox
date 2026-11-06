@@ -39,7 +39,7 @@ export function HomeLogoLink({ className }: { className?: string }) {
   }
 
   return (
-    <Link href="/" aria-label="LeiBox home" className={className} onClick={returnToTop}>
+    <Link href="/" prefetch={pathname === "/" ? false : undefined} aria-label="LeiBox home" className={className} onClick={returnToTop}>
       <SiteLogo navigation />
     </Link>
   );

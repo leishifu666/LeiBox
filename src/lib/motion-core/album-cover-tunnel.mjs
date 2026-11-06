@@ -74,14 +74,25 @@ bg.renderOrder = -1; camera.add(bg); bg.position.z = -60;
 
 /* ---------------- 封面：全部塞进一张纹理数组 + 一个 InstancedMesh（1 次绘制） ---------------- */
 const TS = 512;
-async function buildArray(images) {
+function createLayerCanvas() {
   const cv = document.createElement('canvas'); cv.width = cv.height = TS;
-  const g = cv.getContext('2d', { willReadFrequently: true });
+  return cv.getContext('2d', { willReadFrequently: true });
+}
+async function writeCoverLayer(g, data, index, src) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = src;
+  await img.decode();
+  if (dead) throw new Error('destroyed');
+  g.clearRect(0, 0, TS, TS);
+  g.drawImage(img, 0, 0, TS, TS);
+  data.set(g.getImageData(0, 0, TS, TS).data, index * TS * TS * 4);
+}
+async function buildArray(images) {
+  const g = createLayerCanvas();
   const data = new Uint8Array(TS * TS * 4 * images.length);
   for (let i = 0; i < images.length; i++) {
-    const img = new Image(); img.crossOrigin='anonymous'; img.src = images[i].src; await img.decode(); if(dead)throw new Error('destroyed');
-    g.drawImage(img, 0, 0, TS, TS);
-    data.set(g.getImageData(0, 0, TS, TS).data, i * TS * TS * 4);
+    await writeCoverLayer(g, data, i, images[i].src);
   }
   const t = new THREE.DataArrayTexture(data, TS, TS, images.length);
   t.minFilter = THREE.LinearMipmapLinearFilter; t.magFilter = THREE.LinearFilter;
@@ -434,6 +445,25 @@ function loadImages(images){
   if(options.active!==undefined)applyActive(options.active);wake();
  }).catch(()=>{if(!dead&&version===loadVersion){sceneEl.dataset.error='images';errorEl.hidden=false;errorEl.textContent='封面图片加载失败，请检查图片地址';}});
 }
+// Gallery previews refine the existing texture without restarting the camera or controls.
+async function upgradeCovers(batches) {
+ const texture = mat.uniforms.map.value;
+ if (!texture || dead) return;
+ const g = createLayerCanvas();
+ let upgraded = 0;
+ for await (const batch of batches) {
+  if (dead || mat.uniforms.map.value !== texture) return;
+  for (const [index, src] of batch) {
+   await writeCoverLayer(g, texture.image.data, index, src);
+   if (dead || mat.uniforms.map.value !== texture) return;
+   texture.addLayerUpdate(index);
+  }
+  texture.needsUpdate = true;
+  upgraded += batch.length;
+  sceneEl.dataset.detailCovers = String(upgraded);
+  wake();
+ }
+}
 const ready=loadImages(imageList);
 s.setTimeout(()=>{root.querySelector('#hint').style.opacity='0';},9000);
 s.addCleanup(()=>{
@@ -443,5 +473,5 @@ s.addCleanup(()=>{
  textures.forEach(texture=>texture.dispose());geometries.forEach(geometry=>geometry.dispose());materials.forEach(material=>material.dispose());
  composer.passes.forEach(pass=>pass.dispose?.());composer.dispose();renderer.dispose();renderer.forceContextLoss();
 });
-return {...s.controller,ready,update(next={}){if(dead)return;const activeChanged=next.active!==undefined&&next.active!==options.active,imagesChanged=Object.hasOwn(next,'images')&&next.images!==options.images;options={...options,...next};s.controller.update(next);sceneEl.dataset.theme=options.theme;if(options.theme==='light')PR=Math.min(PR,.75);resize();if(imagesChanged)void loadImages(normalizeImages(next.images));else if(activeChanged&&loaded)applyActive(next.active);stop();wake();}};
+return {...s.controller,ready,upgradeCovers,update(next={}){if(dead)return;const activeChanged=next.active!==undefined&&next.active!==options.active,imagesChanged=Object.hasOwn(next,'images')&&next.images!==options.images;options={...options,...next};s.controller.update(next);sceneEl.dataset.theme=options.theme;if(options.theme==='light')PR=Math.min(PR,.75);resize();if(imagesChanged)void loadImages(normalizeImages(next.images));else if(activeChanged&&loaded)applyActive(next.active);stop();wake();}};
 }

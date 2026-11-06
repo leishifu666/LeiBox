@@ -45,6 +45,7 @@ export function Cta() {
                   </button>
                   <Link
                     href="/components"
+                    prefetch={false}
                     className="inline-flex h-11 items-center justify-center rounded-full border border-white/20 px-6 text-[15px] font-medium text-white transition-colors duration-150 hover:bg-white/10 active:scale-[0.98]"
                   ><T>
                     Browse components

@@ -10,16 +10,18 @@ import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import { INTERACTION_PREVIEWS as INTERACTION_COMPONENTS, type InteractionPreviewEntry } from "@/data/interaction-previews";
 import { optimizedImage } from "@/lib/optimized-image";
+import { loadDocAsset } from "@/lib/load-doc-asset";
+import type { CodeContent } from "@/lib/doc-asset-types";
 
 type Agent = "claude" | "codex";
 type TaskState = "wait" | "run" | "done";
 interface Cursor { kind: "pointer" | "text"; x: number; y: number; ms: number; down: boolean; show: boolean }
-interface App { agent: Agent; picked: boolean; on: boolean; typed: number; pasted: boolean; lines: number }
+interface App { agent: Agent; mounted: boolean; picked: boolean; on: boolean; typed: number; pasted: string; lines: number }
 interface Scene { cursor: Cursor; card: number; modal: boolean; copied: boolean; scroll: number; app: App }
 type Piece = InteractionPreviewEntry;
 interface DemoCode {
   component: string;
-  bundle: string;
+  bundleUrl: string;
   entry: string;
   lineCount: number;
   files: { name: string; lines: number }[];
@@ -29,7 +31,7 @@ interface DemoCode {
 const SPEED = 1.35;
 const TYPED = "pls add this component ";
 const PICKS = ["top-1", "fresh-1"] as const;
-const APP0: App = { agent: "codex", picked: false, on: false, typed: 0, pasted: false, lines: 0 };
+const APP0: App = { agent: "codex", mounted: false, picked: false, on: false, typed: 0, pasted: "", lines: 0 };
 const CURSOR0: Cursor = { kind: "pointer", x: 0, y: 0, ms: 0, down: false, show: false };
 const INITIAL: Scene = { cursor: CURSOR0, card: 0, modal: false, copied: false, scroll: 0, app: APP0 };
 const CLAWD = ["..XXXXXXX..", ".XXXXXXXXX.", "XX.XXXXX.XX", "XXXXXXXXXXX", ".XXXXXXXXX.", ".X.X...X.X."];
@@ -182,12 +184,17 @@ export function AgentDemo({ code }: { code: DemoCode }) {
       patch({ copied: true }); await wait(450); patch({ modal: false }); await wait(200);
     };
     const build = async (agent: Agent) => {
-      patch({ app: { ...APP0, agent } });
+      const source = loadDocAsset<CodeContent>(code.bundleUrl).then(data => data.source, () => code.entry);
+      patch({ app: { ...APP0, agent, mounted: true } });
       await move(at(`[data-ap-dock="${agent}"]`, 0.5, 0.45), 460); await click();
       appPatch({ picked: true }); await wait(260); appPatch({ on: true }); await wait(400);
       await move(at(`[data-ad-app="${agent}"] [data-ap-paste]`, 0.35, 0.5), 380, "text"); await click();
       for (let count = 1; count <= typed.length; count++) { appPatch({ typed: count }); await wait(22); }
-      await wait(160); appPatch({ pasted: true }); await wait(150);
+      await wait(160);
+      const pasted = await source;
+      if (!alive) throw new Error("Playback stopped");
+      appPatch({ pasted });
+      await wait(150);
       await move(at(`[data-ad-app="${agent}"] [data-ap-send]`, 0.5, 0.5), 180); await click();
       for (let lines = 1; lines <= 6; lines++) { appPatch({ lines }); await wait(lines === 1 ? 520 : 560); }
       await wait(700); appPatch({ on: false, picked: false }); await wait(300);
@@ -215,14 +222,17 @@ export function AgentDemo({ code }: { code: DemoCode }) {
       } catch (error) { if (alive) console.error("Agent demo playback failed", error); }
     })();
     return () => { alive = false; cursorMotion?.revert({ suppressEvents: true }); timers.forEach(id => window.clearTimeout(id)); timers.clear(); cancelWait?.(); };
-  }, [activity.playing, typed, locale]);
+  }, [activity.playing, typed, locale, code.bundleUrl, code.entry]);
 
   const current = activity.reduced ? INITIAL : scene;
   const piece = PIECES[current.card];
   const { cursor, app } = current;
   return <figure className="agent-demo" data-playing={activity.playing} data-reduced-motion={activity.reduced} aria-label={t("The GlassFolder React code copied into Claude Code and Codex, then added step by step.")}>
     <figcaption className="sr-only"><T>The GlassFolder React code copied into Claude Code and Codex, then added step by step.</T></figcaption>
-    <div className="g4-plate" style={{ backgroundImage: `url("${optimizedImage("/landing/agent-demo/alpine-lake.png").src}")` }}><div ref={rootRef} data-ap-root data-agent={app.agent} data-lines={app.lines} data-source-component={piece.slug} data-code-lines={code.lineCount} inert aria-hidden className="g4-desk pointer-events-none select-none">
+    <div className="g4-plate">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img {...optimizedImage("/landing/agent-demo/alpine-lake.png", "(min-width: 1152px) 1088px, 100vw")} alt="" fetchPriority="high" className="pointer-events-none absolute inset-0 size-full rounded-[inherit] object-cover" />
+      <div ref={rootRef} data-ap-root data-agent={app.agent} data-lines={app.lines} data-source-component={piece.slug} data-code-lines={code.lineCount} inert aria-hidden className="g4-desk pointer-events-none select-none">
       <div className="g4-app relative flex overflow-hidden"><LibrarySidebar /><div className="relative flex min-w-0 flex-1 flex-col overflow-hidden"><div className="relative z-10 bg-background"><LibraryBar /></div><div className="g5-ap-scroll space-y-9 px-4 pt-6 pb-10 md:px-7 md:pt-7" style={{ transform: `translateY(${-current.scroll}px)` }}>
         <ComponentRail rail="top" title="Components" subtitle="Creative components you can drop into any project." pieces={TOP} />
         <ComponentRail rail="fresh" title="Live demos" subtitle="Inspect before you use" pieces={FRESH} />
@@ -230,7 +240,7 @@ export function AgentDemo({ code }: { code: DemoCode }) {
         <ComponentRail rail="heroes" title="Motion & interaction" subtitle="Reusable interactions from the LeiBox collection." pieces={HEROES} />
         <ComponentRail rail="ui" title="Text & controls" subtitle="Details for your next interface." pieces={UI} />
       </div></div><PromptModal piece={piece} open={current.modal} copied={current.copied} playing={activity.playing} code={code} /></div>
-      <div className="g5p-layer">{app.agent === "claude" ? <ClaudeWindow s={app} piece={piece} typed={typed} playing={activity.playing} code={code} /> : <CodexWindow s={app} piece={piece} typed={typed} playing={activity.playing} code={code} />}<Dock pointer={cursor} playing={activity.playing} /></div>
+      <div className="g5p-layer">{app.mounted && (app.agent === "claude" ? <ClaudeWindow s={app} piece={piece} typed={typed} playing={activity.playing} code={code} /> : <CodexWindow s={app} piece={piece} typed={typed} playing={activity.playing} code={code} />)}<Dock pointer={cursor} playing={activity.playing} /></div>
       <div data-cursor={cursor.kind} data-cursor-x={cursor.x} data-cursor-y={cursor.y} data-down={cursor.down || undefined} className="g5-ap-cursor" style={{ opacity: activity.playing && cursor.show ? 1 : 0 }}><span className="agent-demo-cursor-press" style={{ transform: `scale(${cursor.down && cursor.kind === "pointer" ? 0.88 : 1})` }}><MacCursor kind={cursor.kind} /></span></div>
     </div></div>
   </figure>;
@@ -338,7 +348,7 @@ function ClaudeWindow({ s, piece, typed, playing, code }: { s: App; piece: Piece
       <aside className="g5cc-side"><div className="g5cc-search"><Icon name="search" className="size-[11px]" /><T>Search</T></div><ul className="g5cc-nav"><li className={cn(!sent && "g5cc-on")}><Icon name="plus" />New</li><li><Icon name="folder" />Projects <span className="g5cc-beta">Beta</span></li><li><Icon name="clock" />Scheduled</li><li><Icon name="more" sw={2.6} />More</li></ul><p className="g5cc-head">Pinned <Icon name="right" className="size-2.5" /></p>{sent && <><p className="g5cc-head g5p-in">Working</p><ul className="g5cc-nav g5p-in"><li className="g5cc-on"><span className="truncate">{title}</span>{!done && <span className="ml-auto size-1.5 shrink-0 rounded-full bg-white/40" />}</li></ul></>}<p className="g5cc-head">Idle</p><ul className="g5cc-nav">{["Footer animation experiments", "Layout width adjustment", "Restore background controls", "Payout investigation", "Show more"].map(text => <li key={text} className={text === "Show more" ? "text-white/45" : undefined}><span className="truncate"><T>{text}</T></span></li>)}</ul></aside>
       <div className="g5cc-main"><div className="g5cc-col">
         {sent ? <div ref={thread} className="g5cc-thread">
-          <div className="g5p-grow"><div className="g5cc-user"><p>{typed.trim()}</p><p className="mt-2.5"><T>Integrate GlassFolder from LeiBox into this project.</T></p><p className="mt-2 text-white/55">/docs/animations/glass-folder · React</p><pre data-demo-source className="agent-demo-pasted-code mt-2.5">{code.bundle}</pre><p className="mt-1 text-[11px] text-white/70">{t("{count} source files").replace("{count}", String(code.files.length))} · <T>Show more</T></p></div></div>
+          <div className="g5p-grow"><div className="g5cc-user"><p>{typed.trim()}</p><p className="mt-2.5"><T>Integrate GlassFolder from LeiBox into this project.</T></p><p className="mt-2 text-white/55">/docs/animations/glass-folder · React</p><pre data-demo-source className="agent-demo-pasted-code mt-2.5">{s.pasted}</pre><p className="mt-1 text-[11px] text-white/70">{t("{count} source files").replace("{count}", String(code.files.length))} · <T>Show more</T></p></div></div>
           {s.lines >= 3 && <div className="g5p-grow"><div className="grid gap-[9px]"><p className="g5cc-grey"><T>Read supplied source</T> <span className="text-white/75">GlassFolder.tsx…</span> <Icon name="right" className="inline size-2.5" /></p><p className="g5cc-say"><T>The React bundle includes its interaction core and styles. No registry package is needed.</T></p></div></div>}
           {done && <div className="g5p-grow"><div className="grid gap-2"><p className="g5cc-say"><T>I&apos;m done 🤙 added</T> <code className="g5cc-code">{code.files[0].name}</code> <T>and its demo, wired to your theme tokens.</T></p><p className="g5cc-say">TLDR: <code className="g5cc-code">{`<${component} />`}</code> <T>is in</T> <code className="g5cc-code">components/ui</code><T>, typecheck passes.</T></p></div></div>}
         </div> : <div className="flex flex-1 flex-col items-center justify-center"><div className="g5cc-pick">{["acme-website", "growth", "personal"].map((name, index) => <p key={name} className={cn("g5cc-pick-row", index === 0 && "text-white")}><Icon name="computer" />{name}{index === 0 && <Icon name="check" className="ml-auto" />}</p>)}<p className="g5cc-pick-row border-t border-white/[0.07] pt-2 text-white/60"><T>Choose environment</T><Icon name="right" className="size-2.5 rotate-90" /></p></div><div className="g5cc-pick mt-2"><p className="g5cc-pick-row"><Icon name="terminal" /><T>Import 11 Claude Code CLI sessions</T></p><p className="g5cc-pick-row"><Icon name="bolt" /><T>Turn on auto mode</T></p></div></div>}

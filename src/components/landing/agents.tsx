@@ -36,6 +36,7 @@ export function Agents() {
             </T></p>
             <Link
               href="/docs/mcp#install-skill"
+              prefetch={false}
               className="group mt-6 inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground transition-colors duration-150 hover:text-muted-foreground"
             ><T>
               Install the LeiBox Skill

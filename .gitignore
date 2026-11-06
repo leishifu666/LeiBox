@@ -68,6 +68,8 @@ cloudflare-env.d.ts
 /public/motion-frameworks/
 /public/doc-assets/
 /public/doc-assets-index.json
+/public/motion/album-cover-tunnel-preview.html
+/public/assets/optimized/album-cover-tunnel-textures-*.js
 /public/ai/packages/
 /public/.well-known/agent-skills/
 /public/.well-known/skills/

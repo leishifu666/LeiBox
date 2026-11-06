@@ -4,15 +4,25 @@ import { useEffect, useRef } from "react";
 import { useLanguage } from "@/components/common/language-provider";
 import { useDemoActivity } from "@/components/landing/demo-panel";
 import { cn } from "@/lib/utils";
+import { optimizedImage } from "@/lib/optimized-image";
 import panels from "./claude-panels.generated.json";
 import { claudeDictionary, mountClaudePanel } from "./claude-panels.generated.js";
 
 type PanelKind = keyof typeof panels;
+function panelMarkup(html: string, sizes: string) {
+  return html.replace(/(<img\b[^>]*?\bsrc=")(\/assets\/components\/[^"]+)"/g, (match, prefix: string, url: string) => {
+    const image = optimizedImage(url, sizes);
+    return "srcSet" in image
+      ? `${prefix}${image.src}" srcset="${image.srcSet}" sizes="${image.sizes}"`
+      : match;
+  });
+}
+
 // Keep React from replacing the DOM owned by the scoped controller on a parent update.
 const content = {
-  discovery: { __html: panels.discovery.html },
+  discovery: { __html: panelMarkup(panels.discovery.html, "(min-width: 1024px) 540px, 100vw") },
   frameworks: { __html: panels.frameworks.html },
-  agent: { __html: panels.agent.html },
+  agent: { __html: panelMarkup(panels.agent.html, "72px") },
 };
 interface PanelController {
   setStep(index: number): void;

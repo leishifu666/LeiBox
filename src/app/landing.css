@@ -76,6 +76,10 @@
   box-shadow: inset 0 0 0 1px var(--border);
 }
 .agent-demo .g4-pic { background: #f4f4f4; box-shadow: none; }
+.agent-demo .agent-demo-card [data-ap] > span:not(.g4-pic) {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 1lh;
+}
 .agent-demo .agent-demo-library-logo { display: block; flex-shrink: 0; }
 .agent-demo .agent-demo-library-nav { --fade-bottom: 1; }
 .agent-demo .g5-ap-modal {

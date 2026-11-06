@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import { build } from 'esbuild';
 
 const root=path.resolve(import.meta.dirname,'..');
@@ -68,6 +69,31 @@ test('responsive project posters respect byte budgets',async()=>{
 });
 
 test('retired video assets are not published',async()=>{ assert.deepEqual(media.previews,{}); await assert.rejects(fs.access(path.join(root,'public/assets/videos')), {code:'ENOENT'}); });
+
+test('the album card stages the full cover selection behind a small versioned preview',async()=>{
+ const full=await read('out/motion/album-cover-tunnel.html');
+ const mediaDir='out/_next/static/media';
+ const file=(await fs.readdir(path.join(root,mediaDir))).find(name=>/^album-cover-tunnel-preview\.[\w-]+\.html$/.test(name));
+ assert(file,'The bundled preview must have a versioned URL');
+ const preview=await read(`${mediaDir}/${file}`);
+ const coverCount=html=>[...html.matchAll(/data:image\/webp;base64,/g)].length;
+ assert(coverCount(full)>0);
+ assert.equal(coverCount(preview),coverCount(full));
+ assert(gzipSync(preview).length<600_000,'The first preview stage must fit in 600 KB');
+ const batches=[...preview.matchAll(/\/assets\/optimized\/album-cover-tunnel-textures-([a-f0-9]{12})\.js/g)];
+ assert(batches.length>1,'Detail covers must arrive in separate batches');
+ for(const [url,hash] of batches){
+  const body=await read('out'+url);
+  assert.equal(createHash('sha256').update(body).digest('hex').slice(0,12),hash);
+ }
+});
+
+test('the homepage points to the demo bundle without embedding it in its route data',async()=>{
+ const react=index.motion['glass-folder'].find(pack=>pack.framework==='react');
+ const route=await read('out/__next.__PAGE__.txt');
+ assert(route.includes(react.bundleUrl));
+ assert(Buffer.byteLength(route)<45_000,'The initial route must not embed the full demo source');
+});
 
 test('the guided homepage preview shares the downloadable native engine',async()=>{
  const site=await read('src/lib/motion-core/site-previews/glass-folder.generated.js');

@@ -1,0 +1,17 @@
+.arrow {
+  background: center / contain no-repeat url("../../../public/landing/soft-arrow/silver-loop.webp");
+}
+
+:global(.dark) .arrow {
+  background-image: url("../../../public/landing/soft-arrow/black-loop.webp");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    background-image: url("../../../public/landing/soft-arrow/silver.webp");
+  }
+
+  :global(.dark) .arrow {
+    background-image: url("../../../public/landing/soft-arrow/black.webp");
+  }
+}

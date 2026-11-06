@@ -15,7 +15,12 @@ import {
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
-export async function createSoftArrow(host: HTMLElement, canvas: HTMLCanvasElement, signal: AbortSignal) {
+export async function createSoftArrow(
+  host: HTMLElement,
+  canvas: HTMLCanvasElement,
+  signal: AbortSignal,
+  capture?: (drawAt: (time: number) => void, duration: number, rest: number) => void,
+) {
   const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(32, 32, false);
@@ -101,6 +106,18 @@ export async function createSoftArrow(host: HTMLElement, canvas: HTMLCanvasEleme
     .to(pose, { tip: .75, tail: -.45, duration: .9, ease: "sine.inOut" }, 1.15)
     .to(pose, { turn: -.24, tilt: -.1, roll: -.025, duration: 1.15, ease: "elastic.out(1, 0.65)" }, 2.05)
     .to(pose, { tip: 0, tail: 0, duration: 1.25, ease: "elastic.out(1, 0.55)" }, 2.05);
+
+  if (capture) {
+    try {
+      updateMaterial();
+      capture(time => { motion.time(time, true); draw(); }, motion.duration(), motion.repeatDelay());
+    } finally {
+      motion.kill();
+      theme.disconnect();
+      dispose();
+    }
+    return () => {};
+  }
 
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   let visible = true;

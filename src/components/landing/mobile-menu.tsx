@@ -91,6 +91,7 @@ export function MobileMenu() {
             >
               <Link
                 href={link.href}
+                prefetch={false}
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-2 py-2.5 text-[15px] text-muted-foreground transition-colors duration-150 hover:text-foreground"
               >

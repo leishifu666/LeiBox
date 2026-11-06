@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./landing.css";
 import { SITE_URL } from "@/lib/site-url";
 import { getMotionPackages } from "@/lib/motion-packages";
+import { getDocAssets } from "@/lib/doc-assets";
 
 import { AgentDemo } from "@/components/landing/agent-demo";
 import { Agents } from "@/components/landing/agents";
@@ -41,9 +42,10 @@ const htmlSafeJsonStringify = (obj: unknown): string =>
 export default async function Home() {
   const packages = await getMotionPackages("glass-folder");
   const reactPackage = packages.find((entry) => entry.framework === "react")!;
+  const reactAsset = getDocAssets().motion["glass-folder"].find((entry) => entry.framework === "react")!;
   const demoCode = {
     component: reactPackage.component,
-    bundle: reactPackage.bundle,
+    bundleUrl: reactAsset.bundleUrl,
     entry: reactPackage.files[0].source,
     lineCount: reactPackage.bundle.trimEnd().split(/\r?\n/).length,
     files: reactPackage.files.map((file) => ({

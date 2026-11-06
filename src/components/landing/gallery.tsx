@@ -27,6 +27,7 @@ export function Gallery() {
         </div>
         <Link
           href="/components"
+          prefetch={false}
           className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-foreground transition-colors duration-150 hover:text-muted-foreground"
         ><T>
           Browse all

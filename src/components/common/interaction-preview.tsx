@@ -172,7 +172,10 @@ export function InteractionPreview({ slug, poster, source, width, height, active
   useEffect(() => {
     if (!active || !source || siteSlug) return;
     let current = true;
-    loadPreviewSource(source).then(
+    const previewSource = source === "/motion/album-cover-tunnel.html"
+      ? new URL("../../../public/motion/album-cover-tunnel-preview.html", import.meta.url).href
+      : source;
+    loadPreviewSource(previewSource).then(
       text => { if (current) setHtml(text); },
       () => { /* Retain the poster if the source cannot be loaded. */ },
     );
