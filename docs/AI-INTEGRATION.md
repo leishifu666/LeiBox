@@ -22,7 +22,7 @@ Skill 会先检查项目，再检索相关用途，通常推荐 1–3 个候选�
 - `/ai/search-index.schema.json`：索引的 JSON Schema 字段契约。
 - `/ai/README.md`：Agent 检索、推荐、分层取源码的访问说明。
 - `/ai/catalog.json` 与 `/llms.txt`：完整目录及发现入口，保留中英文名称、描述、框架、来源与分发信息。
-- `/ai/components/{slug}.json`：组件详情、源码提供者、六框架下载地址或上游注册表地址。
+- `/ai/components/{slug}.json`：组件详情、源码提供者、本站框架包或来源链接。
 - `/ai/packages/{slug}/{framework}.json`：本站组件的完整原始文件、SHA-256、依赖和使用示例。读取一个框架即可，不必下载所有框架。
 - `/ai/SKILL.md` 与 `/ai/scripts/leibox.mjs`：可直接阅读的 Skill 及独立脚本。
 - `/.well-known/agent-skills/index.json` 与 `/.well-known/skills/index.json`：Skill 安装器发现入口。
@@ -46,7 +46,7 @@ node <installed-skill>/scripts/leibox.mjs pull glass-folder --framework react --
 
 查询只读；pull 下载源码、核对文件校验值并写入指定目录，不执行代码或 npm 命令。同内容文件复用；遇到不同的已有文件，在写入前报冲突，不覆盖用户工作。推荐仅请求轻量索引，show/pull 再按需取详情与单个框架源码。
 
-本站原有动效组件读取本站框架代码包；Canvas UI 参考条目直接从原作者的公开注册表拉取，保留其许可和署名。完整检索覆盖两类条目，不把上游代码重新声明成本站原创。
+Skill 检索覆盖组件库的全部公开条目。本站动效可用 `pull` 下载。Canvas UI 参考组件和「组件环游 404」的详情通过 `source.url` 分别链接原站和 GitHub。
 
 ## 生成与维护
 
@@ -58,7 +58,7 @@ npm run ai:catalog
 npm run test:ai
 ```
 
-生成器读取当前组件数据和真实六框架包，同步生成索引、目录、详情、源码包及 Skill discovery 文件。新增组件时，在 `src/data/ai-discovery.ts` 同步维护用途信息；框架与下载地址仍从真实包派生。Schema 源文件为 `scripts/ai-search-index.schema.json`。不要手改 public 下的生成文件。项目内可维护的 Skill 源码位于 `integrations/skills/leibox/`。
+生成器读取组件数据、本站框架包和来源信息，同步生成索引、目录、详情、源码包及 Skill discovery 文件。新增组件时，在 `src/data/ai-discovery.ts` 同步维护用途信息。Schema 源文件为 `scripts/ai-search-index.schema.json`。项目内可维护的 Skill 源码位于 `integrations/skills/leibox/`。
 
 仓库原有的本地查询 CLI 仍可使用，但它不是安装 Skill 的前提：
 

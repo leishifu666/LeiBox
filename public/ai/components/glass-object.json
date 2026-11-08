@@ -1,0 +1,69 @@
+{
+  "slug": "glass-object",
+  "docsPath": "/docs/components/glass-object",
+  "previewPath": "/assets/components/original-glass-object.png",
+  "detailPath": "/ai/components/glass-object.json",
+  "markdownPath": "/ai/components/glass-object.md",
+  "name": {
+    "en": "Glass Object",
+    "zh": "玻璃物体"
+  },
+  "description": {
+    "en": "Turns any 3D model, SVG, or image into floating liquid glass with real refraction, dispersion, and frost.",
+    "zh": "将三维模型、SVG 或图片变为悬浮的液态玻璃，呈现折射、色散和磨砂效果。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "玻璃品牌标志",
+      "产品模型展示",
+      "glass logo showcase"
+    ],
+    "searchTerms": [
+      "玻璃",
+      "液态",
+      "折射",
+      "模型",
+      "logo",
+      "glass",
+      "3d",
+      "hero"
+    ],
+    "visualTags": [
+      "glass",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/glass-object",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

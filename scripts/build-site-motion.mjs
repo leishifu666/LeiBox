@@ -30,6 +30,13 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
   async function compile(source, slug, variant) {
     const resources = new Set();
     let html = source;
+    if (slug === 'blister-dropdown') {
+      // Ship the original Tailwind utilities without a blocking Play CDN script.
+      const utilities = await fs.readFile(path.join(root, 'src/lib/motion-core/blister-dropdown-tailwind.css'), 'utf8');
+      // Keep the original controls available to the hover replay, but out of the demo UI.
+      const demoStyles = '.studio-stage > :is(header, footer) { display: none; }';
+      html = html.replace('<script src="https://cdn.tailwindcss.com/3.4.17"></script>', () => `<style>${utilities}\n${demoStyles}</style>`);
+    }
     const googleFonts = /@import\s+url\(["']?https:\/\/fonts\.googleapis\.com[^)]*\)\s*;/gi;
     if (googleFonts.test(html)) {
       const localFont = await fs.readFile(path.join(root, 'src/lib/ShareInvite/share-invite.css'), 'utf8');
@@ -47,6 +54,13 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
         const font = await asset(bytes, extension);
         resources.add(font); html = html.split(url).join(font);
       } else if (/^image\/(?:png|jpeg|webp)$/.test(mime)) {
+        if (slug === 'blister-dropdown' && mime === 'image/png') {
+          // Its canvas only renders particles. Reuse each original PNG across the
+          // stationary pockets and flying capsule without resampling any pixels.
+          const image = await asset(bytes, 'png');
+          resources.add(image); html = html.split(url).join(image);
+          continue;
+        }
         const width = slug === 'crumpled-paper' || slug === 'brand-poster-cards' ? 800 : slug === 'album-cover-tunnel' ? 512 : slug === 'spider-music-player' ? 480 : 1024;
         const key = hash(bytes) + ':' + width;
         if (!images.has(key)) images.set(key, (async () => {
@@ -97,7 +111,7 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
   // A new export must not republish obsolete build files indefinitely. Remote
   // retirement remains subject to the deployment grace period and rollback set.
   for (const entry of await fs.readdir(folder, { withFileTypes: true })) {
-    if (entry.isFile() && /^(?:[a-z0-9-]+-)?[a-f0-9]{24}\.(?:html|js|css|woff2?)$/.test(entry.name) && !lengths.has('/assets/motion/' + entry.name)) {
+    if (entry.isFile() && /^(?:[a-z0-9-]+-)?[a-f0-9]{24}\.(?:html|js|css|woff2?|png)$/.test(entry.name) && !lengths.has('/assets/motion/' + entry.name)) {
       await fs.unlink(path.join(folder, entry.name));
     }
   }

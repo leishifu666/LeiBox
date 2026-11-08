@@ -1,13 +1,13 @@
 # LeiBox / UI 设计与组件收藏
 
-> 为界面开发任务主动推荐适用组件，按实际框架拉取完整源码。Start with the task-oriented search index; fetch details and source only for selected components.
+> 按界面开发需求推荐组件，查找匹配框架的源码包或原始来源。Start with the task-oriented search index; fetch details and source only for selected components.
 
 ## Machine-readable entry points
 
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 47 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 58 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -17,6 +17,8 @@ Paths beginning with / are relative to the origin serving this file. When only a
 
 ## Components
 
+- [Orbit 404 Page / 组件环游 404](https://leibox.pantoria.cn/ai/components/orbit-not-found.md): A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.
+- [Blister Pack Dropdown / 胶囊弹出下拉菜单](https://leibox.pantoria.cn/ai/components/blister-dropdown.md): A foil dropdown that pops the selected capsule out of its pocket and into the trigger.
 - [Pixel Day–Night Toggle / 像素日夜开关](https://leibox.pantoria.cn/ai/components/pixel-toggle.md): A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.
 - [Image Accordion / 弹性图片手风琴](https://leibox.pantoria.cn/ai/components/image-accordion.md): Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.
 - [Image Compare / 弹性图片对比](https://leibox.pantoria.cn/ai/components/image-compare.md): Compare two versions of an image with a divider that bends as you drag and glides to the edge when flicked.
@@ -64,6 +66,15 @@ Paths beginning with / are relative to the origin serving this file. When only a
 - [Expandable Access Request / 访问申请展开](https://leibox.pantoria.cn/ai/components/bouncy-access.md): A compact access request expands into an avatar list with staggered spring motion.
 - [Inertial Calendar Drag / 日历惯性拖拽](https://leibox.pantoria.cn/ai/components/velocity-drag.md): Calendar events turn into a floating focus card that stretches and follows drag velocity.
 - [Dot Grid Loader / 点阵加载](https://leibox.pantoria.cn/ai/components/ai-generating.md): A restrained 20-by-20 dot field pulses around two moving focal points while an image is generating.
+- [ASCII Object / ASCII 物体](https://leibox.pantoria.cn/ai/components/ascii-object.md): Any GLB/glTF model, SVG, or image floating in a studio scene, redrawn as shape-matched ASCII characters.
+- [Asciify / 字符透镜](https://leibox.pantoria.cn/ai/components/asciify.md): A soft lens that follows your cursor and redraws the live HTML beneath it as ascii characters.
+- [Frost / 冰霜](https://leibox.pantoria.cn/ai/components/frost.md): A frozen pane of ice over your live HTML that melts under the cursor and refreezes.
+- [Glass / 玻璃透镜](https://leibox.pantoria.cn/ai/components/glass.md): A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.
+- [Glass Object / 玻璃物体](https://leibox.pantoria.cn/ai/components/glass-object.md): Turns any 3D model, SVG, or image into floating liquid glass with real refraction, dispersion, and frost.
+- [Glyph Rain / 字符雨](https://leibox.pantoria.cn/ai/components/glyph-rain.md): Falling glyph streams that light up your live HTML, with drop heads that surge where your cursor cuts through.
+- [Particle Object / 粒子物体](https://leibox.pantoria.cn/ai/components/particle-object.md): Rebuilds any 3D model, SVG, or image as particles that scatter around the cursor and spring back into shape.
+- [Particle Scroll / 粒子滚动](https://leibox.pantoria.cn/ai/components/particle-scroll.md): Dissolves your live HTML below a chosen line into fine sand particles that reassemble on scroll.
+- [Liquid Object / 流体物体](https://leibox.pantoria.cn/ai/components/liquid-object.md): Drags any 3D model, SVG, or image through invisible liquid that swirls under the cursor and splits the light into color.
 
 ## Use with an AI assistant
 

@@ -1,0 +1,68 @@
+{
+  "slug": "frost",
+  "docsPath": "/docs/components/frost",
+  "previewPath": "/assets/components/original-frost.png",
+  "detailPath": "/ai/components/frost.json",
+  "markdownPath": "/ai/components/frost.md",
+  "name": {
+    "en": "Frost",
+    "zh": "冰霜"
+  },
+  "description": {
+    "en": "A frozen pane of ice over your live HTML that melts under the cursor and refreezes.",
+    "zh": "在网页上覆盖冰层。指针经过时冰面融化，移开后重新凝结。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "cursor",
+    "useCases": [
+      "冰霜擦除互动",
+      "节日活动首屏",
+      "ice reveal"
+    ],
+    "searchTerms": [
+      "冰霜",
+      "冰冻",
+      "融化",
+      "擦除",
+      "ice",
+      "frost",
+      "reveal"
+    ],
+    "visualTags": [
+      "ice",
+      "translucent"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/frost",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

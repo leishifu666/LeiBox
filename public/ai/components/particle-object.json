@@ -1,0 +1,69 @@
+{
+  "slug": "particle-object",
+  "docsPath": "/docs/components/particle-object",
+  "previewPath": "/assets/components/original-particle-object.png",
+  "detailPath": "/ai/components/particle-object.json",
+  "markdownPath": "/ai/components/particle-object.md",
+  "name": {
+    "en": "Particle Object",
+    "zh": "粒子物体"
+  },
+  "description": {
+    "en": "Rebuilds any 3D model, SVG, or image as particles that scatter around the cursor and spring back into shape.",
+    "zh": "将三维模型、SVG 或图片重建为粒子。粒子随指针散开，再弹回原形。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "粒子 Logo",
+      "交互模型展示",
+      "interactive particle logo"
+    ],
+    "searchTerms": [
+      "粒子",
+      "散开",
+      "聚合",
+      "模型",
+      "logo",
+      "particles",
+      "3d",
+      "hero"
+    ],
+    "visualTags": [
+      "particles",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/particle-object",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

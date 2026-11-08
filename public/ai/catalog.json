@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "8fe780d0e309dbe7a6a0181245400a136a1803c373141231417a759900485676",
+  "revision": "ec051883c3d34df3327ccc7d3d34972cba515288c41efff69e0d838b1c30f73e",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -25,12 +25,152 @@
   },
   "classificationPolicy": {
     "supportedKinds": [
-      "project-source"
+      "project-source",
+      "upstream-reference",
+      "project-reference"
     ],
-    "currentKind": "project-source",
-    "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
+    "distribution": "Use LeiBox packages for project-source entries. Reference entries link to the provider's documentation or repository."
   },
   "items": [
+    {
+      "slug": "orbit-not-found",
+      "docsPath": "/docs/components/orbit-not-found",
+      "previewPath": "/assets/components/orbit-not-found.png",
+      "keywords": "404 页面走丢 组件环游 页面模板 轨道 错误页 error not found orbit page template",
+      "detailPath": "/ai/components/orbit-not-found.json",
+      "markdownPath": "/ai/components/orbit-not-found.md",
+      "name": {
+        "en": "Orbit 404 Page",
+        "zh": "组件环游 404"
+      },
+      "description": {
+        "en": "A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.",
+        "zh": "把组件预览排成环形轨道的 404 页面。悬停或聚焦卡片时暂停转动，选中卡片即可打开对应组件。"
+      },
+      "frameworks": [
+        "react"
+      ],
+      "renderers": [],
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "404 错误页",
+          "找不到页面时推荐组件",
+          "not found page with component links"
+        ],
+        "searchTerms": [
+          "404",
+          "页面走丢",
+          "组件环游",
+          "页面模板",
+          "轨道卡片",
+          "not found",
+          "error page",
+          "orbit"
+        ],
+        "visualTags": [
+          "orbit",
+          "cards"
+        ],
+        "interactions": [
+          "hover",
+          "focus",
+          "click",
+          "keyboard"
+        ],
+        "caveat": "React / Next.js 示例，详情提供 GitHub 源码入口。"
+      },
+      "source": {
+        "kind": "project-reference",
+        "provider": "LeiBox",
+        "url": "https://github.com/leishifu666/LeiBox/tree/main/src/components/not-found-experiments",
+        "license": "See the notices in the LeiBox repository."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "github",
+        "notice": {
+          "en": "Use the GitHub source and the LeiBox documentation to integrate this React / Next.js example.",
+          "zh": "通过 GitHub 查看 React / Next.js 源码，结合 LeiBox 文档接入。"
+        }
+      }
+    },
+    {
+      "slug": "blister-dropdown",
+      "name": {
+        "en": "Blister Pack Dropdown",
+        "zh": "胶囊弹出下拉菜单"
+      },
+      "description": {
+        "en": "A foil dropdown that pops the selected capsule out of its pocket and into the trigger.",
+        "zh": "选中一行，胶囊会弹出药槽并飞进顶部，铝箔留下撕开的空槽。"
+      },
+      "keywords": "胶囊 药板 铝箔 弹出 下拉菜单 筛选 状态 pill capsule foil blister pack dropdown filter",
+      "docsPath": "/docs/animations/blister-dropdown",
+      "detailPath": "/ai/components/blister-dropdown.json",
+      "markdownPath": "/ai/components/blister-dropdown.md",
+      "previewPath": "/assets/components/blister-dropdown.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "状态筛选菜单",
+          "药板胶囊弹出选择",
+          "tactile status filter dropdown"
+        ],
+        "searchTerms": [
+          "胶囊",
+          "铝箔",
+          "药板",
+          "状态",
+          "筛选",
+          "下拉菜单",
+          "blister",
+          "capsule",
+          "foil",
+          "dropdown",
+          "status filter"
+        ],
+        "visualTags": [
+          "metal",
+          "foil",
+          "capsule",
+          "tactile"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "详情演示使用原版 HTML。六框架移植版通过 onValueChange 连接实际数据，可配置数量、默认状态、收起行为和音效。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Six LeiBox framework ports use an independent DOM and CSS implementation. The website demo runs the supplied HTML and its original assets and animation code.",
+        "designReference": "https://x.com/AdelineAstraOS/status/2119070206308094176",
+        "designAuthor": "Adeline · AstraOS",
+        "license": "No independent redistribution license was verified for the supplied HTML and artwork. The framework packages use independent CSS materials and retain the Lucide license notice."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "pixel-toggle",
       "name": {
@@ -86,11 +226,13 @@
         "preact",
         "vanilla"
       ],
-      "renderers": [],
+      "renderers": [
+        "webgl"
+      ],
       "source": {
         "kind": "project-source",
         "provider": "LeiBox",
-        "implementation": "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+        "implementation": "LeiBox implementation using a native switch, a WebGL2 glass shader with a Canvas 2D fallback, and optional synthesized click audio.",
         "designReference": "https://x.com/kaolti/status/2119151022014894260",
         "designAuthor": "Zsolt Kacso",
         "license": "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation."
@@ -3390,6 +3532,612 @@
         "notice": {
           "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
           "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "ascii-object",
+      "docsPath": "/docs/components/ascii-object",
+      "previewPath": "/assets/components/original-ascii-object.png",
+      "detailPath": "/ai/components/ascii-object.json",
+      "markdownPath": "/ai/components/ascii-object.md",
+      "name": {
+        "en": "ASCII Object",
+        "zh": "ASCII 物体"
+      },
+      "description": {
+        "en": "Any GLB/glTF model, SVG, or image floating in a studio scene, redrawn as shape-matched ASCII characters.",
+        "zh": "让 GLB/glTF 模型、SVG 或图片悬浮在灯光场景中，并用与轮廓匹配的 ASCII 字符重绘。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "品牌模型展示",
+          "首屏视觉",
+          "3D model showcase"
+        ],
+        "searchTerms": [
+          "字符",
+          "ascii",
+          "模型",
+          "3d",
+          "logo",
+          "首屏",
+          "hero"
+        ],
+        "visualTags": [
+          "ascii",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/ascii-object",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "asciify",
+      "docsPath": "/docs/components/asciify",
+      "previewPath": "/assets/components/original-asciify.png",
+      "detailPath": "/ai/components/asciify.json",
+      "markdownPath": "/ai/components/asciify.md",
+      "name": {
+        "en": "Asciify",
+        "zh": "字符透镜"
+      },
+      "description": {
+        "en": "A soft lens that follows your cursor and redraws the live HTML beneath it as ascii characters.",
+        "zh": "透镜随指针移动，将下方的网页内容重绘为 ASCII 字符。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "鼠标探索效果",
+          "网页局部字符化",
+          "cursor lens"
+        ],
+        "searchTerms": [
+          "字符",
+          "ascii",
+          "透镜",
+          "鼠标",
+          "光标",
+          "cursor",
+          "lens"
+        ],
+        "visualTags": [
+          "ascii"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/asciify",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "frost",
+      "docsPath": "/docs/components/frost",
+      "previewPath": "/assets/components/original-frost.png",
+      "detailPath": "/ai/components/frost.json",
+      "markdownPath": "/ai/components/frost.md",
+      "name": {
+        "en": "Frost",
+        "zh": "冰霜"
+      },
+      "description": {
+        "en": "A frozen pane of ice over your live HTML that melts under the cursor and refreezes.",
+        "zh": "在网页上覆盖冰层。指针经过时冰面融化，移开后重新凝结。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "冰霜擦除互动",
+          "节日活动首屏",
+          "ice reveal"
+        ],
+        "searchTerms": [
+          "冰霜",
+          "冰冻",
+          "融化",
+          "擦除",
+          "ice",
+          "frost",
+          "reveal"
+        ],
+        "visualTags": [
+          "ice",
+          "translucent"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/frost",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "glass",
+      "docsPath": "/docs/components/glass",
+      "previewPath": "/assets/components/original-glass.png",
+      "detailPath": "/ai/components/glass.json",
+      "markdownPath": "/ai/components/glass.md",
+      "name": {
+        "en": "Glass",
+        "zh": "玻璃透镜"
+      },
+      "description": {
+        "en": "A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.",
+        "zh": "玻璃透镜跟随指针，折射并放大下方的网页内容。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "cursor",
+        "useCases": [
+          "鼠标放大镜",
+          "首屏玻璃透镜",
+          "magnifying cursor"
+        ],
+        "searchTerms": [
+          "玻璃",
+          "透镜",
+          "放大镜",
+          "折射",
+          "鼠标",
+          "glass",
+          "lens",
+          "magnifier"
+        ],
+        "visualTags": [
+          "glass",
+          "refraction"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "涉及实时 HTML 捕获；玻璃文件管理卡片应选择 glass-folder。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/glass",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "glass-object",
+      "docsPath": "/docs/components/glass-object",
+      "previewPath": "/assets/components/original-glass-object.png",
+      "detailPath": "/ai/components/glass-object.json",
+      "markdownPath": "/ai/components/glass-object.md",
+      "name": {
+        "en": "Glass Object",
+        "zh": "玻璃物体"
+      },
+      "description": {
+        "en": "Turns any 3D model, SVG, or image into floating liquid glass with real refraction, dispersion, and frost.",
+        "zh": "将三维模型、SVG 或图片变为悬浮的液态玻璃，呈现折射、色散和磨砂效果。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "玻璃品牌标志",
+          "产品模型展示",
+          "glass logo showcase"
+        ],
+        "searchTerms": [
+          "玻璃",
+          "液态",
+          "折射",
+          "模型",
+          "logo",
+          "glass",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "glass",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/glass-object",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "glyph-rain",
+      "docsPath": "/docs/components/glyph-rain",
+      "previewPath": "/assets/components/original-glyph-rain.png",
+      "detailPath": "/ai/components/glyph-rain.json",
+      "markdownPath": "/ai/components/glyph-rain.md",
+      "name": {
+        "en": "Glyph Rain",
+        "zh": "字符雨"
+      },
+      "description": {
+        "en": "Falling glyph streams that light up your live HTML, with drop heads that surge where your cursor cuts through.",
+        "zh": "下落的字符流照亮网页，指针扫过时会激起字符涌动。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "background",
+        "useCases": [
+          "代码雨背景",
+          "科技主题首屏",
+          "matrix code rain"
+        ],
+        "searchTerms": [
+          "代码雨",
+          "字符雨",
+          "黑客",
+          "矩阵",
+          "matrix",
+          "rain",
+          "background"
+        ],
+        "visualTags": [
+          "ascii",
+          "cyber"
+        ],
+        "interactions": [
+          "pointer",
+          "autoplay"
+        ],
+        "caveat": "涉及实时 HTML 捕获；保持正文可读，浏览器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/glyph-rain",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "particle-object",
+      "docsPath": "/docs/components/particle-object",
+      "previewPath": "/assets/components/original-particle-object.png",
+      "detailPath": "/ai/components/particle-object.json",
+      "markdownPath": "/ai/components/particle-object.md",
+      "name": {
+        "en": "Particle Object",
+        "zh": "粒子物体"
+      },
+      "description": {
+        "en": "Rebuilds any 3D model, SVG, or image as particles that scatter around the cursor and spring back into shape.",
+        "zh": "将三维模型、SVG 或图片重建为粒子。粒子随指针散开，再弹回原形。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "粒子 Logo",
+          "交互模型展示",
+          "interactive particle logo"
+        ],
+        "searchTerms": [
+          "粒子",
+          "散开",
+          "聚合",
+          "模型",
+          "logo",
+          "particles",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "particles",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/particle-object",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "particle-scroll",
+      "docsPath": "/docs/components/particle-scroll",
+      "previewPath": "/assets/components/original-particle-scroll.png",
+      "detailPath": "/ai/components/particle-scroll.json",
+      "markdownPath": "/ai/components/particle-scroll.md",
+      "name": {
+        "en": "Particle Scroll",
+        "zh": "粒子滚动"
+      },
+      "description": {
+        "en": "Dissolves your live HTML below a chosen line into fine sand particles that reassemble on scroll.",
+        "zh": "把指定位置下方的网页内容化为细沙，滚动时粒子逐渐拼回原状。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "scroll",
+        "useCases": [
+          "滚动叙事",
+          "页面消散过渡",
+          "scroll storytelling"
+        ],
+        "searchTerms": [
+          "滚动",
+          "消散",
+          "细沙",
+          "粒子",
+          "scroll",
+          "dissolve",
+          "particles"
+        ],
+        "visualTags": [
+          "particles"
+        ],
+        "interactions": [
+          "scroll"
+        ],
+        "caveat": "涉及实时 HTML 捕获；适合局部叙事段落，浏览器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/particle-scroll",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-object",
+      "docsPath": "/docs/components/liquid-object",
+      "previewPath": "/assets/components/original-liquid-object.png",
+      "detailPath": "/ai/components/liquid-object.json",
+      "markdownPath": "/ai/components/liquid-object.md",
+      "name": {
+        "en": "Liquid Object",
+        "zh": "流体物体"
+      },
+      "description": {
+        "en": "Drags any 3D model, SVG, or image through invisible liquid that swirls under the cursor and splits the light into color.",
+        "zh": "将三维模型、SVG 或图片浸入隐形液体。指针带起的水流拖动形体，并将光线分解为颜色。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl",
+        "webgpu"
+      ],
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "液态品牌展示",
+          "流体模型互动",
+          "liquid model showcase"
+        ],
+        "searchTerms": [
+          "液态",
+          "流体",
+          "模型",
+          "logo",
+          "liquid",
+          "fluid",
+          "3d",
+          "hero"
+        ],
+        "visualTags": [
+          "liquid",
+          "3d"
+        ],
+        "interactions": [
+          "pointer"
+        ],
+        "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+      },
+      "source": {
+        "kind": "upstream-reference",
+        "provider": "Canvas UI",
+        "url": "https://canvasui.dev/docs/components/liquid-object",
+        "license": "MIT + Commons Clause. Follow the original provider's terms."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": false,
+        "installProvider": "upstream",
+        "notice": {
+          "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+          "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
         }
       }
     }

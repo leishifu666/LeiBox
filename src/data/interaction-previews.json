@@ -1,5 +1,17 @@
 [
   {
+    "slug": "blister-dropdown",
+    "href": "/docs/animations/blister-dropdown",
+    "name": "Blister Pack Dropdown",
+    "category": "Filter interaction",
+    "description": "A foil dropdown that pops the selected capsule out of its pocket and into the trigger.",
+    "keywords": "胶囊 药板 铝箔 弹出 下拉菜单 筛选 状态 pill capsule foil blister pack dropdown filter",
+    "preview": "/assets/components/blister-dropdown.png",
+    "sourceFile": "biohacking_lab_blister_pack_dropdown_adelineastraos.html",
+    "canvasWidth": 560,
+    "canvasHeight": 580
+  },
+  {
     "slug": "pixel-toggle",
     "href": "/docs/animations/pixel-toggle",
     "name": "Pixel Day–Night Toggle",

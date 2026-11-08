@@ -1,0 +1,69 @@
+{
+  "slug": "liquid-object",
+  "docsPath": "/docs/components/liquid-object",
+  "previewPath": "/assets/components/original-liquid-object.png",
+  "detailPath": "/ai/components/liquid-object.json",
+  "markdownPath": "/ai/components/liquid-object.md",
+  "name": {
+    "en": "Liquid Object",
+    "zh": "流体物体"
+  },
+  "description": {
+    "en": "Drags any 3D model, SVG, or image through invisible liquid that swirls under the cursor and splits the light into color.",
+    "zh": "将三维模型、SVG 或图片浸入隐形液体。指针带起的水流拖动形体，并将光线分解为颜色。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "液态品牌展示",
+      "流体模型互动",
+      "liquid model showcase"
+    ],
+    "searchTerms": [
+      "液态",
+      "流体",
+      "模型",
+      "logo",
+      "liquid",
+      "fluid",
+      "3d",
+      "hero"
+    ],
+    "visualTags": [
+      "liquid",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/liquid-object",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

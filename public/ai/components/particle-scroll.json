@@ -1,0 +1,67 @@
+{
+  "slug": "particle-scroll",
+  "docsPath": "/docs/components/particle-scroll",
+  "previewPath": "/assets/components/original-particle-scroll.png",
+  "detailPath": "/ai/components/particle-scroll.json",
+  "markdownPath": "/ai/components/particle-scroll.md",
+  "name": {
+    "en": "Particle Scroll",
+    "zh": "粒子滚动"
+  },
+  "description": {
+    "en": "Dissolves your live HTML below a chosen line into fine sand particles that reassemble on scroll.",
+    "zh": "把指定位置下方的网页内容化为细沙，滚动时粒子逐渐拼回原状。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "scroll",
+    "useCases": [
+      "滚动叙事",
+      "页面消散过渡",
+      "scroll storytelling"
+    ],
+    "searchTerms": [
+      "滚动",
+      "消散",
+      "细沙",
+      "粒子",
+      "scroll",
+      "dissolve",
+      "particles"
+    ],
+    "visualTags": [
+      "particles"
+    ],
+    "interactions": [
+      "scroll"
+    ],
+    "caveat": "涉及实时 HTML 捕获；适合局部叙事段落，浏览器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/particle-scroll",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

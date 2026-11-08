@@ -1,0 +1,68 @@
+{
+  "slug": "ascii-object",
+  "docsPath": "/docs/components/ascii-object",
+  "previewPath": "/assets/components/original-ascii-object.png",
+  "detailPath": "/ai/components/ascii-object.json",
+  "markdownPath": "/ai/components/ascii-object.md",
+  "name": {
+    "en": "ASCII Object",
+    "zh": "ASCII 物体"
+  },
+  "description": {
+    "en": "Any GLB/glTF model, SVG, or image floating in a studio scene, redrawn as shape-matched ASCII characters.",
+    "zh": "让 GLB/glTF 模型、SVG 或图片悬浮在灯光场景中，并用与轮廓匹配的 ASCII 字符重绘。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "品牌模型展示",
+      "首屏视觉",
+      "3D model showcase"
+    ],
+    "searchTerms": [
+      "字符",
+      "ascii",
+      "模型",
+      "3d",
+      "logo",
+      "首屏",
+      "hero"
+    ],
+    "visualTags": [
+      "ascii",
+      "3d"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "需准备目标模型、SVG 或图片；渲染器要求见详情。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/ascii-object",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

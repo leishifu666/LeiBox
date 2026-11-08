@@ -40,7 +40,7 @@
         "docsPath": { "$ref": "#/definitions/path" },
         "detailPath": { "$ref": "#/definitions/path" },
         "previewPath": { "$ref": "#/definitions/path" },
-        "sourceProvider": { "enum": ["leibox", "upstream"] },
+        "sourceProvider": { "enum": ["leibox", "upstream", "github"] },
         "discovery": {
           "type": "object", "additionalProperties": false,
           "required": ["category", "useCases", "searchTerms", "visualTags", "interactions", "caveat"],

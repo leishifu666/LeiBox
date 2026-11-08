@@ -1,0 +1,67 @@
+{
+  "slug": "asciify",
+  "docsPath": "/docs/components/asciify",
+  "previewPath": "/assets/components/original-asciify.png",
+  "detailPath": "/ai/components/asciify.json",
+  "markdownPath": "/ai/components/asciify.md",
+  "name": {
+    "en": "Asciify",
+    "zh": "字符透镜"
+  },
+  "description": {
+    "en": "A soft lens that follows your cursor and redraws the live HTML beneath it as ascii characters.",
+    "zh": "透镜随指针移动，将下方的网页内容重绘为 ASCII 字符。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "cursor",
+    "useCases": [
+      "鼠标探索效果",
+      "网页局部字符化",
+      "cursor lens"
+    ],
+    "searchTerms": [
+      "字符",
+      "ascii",
+      "透镜",
+      "鼠标",
+      "光标",
+      "cursor",
+      "lens"
+    ],
+    "visualTags": [
+      "ascii"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "涉及实时 HTML 捕获，先查看详情中的浏览器要求与回退说明。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/asciify",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

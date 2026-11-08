@@ -469,7 +469,13 @@ export function interactionPreviewCss(slug: string) {
 
 export function interactionPreviewDocument(source: string, slug: string) {
   if (slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
-  const script = slug === "pixel-toggle" ? "" : PLAYER.replace('__SLUG__', JSON.stringify(slug));
+  const script = slug === "blister-dropdown" ? `
+    addEventListener('load', () => {
+      document.getElementById('btnSoundToggle').click();
+      document.getElementById('btnAutoPlay').click();
+      requestAnimationFrame(() => parent.postMessage({ type: 'leibox-preview-ready', slug: 'blister-dropdown' }, '*'));
+    }, { once: true });
+  ` : slug === "pixel-toggle" ? "" : PLAYER.replace('__SLUG__', JSON.stringify(slug));
   const style = `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares
   // the frame between the original animation and the pointer replay driver.

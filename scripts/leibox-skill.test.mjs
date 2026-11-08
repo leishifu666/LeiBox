@@ -6,6 +6,8 @@ import { createServer } from 'node:http';
 import { createHash } from 'node:crypto';
 import Ajv from 'ajv';
 import { run } from '../integrations/skills/leibox/scripts/leibox.mjs';
+import { COMPONENTS } from '../src/data/components.ts';
+import { ORBIT_NOT_FOUND } from '../src/data/orbit-not-found.ts';
 
 const publicRoot = path.resolve('public');
 const fixtureRoot = path.resolve('node_modules/.cache/leibox-skill-tests');
@@ -40,6 +42,12 @@ test('task index validates against its published schema and covers exactly the l
   assert(validate(index), JSON.stringify(validate.errors));
   assert.equal(index.total, catalog.items.length);
   assert.deepEqual(index.items.map((item) => item.slug), catalog.items.map((item) => item.slug));
+  const interactionPreviews = JSON.parse(await fs.readFile('src/data/interaction-previews.json', 'utf8'));
+  assert.deepEqual(index.items.map(item => item.docsPath), [
+    ORBIT_NOT_FOUND.href,
+    ...interactionPreviews.map(item => item.href),
+    ...COMPONENTS.map(item => item.href),
+  ]);
   assert.equal(index.revision, createHash('sha256').update(JSON.stringify(index.items)).digest('hex'));
   assert.equal(index.revision, catalog.revision);
   assert(indexBytes.length < catalogBytes.length * 0.75);
@@ -81,7 +89,8 @@ test('recommend respects filters and exclusions, returns no invented fallback, a
   const loading = await invoke(['recommend', '加载反馈', '--category', 'feedback', '--exclude-tag', 'particles', '--limit', '1']);
   assert.equal(loading.items[0].slug, 'ai-generating');
   const gpu = await invoke(['recommend', '粒子', '--framework', 'react', '--renderer', 'webgpu']);
-  assert.equal(gpu.count, 0, 'retired renderer packages must not be invented as fallback results');
+  assert(gpu.items.some(item => item.slug === 'particle-object'));
+  assert(gpu.items.every(item => item.sourceProvider === 'upstream' && item.renderers.includes('webgpu')));
   assert.equal((await invoke(['recommend', '团队邀请', '--category', 'input'])).count, 0);
   assert.equal((await invoke(['recommend', 'zzzz-absent-widget'])).count, 0);
   assert.deepEqual(new Set(requests), new Set(['/ai/search-index.json']));
@@ -100,13 +109,29 @@ test('invalid recommendation arguments and malformed remote index report real er
 test('installed helper searches the complete bilingual collection and reads actual package metadata', async () => {
   const catalog = await invoke(['list']);
   assert(catalog.items.some((item) => item.slug === 'glass-folder'));
-  assert(catalog.items.every((item) => item.source.kind === 'project-source'));
-  await assert.rejects(invoke(['pull', 'glass']), { code: 'UNKNOWN_SLUG' });
   assert((await invoke(['search', '玻璃', '文件夹'])).items.some((item) => item.slug === 'glass-folder'));
   assert.equal((await invoke(['search', 'ＤＯＴ-ＭＡＴＲＩＸ-ＴＲＩＯ'])).items[0].slug, 'dot-matrix-trio');
   const detail = await invoke(['show', 'dot-matrix-trio', '--framework', 'vue']);
   assert.equal(detail.selectedPackage.component, 'DotMatrixTrio');
   assert(detail.selectedPackage.url.endsWith('/vue.json'));
+});
+
+test('reference entries show their sources and do not offer local downloads', async () => {
+  const entries = [
+    ['glass', '玻璃透镜', 'upstream', 'https://canvasui.dev/docs/components/glass'],
+    ['orbit-not-found', '组件环游 404', 'github', ORBIT_NOT_FOUND.sourceUrl],
+  ];
+  for (const [slug, name, provider, url] of entries) {
+    const result = await invoke(['recommend', name]);
+    assert.equal(result.items[0].slug, slug);
+    assert.equal(result.items[0].sourceProvider, provider);
+    const detail = await invoke(['show', slug, '--framework', 'react']);
+    assert.equal(detail.source.url, url);
+    assert.equal(detail.distribution.installFromThisSite, false);
+    assert.equal(detail.selectedPackage, null);
+    assert.deepEqual(detail.packages, {});
+    await assert.rejects(invoke(['pull', slug]), error => error.code === 'SOURCE_UNAVAILABLE' && error.message.includes(url));
+  }
 });
 
 test('all generated framework bundles preserve the real files, dependencies and SHA-256 checksums', async () => {

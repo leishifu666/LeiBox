@@ -1,10 +1,13 @@
+import { createGlassRenderer } from './pixel-toggle-glass.mjs';
+
 export const TRACK_WIDTH = 520;
 export const TRACK_HEIGHT = 272;
 export const KNOB_SIZE = 240;
 export const INSET = 16;
 export const TRAVEL = 248;
-export const MARGIN = 72;
-const RADIUS = 66;
+export const MARGIN = 140;
+const SWITCH_SCALE = .83;
+const RADIUS = 69;
 const TURN = Math.PI * 2;
 export const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 export const mix = (from, to, fraction) => from + (to - from) * fraction;
@@ -14,53 +17,50 @@ const blend = (a, b, time) => a.map((channel, index) => Math.round(mix(channel, 
 const rgba = (color, alpha = 1) => `rgba(${color.join(',')},${alpha})`;
 
 const palette = {
-  background: ['151516', 'd9d9d7'], halo: ['202138', 'f3e2c2'],
+  background: ['0d0d0e', 'cdcdcc'], halo: ['212123', 'ececea'],
   focus: ['d6d6ff', '5d3609'],
-  'track-top': ['040508', 'e2e0dc'], 'track-bottom': ['0b0c12', 'eeece8'],
-  'track-inset': ['000000', 'b9b5ae'], 'track-light': ['191a22', 'ffffff'],
-  'track-edge': ['1e1f27', 'ffffff'], 'track-shadow': ['000000', '9c978d'],
-  'knob-top': ['9a9fbd', 'ffffff'], 'knob-bottom': ['4a4d63', 'f2efe9'],
-  'knob-rim': ['ffffff', 'ffffff'], 'knob-shadow': ['000000', '8a8378'],
+  'track-top': ['09090a', 'dededd'], 'track-bottom': ['0d0d0e', 'ebebea'],
+  'track-inset': ['000000', 'bdbdba'], 'track-light': ['1a1a1d', 'ffffff'],
+  'track-edge': ['242426', 'f3f3f2'], 'track-shadow': ['000000', '9d9b96'],
+  'knob-top': ['53535b', 'ffffff'], 'knob-bottom': ['282831', 'eeede9'],
+  'knob-rim': ['ffffff', 'ffffff'], 'knob-shadow': ['000000', '7c7b77'],
 };
 const alpha = { 'knob-top': [.5, .94], 'knob-bottom': [.42, .88], 'knob-rim': [.27, .62], 'knob-shadow': [.44, .35] };
 const sceneColors = Object.entries(palette).map(([name, colors]) => ({ name, night: parseColor(colors[0]), day: parseColor(colors[1]) }));
-const lightColors = [
-  [[112, 110, 255], [224, 225, 255]],
-  [[255, 205, 222], [255, 246, 248]],
-  [[255, 168, 18], [255, 232, 150]],
-];
+const moonLight = [111, 134, 255];
+const sunLight = [255, 168, 46];
 
 function makeMoon() {
   const pixels = [];
-  for (let row = -7; row <= 7; row++) {
-    for (let col = -7; col <= 7; col++) {
-      if (Math.hypot(col + .9, row + .7) > 6) continue;
-      const cut = Math.hypot(col - 1.8, row + 2.7);
-      if (cut > 4.6) pixels.push([col - .4, row, 1]);
-      else if ((col + row) % 2 === 0 || cut > 3.6) pixels.push([col - .4, row, .12 + .4 * (1 - cut / 4.6)]);
+  for (let row = -8; row <= 8; row++) {
+    for (let col = -8; col <= 8; col++) {
+      if (Math.hypot(col, row) > 6.6) continue;
+      const cut = Math.hypot(col - 3.3, row + 2.4);
+      if (cut > 5.4) pixels.push([col, row, 1]);
+      else if ((col + row) % 2 === 0) pixels.push([col, row, .15]);
     }
   }
-  return pixels.concat([[5,-6,1], [4,-6,.7], [6,-6,.7], [5,-7,.7], [5,-5,.7], [3,-4,.35], [7,-3,.3], [2,-7,.3], [7,-7,.25]]);
+  return pixels.concat([[7,-7,1], [6,-7,.45], [8,-7,.45], [7,-8,.45], [7,-6,.45]]);
 }
 
 function makeSun() {
   const pixels = [];
-  for (let row = -4; row <= 3; row++) {
-    for (let col = -4; col <= 3; col++) {
-      if ((col + .5) ** 2 + (row + .5) ** 2 <= 17.2) pixels.push([col, row, 1]);
+  for (let row = -3; row <= 3; row++) {
+    for (let col = -3; col <= 3; col++) {
+      if (Math.hypot(col, row) <= 3.7) pixels.push([col, row, 1]);
     }
   }
   for (let ray = 0; ray < 8; ray++) {
     const angle = ray * Math.PI / 4;
-    const distances = ray % 2 ? [6.1, 7.2] : [6.7, 7.7, 8.7];
-    distances.forEach((distance, index) => {
-      pixels.push([Math.round(Math.cos(angle) * distance - .5), Math.round(Math.sin(angle) * distance - .5), ray % 2 && index ? .6 : .78]);
+    const distances = ray % 2 ? [5.9, 7.2] : [5.6, 6.6, 7.6];
+    distances.forEach(distance => {
+      pixels.push([Math.round(Math.cos(angle) * distance), Math.round(Math.sin(angle) * distance), 1]);
     });
   }
   return pixels;
 }
 
-const glyphs = [{ pixels: makeMoon(), size: 8.4, ratio: 1.18 }, { pixels: makeSun(), size: 7.2, ratio: 1 }];
+const glyphs = [{ pixels: makeMoon(), size: 6.85 }, { pixels: makeSun(), size: 6.85 }];
 const particleCount = Math.max(...glyphs.map(glyph => glyph.pixels.length)) + 20;
 
 export function createPixelParticles() {
@@ -134,18 +134,17 @@ export function createPixelParticles() {
     return { scatter, moving };
   }
 
-  function draw(ctx, center, theme, scatter) {
-    const { size, ratio } = glyphs[glyph];
-    const color = blend([255, 255, 255], [60, 56, 53], theme);
-    ctx.shadowColor = '#e1e4ff';
+  function draw(ctx, center, theme, scatter, mask = false) {
+    const { size } = glyphs[glyph];
+    const color = mask ? [255, 255, 255] : blend([255, 245, 233], [37, 34, 31], theme);
+    if (!mask) ctx.shadowColor = '#fff0d9';
     for (const dot of dots) {
       if (dot.opacity < .02) continue;
       const speed = clamp(Math.hypot(dot.vx, dot.vy) / 420);
       const height = size * .82 * (1 - speed * .35) * (1 - scatter * .35);
-      const width = height * (1 + (ratio - 1) * (1 - speed) * (1 - scatter));
-      ctx.shadowBlur = dot.targetOpacity > .9 ? Math.max(0, (1 - 2 * theme) * 6) : 0;
+      if (!mask) ctx.shadowBlur = dot.targetOpacity > .9 ? Math.max(0, (1 - 2 * theme) * 4) : 0;
       ctx.fillStyle = rgba(color, dot.opacity * (1 - speed * .2));
-      ctx.fillRect(center.x + dot.x - width / 2, center.y + dot.y - height / 2, width, height);
+      ctx.fillRect(center.x + dot.x - height / 2, center.y + dot.y - height / 2, height, height);
     }
   }
 
@@ -235,13 +234,46 @@ function paintRibbon(ctx, samples, { width, exponent, offset = 0, color, opacity
   ctx.restore();
 }
 
-export function createPixelPainter(scene, knob, canvas, dpr) {
+export function createPixelPainter(scene, knob, canvas, dpr, scope) {
   const ctx = canvas.getContext('2d');
   canvas.width = Math.round((TRACK_WIDTH + 2 * MARGIN) * dpr);
   canvas.height = Math.round((TRACK_HEIGHT + 2 * MARGIN) * dpr);
   let previousTheme;
+  const glassCanvas = scene.ownerDocument.createElement('canvas');
+  scene.style.setProperty('--pixel-switch-scale', SWITCH_SCALE);
+  const glass = createGlassRenderer(glassCanvas, {
+    width: TRACK_WIDTH, height: TRACK_HEIGHT, scale: SWITCH_SCALE, dpr,
+    gallery: scene.hasAttribute('data-preview'),
+  });
+  let usingGlass = Boolean(glass);
+  let lastFrame;
+  if (glass) {
+    glassCanvas.className = 'pixel-glass';
+    glassCanvas.setAttribute('aria-hidden', 'true');
+    scene.prepend(glassCanvas);
+    canvas.hidden = true;
+    scene.dataset.glassRenderer = '';
+    glass.resize(scene.clientWidth || 720, scene.clientHeight || 540);
+    const resize = new scope.ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (!usingGlass || !width || !height) return;
+      glass.resize(width, height);
+      if (lastFrame) paint(...lastFrame);
+    });
+    resize.observe(scene);
+    scope.on(glassCanvas, 'webglcontextlost', () => {
+      usingGlass = false;
+      resize.disconnect();
+      delete scene.dataset.glassRenderer;
+      glassCanvas.hidden = true;
+      canvas.hidden = false;
+      if (lastFrame) paint(...lastFrame);
+      lastFrame = undefined;
+    });
+    scope.addCleanup(() => glass.destroy());
+  }
 
-  return function paint(box, theme, phase, transit, dots, scatter) {
+  function paint(box, theme, phase, transit, dots, scatter) {
     if (theme !== previousTheme) {
       for (const { name, night, day } of sceneColors) {
         const opacity = alpha[name];
@@ -250,10 +282,15 @@ export function createPixelPainter(scene, knob, canvas, dpr) {
       previousTheme = theme;
     }
     Object.assign(knob.style, { left: `${box.x}px`, top: `${box.y}px`, width: `${box.width}px`, height: `${box.height}px` });
+    if (usingGlass) {
+      lastFrame = [box, theme, phase, transit, dots, scatter];
+      glass.draw(box, theme, phase, transit, dots, scatter);
+      return;
+    }
     if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, dpr * MARGIN, dpr * MARGIN);
     ctx.clearRect(-MARGIN, -MARGIN, TRACK_WIDTH + 2 * MARGIN, TRACK_HEIGHT + 2 * MARGIN);
-    const padding = 13;
+    const padding = 8;
     const outside = roundedOutline({
       x: box.x - padding, y: box.y - padding, width: box.width + 2 * padding, height: box.height + 2 * padding,
     }, RADIUS + padding);
@@ -261,16 +298,15 @@ export function createPixelPainter(scene, knob, canvas, dpr) {
     const arcFraction = mix(.31, .33, theme) * (1 - .12 * Math.sin(TURN * wrap(phase, .5)));
     const outer = sampleRibbon(outside, outside.phaseDistance(phase), outside.perimeter * arcFraction);
     const inner = sampleRibbon(inside, inside.phaseDistance(phase), inside.perimeter * arcFraction * 1.25);
-    const family = theme < .5 ? 0 : 1;
-    const [wash, core] = lightColors[family].map((color, index) => blend(color, lightColors[family + 1][index], theme * 2 - family));
-    const bright = blend(core, [255, 255, 255], mix(.8, .04, theme));
-    const body = blend(wash, core, .54);
+    const wash = blend(moonLight, sunLight, theme);
+    const bright = blend(wash, [255, 255, 255], .72);
+    const body = blend(wash, bright, .48);
     const night = theme < .55;
     ctx.globalCompositeOperation = night ? 'lighter' : 'source-over';
     paintRibbon(ctx, outer, { width: 64, exponent: .5, offset: 16, color: wash, blur: 25, opacity: mix(.86, .54, theme) });
     paintRibbon(ctx, outer, { width: 18, exponent: .6, offset: 4, color: wash, blur: 8, opacity: .74 });
     paintRibbon(ctx, outer, { width: 9, exponent: .75, color: body, blur: 2, opacity: .94 });
-    paintRibbon(ctx, outer, { width: 5.6, exponent: .9, color: bright, blur: .5 });
+    paintRibbon(ctx, outer, { width: 3.5, exponent: .6, color: bright, blur: .35 });
     ctx.globalCompositeOperation = 'source-over';
 
     const clip = new Path2D();
@@ -295,19 +331,20 @@ export function createPixelPainter(scene, knob, canvas, dpr) {
     paintRibbon(ctx, inner, { width: 8, exponent: .6, color: bright, blur: 2, opacity: .92 });
     dots.draw(ctx, inside.center, theme, scatter);
     ctx.restore();
-  };
+  }
+  return paint;
 }
 
-export function knobGeometry(position, stretch) {
-  let width = KNOB_SIZE * (1 + Math.max(-.08, stretch));
-  let x = INSET + position * TRAVEL - (width - KNOB_SIZE) / 2;
-  if (x < INSET) {
-    width -= INSET - x;
-    x = INSET;
-  }
-  const right = TRACK_WIDTH - INSET;
-  x = Math.min(x, right - KNOB_SIZE * .86);
-  width = clamp(width, KNOB_SIZE * .86, right - x);
-  const height = KNOB_SIZE * (1 - (width / KNOB_SIZE - 1) * .45);
+export function knobGeometry(position, stretch, press) {
+  // Keep the outer edge at the wall and turn spring overshoot into deformation.
+  const overshoot = Math.max(-position, position - 1, 0);
+  const impact = Math.min(.16, overshoot * 1.12);
+  const squeeze = 1 - press * .055;
+  const width = KNOB_SIZE * clamp((1 + stretch - impact) * squeeze, .82, 1.19);
+  const height = KNOB_SIZE * clamp((1 - stretch * .45 + impact * .42) * squeeze, .85, 1.08);
+  const center = INSET + KNOB_SIZE / 2 + clamp(position) * TRAVEL;
+  const x = position > 1 ? TRACK_WIDTH - INSET - width
+    : position < 0 ? INSET
+    : clamp(center - width / 2, INSET, TRACK_WIDTH - INSET - width);
   return { x, y: (TRACK_HEIGHT - height) / 2, width, height };
 }

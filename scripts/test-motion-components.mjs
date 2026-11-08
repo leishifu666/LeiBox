@@ -36,6 +36,7 @@ import { verifyMatchaPowderReveal } from './test-matcha-powder-reveal.mjs';
 import { verifyParticleTextureTrio } from './test-particle-texture-trio.mjs';
 import { verifyShaderFlood } from './test-shader-flood.mjs';
 import { verifyTransferGlow } from './test-transfer-glow.mjs';
+import { verifyBlisterDropdown } from './test-blister-dropdown.mjs';
 import { verifyPixelToggle } from './test-pixel-toggle.mjs';
 import { verifyImageAccordion } from './test-image-accordion.mjs';
 import { verifyImageCompare } from './test-image-compare.mjs';
@@ -121,6 +122,7 @@ try{
   await page.setViewportSize({width:1200,height:1000});
   if(item.slug==='multi-cursor-builder')await verifyMultiCursorBuilder(page,item,ROOT,OUT);
   if(item.slug==='album-cover-tunnel')await verifyAlbumCoverTunnel(page,item,ROOT,OUT);
+  if(item.slug==='blister-dropdown')await verifyBlisterDropdown(page);
   if(item.slug==='pixel-toggle')await verifyPixelToggle(page);
   if(item.slug==='image-accordion')await verifyImageAccordion(page);
   if(item.slug==='image-compare')await verifyImageCompare(page);

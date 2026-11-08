@@ -9,6 +9,18 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "blister-dropdown": {
+    category: "input", useCases: ["状态筛选菜单", "药板胶囊弹出选择", "tactile status filter dropdown"],
+    searchTerms: ["胶囊", "铝箔", "药板", "状态", "筛选", "下拉菜单", "blister", "capsule", "foil", "dropdown", "status filter"],
+    visualTags: ["metal", "foil", "capsule", "tactile"], interactions: ["click", "keyboard", "touch"],
+    caveat: "详情演示使用原版 HTML。六框架移植版通过 onValueChange 连接实际数据，可配置数量、默认状态、收起行为和音效。",
+  },
+  "orbit-not-found": {
+    category: "navigation", useCases: ["404 错误页", "找不到页面时推荐组件", "not found page with component links"],
+    searchTerms: ["404", "页面走丢", "组件环游", "页面模板", "轨道卡片", "not found", "error page", "orbit"],
+    visualTags: ["orbit", "cards"], interactions: ["hover", "focus", "click", "keyboard"],
+    caveat: "React / Next.js 示例，详情提供 GitHub 源码入口。",
+  },
   "pixel-toggle": {
     category: "input", useCases: ["日夜主题开关", "像素图标聚散", "animated day night switch"],
     searchTerms: ["日夜", "主题", "开关", "月亮", "太阳", "像素", "光带", "pixel", "theme toggle", "day night"],

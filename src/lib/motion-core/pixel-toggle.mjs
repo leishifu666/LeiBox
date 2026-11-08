@@ -1,7 +1,11 @@
 import { createSurface } from './motion-runtime';
 import { TRACK_WIDTH, TRAVEL, clamp, mix, createPixelPainter, createPixelParticles, knobGeometry } from './pixel-toggle-paint.mjs';
 
-const DAY_ANGLE = .46;
+const DAY_ANGLE = .5;
+const SLIDE_STIFFNESS = 224;
+const SLIDE_DAMPING = 15.5;
+const SHAPE_STIFFNESS = 420;
+const SHAPE_DAMPING = 24;
 const restAngle = checked => checked ? DAY_ANGLE : 0;
 const smooth = progress => progress * progress * (3 - 2 * progress);
 const easeOut = progress => 1 - (1 - progress) ** 3;
@@ -20,16 +24,16 @@ export function createPixelToggle(host, initial, css, preview = false) {
   const browser = owner.defaultView;
   if (preview) scene.dataset.preview = '';
   const pixelRatio = Math.min(preview ? 1 : 1.5, browser.devicePixelRatio || 1);
-  const paint = createPixelPainter(scene, root.querySelector('.pixel-knob'), root.querySelector('canvas'), pixelRatio);
+  const paint = createPixelPainter(scene, root.querySelector('.pixel-knob'), root.querySelector('canvas'), pixelRatio, scope);
   const particles = createPixelParticles();
   let options = { sound: true, ...initial };
   let checked = Boolean(options.checked);
   let position = Number(checked), theme = position, phase = restAngle(checked);
-  let speed = 0, stretch = 0, stretchSpeed = 0, agitation = 0;
+  let speed = 0, stretch = 0, stretchSpeed = 0, press = 0, agitation = 0;
   let colorMove, lightMove, drag, pointer;
   let frame = 0, lastTime = 0, audio, suppressClick = false, destroyed = false;
 
-  function render(box = knobGeometry(position, stretch), scatter = 0, transit = 0) {
+  function render(box = knobGeometry(position, stretch, press), scatter = 0, transit = 0) {
     paint(box, clamp(theme), phase, transit, particles, scatter);
   }
 
@@ -43,7 +47,7 @@ export function createPixelToggle(host, initial, css, preview = false) {
     stop();
     position = theme = Number(checked);
     phase = restAngle(checked);
-    speed = stretch = stretchSpeed = agitation = 0;
+    speed = stretch = stretchSpeed = press = agitation = 0;
     colorMove = lightMove = undefined;
     particles.assign(position, true);
     render();
@@ -57,6 +61,7 @@ export function createPixelToggle(host, initial, css, preview = false) {
     frame = 0;
     const dt = lastTime ? clamp((now - lastTime) / 1000, .001, .033) : 1 / 60;
     lastTime = now;
+    const substep = dt / 4;
     let transit = 0;
     if (drag?.active) {
       const positionTheme = 1 / (1 + Math.exp(-(position - .5) / .07));
@@ -76,27 +81,31 @@ export function createPixelToggle(host, initial, css, preview = false) {
         transit = Math.min(1, p * 8) * (1 - p) ** 2.2;
         if (p === 1) lightMove = undefined;
       }
-      const dtSmall = dt / 4;
       for (let i = 0; i < 4; i++) {
-        speed += ((Number(checked) - position) * 380 - speed * 26.5) * dtSmall;
-        position += speed * dtSmall;
+        speed += ((Number(checked) - position) * SLIDE_STIFFNESS - speed * SLIDE_DAMPING) * substep;
+        position += speed * substep;
       }
       if (Math.abs(position - Number(checked)) < .0001 && Math.abs(speed) < .001) {
         position = Number(checked);
         speed = 0;
       }
     }
-    const stretchGoal = Math.min(.16, Math.abs(speed) * TRAVEL / 2600 * .16);
-    stretchSpeed += ((stretchGoal - stretch) * 520 - stretchSpeed * 30) * dt;
-    stretch += stretchSpeed * dt;
+    const stretchGoal = Math.min(.18, Math.abs(speed) * .024);
+    for (let i = 0; i < 4; i++) {
+      stretchSpeed += ((stretchGoal - stretch) * SHAPE_STIFFNESS - stretchSpeed * SHAPE_DAMPING) * substep;
+      stretch += stretchSpeed * substep;
+    }
     if (!stretchGoal && Math.abs(stretch) < .0001 && Math.abs(stretchSpeed) < .001) stretch = stretchSpeed = 0;
+    const pressTarget = Number(Boolean(drag));
+    press = mix(press, pressTarget, 1 - Math.exp(-dt * (drag ? 30 : 21)));
+    if (Math.abs(press - pressTarget) < .001) press = pressTarget;
     agitation = Math.max(drag && !drag.active ? .3 : 0, agitation - dt * 7);
-    const box = knobGeometry(position, stretch);
+    const box = knobGeometry(position, stretch, press);
     const center = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
     const livePointer = pointer && now - pointer.at < 160 ? pointer : undefined;
     const { scatter, moving } = particles.advance(clamp(theme), agitation, livePointer, center, dt);
     render(box, scatter, transit);
-    if (moving || agitation || position !== Number(checked) || stretch || colorMove || lightMove || drag?.active) requestFrame();
+    if (moving || agitation || position !== Number(checked) || stretch || press !== pressTarget || colorMove || lightMove || drag?.active) requestFrame();
     else lastTime = 0;
   }
 
@@ -136,6 +145,7 @@ export function createPixelToggle(host, initial, css, preview = false) {
       colorMove = { from: theme, start: now, duration: clicking ? (checked ? 100 : 70) : 140 };
       lightMove = { from: phase, to: finalPhase, start: now + (clicking ? 10 : 0), duration: clicking ? 900 : 700 };
       if (clicking) {
+        press = Math.max(press, .65);
         agitation = .8;
         particles.burst(1.1);
       }

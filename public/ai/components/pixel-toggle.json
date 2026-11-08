@@ -53,11 +53,13 @@
     "preact",
     "vanilla"
   ],
-  "renderers": [],
+  "renderers": [
+    "webgl"
+  ],
   "source": {
     "kind": "project-source",
     "provider": "LeiBox",
-    "implementation": "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+    "implementation": "LeiBox implementation using a native switch, a WebGL2 glass shader with a Canvas 2D fallback, and optional synthesized click audio.",
     "designReference": "https://x.com/kaolti/status/2119151022014894260",
     "designAuthor": "Zsolt Kacso",
     "license": "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation."

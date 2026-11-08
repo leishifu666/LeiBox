@@ -13,12 +13,14 @@ const invoke = (...args) => spawnSync(process.execPath, [cli, ...args], { encodi
 const parseSuccess = result => { assert.equal(result.status, 0, result.stderr); assert.equal(result.stderr, ''); return JSON.parse(result.stdout); };
 const hash = text => crypto.createHash('sha256').update(text).digest('hex');
 
-test('list contains only current project source packages', async () => {
+test('list includes current project source packages and reference entries', async () => {
  const result=parseSuccess(invoke('list'));
  const manifest=JSON.parse(await fs.readFile(path.join(ROOT,'public/motion-frameworks/manifest.json'),'utf8'));
- assert.equal(result.count,new Set(manifest.items.map(item=>item.slug)).size);
- assert(result.items.every(item=>item.source.kind==='project-source'&&item.distribution.installFromThisSite));
- assert(!result.items.some(item=>['glass','asciify','frost','ascii-object'].includes(item.slug)));
+ const packaged=result.items.filter(item=>item.distribution.installFromThisSite);
+ assert.deepEqual(new Set(packaged.map(item=>item.slug)),new Set(manifest.items.map(item=>item.slug)));
+ assert(packaged.every(item=>item.source.kind==='project-source'));
+ assert(result.items.some(item=>item.slug==='glass'&&item.source.kind==='upstream-reference'));
+ assert(result.items.some(item=>item.slug==='orbit-not-found'&&item.source.kind==='project-reference'));
 });
 test('English and Chinese search find current examples',()=>{
  assert(parseSuccess(invoke('search','玻璃','文件夹')).items.some(item=>item.slug==='glass-folder'));

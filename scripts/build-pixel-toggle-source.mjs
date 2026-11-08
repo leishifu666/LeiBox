@@ -43,7 +43,7 @@ addEventListener('pagehide', event => {
   const html = `<!doctype html>
 <html lang="en" translate="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pixel Day–Night Toggle</title>
 <style>
-html,body{margin:0;min-height:100%;background:#151516}
+html,body{margin:0;min-height:100%;background:#0d0d0e}
 html[data-leibox-motion-preview],html[data-leibox-motion-preview] body,html[data-pixel-poster],html[data-pixel-poster] body{background:#f4f4f4}
 body{display:grid;min-height:100vh;place-items:center}
 main{width:100%;min-width:0}

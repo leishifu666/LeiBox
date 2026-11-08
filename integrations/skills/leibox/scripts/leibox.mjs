@@ -119,7 +119,7 @@ export async function run(args, { cwd = process.cwd() } = {}) {
       || [item.frameworks, item.renderers].some((list) => !Array.isArray(list) || list.some((value) => typeof value !== 'string')))) throw new SkillError('INVALID_CATALOG', '推荐索引不符合支持的结构。');
     const items = recommendItems(index.items, values.join(' '), options);
     return { schemaVersion: 1, revision: index.revision, query: values.join(' '), count: items.length, items,
-      next: items.length ? '比较用途与注意事项，再读取选中条目的 detailPath；只下载所需框架。' : '未找到合适组件，可缩短用途词重试；仍无结果时使用现有组件或正常实现。' };
+      next: items.length ? '读取选中条目的 detailPath，按详情下载本站源码包或查看来源链接。' : '未找到合适组件，可缩短用途词重试；仍无结果时使用现有组件或正常实现。' };
   }
   const catalog = await readJson(new URL('/ai/catalog.json', origin));
   if (!Array.isArray(catalog?.items) || catalog.items.some((item) => !item || typeof item.slug !== 'string' || !item.name?.en || !item.name?.zh || !item.description?.en || !item.description?.zh || !Array.isArray(item.frameworks) || !Array.isArray(item.renderers) || !validDiscovery(item.discovery))) throw new SkillError('INVALID_CATALOG', '实时目录缺少必要字段。');
@@ -136,6 +136,10 @@ export async function run(args, { cwd = process.cwd() } = {}) {
   options.framework ??= 'react';
   options.renderer ??= 'webgl';
   if (!entry.frameworks.includes(options.framework)) throw new SkillError('UNSUPPORTED_FRAMEWORK', `${entry.slug} does not offer ${options.framework}.`, 2);
+  if (detail.distribution?.installFromThisSite === false) {
+    if (command === 'show') return { ...detail, selectedPackage: null };
+    throw new SkillError('SOURCE_UNAVAILABLE', `请按组件详情访问源码提供方：${detail.source?.url ?? new URL(entry.docsPath, origin).href}`);
+  }
   const local = detail.packages?.[options.framework];
   const registry = detail.install?.registryUrls?.[options.framework]?.[options.renderer];
   if (command === 'show') return { ...detail, selectedFramework: options.framework, selectedRenderer: local ? 'dom' : options.renderer, selectedPackage: local ?? { provider: 'upstream', url: registry } };

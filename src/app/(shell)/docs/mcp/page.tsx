@@ -6,6 +6,7 @@ import { CodeBlock } from "@/components/docs/code-block";
 import { CopyButton } from "@/components/docs/copy-button";
 import { highlight } from "@/components/docs/highlight";
 import { Footer } from "@/components/landing/footer";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { LEIBOX_SKILL_INSTALL_COMMAND } from "@/lib/leibox-skill";
 
@@ -22,11 +23,11 @@ const MARKDOWN = `# LeiBox Skill
 
 ${LEIBOX_SKILL_INSTALL_COMMAND}
 
-Install the Skill in the AI client you use. Then ask it to search the live LeiBox collection, choose your project's framework and pull the complete source into your project. No LeiBox repository checkout, API key or MCP server is required.
+Install the Skill in the AI client you use. Then ask it to search the live LeiBox collection and find the right source for your project's framework. No LeiBox repository checkout, API key or MCP server is required.
 
 Example: ${EXAMPLE}
 
-Current collection: ${INTERACTION_COMPONENTS.length} components. The Skill fetches /ai/catalog.json for every query, so new published entries are available without reinstalling the Skill.
+The Skill searches ${COMPONENT_CATALOG.length} components in the live index at /ai/search-index.json. LeiBox provides six-framework packages for ${INTERACTION_COMPONENTS.length} components. Reference entries link to Canvas UI or GitHub.
 
 ${COMMANDS}
 
@@ -48,12 +49,13 @@ export default async function AiIntegrationPage() {
         <p><T>Run this command in your project and choose the AI client you use. No LeiBox repository checkout, API key or MCP server is required.</T></p>
         <div className="my-6"><CodeBlock source={LEIBOX_SKILL_INSTALL_COMMAND} fileName="Terminal" /></div>
         <h2><T>Ask your AI</T></h2>
-        <p><T>After installation, describe the component you need and your AI will search, choose the matching framework and download the actual source files.</T></p>
+        <p><T>After installation, describe the component you need. Your AI will search the collection and find the source for your framework.</T></p>
         <blockquote><T>Use LeiBox to find a glass folder component and integrate its React source into my current page.</T></blockquote>
         <p><T>The Skill reads the live catalog every time. Newly published components become searchable without reinstalling it.</T></p>
         <h2><T>The complete collection</T></h2>
-        <p><strong>{INTERACTION_COMPONENTS.length}</strong> <T>components are currently searchable, with six framework versions where offered.</T></p>
+        <p><strong>{COMPONENT_CATALOG.length}</strong> <T>components are searchable.</T> <strong>{INTERACTION_COMPONENTS.length}</strong> <T>offer six framework packages from LeiBox. Reference entries link to Canvas UI or GitHub.</T></p>
         <ul>
+          <li><a href="/ai/search-index.json"><code>/ai/search-index.json</code></a> — <T>Compact component search index</T></li>
           <li><a href="/ai/catalog.json"><code>/ai/catalog.json</code></a> — <T>Searchable component metadata</T></li>
           <li><a href="/ai/components/glass-folder.json"><code>/ai/components/glass-folder.json</code></a> — <T>Example component detail as JSON</T></li>
           <li><a href="/ai/packages/glass-folder/react.json"><code>/ai/packages/glass-folder/react.json</code></a> — <T>Complete React source, dependencies and usage</T></li>

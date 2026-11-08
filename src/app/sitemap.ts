@@ -6,6 +6,7 @@ export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
   { path: "/docs/components/orbit-not-found", priority: 0.8 },
+  { path: "/docs/animations/blister-dropdown", priority: 0.8 },
   { path: "/docs/animations/pixel-toggle", priority: 0.8 },
   { path: "/docs/animations/image-accordion", priority: 0.8 },
   { path: "/docs/animations/image-compare", priority: 0.8 },

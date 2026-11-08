@@ -43,6 +43,14 @@ export default async function MotionPage({params}:Props){
         {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "blister-dropdown" ? [
+          {name:"options.value",type:'"all" | "open" | "closed"',defaultValue:'"all"',description:"The selected status."},
+          {name:"options.expanded",type:"boolean",defaultValue:"true",description:"Whether the dropdown is expanded."},
+          {name:"options.autoClose",type:"boolean",defaultValue:"true",description:"Close the dropdown after the capsule lands."},
+          {name:"options.sound",type:"boolean",defaultValue:"true",description:"Play sounds when opening, closing, or selecting."},
+          {name:"options.counts",type:"{ all?: number; open?: number; closed?: number }",description:"Override the example counts shown next to each status."},
+          {name:"options.onValueChange",type:'(value: "all" | "open" | "closed") => void',description:"Called when the user selects a different status."},
+        ] : []),
         ...(slug === "pixel-toggle" ? [
           {name:"options.checked",type:"boolean",defaultValue:"false",description:"Set the switch to day mode."},
           {name:"options.sound",type:"boolean",defaultValue:"true",description:"Play a short sound on user changes."},

@@ -1,0 +1,69 @@
+{
+  "slug": "glass",
+  "docsPath": "/docs/components/glass",
+  "previewPath": "/assets/components/original-glass.png",
+  "detailPath": "/ai/components/glass.json",
+  "markdownPath": "/ai/components/glass.md",
+  "name": {
+    "en": "Glass",
+    "zh": "玻璃透镜"
+  },
+  "description": {
+    "en": "A cursor-following glass lens that refracts your live HTML and zooms in on targets like a crystal ball.",
+    "zh": "玻璃透镜跟随指针，折射并放大下方的网页内容。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl",
+    "webgpu"
+  ],
+  "discovery": {
+    "category": "cursor",
+    "useCases": [
+      "鼠标放大镜",
+      "首屏玻璃透镜",
+      "magnifying cursor"
+    ],
+    "searchTerms": [
+      "玻璃",
+      "透镜",
+      "放大镜",
+      "折射",
+      "鼠标",
+      "glass",
+      "lens",
+      "magnifier"
+    ],
+    "visualTags": [
+      "glass",
+      "refraction"
+    ],
+    "interactions": [
+      "pointer"
+    ],
+    "caveat": "涉及实时 HTML 捕获；玻璃文件管理卡片应选择 glass-folder。 从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+  },
+  "source": {
+    "kind": "upstream-reference",
+    "provider": "Canvas UI",
+    "url": "https://canvasui.dev/docs/components/glass",
+    "license": "MIT + Commons Clause. Follow the original provider's terms."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": false,
+    "installProvider": "upstream",
+    "notice": {
+      "en": "Use the Canvas UI documentation to choose a framework and install from its original registry.",
+      "zh": "从 Canvas UI 原站选择框架和渲染器，按原站说明安装。"
+    }
+  },
+  "packages": {}
+}

@@ -36,7 +36,7 @@ export default function OrbitNotFoundDoc() {
           <p className="mt-2 text-sm leading-6 text-muted-foreground">
             <T>LeiBox renders this component from Next.js app/not-found.tsx. The items prop supplies the previews and destination links.</T>
           </p>
-          <a href="https://github.com/leishifu666/LeiBox/tree/main/src/components/not-found-experiments" target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1.5 rounded text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2">
+          <a href={ORBIT_NOT_FOUND.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1.5 rounded text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2">
             <T>View source on GitHub</T><ArrowUpRight aria-hidden className="size-3.5" />
           </a>
         </section>

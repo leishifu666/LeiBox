@@ -1,3 +1,4 @@
+import { BLISTER_DROPDOWN_PROMPT } from "./blister-dropdown.mjs";
 import { PIXEL_TOGGLE_PROMPT } from "./pixel-toggle.mjs";
 import { IMAGE_ACCORDION_PROMPT } from "./image-accordion.mjs";
 import { IMAGE_COMPARE_PROMPT } from "./image-compare.mjs";
@@ -67,16 +68,28 @@ export interface MotionEntry {
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
   {
+    slug: "blister-dropdown", href: "/docs/animations/blister-dropdown", name: "Blister Pack Dropdown", category: "Filter interaction",
+    description: "A foil dropdown that pops the selected capsule out of its pocket and into the trigger.",
+    keywords: "胶囊 药板 铝箔 弹出 下拉菜单 筛选 状态 pill capsule foil blister pack dropdown filter",
+    preview: "/assets/components/blister-dropdown.png", sourceFile: "biohacking_lab_blister_pack_dropdown_adelineastraos.html", canvasWidth: 560, canvasHeight: 580,
+    instructions: "Select a capsule to change the filter. Click the trigger to open or close the menu.",
+    prompt: BLISTER_DROPDOWN_PROMPT,
+    referenceUrl: "https://x.com/AdelineAstraOS/status/2119070206308094176", referenceAuthor: "Adeline · AstraOS", referenceAuthorUrl: "https://x.com/AdelineAstraOS",
+    referenceNotes: "The demo runs the user-supplied Biohacking Lab HTML. The original file is available separately from the six framework packages.",
+    referenceLicense: "No independent redistribution license was verified for the supplied HTML and artwork. The framework packages use independent CSS materials and retain the Lucide license notice.",
+    codeSource: "Six LeiBox framework ports use an independent DOM and CSS implementation. The website demo runs the supplied HTML and its original assets and animation code.",
+  },
+  {
     slug: "pixel-toggle", href: "/docs/animations/pixel-toggle", name: "Pixel Day–Night Toggle", category: "Theme interaction",
     description: "A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.",
     keywords: "像素 日夜 开关 日间 夜间 太阳 月亮 主题 粒子 光带 拖动 pixel day night toggle sun moon glow theme switch kaolti",
     preview: "/assets/components/pixel-toggle.png", sourceFile: "pixel-toggle.html", canvasWidth: 720, canvasHeight: 540,
     instructions: "Click or drag the switch. With focus on the switch, press Space or Enter to change modes.",
-    prompt: PIXEL_TOGGLE_PROMPT, recreatedHtml: true,
+    prompt: PIXEL_TOGGLE_PROMPT, recreatedHtml: true, renderers: ["webgl"],
     referenceUrl: "https://x.com/kaolti/status/2119151022014894260", referenceAuthor: "Zsolt Kacso", referenceAuthorUrl: "https://x.com/kaolti",
-    referenceNotes: "Checked the original video for framing and the supplied HTML for timing, colors and drag response.",
+    referenceNotes: "Used the original video and the supplied glass-toggle demo as references for the switch, including the refracted pixels, recessed track and traveling edge light.",
     referenceLicense: "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation.",
-    codeSource: "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+    codeSource: "LeiBox implementation using a native switch, a WebGL2 glass shader with a Canvas 2D fallback, and optional synthesized click audio.",
   },
   {
     slug: "image-accordion", href: "/docs/animations/image-accordion", name: "Image Accordion", category: "Hover interaction",

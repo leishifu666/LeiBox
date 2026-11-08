@@ -1,9 +1,13 @@
 {
   "chineseFontStylesheet": "/assets/motion/b4e338107c38036aebc0b3c1.css",
   "components": {
+    "blister-dropdown": {
+      "documentUrl": "/assets/motion/blister-dropdown-ced86427894ee5ce19da5cc9.html",
+      "previewUrl": "/assets/motion/blister-dropdown-ced86427894ee5ce19da5cc9.html"
+    },
     "pixel-toggle": {
-      "documentUrl": "/assets/motion/pixel-toggle-e243d71b35ed78f826177223.html",
-      "previewUrl": "/assets/motion/pixel-toggle-e243d71b35ed78f826177223.html"
+      "documentUrl": "/assets/motion/pixel-toggle-13e7ffd5481cb40e9b9e092f.html",
+      "previewUrl": "/assets/motion/pixel-toggle-13e7ffd5481cb40e9b9e092f.html"
     },
     "image-accordion": {
       "documentUrl": "/assets/motion/image-accordion-86ff921a99be2a09e0643ac9.html",
