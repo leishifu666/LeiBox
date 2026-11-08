@@ -1,4 +1,6 @@
-![LeiBox 封面](docs/screenshots/leibox-cover.png)
+<p align="center">
+  <img src="docs/screenshots/leibox-cover.png" alt="LeiBox 封面" width="400">
+</p>
 
 # LeiBox
 
