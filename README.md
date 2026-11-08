@@ -1,3 +1,5 @@
+![LeiBox 封面](docs/screenshots/leibox-cover.png)
+
 # LeiBox
 
 **为你的页面，挑一箱好玩的组件。**
