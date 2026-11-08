@@ -39,10 +39,33 @@ export default async function MotionPage({params}:Props){
         <a href={entry.originalHtml??"/motion/"+slug+".html"} download={entry.sourceFile} className="inline-flex items-center gap-1.5 rounded py-1 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2"><Download aria-hidden className="size-3.5"/><T>{entry.originalHtml?"Download original HTML":entry.recreatedHtml?"Download standalone HTML":"Download original HTML"}</T></a>
         {slug === "multi-cursor-builder" ? <a href="/motion/multi-cursor-builder.html" download="多光标页面搭建-独立演示.html" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download standalone HTML</T></a> : null}
         {slug === "deep-agent-composer" || slug === "reasoning-effort-slider" ? <a href="/motion/deep-agent-original-source.txt" download="DeepAgent-原版源码.txt" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download original Deep Agent source</T></a> : null}
-        {entry.suppliedSource?<a href={entry.suppliedSource} download="GlassFolder.tsx" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
+        {entry.suppliedSource?<a href={entry.suppliedSource} download={slug === "card-swap" ? "CardSwap.tsx" : "GlassFolder.tsx"} className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
         {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "pixel-toggle" ? [
+          {name:"options.checked",type:"boolean",defaultValue:"false",description:"Set the switch to day mode."},
+          {name:"options.sound",type:"boolean",defaultValue:"true",description:"Play a short sound on user changes."},
+          {name:"options.onCheckedChange",type:"(checked: boolean) => void",description:"Called when the user changes the switch."},
+        ] : []),
+        ...(slug === "image-accordion" ? [
+          {name:"options.open",type:"number",defaultValue:"50",description:"How wide the active photo opens, from 0 to 100."},
+          {name:"options.reach",type:"number",defaultValue:"35",description:"How far the expansion spreads to neighboring photos, from 0 to 100."},
+          {name:"options.bounce",type:"number",defaultValue:"10",description:"Spring rebound strength, from 0 to 100."},
+          {name:"options.gap",type:"number",defaultValue:"8",description:"Gap in pixels, from 0 to 20. The corner radius follows the gap up to 12px."},
+          {name:"options.images",type:"{ name: string; src: string }[]",description:"One to five photos with accessible names. The demo includes five embedded photos."},
+        ] : []),
+        ...(slug === "image-compare" ? [
+          {name:"options.labels",type:"boolean",defaultValue:"true",description:"Show the Before and After labels."},
+          {name:"options.corner",type:"number",defaultValue:"20",description:"Corner radius in pixels, from 0 to 28."},
+          {name:"options.beforeSrc",type:"string",description:"Optional before image. By default the after image is shown in grayscale."},
+          {name:"options.afterSrc",type:"string",description:"Optional after image. The default illustration is embedded."},
+        ] : []),
+        ...(slug === "card-swap" ? [
+          {name:"options.auto",type:"boolean",defaultValue:"false",description:"Automatically cycle while the stack is visible and idle."},
+          {name:"options.every",type:"number",defaultValue:"4",description:"Seconds between automatic swaps, with a minimum of 1.5."},
+          {name:"options.cards",type:"{ title: string; src: string }[]",description:"Four photo cards with a title and image source. Defaults are embedded."},
+        ] : []),
         ...(slug === "multi-cursor-builder" ? [
           {name:"options.playing",type:"boolean",defaultValue:"true",description:"Play or pause the local construction and cursor motion."},
           {name:"options.speed",type:"number",defaultValue:"1",description:"Construction speed multiplier, from 0.25 to 2."},

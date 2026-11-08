@@ -36,6 +36,10 @@
       "src": "/assets/optimized/brand-poster-cards-251561b75c9e-1200.webp",
       "srcSet": "/assets/optimized/brand-poster-cards-251561b75c9e-320.webp 320w, /assets/optimized/brand-poster-cards-251561b75c9e-640.webp 640w, /assets/optimized/brand-poster-cards-251561b75c9e-960.webp 960w, /assets/optimized/brand-poster-cards-251561b75c9e-1200.webp 1200w"
     },
+    "/assets/components/card-swap.png": {
+      "src": "/assets/optimized/card-swap-ef8388be3178-1120.webp",
+      "srcSet": "/assets/optimized/card-swap-ef8388be3178-320.webp 320w, /assets/optimized/card-swap-ef8388be3178-640.webp 640w, /assets/optimized/card-swap-ef8388be3178-960.webp 960w, /assets/optimized/card-swap-ef8388be3178-1120.webp 1120w"
+    },
     "/assets/components/collection-layout-morph.png": {
       "src": "/assets/optimized/collection-layout-morph-5cf78720c78b-1200.webp",
       "srcSet": "/assets/optimized/collection-layout-morph-5cf78720c78b-320.webp 320w, /assets/optimized/collection-layout-morph-5cf78720c78b-640.webp 640w, /assets/optimized/collection-layout-morph-5cf78720c78b-960.webp 960w, /assets/optimized/collection-layout-morph-5cf78720c78b-1200.webp 1200w"
@@ -91,6 +95,14 @@
     "/assets/components/hammerhead-chart.png": {
       "src": "/assets/optimized/hammerhead-chart-55720a189153-1200.webp",
       "srcSet": "/assets/optimized/hammerhead-chart-55720a189153-320.webp 320w, /assets/optimized/hammerhead-chart-55720a189153-640.webp 640w, /assets/optimized/hammerhead-chart-55720a189153-960.webp 960w, /assets/optimized/hammerhead-chart-55720a189153-1200.webp 1200w"
+    },
+    "/assets/components/image-accordion.png": {
+      "src": "/assets/optimized/image-accordion-a1985b3b9151-1120.webp",
+      "srcSet": "/assets/optimized/image-accordion-a1985b3b9151-320.webp 320w, /assets/optimized/image-accordion-a1985b3b9151-640.webp 640w, /assets/optimized/image-accordion-a1985b3b9151-960.webp 960w, /assets/optimized/image-accordion-a1985b3b9151-1120.webp 1120w"
+    },
+    "/assets/components/image-compare.png": {
+      "src": "/assets/optimized/image-compare-61ac6ab96cdb-1120.webp",
+      "srcSet": "/assets/optimized/image-compare-61ac6ab96cdb-320.webp 320w, /assets/optimized/image-compare-61ac6ab96cdb-640.webp 640w, /assets/optimized/image-compare-61ac6ab96cdb-960.webp 960w, /assets/optimized/image-compare-61ac6ab96cdb-1120.webp 1120w"
     },
     "/assets/components/ink-spread-carousel.png": {
       "src": "/assets/optimized/ink-spread-carousel-beadc3c131ba-1168.webp",
@@ -163,6 +175,10 @@
     "/assets/components/particle-texture-trio.png": {
       "src": "/assets/optimized/particle-texture-trio-324731fc5f0b-960.webp",
       "srcSet": "/assets/optimized/particle-texture-trio-324731fc5f0b-320.webp 320w, /assets/optimized/particle-texture-trio-324731fc5f0b-640.webp 640w, /assets/optimized/particle-texture-trio-324731fc5f0b-960.webp 960w"
+    },
+    "/assets/components/pixel-toggle.png": {
+      "src": "/assets/optimized/pixel-toggle-1e2a23d87990-720.webp",
+      "srcSet": "/assets/optimized/pixel-toggle-1e2a23d87990-320.webp 320w, /assets/optimized/pixel-toggle-1e2a23d87990-640.webp 640w, /assets/optimized/pixel-toggle-1e2a23d87990-720.webp 720w"
     },
     "/assets/components/reasoning-effort-slider.png": {
       "src": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp",

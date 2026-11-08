@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "cd726a07cd02b0cc360d999cfaad24d5d1d6144cbfae0d0ef71700a2cb51f251",
+  "revision": "8fe780d0e309dbe7a6a0181245400a136a1803c373141231417a759900485676",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -31,6 +31,296 @@
     "distribution": "Project framework packages are fetched from LeiBox. Check each component's source and permissions before use."
   },
   "items": [
+    {
+      "slug": "pixel-toggle",
+      "name": {
+        "en": "Pixel Day–Night Toggle",
+        "zh": "像素日夜开关"
+      },
+      "description": {
+        "en": "A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.",
+        "zh": "拖动开关切换日夜，像素在月亮和太阳之间散开重组，光带绕滑块转动。"
+      },
+      "keywords": "像素 日夜 开关 日间 夜间 太阳 月亮 主题 粒子 光带 拖动 pixel day night toggle sun moon glow theme switch kaolti",
+      "docsPath": "/docs/animations/pixel-toggle",
+      "detailPath": "/ai/components/pixel-toggle.json",
+      "markdownPath": "/ai/components/pixel-toggle.md",
+      "previewPath": "/assets/components/pixel-toggle.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "日夜主题开关",
+          "像素图标聚散",
+          "animated day night switch"
+        ],
+        "searchTerms": [
+          "日夜",
+          "主题",
+          "开关",
+          "月亮",
+          "太阳",
+          "像素",
+          "光带",
+          "pixel",
+          "theme toggle",
+          "day night"
+        ],
+        "visualTags": [
+          "pixel",
+          "glow",
+          "spring"
+        ],
+        "interactions": [
+          "click",
+          "drag",
+          "touch",
+          "keyboard"
+        ],
+        "caveat": "默认切换组件内场景。若要同步宿主主题，可使用 onCheckedChange。可关闭点击声。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+        "designReference": "https://x.com/kaolti/status/2119151022014894260",
+        "designAuthor": "Zsolt Kacso",
+        "license": "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "image-accordion",
+      "name": {
+        "en": "Image Accordion",
+        "zh": "弹性图片手风琴"
+      },
+      "description": {
+        "en": "Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.",
+        "zh": "悬停时照片弹性展开，邻图随之调整，横栏总宽保持不变。"
+      },
+      "keywords": "图片 手风琴 摄影 悬停 横栏 展开 弹簧 Bencho image accordion hover gallery photo spring",
+      "docsPath": "/docs/animations/image-accordion",
+      "detailPath": "/ai/components/image-accordion.json",
+      "markdownPath": "/ai/components/image-accordion.md",
+      "previewPath": "/assets/components/image-accordion.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "交互摄影条带",
+          "横向图片手风琴",
+          "spring image gallery"
+        ],
+        "searchTerms": [
+          "图片",
+          "摄影",
+          "手风琴",
+          "悬停",
+          "弹簧",
+          "image accordion",
+          "hover gallery",
+          "spring"
+        ],
+        "visualTags": [
+          "photography",
+          "accordion",
+          "elastic"
+        ],
+        "interactions": [
+          "hover",
+          "focus",
+          "touch",
+          "keyboard"
+        ],
+        "caveat": "自定义图片可传一至五张，建议使用主体居中的竖图。展开时横栏总宽固定。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Bencho Image Accordion adapted to the LeiBox DOM lifecycle for six frameworks.",
+        "designReference": "https://bencho.dev/blocks/image-accordion",
+        "designAuthor": "Lorenzo Cabra · Bencho",
+        "license": "MIT code, Copyright (c) 2026 Lorenzo Cabra. Free block license: https://bencho.dev/licence."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "image-compare",
+      "name": {
+        "en": "Image Compare",
+        "zh": "弹性图片对比"
+      },
+      "description": {
+        "en": "Compare two versions of an image with a divider that bends as you drag and glides to the edge when flicked.",
+        "zh": "拖动分隔线对比两张图。线条随手势弯曲，快甩时滑到边缘。"
+      },
+      "keywords": "弹性 图片 对比 黑白 彩色 滑块 果冻 拖动 分隔线 Bencho image compare before after slider drag",
+      "docsPath": "/docs/animations/image-compare",
+      "detailPath": "/ai/components/image-compare.json",
+      "markdownPath": "/ai/components/image-compare.md",
+      "previewPath": "/assets/components/image-compare.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "图片处理前后对比",
+          "弹性图片分隔线",
+          "before and after image comparison"
+        ],
+        "searchTerms": [
+          "图片对比",
+          "前后",
+          "黑白",
+          "滑块",
+          "曲线",
+          "before after",
+          "image compare",
+          "elastic slider"
+        ],
+        "visualTags": [
+          "image",
+          "grayscale",
+          "elastic"
+        ],
+        "interactions": [
+          "drag",
+          "touch",
+          "keyboard"
+        ],
+        "caveat": "自定义前后图需保持相同构图和比例。默认使用同一张画的彩色和灰度状态。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "MIT-licensed Bencho Image compare source adapted to the native LeiBox lifecycle with scoped design tokens and six framework entries.",
+        "designReference": "https://bencho.dev/blocks/image-compare",
+        "designAuthor": "Lorenzo Cabra · Bencho",
+        "license": "MIT code, Copyright (c) 2026 Lorenzo Cabra. The free block license is at https://bencho.dev/licence. The demonstration artwork is generated for this adaptation."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "card-swap",
+      "name": {
+        "en": "Card Swap",
+        "zh": "拖甩照片卡片"
+      },
+      "description": {
+        "en": "Tap or fling the front photo to the back of a tilted stack as the other cards step forward.",
+        "zh": "点按或甩动最前面的照片，让它退到队尾，其余卡片顺势前移。"
+      },
+      "keywords": "拖甩 照片 叠放 堆叠 卡片 轮播 橡皮筋 photo stack swipe fling card swap",
+      "docsPath": "/docs/animations/card-swap",
+      "detailPath": "/ai/components/card-swap.json",
+      "markdownPath": "/ai/components/card-swap.md",
+      "previewPath": "/assets/components/card-swap.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "照片卡片叠放",
+          "可拖拽卡片轮播",
+          "flingable photo carousel"
+        ],
+        "searchTerms": [
+          "甩动",
+          "照片",
+          "轮播",
+          "叠放",
+          "fling",
+          "drag",
+          "photo",
+          "stack"
+        ],
+        "visualTags": [
+          "photo",
+          "stack",
+          "perspective"
+        ],
+        "interactions": [
+          "drag",
+          "click",
+          "keyboard",
+          "touch",
+          "auto-play"
+        ],
+        "caveat": "默认四张内嵌照片，可换图。自动切换默认关闭。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "User-provided CardSwap React snippet adapted to a shared DOM core with six native framework entries.",
+        "designReference": null,
+        "designAuthor": "User-provided React source",
+        "license": "No upstream author or code license was supplied. The bundled demonstration photos were generated for this adaptation."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
     {
       "slug": "tactile-push-button",
       "name": {

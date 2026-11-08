@@ -1,0 +1,46 @@
+/* Image accordion — adapted from Bencho by Lorenzo Cabra (MIT). */
+.acc-scene {
+  display: grid;
+  min-height: var(--motion-height, 300px);
+  place-items: center;
+  background: #f4f4f4;
+}
+
+.acc {
+  display: flex;
+  align-items: stretch;
+  width: 340px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: var(--acc-radius);
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.acc-cell {
+  position: relative;
+  flex-basis: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--acc-radius);
+  padding: 0;
+  background: var(--muted, #ddd);
+  cursor: pointer;
+}
+
+.acc-cell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Constant height keeps scale stable as the cell reveals more of the image. */
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.acc-cell:focus-visible {
+  outline: 2px solid var(--ring, #fff);
+  outline-offset: -3px;
+}

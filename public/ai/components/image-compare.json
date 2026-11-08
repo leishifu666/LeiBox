@@ -1,0 +1,160 @@
+{
+  "slug": "image-compare",
+  "name": {
+    "en": "Image Compare",
+    "zh": "弹性图片对比"
+  },
+  "description": {
+    "en": "Compare two versions of an image with a divider that bends as you drag and glides to the edge when flicked.",
+    "zh": "拖动分隔线对比两张图。线条随手势弯曲，快甩时滑到边缘。"
+  },
+  "keywords": "弹性 图片 对比 黑白 彩色 滑块 果冻 拖动 分隔线 Bencho image compare before after slider drag",
+  "docsPath": "/docs/animations/image-compare",
+  "detailPath": "/ai/components/image-compare.json",
+  "markdownPath": "/ai/components/image-compare.md",
+  "previewPath": "/assets/components/image-compare.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "图片处理前后对比",
+      "弹性图片分隔线",
+      "before and after image comparison"
+    ],
+    "searchTerms": [
+      "图片对比",
+      "前后",
+      "黑白",
+      "滑块",
+      "曲线",
+      "before after",
+      "image compare",
+      "elastic slider"
+    ],
+    "visualTags": [
+      "image",
+      "grayscale",
+      "elastic"
+    ],
+    "interactions": [
+      "drag",
+      "touch",
+      "keyboard"
+    ],
+    "caveat": "自定义前后图需保持相同构图和比例。默认使用同一张画的彩色和灰度状态。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "MIT-licensed Bencho Image compare source adapted to the native LeiBox lifecycle with scoped design tokens and six framework entries.",
+    "designReference": "https://bencho.dev/blocks/image-compare",
+    "designAuthor": "Lorenzo Cabra · Bencho",
+    "license": "MIT code, Copyright (c) 2026 Lorenzo Cabra. The free block license is at https://bencho.dev/licence. The demonstration artwork is generated for this adaptation."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/image-compare/react.json",
+      "component": "ImageCompare",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ImageCompare } from \"./ImageCompare\";\n\nexport default function App() {\n  return <ImageCompare />;\n}",
+      "files": [
+        "ImageCompare.tsx",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/image-compare/vue.json",
+      "component": "ImageCompare",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ImageCompare from \"./ImageCompare.vue\";\n</script>\n<template><ImageCompare /></template>",
+      "files": [
+        "ImageCompare.vue",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/image-compare/svelte.json",
+      "component": "ImageCompare",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ImageCompare from \"./ImageCompare.svelte\";\n</script>\n<ImageCompare />",
+      "files": [
+        "ImageCompare.svelte",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/image-compare/solid.json",
+      "component": "ImageCompare",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ImageCompare } from \"./ImageCompare.solid\";\n\nexport default function App() {\n  return <ImageCompare />;\n}",
+      "files": [
+        "ImageCompare.solid.tsx",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/image-compare/preact.json",
+      "component": "ImageCompare",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ImageCompare } from \"./ImageCompare.preact\";\n\nexport default function App() {\n  return <ImageCompare />;\n}",
+      "files": [
+        "ImageCompare.preact.tsx",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/image-compare/vanilla.json",
+      "component": "ImageCompare",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ImageCompare\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ImageCompare.ts",
+        "ImageCompareEngine.js",
+        "motion-runtime.ts",
+        "ImageCompareEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag the divider to compare the images. Flick toward either edge, or use the arrow keys, Home and End.",
+    "zh": "拖动分隔线对比图片，快速甩动可滑到边缘。也支持方向键、Home 和 End。"
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "slug": "pixel-toggle",
+  "name": {
+    "en": "Pixel Day–Night Toggle",
+    "zh": "像素日夜开关"
+  },
+  "description": {
+    "en": "A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.",
+    "zh": "拖动开关切换日夜，像素在月亮和太阳之间散开重组，光带绕滑块转动。"
+  },
+  "keywords": "像素 日夜 开关 日间 夜间 太阳 月亮 主题 粒子 光带 拖动 pixel day night toggle sun moon glow theme switch kaolti",
+  "docsPath": "/docs/animations/pixel-toggle",
+  "detailPath": "/ai/components/pixel-toggle.json",
+  "markdownPath": "/ai/components/pixel-toggle.md",
+  "previewPath": "/assets/components/pixel-toggle.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "日夜主题开关",
+      "像素图标聚散",
+      "animated day night switch"
+    ],
+    "searchTerms": [
+      "日夜",
+      "主题",
+      "开关",
+      "月亮",
+      "太阳",
+      "像素",
+      "光带",
+      "pixel",
+      "theme toggle",
+      "day night"
+    ],
+    "visualTags": [
+      "pixel",
+      "glow",
+      "spring"
+    ],
+    "interactions": [
+      "click",
+      "drag",
+      "touch",
+      "keyboard"
+    ],
+    "caveat": "默认切换组件内场景。若要同步宿主主题，可使用 onCheckedChange。可关闭点击声。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+    "designReference": "https://x.com/kaolti/status/2119151022014894260",
+    "designAuthor": "Zsolt Kacso",
+    "license": "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/pixel-toggle/react.json",
+      "component": "PixelToggle",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { PixelToggle } from \"./PixelToggle\";\n\nexport default function App() {\n  return <PixelToggle />;\n}",
+      "files": [
+        "PixelToggle.tsx",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/pixel-toggle/vue.json",
+      "component": "PixelToggle",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport PixelToggle from \"./PixelToggle.vue\";\n</script>\n<template><PixelToggle /></template>",
+      "files": [
+        "PixelToggle.vue",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/pixel-toggle/svelte.json",
+      "component": "PixelToggle",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport PixelToggle from \"./PixelToggle.svelte\";\n</script>\n<PixelToggle />",
+      "files": [
+        "PixelToggle.svelte",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/pixel-toggle/solid.json",
+      "component": "PixelToggle",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { PixelToggle } from \"./PixelToggle.solid\";\n\nexport default function App() {\n  return <PixelToggle />;\n}",
+      "files": [
+        "PixelToggle.solid.tsx",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/pixel-toggle/preact.json",
+      "component": "PixelToggle",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { PixelToggle } from \"./PixelToggle.preact\";\n\nexport default function App() {\n  return <PixelToggle />;\n}",
+      "files": [
+        "PixelToggle.preact.tsx",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/pixel-toggle/vanilla.json",
+      "component": "PixelToggle",
+      "dependencies": [],
+      "usage": "import { mount } from \"./PixelToggle\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "PixelToggle.ts",
+        "PixelToggleEngine.js",
+        "motion-runtime.ts",
+        "PixelToggleEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click or drag the switch. With focus on the switch, press Space or Enter to change modes.",
+    "zh": "点击或拖动开关。键盘聚焦后，可用空格或 Enter 切换。"
+  }
+}

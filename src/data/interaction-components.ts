@@ -1,3 +1,7 @@
+import { PIXEL_TOGGLE_PROMPT } from "./pixel-toggle.mjs";
+import { IMAGE_ACCORDION_PROMPT } from "./image-accordion.mjs";
+import { IMAGE_COMPARE_PROMPT } from "./image-compare.mjs";
+import { CARD_SWAP_PROMPT } from "./card-swap.mjs";
 import { MULTI_CURSOR_BUILDER_PROMPT } from "./multi-cursor-builder.mjs";
 import { ALBUM_COVER_TUNNEL_PROMPT } from "./album-cover-tunnel.mjs";
 import { STACKED_METADATA_PROMPT } from "./stacked-metadata.mjs";
@@ -62,6 +66,56 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  {
+    slug: "pixel-toggle", href: "/docs/animations/pixel-toggle", name: "Pixel Day–Night Toggle", category: "Theme interaction",
+    description: "A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.",
+    keywords: "像素 日夜 开关 日间 夜间 太阳 月亮 主题 粒子 光带 拖动 pixel day night toggle sun moon glow theme switch kaolti",
+    preview: "/assets/components/pixel-toggle.png", sourceFile: "pixel-toggle.html", canvasWidth: 720, canvasHeight: 540,
+    instructions: "Click or drag the switch. With focus on the switch, press Space or Enter to change modes.",
+    prompt: PIXEL_TOGGLE_PROMPT, recreatedHtml: true,
+    referenceUrl: "https://x.com/kaolti/status/2119151022014894260", referenceAuthor: "Zsolt Kacso", referenceAuthorUrl: "https://x.com/kaolti",
+    referenceNotes: "Checked the original video for framing and the supplied HTML for timing, colors and drag response.",
+    referenceLicense: "The original design and supplied HTML had no verified redistribution license. The downloadable HTML and framework packages contain the LeiBox reimplementation.",
+    codeSource: "LeiBox implementation using DOM, CSS and Canvas 2D with optional synthesized click audio.",
+  },
+  {
+    slug: "image-accordion", href: "/docs/animations/image-accordion", name: "Image Accordion", category: "Hover interaction",
+    description: "Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.",
+    keywords: "图片 手风琴 摄影 悬停 横栏 展开 弹簧 Bencho image accordion hover gallery photo spring",
+    preview: "/assets/components/image-accordion.png", sourceFile: "image-accordion.html", canvasWidth: 560, canvasHeight: 420,
+    recreatedHtml: true,
+    instructions: "Hover over a photo or use Tab to expand it. On touch screens, tap a photo to expand or collapse it.",
+    prompt: IMAGE_ACCORDION_PROMPT,
+    referenceUrl: "https://bencho.dev/blocks/image-accordion", referenceAuthor: "Lorenzo Cabra · Bencho",
+    referenceNotes: "Adapted from Bencho's Image Accordion, with a fixed strip, spring motion and expansion that falls off across neighboring photos. The five demo photos were generated with Nano Banana 2.1 in Google Flow.",
+    referenceLicense: "MIT code, Copyright (c) 2026 Lorenzo Cabra. Free block license: https://bencho.dev/licence.",
+    codeSource: "Bencho Image Accordion adapted to the LeiBox DOM lifecycle for six frameworks.",
+  },
+  {
+    slug: "image-compare", href: "/docs/animations/image-compare", name: "Image Compare", category: "Drag interaction",
+    description: "Compare two versions of an image with a divider that bends as you drag and glides to the edge when flicked.",
+    keywords: "弹性 图片 对比 黑白 彩色 滑块 果冻 拖动 分隔线 Bencho image compare before after slider drag",
+    preview: "/assets/components/image-compare.png", sourceFile: "image-compare.html", canvasWidth: 560, canvasHeight: 420,
+    recreatedHtml: true,
+    instructions: "Drag the divider to compare the images. Flick toward either edge, or use the arrow keys, Home and End.",
+    prompt: IMAGE_COMPARE_PROMPT,
+    referenceUrl: "https://bencho.dev/blocks/image-compare", referenceAuthor: "Lorenzo Cabra · Bencho",
+    referenceNotes: "Adapted from the supplied Bencho React and CSS source. Retains the pointer glide, spring and shared quadratic path. A generated yak painting and its grayscale version replace the demonstration images with identical framing.",
+    referenceLicense: "MIT code, Copyright (c) 2026 Lorenzo Cabra. The free block license is at https://bencho.dev/licence. The demonstration artwork is generated for this adaptation.",
+    codeSource: "MIT-licensed Bencho Image compare source adapted to the native LeiBox lifecycle with scoped design tokens and six framework entries.",
+  },
+  {
+    slug: "card-swap", href: "/docs/animations/card-swap", name: "Card Swap", category: "Card interaction",
+    description: "Tap or fling the front photo to the back of a tilted stack as the other cards step forward.",
+    keywords: "拖甩 照片 叠放 堆叠 卡片 轮播 橡皮筋 photo stack swipe fling card swap",
+    preview: "/assets/components/card-swap.png", sourceFile: "card-swap.html", canvasWidth: 560, canvasHeight: 420,
+    recreatedHtml: true, suppliedSource: "/motion/card-swap-original.tsx",
+    instructions: "Click or fling the front card. Enter and Space also swap it. Turn on Auto to cycle the stack.",
+    prompt: CARD_SWAP_PROMPT, referenceAuthor: "User-provided React source",
+    referenceNotes: "Adapted from a supplied React snippet. The stylesheet, four linked photos and a public source URL were not supplied. LeiBox reconstructed the card styling and generated four photos for the same subjects.",
+    referenceLicense: "No upstream author or code license was supplied. The bundled demonstration photos were generated for this adaptation.",
+    codeSource: "User-provided CardSwap React snippet adapted to a shared DOM core with six native framework entries.",
+  },
   {
     slug:"tactile-push-button",href:"/docs/animations/tactile-push-button",name:"Tactile Push Button",category:"Button interaction",
     description:"A sculpted CSS button that sinks on hover and compresses while pressed.",

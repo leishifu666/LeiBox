@@ -1,5 +1,53 @@
 [
   {
+    "slug": "pixel-toggle",
+    "href": "/docs/animations/pixel-toggle",
+    "name": "Pixel Day–Night Toggle",
+    "category": "Theme interaction",
+    "description": "A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.",
+    "keywords": "像素 日夜 开关 日间 夜间 太阳 月亮 主题 粒子 光带 拖动 pixel day night toggle sun moon glow theme switch kaolti",
+    "preview": "/assets/components/pixel-toggle.png",
+    "sourceFile": "pixel-toggle.html",
+    "canvasWidth": 720,
+    "canvasHeight": 540
+  },
+  {
+    "slug": "image-accordion",
+    "href": "/docs/animations/image-accordion",
+    "name": "Image Accordion",
+    "category": "Hover interaction",
+    "description": "Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.",
+    "keywords": "图片 手风琴 摄影 悬停 横栏 展开 弹簧 Bencho image accordion hover gallery photo spring",
+    "preview": "/assets/components/image-accordion.png",
+    "sourceFile": "image-accordion.html",
+    "canvasWidth": 560,
+    "canvasHeight": 420
+  },
+  {
+    "slug": "image-compare",
+    "href": "/docs/animations/image-compare",
+    "name": "Image Compare",
+    "category": "Drag interaction",
+    "description": "Compare two versions of an image with a divider that bends as you drag and glides to the edge when flicked.",
+    "keywords": "弹性 图片 对比 黑白 彩色 滑块 果冻 拖动 分隔线 Bencho image compare before after slider drag",
+    "preview": "/assets/components/image-compare.png",
+    "sourceFile": "image-compare.html",
+    "canvasWidth": 560,
+    "canvasHeight": 420
+  },
+  {
+    "slug": "card-swap",
+    "href": "/docs/animations/card-swap",
+    "name": "Card Swap",
+    "category": "Card interaction",
+    "description": "Tap or fling the front photo to the back of a tilted stack as the other cards step forward.",
+    "keywords": "拖甩 照片 叠放 堆叠 卡片 轮播 橡皮筋 photo stack swipe fling card swap",
+    "preview": "/assets/components/card-swap.png",
+    "sourceFile": "card-swap.html",
+    "canvasWidth": 560,
+    "canvasHeight": 420
+  },
+  {
     "slug": "tactile-push-button",
     "href": "/docs/animations/tactile-push-button",
     "name": "Tactile Push Button",

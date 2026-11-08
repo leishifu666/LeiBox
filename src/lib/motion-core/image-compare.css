@@ -1,0 +1,88 @@
+/* Image compare — adapted from Bencho by Lorenzo Cabra (MIT). */
+.cmp-scene {
+  display: grid;
+  min-height: var(--motion-height, 360px);
+  place-items: center;
+  background: #f4f4f4;
+}
+
+.cmp {
+  --ink: var(--foreground, #17181a);
+  --fill-on: var(--card-foreground, var(--ink));
+  --fill-slab: var(--card, #fff);
+  --font-ui: var(--font-site-sans, system-ui, sans-serif);
+  --signal: var(--ring, #2231dd);
+  position: relative;
+  width: 270px;
+  height: 360px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: ew-resize;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: var(--fill-on);
+}
+
+.cmp:focus-visible { box-shadow: 0 0 0 2px var(--signal); }
+
+.cmp-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* No drift: the two states stay exactly in register. */
+.cmp-before { position: absolute; inset: 0; pointer-events: none; }
+.cmp-before [data-monochrome] { filter: grayscale(1) brightness(.77); }
+
+.cmp-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(23, 24, 26, 0.36);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font: 500 12px/1.45 var(--font-ui);
+  pointer-events: none;
+}
+
+.cmp-tag.cmp-right { left: auto; right: 12px; }
+
+/* The line is drawn so it can bend: a 2px white curve with a soft glow. */
+.cmp-line {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, .5));
+}
+
+.cmp-line path { fill: none; stroke: #fff; stroke-width: 2; }
+.cmp-grip { position: absolute; top: 0; bottom: 0; width: 0; pointer-events: none; }
+
+.cmp-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--fill-slab);
+  color: var(--fill-on);
+  box-shadow: 0 2px 12px rgba(23, 24, 26, .25);
+  transition: scale 220ms cubic-bezier(.24, 1.34, .38, 1);
+}
+
+.cmp:hover .cmp-knob { scale: 1.08; }
+.cmp[data-held] .cmp-knob { scale: .9; }

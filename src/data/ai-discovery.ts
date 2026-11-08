@@ -9,6 +9,30 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  "pixel-toggle": {
+    category: "input", useCases: ["日夜主题开关", "像素图标聚散", "animated day night switch"],
+    searchTerms: ["日夜", "主题", "开关", "月亮", "太阳", "像素", "光带", "pixel", "theme toggle", "day night"],
+    visualTags: ["pixel", "glow", "spring"], interactions: ["click", "drag", "touch", "keyboard"],
+    caveat: "默认切换组件内场景。若要同步宿主主题，可使用 onCheckedChange。可关闭点击声。",
+  },
+  "image-accordion": {
+    category: "media", useCases: ["交互摄影条带", "横向图片手风琴", "spring image gallery"],
+    searchTerms: ["图片", "摄影", "手风琴", "悬停", "弹簧", "image accordion", "hover gallery", "spring"],
+    visualTags: ["photography", "accordion", "elastic"], interactions: ["hover", "focus", "touch", "keyboard"],
+    caveat: "自定义图片可传一至五张，建议使用主体居中的竖图。展开时横栏总宽固定。",
+  },
+  "image-compare": {
+    category: "media", useCases: ["图片处理前后对比", "弹性图片分隔线", "before and after image comparison"],
+    searchTerms: ["图片对比", "前后", "黑白", "滑块", "曲线", "before after", "image compare", "elastic slider"],
+    visualTags: ["image", "grayscale", "elastic"], interactions: ["drag", "touch", "keyboard"],
+    caveat: "自定义前后图需保持相同构图和比例。默认使用同一张画的彩色和灰度状态。",
+  },
+  "card-swap": {
+    category: "cards", useCases: ["照片卡片叠放", "可拖拽卡片轮播", "flingable photo carousel"],
+    searchTerms: ["甩动", "照片", "轮播", "叠放", "fling", "drag", "photo", "stack"],
+    visualTags: ["photo", "stack", "perspective"], interactions: ["drag", "click", "keyboard", "touch", "auto-play"],
+    caveat: "默认四张内嵌照片，可换图。自动切换默认关闭。",
+  },
   "tactile-push-button": {
     category: "input", useCases: ["立体按钮", "按压反馈", "tactile push button"],
     searchTerms: ["按钮", "按压", "触感", "立体", "button", "press", "css"],

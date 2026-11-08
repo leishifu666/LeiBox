@@ -1,0 +1,161 @@
+{
+  "slug": "image-accordion",
+  "name": {
+    "en": "Image Accordion",
+    "zh": "弹性图片手风琴"
+  },
+  "description": {
+    "en": "Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.",
+    "zh": "悬停时照片弹性展开，邻图随之调整，横栏总宽保持不变。"
+  },
+  "keywords": "图片 手风琴 摄影 悬停 横栏 展开 弹簧 Bencho image accordion hover gallery photo spring",
+  "docsPath": "/docs/animations/image-accordion",
+  "detailPath": "/ai/components/image-accordion.json",
+  "markdownPath": "/ai/components/image-accordion.md",
+  "previewPath": "/assets/components/image-accordion.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "交互摄影条带",
+      "横向图片手风琴",
+      "spring image gallery"
+    ],
+    "searchTerms": [
+      "图片",
+      "摄影",
+      "手风琴",
+      "悬停",
+      "弹簧",
+      "image accordion",
+      "hover gallery",
+      "spring"
+    ],
+    "visualTags": [
+      "photography",
+      "accordion",
+      "elastic"
+    ],
+    "interactions": [
+      "hover",
+      "focus",
+      "touch",
+      "keyboard"
+    ],
+    "caveat": "自定义图片可传一至五张，建议使用主体居中的竖图。展开时横栏总宽固定。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Bencho Image Accordion adapted to the LeiBox DOM lifecycle for six frameworks.",
+    "designReference": "https://bencho.dev/blocks/image-accordion",
+    "designAuthor": "Lorenzo Cabra · Bencho",
+    "license": "MIT code, Copyright (c) 2026 Lorenzo Cabra. Free block license: https://bencho.dev/licence."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/image-accordion/react.json",
+      "component": "ImageAccordion",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ImageAccordion } from \"./ImageAccordion\";\n\nexport default function App() {\n  return <ImageAccordion />;\n}",
+      "files": [
+        "ImageAccordion.tsx",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/image-accordion/vue.json",
+      "component": "ImageAccordion",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ImageAccordion from \"./ImageAccordion.vue\";\n</script>\n<template><ImageAccordion /></template>",
+      "files": [
+        "ImageAccordion.vue",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/image-accordion/svelte.json",
+      "component": "ImageAccordion",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ImageAccordion from \"./ImageAccordion.svelte\";\n</script>\n<ImageAccordion />",
+      "files": [
+        "ImageAccordion.svelte",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/image-accordion/solid.json",
+      "component": "ImageAccordion",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ImageAccordion } from \"./ImageAccordion.solid\";\n\nexport default function App() {\n  return <ImageAccordion />;\n}",
+      "files": [
+        "ImageAccordion.solid.tsx",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/image-accordion/preact.json",
+      "component": "ImageAccordion",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ImageAccordion } from \"./ImageAccordion.preact\";\n\nexport default function App() {\n  return <ImageAccordion />;\n}",
+      "files": [
+        "ImageAccordion.preact.tsx",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/image-accordion/vanilla.json",
+      "component": "ImageAccordion",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ImageAccordion\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ImageAccordion.ts",
+        "ImageAccordionEngine.js",
+        "motion-runtime.ts",
+        "ImageAccordionEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover over a photo or use Tab to expand it. On touch screens, tap a photo to expand or collapse it.",
+    "zh": "悬停或用 Tab 聚焦可展开照片。触屏点按展开，再点同一张收起。"
+  }
+}

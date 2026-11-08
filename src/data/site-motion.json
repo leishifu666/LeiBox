@@ -1,6 +1,22 @@
 {
   "chineseFontStylesheet": "/assets/motion/b4e338107c38036aebc0b3c1.css",
   "components": {
+    "pixel-toggle": {
+      "documentUrl": "/assets/motion/pixel-toggle-e243d71b35ed78f826177223.html",
+      "previewUrl": "/assets/motion/pixel-toggle-e243d71b35ed78f826177223.html"
+    },
+    "image-accordion": {
+      "documentUrl": "/assets/motion/image-accordion-86ff921a99be2a09e0643ac9.html",
+      "previewUrl": "/assets/motion/image-accordion-86ff921a99be2a09e0643ac9.html"
+    },
+    "image-compare": {
+      "documentUrl": "/assets/motion/image-compare-ea652e60a285c979f1b905e0.html",
+      "previewUrl": "/assets/motion/image-compare-ea652e60a285c979f1b905e0.html"
+    },
+    "card-swap": {
+      "documentUrl": "/assets/motion/card-swap-99f5d9c5b3cfbe7a71744cdc.html",
+      "previewUrl": "/assets/motion/card-swap-99f5d9c5b3cfbe7a71744cdc.html"
+    },
     "tactile-push-button": {
       "documentUrl": "/assets/motion/tactile-push-button-2d008586b0acca73f4726430.html",
       "previewUrl": "/assets/motion/tactile-push-button-2d008586b0acca73f4726430.html"

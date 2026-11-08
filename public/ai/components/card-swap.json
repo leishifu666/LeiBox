@@ -1,0 +1,162 @@
+{
+  "slug": "card-swap",
+  "name": {
+    "en": "Card Swap",
+    "zh": "拖甩照片卡片"
+  },
+  "description": {
+    "en": "Tap or fling the front photo to the back of a tilted stack as the other cards step forward.",
+    "zh": "点按或甩动最前面的照片，让它退到队尾，其余卡片顺势前移。"
+  },
+  "keywords": "拖甩 照片 叠放 堆叠 卡片 轮播 橡皮筋 photo stack swipe fling card swap",
+  "docsPath": "/docs/animations/card-swap",
+  "detailPath": "/ai/components/card-swap.json",
+  "markdownPath": "/ai/components/card-swap.md",
+  "previewPath": "/assets/components/card-swap.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "照片卡片叠放",
+      "可拖拽卡片轮播",
+      "flingable photo carousel"
+    ],
+    "searchTerms": [
+      "甩动",
+      "照片",
+      "轮播",
+      "叠放",
+      "fling",
+      "drag",
+      "photo",
+      "stack"
+    ],
+    "visualTags": [
+      "photo",
+      "stack",
+      "perspective"
+    ],
+    "interactions": [
+      "drag",
+      "click",
+      "keyboard",
+      "touch",
+      "auto-play"
+    ],
+    "caveat": "默认四张内嵌照片，可换图。自动切换默认关闭。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "User-provided CardSwap React snippet adapted to a shared DOM core with six native framework entries.",
+    "designReference": null,
+    "designAuthor": "User-provided React source",
+    "license": "No upstream author or code license was supplied. The bundled demonstration photos were generated for this adaptation."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/card-swap/react.json",
+      "component": "CardSwap",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { CardSwap } from \"./CardSwap\";\n\nexport default function App() {\n  return <CardSwap />;\n}",
+      "files": [
+        "CardSwap.tsx",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/card-swap/vue.json",
+      "component": "CardSwap",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport CardSwap from \"./CardSwap.vue\";\n</script>\n<template><CardSwap /></template>",
+      "files": [
+        "CardSwap.vue",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/card-swap/svelte.json",
+      "component": "CardSwap",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport CardSwap from \"./CardSwap.svelte\";\n</script>\n<CardSwap />",
+      "files": [
+        "CardSwap.svelte",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/card-swap/solid.json",
+      "component": "CardSwap",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { CardSwap } from \"./CardSwap.solid\";\n\nexport default function App() {\n  return <CardSwap />;\n}",
+      "files": [
+        "CardSwap.solid.tsx",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/card-swap/preact.json",
+      "component": "CardSwap",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { CardSwap } from \"./CardSwap.preact\";\n\nexport default function App() {\n  return <CardSwap />;\n}",
+      "files": [
+        "CardSwap.preact.tsx",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/card-swap/vanilla.json",
+      "component": "CardSwap",
+      "dependencies": [],
+      "usage": "import { mount } from \"./CardSwap\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "CardSwap.ts",
+        "CardSwapEngine.js",
+        "motion-runtime.ts",
+        "CardSwapEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click or fling the front card. Enter and Space also swap it. Turn on Auto to cycle the stack.",
+    "zh": "点按或甩动最前面的卡片，也可用 Enter 或空格切换。勾选 Auto 开启自动切换。"
+  }
+}
