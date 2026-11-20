@@ -33,7 +33,9 @@ try{
   const response=await page.goto(base+route(slug),{waitUntil:'networkidle'});assert.equal(response.status(),200);
   const code=page.locator('section[aria-label="Code"]'),install=page.locator('section[aria-label="Installation"]');
   for(const pack of packages){
-   const trigger=code.locator('button[aria-label="框架"]');await trigger.click();
+   const trigger=code.locator('button[aria-label="框架"]');
+   await trigger.scrollIntoViewIfNeeded();
+   await trigger.click();
    await page.getByRole('option',{name:pack.label,exact:true}).click();
    await expect(trigger).toContainText(pack.label);await expect(install.locator('button[aria-label="框架"]')).toContainText(pack.label);
    await expect(install.locator('code')).toHaveText(pack.install);
@@ -46,7 +48,9 @@ try{
    await menu.getByRole('menuitem',{name:'复制提示词',exact:true}).click();
    await expect(menu.getByRole('menuitem',{name:'已复制',exact:true})).toBeVisible();
    assert.equal(normal(await page.evaluate(()=>navigator.clipboard.readText())),normal(pack.prompt));
-   assert.equal(normal(await page.locator('section[aria-label="Recreation prompt"] pre').innerText()),normal(pack.prompt));
+   const prompt=page.locator('section[aria-label="Recreation prompt"]');
+   await prompt.scrollIntoViewIfNeeded();
+   assert.equal(normal(await prompt.locator('pre').innerText()),normal(pack.prompt));
    await expect(menu).toHaveCount(0);
    checks.push({slug,framework:pack.framework,selector:true,install:true,usage:true,bundle:true,prompt:true});
    console.log(`PASS DOC ${slug} ${pack.framework}`);
@@ -121,7 +125,8 @@ try{
  await page.setViewportSize({width:1440,height:1000});
  await page.goto(base+'/components#interaction',{waitUntil:'networkidle'});
  await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(0);
- const card=page.locator('[data-preview-card]').first();await card.hover();
+ const card=page.locator(filters.length ? `[data-component-card="${route(slugs[0])}"]` : '[data-preview-card][data-component-doc-layout]').first();
+ await card.hover();
  await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(1);
  await page.mouse.move(300,20);await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(0);
  if(slugs.includes('ink-spread-carousel'))await verifyInkSpreadPreviews(page,base,out);

@@ -1,0 +1,162 @@
+{
+  "slug": "thinking-orb",
+  "name": {
+    "en": "Dissolve Thinking Orb",
+    "zh": "Dissolve 状态粒子球"
+  },
+  "description": {
+    "en": "A 180-dot orb morphs between six agent states and responds to the pointer.",
+    "zh": "由 180 个粒子组成的状态球，在六种智能体状态间变形，也会避让指针。"
+  },
+  "keywords": "智能体 状态 粒子球 呼吸 环形 雷达 监听 音量 完成 错误 dissolve thinking orb status agent canvas particles radar",
+  "docsPath": "/docs/animations/thinking-orb",
+  "detailPath": "/ai/components/thinking-orb.json",
+  "markdownPath": "/ai/components/thinking-orb.md",
+  "previewPath": "/assets/components/thinking-orb.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "Show the current state of an AI agent.",
+      "用粒子球显示 AI 智能体的当前状态。"
+    ],
+    "searchTerms": [
+      "dissolve",
+      "thinking orb",
+      "agent status",
+      "radar",
+      "voice level",
+      "智能体",
+      "状态球",
+      "粒子",
+      "聆听"
+    ],
+    "visualTags": [
+      "particles",
+      "orb",
+      "morph"
+    ],
+    "interactions": [
+      "click",
+      "drag",
+      "touch",
+      "keyboard"
+    ],
+    "caveat": "试玩可用滑杆模拟音量。应用可直接传入音量读数。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "MIT-licensed dissolve ThinkingOrb Web source, adapted for the LeiBox preview and framework packages.",
+    "designReference": "https://dissolve.rselmi.com/",
+    "designAuthor": "Rayan Selmi · dissolve",
+    "upstreamSource": "https://www.npmjs.com/package/dissolve-ui/v/0.0.6",
+    "license": "MIT License · Copyright (c) 2026 Rayan Selmi."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/thinking-orb/react.json",
+      "component": "ThinkingOrb",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ThinkingOrb } from \"./ThinkingOrb\";\n\nexport default function AgentIndicator() {\n  return <ThinkingOrb options={{ state: \"thinking\", size: 96, interactive: true }} />;\n}",
+      "files": [
+        "ThinkingOrb.tsx",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/thinking-orb/vue.json",
+      "component": "ThinkingOrb",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ThinkingOrb from \"./ThinkingOrb.vue\";\n</script>\n<template><ThinkingOrb /></template>",
+      "files": [
+        "ThinkingOrb.vue",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/thinking-orb/svelte.json",
+      "component": "ThinkingOrb",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ThinkingOrb from \"./ThinkingOrb.svelte\";\n</script>\n<ThinkingOrb />",
+      "files": [
+        "ThinkingOrb.svelte",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/thinking-orb/solid.json",
+      "component": "ThinkingOrb",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ThinkingOrb } from \"./ThinkingOrb.solid\";\n\nexport default function App() {\n  return <ThinkingOrb />;\n}",
+      "files": [
+        "ThinkingOrb.solid.tsx",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/thinking-orb/preact.json",
+      "component": "ThinkingOrb",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ThinkingOrb } from \"./ThinkingOrb.preact\";\n\nexport default function App() {\n  return <ThinkingOrb />;\n}",
+      "files": [
+        "ThinkingOrb.preact.tsx",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/thinking-orb/vanilla.json",
+      "component": "ThinkingOrb",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ThinkingOrb\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ThinkingOrb.ts",
+        "ThinkingOrbEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Switch the agent state, drag across the orb, or adjust the simulated voice level while listening.",
+    "zh": "切换智能体状态，划过粒子球，或在聆听时拖动滑杆模拟音量。"
+  }
+}

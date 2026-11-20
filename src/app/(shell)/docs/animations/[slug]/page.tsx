@@ -8,6 +8,9 @@ import { getMotionDocProps } from "@/components/docs/motion-doc-props";
 import { MotionPreview } from "@/components/docs/motion-preview";
 import { Footer } from "@/components/landing/footer";
 import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
+import { LIBRARIES_DEV, libraryDemoApi } from "@/data/libraries-dev";
+import { THINKING_ORB_API } from "@/data/thinking-orb";
+import { UPLOAD_TILE_API } from "@/data/upload-tile";
 import { interactionTranslations } from "@/lib/i18n/interactions";
 import { motionDocLayout } from "@/lib/motion-doc-layout";
 import { DEEP_AGENT_API, DEEP_AGENT_COMPOSER_API } from "@/data/deep-agent.mjs";
@@ -25,10 +28,19 @@ export default async function MotionPage({params}:Props){
   if(!entry)notFound();
   const doc=await getMotionDocProps(slug);
   const {width,height,responsive,instructions,tags}=motionDocLayout(entry);
+  const library = LIBRARIES_DEV[slug];
+  const dissolveApi = slug === "upload-tile" ? UPLOAD_TILE_API : slug === "thinking-orb" ? THINKING_ORB_API : [];
   return <div className="page-enter">
     <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={tags}
       beforeInstall={<MotionDemoSection instructions={instructions}>
         <MotionPreview slug={slug} name={entry.name} width={width} height={height} poster={entry.preview} responsive={responsive} />
+        {entry.referenceSourceUrl && entry.referenceUrl && (
+          <p className="mt-3 flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs leading-relaxed text-muted-foreground">
+            <a className="rounded underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceUrl} target="_blank" rel="noreferrer"><T>Reference</T> · {entry.referenceAuthor}</a>
+            <a className="rounded underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceSourceUrl} target="_blank" rel="noreferrer"><T>Upstream source</T></a>
+            {entry.referencePackage && <span>{entry.referencePackage} · MIT</span>}
+          </p>
+        )}
         {entry.communitySubmission && entry.referenceAuthor && (
           <p className="mt-2 text-center text-xs leading-relaxed text-muted-foreground">
             <T>Community submission</T> · <T>{entry.referenceAuthor}</T>
@@ -40,9 +52,25 @@ export default async function MotionPage({params}:Props){
         {slug === "multi-cursor-builder" ? <a href="/motion/multi-cursor-builder.html" download="多光标页面搭建-独立演示.html" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download standalone HTML</T></a> : null}
         {slug === "deep-agent-composer" || slug === "reasoning-effort-slider" ? <a href="/motion/deep-agent-original-source.txt" download="DeepAgent-原版源码.txt" className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download original Deep Agent source</T></a> : null}
         {entry.suppliedSource?<a href={entry.suppliedSource} download={slug === "card-swap" ? "CardSwap.tsx" : "GlassFolder.tsx"} className="inline-flex items-center gap-1.5 rounded py-1 underline underline-offset-4"><Download aria-hidden className="size-3.5"/><T>Download supplied React source</T></a>:null}
-        {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
+        {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceSourceUrl?null:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(library ? [...library.api, ...libraryDemoApi].map(({ key, type, en }) => ({ name: `options.${key}`, type, description: en })) : []),
+        ...dissolveApi.map(({ key, type, defaultValue, en }) => ({ name: slug === "upload-tile" ? key : `options.${key}`, type, defaultValue, description: en })),
+        ...(slug === "distortion-waves" ? [
+          {name:"options.type",type:'"vertical" | "center" | "horizontal"',defaultValue:'"vertical"',description:"Wave propagation shape: vertical from bottom button, center ring from badge, or horizontal from left rail."},
+          {name:"options.palette",type:'"colorful" | "green" | "ocean" | "sunset" | "mono" | string',defaultValue:'"colorful"',description:"Preset palette name or a 6-digit hex colour such as #35ba00."},
+          {name:"options.revealed",type:"boolean",defaultValue:"false",description:"Control whether the revealed view is shown; changing it runs or reverses the wave."},
+          {name:"options.scrub",type:"number | null",defaultValue:"null",description:"Hold the wave at a normalized progress between 0 and 1 instead of auto-playing."},
+          {name:"options.showControls",type:"boolean",defaultValue:"true",description:"Show the mode and palette controls underneath the card."},
+          {name:"options.onRevealedChange",type:"(revealed: boolean) => void",description:"Called when the user clicks the card button to toggle views."},
+          {name:"options.onFinish",type:"(revealed: boolean) => void",description:"Called when a wave or crossfade finishes, with the current revealed state."},
+        ] : []),
+        ...(slug === "focus-switch" ? [
+          {name:"options.checked",type:"boolean",defaultValue:"false",description:"Set the focus switch on or off."},
+          {name:"options.renderer",type:'"webgl2" | "canvas2d"',defaultValue:'"webgl2"',description:"Force the Canvas 2D renderer."},
+          {name:"options.onCheckedChange",type:"(checked: boolean) => void",description:"Called when the user changes the switch."},
+        ] : []),
         ...(slug === "blister-dropdown" ? [
           {name:"options.value",type:'"all" | "open" | "closed"',defaultValue:'"all"',description:"The selected status."},
           {name:"options.expanded",type:"boolean",defaultValue:"true",description:"Whether the dropdown is expanded."},

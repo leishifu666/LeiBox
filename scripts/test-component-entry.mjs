@@ -230,6 +230,24 @@ try{
   await reduced.waitForURL(url=>url.pathname===firstHref);await clean(reduced);
   assert.equal(await reduced.evaluate(()=>window.__entryFrames.filter(f=>['waiting','entering'].includes(f.state)).length),0);
   results.reducedMotion=true;await reduced.close();
+
+  const filtered=await pageFor(1440,{reducedMotion:'reduce'});
+  const controls=base+'/components?category=controls';
+  const borderBeam='/docs/animations/border-beam';
+  await filtered.goto(controls);
+  await expect(filtered.locator('aside a[aria-current="page"]')).toHaveAttribute('href','/components?category=controls');
+  const filteredCard=filtered.locator(`main [data-component-card="${borderBeam}"] a`);
+  await filteredCard.click();
+  await filtered.waitForURL('**'+borderBeam);
+  await filtered.goBack();
+  await filtered.waitForURL(controls);
+  await expect(filtered.locator('aside a[aria-current="page"]')).toHaveAttribute('href','/components?category=controls');
+  await filteredCard.click();
+  await filtered.waitForURL('**'+borderBeam);
+  await filtered.locator('aside a[href="/components?category=navigation"]').click();
+  await filtered.waitForURL(base+'/components?category=navigation');
+  await expect(filteredCard).toHaveCount(0);
+  results.categoryReturn=true;await filtered.close();
   assert.deepEqual(results.errors,[]);
   await fs.writeFile(path.join(output,'results.json'),JSON.stringify(results,null,2));
   console.log(JSON.stringify({status:'passed',checks:Object.keys(results)}));

@@ -14,6 +14,7 @@ import { COMPONENT_CATALOG } from "@/data/component-catalog";
 import type { MotionPackageRef } from "@/lib/doc-asset-types";
 import { getDocAssets } from "@/lib/doc-assets";
 import { MotionPrompt } from "@/components/docs/motion-framework-tabs";
+import { MotionPackageDownloadProvider } from "@/components/docs/motion-package-download";
 import { cn } from "@/lib/utils";
 
 export interface ComponentDocProps {
@@ -66,13 +67,13 @@ export async function ComponentDoc({
   const devDependencies: string[] = [];
   const hasWebGPU = false;
 
-  return (
+  const content = (
     <article className="mx-auto w-full max-w-3xl" data-component-document={installItem}>
       <ComponentDocHeader
         title={title}
         description={description}
         tags={hasWebGPU ? [...(tags ?? []), "webgl", "webgpu"] : tags}
-        actions={copyContent ? <CopyMenu title={title} standalone={copyContent} motionPackages={motionPackages} /> : null}
+        actions={copyContent ? <CopyMenu title={title} standalone={copyContent} /> : null}
       />
 
 
@@ -164,6 +165,9 @@ export async function ComponentDoc({
       <ComponentPager slug={installItem} />
     </article>
   );
+  return motionPackages
+    ? <MotionPackageDownloadProvider packages={motionPackages}>{content}</MotionPackageDownloadProvider>
+    : content;
 }
 
 function ComponentPager({ slug }: { slug: string }) {

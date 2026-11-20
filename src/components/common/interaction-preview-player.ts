@@ -450,6 +450,7 @@ export function interactionPreviewCss(slug: string) {
   return `
     html, body { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; }
     html, body { background: #f4f4f4 !important; }
+    ${slug === 'focus-switch' ? '.stage { background: #f4f4f4 !important; }' : ''}
     ${slug === 'dot-matrix-trio' ? '.dm-scene { background:#f4f4f4!important; }' : ''}
     ${slug === 'glass-folder' || slug === 'cosmic-panels' ? '.glass-folder-demo,.cosmos-demo { min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'brand-line-cards' ? '.gallery { width: 94%; min-height: 100%; padding: 0; gap: 16px; }' : ''}
@@ -468,15 +469,29 @@ export function interactionPreviewCss(slug: string) {
 }
 
 export function interactionPreviewDocument(source: string, slug: string) {
-  if (slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
-  const script = slug === "blister-dropdown" ? `
+  const library = source.includes("data-leibox-library");
+  if (library || slug === "distortion-waves" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  const script = library ? "" : slug === "focus-switch" ? `
+    customElements.whenDefined('focus-switch').then(() => {
+      const focusSwitch = document.querySelector('focus-switch');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        parent.postMessage({ type: 'leibox-preview-ready', slug: 'focus-switch' }, '*');
+      }));
+      const toggle = () => { if (!document.hidden) focusSwitch.checked = !focusSwitch.checked; };
+      const first = setTimeout(toggle, 850);
+      const replay = setInterval(toggle, 3600);
+      addEventListener('pagehide', () => { clearTimeout(first); clearInterval(replay); }, { once: true });
+    });
+  ` : slug === "blister-dropdown" ? `
     addEventListener('load', () => {
       document.getElementById('btnSoundToggle').click();
       document.getElementById('btnAutoPlay').click();
       requestAnimationFrame(() => parent.postMessage({ type: 'leibox-preview-ready', slug: 'blister-dropdown' }, '*'));
     }, { once: true });
-  ` : slug === "pixel-toggle" ? "" : PLAYER.replace('__SLUG__', JSON.stringify(slug));
-  const style = `<style>${interactionPreviewCss(slug)}</style>`;
+  ` : slug === "pixel-toggle" || slug === "distortion-waves" ? "" : PLAYER.replace('__SLUG__', JSON.stringify(slug));
+  const style = library || slug === "distortion-waves"
+    ? "<style>html,body{overflow:hidden;background:#fff}</style>"
+    : `<style>${interactionPreviewCss(slug)}</style>`;
   // Gallery-sized scenes need at most 30 draws per second. One scheduler shares
   // the frame between the original animation and the pointer replay driver.
   const scheduler = `<script>(() => {

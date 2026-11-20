@@ -28,9 +28,10 @@ type Entry = {
   fromTitle: TitleState;
   quick?: boolean;
 };
-type Visit = { href: string; scrollY: number; origin: string; template: HTMLElement; titleTemplate: HTMLElement; panel?: Box; detailTitle?: TitleState };
+type Visit = { href: string; returnHref: string; scrollY: number; origin: string; template: HTMLElement; titleTemplate: HTMLElement; panel?: Box; detailTitle?: TitleState };
 type Opening = {
   href: string;
+  returnHref: string;
   title: string;
   description: string;
   poster?: string;
@@ -338,10 +339,12 @@ export function ComponentEntryTransition({ children }: { children: ReactNode }) 
       const target = event.target instanceof Element ? event.target : null;
       const navigation = target?.closest<HTMLAnchorElement>("a[href]");
       const destination = navigation ? new URL(navigation.href) : null;
-      const returningToCollection = destination?.origin === location.origin && destination.pathname === collectionHref;
+      const collectionTarget = destination?.origin === location.origin && destination.pathname === collectionHref
+        ? destination.pathname + destination.search
+        : null;
       if (navigation?.target === "_blank" || navigation?.hasAttribute("download")) return;
       if (openingRef.current) {
-        if (returningToCollection) {
+        if (collectionTarget === openingRef.current.returnHref) {
           event.preventDefault();
           router.back();
         } else if (destination?.origin === location.origin && destination.pathname === openingRef.current.href) {
@@ -349,14 +352,18 @@ export function ComponentEntryTransition({ children }: { children: ReactNode }) 
         }
         return;
       }
-      if (returningToCollection && window.history.state?.[collectionHistoryKey] === pathname) {
+      const savedVisit = window.history.state?.[collectionHistoryKey];
+      const matchesVisit = savedVisit?.href === pathname && savedVisit.returnHref === collectionTarget;
+      const matchesLegacyVisit = savedVisit === pathname && collectionTarget === collectionHref;
+      if (matchesVisit || matchesLegacyVisit) {
         event.preventDefault();
         router.back();
         return;
       }
-      if (pathname === previous.current?.href && returningToCollection) {
-        restore.current = previous.current;
-        if (beginReturn()) { event.preventDefault(); router.push(collectionHref); }
+      const previousVisit = previous.current;
+      if (pathname === previousVisit?.href && collectionTarget === previousVisit.returnHref) {
+        restore.current = previousVisit;
+        if (beginReturn()) { event.preventDefault(); router.push(previousVisit.returnHref); }
         return;
       }
       const quick = pathname === collectionHref;
@@ -410,7 +417,8 @@ export function ComponentEntryTransition({ children }: { children: ReactNode }) 
       gsap.set(proxyMedia, { x: mediaBox.x - from.x, y: mediaBox.y - from.y, width: mediaBox.width, height: mediaBox.height });
       const entry: Entry = { direction: "enter", href, componentHref: href, scrollY: window.scrollY, from, card: proxy, media: proxyMedia, caption, title, fromTitle, quick };
       pending.current = entry;
-      previous.current = { href, scrollY: entry.scrollY, origin: pathname, template: proxy.cloneNode(true) as HTMLElement, titleTemplate: title.cloneNode(true) as HTMLElement };
+      const returnHref = quick ? collectionHref + location.search : collectionHref;
+      previous.current = { href, returnHref, scrollY: entry.scrollY, origin: pathname, template: proxy.cloneNode(true) as HTMLElement, titleTemplate: title.cloneNode(true) as HTMLElement };
       sourceMain.current = slot;
       slot.classList.add(styles.main);
       if (quick) {
@@ -418,7 +426,7 @@ export function ComponentEntryTransition({ children }: { children: ReactNode }) 
         const video = media.querySelector("video");
         const layout = card.dataset.componentDocLayout;
         const preview: Opening = {
-          href, slot, link, scrollY: entry.scrollY,
+          href, returnHref, slot, link, scrollY: entry.scrollY,
           title: heading.textContent ?? "",
           description: sourceCaption.querySelector("p")?.textContent ?? "",
           poster: image?.currentSrc || image?.src || video?.poster || undefined,
@@ -739,7 +747,7 @@ export function ComponentEntryTransition({ children }: { children: ReactNode }) 
       window.history.replaceState({
         ...window.history.state,
         [previewHistoryKey]: null,
-        [collectionHistoryKey]: href,
+        [collectionHistoryKey]: { href, returnHref: opening.returnHref },
       }, "");
       closeOpening(false);
       // Native demos have their own layout. Carry any remaining difference

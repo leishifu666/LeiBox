@@ -96,6 +96,7 @@ for (const component of INTERACTION_COMPONENTS) {
     source: {
       kind: "project-source", provider: "LeiBox", implementation: component.codeSource ?? "LeiBox component package",
       designReference: component.referenceUrl ?? null, designAuthor: component.referenceAuthor ?? null,
+      ...(component.referenceSourceUrl ? { upstreamSource: component.referenceSourceUrl } : {}),
       ...(component.original ? { original: true, author: "雷师傅" } : {}),
       license: component.referenceLicense ?? "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog.",
     },
@@ -120,7 +121,9 @@ for (const component of INTERACTION_COMPONENTS) {
     `Docs: ${localLink(component.href)}`, `Detail: ${localLink(detailPath)}`, "",
     "Use the installed LeiBox Skill to pull the selected framework's complete source, or fetch one package JSON directly:", "",
     ...packages.map((pack) => `- ${pack.label}: ${localLink(`/ai/packages/${component.slug}/${pack.framework}.json`)}`), "",
-    `Design reference: ${component.original ? "LeiShiFu original interaction / 雷师傅原创" : component.referenceUrl ?? "Not supplied"}`, `Source notice: ${entry.source.license}`, "",
+    `Design reference: ${component.original ? "LeiShiFu original interaction / 雷师傅原创" : component.referenceUrl ?? "Not supplied"}`,
+    ...(component.referenceSourceUrl ? [`Upstream source: ${component.referenceSourceUrl}`] : []),
+    `Source notice: ${entry.source.license}`, "",
   ].join("\n"));
   items.push(entry);
 }

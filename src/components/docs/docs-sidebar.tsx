@@ -1,8 +1,6 @@
 "use client";
 
 import { T as TranslatedText, useLanguage } from "@/components/common/language-provider";
-
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -24,7 +22,9 @@ import {
 import { cn } from "@/lib/utils";
 import { INTERACTION_PREVIEWS, type InteractionPreviewEntry } from "@/data/interaction-previews";
 import { InteractionPreview } from "@/components/common/interaction-preview";
-import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { COMPONENT_CATALOG_GROUPS } from "@/data/component-catalog";
+import { componentCategories, componentCategoryHref, type ComponentCategory } from "@/data/component-categories";
+import { useComponentCategory } from "@/hooks/use-component-category";
 
 type NavPreview = { kind: "canvas"; entry: ComponentEntry } | { kind: "interaction"; entry: InteractionPreviewEntry };
 const PREVIEWS = new Map<string, NavPreview>([
@@ -45,24 +45,16 @@ function subscribeHover(callback: () => void) {
   return () => mql.removeEventListener("change", callback);
 }
 
-const sections = [
-  {
-    title: "Getting Started",
-    items: [
-      { href: "/docs", label: "Introduction" },
-      { href: "/docs/installation", label: "Installation" },
-      { href: "/docs/rendering", label: "Rendering" },
-      { href: "/docs/mcp", label: "AI integration" },
-    ],
-  },
-  {
-    title: "Components",
-    items: [
-      { href: "/components", label: "Browse All" },
-      ...COMPONENT_CATALOG.map(entry => ({ href: entry.href, label: entry.name })),
-    ],
-  },
-] as const;
+const guides = [
+  { href: "/docs", label: "Introduction" },
+  { href: "/docs/installation", label: "Installation" },
+  { href: "/docs/rendering", label: "Rendering" },
+  { href: "/docs/mcp", label: "AI integration" },
+];
+const navHeading = "px-2 pb-1.5 text-[12px] font-medium text-muted-foreground/70";
+const navRow = "flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm transition-colors duration-150";
+const navCurrent = "bg-muted font-medium text-foreground";
+const navIdle = "text-muted-foreground hover:bg-muted/60 hover:text-foreground";
 
 export function DocsNavList({
   onNavigate,
@@ -72,6 +64,9 @@ export function DocsNavList({
   showPreviews?: boolean;
 }) {
   const pathname = usePathname();
+  const [category, setCategory] = useComponentCategory();
+  const inCatalog = pathname === "/components";
+  const openCategory = !inCatalog && PREVIEWS.has(pathname) ? componentCategories(pathname).primary : null;
   const shouldReduceMotion = useReducedMotion();
   const [preview, setPreview] = useState<NavPreview | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -132,76 +127,102 @@ export function DocsNavList({
     };
   }, [pathname]);
 
+  const catalogLink = (event: { preventDefault: () => void }, nextCategory: ComponentCategory | null) => {
+    if (inCatalog) {
+      event.preventDefault();
+      if (nextCategory !== category) void setCategory(nextCategory);
+    }
+    clearPreview();
+    onNavigate?.();
+  };
+
+  const renderItem = ({ href, label }: { href: string; label: string }) => {
+    const active = pathname === href;
+    const entry = enabled ? PREVIEWS.get(href) : undefined;
+    return (
+      <li key={href}>
+        <Link
+          prefetch={false}
+          href={href}
+          aria-current={active ? "page" : undefined}
+          onNavigate={() => { clearPreview(); onNavigate?.(); }}
+          onPointerEnter={entry ? (event) => {
+            clearTimeout(hoverTimer.current);
+            place(event, !activeRef.current);
+            const switching = activeRef.current;
+            activeRef.current = true;
+            if (switching) setPreview(entry);
+            else hoverTimer.current = setTimeout(() => setPreview(entry), 120);
+          } : undefined}
+          onPointerMove={entry ? (event) => place(event, false) : undefined}
+          onPointerLeave={entry ? clearPreview : undefined}
+          onFocus={entry ? (event) => {
+            clearTimeout(hoverTimer.current);
+            const rect = event.currentTarget.getBoundingClientRect();
+            const px = Math.min(rect.right + 12, window.innerWidth - PREVIEW_W - 12);
+            const py = Math.max(12, Math.min(rect.top, window.innerHeight - PREVIEW_H - 12));
+            mx.jump(px); my.jump(py); sx.jump(px); sy.jump(py);
+            activeRef.current = true; setPreview(entry);
+          } : undefined}
+          onBlur={entry ? clearPreview : undefined}
+          className={cn(navRow, active ? navCurrent : navIdle)}
+        >
+          <TranslatedText>{label}</TranslatedText>
+          {NEW_HREFS.has(href) && (
+            <>
+              <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-blue-500" />
+              <span className="sr-only"><TranslatedText>New</TranslatedText></span>
+            </>
+          )}
+        </Link>
+      </li>
+    );
+  };
+
   return (
     <div onPointerLeave={enabled ? clearPreview : undefined}>
-      {sections.map((section) => (
-        <div key={section.title} className="mt-4 first:mt-0">
-          <p className="px-2 pb-1.5 text-[12px] font-medium text-muted-foreground/70">
-            <TranslatedText>{section.title}</TranslatedText>
-          </p>
-          <ul className="flex flex-col gap-0.5">
-            {section.items.map((item) => {
-              const active = pathname === item.href;
-              const entry = enabled ? PREVIEWS.get(item.href) : undefined;
-              return (
-                <li key={item.href}>
-                  <Link prefetch={false}
-                    href={item.href}
-                    aria-current={active ? "page" : undefined}
-                    onClick={() => { clearPreview(); onNavigate?.(); }}
-                    onPointerEnter={
-                      enabled
-                        ? (event) => {
-                            if (!entry) {
-                              clearPreview();
-                              return;
-                            }
-                            clearTimeout(hoverTimer.current);
-                            place(event, !activeRef.current);
-                            const switching = activeRef.current;
-                            activeRef.current = true;
-                            if (switching) setPreview(entry);
-                            else hoverTimer.current = setTimeout(() => setPreview(entry), 120);
-                          }
-                        : undefined
-                    }
-                    onPointerMove={
-                      entry ? (event) => place(event, false) : undefined
-                    }
-                    onPointerLeave={enabled ? clearPreview : undefined}
-                    onFocus={entry ? (event) => {
-                      clearTimeout(hoverTimer.current);
-                      const rect = event.currentTarget.getBoundingClientRect();
-                      const px = Math.min(rect.right + 12, window.innerWidth - PREVIEW_W - 12);
-                      const py = Math.max(12, Math.min(rect.top, window.innerHeight - PREVIEW_H - 12));
-                      mx.jump(px); my.jump(py); sx.jump(px); sy.jump(py);
-                      activeRef.current = true; setPreview(entry);
-                    } : undefined}
-                    onBlur={entry ? clearPreview : undefined}
-                    className={cn(
-                      "flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm transition-colors duration-150",
-                      active
-                        ? "bg-muted font-medium text-foreground"
-                        : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
-                    )}
-                  >
-                    <TranslatedText>{item.label}</TranslatedText>
-                    {NEW_HREFS.has(item.href) && (
-                      <>
-                        <span
-                          aria-hidden
-                          className="size-1.5 shrink-0 rounded-full bg-blue-500"
-                        />
-                        <span className="sr-only"><TranslatedText>New</TranslatedText></span>
-                      </>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      ))}
+      <div>
+        <p className={navHeading}><TranslatedText>Getting Started</TranslatedText></p>
+        <ul className="flex flex-col gap-0.5">{guides.map(renderItem)}</ul>
+      </div>
+      <div className="mt-4">
+        <p className={navHeading}><TranslatedText>Components</TranslatedText></p>
+        <ul className="flex flex-col gap-0.5">
+          <li>
+            <Link
+              prefetch={false}
+              href={componentCategoryHref(null)}
+              aria-current={inCatalog && !category ? "page" : undefined}
+              onNavigate={(event) => catalogLink(event, null)}
+              className={cn(navRow, inCatalog && !category ? navCurrent : navIdle)}
+            >
+              <TranslatedText>Browse All</TranslatedText>
+            </Link>
+          </li>
+          {COMPONENT_CATALOG_GROUPS.map(({ id, label, entries }) => {
+            const expanded = openCategory === id;
+            const selected = inCatalog && category === id;
+            return (
+              <li key={id}>
+                <Link
+                  prefetch={false}
+                  href={componentCategoryHref(id)}
+                  aria-current={selected ? "page" : undefined}
+                  onNavigate={(event) => catalogLink(event, id)}
+                  className={cn(navRow, selected ? navCurrent : navIdle, expanded && "font-medium text-foreground")}
+                >
+                  <TranslatedText>{label}</TranslatedText>
+                </Link>
+                {expanded && (
+                  <ul className="my-1 flex flex-col gap-0.5 pl-3">
+                    {entries.map(({ href, name }) => renderItem({ href, label: name }))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       {enabled &&
         createPortal(
           <AnimatePresence>

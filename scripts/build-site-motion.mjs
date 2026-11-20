@@ -15,7 +15,12 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
   const folder = path.join(root, 'public/assets/motion');
   await fs.mkdir(folder, { recursive: true });
   if (await fs.realpath(folder) !== folder) throw new Error('Motion output must not be a symlink');
-  if (!slugs) slugs = JSON.parse(await fs.readFile(path.join(root, 'src/data/interaction-previews.json'), 'utf8')).filter(entry => entry.sourceFile).map(entry => entry.slug);
+  const viewportPlayback = new Set();
+  if (!slugs) {
+    const entries = JSON.parse(await fs.readFile(path.join(root, 'src/data/interaction-previews.json'), 'utf8')).filter(entry => entry.sourceFile);
+    slugs = entries.map(entry => entry.slug);
+    for (const entry of entries) if (entry.viewportPlayback) viewportPlayback.add(entry.slug);
+  }
   const output = { schemaVersion: 1, chineseFontStylesheet: '', components: {} };
   const lengths = new Map(), images = new Map();
   async function asset(bytes, extension, prefix = '') {
@@ -104,7 +109,9 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
     output.components[slug] = { documentUrl: document.url, previewUrl: document.url, originalGzipBytes: gzipSync(original).length, documentGzipBytes: document.gzipBytes, initialGzipBytes: document.totalGzipBytes, totalGzipBytes: document.totalGzipBytes + deferredBytes, deferredResources: deferred, resources: document.resources };
   }
   output.chineseFontStylesheet = await asset(await fs.readFile(path.join(root, 'public/fonts/misans.css')), 'css');
-  const client = { chineseFontStylesheet: output.chineseFontStylesheet, components: Object.fromEntries(Object.entries(output.components).map(([slug, entry]) => [slug, { documentUrl: entry.documentUrl, previewUrl: entry.previewUrl }])) };
+  const client = { chineseFontStylesheet: output.chineseFontStylesheet, components: Object.fromEntries(Object.entries(output.components).map(([slug, entry]) => [slug, {
+    documentUrl: entry.documentUrl, previewUrl: entry.previewUrl, ...(viewportPlayback.has(slug) ? { viewportPlayback: true } : {}),
+  }])) };
   await fs.mkdir(path.join(root, 'src/data'), { recursive: true });
   await fs.writeFile(path.join(root, 'src/data/site-motion.json'), JSON.stringify(client, null, 2) + '\n');
   await fs.writeFile(path.join(root, 'public/site-motion-manifest.json'), JSON.stringify(output, null, 2) + '\n');

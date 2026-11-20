@@ -1,0 +1,197 @@
+{
+  "slug": "thinking-orbs",
+  "name": {
+    "en": "Thinking Orbs",
+    "zh": "思考粒子球"
+  },
+  "description": {
+    "en": "Particle orbs give nine AI processing states distinct motion.",
+    "zh": "九种粒子球动效，分别表现搜索、推理、聆听和其他 AI 工作状态。"
+  },
+  "keywords": "思考 粒子 球 搜索 推理 监听 编织 加载 thinking orbs particles loading state Libraries.dev Jakub Antalik thinking-orbs",
+  "docsPath": "/docs/animations/thinking-orbs",
+  "detailPath": "/ai/components/thinking-orbs.json",
+  "markdownPath": "/ai/components/thinking-orbs.md",
+  "previewPath": "/assets/components/thinking-orbs.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "Particle orbs give nine AI processing states distinct motion.",
+      "九种粒子球动效，分别表现搜索、推理、聆听和其他 AI 工作状态。"
+    ],
+    "searchTerms": [
+      "思考",
+      "粒子",
+      "球",
+      "搜索",
+      "推理",
+      "监听",
+      "编织",
+      "加载",
+      "thinking",
+      "orbs",
+      "particles",
+      "loading",
+      "state",
+      "thinking-orbs",
+      "libraries.dev",
+      "思考粒子球"
+    ],
+    "visualTags": [
+      "particles",
+      "orb",
+      "minimal"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "九种状态使用独立的上游 Canvas 2D 动画，可随减少动态效果设置定格。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed thinking-orbs@0.3.2 React renderer.",
+    "designReference": "https://libraries.dev/orbs",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/thinking-orbs",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · thinking-orbs@0.3.2."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/thinking-orbs/react.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { ThinkingOrbs } from \"./ThinkingOrbs\";\n\nexport default function App() {\n  return <ThinkingOrbs />;\n}",
+      "files": [
+        "ThinkingOrbs.tsx",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/thinking-orbs/vue.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ThinkingOrbs from \"./ThinkingOrbs.vue\";\n</script>\n<template><ThinkingOrbs /></template>",
+      "files": [
+        "ThinkingOrbs.vue",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/thinking-orbs/svelte.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ThinkingOrbs from \"./ThinkingOrbs.svelte\";\n</script>\n<ThinkingOrbs />",
+      "files": [
+        "ThinkingOrbs.svelte",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/thinking-orbs/solid.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { ThinkingOrbs } from \"./ThinkingOrbs.solid\";\n\nexport default function App() {\n  return <ThinkingOrbs />;\n}",
+      "files": [
+        "ThinkingOrbs.solid.tsx",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/thinking-orbs/preact.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { ThinkingOrbs } from \"./ThinkingOrbs.preact\";\n\nexport default function App() {\n  return <ThinkingOrbs />;\n}",
+      "files": [
+        "ThinkingOrbs.preact.tsx",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/thinking-orbs/vanilla.json",
+      "component": "ThinkingOrbs",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "thinking-orbs@0.3.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { mount } from \"./ThinkingOrbs\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ThinkingOrbs.ts",
+        "ThinkingOrbsEngine.js",
+        "motion-runtime.ts",
+        "ThinkingOrbsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Choose a state to see its motion. Change the size to preview an inline indicator or an avatar.",
+    "zh": "切换工作状态，比较粒子轨迹。调整尺寸，查看行内和头像大小的显示效果。"
+  }
+}

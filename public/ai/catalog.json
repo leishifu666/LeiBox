@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "ec051883c3d34df3327ccc7d3d34972cba515288c41efff69e0d838b1c30f73e",
+  "revision": "3f5bb604d613f47668c1e92eb51951f41b5043b896964ff9d4eb77b2cc6a078a",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -93,6 +93,774 @@
         "notice": {
           "en": "Use the GitHub source and the LeiBox documentation to integrate this React / Next.js example.",
           "zh": "通过 GitHub 查看 React / Next.js 源码，结合 LeiBox 文档接入。"
+        }
+      }
+    },
+    {
+      "slug": "upload-tile",
+      "name": {
+        "en": "Dissolve Upload Tile",
+        "zh": "Dissolve 粒子上传"
+      },
+      "description": {
+        "en": "An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.",
+        "zh": "上传时粒子逐步拼成附件，失败、取消或移除时散开。"
+      },
+      "keywords": "dissolve upload tile upload tray grain attachment progress abort cancel file size error 上传 附件 瓦片 进度 粒子 取消 超限",
+      "docsPath": "/docs/animations/upload-tile",
+      "detailPath": "/ai/components/upload-tile.json",
+      "markdownPath": "/ai/components/upload-tile.md",
+      "previewPath": "/assets/components/upload-tile.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "Show attachment progress inline in a chat composer.",
+          "在聊天输入框展示附件上传进度。"
+        ],
+        "searchTerms": [
+          "dissolve",
+          "upload tile",
+          "upload tray",
+          "attachment",
+          "progress",
+          "abort",
+          "附件",
+          "粒子上传",
+          "文件超限"
+        ],
+        "visualTags": [
+          "particles",
+          "file",
+          "progress"
+        ],
+        "interactions": [
+          "click",
+          "touch",
+          "keyboard"
+        ],
+        "caveat": "试玩模拟上传结果，接入时传入自己的文件列表和上传函数。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "MIT-licensed dissolve upload tile and Canvas 2D grain engine, with a LeiBox attachment tray and framework adapters.",
+        "designReference": "https://dissolve.rselmi.com/",
+        "designAuthor": "Rayan Selmi · dissolve",
+        "upstreamSource": "https://www.npmjs.com/package/dissolve-ui/v/0.0.6",
+        "license": "MIT License · Copyright (c) 2026 Rayan Selmi."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "thinking-orb",
+      "name": {
+        "en": "Dissolve Thinking Orb",
+        "zh": "Dissolve 状态粒子球"
+      },
+      "description": {
+        "en": "A 180-dot orb morphs between six agent states and responds to the pointer.",
+        "zh": "由 180 个粒子组成的状态球，在六种智能体状态间变形，也会避让指针。"
+      },
+      "keywords": "智能体 状态 粒子球 呼吸 环形 雷达 监听 音量 完成 错误 dissolve thinking orb status agent canvas particles radar",
+      "docsPath": "/docs/animations/thinking-orb",
+      "detailPath": "/ai/components/thinking-orb.json",
+      "markdownPath": "/ai/components/thinking-orb.md",
+      "previewPath": "/assets/components/thinking-orb.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "Show the current state of an AI agent.",
+          "用粒子球显示 AI 智能体的当前状态。"
+        ],
+        "searchTerms": [
+          "dissolve",
+          "thinking orb",
+          "agent status",
+          "radar",
+          "voice level",
+          "智能体",
+          "状态球",
+          "粒子",
+          "聆听"
+        ],
+        "visualTags": [
+          "particles",
+          "orb",
+          "morph"
+        ],
+        "interactions": [
+          "click",
+          "drag",
+          "touch",
+          "keyboard"
+        ],
+        "caveat": "试玩可用滑杆模拟音量。应用可直接传入音量读数。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "MIT-licensed dissolve ThinkingOrb Web source, adapted for the LeiBox preview and framework packages.",
+        "designReference": "https://dissolve.rselmi.com/",
+        "designAuthor": "Rayan Selmi · dissolve",
+        "upstreamSource": "https://www.npmjs.com/package/dissolve-ui/v/0.0.6",
+        "license": "MIT License · Copyright (c) 2026 Rayan Selmi."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "distortion-waves",
+      "name": {
+        "en": "Distortion Waves",
+        "zh": "折射波浪视图转场"
+      },
+      "description": {
+        "en": "A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.",
+        "zh": "彩色 WebGL2 波浪先向触发按钮蓄力内吸，随后带着实时 DOM 折射、色散、模糊与边缘光晕扫过卡片并切换视图。"
+      },
+      "keywords": "波浪 扭曲 折射 色散 模糊 视图 切换 转场 彩虹 粒子 边缘光晕 distortion waves webgl transition shader chromatic aberration libraries.dev Jakub Antalik",
+      "docsPath": "/docs/animations/distortion-waves",
+      "detailPath": "/ai/components/distortion-waves.json",
+      "markdownPath": "/ai/components/distortion-waves.md",
+      "previewPath": "/assets/components/distortion-waves.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "转账或支付确认视图转场",
+          "彩色折射波浪切换卡片内容",
+          "WebGL2 DOM distortion wave transition"
+        ],
+        "searchTerms": [
+          "波浪",
+          "扭曲",
+          "折射",
+          "色散",
+          "模糊",
+          "视图切换",
+          "转场",
+          "彩虹",
+          "粒子",
+          "光晕",
+          "distortion",
+          "waves",
+          "webgl",
+          "chromatic aberration",
+          "transition"
+        ],
+        "visualTags": [
+          "wave",
+          "refraction",
+          "chromatic",
+          "glow",
+          "particles",
+          "dark"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "基于 MIT 协议的 distortion-waves 核心移植，支持纵向、中心环形与横向三种波型及五组色板；无 WebGL2 或开启减少动态效果时自动回退为平滑淡变。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "MIT-licensed distortion-waves@0.1.0 WebGL2 renderer, wave front physics, particle system and DOM snapshot core adapted to a ShadowRoot-safe, iframe-free lifecycle with six native framework entries.",
+        "designReference": "https://libraries.dev/waves",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/distortion-waves",
+        "license": "MIT License, Copyright (c) 2026 Jakub Antalik. Upstream package: distortion-waves@0.1.0 (https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/distortion-waves)."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "border-beam",
+      "name": {
+        "en": "Border Beam",
+        "zh": "流光描边"
+      },
+      "description": {
+        "en": "A ribbon of light runs along a card, button or input border.",
+        "zh": "一束流光沿着卡片、按钮或输入框的边缘游走。"
+      },
+      "keywords": "流光 边框 描边 走马灯 呼吸光 border beam glow outline pulse Libraries.dev Jakub Antalik border-beam",
+      "docsPath": "/docs/animations/border-beam",
+      "detailPath": "/ai/components/border-beam.json",
+      "markdownPath": "/ai/components/border-beam.md",
+      "previewPath": "/assets/components/border-beam.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "A ribbon of light runs along a card, button or input border.",
+          "一束流光沿着卡片、按钮或输入框的边缘游走。"
+        ],
+        "searchTerms": [
+          "流光",
+          "边框",
+          "描边",
+          "走马灯",
+          "呼吸光",
+          "border",
+          "beam",
+          "glow",
+          "outline",
+          "pulse",
+          "border-beam",
+          "libraries.dev",
+          "流光描边"
+        ],
+        "visualTags": [
+          "glow",
+          "outline",
+          "light"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "开源原包提供边框光带，LeiBox 为独立预览注册连续插值属性，并保留造型、色板与强度调节。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed border-beam@1.4.1 React renderer.",
+        "designReference": "https://libraries.dev/beam",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/border-beam",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · border-beam@1.4.1."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "thinking-orbs",
+      "name": {
+        "en": "Thinking Orbs",
+        "zh": "思考粒子球"
+      },
+      "description": {
+        "en": "Particle orbs give nine AI processing states distinct motion.",
+        "zh": "九种粒子球动效，分别表现搜索、推理、聆听和其他 AI 工作状态。"
+      },
+      "keywords": "思考 粒子 球 搜索 推理 监听 编织 加载 thinking orbs particles loading state Libraries.dev Jakub Antalik thinking-orbs",
+      "docsPath": "/docs/animations/thinking-orbs",
+      "detailPath": "/ai/components/thinking-orbs.json",
+      "markdownPath": "/ai/components/thinking-orbs.md",
+      "previewPath": "/assets/components/thinking-orbs.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "Particle orbs give nine AI processing states distinct motion.",
+          "九种粒子球动效，分别表现搜索、推理、聆听和其他 AI 工作状态。"
+        ],
+        "searchTerms": [
+          "思考",
+          "粒子",
+          "球",
+          "搜索",
+          "推理",
+          "监听",
+          "编织",
+          "加载",
+          "thinking",
+          "orbs",
+          "particles",
+          "loading",
+          "state",
+          "thinking-orbs",
+          "libraries.dev",
+          "思考粒子球"
+        ],
+        "visualTags": [
+          "particles",
+          "orb",
+          "minimal"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "九种状态使用独立的上游 Canvas 2D 动画，可随减少动态效果设置定格。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed thinking-orbs@0.3.2 React renderer.",
+        "designReference": "https://libraries.dev/orbs",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/thinking-orbs",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · thinking-orbs@0.3.2."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-gooey",
+      "name": {
+        "en": "Liquid Gooey",
+        "zh": "流体黏合"
+      },
+      "description": {
+        "en": "Nearby shapes stretch, join and separate like liquid.",
+        "zh": "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
+      },
+      "keywords": "液态 黏连 融合 果冻 变形 gooey liquid merging morph svg Libraries.dev Jakub Antalik liquid-gooey",
+      "docsPath": "/docs/animations/liquid-gooey",
+      "detailPath": "/ai/components/liquid-gooey.json",
+      "markdownPath": "/ai/components/liquid-gooey.md",
+      "previewPath": "/assets/components/liquid-gooey.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "Nearby shapes stretch, join and separate like liquid.",
+          "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
+        ],
+        "searchTerms": [
+          "液态",
+          "黏连",
+          "融合",
+          "果冻",
+          "变形",
+          "gooey",
+          "liquid",
+          "merging",
+          "morph",
+          "svg",
+          "liquid-gooey",
+          "libraries.dev",
+          "流体黏合"
+        ],
+        "visualTags": [
+          "liquid",
+          "morph",
+          "organic"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "依据开源包的原始黏合算法渲染，演示支持键盘操作。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed liquid-gooey@0.2.2 React renderer.",
+        "designReference": "https://libraries.dev/gooey",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/liquid-gooey",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · liquid-gooey@0.2.2."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "voice-glow",
+      "name": {
+        "en": "Voice Glow",
+        "zh": "语音浮光"
+      },
+      "description": {
+        "en": "A voice-reactive glow rises from the edge of a surface.",
+        "zh": "光晕从界面边缘升起，随音量和语音状态变化。"
+      },
+      "keywords": "语音 音量 光晕 可视化 录音 输入框 voice glow audio reactive speech Libraries.dev Jakub Antalik voice-glow",
+      "docsPath": "/docs/animations/voice-glow",
+      "detailPath": "/ai/components/voice-glow.json",
+      "markdownPath": "/ai/components/voice-glow.md",
+      "previewPath": "/assets/components/voice-glow.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "A voice-reactive glow rises from the edge of a surface.",
+          "光晕从界面边缘升起，随音量和语音状态变化。"
+        ],
+        "searchTerms": [
+          "语音",
+          "音量",
+          "光晕",
+          "可视化",
+          "录音",
+          "输入框",
+          "voice",
+          "glow",
+          "audio",
+          "reactive",
+          "speech",
+          "voice-glow",
+          "libraries.dev",
+          "语音浮光"
+        ],
+        "visualTags": [
+          "glow",
+          "audio",
+          "gradient"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "预览使用模拟音量。应用可传入自己的音量读数或已有音频流。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed voice-glow@0.3.0 React renderer.",
+        "designReference": "https://libraries.dev/voice",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/voice-glow",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · voice-glow@0.3.0."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "bot-avatars",
+      "name": {
+        "en": "Bot Avatars",
+        "zh": "智能体表情头像"
+      },
+      "description": {
+        "en": "Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.",
+        "zh": "十八种 Canvas 2D 头像会张望、工作或进入睡眠。"
+      },
+      "keywords": "智能体 机器人 头像 毛绒 表情 动画 agent avatar bot face fur Libraries.dev Jakub Antalik bot-avatars",
+      "docsPath": "/docs/animations/bot-avatars",
+      "detailPath": "/ai/components/bot-avatars.json",
+      "markdownPath": "/ai/components/bot-avatars.md",
+      "previewPath": "/assets/components/bot-avatars.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.",
+          "十八种 Canvas 2D 头像会张望、工作或进入睡眠。"
+        ],
+        "searchTerms": [
+          "智能体",
+          "机器人",
+          "头像",
+          "毛绒",
+          "表情",
+          "动画",
+          "agent",
+          "avatar",
+          "bot",
+          "face",
+          "fur",
+          "bot-avatars",
+          "libraries.dev",
+          "智能体表情头像"
+        ],
+        "visualTags": [
+          "avatar",
+          "fabric",
+          "character"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "上游 Canvas 2D 材质与动画支持定格，头像可以用状态值跟随应用工作流。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed bot-avatars@0.2.2 React renderer.",
+        "designReference": "https://libraries.dev/bots",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/bot-avatars",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · bot-avatars@0.2.2."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-metal",
+      "name": {
+        "en": "Liquid Metal",
+        "zh": "流体金属"
+      },
+      "description": {
+        "en": "Chrome reflections give controls and text a shifting metal finish.",
+        "zh": "铬金属反光在控件和文字表面流动。"
+      },
+      "keywords": "液态 金属 铬 银 金 反光 按钮 liquid metal chrome shader Libraries.dev Jakub Antalik metal-fx",
+      "docsPath": "/docs/animations/liquid-metal",
+      "detailPath": "/ai/components/liquid-metal.json",
+      "markdownPath": "/ai/components/liquid-metal.md",
+      "previewPath": "/assets/components/liquid-metal.png",
+      "discovery": {
+        "category": "feedback",
+        "useCases": [
+          "Chrome reflections give controls and text a shifting metal finish.",
+          "铬金属反光在控件和文字表面流动。"
+        ],
+        "searchTerms": [
+          "液态",
+          "金属",
+          "铬",
+          "银",
+          "金",
+          "反光",
+          "按钮",
+          "liquid",
+          "metal",
+          "chrome",
+          "shader",
+          "metal-fx",
+          "libraries.dev",
+          "流体金属"
+        ],
+        "visualTags": [
+          "chrome",
+          "metal",
+          "reflection"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "WebGL2 渲染金属表面，硬件不支持时保留可用的普通控件。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed metal-fx@2.0.11 React renderer.",
+        "designReference": "https://libraries.dev/metal",
+        "designAuthor": "Jakub Antalik · Libraries.dev",
+        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/metal-fx",
+        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · metal-fx@2.0.11. Paper Shaders retain their Apache-2.0 license and notice."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "focus-switch",
+      "name": {
+        "en": "Pixel Room Focus Switch",
+        "zh": "像素房间专注开关"
+      },
+      "description": {
+        "en": "Slide a glass lens through a pixel room to move from daytime chat into nighttime focus.",
+        "zh": "拖动玻璃透镜，像素房间从白天聊天过渡到夜晚专注。"
+      },
+      "keywords": "专注 模式 开关 像素房间 玻璃透镜 昼夜 拖动 focus mode toggle pixel room glass lens",
+      "docsPath": "/docs/animations/focus-switch",
+      "detailPath": "/ai/components/focus-switch.json",
+      "markdownPath": "/ai/components/focus-switch.md",
+      "previewPath": "/assets/components/focus-switch.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "专注模式开关",
+          "拖动切换昼夜",
+          "pixel-art focus mode switch"
+        ],
+        "searchTerms": [
+          "专注",
+          "勿扰",
+          "像素房间",
+          "玻璃透镜",
+          "昼夜",
+          "focus mode",
+          "do not disturb",
+          "pixel room",
+          "glass lens"
+        ],
+        "visualTags": [
+          "pixel",
+          "glass",
+          "day night"
+        ],
+        "interactions": [
+          "click",
+          "drag",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "开关驱动像素房间里的时间；用 onCheckedChange 将专注状态接入实际应用。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "Native framework adapters around the supplied pixel renderer, focus timeline and lens spring.",
+        "designReference": "https://x.com/Lattice_Node/status/2119392949813555224/video/1",
+        "designAuthor": "Lattice Node",
+        "license": "The supplied HTML did not identify an upstream source license. Preserve the supplied provenance and verify any reuse rights separately."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
         }
       }
     },

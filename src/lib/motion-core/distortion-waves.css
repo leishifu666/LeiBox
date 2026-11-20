@@ -1,0 +1,503 @@
+.dw-scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  min-height: var(--motion-height, 540px);
+  padding: 28px 20px;
+  background: #fff;
+  color: #111111;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "PingFang SC", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.dw-scene[data-gallery="true"] {
+  background: #fff;
+  padding: 16px;
+  gap: 0;
+}
+
+.dw-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.dw-card {
+  position: relative;
+  display: grid;
+  width: 380px;
+  max-width: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #111;
+}
+
+.dw-card[data-mode="center"] {
+  width: 354px;
+}
+
+.dw-card[data-mode="horizontal"] {
+  width: 440px;
+}
+
+.dw-layer {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  isolation: isolate;
+}
+
+.dw-overlay {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.dw-card[data-mode="horizontal"] .dw-overlay {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 16px;
+}
+
+.dw-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 386px;
+  padding: 26px 20px 84px;
+  background: #111;
+  color: #f5f5f7;
+  box-sizing: border-box;
+}
+
+.dw-card[data-mode="center"] .dw-view {
+  min-height: 348px;
+}
+
+.dw-card[data-mode="horizontal"] .dw-view {
+  min-height: 300px;
+  padding: 26px 24px 26px 96px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+}
+
+.dw-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  background: #282829;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dw-badge--check {
+  background: radial-gradient(circle at 32% 28%, #5be87d 0%, #2dc852 60%, #1ea640 100%);
+  box-shadow: 0 0 22px rgba(48, 209, 88, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.dw-badge--token {
+  background: #282829;
+  color: #aaa;
+}
+
+.dw-badge svg {
+  display: block;
+}
+
+.dw-subtitle {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.dw-subtitle strong {
+  color: #f5f5f7;
+  font-weight: 600;
+}
+
+.dw-amount {
+  margin: 6px 0 18px;
+  font-size: 32px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  color: #f5f5f7;
+}
+
+.dw-title {
+  margin: 2px 0 4px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+}
+
+.dw-caption {
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #aaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.dw-rows {
+  width: 100%;
+  background: #242426;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.dw-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.dw-row:first-child {
+  border-top: 0;
+}
+
+.dw-row-label {
+  color: #aaa;
+  font-weight: 400;
+}
+
+.dw-row-value {
+  color: #f5f5f7;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.dw-row-value--ok {
+  color: #6ee89b;
+}
+
+.dw-checklist {
+  width: 100%;
+  background: #242426;
+  border-radius: 18px;
+  overflow: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dw-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #ececf0;
+}
+
+.dw-checklist li:first-child {
+  border-top: 0;
+}
+
+.dw-check-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #343436;
+  color: #d4d4d8;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.dw-check-dot--ok {
+  background: rgba(48, 209, 88, 0.2);
+  color: #6ee89b;
+}
+
+/* Horizontal layout specifics */
+.dw-h-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(126, 196, 255, 0.14);
+  color: #93d0ff;
+}
+
+.dw-h-tag--done {
+  background: rgba(48, 209, 88, 0.16);
+  color: #6ee89b;
+}
+
+.dw-h-title {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+}
+
+.dw-h-desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #aaa;
+}
+
+.dw-h-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  width: 100%;
+  padding-top: 10px;
+  font-size: 12px;
+  color: #aaa;
+  font-variant-numeric: tabular-nums;
+}
+
+.dw-h-meta strong {
+  color: #e4e4e7;
+  font-weight: 600;
+}
+
+/* Primary CTA in overlay (stays live and sharp above the wave) */
+.dw-cta {
+  pointer-events: auto;
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 24px;
+  background: #f5f5f7;
+  color: #111;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.dw-cta:hover {
+  background: #fff;
+}
+
+.dw-cta:active {
+  transform: scale(0.985);
+}
+
+.dw-cta:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.dw-cta--rail {
+  width: 60px;
+  height: 100%;
+  border-radius: 20px;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 6px;
+}
+
+.dw-card[data-mode-morph] > .dw-layer {
+  visibility: hidden;
+}
+
+.dw-card[data-mode-morph] .dw-cta {
+  position: absolute;
+  transform: none;
+}
+
+.dw-view.dw-mode-view {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 1;
+  background: transparent;
+  pointer-events: none;
+}
+
+.dw-mode-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Compact control bar below the card */
+.dw-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 14px;
+  width: min(100%, 560px);
+  padding-top: 12px;
+  border-top: 1px solid #ededed;
+}
+
+.dw-controls[hidden] {
+  display: none;
+}
+
+.dw-seg {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: #f4f4f4;
+  gap: 2px;
+}
+
+.dw-mode-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 999px;
+  background: #111;
+  pointer-events: none;
+}
+
+.dw-seg[data-highlight-ready] .dw-mode-highlight {
+  transition: transform 380ms cubic-bezier(.24,.8,.28,1), width 380ms cubic-bezier(.24,.8,.28,1);
+}
+
+.dw-seg-btn {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  mix-blend-mode: difference;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 140ms ease;
+}
+
+.dw-seg-btn:focus-visible {
+  z-index: 1;
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.dw-swatches {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f4f4f4;
+  gap: 6px;
+}
+
+.dw-swatch {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background-clip: padding-box;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.dw-swatch:hover {
+  transform: scale(1.12);
+}
+
+.dw-swatch[aria-pressed="true"] {
+  border-color: #111111;
+  transform: scale(1.1);
+}
+
+.dw-swatch:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.dw-swatch--colorful {
+  background: conic-gradient(from 45deg, #ffc915, #eb64a0, #b428e6, #7ec4ff, #7fd9ee, #ffc915);
+}
+
+.dw-swatch--green {
+  background: linear-gradient(135deg, #befa82, #35ba00);
+}
+
+.dw-swatch--ocean {
+  background: linear-gradient(135deg, #78e6f0, #2878ff);
+}
+
+.dw-swatch--sunset {
+  background: linear-gradient(135deg, #ffc850, #f0465a, #dc5ac8);
+}
+
+.dw-swatch--mono {
+  background: linear-gradient(135deg, #ffffff, #8e93a4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dw-seg[data-highlight-ready] .dw-mode-highlight {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .dw-scene {
+    padding: 14px 12px;
+  }
+  .dw-card,
+  .dw-card[data-mode="horizontal"] {
+    width: 100%;
+    border-radius: 26px;
+  }
+  .dw-card[data-mode="horizontal"] .dw-view {
+    padding: 20px 18px 20px 84px;
+  }
+}

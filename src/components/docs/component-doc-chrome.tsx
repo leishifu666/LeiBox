@@ -44,12 +44,13 @@ export function MotionDemoSection({ instructions, children }: { instructions?: s
   );
 }
 
-export function MotionDemoFrame({ width, height, responsive, viewportRef, children }: Pick<MotionDocLayout, "width" | "height" | "responsive"> & {
+export function MotionDemoFrame({ width, height, responsive, viewportRef, borderless = false, children }: Pick<MotionDocLayout, "width" | "height" | "responsive"> & {
   viewportRef?: Ref<HTMLDivElement>;
+  borderless?: boolean;
   children: ReactNode;
 }) {
   return (
-    <div data-component-demo-panel className="overflow-hidden rounded-xl border border-border/60">
+      <div data-component-demo-panel className={borderless ? "overflow-hidden" : "overflow-hidden rounded-xl border border-border/60"}>
       <div
         ref={viewportRef}
         className="relative w-full overflow-hidden bg-white"

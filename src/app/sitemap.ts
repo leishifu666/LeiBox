@@ -1,11 +1,15 @@
 import type { MetadataRoute } from "next";
 import { COMPONENTS } from "@/data/components";
+import { librariesDevEntries } from "@/data/libraries-dev";
 import { SITE_URL } from "@/lib/site-url";
 
 export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
   { path: "/docs/components/orbit-not-found", priority: 0.8 },
+  { path: "/docs/animations/distortion-waves", priority: 0.8 },
+  ...librariesDevEntries.map(entry => ({ path: entry.href, priority: 0.8 })),
+  { path: "/docs/animations/focus-switch", priority: 0.8 },
   { path: "/docs/animations/blister-dropdown", priority: 0.8 },
   { path: "/docs/animations/pixel-toggle", priority: 0.8 },
   { path: "/docs/animations/image-accordion", priority: 0.8 },

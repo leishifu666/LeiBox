@@ -36,6 +36,7 @@ import { verifyMatchaPowderReveal } from './test-matcha-powder-reveal.mjs';
 import { verifyParticleTextureTrio } from './test-particle-texture-trio.mjs';
 import { verifyShaderFlood } from './test-shader-flood.mjs';
 import { verifyTransferGlow } from './test-transfer-glow.mjs';
+import { verifyDistortionWaves } from './test-distortion-waves.mjs';
 import { verifyBlisterDropdown } from './test-blister-dropdown.mjs';
 import { verifyPixelToggle } from './test-pixel-toggle.mjs';
 import { verifyImageAccordion } from './test-image-accordion.mjs';
@@ -120,9 +121,27 @@ try{
    if(item.framework==='react')await page.screenshot({path:path.join(OUT,`${item.slug}-native-${width}.png`)});
   }
   await page.setViewportSize({width:1200,height:1000});
+  if (item.slug === 'upload-tile' && item.framework === 'react') {
+   const remove = page.getByRole('button', {name: 'Remove brief.pdf', exact: true});
+   await remove.waitFor();
+   await remove.press('Enter');
+   await page.getByRole('listitem', {name: 'brief.pdf', exact: true}).waitFor({state: 'detached'});
+   assert.equal(await page.getByRole('button', {name: 'Remove alpine-lake.webp', exact: true}).count(), 1);
+  }
   if(item.slug==='multi-cursor-builder')await verifyMultiCursorBuilder(page,item,ROOT,OUT);
   if(item.slug==='album-cover-tunnel')await verifyAlbumCoverTunnel(page,item,ROOT,OUT);
+  if(item.slug==='distortion-waves')await verifyDistortionWaves(page,item,OUT);
   if(item.slug==='blister-dropdown')await verifyBlisterDropdown(page);
+  if(item.slug==='focus-switch'){
+   const control=page.locator('#demo').getByRole('switch');
+   await control.press('End');
+   assert.equal(await control.getAttribute('aria-checked'),'true');
+   await page.waitForFunction(()=>Number(document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('.motion-body').style.getPropertyValue('--night'))>.98);
+   await page.evaluate(()=>{window.__focusChanges=[];window.__update({checked:false,onCheckedChange:value=>window.__focusChanges.push(value)});});
+   await page.waitForFunction(()=>document.querySelector('#demo [data-motion-surface]').shadowRoot.querySelector('[role=switch]').getAttribute('aria-checked')==='false');
+   await control.press('Space');
+   assert.deepEqual(await page.evaluate(()=>window.__focusChanges),[true],'user toggles notify, programmatic updates do not');
+  }
   if(item.slug==='pixel-toggle')await verifyPixelToggle(page);
   if(item.slug==='image-accordion')await verifyImageAccordion(page);
   if(item.slug==='image-compare')await verifyImageCompare(page);
@@ -343,6 +362,10 @@ try{
   }
   await page.evaluate(()=>window.__update({height:620}));await page.waitForFunction(()=>document.querySelector('#demo').querySelector('[data-motion-surface]').style.getPropertyValue('--motion-height')==='620px');
   await page.evaluate(()=>window.__mount('second'));await page.locator('#second [data-motion-surface]').waitFor();assert.equal(await page.locator('[data-motion-surface]').count(),2);
+  if(item.slug==='focus-switch'){
+   assert.equal(await page.locator('#demo').getByRole('switch').getAttribute('aria-checked'),'true');
+   assert.equal(await page.locator('#second').getByRole('switch').getAttribute('aria-checked'),'false','focus state starts independently per instance');
+  }
   if(item.slug==='transfer-glow'){
    await page.evaluate(()=>window.__update({amount:'42.00',recipient:'Second recipient'},'second'));
    await page.waitForFunction(()=>document.querySelector('#second [data-motion-surface]').shadowRoot.querySelector('.tg-number').textContent==='42.00');

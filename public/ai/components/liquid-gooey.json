@@ -1,0 +1,182 @@
+{
+  "slug": "liquid-gooey",
+  "name": {
+    "en": "Liquid Gooey",
+    "zh": "流体黏合"
+  },
+  "description": {
+    "en": "Nearby shapes stretch, join and separate like liquid.",
+    "zh": "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
+  },
+  "keywords": "液态 黏连 融合 果冻 变形 gooey liquid merging morph svg Libraries.dev Jakub Antalik liquid-gooey",
+  "docsPath": "/docs/animations/liquid-gooey",
+  "detailPath": "/ai/components/liquid-gooey.json",
+  "markdownPath": "/ai/components/liquid-gooey.md",
+  "previewPath": "/assets/components/liquid-gooey.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "Nearby shapes stretch, join and separate like liquid.",
+      "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
+    ],
+    "searchTerms": [
+      "液态",
+      "黏连",
+      "融合",
+      "果冻",
+      "变形",
+      "gooey",
+      "liquid",
+      "merging",
+      "morph",
+      "svg",
+      "liquid-gooey",
+      "libraries.dev",
+      "流体黏合"
+    ],
+    "visualTags": [
+      "liquid",
+      "morph",
+      "organic"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "依据开源包的原始黏合算法渲染，演示支持键盘操作。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed liquid-gooey@0.2.2 React renderer.",
+    "designReference": "https://libraries.dev/gooey",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/liquid-gooey",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · liquid-gooey@0.2.2."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/liquid-gooey/react.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "import { LiquidGooey } from \"./LiquidGooey\";\n\nexport default function App() {\n  return <LiquidGooey />;\n}",
+      "files": [
+        "LiquidGooey.tsx",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/liquid-gooey/vue.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport LiquidGooey from \"./LiquidGooey.vue\";\n</script>\n<template><LiquidGooey /></template>",
+      "files": [
+        "LiquidGooey.vue",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/liquid-gooey/svelte.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "<script lang=\"ts\">\nimport LiquidGooey from \"./LiquidGooey.svelte\";\n</script>\n<LiquidGooey />",
+      "files": [
+        "LiquidGooey.svelte",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/liquid-gooey/solid.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "import { LiquidGooey } from \"./LiquidGooey.solid\";\n\nexport default function App() {\n  return <LiquidGooey />;\n}",
+      "files": [
+        "LiquidGooey.solid.tsx",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/liquid-gooey/preact.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "import { LiquidGooey } from \"./LiquidGooey.preact\";\n\nexport default function App() {\n  return <LiquidGooey />;\n}",
+      "files": [
+        "LiquidGooey.preact.tsx",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/liquid-gooey/vanilla.json",
+      "component": "LiquidGooey",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "liquid-gooey@0.2.2"
+      ],
+      "usage": "import { mount } from \"./LiquidGooey\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "LiquidGooey.ts",
+        "LiquidGooeyEngine.js",
+        "motion-runtime.ts",
+        "LiquidGooeyEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Bring the shapes together and try the different motion settings.",
+    "zh": "让形状靠近，体验黏合和拉开时的变化，并试试不同的动效设置。"
+  }
+}

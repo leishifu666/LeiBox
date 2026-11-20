@@ -1,3 +1,8 @@
+import { DISTORTION_WAVES_PROMPT } from "./distortion-waves.mjs";
+import { librariesDevEntries } from "./libraries-dev.ts";
+import { THINKING_ORB_ENTRY } from "./thinking-orb.ts";
+import { UPLOAD_TILE_ENTRY } from "./upload-tile.ts";
+import { FOCUS_SWITCH_PROMPT } from "./focus-switch.mjs";
 import { BLISTER_DROPDOWN_PROMPT } from "./blister-dropdown.mjs";
 import { PIXEL_TOGGLE_PROMPT } from "./pixel-toggle.mjs";
 import { IMAGE_ACCORDION_PROMPT } from "./image-accordion.mjs";
@@ -53,6 +58,8 @@ export interface MotionEntry {
   prompt?: string;
   referenceUrl?: string;
   referenceAuthor?: string;
+  referenceSourceUrl?: string;
+  referencePackage?: string;
   communitySubmission?: boolean;
   referenceAuthorUrl?: string;
   referenceNotes?: string;
@@ -64,9 +71,42 @@ export interface MotionEntry {
   renderers?: string[];
   suppliedSource?: string;
   recreatedHtml?: boolean;
+  viewportPlayback?: boolean;
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  UPLOAD_TILE_ENTRY,
+  THINKING_ORB_ENTRY,
+  {
+    slug: "distortion-waves", href: "/docs/animations/distortion-waves", name: "Distortion Waves", category: "View transition",
+    description: "A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.",
+    keywords: "波浪 扭曲 折射 色散 模糊 视图 切换 转场 彩虹 粒子 边缘光晕 distortion waves webgl transition shader chromatic aberration libraries.dev Jakub Antalik",
+    preview: "/assets/components/distortion-waves.png", sourceFile: "distortion-waves.html", canvasWidth: 820, canvasHeight: 540, responsive: true, recreatedHtml: true, viewportPlayback: true, renderers: ["webgl"],
+    instructions: "Click the main action button to send the wave through the card, or click again to collapse it back. Switch between Vertical, Center and Horizontal modes and five colour palettes below.",
+    prompt: DISTORTION_WAVES_PROMPT,
+    referenceUrl: "https://libraries.dev/waves",
+    referenceSourceUrl: "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/distortion-waves",
+    referencePackage: "distortion-waves@0.1.0",
+    referenceAuthor: "Jakub Antalik · Libraries.dev",
+    referenceAuthorUrl: "https://x.com/jakubantalik",
+    referenceNotes: "Adapted from the MIT-licensed distortion-waves@0.1.0 package and the Libraries.dev Waves playground. Preserves the WebGL2 refraction, progressive blur, 5-channel chromatic aberration, OKLab edge rim, hairline and particle shaders across vertical, center and horizontal modes. Replaces the hidden style-probe iframe with an isolated ShadowRoot probe for zero-iframe mounting and full cleanup.",
+    referenceLicense: "MIT License, Copyright (c) 2026 Jakub Antalik. Upstream package: distortion-waves@0.1.0 (https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/distortion-waves).",
+    codeSource: "MIT-licensed distortion-waves@0.1.0 WebGL2 renderer, wave front physics, particle system and DOM snapshot core adapted to a ShadowRoot-safe, iframe-free lifecycle with six native framework entries.",
+  },
+  ...librariesDevEntries,
+  {
+    slug: "focus-switch", href: "/docs/animations/focus-switch", name: "Pixel Room Focus Switch", category: "Toggle interaction",
+    description: "Slide a glass lens through a pixel room to move from daytime chat into nighttime focus.",
+    keywords: "专注 模式 开关 像素房间 玻璃透镜 昼夜 拖动 focus mode toggle pixel room glass lens",
+    preview: "/assets/components/focus-switch.png", sourceFile: "focus_switch.html", canvasWidth: 960, canvasHeight: 540,
+    instructions: "Click or drag the lens. Use the arrow keys to adjust it, or Home and End to jump to either side.",
+    prompt: FOCUS_SWITCH_PROMPT, renderers: ["webgl"],
+    referenceUrl: "https://x.com/Lattice_Node/status/2119392949813555224/video/1",
+    referenceAuthor: "Lattice Node", referenceAuthorUrl: "https://x.com/Lattice_Node",
+    referenceNotes: "The supplied standalone HTML is the website demo and the source of the room renderer and motion. The design reference was supplied separately.",
+    referenceLicense: "The supplied HTML did not identify an upstream source license. Preserve the supplied provenance and verify any reuse rights separately.",
+    codeSource: "Native framework adapters around the supplied pixel renderer, focus timeline and lens spring.",
+  },
   {
     slug: "blister-dropdown", href: "/docs/animations/blister-dropdown", name: "Blister Pack Dropdown", category: "Filter interaction",
     description: "A foil dropdown that pops the selected capsule out of its pocket and into the trigger.",

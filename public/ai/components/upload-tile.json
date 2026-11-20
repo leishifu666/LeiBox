@@ -1,0 +1,161 @@
+{
+  "slug": "upload-tile",
+  "name": {
+    "en": "Dissolve Upload Tile",
+    "zh": "Dissolve 粒子上传"
+  },
+  "description": {
+    "en": "An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.",
+    "zh": "上传时粒子逐步拼成附件，失败、取消或移除时散开。"
+  },
+  "keywords": "dissolve upload tile upload tray grain attachment progress abort cancel file size error 上传 附件 瓦片 进度 粒子 取消 超限",
+  "docsPath": "/docs/animations/upload-tile",
+  "detailPath": "/ai/components/upload-tile.json",
+  "markdownPath": "/ai/components/upload-tile.md",
+  "previewPath": "/assets/components/upload-tile.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "Show attachment progress inline in a chat composer.",
+      "在聊天输入框展示附件上传进度。"
+    ],
+    "searchTerms": [
+      "dissolve",
+      "upload tile",
+      "upload tray",
+      "attachment",
+      "progress",
+      "abort",
+      "附件",
+      "粒子上传",
+      "文件超限"
+    ],
+    "visualTags": [
+      "particles",
+      "file",
+      "progress"
+    ],
+    "interactions": [
+      "click",
+      "touch",
+      "keyboard"
+    ],
+    "caveat": "试玩模拟上传结果，接入时传入自己的文件列表和上传函数。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "MIT-licensed dissolve upload tile and Canvas 2D grain engine, with a LeiBox attachment tray and framework adapters.",
+    "designReference": "https://dissolve.rselmi.com/",
+    "designAuthor": "Rayan Selmi · dissolve",
+    "upstreamSource": "https://www.npmjs.com/package/dissolve-ui/v/0.0.6",
+    "license": "MIT License · Copyright (c) 2026 Rayan Selmi."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/upload-tile/react.json",
+      "component": "UploadTray",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { UploadTray, type UploadTrayProps } from \"./UploadTray\";\n\nexport function ChatAttachments({ files, upload, onAdd, onRemove }: UploadTrayProps) {\n  return (\n    <UploadTray files={files} upload={upload} maxSize={25 * 1024 * 1024}\n      onAdd={onAdd} onRemove={onRemove} />\n  );\n}",
+      "files": [
+        "UploadTray.tsx",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/upload-tile/vue.json",
+      "component": "UploadTray",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport UploadTray from \"./UploadTray.vue\";\n</script>\n<template><UploadTray /></template>",
+      "files": [
+        "UploadTray.vue",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/upload-tile/svelte.json",
+      "component": "UploadTray",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport UploadTray from \"./UploadTray.svelte\";\n</script>\n<UploadTray />",
+      "files": [
+        "UploadTray.svelte",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/upload-tile/solid.json",
+      "component": "UploadTray",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { UploadTray } from \"./UploadTray.solid\";\n\nexport default function App() {\n  return <UploadTray />;\n}",
+      "files": [
+        "UploadTray.solid.tsx",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/upload-tile/preact.json",
+      "component": "UploadTray",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { UploadTray } from \"./UploadTray.preact\";\n\nexport default function App() {\n  return <UploadTray />;\n}",
+      "files": [
+        "UploadTray.preact.tsx",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/upload-tile/vanilla.json",
+      "component": "UploadTray",
+      "dependencies": [],
+      "usage": "import { mount } from \"./UploadTray\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "UploadTray.ts",
+        "UploadTrayEngine.js",
+        "motion-runtime.ts",
+        "UploadTrayEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Choose a simulated result and add an attachment. Click during upload to cancel, or remove the finished tile with the cross.",
+    "zh": "选择模拟结果，再添加附件。上传中点击附件可取消，完成后可用叉号移除。"
+  }
+}

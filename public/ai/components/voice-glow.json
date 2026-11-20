@@ -1,0 +1,195 @@
+{
+  "slug": "voice-glow",
+  "name": {
+    "en": "Voice Glow",
+    "zh": "语音浮光"
+  },
+  "description": {
+    "en": "A voice-reactive glow rises from the edge of a surface.",
+    "zh": "光晕从界面边缘升起，随音量和语音状态变化。"
+  },
+  "keywords": "语音 音量 光晕 可视化 录音 输入框 voice glow audio reactive speech Libraries.dev Jakub Antalik voice-glow",
+  "docsPath": "/docs/animations/voice-glow",
+  "detailPath": "/ai/components/voice-glow.json",
+  "markdownPath": "/ai/components/voice-glow.md",
+  "previewPath": "/assets/components/voice-glow.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "A voice-reactive glow rises from the edge of a surface.",
+      "光晕从界面边缘升起，随音量和语音状态变化。"
+    ],
+    "searchTerms": [
+      "语音",
+      "音量",
+      "光晕",
+      "可视化",
+      "录音",
+      "输入框",
+      "voice",
+      "glow",
+      "audio",
+      "reactive",
+      "speech",
+      "voice-glow",
+      "libraries.dev",
+      "语音浮光"
+    ],
+    "visualTags": [
+      "glow",
+      "audio",
+      "gradient"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "预览使用模拟音量。应用可传入自己的音量读数或已有音频流。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed voice-glow@0.3.0 React renderer.",
+    "designReference": "https://libraries.dev/voice",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/voice-glow",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · voice-glow@0.3.0."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/voice-glow/react.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { VoiceGlow } from \"./VoiceGlow\";\n\nexport default function App() {\n  return <VoiceGlow />;\n}",
+      "files": [
+        "VoiceGlow.tsx",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/voice-glow/vue.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport VoiceGlow from \"./VoiceGlow.vue\";\n</script>\n<template><VoiceGlow /></template>",
+      "files": [
+        "VoiceGlow.vue",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/voice-glow/svelte.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script lang=\"ts\">\nimport VoiceGlow from \"./VoiceGlow.svelte\";\n</script>\n<VoiceGlow />",
+      "files": [
+        "VoiceGlow.svelte",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/voice-glow/solid.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { VoiceGlow } from \"./VoiceGlow.solid\";\n\nexport default function App() {\n  return <VoiceGlow />;\n}",
+      "files": [
+        "VoiceGlow.solid.tsx",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/voice-glow/preact.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { VoiceGlow } from \"./VoiceGlow.preact\";\n\nexport default function App() {\n  return <VoiceGlow />;\n}",
+      "files": [
+        "VoiceGlow.preact.tsx",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/voice-glow/vanilla.json",
+      "component": "VoiceGlow",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "voice-glow@0.3.0",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { mount } from \"./VoiceGlow\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "VoiceGlow.ts",
+        "VoiceGlowEngine.js",
+        "motion-runtime.ts",
+        "VoiceGlowEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Adjust the simulated level, voice state, shape and palette.",
+    "zh": "调节模拟音量，切换语音状态、光晕造型和配色。"
+  }
+}

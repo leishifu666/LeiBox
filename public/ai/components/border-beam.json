@@ -1,0 +1,194 @@
+{
+  "slug": "border-beam",
+  "name": {
+    "en": "Border Beam",
+    "zh": "流光描边"
+  },
+  "description": {
+    "en": "A ribbon of light runs along a card, button or input border.",
+    "zh": "一束流光沿着卡片、按钮或输入框的边缘游走。"
+  },
+  "keywords": "流光 边框 描边 走马灯 呼吸光 border beam glow outline pulse Libraries.dev Jakub Antalik border-beam",
+  "docsPath": "/docs/animations/border-beam",
+  "detailPath": "/ai/components/border-beam.json",
+  "markdownPath": "/ai/components/border-beam.md",
+  "previewPath": "/assets/components/border-beam.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "A ribbon of light runs along a card, button or input border.",
+      "一束流光沿着卡片、按钮或输入框的边缘游走。"
+    ],
+    "searchTerms": [
+      "流光",
+      "边框",
+      "描边",
+      "走马灯",
+      "呼吸光",
+      "border",
+      "beam",
+      "glow",
+      "outline",
+      "pulse",
+      "border-beam",
+      "libraries.dev",
+      "流光描边"
+    ],
+    "visualTags": [
+      "glow",
+      "outline",
+      "light"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "开源原包提供边框光带，LeiBox 为独立预览注册连续插值属性，并保留造型、色板与强度调节。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed border-beam@1.4.1 React renderer.",
+    "designReference": "https://libraries.dev/beam",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/border-beam",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · border-beam@1.4.1."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/border-beam/react.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BorderBeam } from \"./BorderBeam\";\n\nexport default function App() {\n  return <BorderBeam />;\n}",
+      "files": [
+        "BorderBeam.tsx",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/border-beam/vue.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BorderBeam from \"./BorderBeam.vue\";\n</script>\n<template><BorderBeam /></template>",
+      "files": [
+        "BorderBeam.vue",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/border-beam/svelte.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BorderBeam from \"./BorderBeam.svelte\";\n</script>\n<BorderBeam />",
+      "files": [
+        "BorderBeam.svelte",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/border-beam/solid.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BorderBeam } from \"./BorderBeam.solid\";\n\nexport default function App() {\n  return <BorderBeam />;\n}",
+      "files": [
+        "BorderBeam.solid.tsx",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/border-beam/preact.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BorderBeam } from \"./BorderBeam.preact\";\n\nexport default function App() {\n  return <BorderBeam />;\n}",
+      "files": [
+        "BorderBeam.preact.tsx",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/border-beam/vanilla.json",
+      "component": "BorderBeam",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "border-beam@1.4.1",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { mount } from \"./BorderBeam\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BorderBeam.ts",
+        "BorderBeamEngine.js",
+        "motion-runtime.ts",
+        "BorderBeamEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Change the beam shape, colour and intensity, or pause the light.",
+    "zh": "切换光带造型和配色，调节强度，或暂停流光。"
+  }
+}

@@ -17,7 +17,7 @@ export function motionDocLayout(entry: MotionEntry): MotionDocLayout {
   return {
     width: entry.canvasWidth!,
     height: entry.canvasHeight!,
-    responsive: fullWidthDemos.has(entry.slug),
+    responsive: fullWidthDemos.has(entry.slug) || entry.viewportPlayback === true,
     instructions: entry.instructions,
     tags: [entry.category, "6 frameworks", "TypeScript", ...(entry.original ? ["LeiShiFu original"] : [])],
   };

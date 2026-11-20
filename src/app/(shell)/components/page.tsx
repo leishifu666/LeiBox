@@ -1,13 +1,15 @@
 import { T } from "@/components/common/language-provider";
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { ComponentCatalogView } from "@/components/docs/component-catalog-view";
 import { Footer } from "@/components/landing/footer";
 import { PreviewVideo } from "@/components/common/preview-video";
 import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { componentCategories } from "@/data/component-categories";
 import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { motionDocLayout } from "@/lib/motion-doc-layout";
+import { usesViewportMotionPlayback } from "@/lib/site-motion";
 
 const motionLayouts = new Map(INTERACTION_COMPONENTS
   .filter(entry => entry.href.startsWith("/docs/animations/"))
@@ -29,25 +31,25 @@ export default function ComponentsPage() {
         and make them yours. More on the way.
       </T></p>
 
-      <section id="interaction" className="mt-10 scroll-mt-24" aria-labelledby="components-title">
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {COMPONENT_CATALOG.map((component) => (
-            <li key={component.href} data-preview-card data-component-card={component.href} data-component-doc-layout={motionLayouts.get(component.href)} className="group relative flex h-full flex-col gap-4">
-                <div className="relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f4f4f4]">
-                  {component.kind === "interaction" ? (
-                  <InteractionPreview slug={component.slug} poster={component.preview} source={component.sourceFile ? `/motion/${component.slug}.html` : undefined} width={component.canvasWidth} height={component.canvasHeight} />
-                  ) : (
-                    <PreviewVideo src={component.video} className="absolute inset-0 size-full object-cover" />
-                  )}
-                </div>
-                <Link prefetch={false} href={component.href} className="block px-1 after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4">
-                  <h2 className="text-[15px] font-medium tracking-tight"><T>{component.name}</T></h2>
-                  <p className="mt-1 text-sm leading-6 text-pretty text-muted-foreground"><T>{component.description}</T></p>
-                </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <ComponentCatalogView cards={COMPONENT_CATALOG.map((component) => ({
+        href: component.href,
+        name: component.name,
+        description: component.description,
+        ...componentCategories(component.href),
+        layout: motionLayouts.get(component.href),
+        wide: component.kind === "interaction" && usesViewportMotionPlayback(component.slug),
+        preview: component.kind === "interaction" ? (
+          <InteractionPreview
+            slug={component.slug}
+            poster={component.preview}
+            source={component.sourceFile ? `/motion/${component.slug}.html` : undefined}
+            width={component.canvasWidth}
+            height={component.canvasHeight}
+          />
+        ) : (
+          <PreviewVideo src={component.video} className="absolute inset-0 size-full object-cover" />
+        ),
+      }))} />
 
       <div className="mt-24">
         <Footer variant="docs" />

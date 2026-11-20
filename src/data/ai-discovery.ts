@@ -1,3 +1,5 @@
+import { librariesDevDiscovery } from "./libraries-dev.ts";
+
 /** Task-oriented search metadata. Frameworks, packages and provenance come from the live collection. */
 export type Discovery = {
   category: string;
@@ -9,6 +11,35 @@ export type Discovery = {
 };
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
+  ...librariesDevDiscovery,
+  "upload-tile": {
+    category: "media",
+    useCases: ["Show attachment progress inline in a chat composer.", "在聊天输入框展示附件上传进度。"],
+    searchTerms: ["dissolve", "upload tile", "upload tray", "attachment", "progress", "abort", "附件", "粒子上传", "文件超限"],
+    visualTags: ["particles", "file", "progress"],
+    interactions: ["click", "touch", "keyboard"],
+    caveat: "试玩模拟上传结果，接入时传入自己的文件列表和上传函数。",
+  },
+  "thinking-orb": {
+    category: "feedback",
+    useCases: ["Show the current state of an AI agent.", "用粒子球显示 AI 智能体的当前状态。"],
+    searchTerms: ["dissolve", "thinking orb", "agent status", "radar", "voice level", "智能体", "状态球", "粒子", "聆听"],
+    visualTags: ["particles", "orb", "morph"],
+    interactions: ["click", "drag", "touch", "keyboard"],
+    caveat: "试玩可用滑杆模拟音量。应用可直接传入音量读数。",
+  },
+  "distortion-waves": {
+    category: "feedback", useCases: ["转账或支付确认视图转场", "彩色折射波浪切换卡片内容", "WebGL2 DOM distortion wave transition"],
+    searchTerms: ["波浪", "扭曲", "折射", "色散", "模糊", "视图切换", "转场", "彩虹", "粒子", "光晕", "distortion", "waves", "webgl", "chromatic aberration", "transition"],
+    visualTags: ["wave", "refraction", "chromatic", "glow", "particles", "dark"], interactions: ["click", "keyboard", "touch"],
+    caveat: "基于 MIT 协议的 distortion-waves 核心移植，支持纵向、中心环形与横向三种波型及五组色板；无 WebGL2 或开启减少动态效果时自动回退为平滑淡变。",
+  },
+  "focus-switch": {
+    category: "input", useCases: ["专注模式开关", "拖动切换昼夜", "pixel-art focus mode switch"],
+    searchTerms: ["专注", "勿扰", "像素房间", "玻璃透镜", "昼夜", "focus mode", "do not disturb", "pixel room", "glass lens"],
+    visualTags: ["pixel", "glass", "day night"], interactions: ["click", "drag", "keyboard", "touch"],
+    caveat: "开关驱动像素房间里的时间；用 onCheckedChange 将专注状态接入实际应用。",
+  },
   "blister-dropdown": {
     category: "input", useCases: ["状态筛选菜单", "药板胶囊弹出选择", "tactile status filter dropdown"],
     searchTerms: ["胶囊", "铝箔", "药板", "状态", "筛选", "下拉菜单", "blister", "capsule", "foil", "dropdown", "status filter"],

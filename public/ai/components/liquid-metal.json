@@ -1,0 +1,185 @@
+{
+  "slug": "liquid-metal",
+  "name": {
+    "en": "Liquid Metal",
+    "zh": "流体金属"
+  },
+  "description": {
+    "en": "Chrome reflections give controls and text a shifting metal finish.",
+    "zh": "铬金属反光在控件和文字表面流动。"
+  },
+  "keywords": "液态 金属 铬 银 金 反光 按钮 liquid metal chrome shader Libraries.dev Jakub Antalik metal-fx",
+  "docsPath": "/docs/animations/liquid-metal",
+  "detailPath": "/ai/components/liquid-metal.json",
+  "markdownPath": "/ai/components/liquid-metal.md",
+  "previewPath": "/assets/components/liquid-metal.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "Chrome reflections give controls and text a shifting metal finish.",
+      "铬金属反光在控件和文字表面流动。"
+    ],
+    "searchTerms": [
+      "液态",
+      "金属",
+      "铬",
+      "银",
+      "金",
+      "反光",
+      "按钮",
+      "liquid",
+      "metal",
+      "chrome",
+      "shader",
+      "metal-fx",
+      "libraries.dev",
+      "流体金属"
+    ],
+    "visualTags": [
+      "chrome",
+      "metal",
+      "reflection"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "WebGL2 渲染金属表面，硬件不支持时保留可用的普通控件。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed metal-fx@2.0.11 React renderer.",
+    "designReference": "https://libraries.dev/metal",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/metal-fx",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · metal-fx@2.0.11. Paper Shaders retain their Apache-2.0 license and notice."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/liquid-metal/react.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "import { LiquidMetal } from \"./LiquidMetal\";\n\nexport default function App() {\n  return <LiquidMetal />;\n}",
+      "files": [
+        "LiquidMetal.tsx",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/liquid-metal/vue.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport LiquidMetal from \"./LiquidMetal.vue\";\n</script>\n<template><LiquidMetal /></template>",
+      "files": [
+        "LiquidMetal.vue",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/liquid-metal/svelte.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "<script lang=\"ts\">\nimport LiquidMetal from \"./LiquidMetal.svelte\";\n</script>\n<LiquidMetal />",
+      "files": [
+        "LiquidMetal.svelte",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/liquid-metal/solid.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "import { LiquidMetal } from \"./LiquidMetal.solid\";\n\nexport default function App() {\n  return <LiquidMetal />;\n}",
+      "files": [
+        "LiquidMetal.solid.tsx",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/liquid-metal/preact.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "import { LiquidMetal } from \"./LiquidMetal.preact\";\n\nexport default function App() {\n  return <LiquidMetal />;\n}",
+      "files": [
+        "LiquidMetal.preact.tsx",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/liquid-metal/vanilla.json",
+      "component": "LiquidMetal",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "metal-fx@2.0.11"
+      ],
+      "usage": "import { mount } from \"./LiquidMetal\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "LiquidMetal.ts",
+        "LiquidMetalEngine.js",
+        "motion-runtime.ts",
+        "LiquidMetalEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Try the available metal finishes and change the intensity.",
+    "zh": "切换金属材质并调整反光强度。"
+  }
+}

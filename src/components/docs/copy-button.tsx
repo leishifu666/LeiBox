@@ -20,21 +20,23 @@ export function CopyButton({
   sourceUrl,
   label,
   className,
+  failureLabel,
 }: {
   text?: string;
   sourceUrl?: string;
   label?: string;
   className?: string;
+  failureLabel?: string;
 }) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<keyof typeof feedbackLabels>("idle");
   const copyInFlight = useRef(false);
 
   useEffect(() => {
-    if (status !== "copied" && status !== "failed") return;
+    if (status !== "copied" && (status !== "failed" || failureLabel)) return;
     const timeout = setTimeout(() => setStatus("idle"), 1600);
     return () => clearTimeout(timeout);
-  }, [status]);
+  }, [status, failureLabel]);
 
   const copy = async () => {
     if (copyInFlight.current) return;
@@ -55,7 +57,7 @@ export function CopyButton({
 
   const copying = status === "copying";
   const copied = status === "copied";
-  const feedback = t(feedbackLabels[status]);
+  const feedback = t(status === "failed" && failureLabel ? failureLabel : feedbackLabels[status]);
   const idleLabel = t(label ?? "Copy to clipboard");
 
   return (

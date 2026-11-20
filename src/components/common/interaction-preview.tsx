@@ -7,7 +7,8 @@ import { optimizedImage } from "@/lib/optimized-image";
 import { sendMotionRenderSize } from "@/lib/motion-render-size";
 import { SiteNativePreview, hasSiteNativePreview, type SitePreviewSlug } from "./site-native-preview";
 import { motionDocuments } from "@/lib/motion-document";
-import { siteMotionUrl } from "@/lib/site-motion";
+import { useLanguage } from "./language-provider";
+import { siteMotionUrl, usesViewportMotionPlayback } from "@/lib/site-motion";
 
 const ShareInvite = dynamic(() => import("@/lib/ShareInvite/ShareInvite").then(module => module.ShareInvite), { ssr: false });
 const OtpVerification = dynamic(() => import("@/lib/OtpVerification/OtpVerification").then(module => module.OtpVerification), { ssr: false });
@@ -56,7 +57,9 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
 }) {
   const [painted, setPainted] = useState(false);
   const iframe = useRef<HTMLIFrameElement>(null);
-  const waitsForDraw = slug === "blister-dropdown" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "ink-spread-carousel" || slug === "particle-texture-trio" || slug === "matcha-powder-reveal" || slug === "ai-brand-cover-cards" || slug === "gradient-ring-cards" || slug === "folded-emoji-scroll" || slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
+  const { locale } = useLanguage();
+  const library = html.includes("data-leibox-library");
+  const waitsForDraw = library || slug === "distortion-waves" || slug === "focus-switch" || slug === "blister-dropdown" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "shader-flood" || slug === "ascii-sharks" || slug === "ink-spread-carousel" || slug === "particle-texture-trio" || slug === "matcha-powder-reveal" || slug === "ai-brand-cover-cards" || slug === "gradient-ring-cards" || slug === "folded-emoji-scroll" || slug === "collection-layout-morph" || slug === "brand-poster-cards" || slug === "dot-matrix-trio" || slug === "inline-text-morph" || slug === "selection-flower" || slug === "notes-text-color" || slug === "galaxy-effort-slider" || slug === "glass-folder" || slug === "cosmic-panels" || slug === "sailing-toc" || slug === "crumpled-paper" || slug === "glass-tab-menu" || slug === "hammerhead-chart" || slug === "blue-fluted-glass" || slug === "staggered-radial-menu" || slug === "soft-action-wheel" || slug === "bounding-box-resize";
   const frames = useRef<number[]>([]);
   const reveal = useCallback(() => {
     frames.current.forEach(cancelAnimationFrame);
@@ -77,18 +80,27 @@ function PreviewScene({ slug, native, siteSlug, html, width, height, scale }: {
     return () => window.removeEventListener("message", receive);
   }, [waitsForDraw, slug, reveal]);
   return (
-    <div data-scene-ready={painted} className="absolute top-1/2 left-1/2 bg-[#f4f4f4] transition-opacity duration-150" style={{ width, height, opacity: painted ? 1 : 0, transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: "center" }}>
+    <div data-scene-ready={painted} className={`absolute top-1/2 left-1/2 transition-opacity duration-150 ${usesViewportMotionPlayback(slug) ? "bg-white" : "bg-[#f4f4f4]"}`} style={{ width, height, opacity: painted ? 1 : 0, transform: `translate(-50%, -50%) scale(${scale})`, transformOrigin: "center" }}>
       {siteSlug ? <SiteNativePreview slug={siteSlug} height={height} onReady={reveal} /> : native ? <NativePreview slug={slug} onReady={reveal} /> : (
-        <iframe ref={iframe} srcDoc={html} title={`${slug} animated preview`} sandbox="allow-scripts" tabIndex={-1} width={width} height={height} onLoad={() => { sendMotionRenderSize(iframe.current, slug); if (!waitsForDraw) reveal(); }} className="block border-0" />
+        <iframe ref={iframe} srcDoc={html} title={`${slug} animated preview`} sandbox="allow-scripts" tabIndex={-1} width={width} height={height} onLoad={() => { sendMotionRenderSize(iframe.current, slug); if (library) iframe.current?.contentWindow?.postMessage({ type: "leibox-library-locale", locale }, "*"); if (!waitsForDraw) reveal(); }} className="block border-0" />
       )}
     </div>
   );
 }
 
-/** Only the hovered/focused card mounts a live scene; idle cards cost one image. */
-export function InteractionPreview({ slug, poster, source, width, height, active: controlledActive, preferNative = false }: {
+type PreviewProps = {
   slug: string; poster: string; source?: string; width?: number; height?: number; active?: boolean; preferNative?: boolean;
-}) {
+};
+
+function PreviewImage({ poster }: { poster: string }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img {...optimizedImage(poster)} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />;
+}
+
+let releaseFeaturedPreview: (() => void) | undefined;
+
+/** Only the hovered/focused card mounts a live scene. */
+export function InteractionPreview({ slug, poster, source, width, height, active: controlledActive, preferNative = false }: PreviewProps) {
   const root = useRef<HTMLDivElement>(null);
   const reduceMotion = useSyncExternalStore(subscribeMotion, readMotion, serverMotion);
   const [visible, setVisible] = useState(false);
@@ -97,6 +109,7 @@ export function InteractionPreview({ slug, poster, source, width, height, active
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [html, setHtml] = useState("");
   const native = slug === "share-invite" || slug === "otp-verification";
+  const viewportPlayback = usesViewportMotionPlayback(slug);
   const siteSlug = preferNative && hasSiteNativePreview(slug) ? slug : undefined;
   const active = (controlledActive ?? engaged) && visible && pageVisible && !reduceMotion;
   const ready = active && (native || siteSlug !== undefined || Boolean(html));
@@ -114,14 +127,28 @@ export function InteractionPreview({ slug, poster, source, width, height, active
     const card = element.closest<HTMLElement>("[data-preview-card]") ?? element;
     let hovered = false, focused = false;
     let hoverTimer: number | undefined;
-    const update = () => setEngaged(hovered || focused);
+    const release = () => {
+      if (releaseFeaturedPreview === release) releaseFeaturedPreview = undefined;
+      setEngaged(false);
+    };
+    const update = () => {
+      if (!hovered && !focused) return release();
+      if (viewportPlayback && releaseFeaturedPreview !== release) {
+        releaseFeaturedPreview?.();
+        releaseFeaturedPreview = release;
+      }
+      setEngaged(true);
+    };
     const enter = (event: PointerEvent) => {
       if (event.pointerType === "touch") return;
       window.clearTimeout(hoverTimer);
-      hoverTimer = window.setTimeout(() => { hovered = true; update(); }, 120);
+      hoverTimer = window.setTimeout(() => { hovered = true; update(); }, viewportPlayback ? 220 : 120);
     };
     const leave = () => { window.clearTimeout(hoverTimer); hovered = false; update(); };
-    const focus = () => { focused = true; update(); };
+    const focus = (event: FocusEvent) => {
+      if (viewportPlayback && !(event.target as Element).matches(":focus-visible")) return;
+      focused = true; update();
+    };
     const blur = (event: FocusEvent) => {
       if (!card.contains(event.relatedTarget as Node | null)) { focused = false; update(); }
     };
@@ -145,6 +172,7 @@ export function InteractionPreview({ slug, poster, source, width, height, active
     card.addEventListener("keydown", navigate, true);
     return () => {
       window.clearTimeout(hoverTimer);
+      if (releaseFeaturedPreview === release) releaseFeaturedPreview = undefined;
       intersection.disconnect(); resize.disconnect();
       window.document.removeEventListener("visibilitychange", visibility);
       card.removeEventListener("pointerenter", enter);
@@ -154,7 +182,7 @@ export function InteractionPreview({ slug, poster, source, width, height, active
       card.removeEventListener("pointerdown", navigate, true);
       card.removeEventListener("keydown", navigate, true);
     };
-  }, [slug]);
+  }, [slug, viewportPlayback]);
 
   useEffect(() => {
     if (!active || !native) return;
@@ -174,9 +202,8 @@ export function InteractionPreview({ slug, poster, source, width, height, active
   }, [active, source, siteSlug, slug]);
 
   return (
-    <div ref={root} aria-hidden="true" data-motion-preview={slug} data-preview-state={ready ? "playing" : "poster"} className="pointer-events-none relative size-full overflow-hidden bg-[#f4f4f4]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img {...optimizedImage(poster)} alt="" loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
+    <div ref={root} aria-hidden="true" data-motion-preview={slug} data-preview-state={ready ? "playing" : "poster"} className={`pointer-events-none relative size-full overflow-hidden ${viewportPlayback ? "bg-white" : "bg-[#f4f4f4]"}`}>
+      <PreviewImage poster={poster} />
       {ready && size.width > 0 && (
         <PreviewScene slug={slug} native={native} siteSlug={siteSlug} html={document} width={sceneWidth} height={sceneHeight} scale={scale} />
       )}

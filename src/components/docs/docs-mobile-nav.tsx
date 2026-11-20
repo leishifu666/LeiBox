@@ -5,7 +5,7 @@ import { useLanguage } from "@/components/common/language-provider";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { SiteLogo } from "@/components/common/site-logo";
@@ -17,6 +17,9 @@ export function DocsMobileNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
+  const dialog = useRef<HTMLDivElement>(null);
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -25,20 +28,39 @@ export function DocsMobileNav() {
 
   useEffect(() => {
     if (!open) return;
+    const opener = trigger.current;
+    closeButton.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+      }
+      if (event.key !== "Tab") return;
+      const links = dialog.current?.querySelectorAll<HTMLElement>("button, a[href]");
+      if (!links?.length) return;
+      const first = links[0];
+      const last = links[links.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKeyDown);
     document.documentElement.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.documentElement.style.removeProperty("overflow");
+      opener?.focus({ preventScroll: true });
     };
   }, [open]);
 
   return (
     <div className="lg:hidden">
       <button
+        ref={trigger}
         type="button"
         aria-label={t("Open docs navigation")}
         aria-expanded={open}
@@ -53,6 +75,7 @@ export function DocsMobileNav() {
           <AnimatePresence>
             {open && (
               <motion.div
+                ref={dialog}
                 role="dialog"
                 aria-modal="true"
                 aria-label={t("Docs navigation")}
@@ -65,6 +88,7 @@ export function DocsMobileNav() {
                 <div className="flex items-center justify-between px-5 pt-5 pb-4">
                   <SiteLogo />
                   <button
+                    ref={closeButton}
                     type="button"
                     aria-label={t("Close docs navigation")}
                     onClick={() => setOpen(false)}

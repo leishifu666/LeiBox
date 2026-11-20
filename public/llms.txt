@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 58 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 68 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -18,6 +18,16 @@ Paths beginning with / are relative to the origin serving this file. When only a
 ## Components
 
 - [Orbit 404 Page / 组件环游 404](https://leibox.pantoria.cn/ai/components/orbit-not-found.md): A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.
+- [Dissolve Upload Tile / Dissolve 粒子上传](https://leibox.pantoria.cn/ai/components/upload-tile.md): An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.
+- [Dissolve Thinking Orb / Dissolve 状态粒子球](https://leibox.pantoria.cn/ai/components/thinking-orb.md): A 180-dot orb morphs between six agent states and responds to the pointer.
+- [Distortion Waves / 折射波浪视图转场](https://leibox.pantoria.cn/ai/components/distortion-waves.md): A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.
+- [Border Beam / 流光描边](https://leibox.pantoria.cn/ai/components/border-beam.md): A ribbon of light runs along a card, button or input border.
+- [Thinking Orbs / 思考粒子球](https://leibox.pantoria.cn/ai/components/thinking-orbs.md): Particle orbs give nine AI processing states distinct motion.
+- [Liquid Gooey / 流体黏合](https://leibox.pantoria.cn/ai/components/liquid-gooey.md): Nearby shapes stretch, join and separate like liquid.
+- [Voice Glow / 语音浮光](https://leibox.pantoria.cn/ai/components/voice-glow.md): A voice-reactive glow rises from the edge of a surface.
+- [Bot Avatars / 智能体表情头像](https://leibox.pantoria.cn/ai/components/bot-avatars.md): Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.
+- [Liquid Metal / 流体金属](https://leibox.pantoria.cn/ai/components/liquid-metal.md): Chrome reflections give controls and text a shifting metal finish.
+- [Pixel Room Focus Switch / 像素房间专注开关](https://leibox.pantoria.cn/ai/components/focus-switch.md): Slide a glass lens through a pixel room to move from daytime chat into nighttime focus.
 - [Blister Pack Dropdown / 胶囊弹出下拉菜单](https://leibox.pantoria.cn/ai/components/blister-dropdown.md): A foil dropdown that pops the selected capsule out of its pocket and into the trigger.
 - [Pixel Day–Night Toggle / 像素日夜开关](https://leibox.pantoria.cn/ai/components/pixel-toggle.md): A draggable day–night switch with pixel icons that scatter and a band of light that circles the knob.
 - [Image Accordion / 弹性图片手风琴](https://leibox.pantoria.cn/ai/components/image-accordion.md): Hover over a photo to expand it with a spring. The surrounding photos share the remaining space.

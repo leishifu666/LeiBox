@@ -1,0 +1,195 @@
+{
+  "slug": "bot-avatars",
+  "name": {
+    "en": "Bot Avatars",
+    "zh": "智能体表情头像"
+  },
+  "description": {
+    "en": "Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.",
+    "zh": "十八种 Canvas 2D 头像会张望、工作或进入睡眠。"
+  },
+  "keywords": "智能体 机器人 头像 毛绒 表情 动画 agent avatar bot face fur Libraries.dev Jakub Antalik bot-avatars",
+  "docsPath": "/docs/animations/bot-avatars",
+  "detailPath": "/ai/components/bot-avatars.json",
+  "markdownPath": "/ai/components/bot-avatars.md",
+  "previewPath": "/assets/components/bot-avatars.png",
+  "discovery": {
+    "category": "feedback",
+    "useCases": [
+      "Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.",
+      "十八种 Canvas 2D 头像会张望、工作或进入睡眠。"
+    ],
+    "searchTerms": [
+      "智能体",
+      "机器人",
+      "头像",
+      "毛绒",
+      "表情",
+      "动画",
+      "agent",
+      "avatar",
+      "bot",
+      "face",
+      "fur",
+      "bot-avatars",
+      "libraries.dev",
+      "智能体表情头像"
+    ],
+    "visualTags": [
+      "avatar",
+      "fabric",
+      "character"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "上游 Canvas 2D 材质与动画支持定格，头像可以用状态值跟随应用工作流。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed bot-avatars@0.2.2 React renderer.",
+    "designReference": "https://libraries.dev/bots",
+    "designAuthor": "Jakub Antalik · Libraries.dev",
+    "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/bot-avatars",
+    "license": "MIT License · Copyright (c) 2026 Jakub Antalik · bot-avatars@0.2.2."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/bot-avatars/react.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BotAvatars } from \"./BotAvatars\";\n\nexport default function App() {\n  return <BotAvatars />;\n}",
+      "files": [
+        "BotAvatars.tsx",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/bot-avatars/vue.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport BotAvatars from \"./BotAvatars.vue\";\n</script>\n<template><BotAvatars /></template>",
+      "files": [
+        "BotAvatars.vue",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/bot-avatars/svelte.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "<script lang=\"ts\">\nimport BotAvatars from \"./BotAvatars.svelte\";\n</script>\n<BotAvatars />",
+      "files": [
+        "BotAvatars.svelte",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/bot-avatars/solid.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BotAvatars } from \"./BotAvatars.solid\";\n\nexport default function App() {\n  return <BotAvatars />;\n}",
+      "files": [
+        "BotAvatars.solid.tsx",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/bot-avatars/preact.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { BotAvatars } from \"./BotAvatars.preact\";\n\nexport default function App() {\n  return <BotAvatars />;\n}",
+      "files": [
+        "BotAvatars.preact.tsx",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/bot-avatars/vanilla.json",
+      "component": "BotAvatars",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "bot-avatars@0.2.2",
+        "@base-ui/react@1.6.0",
+        "lucide-react@1.24.0"
+      ],
+      "usage": "import { mount } from \"./BotAvatars\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "BotAvatars.ts",
+        "BotAvatarsEngine.js",
+        "motion-runtime.ts",
+        "BotAvatarsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Try another shape, material or activity to see how the avatar responds.",
+    "zh": "切换头像造型、材质或工作状态，观察表情和动作变化。"
+  }
+}

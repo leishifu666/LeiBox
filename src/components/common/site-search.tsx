@@ -15,7 +15,8 @@ import {
 } from "react";
 
 import { cn } from "@/lib/utils";
-import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { COMPONENT_CATALOG, COMPONENT_CATALOG_GROUPS } from "@/data/component-catalog";
+import { COMPONENT_CATEGORY_LABELS, componentCategories, componentCategoryHref } from "@/data/component-categories";
 let searchOpen = false;
 let searchTrigger: HTMLElement | null = null;
 const listeners = new Set<() => void>();
@@ -45,12 +46,28 @@ interface SearchEntry {
 }
 
 const ENTRIES: SearchEntry[] = [
-  ...COMPONENT_CATALOG.map((component) => ({
-    href: component.href,
-    label: component.name,
+  ...COMPONENT_CATALOG.map((component) => {
+    const { primary, secondary } = componentCategories(component.href);
+    const purposes = [primary, secondary].flatMap((id) => {
+      const label = id ? COMPONENT_CATEGORY_LABELS.get(id) : undefined;
+      return label && id !== "other" ? [label, translateText(label, "zh")] : [];
+    });
+    return {
+      href: component.href,
+      label: component.name,
+      section: "Components",
+      hint: [
+        component.kind === "interaction" ? component.keywords : component.description,
+        translateText(component.description, "zh"),
+        ...purposes,
+      ].join(" "),
+      suggested: true,
+    };
+  }),
+  ...COMPONENT_CATALOG_GROUPS.map(({ id, label }) => ({
+    href: componentCategoryHref(id),
+    label,
     section: "Components",
-    hint: component.kind === "interaction" ? component.keywords : component.description,
-    suggested: true,
   })),
   {
     href: "/docs",

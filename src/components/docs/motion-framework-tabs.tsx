@@ -5,6 +5,7 @@ import { ChoiceSelect } from "@/components/docs/choice-select";
 import { SnippetTabs } from "@/components/docs/snippet-tabs";
 import { CodeBlock } from "@/components/docs/code-block";
 import { CopyButton } from "@/components/docs/copy-button";
+import { MotionPackageDownloadButton } from "@/components/docs/motion-package-download";
 import { usePreference } from "@/hooks/use-preference";
 import { DeferredCode } from "./deferred-code";
 import type { MotionPackageRef as MotionPackage } from "@/lib/doc-asset-types";
@@ -26,7 +27,15 @@ export function MotionCodeTabs({ packages }: { packages: MotionPackage[] }) {
   return <div>
     <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
       <ChoiceSelect label="Framework" options={packages.map(pack => ({ id: pack.framework, label: pack.label }))} value={active.framework} onValueChange={setFramework} />
-      <CopyButton sourceUrl={active.bundleUrl} label="Copy full code bundle" />
+      <div className="flex flex-wrap items-center gap-x-1">
+        <CopyButton
+          key={active.bundleUrl}
+          sourceUrl={active.bundleUrl}
+          label="Copy full code bundle"
+          failureLabel="Copy failed, you can download the ZIP"
+        />
+        <MotionPackageDownloadButton />
+      </div>
     </div>
     <SnippetTabs key={active.framework} storageKey={`motion-${active.slug}-${active.framework}`} tabs={active.files} label="Source file" />
   </div>;

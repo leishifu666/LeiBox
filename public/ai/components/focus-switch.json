@@ -1,0 +1,164 @@
+{
+  "slug": "focus-switch",
+  "name": {
+    "en": "Pixel Room Focus Switch",
+    "zh": "像素房间专注开关"
+  },
+  "description": {
+    "en": "Slide a glass lens through a pixel room to move from daytime chat into nighttime focus.",
+    "zh": "拖动玻璃透镜，像素房间从白天聊天过渡到夜晚专注。"
+  },
+  "keywords": "专注 模式 开关 像素房间 玻璃透镜 昼夜 拖动 focus mode toggle pixel room glass lens",
+  "docsPath": "/docs/animations/focus-switch",
+  "detailPath": "/ai/components/focus-switch.json",
+  "markdownPath": "/ai/components/focus-switch.md",
+  "previewPath": "/assets/components/focus-switch.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "专注模式开关",
+      "拖动切换昼夜",
+      "pixel-art focus mode switch"
+    ],
+    "searchTerms": [
+      "专注",
+      "勿扰",
+      "像素房间",
+      "玻璃透镜",
+      "昼夜",
+      "focus mode",
+      "do not disturb",
+      "pixel room",
+      "glass lens"
+    ],
+    "visualTags": [
+      "pixel",
+      "glass",
+      "day night"
+    ],
+    "interactions": [
+      "click",
+      "drag",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "开关驱动像素房间里的时间；用 onCheckedChange 将专注状态接入实际应用。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "Native framework adapters around the supplied pixel renderer, focus timeline and lens spring.",
+    "designReference": "https://x.com/Lattice_Node/status/2119392949813555224/video/1",
+    "designAuthor": "Lattice Node",
+    "license": "The supplied HTML did not identify an upstream source license. Preserve the supplied provenance and verify any reuse rights separately."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/focus-switch/react.json",
+      "component": "FocusSwitch",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { FocusSwitch } from \"./FocusSwitch\";\n\nexport default function App() {\n  return <FocusSwitch />;\n}",
+      "files": [
+        "FocusSwitch.tsx",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/focus-switch/vue.json",
+      "component": "FocusSwitch",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport FocusSwitch from \"./FocusSwitch.vue\";\n</script>\n<template><FocusSwitch /></template>",
+      "files": [
+        "FocusSwitch.vue",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/focus-switch/svelte.json",
+      "component": "FocusSwitch",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport FocusSwitch from \"./FocusSwitch.svelte\";\n</script>\n<FocusSwitch />",
+      "files": [
+        "FocusSwitch.svelte",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/focus-switch/solid.json",
+      "component": "FocusSwitch",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { FocusSwitch } from \"./FocusSwitch.solid\";\n\nexport default function App() {\n  return <FocusSwitch />;\n}",
+      "files": [
+        "FocusSwitch.solid.tsx",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/focus-switch/preact.json",
+      "component": "FocusSwitch",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { FocusSwitch } from \"./FocusSwitch.preact\";\n\nexport default function App() {\n  return <FocusSwitch />;\n}",
+      "files": [
+        "FocusSwitch.preact.tsx",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/focus-switch/vanilla.json",
+      "component": "FocusSwitch",
+      "dependencies": [],
+      "usage": "import { mount } from \"./FocusSwitch\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "FocusSwitch.ts",
+        "FocusSwitchEngine.js",
+        "motion-runtime.ts",
+        "FocusSwitchEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click or drag the lens. Use the arrow keys to adjust it, or Home and End to jump to either side.",
+    "zh": "点击或拖动透镜。方向键可微调，Home 和 End 可跳到两端。"
+  }
+}
