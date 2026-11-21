@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "3f5bb604d613f47668c1e92eb51951f41b5043b896964ff9d4eb77b2cc6a078a",
+  "revision": "9ac5c2821b3a008f9d38bb806b6dd0186aa930e4ec9234b87c6dcb1002e94195",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -93,6 +93,76 @@
         "notice": {
           "en": "Use the GitHub source and the LeiBox documentation to integrate this React / Next.js example.",
           "zh": "通过 GitHub 查看 React / Next.js 源码，结合 LeiBox 文档接入。"
+        }
+      }
+    },
+    {
+      "slug": "metaball-menu",
+      "name": {
+        "en": "SVG Metaball Menu",
+        "zh": "黑白黏球菜单"
+      },
+      "description": {
+        "en": "Three quick actions peel away from a plus button and merge back into one monochrome shape.",
+        "zh": "三个快捷操作从加号圆钮中分离，收起时融为一体。"
+      },
+      "keywords": "metaball gooey svg menu radial quick actions gaussian alpha blur 菜单 黏球 融合 黑白 快捷操作 高斯模糊",
+      "docsPath": "/docs/animations/metaball-menu",
+      "detailPath": "/ai/components/metaball-menu.json",
+      "markdownPath": "/ai/components/metaball-menu.md",
+      "previewPath": "/assets/components/metaball-menu.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "Reveal three quick actions from a compact plus button.",
+          "从一个加号按钮展开三个快捷操作。"
+        ],
+        "searchTerms": [
+          "metaball",
+          "gooey menu",
+          "radial menu",
+          "SVG",
+          "黏球",
+          "黑白",
+          "快捷菜单"
+        ],
+        "visualTags": [
+          "monochrome",
+          "svg",
+          "morph"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch",
+          "hover"
+        ],
+        "caveat": "自动播放仅在可见、空闲且未开启减少动态效果时运行。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "A React SVG implementation of the supplied filter and motion specifications.",
+        "designReference": null,
+        "designAuthor": null,
+        "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+      },
+      "distribution": {
+        "canRedistributeSource": true,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
         }
       }
     },
@@ -469,82 +539,6 @@
         "designAuthor": "Jakub Antalik · Libraries.dev",
         "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/thinking-orbs",
         "license": "MIT License · Copyright (c) 2026 Jakub Antalik · thinking-orbs@0.3.2."
-      },
-      "distribution": {
-        "canRedistributeSource": true,
-        "installFromThisSite": true,
-        "installProvider": "leibox",
-        "notice": {
-          "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
-          "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
-        }
-      }
-    },
-    {
-      "slug": "liquid-gooey",
-      "name": {
-        "en": "Liquid Gooey",
-        "zh": "流体黏合"
-      },
-      "description": {
-        "en": "Nearby shapes stretch, join and separate like liquid.",
-        "zh": "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
-      },
-      "keywords": "液态 黏连 融合 果冻 变形 gooey liquid merging morph svg Libraries.dev Jakub Antalik liquid-gooey",
-      "docsPath": "/docs/animations/liquid-gooey",
-      "detailPath": "/ai/components/liquid-gooey.json",
-      "markdownPath": "/ai/components/liquid-gooey.md",
-      "previewPath": "/assets/components/liquid-gooey.png",
-      "discovery": {
-        "category": "feedback",
-        "useCases": [
-          "Nearby shapes stretch, join and separate like liquid.",
-          "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"
-        ],
-        "searchTerms": [
-          "液态",
-          "黏连",
-          "融合",
-          "果冻",
-          "变形",
-          "gooey",
-          "liquid",
-          "merging",
-          "morph",
-          "svg",
-          "liquid-gooey",
-          "libraries.dev",
-          "流体黏合"
-        ],
-        "visualTags": [
-          "liquid",
-          "morph",
-          "organic"
-        ],
-        "interactions": [
-          "click",
-          "keyboard",
-          "touch"
-        ],
-        "caveat": "依据开源包的原始黏合算法渲染，演示支持键盘操作。"
-      },
-      "frameworks": [
-        "react",
-        "vue",
-        "svelte",
-        "solid",
-        "preact",
-        "vanilla"
-      ],
-      "renderers": [],
-      "source": {
-        "kind": "project-source",
-        "provider": "LeiBox",
-        "implementation": "LeiBox demo and six framework mount entries, powered by the MIT-licensed liquid-gooey@0.2.2 React renderer.",
-        "designReference": "https://libraries.dev/gooey",
-        "designAuthor": "Jakub Antalik · Libraries.dev",
-        "upstreamSource": "https://github.com/Jakubantalik/Libraries.dev/tree/main/packages/liquid-gooey",
-        "license": "MIT License · Copyright (c) 2026 Jakub Antalik · liquid-gooey@0.2.2."
       },
       "distribution": {
         "canRedistributeSource": true,

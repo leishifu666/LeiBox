@@ -1,5 +1,19 @@
 [
   {
+    "slug": "metaball-menu",
+    "href": "/docs/animations/metaball-menu",
+    "name": "SVG Metaball Menu",
+    "category": "Menu interaction",
+    "description": "Three quick actions peel away from a plus button and merge back into one monochrome shape.",
+    "keywords": "metaball gooey svg menu radial quick actions gaussian alpha blur 菜单 黏球 融合 黑白 快捷操作 高斯模糊",
+    "preview": "/assets/components/metaball-menu.png",
+    "sourceFile": "metaball-menu.html",
+    "canvasWidth": 720,
+    "canvasHeight": 300,
+    "responsive": true,
+    "viewportPlayback": true
+  },
+  {
     "slug": "upload-tile",
     "href": "/docs/animations/upload-tile",
     "name": "Dissolve Upload Tile",
@@ -64,20 +78,6 @@
     "keywords": "思考 粒子 球 搜索 推理 监听 编织 加载 thinking orbs particles loading state Libraries.dev Jakub Antalik thinking-orbs",
     "preview": "/assets/components/thinking-orbs.png",
     "sourceFile": "thinking-orbs.html",
-    "canvasWidth": 820,
-    "canvasHeight": 440,
-    "responsive": true,
-    "viewportPlayback": true
-  },
-  {
-    "slug": "liquid-gooey",
-    "href": "/docs/animations/liquid-gooey",
-    "name": "Liquid Gooey",
-    "category": "Morph interaction",
-    "description": "Nearby shapes stretch, join and separate like liquid.",
-    "keywords": "液态 黏连 融合 果冻 变形 gooey liquid merging morph svg Libraries.dev Jakub Antalik liquid-gooey",
-    "preview": "/assets/components/liquid-gooey.png",
-    "sourceFile": "liquid-gooey.html",
     "canvasWidth": 820,
     "canvasHeight": 440,
     "responsive": true,

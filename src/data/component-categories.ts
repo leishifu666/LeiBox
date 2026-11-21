@@ -5,7 +5,7 @@ export const COMPONENT_CATEGORIES = [
   },
   {
     id: "navigation", label: "Menus and Navigation",
-    components: ["blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
+    components: ["metaball-menu", "blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
   },
   {
     id: "galleries", label: "Galleries and Carousels",
@@ -33,7 +33,7 @@ export const COMPONENT_CATEGORIES = [
   },
   {
     id: "surfaces", label: "Surfaces and Materials",
-    components: ["border-beam", "liquid-gooey", "liquid-metal", "asciify", "frost", "glass"],
+    components: ["border-beam", "liquid-metal", "asciify", "frost", "glass"],
   },
   {
     id: "backgrounds", label: "Backgrounds and Objects",

@@ -11,6 +11,7 @@ import { INTERACTION_COMPONENTS } from "@/data/interaction-components";
 import { LIBRARIES_DEV, libraryDemoApi } from "@/data/libraries-dev";
 import { THINKING_ORB_API } from "@/data/thinking-orb";
 import { UPLOAD_TILE_API } from "@/data/upload-tile";
+import { METABALL_MENU_API } from "@/data/metaball-menu";
 import { interactionTranslations } from "@/lib/i18n/interactions";
 import { motionDocLayout } from "@/lib/motion-doc-layout";
 import { DEEP_AGENT_API, DEEP_AGENT_COMPOSER_API } from "@/data/deep-agent.mjs";
@@ -29,7 +30,7 @@ export default async function MotionPage({params}:Props){
   const doc=await getMotionDocProps(slug);
   const {width,height,responsive,instructions,tags}=motionDocLayout(entry);
   const library = LIBRARIES_DEV[slug];
-  const dissolveApi = slug === "upload-tile" ? UPLOAD_TILE_API : slug === "thinking-orb" ? THINKING_ORB_API : [];
+  const componentApi = slug === "metaball-menu" ? METABALL_MENU_API : slug === "upload-tile" ? UPLOAD_TILE_API : slug === "thinking-orb" ? THINKING_ORB_API : [];
   return <div className="page-enter">
     <ComponentDoc {...doc} title={entry.name} description={entry.description} installItem={slug} tags={tags}
       beforeInstall={<MotionDemoSection instructions={instructions}>
@@ -56,7 +57,7 @@ export default async function MotionPage({params}:Props){
       </div></>}
       apiReference={[
         ...(library ? [...library.api, ...libraryDemoApi].map(({ key, type, en }) => ({ name: `options.${key}`, type, description: en })) : []),
-        ...dissolveApi.map(({ key, type, defaultValue, en }) => ({ name: slug === "upload-tile" ? key : `options.${key}`, type, defaultValue, description: en })),
+        ...componentApi.map(({ key, type, defaultValue, en }) => ({ name: slug === "upload-tile" ? key : `options.${key}`, type, defaultValue, description: en })),
         ...(slug === "distortion-waves" ? [
           {name:"options.type",type:'"vertical" | "center" | "horizontal"',defaultValue:'"vertical"',description:"Wave propagation shape: vertical from bottom button, center ring from badge, or horizontal from left rail."},
           {name:"options.palette",type:'"colorful" | "green" | "ocean" | "sunset" | "mono" | string',defaultValue:'"colorful"',description:"Preset palette name or a 6-digit hex colour such as #35ba00."},
@@ -208,7 +209,7 @@ export default async function MotionPage({params}:Props){
         ...((slug === "reasoning-effort-slider" || slug === "deep-agent-composer") ? DEEP_AGENT_API : []),
         ...(slug === "deep-agent-composer" ? DEEP_AGENT_COMPOSER_API : []),
         {name:"options.height",type:"number",defaultValue:String(entry.canvasHeight),description:"Preferred scene height. The layout grows to fit content."},
-        {name:"options.reducedMotion",type:"boolean",description:"Override the system reduced-motion preference without changing interaction states."},
+        ...(slug === "metaball-menu" ? [] : [{name:"options.reducedMotion",type:"boolean",description:"Override the system reduced-motion preference without changing interaction states."}]),
       ]}
     />
     <div className="mx-auto mt-24 w-full max-w-3xl"><Footer variant="docs"/></div>

@@ -2,6 +2,7 @@ import { DISTORTION_WAVES_PROMPT } from "./distortion-waves.mjs";
 import { librariesDevEntries } from "./libraries-dev.ts";
 import { THINKING_ORB_ENTRY } from "./thinking-orb.ts";
 import { UPLOAD_TILE_ENTRY } from "./upload-tile.ts";
+import { METABALL_MENU_ENTRY } from "./metaball-menu.ts";
 import { FOCUS_SWITCH_PROMPT } from "./focus-switch.mjs";
 import { BLISTER_DROPDOWN_PROMPT } from "./blister-dropdown.mjs";
 import { PIXEL_TOGGLE_PROMPT } from "./pixel-toggle.mjs";
@@ -75,6 +76,7 @@ export interface MotionEntry {
 }
 
 export const INTERACTION_COMPONENTS: MotionEntry[] = [
+  METABALL_MENU_ENTRY,
   UPLOAD_TILE_ENTRY,
   THINKING_ORB_ENTRY,
   {

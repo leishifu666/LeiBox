@@ -69,10 +69,11 @@ test('responsive project posters respect byte budgets',async()=>{
 });
 
 test('Libraries.dev previews defer their effects until in view', async () => {
- const slugs = ['border-beam', 'thinking-orbs', 'liquid-gooey', 'voice-glow', 'distortion-waves', 'bot-avatars', 'liquid-metal'];
+ const slugs = ['border-beam', 'thinking-orbs', 'voice-glow', 'distortion-waves', 'bot-avatars', 'liquid-metal'];
  const { components } = JSON.parse(await read('src/data/site-motion.json'));
  assert(!components['voice-ring'], 'Removed demos must not be listed in the player manifest');
  assert(!components['image-fx'], 'Removed demos must not be listed in the player manifest');
+ assert(!components['liquid-gooey'], 'Removed demos must not be listed in the player manifest');
  for (const slug of slugs) {
   assert.equal(components[slug].viewportPlayback, true, `${slug} must release inactive previews`);
   const page = await read(`out/docs/animations/${slug}.html`);

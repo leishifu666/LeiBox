@@ -56,20 +56,6 @@ export const LIBRARIES_DEV: Record<string, Library> = {
       { key: "speed", type: "number", en: "Animation speed multiplier.", zh: "动画速度倍数。" },
     ],
   },
-  "liquid-gooey": {
-    page: "gooey", packageName: "liquid-gooey", version: "0.2.2",
-    name: "Liquid Gooey", zh: "流体黏合", category: "Morph interaction", renderer: "svg", width: 820, height: 440,
-    description: ["Nearby shapes stretch, join and separate like liquid.", "形状靠近时像液体一样拉伸、黏合，拉开后自然分离。"],
-    instructions: ["Bring the shapes together and try the different motion settings.", "让形状靠近，体验黏合和拉开时的变化，并试试不同的动效设置。"],
-    search: "液态 黏连 融合 果冻 变形 gooey liquid merging morph svg",
-    visualTags: ["liquid", "morph", "organic"],
-    caveat: "依据开源包的原始黏合算法渲染，演示支持键盘操作。",
-    api: [
-      { key: "mode", type: '"morph" | "move" | "melt" | "bend"', en: "Choose a liquid deformation demo.", zh: "选择融合、移动、熔融或弯曲演示。" },
-      { key: "open", type: "boolean", en: "Expand or collapse the morphing controls.", zh: "展开或收起融合动效的按钮组。" },
-      { key: "fill", type: "string", en: "Set the liquid shape fill colour.", zh: "设置流体形状的填充颜色。" },
-    ],
-  },
   "voice-glow": {
     page: "voice", packageName: "voice-glow", version: "0.3.0",
     name: "Voice Glow", zh: "语音浮光", category: "Audio visualizer", renderer: "canvas", width: 820, height: 460,

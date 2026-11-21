@@ -18,12 +18,12 @@ Paths beginning with / are relative to the origin serving this file. When only a
 ## Components
 
 - [Orbit 404 Page / 组件环游 404](https://leibox.pantoria.cn/ai/components/orbit-not-found.md): A 404 page that turns component previews into an orbit. Hover or focus a card to pause it, and open the component from the ring.
+- [SVG Metaball Menu / 黑白黏球菜单](https://leibox.pantoria.cn/ai/components/metaball-menu.md): Three quick actions peel away from a plus button and merge back into one monochrome shape.
 - [Dissolve Upload Tile / Dissolve 粒子上传](https://leibox.pantoria.cn/ai/components/upload-tile.md): An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.
 - [Dissolve Thinking Orb / Dissolve 状态粒子球](https://leibox.pantoria.cn/ai/components/thinking-orb.md): A 180-dot orb morphs between six agent states and responds to the pointer.
 - [Distortion Waves / 折射波浪视图转场](https://leibox.pantoria.cn/ai/components/distortion-waves.md): A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.
 - [Border Beam / 流光描边](https://leibox.pantoria.cn/ai/components/border-beam.md): A ribbon of light runs along a card, button or input border.
 - [Thinking Orbs / 思考粒子球](https://leibox.pantoria.cn/ai/components/thinking-orbs.md): Particle orbs give nine AI processing states distinct motion.
-- [Liquid Gooey / 流体黏合](https://leibox.pantoria.cn/ai/components/liquid-gooey.md): Nearby shapes stretch, join and separate like liquid.
 - [Voice Glow / 语音浮光](https://leibox.pantoria.cn/ai/components/voice-glow.md): A voice-reactive glow rises from the edge of a surface.
 - [Bot Avatars / 智能体表情头像](https://leibox.pantoria.cn/ai/components/bot-avatars.md): Eighteen animated avatar shapes idle, work and fall asleep in Canvas 2D.
 - [Liquid Metal / 流体金属](https://leibox.pantoria.cn/ai/components/liquid-metal.md): Chrome reflections give controls and text a shifting metal finish.

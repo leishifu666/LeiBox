@@ -1,11 +1,13 @@
 import { librariesDevTranslations } from "../../data/libraries-dev.ts";
 import { thinkingOrbTranslations } from "../../data/thinking-orb.ts";
 import { uploadTileTranslations } from "../../data/upload-tile.ts";
+import { metaballMenuTranslations } from "../../data/metaball-menu.ts";
 
 export const interactionTranslations: Record<string, string> = {
   ...librariesDevTranslations,
   ...thinkingOrbTranslations,
   ...uploadTileTranslations,
+  ...metaballMenuTranslations,
   "Surface effect": "表面效果",
   "Status indicator": "状态指示",
   "Morph interaction": "形态变化",

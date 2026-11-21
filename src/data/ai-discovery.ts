@@ -12,6 +12,14 @@ export type Discovery = {
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
   ...librariesDevDiscovery,
+  "metaball-menu": {
+    category: "navigation",
+    useCases: ["Reveal three quick actions from a compact plus button.", "从一个加号按钮展开三个快捷操作。"],
+    searchTerms: ["metaball", "gooey menu", "radial menu", "SVG", "黏球", "黑白", "快捷菜单"],
+    visualTags: ["monochrome", "svg", "morph"],
+    interactions: ["click", "keyboard", "touch", "hover"],
+    caveat: "自动播放仅在可见、空闲且未开启减少动态效果时运行。",
+  },
   "upload-tile": {
     category: "media",
     useCases: ["Show attachment progress inline in a chat composer.", "在聊天输入框展示附件上传进度。"],

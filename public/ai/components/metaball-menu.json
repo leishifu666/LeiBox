@@ -1,0 +1,176 @@
+{
+  "slug": "metaball-menu",
+  "name": {
+    "en": "SVG Metaball Menu",
+    "zh": "黑白黏球菜单"
+  },
+  "description": {
+    "en": "Three quick actions peel away from a plus button and merge back into one monochrome shape.",
+    "zh": "三个快捷操作从加号圆钮中分离，收起时融为一体。"
+  },
+  "keywords": "metaball gooey svg menu radial quick actions gaussian alpha blur 菜单 黏球 融合 黑白 快捷操作 高斯模糊",
+  "docsPath": "/docs/animations/metaball-menu",
+  "detailPath": "/ai/components/metaball-menu.json",
+  "markdownPath": "/ai/components/metaball-menu.md",
+  "previewPath": "/assets/components/metaball-menu.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "Reveal three quick actions from a compact plus button.",
+      "从一个加号按钮展开三个快捷操作。"
+    ],
+    "searchTerms": [
+      "metaball",
+      "gooey menu",
+      "radial menu",
+      "SVG",
+      "黏球",
+      "黑白",
+      "快捷菜单"
+    ],
+    "visualTags": [
+      "monochrome",
+      "svg",
+      "morph"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch",
+      "hover"
+    ],
+    "caveat": "自动播放仅在可见、空闲且未开启减少动态效果时运行。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "A React SVG implementation of the supplied filter and motion specifications.",
+    "designReference": null,
+    "designAuthor": null,
+    "license": "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog."
+  },
+  "distribution": {
+    "canRedistributeSource": true,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
+      "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/metaball-menu/react.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "import { MetaballMenu } from \"./MetaballMenu\";\n\nexport default function App() {\n  return <MetaballMenu />;\n}",
+      "files": [
+        "MetaballMenu.tsx",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/metaball-menu/vue.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "vue",
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport MetaballMenu from \"./MetaballMenu.vue\";\n</script>\n<template><MetaballMenu /></template>",
+      "files": [
+        "MetaballMenu.vue",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/metaball-menu/svelte.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "svelte",
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "<script lang=\"ts\">\nimport MetaballMenu from \"./MetaballMenu.svelte\";\n</script>\n<MetaballMenu />",
+      "files": [
+        "MetaballMenu.svelte",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/metaball-menu/solid.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "solid-js",
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "import { MetaballMenu } from \"./MetaballMenu.solid\";\n\nexport default function App() {\n  return <MetaballMenu />;\n}",
+      "files": [
+        "MetaballMenu.solid.tsx",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/metaball-menu/preact.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "preact",
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "import { MetaballMenu } from \"./MetaballMenu.preact\";\n\nexport default function App() {\n  return <MetaballMenu />;\n}",
+      "files": [
+        "MetaballMenu.preact.tsx",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/metaball-menu/vanilla.json",
+      "component": "MetaballMenu",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "lucide-react"
+      ],
+      "usage": "import { mount } from \"./MetaballMenu\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "MetaballMenu.ts",
+        "MetaballMenuEngine.js",
+        "motion-runtime.ts",
+        "MetaballMenuEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Move the mouse into the menu to close it, or press the plus button to toggle it. The menu cycles while idle.",
+    "zh": "鼠标移入时收起，点击加号可切换。空闲时菜单自动演示。"
+  }
+}
