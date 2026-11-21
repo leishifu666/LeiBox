@@ -1,23 +1,18 @@
 "use client";
 
-import type { ReactNode } from "react";
 import Link from "next/link";
+import { InteractionPreview } from "@/components/common/interaction-preview";
 import { T } from "@/components/common/language-provider";
-import { COMPONENT_CATEGORY_LABELS, type ComponentCategory } from "@/data/component-categories";
+import { PreviewVideo } from "@/components/common/preview-video";
+import { COMPONENT_CATALOG } from "@/data/component-catalog";
+import { COMPONENT_CATEGORY_LABELS, componentCategories } from "@/data/component-categories";
 import { useComponentCategory } from "@/hooks/use-component-category";
+import { usesViewportMotionPlayback } from "@/lib/site-motion";
 
-export interface ComponentCatalogCard {
-  href: string;
-  name: string;
-  description: string;
-  primary: ComponentCategory;
-  secondary?: ComponentCategory;
-  preview: ReactNode;
-  layout?: string;
-  wide: boolean;
-}
+// Navigation already loads the catalogue. Render from that data without resending it in the route.
+const cards = COMPONENT_CATALOG.map(component => ({ ...component, ...componentCategories(component.href) }));
 
-export function ComponentCatalogView({ cards }: { cards: ComponentCatalogCard[] }) {
+export function ComponentCatalogView({ motionLayouts }: { motionLayouts: Record<string, string | undefined> }) {
   const [category] = useComponentCategory();
   const visible = category
     ? [
@@ -38,26 +33,40 @@ export function ComponentCatalogView({ cards }: { cards: ComponentCatalogCard[] 
         )}
       </div>
       <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {visible.map(({ href, name, description, primary, preview, layout, wide }) => (
-          <li key={href} data-preview-card data-component-card={href} data-component-doc-layout={layout} className="group relative flex h-full flex-col gap-4">
-            <div className={`relative flex shrink-0 items-center justify-center overflow-hidden ${wide ? "aspect-[16/10] bg-white" : "aspect-4/3 rounded-xl bg-[#f4f4f4]"}`}>
-              {preview}
-            </div>
-            <Link prefetch={false} href={href} className="block px-1 after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4">
-              {label ? (
-                <h3 className="text-[15px] font-medium tracking-tight"><T>{name}</T></h3>
-              ) : (
-                <h2 className="text-[15px] font-medium tracking-tight"><T>{name}</T></h2>
-              )}
-              <p className="mt-1 text-sm leading-6 text-pretty text-muted-foreground"><T>{description}</T></p>
-              {category && primary !== category && (
-                <span className="mt-1 block text-xs text-muted-foreground">
-                  <T>Main category</T> · <T>{COMPONENT_CATEGORY_LABELS.get(primary)}</T>
-                </span>
-              )}
-            </Link>
-          </li>
-        ))}
+        {visible.map(component => {
+          const { href, name, description, primary } = component;
+          const wide = component.kind === "interaction" && usesViewportMotionPlayback(component.slug);
+          return (
+            <li key={href} data-preview-card data-component-card={href} data-component-doc-layout={motionLayouts[href]} className="group relative flex h-full flex-col gap-4">
+              <div className={`relative flex shrink-0 items-center justify-center overflow-hidden ${wide ? "aspect-[16/10] bg-white" : "aspect-4/3 rounded-xl bg-[#f4f4f4]"}`}>
+                {component.kind === "interaction" ? (
+                  <InteractionPreview
+                    slug={component.slug}
+                    poster={component.preview}
+                    source={component.sourceFile ? `/motion/${component.slug}.html` : undefined}
+                    width={component.canvasWidth}
+                    height={component.canvasHeight}
+                  />
+                ) : (
+                  <PreviewVideo src={component.video} className="absolute inset-0 size-full object-cover" />
+                )}
+              </div>
+              <Link prefetch={false} href={href} className="block px-1 after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-4">
+                {label ? (
+                  <h3 className="text-[15px] font-medium tracking-tight"><T>{name}</T></h3>
+                ) : (
+                  <h2 className="text-[15px] font-medium tracking-tight"><T>{name}</T></h2>
+                )}
+                <p className="mt-1 text-sm leading-6 text-pretty text-muted-foreground"><T>{description}</T></p>
+                {category && primary !== category && (
+                  <span className="mt-1 block text-xs text-muted-foreground">
+                    <T>Main category</T> · <T>{COMPONENT_CATEGORY_LABELS.get(primary)}</T>
+                  </span>
+                )}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

@@ -17,6 +17,11 @@ test('client catalog excludes reconstruction prompts and their source data',asyn
  assert(!Object.keys(result.metafile.inputs).some(file=>/motion-prompts|gradient-ring-fields|folded-emoji-scroll\.mjs/.test(file)),'Client navigation must not import full reconstruction data');
 });
 
+test('the components route reuses the shared catalog without resending its cards', async () => {
+ const { size } = await fs.stat(path.join(root, 'out/components.txt'));
+ assert(size < 55_000, `Components route data exceeds 55 KB (${size} bytes)`);
+});
+
 test('detail HTML and route data stay below 450 KB without embedding all source versions',async()=>{
  for(const file of ['out/docs/animations/gradient-ring-cards.html','out/docs/animations/glass-folder.html','out/docs/animations/spider-music-player.html','out/docs/animations/gradient-cover-wall.html','out/docs/components/otp-verification.html']){
   const html=await read(file);

@@ -39,7 +39,6 @@ export function Hero() {
           </Link>
           <Link
             href="/components"
-            prefetch={false}
             className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-[15px] font-medium text-foreground transition-colors duration-150 hover:bg-muted active:scale-[0.98] sm:h-auto sm:border-0 sm:px-0 sm:hover:bg-transparent sm:hover:text-muted-foreground sm:active:scale-100"
           ><span data-language-label className="inline-block whitespace-nowrap"><T>
             Browse components
