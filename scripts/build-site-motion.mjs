@@ -77,8 +77,19 @@ export async function buildSiteMotion({ root = process.cwd(), slugs } = {}) {
         html = html.split(url).join(await images.get(key));
       }
     }
-    // Keep image data URLs origin-clean in opaque sandboxed frames. Font files
-    // use CORS; their original bytes and all associated license notices remain.
+    // Keep images origin-clean in opaque sandboxed frames, but put their bytes
+    // in the versioned script rather than inflating the initial HTML document.
+    const markupImages = [];
+    html = html.replace(/<img\b[^>]*>/gi, tag => {
+      const source = tag.match(/\bsrc\s*=\s*(["'])(data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+)\1/i);
+      if (!source) return tag;
+      const index = markupImages.push(source[2]) - 1;
+      return tag.replace(source[0], `data-motion-image="${index}"`);
+    });
+    if (markupImages.length) {
+      html = html.replace(/<\/body>/i, () => `<script>{const images=${JSON.stringify(markupImages)};document.querySelectorAll('img[data-motion-image]').forEach(image=>{image.src=images[Number(image.dataset.motionImage)];image.removeAttribute('data-motion-image');});}</script></body>`);
+    }
+    // Font files use CORS; original bytes and license notices remain intact.
     const styles = [...html.matchAll(/<style\b([^>]*)>([\s\S]*?)<\/style>/gi)];
     for (const match of styles) {
       const result = await transform(notice(match[2]), { loader: 'css', minify: true, legalComments: 'inline' });

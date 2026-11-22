@@ -16,7 +16,7 @@ test('website documents use immutable external scripts and byte-identical shared
     const font = Buffer.from('fixture font bytes must be retained');
     const fontUrl = 'data:font/woff2;base64,' + font.toString('base64');
     const image = await sharp({ create: { width: 400, height: 300, channels: 3, background: '#e8e3db' } }).png().toBuffer();
-    const source = `<html><head><style>@import url('https://fonts.googleapis.com/css2?family=Inter');@font-face{font-family:Demo;src:url(${fontUrl})}body{margin:0}</style></head><body><canvas></canvas><script>const picture="data:image/png;base64,${image.toString('base64')}";window.fixture=picture;/* ${'comment '.repeat(2000)} */</script></body></html>`;
+    const source = `<html><head><style>@import url('https://fonts.googleapis.com/css2?family=Inter');@font-face{font-family:Demo;src:url(${fontUrl})}body{margin:0}</style></head><body><canvas></canvas><img src="data:image/png;base64,${image.toString('base64')}" alt="Profile avatar"><script>const picture="data:image/png;base64,${image.toString('base64')}";window.fixture=picture;/* ${'comment '.repeat(2000)} */</script></body></html>`;
     await fs.writeFile(path.join(root, 'public/motion/example.html'), source);
     await fs.writeFile(path.join(root, 'public/fonts/misans.css'), 'body{font-family:MiSans}');
     await fs.writeFile(path.join(root, 'src/lib/ShareInvite/share-invite.css'), `/*! Font license fixture */\n@font-face{font-family:ShareInviteInter;src:url(${fontUrl})}`);
@@ -28,6 +28,9 @@ test('website documents use immutable external scripts and byte-identical shared
     assert(!document.includes('base64,'));
     assert.match(document, /<script[^>]+src=/);
     assert.match(document, /<link[^>]+stylesheet/);
+    assert.match(document, /<img data-motion-image="0" alt="Profile avatar">/);
+    const scripts = await Promise.all(item.resources.filter(url => url.endsWith('.js')).map(url => fs.readFile(path.join(root, 'public', url), 'utf8')));
+    assert(scripts.some(source => source.includes('data-motion-image') && source.includes('data:image/')), 'DOM images must be restored from the external script without losing their origin-clean data URLs');
     assert.equal(await fs.readFile(path.join(root, 'public/motion/example.html'), 'utf8'), source);
     const files = await fs.readdir(path.join(root, 'public/assets/motion'));
     const fontFile = files.find(name => name.endsWith('.woff2'));
