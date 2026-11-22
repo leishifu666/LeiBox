@@ -36,7 +36,8 @@ export function DocsMobileNav() {
         setOpen(false);
       }
       if (event.key !== "Tab") return;
-      const links = dialog.current?.querySelectorAll<HTMLElement>("button, a[href]");
+      const links = [...(dialog.current?.querySelectorAll<HTMLElement>("button, a[href]") ?? [])]
+        .filter(element => !element.closest("[inert]") && element.getClientRects().length > 0);
       if (!links?.length) return;
       const first = links[0];
       const last = links[links.length - 1];

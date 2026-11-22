@@ -1,0 +1,330 @@
+:root {
+  --bg: #f5f5f5;
+  --text: #1c1c1e;
+  /* Exact flat solid colors sampled from the reference video */
+  --online: #22d44a;
+  --focus: #f7c508;
+  --dnd: #f26f14;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+}
+
+/* Component anchor: dead-center in viewport, smoothly counter-shifts on expand */
+.avatar-cluster {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Circular illustrated avatar — scales up smoothly (1.20x) when picker opens */
+.avatar-wrap {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.09),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  background-color: #e6ebe3;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Morphing Liquid Glass status picker anchored on the top-right shoulder of the avatar */
+.picker-anchor {
+  position: absolute;
+  left: 114px;
+  top: -6px;
+  z-index: 20;
+  will-change: transform;
+}
+
+/* Floating morphing Liquid Glass tooltip pill above the expanded picker */
+.tooltip-pill {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  height: 44px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 0 0 1px rgba(0, 0, 0, 0.075),
+    0 6px 18px rgba(0, 0, 0, 0.055);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, width, opacity, filter;
+}
+
+/* Crisp directional Liquid Glass refractive rim on tooltip */
+.tooltip-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  padding: 1.25px;
+  background: linear-gradient(
+    90deg,
+    rgba(120, 126, 134, 0.42) 0%,
+    rgba(255, 255, 255, 0.92) 22%,
+    rgba(255, 255, 255, 0.92) 78%,
+    rgba(120, 126, 134, 0.42) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.tooltip-text-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 16.5px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  padding: 0 20px;
+  transition:
+    opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, filter, transform;
+}
+
+.tooltip-text-layer.is-entering {
+  opacity: 0;
+  filter: blur(4px);
+  transform: scale(0.92);
+}
+
+.tooltip-text-layer.is-visible {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1);
+}
+
+.tooltip-text-layer.is-exiting {
+  opacity: 0;
+  filter: blur(4px);
+  transform: scale(0.92);
+}
+
+/* Hidden measurer for exact tooltip width */
+.tooltip-measurer {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  font-size: 16.5px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  padding: 0 22px;
+}
+
+/* Outer Liquid Glass morphing pill — airy high-translucency glass + razor-sharp directional rim */
+.picker-shell {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.50);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.92),
+    inset 0 -1.5px 2px rgba(255, 255, 255, 0.55),
+    0 6px 20px rgba(0, 0, 0, 0.045);
+  overflow: hidden;
+  cursor: pointer;
+  will-change: width, height, transform;
+}
+
+/* Crisp crystalline Liquid Glass directional edge (darker refractive side arcs, bright top/bottom) */
+.picker-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  padding: 1.35px;
+  background: linear-gradient(
+    90deg,
+    rgba(110, 116, 124, 0.48) 0%,
+    rgba(235, 238, 242, 0.78) 18%,
+    rgba(255, 255, 255, 0.94) 50%,
+    rgba(235, 238, 242, 0.78) 82%,
+    rgba(110, 116, 124, 0.48) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.picker-shell.is-open {
+  cursor: default;
+}
+
+/* Hit trigger button covering collapsed circle for keyboard accessibility */
+.collapsed-trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+}
+
+.collapsed-trigger:focus-visible {
+  box-shadow: inset 0 0 0 2.5px rgba(28, 28, 30, 0.35);
+}
+
+.picker-shell.is-open .collapsed-trigger {
+  pointer-events: none;
+  display: none;
+}
+
+/* Pure flat solid colored status circles — ZERO static gloss, dome, or outer glow */
+.status-orb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+}
+
+.status-orb[data-status="online"] {
+  background-color: var(--online);
+}
+
+.status-orb[data-status="focus"] {
+  background-color: var(--focus);
+}
+
+.status-orb[data-status="dnd"] {
+  background-color: var(--dnd);
+}
+
+.status-orb:focus-visible {
+  box-shadow: 0 0 0 2.5px rgba(28, 28, 30, 0.35);
+}
+
+.status-orb svg {
+  position: relative;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  display: block;
+  color: #ffffff;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Soft wide diagonal light sweep clipped strictly inside the flat circle, ONLY triggered on selection */
+.orb-sheen {
+  position: absolute;
+  inset: -50%;
+  z-index: 3;
+  background: linear-gradient(
+    130deg,
+    rgba(255, 255, 255, 0) 24%,
+    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 255, 255, 0) 76%
+  );
+  transform: translate3d(-115%, -115%, 0);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.orb-sheen.is-sweeping {
+  animation: sheenSweep 640ms cubic-bezier(0.25, 0.85, 0.35, 1) forwards;
+}
+
+@keyframes sheenSweep {
+  0% {
+    opacity: 0;
+    transform: translate3d(-105%, -105%, 0);
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(105%, 105%, 0);
+  }
+}
+
+@media (max-width: 560px) {
+  .stage {
+    padding: 0 12px;
+  }
+}

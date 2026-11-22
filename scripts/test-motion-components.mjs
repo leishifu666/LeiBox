@@ -9,6 +9,7 @@ import { transformAsync } from '@babel/core';
 import solidPreset from 'babel-preset-solid';
 import typescriptPlugin from '@babel/plugin-transform-typescript';
 import { chromium } from 'playwright';
+import { expect } from 'playwright/test';
 import { verifyCrumpledPaper } from './test-crumpled-paper.mjs';
 import { verifyGlassTabMenu } from './test-glass-tab-menu.mjs';
 import { verifyStaggeredRadialMenu } from './test-staggered-radial-menu.mjs';
@@ -45,6 +46,8 @@ import { verifyCardSwap } from './test-card-swap.mjs';
 import { verifyStackedMetadata } from './test-stacked-metadata.mjs';
 import { verifyMultiCursorBuilder } from './test-multi-cursor-builder.mjs';
 import { verifyAlbumCoverTunnel } from './test-album-cover-tunnel.mjs';
+import { verifyStatusPicker } from './test-status-picker.mjs';
+import { verifyGenieMenu } from './test-genie-menu.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
 await fs.mkdir(OUT,{recursive:true});
@@ -101,7 +104,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 let activePage,activeItem;
 try{
  for(const item of selected){
-  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='multi-cursor-builder'||item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
+  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='genie-menu'||item.slug==='status-picker'||item.slug==='multi-cursor-builder'||item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   activePage=page;activeItem=item;page.setDefaultTimeout(10000);
   if(item.slug==='inline-text-morph')await page.addInitScript(()=>{
@@ -132,6 +135,68 @@ try{
   if(item.slug==='album-cover-tunnel')await verifyAlbumCoverTunnel(page,item,ROOT,OUT);
   if(item.slug==='distortion-waves')await verifyDistortionWaves(page,item,OUT);
   if(item.slug==='blister-dropdown')await verifyBlisterDropdown(page);
+  if (item.slug === 'status-picker') await verifyStatusPicker(page);
+  if (item.slug === 'genie-menu') await verifyGenieMenu(page, item, OUT);
+  if (item.slug === 'knoll-morph-menu') {
+   const toggle = page.locator('#menuToggle');
+   const shell = page.locator('#morphShell');
+   assert.equal(await page.getByRole('button', { name: 'Projects', exact: true }).count(), 0);
+   await toggle.press('Enter');
+   assert.equal(await shell.getAttribute('data-state'), 'opening-v');
+   await page.locator('#morphShell[data-state="open"]').waitFor();
+   await page.keyboard.press('Tab');
+   await page.locator('.preview-card[data-key="home"].is-text-on').waitFor();
+   await page.getByRole('button', { name: 'Projects', exact: true }).hover();
+   await page.locator('.preview-card[data-key="projects"].is-text-on').waitFor();
+   await page.keyboard.press('Escape');
+   assert.equal(await toggle.getAttribute('aria-expanded'), 'false');
+   assert(await toggle.evaluate(node => node.getRootNode().activeElement === node));
+   await page.locator('#morphShell[data-state="collapsed"]').waitFor();
+
+   await page.evaluate(() => window.__update({ reducedMotion: true }));
+   await toggle.press('Space');
+   assert.equal(await shell.getAttribute('data-state'), 'open');
+   await toggle.press('Escape');
+   assert.equal(await shell.getAttribute('data-state'), 'collapsed');
+   await page.evaluate(() => window.__update({ reducedMotion: false }));
+  }
+  if (item.slug === 'retro-computer-cord') {
+   const screen = page.locator('#mac-crt-screen');
+   const computer = page.locator('#mac-body');
+   const outlet = page.locator('#wall-outlet');
+   const cord = page.locator('#cord-connected');
+   const reconnect = page.locator('#reconnect-btn');
+   const initialCord = await cord.getAttribute('d');
+   assert(initialCord?.startsWith('M '));
+   assert.equal(await reconnect.getAttribute('tabindex'), '-1');
+   await computer.click();
+   assert.equal(await screen.getAttribute('data-tint'), 'green');
+   await computer.press('Enter');
+   assert.equal(await screen.getAttribute('data-tint'), 'amber');
+   await outlet.press('Space');
+   await page.locator('#mac-crt-screen.is-off').waitFor();
+   await outlet.click();
+   await page.locator('#mac-crt-screen:not(.is-off)').waitFor();
+
+   const { x, y, width, height } = await computer.boundingBox();
+   await page.mouse.move(x + width / 2, y + height / 2);
+   await page.mouse.down();
+   await page.mouse.move(x + width / 2 + 90, y + height / 2, { steps: 7 });
+   assert.notEqual(await cord.getAttribute('d'), initialCord, 'cord follows the moving computer');
+   await page.mouse.move(x + width / 2 + 200, y + height / 2, { steps: 10 });
+   await page.mouse.up();
+   await page.locator('#wall-outlet.is-unplugged').waitFor();
+   assert(await page.locator('#cord-mac-tail').isVisible());
+   assert.equal(await reconnect.getAttribute('tabindex'), '0');
+   await reconnect.press('Enter');
+   await page.locator('#mac-crt-screen:not(.is-off)').waitFor();
+   assert(await cord.isVisible());
+   assert.equal(await reconnect.getAttribute('tabindex'), '-1');
+   await page.getByRole('button', { name: 'Preview product design work' }).hover();
+   await page.locator('#preview-product.is-open').waitFor();
+   await page.mouse.move(0, 0);
+   await page.locator('#preview-product:not(.is-open)').waitFor();
+  }
   if(item.slug==='focus-switch'){
    const control=page.locator('#demo').getByRole('switch');
    await control.press('End');
@@ -362,6 +427,17 @@ try{
   }
   await page.evaluate(()=>window.__update({height:620}));await page.waitForFunction(()=>document.querySelector('#demo').querySelector('[data-motion-surface]').style.getPropertyValue('--motion-height')==='620px');
   await page.evaluate(()=>window.__mount('second'));await page.locator('#second [data-motion-surface]').waitFor();assert.equal(await page.locator('[data-motion-surface]').count(),2);
+  if (item.slug === 'status-picker') {
+   await page.evaluate(() => window.__update({ status:'dnd', open:true }));
+   await expect(page.locator('#demo #pickerShell')).toHaveAttribute('data-status','dnd');
+   await expect(page.locator('#second #pickerShell')).toHaveAttribute('data-status','online');
+   await expect(page.locator('#second #pickerShell')).toHaveAttribute('data-open','false');
+  }
+  if (item.slug === 'genie-menu') {
+   await page.evaluate(() => window.__update({ open:true, reducedMotion:true }));
+   await expect(page.locator('#demo #menuCard')).toHaveAttribute('data-state','open');
+   await expect(page.locator('#second #menuCard')).toHaveAttribute('data-state','closed');
+  }
   if(item.slug==='focus-switch'){
    assert.equal(await page.locator('#demo').getByRole('switch').getAttribute('aria-checked'),'true');
    assert.equal(await page.locator('#second').getByRole('switch').getAttribute('aria-checked'),'false','focus state starts independently per instance');

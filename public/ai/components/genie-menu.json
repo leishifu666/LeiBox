@@ -1,0 +1,166 @@
+{
+  "slug": "genie-menu",
+  "name": {
+    "en": "Liquid Pull-out Menu",
+    "zh": "吸附展开菜单"
+  },
+  "description": {
+    "en": "A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.",
+    "zh": "液滴从圆钮中拉出，翻展成带透视的菜单，收起时快速吸回圆钮。"
+  },
+  "keywords": "液滴 吸附 展开 菜单 翻转 透视 油画 玻璃 圆钮 genie liquid pull out menu gooey SVG 3D perspective imharshin",
+  "docsPath": "/docs/animations/genie-menu",
+  "detailPath": "/ai/components/genie-menu.json",
+  "markdownPath": "/ai/components/genie-menu.md",
+  "previewPath": "/assets/components/genie-menu.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "圆钮展开四项快捷菜单",
+      "A liquid button reveals a perspective action menu"
+    ],
+    "searchTerms": [
+      "菜单",
+      "液滴",
+      "吸附",
+      "展开",
+      "翻转",
+      "透视",
+      "快捷操作",
+      "genie",
+      "gooey",
+      "liquid menu",
+      "action menu",
+      "perspective"
+    ],
+    "visualTags": [
+      "liquid",
+      "svg",
+      "perspective",
+      "glass"
+    ],
+    "interactions": [
+      "click",
+      "hover",
+      "focus",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "菜单项只显示本地提示，可通过 onAction 接入应用。原背景画作的再分发许可尚未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML and artwork adapted to a shared instance-scoped DOM/SVG core with six native framework entries.",
+    "designReference": "https://x.com/imharshin/status/2118343243092070523/video/1",
+    "designAuthor": "@imharshin",
+    "license": "No separate license was supplied or verified for the original HTML and embedded painting. Preserve the reference attribution."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/genie-menu/react.json",
+      "component": "GenieMenu",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GenieMenu } from \"./GenieMenu\";\n\nexport default function App() {\n  return <GenieMenu />;\n}",
+      "files": [
+        "GenieMenu.tsx",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/genie-menu/vue.json",
+      "component": "GenieMenu",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GenieMenu from \"./GenieMenu.vue\";\n</script>\n<template><GenieMenu /></template>",
+      "files": [
+        "GenieMenu.vue",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/genie-menu/svelte.json",
+      "component": "GenieMenu",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GenieMenu from \"./GenieMenu.svelte\";\n</script>\n<GenieMenu />",
+      "files": [
+        "GenieMenu.svelte",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/genie-menu/solid.json",
+      "component": "GenieMenu",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GenieMenu } from \"./GenieMenu.solid\";\n\nexport default function App() {\n  return <GenieMenu />;\n}",
+      "files": [
+        "GenieMenu.solid.tsx",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/genie-menu/preact.json",
+      "component": "GenieMenu",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GenieMenu } from \"./GenieMenu.preact\";\n\nexport default function App() {\n  return <GenieMenu />;\n}",
+      "files": [
+        "GenieMenu.preact.tsx",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/genie-menu/vanilla.json",
+      "component": "GenieMenu",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GenieMenu\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GenieMenu.ts",
+        "GenieMenuEngine.js",
+        "motion-runtime.ts",
+        "GenieMenuEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click the round button to open the menu. Choose an action, click outside or press Escape to close. Switch to 0.3× to inspect the motion.",
+    "zh": "点击圆钮展开菜单。选择操作、点击外部或按 Esc 收起，可切换至 0.3× 慢速观察动效。"
+  }
+}

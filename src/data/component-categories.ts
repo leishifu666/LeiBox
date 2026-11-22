@@ -1,11 +1,11 @@
 export const COMPONENT_CATEGORIES = [
   {
     id: "controls", label: "Buttons and Inputs",
-    components: ["upload-tile", "focus-switch", "pixel-toggle", "tactile-push-button", "folded-emoji-scroll", "spider-music-player", "galaxy-effort-slider", "reasoning-effort-slider", "deep-agent-composer", "otp-verification"],
+    components: ["status-picker", "upload-tile", "focus-switch", "pixel-toggle", "tactile-push-button", "folded-emoji-scroll", "spider-music-player", "galaxy-effort-slider", "reasoning-effort-slider", "deep-agent-composer", "otp-verification"],
   },
   {
     id: "navigation", label: "Menus and Navigation",
-    components: ["metaball-menu", "blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
+    components: ["metaball-menu", "genie-menu", "knoll-morph-menu", "blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
   },
   {
     id: "galleries", label: "Galleries and Carousels",
@@ -25,7 +25,7 @@ export const COMPONENT_CATEGORIES = [
   },
   {
     id: "editing", label: "Dragging and Editing",
-    components: ["multi-cursor-builder", "bounding-box-resize", "elastic-panel-resize", "velocity-drag"],
+    components: ["retro-computer-cord", "multi-cursor-builder", "bounding-box-resize", "elastic-panel-resize", "velocity-drag"],
   },
   {
     id: "transitions", label: "Pages and Transitions",

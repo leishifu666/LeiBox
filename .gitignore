@@ -71,6 +71,9 @@ cloudflare-env.d.ts
 /public/assets/motion/
 /public/site-motion-manifest.json
 /public/motion/album-cover-tunnel-preview.html
+/public/motion/retro-computer-cord.html
+/public/motion/status-picker.html
+/public/motion/genie-menu.html
 /public/assets/optimized/album-cover-tunnel-textures-*.js
 /public/ai/packages/
 /public/.well-known/agent-skills/

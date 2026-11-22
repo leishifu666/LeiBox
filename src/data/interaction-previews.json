@@ -42,6 +42,58 @@
     "viewportPlayback": true
   },
   {
+    "slug": "genie-menu",
+    "href": "/docs/animations/genie-menu",
+    "name": "Liquid Pull-out Menu",
+    "category": "Menu interaction",
+    "description": "A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.",
+    "keywords": "液滴 吸附 展开 菜单 翻转 透视 油画 玻璃 圆钮 genie liquid pull out menu gooey SVG 3D perspective imharshin",
+    "preview": "/assets/components/genie-menu.png",
+    "sourceFile": "genie_style_menu.html",
+    "canvasWidth": 720,
+    "canvasHeight": 540,
+    "responsive": true
+  },
+  {
+    "slug": "status-picker",
+    "href": "/docs/animations/status-picker",
+    "name": "Avatar Status Picker",
+    "category": "Status interaction",
+    "description": "A glass status dot expands into three choices, with a springy tooltip that follows the active option.",
+    "keywords": "头像 状态 在线 专注 勿扰 玻璃 圆点 气泡 展开 选择器 弹簧 status picker avatar online focus do not disturb glass spring tooltip Nitish Khagwal",
+    "preview": "/assets/components/status-picker.png",
+    "sourceFile": "status_picker_interaction.html",
+    "canvasWidth": 720,
+    "canvasHeight": 540,
+    "responsive": true
+  },
+  {
+    "slug": "knoll-morph-menu",
+    "href": "/docs/animations/knoll-morph-menu",
+    "name": "Knoll Morph Menu",
+    "category": "Menu interaction",
+    "description": "A compact navigation button springs into a two-stage menu with photo previews for each destination.",
+    "keywords": "Knoll 形变 菜单 导航 双阶段 弹簧 侧栏 图片预览 悬停 渐现 morph menu navigation spring hover image preview",
+    "preview": "/assets/components/knoll-morph-menu.png",
+    "sourceFile": "knoll_morph_menu_component.html",
+    "canvasWidth": 850,
+    "canvasHeight": 540,
+    "responsive": true
+  },
+  {
+    "slug": "retro-computer-cord",
+    "href": "/docs/animations/retro-computer-cord",
+    "name": "Retro Computer Power Cord",
+    "category": "Drag interaction",
+    "description": "Drag a retro computer to unplug its springy power cord, or tap the screen to cycle through four CRT tints.",
+    "keywords": "复古 电脑 电源线 拔插 插座 拖拽 弹簧 显像管 换色 手写 悬浮预览 retro computer macintosh power cord unplug reconnect CRT tint drag portfolio",
+    "preview": "/assets/components/retro-computer-cord.png",
+    "sourceFile": "aqib_product_web_designer.html",
+    "canvasWidth": 720,
+    "canvasHeight": 540,
+    "responsive": true
+  },
+  {
     "slug": "distortion-waves",
     "href": "/docs/animations/distortion-waves",
     "name": "Distortion Waves",

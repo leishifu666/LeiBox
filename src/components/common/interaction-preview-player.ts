@@ -7,6 +7,85 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'genie-menu') {
+      const trigger=document.getElementById('triggerBtn');
+      const activate=()=>trigger.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));
+      const items=[...document.querySelectorAll('.menu-item-btn')];
+      activate();
+      // The hidden preview needs its first paint announced before the full
+      // animation, because browsers may throttle frames under an opaque poster.
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          const actions=[...items.map(item=>()=>item.dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}))),activate,activate];
+          let step=0;
+          later(()=>repeat(()=>actions[step++%actions.length](),800),650);
+      }));
+      return;
+    }
+    if (slug === 'status-picker') {
+      const online = document.querySelector('.status-orb[data-status="online"]');
+      const focus = document.querySelector('.status-orb[data-status="focus"]');
+      const dnd = document.querySelector('.status-orb[data-status="dnd"]');
+      const activate = node => node.dispatchEvent(new MouseEvent('click', {bubbles:true, detail:1}));
+      const hover = option => option.dispatchEvent(new PointerEvent('pointerenter', {pointerType:'mouse'}));
+      const actions = [
+        () => activate(document.getElementById('collapsedTrigger')), () => hover(focus), () => activate(focus),
+        () => activate(document.getElementById('collapsedTrigger')), () => hover(dnd), () => activate(dnd),
+        () => activate(document.getElementById('collapsedTrigger')), () => hover(online), () => activate(online),
+      ];
+      Promise.allSettled([...document.images].map(img => img.decode())).then(() => {
+        let step = 0;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          parent.postMessage({type:'leibox-preview-ready',slug}, '*');
+          later(() => repeat(() => actions[step++ % actions.length](), 1100), 600);
+        }));
+      });
+      return;
+    }
+    if (slug === 'knoll-morph-menu') {
+      const actions = [
+        () => click('#menuToggle'),
+        ...['studio', 'projects', 'journal'].map(key => () =>
+          document.querySelector('.nav-item-btn[data-key="' + key + '"]')
+            ?.dispatchEvent(new PointerEvent('pointerenter', { pointerType: 'mouse' }))),
+        () => click('#menuToggle'),
+      ];
+      let step = 0;
+      later(() => repeat(() => actions[step++ % actions.length](), 1100), 350);
+      return;
+    }
+    if (slug === 'retro-computer-cord') {
+      const screen = document.getElementById('mac-body');
+      const computer = screen.parentElement;
+      const unplug = () => {
+        const box = screen.getBoundingClientRect();
+        const x = box.left + box.width / 2, y = box.top + box.height / 2;
+        const send = (type, move) => computer.dispatchEvent(new PointerEvent(type, { pointerId: 1, clientX: x + move, clientY: y }));
+        send('pointerdown', 0);
+        const began = performance.now();
+        const drag = now => {
+          const progress = Math.min(1, (now - began) / 540);
+          const move = 200 * (1 - (1 - progress) ** 2);
+          send('pointermove', move);
+          if (progress < 1) requestAnimationFrame(drag);
+          else send('pointerup', move);
+        };
+        requestAnimationFrame(drag);
+      };
+      const ready = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+        parent.postMessage({ type: 'leibox-preview-ready', slug }, '*');
+        let step = 0;
+        later(() => repeat(() => {
+          const action = step++ % 4;
+          if (action === 0) screen.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+          if (action === 1) unplug();
+          if (action === 2) click('#reconnect-btn');
+          if (action === 3) click('#handwriting-btn');
+        }, 1250), 700);
+      }));
+      Promise.allSettled([...document.images].map(img => img.decode())).then(ready);
+      return;
+    }
     if (slug === 'multi-cursor-builder') {
       const ready=()=>{
         const root=document.querySelector('#multi-cursor-builder [data-motion-surface]')?.shadowRoot;
@@ -451,6 +530,8 @@ export function interactionPreviewCss(slug: string) {
     html, body { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; }
     html, body { background: #f4f4f4 !important; }
     ${slug === 'focus-switch' ? '.stage { background: #f4f4f4 !important; }' : ''}
+    ${slug === 'status-picker' ? '.stage { --bg:#f4f4f4; background:#f4f4f4!important; }' : ''}
+    ${slug === 'genie-menu' ? '.stage {background:#f4f4f4!important;background-image:none!important}.glass-frame{inset:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}.sheet{background:transparent;border-radius:0;box-shadow:none}.menu-anchor{top:calc(50% - 140px);right:calc(50% - 124px)}.speed-control,.action-toast{display:none}' : ''}
     ${slug === 'dot-matrix-trio' ? '.dm-scene { background:#f4f4f4!important; }' : ''}
     ${slug === 'glass-folder' || slug === 'cosmic-panels' ? '.glass-folder-demo,.cosmos-demo { min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'brand-line-cards' ? '.gallery { width: 94%; min-height: 100%; padding: 0; gap: 16px; }' : ''}
@@ -470,7 +551,7 @@ export function interactionPreviewCss(slug: string) {
 
 export function interactionPreviewDocument(source: string, slug: string) {
   const library = source.includes("data-leibox-library");
-  if (library || slug === "distortion-waves" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  if (library || slug === "retro-computer-cord" || slug === "distortion-waves" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = library ? "" : slug === "focus-switch" ? `
     customElements.whenDefined('focus-switch').then(() => {
       const focusSwitch = document.querySelector('focus-switch');

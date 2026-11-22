@@ -1,0 +1,166 @@
+{
+  "slug": "retro-computer-cord",
+  "name": {
+    "en": "Retro Computer Power Cord",
+    "zh": "复古电脑电源线"
+  },
+  "description": {
+    "en": "Drag a retro computer to unplug its springy power cord, or tap the screen to cycle through four CRT tints.",
+    "zh": "拖动复古电脑，电源线拉紧后脱开。轻点屏幕可轮换四种 CRT 色调。"
+  },
+  "keywords": "复古 电脑 电源线 拔插 插座 拖拽 弹簧 显像管 换色 手写 悬浮预览 retro computer macintosh power cord unplug reconnect CRT tint drag portfolio",
+  "docsPath": "/docs/animations/retro-computer-cord",
+  "detailPath": "/ai/components/retro-computer-cord.json",
+  "markdownPath": "/ai/components/retro-computer-cord.md",
+  "previewPath": "/assets/components/retro-computer-cord.png",
+  "discovery": {
+    "category": "hero",
+    "useCases": [
+      "作品集开场中的复古电脑交互",
+      "Portfolio hero with a draggable computer and springy cord"
+    ],
+    "searchTerms": [
+      "电脑",
+      "电源线",
+      "插座",
+      "拔插",
+      "拖拽",
+      "显像管",
+      "作品集",
+      "macintosh",
+      "power cord",
+      "unplug",
+      "CRT",
+      "portfolio"
+    ],
+    "visualTags": [
+      "retro",
+      "svg",
+      "elastic",
+      "pixel"
+    ],
+    "interactions": [
+      "drag",
+      "click",
+      "hover",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "示例保留原 HTML 的嵌入图像，原素材的再分发许可尚未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied standalone HTML and assets, adapted to an instance-scoped DOM and SVG lifecycle for six frameworks.",
+    "designReference": "https://x.com/MAQIB135/status/2121613818380046388/video/1",
+    "designAuthor": "Aqib · @MAQIB135",
+    "license": "No separate redistribution license was supplied or verified for the original HTML or embedded artwork. Preserve the original attribution and included font notices."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/retro-computer-cord/react.json",
+      "component": "RetroComputerCord",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { RetroComputerCord } from \"./RetroComputerCord\";\n\nexport default function App() {\n  return <RetroComputerCord />;\n}",
+      "files": [
+        "RetroComputerCord.tsx",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/retro-computer-cord/vue.json",
+      "component": "RetroComputerCord",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport RetroComputerCord from \"./RetroComputerCord.vue\";\n</script>\n<template><RetroComputerCord /></template>",
+      "files": [
+        "RetroComputerCord.vue",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/retro-computer-cord/svelte.json",
+      "component": "RetroComputerCord",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport RetroComputerCord from \"./RetroComputerCord.svelte\";\n</script>\n<RetroComputerCord />",
+      "files": [
+        "RetroComputerCord.svelte",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/retro-computer-cord/solid.json",
+      "component": "RetroComputerCord",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { RetroComputerCord } from \"./RetroComputerCord.solid\";\n\nexport default function App() {\n  return <RetroComputerCord />;\n}",
+      "files": [
+        "RetroComputerCord.solid.tsx",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/retro-computer-cord/preact.json",
+      "component": "RetroComputerCord",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { RetroComputerCord } from \"./RetroComputerCord.preact\";\n\nexport default function App() {\n  return <RetroComputerCord />;\n}",
+      "files": [
+        "RetroComputerCord.preact.tsx",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/retro-computer-cord/vanilla.json",
+      "component": "RetroComputerCord",
+      "dependencies": [],
+      "usage": "import { mount } from \"./RetroComputerCord\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "RetroComputerCord.ts",
+        "RetroComputerCordEngine.js",
+        "motion-runtime.ts",
+        "RetroComputerCordEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag the computer until the cord unplugs, then use Reconnect or the outlet. Tap the computer to cycle the screen tint.",
+    "zh": "拖动电脑拔掉电源线，点击 Reconnect 或插座重新接通。轻点电脑切换屏幕色调。"
+  }
+}

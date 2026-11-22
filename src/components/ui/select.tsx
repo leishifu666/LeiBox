@@ -4,6 +4,8 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { MENU_POPUP_STYLE } from "@/lib/menu-popup-motion";
+import styles from "./menu-popup.module.css";
 
 function Select<Value>(props: SelectPrimitive.Root.Props<Value>) {
   return <SelectPrimitive.Root {...props} />;
@@ -35,6 +37,7 @@ const SelectValue = SelectPrimitive.Value;
 
 function SelectContent({
   className,
+  style,
   children,
   align = "start",
   container,
@@ -53,9 +56,11 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            "max-h-[var(--available-height)] min-w-[var(--anchor-width)] origin-[var(--transform-origin)] overflow-y-auto rounded-xl border border-border/70 bg-background p-1 shadow-lg outline-none transition-[opacity,transform] duration-150 ease-out data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 motion-reduce:transition-none motion-reduce:data-ending-style:scale-100 motion-reduce:data-starting-style:scale-100",
+            styles.popup,
+            "max-h-[var(--available-height)] min-w-[var(--anchor-width)] origin-[var(--transform-origin)] overflow-y-auto rounded-xl border border-border/70 bg-background p-1 shadow-lg outline-none",
             className,
           )}
+          style={(state) => ({ ...MENU_POPUP_STYLE, ...(typeof style === "function" ? style(state) : style) })}
           {...props}
         >
           <SelectPrimitive.List>{children}</SelectPrimitive.List>

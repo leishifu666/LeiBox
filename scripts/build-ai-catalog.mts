@@ -100,7 +100,14 @@ for (const component of INTERACTION_COMPONENTS) {
       ...(component.original ? { original: true, author: "雷师傅" } : {}),
       license: component.referenceLicense ?? "Retain source notices and design-reference attribution; no blanket license is assigned by the catalog.",
     },
-    distribution: { canRedistributeSource: true, installFromThisSite: true, installProvider: "leibox", notice: { en: "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.", zh: "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。" } },
+    distribution: {
+      canRedistributeSource: component.canRedistributeSource ?? true,
+      installFromThisSite: true,
+      installProvider: "leibox",
+      notice: component.canRedistributeSource === false
+        ? { en: "Source packages preserve the supplied material. Redistribution rights have not been verified.", zh: "代码包保留提交的素材，再分发许可尚未核实。" }
+        : { en: "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.", zh: "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。" },
+    },
   };
   const packageRefs: Record<string, unknown> = {};
   const folder = path.join(OUT, "packages", component.slug);

@@ -1,0 +1,167 @@
+{
+  "slug": "status-picker",
+  "name": {
+    "en": "Avatar Status Picker",
+    "zh": "头像状态选择器"
+  },
+  "description": {
+    "en": "A glass status dot expands into three choices, with a springy tooltip that follows the active option.",
+    "zh": "玻璃状态圆点展开为三个选项，弹性提示气泡跟随当前选项移动。"
+  },
+  "keywords": "头像 状态 在线 专注 勿扰 玻璃 圆点 气泡 展开 选择器 弹簧 status picker avatar online focus do not disturb glass spring tooltip Nitish Khagwal",
+  "docsPath": "/docs/animations/status-picker",
+  "detailPath": "/ai/components/status-picker.json",
+  "markdownPath": "/ai/components/status-picker.md",
+  "previewPath": "/assets/components/status-picker.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "切换头像在线、专注和勿扰状态",
+      "Choose a profile presence status from an expanding glass pill"
+    ],
+    "searchTerms": [
+      "头像",
+      "状态",
+      "在线",
+      "专注",
+      "勿扰",
+      "选择器",
+      "玻璃",
+      "气泡",
+      "status picker",
+      "presence",
+      "online",
+      "avatar",
+      "do not disturb"
+    ],
+    "visualTags": [
+      "glass",
+      "spring",
+      "avatar",
+      "pill"
+    ],
+    "interactions": [
+      "click",
+      "hover",
+      "focus",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "只切换本地展示状态，可用 onStatusChange 接入实际应用。原头像素材的再分发许可尚未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML, artwork and spring simulation adapted to a shared DOM lifecycle with six native framework entries.",
+    "designReference": "https://x.com/nitishkmrk/status/2121129936497111406/video/1",
+    "designAuthor": "Nitish Khagwal",
+    "license": "No separate license was supplied or verified for the original HTML and embedded avatar. Preserve the source attribution and included font notices."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/status-picker/react.json",
+      "component": "StatusPicker",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { StatusPicker } from \"./StatusPicker\";\n\nexport default function App() {\n  return <StatusPicker />;\n}",
+      "files": [
+        "StatusPicker.tsx",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/status-picker/vue.json",
+      "component": "StatusPicker",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport StatusPicker from \"./StatusPicker.vue\";\n</script>\n<template><StatusPicker /></template>",
+      "files": [
+        "StatusPicker.vue",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/status-picker/svelte.json",
+      "component": "StatusPicker",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport StatusPicker from \"./StatusPicker.svelte\";\n</script>\n<StatusPicker />",
+      "files": [
+        "StatusPicker.svelte",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/status-picker/solid.json",
+      "component": "StatusPicker",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { StatusPicker } from \"./StatusPicker.solid\";\n\nexport default function App() {\n  return <StatusPicker />;\n}",
+      "files": [
+        "StatusPicker.solid.tsx",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/status-picker/preact.json",
+      "component": "StatusPicker",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { StatusPicker } from \"./StatusPicker.preact\";\n\nexport default function App() {\n  return <StatusPicker />;\n}",
+      "files": [
+        "StatusPicker.preact.tsx",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/status-picker/vanilla.json",
+      "component": "StatusPicker",
+      "dependencies": [],
+      "usage": "import { mount } from \"./StatusPicker\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "StatusPicker.ts",
+        "StatusPickerEngine.js",
+        "motion-runtime.ts",
+        "StatusPickerEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click the status dot, then select Online, Focus or Do Not Disturb. Use the arrow keys to move between options and Escape to close.",
+    "zh": "点击状态圆点，可选择在线、专注或勿扰。方向键切换选项，Esc 收起。"
+  }
+}

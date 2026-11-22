@@ -7,6 +7,19 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const args=process.argv.slice(2),dry=args.includes('--prepare-only');
+const catalogPath='/ai/catalog.json';
+const detailPattern=/^out\/docs\/animations\/([a-z0-9-]+)\.html$/;
+const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
+const publicGet=(base,route,fresh=false)=>{
+ const url=new URL(route,base);
+ if(fresh)url.searchParams.set('leibox-release-check',Date.now().toString());
+ return fetch(url,{headers:fresh?{'Cache-Control':'no-cache'}:undefined,signal:AbortSignal.timeout(20000)});
+};
+const publicHash=async (base,route,fresh=false)=>{
+ const response=await publicGet(base,route,fresh);
+ if(!response.ok)throw new Error(`Public verification failed: ${route} (${response.status})`);
+ return sha256(Buffer.from(await response.arrayBuffer()));
+};
 const run=(command,args,options={})=>new Promise((resolve,reject)=>{
  const child=spawn(command,args,{cwd:root,stdio:options.capture?['pipe','pipe','pipe']:'inherit',...options});let stdout='',stderr='';
  if(options.capture){child.stdout.on('data',data=>{stdout+=data;});child.stderr.on('data',data=>{stderr+=data;});}
@@ -19,10 +32,18 @@ try{
  const key=path.resolve(config.key.replace(/^~(?=[/\\])/,os.homedir())),known=path.resolve(config.knownHosts.replace(/^~(?=[/\\])/,os.homedir()));
  await fs.access(key);await fs.access(known);
  const ssh=['-T','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','IdentitiesOnly=yes','-o','ConnectTimeout=20',...(process.platform==='win32'?['-o','KexAlgorithms=curve25519-sha256']:[]),'-o',`UserKnownHostsFile="${known.replaceAll('\\','/')}"`,'-i',key,'-p',String(config.port),`${config.user}@${config.host}`];
+ const git=config.directGitHub?['-c','http.proxy=','-c','http.https://github.com.proxy=','-c','http.version=HTTP/1.1']:[];
  const commit=await run('git',['rev-parse','HEAD'],{capture:true});
  if(!/^[a-f0-9]{40}$/.test(commit))throw new Error('Invalid Git revision');
  const branch=await run('git',['branch','--show-current'],{capture:true});if(branch!=='main')throw new Error('Run deployment from main');
  const dirty=await run('git',['diff','--name-only','HEAD'],{capture:true});
+ const baseline=await run(config.ssh||'ssh',[...ssh,'manifest'],{capture:true});
+ const current=JSON.parse(baseline);
+ const currentCatalog=current.liveCatalogSha256??current.files.find(item=>item.path==='out'+catalogPath)?.sha256;
+ if(!currentCatalog||await publicHash(config.siteUrl,catalogPath,true)!==currentCatalog){
+  throw new Error('SSH target does not match the live LeiBox catalog. Check the production origin and .deploy/server.json before publishing.');
+ }
+ if(current.retirementProtocol!==1)throw new Error('The production deployment receiver must be upgraded to support route retirement.');
  console.log(`Deploying committed revision ${commit}. ${dirty?'Uncommitted edits are excluded.':''}`);
  const release=commit.slice(0,12)+'-'+Date.now().toString(16),folder=path.join(root,'outputs/deploy-server',release),source=path.join(folder,'source');await fs.mkdir(source,{recursive:true});
  await run('git',['archive','--format=tar',`--output=${path.join(folder,'source.tar')}`,commit]);
@@ -31,22 +52,34 @@ try{
  const npm=process.env.npm_execpath;if(!npm)throw new Error('Use npm run deploy:server');
  await run(process.execPath,[npm,'run','build'],{cwd:source,env:{...process.env,NEXT_PUBLIC_SITE_URL:config.siteUrl}});
  await run(process.execPath,['--test','scripts/performance-budget.test.mjs','scripts/leibox-skill.test.mjs','scripts/collection-cli.test.mjs'],{cwd:source});
- await run(config.python||'python',['-m','unittest','discover','-s','scripts/deploy','-p','test_*.py'],{cwd:source});
- const baseline=await run(config.ssh||'ssh',[...ssh,'manifest'],{capture:true});JSON.parse(baseline);await fs.writeFile(path.join(folder,'baseline.json'),baseline);
- // Packaging rules must come from the same committed snapshot as the site.
- await run(config.python||'python',[path.join(source,'scripts/deploy/package.py'),source,folder,commit,release]);
+ await run(config.python||'python',['-m','unittest','discover','-s','scripts/deploy','-p','test_*.py']);
+ await fs.writeFile(path.join(folder,'baseline.json'),baseline);
+ // Read site files from the commit and use the publisher paired with the installed receiver.
+ await run(config.python||'python',['scripts/deploy/package.py',source,folder,commit,release]);
+ const manifest=JSON.parse(await fs.readFile(path.join(folder,'release-manifest.json'),'utf8'));
  if(dry){console.log(`Prepared and checked: ${folder}`);process.exit(0);}
  if(await run('git',['rev-parse','HEAD'],{capture:true})!==commit)throw new Error('HEAD changed during the build; rerun deployment');
- await run('git',['push','origin','main']);
+ const remoteRef=await run('git',[...git,'ls-remote','origin','refs/heads/main'],{capture:true,signal:AbortSignal.timeout(20000)}).catch(()=>null);
+ if(remoteRef?.split(/\s+/)[0]===commit)console.log('GitHub main already contains this revision.');
+ else await run('git',[...git,'push','origin','main']);
  const output=await run(config.ssh||'ssh',[...ssh,'deploy'],{capture:true,input:createReadStream(path.join(folder,'release.tar.gz'))});
  const receipt=JSON.parse(output);if(receipt.commit!==commit)throw new Error('Server returned the wrong revision');
- if(receipt.archiveSha256!==createHash('sha256').update(await fs.readFile(path.join(folder,'release.tar.gz'))).digest('hex'))throw new Error('Server received a different archive');
+ if(receipt.archiveSha256!==sha256(await fs.readFile(path.join(folder,'release.tar.gz'))))throw new Error('Server received a different archive');
  await fs.writeFile(path.join(folder,'receipt.json'),JSON.stringify(receipt,null,2));
- const manifest=JSON.parse(await fs.readFile(path.join(folder,'release-manifest.json'),'utf8'));
- for(const route of config.verifyRoutes||['/components','/ai/catalog.json']){
-  const response=await fetch(new URL(route,config.siteUrl));if(!response.ok)throw new Error(`Public verification failed: ${route} (${response.status})`);
-  const data=Buffer.from(await response.arrayBuffer()),file=route.endsWith('.json')?'out'+route:'out'+route+'.html';
-  const expected=manifest.files.find(item=>item.path===file);if(expected&&createHash('sha256').update(data).digest('hex')!==expected.sha256)throw new Error(`Public payload differs: ${route}`);
+ const previousPaths=new Set(current.files.map(item=>item.path));
+ const newDetails=manifest.files
+  .filter(item=>!previousPaths.has(item.path)&&detailPattern.test(item.path))
+  .map(item=>'/docs/animations/'+item.path.match(detailPattern)[1]);
+ for(const route of new Set(['/components',catalogPath,...(config.verifyRoutes??[]),...newDetails])){
+  const file=route.endsWith('.json')?'out'+route:'out'+route+'.html';
+  const expected=manifest.files.find(item=>item.path===file);
+  if(!expected||await publicHash(config.siteUrl,route)!==expected.sha256)throw new Error(`Public payload differs: ${route}`);
  }
- console.log(JSON.stringify({...receipt,publicVerified:true,receipt:path.join(folder,'receipt.json')},null,2));
+ const retiredDetails=manifest.retired.filter(item=>detailPattern.test(item.path)).map(item=>'/docs/animations/'+item.path.match(detailPattern)[1]);
+ for(const route of retiredDetails){
+  const response=await publicGet(config.siteUrl,route);
+  if(![404,410].includes(response.status))throw new Error(`Retired page is still public: ${route} (${response.status})`);
+  await response.body?.cancel();
+ }
+ console.log(JSON.stringify({...receipt,publicVerified:true,retiredDetails,receipt:path.join(folder,'receipt.json')},null,2));
 }catch(error){console.error(error.message);process.exitCode=1;}

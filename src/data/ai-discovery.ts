@@ -12,6 +12,22 @@ export type Discovery = {
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
   ...librariesDevDiscovery,
+  "genie-menu": {
+    category: "navigation",
+    useCases: ["圆钮展开四项快捷菜单", "A liquid button reveals a perspective action menu"],
+    searchTerms: ["菜单", "液滴", "吸附", "展开", "翻转", "透视", "快捷操作", "genie", "gooey", "liquid menu", "action menu", "perspective"],
+    visualTags: ["liquid", "svg", "perspective", "glass"],
+    interactions: ["click", "hover", "focus", "keyboard", "touch"],
+    caveat: "菜单项只显示本地提示，可通过 onAction 接入应用。原背景画作的再分发许可尚未核实。",
+  },
+  "status-picker": {
+    category: "input",
+    useCases: ["切换头像在线、专注和勿扰状态", "Choose a profile presence status from an expanding glass pill"],
+    searchTerms: ["头像", "状态", "在线", "专注", "勿扰", "选择器", "玻璃", "气泡", "status picker", "presence", "online", "avatar", "do not disturb"],
+    visualTags: ["glass", "spring", "avatar", "pill"],
+    interactions: ["click", "hover", "focus", "keyboard", "touch"],
+    caveat: "只切换本地展示状态，可用 onStatusChange 接入实际应用。原头像素材的再分发许可尚未核实。",
+  },
   "metaball-menu": {
     category: "navigation",
     useCases: ["Reveal three quick actions from a compact plus button.", "从一个加号按钮展开三个快捷操作。"],
@@ -19,6 +35,14 @@ export const AI_DISCOVERY: Record<string, Discovery> = {
     visualTags: ["monochrome", "svg", "morph"],
     interactions: ["click", "keyboard", "touch", "hover"],
     caveat: "自动播放仅在可见、空闲且未开启减少动态效果时运行。",
+  },
+  "knoll-morph-menu": {
+    category: "navigation",
+    useCases: ["作品集和工作室网站的导航与目的地预览", "Portfolio navigation with destination image previews"],
+    searchTerms: ["Knoll", "形变菜单", "弹簧导航", "图片预览", "morph menu", "spring navigation", "destination preview"],
+    visualTags: ["morph", "spring", "photography", "dark"],
+    interactions: ["click", "hover", "focus", "keyboard", "touch"],
+    caveat: "示例保留所提供 HTML 的嵌入照片，素材许可尚未核实。菜单项点击后显示示例反馈，接入时可替换成实际导航。",
   },
   "upload-tile": {
     category: "media",
@@ -47,6 +71,14 @@ export const AI_DISCOVERY: Record<string, Discovery> = {
     searchTerms: ["专注", "勿扰", "像素房间", "玻璃透镜", "昼夜", "focus mode", "do not disturb", "pixel room", "glass lens"],
     visualTags: ["pixel", "glass", "day night"], interactions: ["click", "drag", "keyboard", "touch"],
     caveat: "开关驱动像素房间里的时间；用 onCheckedChange 将专注状态接入实际应用。",
+  },
+  "retro-computer-cord": {
+    category: "hero",
+    useCases: ["作品集开场中的复古电脑交互", "Portfolio hero with a draggable computer and springy cord"],
+    searchTerms: ["电脑", "电源线", "插座", "拔插", "拖拽", "显像管", "作品集", "macintosh", "power cord", "unplug", "CRT", "portfolio"],
+    visualTags: ["retro", "svg", "elastic", "pixel"],
+    interactions: ["drag", "click", "hover", "keyboard", "touch"],
+    caveat: "示例保留原 HTML 的嵌入图像，原素材的再分发许可尚未核实。",
   },
   "blister-dropdown": {
     category: "input", useCases: ["状态筛选菜单", "药板胶囊弹出选择", "tactile status filter dropdown"],

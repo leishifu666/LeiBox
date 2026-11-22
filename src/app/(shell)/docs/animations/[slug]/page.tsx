@@ -56,6 +56,16 @@ export default async function MotionPage({params}:Props){
         {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceSourceUrl?null:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "genie-menu" ? [
+          {name:"options.open",type:"boolean",defaultValue:"false",description:"Open or close the pull-out menu."},
+          {name:"options.speed",type:"1 | 0.3",defaultValue:"1",description:"Normal speed or 0.3× slow motion."},
+          {name:"options.onAction",type:"(action: string) => void",description:"Called with the selected menu action label."},
+        ] : []),
+        ...(slug === "status-picker" ? [
+          {name:"options.status",type:'"online" | "focus" | "dnd"',defaultValue:'"online"',description:"Current profile status. Updating it does not emit onStatusChange."},
+          {name:"options.open",type:"boolean",defaultValue:"false",description:"Expand or collapse the status choices."},
+          {name:"options.onStatusChange",type:'(status: "online" | "focus" | "dnd") => void',description:"Called when the user selects a different status."},
+        ] : []),
         ...(library ? [...library.api, ...libraryDemoApi].map(({ key, type, en }) => ({ name: `options.${key}`, type, description: en })) : []),
         ...componentApi.map(({ key, type, defaultValue, en }) => ({ name: slug === "upload-tile" ? key : `options.${key}`, type, defaultValue, description: en })),
         ...(slug === "distortion-waves" ? [

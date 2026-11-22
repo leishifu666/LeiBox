@@ -7,6 +7,9 @@ export const dynamic = "force-static";
 
 const ROUTES: { path: string; priority: number }[] = [
   { path: "/docs/components/orbit-not-found", priority: 0.8 },
+  { path: "/docs/animations/status-picker", priority: 0.8 },
+  { path: "/docs/animations/genie-menu", priority: 0.8 },
+  { path: "/docs/animations/knoll-morph-menu", priority: 0.8 },
   { path: "/docs/animations/distortion-waves", priority: 0.8 },
   ...librariesDevEntries.map(entry => ({ path: entry.href, priority: 0.8 })),
   { path: "/docs/animations/focus-switch", priority: 0.8 },

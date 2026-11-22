@@ -96,6 +96,10 @@
       "src": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp",
       "srcSet": "/assets/optimized/galaxy-effort-slider-83888a47b8cb-320.webp 320w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-640.webp 640w, /assets/optimized/galaxy-effort-slider-83888a47b8cb-945.webp 945w"
     },
+    "/assets/components/genie-menu.png": {
+      "src": "/assets/optimized/genie-menu-4d5b9956b39d-720.webp",
+      "srcSet": "/assets/optimized/genie-menu-4d5b9956b39d-320.webp 320w, /assets/optimized/genie-menu-4d5b9956b39d-640.webp 640w, /assets/optimized/genie-menu-4d5b9956b39d-720.webp 720w"
+    },
     "/assets/components/glass-folder.png": {
       "src": "/assets/optimized/glass-folder-a237d1600d80-1200.webp",
       "srcSet": "/assets/optimized/glass-folder-a237d1600d80-320.webp 320w, /assets/optimized/glass-folder-a237d1600d80-640.webp 640w, /assets/optimized/glass-folder-a237d1600d80-960.webp 960w, /assets/optimized/glass-folder-a237d1600d80-1200.webp 1200w"
@@ -131,6 +135,10 @@
     "/assets/components/inline-text-morph.png": {
       "src": "/assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp",
       "srcSet": "/assets/optimized/inline-text-morph-8daecfa57f4c-320.webp 320w, /assets/optimized/inline-text-morph-8daecfa57f4c-640.webp 640w, /assets/optimized/inline-text-morph-8daecfa57f4c-960.webp 960w, /assets/optimized/inline-text-morph-8daecfa57f4c-1044.webp 1044w"
+    },
+    "/assets/components/knoll-morph-menu.png": {
+      "src": "/assets/optimized/knoll-morph-menu-a90e352795bb-850.webp",
+      "srcSet": "/assets/optimized/knoll-morph-menu-a90e352795bb-320.webp 320w, /assets/optimized/knoll-morph-menu-a90e352795bb-640.webp 640w, /assets/optimized/knoll-morph-menu-a90e352795bb-850.webp 850w"
     },
     "/assets/components/liquid-metal.png": {
       "src": "/assets/optimized/liquid-metal-a612583e4ff3-820.webp",
@@ -212,6 +220,10 @@
       "src": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp",
       "srcSet": "/assets/optimized/reasoning-effort-slider-12cde9adac9e-320.webp 320w, /assets/optimized/reasoning-effort-slider-12cde9adac9e-520.webp 520w"
     },
+    "/assets/components/retro-computer-cord.png": {
+      "src": "/assets/optimized/retro-computer-cord-c3e1df4fd635-720.webp",
+      "srcSet": "/assets/optimized/retro-computer-cord-c3e1df4fd635-320.webp 320w, /assets/optimized/retro-computer-cord-c3e1df4fd635-640.webp 640w, /assets/optimized/retro-computer-cord-c3e1df4fd635-720.webp 720w"
+    },
     "/assets/components/sailing-toc.png": {
       "src": "/assets/optimized/sailing-toc-2d86ebba867c-1200.webp",
       "srcSet": "/assets/optimized/sailing-toc-2d86ebba867c-320.webp 320w, /assets/optimized/sailing-toc-2d86ebba867c-640.webp 640w, /assets/optimized/sailing-toc-2d86ebba867c-960.webp 960w, /assets/optimized/sailing-toc-2d86ebba867c-1200.webp 1200w"
@@ -243,6 +255,10 @@
     "/assets/components/staggered-radial-menu.png": {
       "src": "/assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp",
       "srcSet": "/assets/optimized/staggered-radial-menu-ef5939c3f398-320.webp 320w, /assets/optimized/staggered-radial-menu-ef5939c3f398-640.webp 640w, /assets/optimized/staggered-radial-menu-ef5939c3f398-960.webp 960w, /assets/optimized/staggered-radial-menu-ef5939c3f398-1200.webp 1200w"
+    },
+    "/assets/components/status-picker.png": {
+      "src": "/assets/optimized/status-picker-506f552f152e-720.webp",
+      "srcSet": "/assets/optimized/status-picker-506f552f152e-320.webp 320w, /assets/optimized/status-picker-506f552f152e-640.webp 640w, /assets/optimized/status-picker-506f552f152e-720.webp 720w"
     },
     "/assets/components/tactile-push-button.png": {
       "src": "/assets/optimized/tactile-push-button-08146a8ffae6-720.webp",

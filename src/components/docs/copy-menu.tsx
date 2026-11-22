@@ -10,6 +10,7 @@ import { loadDocAsset } from "@/lib/load-doc-asset";
 import { copyText as writeCopyText } from "@/lib/copy-text";
 import { cn } from "@/lib/utils";
 import { siteUrl } from "@/lib/site-url";
+import { MENU_POPUP_MOTION } from "@/lib/menu-popup-motion";
 export interface StandaloneCopyContent { href: string; prompt?: string; promptUrl?: string; code: string; codeLabel: string; markdown: string; bundleUrl?: string }
 interface CopyMenuProps { title: string; standalone: StandaloneCopyContent }
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
@@ -128,20 +129,11 @@ export function CopyMenu({ title, standalone }: CopyMenuProps) {
             aria-label={t("Copy for AI")}
             initial={
               shouldReduceMotion
-                ? { opacity: 0 }
-                : { opacity: 0, y: -4, scale: 0.98 }
+                ? false
+                : MENU_POPUP_MOTION.closed
             }
-            animate={
-              shouldReduceMotion
-                ? { opacity: 1 }
-                : { opacity: 1, y: 0, scale: 1 }
-            }
-            exit={
-              shouldReduceMotion
-                ? { opacity: 0 }
-                : { opacity: 0, y: -4, scale: 0.98 }
-            }
-            transition={{ duration: 0.15, ease: "easeOut" }}
+            animate={{ ...MENU_POPUP_MOTION.open, transition: shouldReduceMotion ? { duration: 0 } : MENU_POPUP_MOTION.enter }}
+            exit={{ ...MENU_POPUP_MOTION.closed, transition: shouldReduceMotion ? { duration: 0 } : MENU_POPUP_MOTION.exit }}
             className="absolute right-0 top-full z-40 mt-2 w-56 origin-top-right rounded-xl border border-border/70 bg-background p-1 shadow-lg"
           >
             {items.map((item) => {

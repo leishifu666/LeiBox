@@ -1,0 +1,161 @@
+{
+  "slug": "knoll-morph-menu",
+  "name": {
+    "en": "Knoll Morph Menu",
+    "zh": "Knoll 形变菜单"
+  },
+  "description": {
+    "en": "A compact navigation button springs into a two-stage menu with photo previews for each destination.",
+    "zh": "紧凑的导航按钮通过两段弹簧动效展开菜单，每个导航项都带图片预览。"
+  },
+  "keywords": "Knoll 形变 菜单 导航 双阶段 弹簧 侧栏 图片预览 悬停 渐现 morph menu navigation spring hover image preview",
+  "docsPath": "/docs/animations/knoll-morph-menu",
+  "detailPath": "/ai/components/knoll-morph-menu.json",
+  "markdownPath": "/ai/components/knoll-morph-menu.md",
+  "previewPath": "/assets/components/knoll-morph-menu.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "作品集和工作室网站的导航与目的地预览",
+      "Portfolio navigation with destination image previews"
+    ],
+    "searchTerms": [
+      "Knoll",
+      "形变菜单",
+      "弹簧导航",
+      "图片预览",
+      "morph menu",
+      "spring navigation",
+      "destination preview"
+    ],
+    "visualTags": [
+      "morph",
+      "spring",
+      "photography",
+      "dark"
+    ],
+    "interactions": [
+      "click",
+      "hover",
+      "focus",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "示例保留所提供 HTML 的嵌入照片，素材许可尚未核实。菜单项点击后显示示例反馈，接入时可替换成实际导航。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML adapted to a responsive, instance-scoped DOM with keyboard and touch support. The same menu runs in the standalone demo and six framework adapters.",
+    "designReference": "https://x.com/dtawuxui/status/2121543668213658097/video/1",
+    "designAuthor": "@dtawuxui",
+    "license": "No separate license was supplied or verified for the original HTML and embedded photos."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/knoll-morph-menu/react.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { KnollMorphMenu } from \"./KnollMorphMenu\";\n\nexport default function App() {\n  return <KnollMorphMenu />;\n}",
+      "files": [
+        "KnollMorphMenu.tsx",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/knoll-morph-menu/vue.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport KnollMorphMenu from \"./KnollMorphMenu.vue\";\n</script>\n<template><KnollMorphMenu /></template>",
+      "files": [
+        "KnollMorphMenu.vue",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/knoll-morph-menu/svelte.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport KnollMorphMenu from \"./KnollMorphMenu.svelte\";\n</script>\n<KnollMorphMenu />",
+      "files": [
+        "KnollMorphMenu.svelte",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/knoll-morph-menu/solid.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { KnollMorphMenu } from \"./KnollMorphMenu.solid\";\n\nexport default function App() {\n  return <KnollMorphMenu />;\n}",
+      "files": [
+        "KnollMorphMenu.solid.tsx",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/knoll-morph-menu/preact.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { KnollMorphMenu } from \"./KnollMorphMenu.preact\";\n\nexport default function App() {\n  return <KnollMorphMenu />;\n}",
+      "files": [
+        "KnollMorphMenu.preact.tsx",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/knoll-morph-menu/vanilla.json",
+      "component": "KnollMorphMenu",
+      "dependencies": [],
+      "usage": "import { mount } from \"./KnollMorphMenu\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "KnollMorphMenu.ts",
+        "KnollMorphMenuEngine.js",
+        "motion-runtime.ts",
+        "KnollMorphMenuEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Open the menu with +. Hover or use Tab to preview a destination. On touch, tap once to preview and again to select. Press Esc to close.",
+    "zh": "点击加号展开菜单。悬停或用 Tab 聚焦导航项可查看预览，触屏轻点一次预览、再点一次选择。按 Esc 收起。"
+  }
+}

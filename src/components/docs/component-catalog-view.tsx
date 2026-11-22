@@ -32,13 +32,13 @@ export function ComponentCatalogView({ motionLayouts }: { motionLayouts: Record<
           </h2>
         )}
       </div>
-      <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
         {visible.map(component => {
           const { href, name, description, primary } = component;
-          const wide = component.kind === "interaction" && usesViewportMotionPlayback(component.slug);
+          const whitePreview = component.kind === "interaction" && usesViewportMotionPlayback(component.slug);
           return (
             <li key={href} data-preview-card data-component-card={href} data-component-doc-layout={motionLayouts[href]} className="group relative flex h-full flex-col gap-4">
-              <div className={`relative flex shrink-0 items-center justify-center overflow-hidden ${wide ? "aspect-[16/10] bg-white" : "aspect-4/3 rounded-xl bg-[#f4f4f4]"}`}>
+              <div className={`relative flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-xl ${whitePreview ? "bg-white" : "bg-[#f4f4f4]"}`}>
                 {component.kind === "interaction" ? (
                   <InteractionPreview
                     slug={component.slug}

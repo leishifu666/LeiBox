@@ -34,6 +34,35 @@ class PackageTests(unittest.TestCase):
             with tarfile.open(target / 'release.tar.gz') as archive:
                 self.assertEqual(set(archive.getnames()), set(kept) | {'release-manifest.json'})
 
+    def test_retirement_removes_only_stable_endpoints_of_deleted_components(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = pathlib.Path(directory).resolve()
+            (root / 'out/docs/animations').mkdir(parents=True)
+            (root / 'out/docs/animations/keep.html').write_text('active')
+            retired = [
+                'out/docs/animations/remove.html',
+                'out/docs/animations/remove.txt',
+                'out/docs/animations/remove/__next._full.txt',
+                'out/motion/remove.html',
+                'out/ai/components/remove.json',
+            ]
+            unchanged = [
+                'out/docs/animations/keep.html',
+                'out/docs/installation.html',
+                'out/assets/motion/remove-' + 'a' * 24 + '.html',
+                'out/assets/optimized/remove-' + 'b' * 12 + '-320.webp',
+            ]
+            (root / 'baseline.json').write_text(json.dumps({
+                'files': [{'path': name, 'sha256': '0' * 64} for name in retired + unchanged],
+            }))
+            subprocess.run([sys.executable, str(pathlib.Path(__file__).with_name('package.py')),
+                            str(root), str(root), 'a' * 40, 'abcdef12-1234'],
+                           check=True, capture_output=True)
+            manifest = json.loads((root / 'release-manifest.json').read_text())
+            self.assertEqual({item['path'] for item in manifest['retired']}, set(retired))
+            with tarfile.open(root / 'release.tar.gz') as archive:
+                self.assertTrue(set(retired).isdisjoint(archive.getnames()))
+
 
 if __name__ == '__main__':
     unittest.main()

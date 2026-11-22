@@ -11,6 +11,8 @@ import {verifyGalaxyEffortSliderDoc} from './test-galaxy-effort-slider.mjs';
 import {verifySailingBoat} from './test-sailing-boat.mjs';
 import {verifyHammerheadChartDoc} from './test-hammerhead-chart.mjs';
 import {verifyDotMatrixTrioDoc} from './test-dot-matrix-trio.mjs';
+import {verifyStatusPickerPreviews} from './test-status-picker.mjs';
+import {verifyGenieMenuPreviews} from './test-genie-menu.mjs';
 
 const ROOT=process.cwd(),base=process.env.BASE_URL||'http://127.0.0.1:3000',out=path.join(ROOT,'outputs/motion-six-frameworks/site');
 await fs.mkdir(out,{recursive:true});
@@ -131,6 +133,8 @@ try{
  await page.mouse.move(300,20);await expect(page.locator('[data-preview-state="playing"]')).toHaveCount(0);
  if(slugs.includes('ink-spread-carousel'))await verifyInkSpreadPreviews(page,base,out);
  if(slugs.includes('ascii-sharks'))await verifyAsciiSharksPreviews(page,base,out);
+ if(slugs.includes('status-picker'))await verifyStatusPickerPreviews(page,base);
+ if(slugs.includes('genie-menu'))await verifyGenieMenuPreviews(page,base);
  assert.deepEqual(errors,[]);
  await fs.writeFile(path.join(out,filters.length?'partial-results.json':'results.json'),JSON.stringify({checks,previewHover:true,pageErrors:errors},null,2));
 }catch(error){await page.screenshot({path:path.join(out,'failure.png')});await fs.writeFile(path.join(out,'failure.json'),JSON.stringify({slug:active,error:String(error),pageErrors:errors},null,2));throw error;}finally{await browser.close();}

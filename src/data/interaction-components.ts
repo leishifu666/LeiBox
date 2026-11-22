@@ -35,6 +35,10 @@ import { STAGGERED_RADIAL_MENU_PROMPT } from "./staggered-radial-menu.mjs";
 import { SOFT_ACTION_WHEEL_PROMPT } from "./soft-action-wheel.mjs";
 import { ELASTIC_PANEL_RESIZE_PROMPT } from "./elastic-panel-resize.mjs";
 import { GRADIENT_COVER_WALL_PROMPT } from "./gradient-cover-wall.mjs";
+import { RETRO_COMPUTER_CORD_PROMPT } from "./retro-computer-cord.mjs";
+import { KNOLL_MORPH_MENU_PROMPT } from "./knoll-morph-menu.mjs";
+import { STATUS_PICKER_PROMPT } from "./status-picker.mjs";
+import { GENIE_MENU_PROMPT } from "./genie-menu.mjs";
 
 import { GLASS_FOLDER_PROMPT, COSMIC_PANELS_PROMPT } from "./folder-cosmos.mjs";
 import { THINKING_PARTICLES_PROMPT } from "./thinking-particles.mjs";
@@ -65,6 +69,7 @@ export interface MotionEntry {
   referenceAuthorUrl?: string;
   referenceNotes?: string;
   referenceLicense?: string;
+  canRedistributeSource?: boolean;
   codeSource?: string;
   original?: boolean;
   originalHtml?: string;
@@ -79,6 +84,65 @@ export const INTERACTION_COMPONENTS: MotionEntry[] = [
   METABALL_MENU_ENTRY,
   UPLOAD_TILE_ENTRY,
   THINKING_ORB_ENTRY,
+  {
+    slug: "genie-menu", href: "/docs/animations/genie-menu", name: "Liquid Pull-out Menu", category: "Menu interaction",
+    description: "A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.",
+    keywords: "液滴 吸附 展开 菜单 翻转 透视 油画 玻璃 圆钮 genie liquid pull out menu gooey SVG 3D perspective imharshin",
+    preview: "/assets/components/genie-menu.png", sourceFile: "genie_style_menu.html", originalHtml: "/motion/genie-menu-original.html",
+    canvasWidth: 720, canvasHeight: 540, responsive: true,
+    instructions: "Click the round button to open the menu. Choose an action, click outside or press Escape to close. Switch to 0.3× to inspect the motion.",
+    prompt: GENIE_MENU_PROMPT,
+    referenceUrl: "https://x.com/imharshin/status/2118343243092070523/video/1",
+    referenceAuthor: "@imharshin", referenceAuthorUrl: "https://x.com/imharshin",
+    referenceNotes: "The supplied HTML provides the embedded painting, SVG liquid geometry and CSS 3D choreography. The original video link was supplied separately by the collector. The adaptation adds native framework lifecycles, keyboard navigation and reduced-motion support.",
+    referenceLicense: "No separate license was supplied or verified for the original HTML and embedded painting. Preserve the reference attribution.",
+    canRedistributeSource: false,
+    codeSource: "The supplied HTML and artwork adapted to a shared instance-scoped DOM/SVG core with six native framework entries.",
+  },
+  {
+    slug: "status-picker", href: "/docs/animations/status-picker", name: "Avatar Status Picker", category: "Status interaction",
+    description: "A glass status dot expands into three choices, with a springy tooltip that follows the active option.",
+    keywords: "头像 状态 在线 专注 勿扰 玻璃 圆点 气泡 展开 选择器 弹簧 status picker avatar online focus do not disturb glass spring tooltip Nitish Khagwal",
+    preview: "/assets/components/status-picker.png", sourceFile: "status_picker_interaction.html", originalHtml: "/motion/status-picker-original.html",
+    canvasWidth: 720, canvasHeight: 540, responsive: true,
+    instructions: "Click the status dot, then select Online, Focus or Do Not Disturb. Use the arrow keys to move between options and Escape to close.",
+    prompt: STATUS_PICKER_PROMPT,
+    referenceUrl: "https://x.com/nitishkmrk/status/2121129936497111406/video/1",
+    referenceAuthor: "Nitish Khagwal", referenceAuthorUrl: "https://x.com/nitishkmrk",
+    referenceNotes: "The supplied HTML provides the artwork and spring-driven geometry. The collector supplied the original video reference separately. The adaptation adds instance isolation, arrow-key navigation, focus restoration and an update API.",
+    referenceLicense: "No separate license was supplied or verified for the original HTML and embedded avatar. Preserve the source attribution and included font notices.",
+    canRedistributeSource: false,
+    codeSource: "The supplied HTML, artwork and spring simulation adapted to a shared DOM lifecycle with six native framework entries.",
+  },
+  {
+    slug: "knoll-morph-menu", href: "/docs/animations/knoll-morph-menu", name: "Knoll Morph Menu", category: "Menu interaction",
+    description: "A compact navigation button springs into a two-stage menu with photo previews for each destination.",
+    keywords: "Knoll 形变 菜单 导航 双阶段 弹簧 侧栏 图片预览 悬停 渐现 morph menu navigation spring hover image preview",
+    preview: "/assets/components/knoll-morph-menu.png", sourceFile: "knoll_morph_menu_component.html",
+    canvasWidth: 850, canvasHeight: 540, responsive: true, recreatedHtml: true,
+    instructions: "Open the menu with +. Hover or use Tab to preview a destination. On touch, tap once to preview and again to select. Press Esc to close.",
+    prompt: KNOLL_MORPH_MENU_PROMPT,
+    referenceUrl: "https://x.com/dtawuxui/status/2121543668213658097/video/1", referenceAuthor: "@dtawuxui",
+    referenceNotes: "The X video is the design reference supplied by the collector. The standalone demo adapts the supplied HTML, including its spring choreography and embedded photos.",
+    referenceLicense: "No separate license was supplied or verified for the original HTML and embedded photos.",
+    canRedistributeSource: false,
+    codeSource: "The supplied HTML adapted to a responsive, instance-scoped DOM with keyboard and touch support. The same menu runs in the standalone demo and six framework adapters.",
+  },
+  {
+    slug: "retro-computer-cord", href: "/docs/animations/retro-computer-cord", name: "Retro Computer Power Cord", category: "Drag interaction",
+    description: "Drag a retro computer to unplug its springy power cord, or tap the screen to cycle through four CRT tints.",
+    keywords: "复古 电脑 电源线 拔插 插座 拖拽 弹簧 显像管 换色 手写 悬浮预览 retro computer macintosh power cord unplug reconnect CRT tint drag portfolio",
+    preview: "/assets/components/retro-computer-cord.png", sourceFile: "aqib_product_web_designer.html", originalHtml: "/motion/retro-computer-cord-original.html",
+    canvasWidth: 720, canvasHeight: 540, responsive: true,
+    instructions: "Drag the computer until the cord unplugs, then use Reconnect or the outlet. Tap the computer to cycle the screen tint.",
+    prompt: RETRO_COMPUTER_CORD_PROMPT,
+    referenceUrl: "https://x.com/MAQIB135/status/2121613818380046388/video/1",
+    referenceAuthor: "Aqib · @MAQIB135", referenceAuthorUrl: "https://x.com/MAQIB135",
+    referenceNotes: "The design reference is Aqib's video link supplied by the collector. The full portfolio and its artwork are preserved from the supplied HTML. The live demo also retains the handwriting and floating project previews.",
+    referenceLicense: "No separate redistribution license was supplied or verified for the original HTML or embedded artwork. Preserve the original attribution and included font notices.",
+    canRedistributeSource: false,
+    codeSource: "The supplied standalone HTML and assets, adapted to an instance-scoped DOM and SVG lifecycle for six frameworks.",
+  },
   {
     slug: "distortion-waves", href: "/docs/animations/distortion-waves", name: "Distortion Waves", category: "View transition",
     description: "A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.",

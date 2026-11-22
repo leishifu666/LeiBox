@@ -6,9 +6,11 @@
 npm run deploy:server
 ```
 
-脚本发布 **main 当前已提交的 Git 版本**，未提交的修改不上传。它导出该提交到 `outputs/deploy-server/` 下的构建目录，复用本机依赖，构建并运行性能、Skill 和下载检查，再推送 GitHub、打包增量、通过 SSH 发布，最后核对公网页面和 AI 目录摘要。它不创建 worktree、不自动提交文件。
+脚本发布 **main 当前已提交的 Git 版本**。开始时对比 SSH 发布目标和公网当前 AI 目录的 SHA-256，内容不一致时会在推送和上传前停止。通过后，脚本导出该提交到 `outputs/deploy-server/`，构建并运行性能、Skill、下载与发布回归检查，再打包增量、推送 GitHub 及通过 SSH 上传。发布后核对组件列表、AI 目录和新增详情页的内容摘要，再检查下线详情页是否返回 404 或 410。
 
-发布端先校验完整清单、路径及 SHA-256，再备份旧文件、优先更新静态资源，最后更新 HTML。服务端写入或校验失败时恢复本次已经替换的文件；`.env.local` 不在发布范围。公网检查失败时保留服务端回执并报错，供核对，不因临时网络错误自动更换线上版本。回执保存在本机该发布目录的 `receipt.json`，服务器备份位于 `/opt/Project/leibox/backups/<release>`。旧哈希资源保留以兼容仍打开的页面。
+发布端先校验完整清单、路径及 SHA-256，再备份旧文件、优先更新静态资源，最后更新 HTML。服务端写入或校验失败时恢复本次已经替换的文件；`.env.local` 不在发布范围。公网检查失败时保留服务端回执并报错，供核对，不因临时网络错误自动更换线上版本。回执保存在本机该发布目录的 `receipt.json`，服务器备份位于项目目录下的 `backups/<release>`。旧哈希资源保留以兼容仍打开的页面。
+
+从组件目录下线的详情页、导航数据、独立演示和专用 AI 下载文件随发布移到该次备份。发布前逐个核对上一版的摘要，发现线上文件被单独修改时停止。首次接管已有站点且发布清单尚未建立时，通过源站当前 AI 目录识别已有组件。
 
 `public/motion-frameworks` 保留在本地用于生成文档与安装包，不再放入服务器发布清单；线上源码复制使用 `doc-assets`，AI/CLI 安装使用 `ai/packages`。预览方案页也不进入发布包。
 
@@ -26,7 +28,7 @@ npm run deploy:server
 
 清理前校验当前版本全部文件的 SHA-256；校验失败就停止。发布与清理使用同一个 `.releases/publish.lock`，避免清理到正在上传的资源。新发布备份同时记录 `previous-manifest.json`。旧备份必须用保存文件的摘要核实前一版清单，核实失败时保留资源与备份并报告原因。
 
-管理员将本目录的 `receiver.py`、`cleanup.py` 安装为服务器 `scripts/leibox-deploy-receiver.py`、`scripts/leibox-release-cleanup.py`；现有发布密钥不能更新这些管理程序。将 `leibox-cleanup.service` 和 `leibox-cleanup.timer` 安装到 `/etc/systemd/system/`，检查后执行 `systemctl enable --now leibox-cleanup.timer`，每天自动清理一次。此过程不扩大 SSH 密钥的命令权限。
+管理员将本目录的 `receiver.py`、`retirement.py`、`cleanup.py` 安装为服务器 `scripts/leibox-deploy-receiver.py`、`scripts/retirement.py`、`scripts/leibox-release-cleanup.py`。接收器和下线模块必须位于同一目录。将 `leibox-cleanup.service` 和 `leibox-cleanup.timer` 安装到 `/etc/systemd/system/`，检查后执行 `systemctl enable --now leibox-cleanup.timer`，每天自动清理一次。
 
 ```sh
 # 查看计划；不删除
@@ -40,9 +42,11 @@ systemctl status leibox-cleanup.timer
 
 ## 当前机器
 
-服务器已安装受限接收器；本机设置在被 Git 忽略的 `.deploy/server.json`。专用 SSH 密钥位于用户 `.ssh` 目录，没有写入仓库。主机公钥指纹通过已经登录的宝塔终端核对后固定；脚本始终开启严格主机校验。
+本机设置在被 Git 忽略的 `.deploy/server.json`。更换生产源站后，在管理员终端核对新服务器的 SSH 主机公钥指纹，更新本机可信主机记录和发布目标。GitHub 直连可用而本机 Git 代理失效时，可在本机配置中设置 `"directGitHub": true`，仅对发布中的 Git 推送使用直连。
 
 专用密钥只允许 `manifest` 和 `deploy`，禁止普通 shell、端口转发、PTY 和 agent 转发。接收器只接收 `out` 内的常规文件，不接收脚本或环境文件。已有接收器若需升级，应通过管理员通道替换，不能用发布密钥修改自己。
+
+新源站通过 SSH 强制命令中的 `LEIBOX_DEPLOY_ROOT` 指定站点根目录，Linux 路径区分大小写。接收器和同目录的 `retirement.py` 安装在管理员专用目录。设置 `LEIBOX_DEPLOY_RUN_AS_WEB_USER=1` 后，接收器以 `www` 账户读写站点导出、发布清单和备份。
 
 ## 换机器配置
 

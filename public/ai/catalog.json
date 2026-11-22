@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "9ac5c2821b3a008f9d38bb806b6dd0186aa930e4ec9234b87c6dcb1002e94195",
+  "revision": "d875a98987f4ecc4435add76f30f12286a8b5d798b2a83e493a1e2f692a4d90a",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -308,6 +308,310 @@
         "notice": {
           "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
           "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "genie-menu",
+      "name": {
+        "en": "Liquid Pull-out Menu",
+        "zh": "吸附展开菜单"
+      },
+      "description": {
+        "en": "A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.",
+        "zh": "液滴从圆钮中拉出，翻展成带透视的菜单，收起时快速吸回圆钮。"
+      },
+      "keywords": "液滴 吸附 展开 菜单 翻转 透视 油画 玻璃 圆钮 genie liquid pull out menu gooey SVG 3D perspective imharshin",
+      "docsPath": "/docs/animations/genie-menu",
+      "detailPath": "/ai/components/genie-menu.json",
+      "markdownPath": "/ai/components/genie-menu.md",
+      "previewPath": "/assets/components/genie-menu.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "圆钮展开四项快捷菜单",
+          "A liquid button reveals a perspective action menu"
+        ],
+        "searchTerms": [
+          "菜单",
+          "液滴",
+          "吸附",
+          "展开",
+          "翻转",
+          "透视",
+          "快捷操作",
+          "genie",
+          "gooey",
+          "liquid menu",
+          "action menu",
+          "perspective"
+        ],
+        "visualTags": [
+          "liquid",
+          "svg",
+          "perspective",
+          "glass"
+        ],
+        "interactions": [
+          "click",
+          "hover",
+          "focus",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "菜单项只显示本地提示，可通过 onAction 接入应用。原背景画作的再分发许可尚未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML and artwork adapted to a shared instance-scoped DOM/SVG core with six native framework entries.",
+        "designReference": "https://x.com/imharshin/status/2118343243092070523/video/1",
+        "designAuthor": "@imharshin",
+        "license": "No separate license was supplied or verified for the original HTML and embedded painting. Preserve the reference attribution."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "status-picker",
+      "name": {
+        "en": "Avatar Status Picker",
+        "zh": "头像状态选择器"
+      },
+      "description": {
+        "en": "A glass status dot expands into three choices, with a springy tooltip that follows the active option.",
+        "zh": "玻璃状态圆点展开为三个选项，弹性提示气泡跟随当前选项移动。"
+      },
+      "keywords": "头像 状态 在线 专注 勿扰 玻璃 圆点 气泡 展开 选择器 弹簧 status picker avatar online focus do not disturb glass spring tooltip Nitish Khagwal",
+      "docsPath": "/docs/animations/status-picker",
+      "detailPath": "/ai/components/status-picker.json",
+      "markdownPath": "/ai/components/status-picker.md",
+      "previewPath": "/assets/components/status-picker.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "切换头像在线、专注和勿扰状态",
+          "Choose a profile presence status from an expanding glass pill"
+        ],
+        "searchTerms": [
+          "头像",
+          "状态",
+          "在线",
+          "专注",
+          "勿扰",
+          "选择器",
+          "玻璃",
+          "气泡",
+          "status picker",
+          "presence",
+          "online",
+          "avatar",
+          "do not disturb"
+        ],
+        "visualTags": [
+          "glass",
+          "spring",
+          "avatar",
+          "pill"
+        ],
+        "interactions": [
+          "click",
+          "hover",
+          "focus",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "只切换本地展示状态，可用 onStatusChange 接入实际应用。原头像素材的再分发许可尚未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML, artwork and spring simulation adapted to a shared DOM lifecycle with six native framework entries.",
+        "designReference": "https://x.com/nitishkmrk/status/2121129936497111406/video/1",
+        "designAuthor": "Nitish Khagwal",
+        "license": "No separate license was supplied or verified for the original HTML and embedded avatar. Preserve the source attribution and included font notices."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "knoll-morph-menu",
+      "name": {
+        "en": "Knoll Morph Menu",
+        "zh": "Knoll 形变菜单"
+      },
+      "description": {
+        "en": "A compact navigation button springs into a two-stage menu with photo previews for each destination.",
+        "zh": "紧凑的导航按钮通过两段弹簧动效展开菜单，每个导航项都带图片预览。"
+      },
+      "keywords": "Knoll 形变 菜单 导航 双阶段 弹簧 侧栏 图片预览 悬停 渐现 morph menu navigation spring hover image preview",
+      "docsPath": "/docs/animations/knoll-morph-menu",
+      "detailPath": "/ai/components/knoll-morph-menu.json",
+      "markdownPath": "/ai/components/knoll-morph-menu.md",
+      "previewPath": "/assets/components/knoll-morph-menu.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "作品集和工作室网站的导航与目的地预览",
+          "Portfolio navigation with destination image previews"
+        ],
+        "searchTerms": [
+          "Knoll",
+          "形变菜单",
+          "弹簧导航",
+          "图片预览",
+          "morph menu",
+          "spring navigation",
+          "destination preview"
+        ],
+        "visualTags": [
+          "morph",
+          "spring",
+          "photography",
+          "dark"
+        ],
+        "interactions": [
+          "click",
+          "hover",
+          "focus",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "示例保留所提供 HTML 的嵌入照片，素材许可尚未核实。菜单项点击后显示示例反馈，接入时可替换成实际导航。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML adapted to a responsive, instance-scoped DOM with keyboard and touch support. The same menu runs in the standalone demo and six framework adapters.",
+        "designReference": "https://x.com/dtawuxui/status/2121543668213658097/video/1",
+        "designAuthor": "@dtawuxui",
+        "license": "No separate license was supplied or verified for the original HTML and embedded photos."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "retro-computer-cord",
+      "name": {
+        "en": "Retro Computer Power Cord",
+        "zh": "复古电脑电源线"
+      },
+      "description": {
+        "en": "Drag a retro computer to unplug its springy power cord, or tap the screen to cycle through four CRT tints.",
+        "zh": "拖动复古电脑，电源线拉紧后脱开。轻点屏幕可轮换四种 CRT 色调。"
+      },
+      "keywords": "复古 电脑 电源线 拔插 插座 拖拽 弹簧 显像管 换色 手写 悬浮预览 retro computer macintosh power cord unplug reconnect CRT tint drag portfolio",
+      "docsPath": "/docs/animations/retro-computer-cord",
+      "detailPath": "/ai/components/retro-computer-cord.json",
+      "markdownPath": "/ai/components/retro-computer-cord.md",
+      "previewPath": "/assets/components/retro-computer-cord.png",
+      "discovery": {
+        "category": "hero",
+        "useCases": [
+          "作品集开场中的复古电脑交互",
+          "Portfolio hero with a draggable computer and springy cord"
+        ],
+        "searchTerms": [
+          "电脑",
+          "电源线",
+          "插座",
+          "拔插",
+          "拖拽",
+          "显像管",
+          "作品集",
+          "macintosh",
+          "power cord",
+          "unplug",
+          "CRT",
+          "portfolio"
+        ],
+        "visualTags": [
+          "retro",
+          "svg",
+          "elastic",
+          "pixel"
+        ],
+        "interactions": [
+          "drag",
+          "click",
+          "hover",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "示例保留原 HTML 的嵌入图像，原素材的再分发许可尚未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied standalone HTML and assets, adapted to an instance-scoped DOM and SVG lifecycle for six frameworks.",
+        "designReference": "https://x.com/MAQIB135/status/2121613818380046388/video/1",
+        "designAuthor": "Aqib · @MAQIB135",
+        "license": "No separate redistribution license was supplied or verified for the original HTML or embedded artwork. Preserve the original attribution and included font notices."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
         }
       }
     },

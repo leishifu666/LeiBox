@@ -10,7 +10,7 @@ import {
   useReducedMotion,
   useSpring,
 } from "motion/react";
-import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 
 import { SiteLogo } from "@/components/common/site-logo";
@@ -25,6 +25,7 @@ import { InteractionPreview } from "@/components/common/interaction-preview";
 import { COMPONENT_CATALOG_GROUPS } from "@/data/component-catalog";
 import { componentCategories, componentCategoryHref, type ComponentCategory } from "@/data/component-categories";
 import { useComponentCategory } from "@/hooks/use-component-category";
+import { DocsCategoryPanel } from "@/components/docs/docs-category-panel";
 
 type NavPreview = { kind: "canvas"; entry: ComponentEntry } | { kind: "interaction"; entry: InteractionPreviewEntry };
 const PREVIEWS = new Map<string, NavPreview>([
@@ -64,6 +65,7 @@ export function DocsNavList({
   showPreviews?: boolean;
 }) {
   const pathname = usePathname();
+  const navId = useId();
   const [category, setCategory] = useComponentCategory();
   const inCatalog = pathname === "/components";
   const openCategory = !inCatalog && PREVIEWS.has(pathname) ? componentCategories(pathname).primary : null;
@@ -207,17 +209,17 @@ export function DocsNavList({
                 <Link
                   prefetch={false}
                   href={componentCategoryHref(id)}
+                  aria-expanded={expanded}
+                  aria-controls={`${navId}-${id}`}
                   aria-current={selected ? "page" : undefined}
                   onNavigate={(event) => catalogLink(event, id)}
                   className={cn(navRow, selected ? navCurrent : navIdle, expanded && "font-medium text-foreground")}
                 >
                   <TranslatedText>{label}</TranslatedText>
                 </Link>
-                {expanded && (
-                  <ul className="my-1 flex flex-col gap-0.5 pl-3">
-                    {entries.map(({ href, name }) => renderItem({ href, label: name }))}
-                  </ul>
-                )}
+                <DocsCategoryPanel id={`${navId}-${id}`} category={id} expanded={expanded} reducedMotion={shouldReduceMotion === true}>
+                  {entries.map(({ href, name }) => renderItem({ href, label: name }))}
+                </DocsCategoryPanel>
               </li>
             );
           })}

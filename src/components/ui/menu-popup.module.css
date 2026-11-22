@@ -1,0 +1,35 @@
+.popup {
+  --menu-direction: -1;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-property: opacity, transform;
+  transition-duration: var(--menu-open-duration);
+  transition-timing-function: var(--menu-open-ease);
+}
+
+.popup[data-side="top"] {
+  --menu-direction: 1;
+}
+
+.popup[data-starting-style],
+.popup[data-ending-style] {
+  opacity: 0;
+  transform: translateY(calc(var(--menu-offset) * var(--menu-direction))) scale(var(--menu-closed-scale));
+}
+
+.popup[data-ending-style] {
+  pointer-events: none;
+  transition-duration: var(--menu-close-duration);
+  transition-timing-function: var(--menu-close-ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popup {
+    transition: none;
+  }
+
+  .popup[data-starting-style],
+  .popup[data-ending-style] {
+    transform: none;
+  }
+}

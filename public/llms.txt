@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 68 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 72 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -21,6 +21,10 @@ Paths beginning with / are relative to the origin serving this file. When only a
 - [SVG Metaball Menu / 黑白黏球菜单](https://leibox.pantoria.cn/ai/components/metaball-menu.md): Three quick actions peel away from a plus button and merge back into one monochrome shape.
 - [Dissolve Upload Tile / Dissolve 粒子上传](https://leibox.pantoria.cn/ai/components/upload-tile.md): An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.
 - [Dissolve Thinking Orb / Dissolve 状态粒子球](https://leibox.pantoria.cn/ai/components/thinking-orb.md): A 180-dot orb morphs between six agent states and responds to the pointer.
+- [Liquid Pull-out Menu / 吸附展开菜单](https://leibox.pantoria.cn/ai/components/genie-menu.md): A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.
+- [Avatar Status Picker / 头像状态选择器](https://leibox.pantoria.cn/ai/components/status-picker.md): A glass status dot expands into three choices, with a springy tooltip that follows the active option.
+- [Knoll Morph Menu / Knoll 形变菜单](https://leibox.pantoria.cn/ai/components/knoll-morph-menu.md): A compact navigation button springs into a two-stage menu with photo previews for each destination.
+- [Retro Computer Power Cord / 复古电脑电源线](https://leibox.pantoria.cn/ai/components/retro-computer-cord.md): Drag a retro computer to unplug its springy power cord, or tap the screen to cycle through four CRT tints.
 - [Distortion Waves / 折射波浪视图转场](https://leibox.pantoria.cn/ai/components/distortion-waves.md): A colourful WebGL2 wave pulls toward the trigger, bends the live DOM with chromatic aberration and blur, and carries one view into another.
 - [Border Beam / 流光描边](https://leibox.pantoria.cn/ai/components/border-beam.md): A ribbon of light runs along a card, button or input border.
 - [Thinking Orbs / 思考粒子球](https://leibox.pantoria.cn/ai/components/thinking-orbs.md): Particle orbs give nine AI processing states distinct motion.

@@ -12,10 +12,11 @@ class PublicationTests(unittest.TestCase):
   self.permissions=patch.object(receiver.os,'chown',create=True);self.permissions.start()
   self.account=patch.object(receiver.pwd,'getpwnam',return_value=types.SimpleNamespace(pw_uid=0,pw_gid=0));self.account.start()
  def tearDown(self):self.account.stop();self.permissions.stop();self.temp.cleanup()
- def archive(self,path='out/index.html',tamper=False,extra=False,two=False):
+ def archive(self,path='out/index.html',tamper=False,extra=False,two=False,retired=None):
   files=[{'path':path,'sha256':sha(b'next'),'before':sha(b'previous'),'included':True,'size':4}]
   if two:files.append({'path':'out/new.html','sha256':sha(b'next'),'before':None,'included':True,'size':4})
   manifest={'commit':'a'*40,'release':'abcdef12-1234','files':files};buf=io.BytesIO()
+  if retired is not None:manifest['retired']=retired
   with tarfile.open(fileobj=buf,mode='w:gz') as tar:
    bodies={'release-manifest.json':json.dumps(manifest).encode(),path:b'BAD!' if tamper else b'next'}
    if two:bodies['out/new.html']=b'next'
@@ -25,6 +26,13 @@ class PublicationTests(unittest.TestCase):
   buf.seek(0);return buf
  def intact(self):
   self.assertEqual((self.root/'out/index.html').read_bytes(),b'previous');self.assertEqual((self.root/'.env.local').read_bytes(),b'TEST_ONLY_PRIVATE_VALUE')
+ def previous_component(self):
+  name='out/docs/animations/retired.html';old=self.root/name
+  old.parent.mkdir(parents=True);old.write_bytes(b'old component')
+  receiver.STATE.parent.mkdir(parents=True)
+  item={'path':name,'sha256':sha(b'old component')}
+  receiver.STATE.write_text(json.dumps({'files':[item]}))
+  return old,item
  def test_publish_backups_and_preserves_environment(self):
   result=receiver.deploy(self.archive());self.assertEqual(result['updatedFiles'],1);self.assertTrue(result['environmentPreserved']);self.assertEqual((self.root/'out/index.html').read_bytes(),b'next');self.assertEqual((self.root/'backups/abcdef12-1234/out/index.html').read_bytes(),b'previous');self.assertTrue(receiver.STATE.exists())
  def test_publish_keeps_the_actual_previous_snapshot_for_cleanup_and_rollback(self):
@@ -59,4 +67,40 @@ class PublicationTests(unittest.TestCase):
    with self.assertRaises(OSError):receiver.deploy(self.archive())
   self.intact()
   self.assertFalse((self.root/'backups/abcdef12-1234/manifest.json').exists())
+ def test_retired_component_stops_serving_and_keeps_its_previous_bytes(self):
+  old,item=self.previous_component()
+  result=receiver.deploy(self.archive(retired=[item]))
+  self.assertEqual(result['retiredFiles'],1)
+  self.assertFalse(old.exists())
+  self.assertEqual((self.root/'backups/abcdef12-1234'/item['path']).read_bytes(),b'old component')
+ def test_retirement_rejects_a_path_or_digest_outside_the_previous_component(self):
+  old,item=self.previous_component()
+  unexpected={'path':'out/index.html','sha256':sha(b'previous')}
+  with self.assertRaisesRegex(ValueError,'Retirement plan'):
+   receiver.deploy(self.archive(retired=[item,unexpected]))
+  old.write_bytes(b'manual edit')
+  with self.assertRaisesRegex(ValueError,'Retired file was edited'):
+   receiver.deploy(self.archive(retired=[item]))
+  self.intact()
+  self.assertEqual(old.read_bytes(),b'manual edit')
+ def test_failed_publish_restores_the_retired_page(self):
+  old,item=self.previous_component()
+  actual=receiver.os.replace
+  def replace(source,target):
+   if pathlib.Path(target)==receiver.STATE:raise OSError('Injected state write failure')
+   return actual(source,target)
+  with patch.object(receiver.os,'replace',side_effect=replace):
+   with self.assertRaises(OSError):receiver.deploy(self.archive(retired=[item]))
+  self.intact()
+  self.assertEqual(old.read_bytes(),b'old component')
+ def test_first_release_on_an_existing_origin_reads_only_listed_live_components(self):
+  catalog=self.root/'out/ai/catalog.json';catalog.parent.mkdir()
+  catalog.write_text(json.dumps({'items':[{'docsPath':'/docs/animations/retired'}]}))
+  detail=self.root/'out/docs/animations';detail.mkdir(parents=True)
+  (detail/'retired.html').write_bytes(b'old component')
+  (detail/'unlisted.html').write_bytes(b'other page')
+  manifest=receiver.manifest_response()
+  self.assertEqual(manifest['retirementProtocol'],1)
+  self.assertEqual(manifest['liveCatalogSha256'],sha(catalog.read_bytes()))
+  self.assertEqual({item['path'] for item in manifest['files']},{'out/ai/catalog.json','out/docs/animations/retired.html'})
 if __name__=='__main__':unittest.main()
