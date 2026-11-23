@@ -1,0 +1,170 @@
+{
+  "slug": "image-dust-disintegration",
+  "name": {
+    "en": "Image Dust Disintegration",
+    "zh": "图片卡片化尘"
+  },
+  "description": {
+    "en": "A portrait comes into focus after an aurora loader, then breaks into image-colored particles that drift upward and fade.",
+    "zh": "极光加载后，人像逐区域变清晰；删除时，原图化为彩色粒子，向上飘散。"
+  },
+  "keywords": "图片 卡片 化尘 粒子 消散 灰烬 极光 加载 对焦 模糊 人像 image card dust disintegration particles aurora rack focus Irakkkl",
+  "docsPath": "/docs/animations/image-dust-disintegration",
+  "detailPath": "/ai/components/image-dust-disintegration.json",
+  "markdownPath": "/ai/components/image-dust-disintegration.md",
+  "previewPath": "/assets/components/image-dust-disintegration.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "图片卡片的逐区域加载与粒子删除效果",
+      "A portrait card with an aurora loader, spatial focus reveal and sampled dust deletion"
+    ],
+    "searchTerms": [
+      "图片",
+      "化尘",
+      "粒子消散",
+      "灰烬",
+      "极光加载",
+      "逐区域对焦",
+      "image card",
+      "dust disintegration",
+      "pixel particles",
+      "aurora",
+      "rack focus"
+    ],
+    "visualTags": [
+      "dark",
+      "portrait",
+      "particles",
+      "glass",
+      "aurora"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard",
+      "touch",
+      "download",
+      "replay",
+      "pause"
+    ],
+    "caveat": "加载、收藏与删除为本地演示；无真实AI生成或文件删除。无WebGL时降级为CSS对焦；原HTML与照片许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML and portrait adapted to an instance-scoped DOM/WebGL/Canvas core with six native framework entries. Loading, replay, favorites and disappearance are local visual states; no AI generation or remote file deletion is performed.",
+    "designReference": "https://x.com/Irakkkl/status/2119512374218465683/video/1",
+    "designAuthor": "@Irakkkl",
+    "license": "No separate license was supplied or verified for the HTML or embedded portrait."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/image-dust-disintegration/react.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ImageDustDisintegration } from \"./ImageDustDisintegration\";\n\nexport default function App() {\n  return <ImageDustDisintegration />;\n}",
+      "files": [
+        "ImageDustDisintegration.tsx",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/image-dust-disintegration/vue.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ImageDustDisintegration from \"./ImageDustDisintegration.vue\";\n</script>\n<template><ImageDustDisintegration /></template>",
+      "files": [
+        "ImageDustDisintegration.vue",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/image-dust-disintegration/svelte.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ImageDustDisintegration from \"./ImageDustDisintegration.svelte\";\n</script>\n<ImageDustDisintegration />",
+      "files": [
+        "ImageDustDisintegration.svelte",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/image-dust-disintegration/solid.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ImageDustDisintegration } from \"./ImageDustDisintegration.solid\";\n\nexport default function App() {\n  return <ImageDustDisintegration />;\n}",
+      "files": [
+        "ImageDustDisintegration.solid.tsx",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/image-dust-disintegration/preact.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ImageDustDisintegration } from \"./ImageDustDisintegration.preact\";\n\nexport default function App() {\n  return <ImageDustDisintegration />;\n}",
+      "files": [
+        "ImageDustDisintegration.preact.tsx",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/image-dust-disintegration/vanilla.json",
+      "component": "ImageDustDisintegration",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ImageDustDisintegration\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ImageDustDisintegration.ts",
+        "ImageDustDisintegrationEngine.js",
+        "motion-runtime.ts",
+        "ImageDustDisintegrationEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus the portrait for Like, Replay, Download and Delete. Delete scatters the pixels; Replay image restores the local demo.",
+    "zh": "悬停或聚焦人像，可收藏、重播、下载和删除。删除后像素化尘，点击 Replay image 重播本地演示。"
+  }
+}

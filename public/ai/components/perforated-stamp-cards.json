@@ -1,0 +1,169 @@
+{
+  "slug": "perforated-stamp-cards",
+  "name": {
+    "en": "Perforated Stamp Cards",
+    "zh": "齿孔邮票卡片"
+  },
+  "description": {
+    "en": "Three paper cards pair woodblock landscapes with real perforated edges, spring tilt and a pointer-following sheen.",
+    "zh": "三张纸质卡片搭配木刻风景，保留透明齿孔、弹簧倾斜和跟随指针的纸面高光。"
+  },
+  "keywords": "邮票 齿孔 卡片 纸张 木刻 浮世绘 插画 弹簧 倾斜 高光 perforated stamp cards paper woodblock illustration mask spring tilt devxnuj",
+  "docsPath": "/docs/animations/perforated-stamp-cards",
+  "detailPath": "/ai/components/perforated-stamp-cards.json",
+  "markdownPath": "/ai/components/perforated-stamp-cards.md",
+  "previewPath": "/assets/components/perforated-stamp-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "带真实邮票齿孔与纸面弹簧倾斜的三张介绍卡",
+      "Three illustrated paper cards with transparent perforations and spring hover feedback"
+    ],
+    "searchTerms": [
+      "邮票",
+      "齿孔",
+      "纸张",
+      "卡片",
+      "浮世绘",
+      "木刻",
+      "插画",
+      "倾斜",
+      "stamp cards",
+      "perforation",
+      "paper",
+      "SVG mask",
+      "woodblock",
+      "spring tilt"
+    ],
+    "visualTags": [
+      "paper",
+      "cream",
+      "illustration",
+      "perforated",
+      "woodblock"
+    ],
+    "interactions": [
+      "hover",
+      "focus",
+      "keyboard",
+      "touch",
+      "pause"
+    ],
+    "caveat": "卡片用于展示内容，未添加虚构业务操作；原HTML与插画许可未核实，Inter保留OFL许可。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML and three illustrations adapted to an instance-scoped DOM/SVG core with six native framework entries and an existing licensed Inter subset. Cards remain informational articles with focus and hover feedback.",
+    "designReference": "https://x.com/devxnuj/status/2004205160231587851/photo/1",
+    "designAuthor": "@devxnuj",
+    "license": "No separate license was supplied or verified for the HTML or illustrations. The embedded Inter subset retains its SIL Open Font License notice."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/perforated-stamp-cards/react.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { PerforatedStampCards } from \"./PerforatedStampCards\";\n\nexport default function App() {\n  return <PerforatedStampCards />;\n}",
+      "files": [
+        "PerforatedStampCards.tsx",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/perforated-stamp-cards/vue.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport PerforatedStampCards from \"./PerforatedStampCards.vue\";\n</script>\n<template><PerforatedStampCards /></template>",
+      "files": [
+        "PerforatedStampCards.vue",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/perforated-stamp-cards/svelte.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport PerforatedStampCards from \"./PerforatedStampCards.svelte\";\n</script>\n<PerforatedStampCards />",
+      "files": [
+        "PerforatedStampCards.svelte",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/perforated-stamp-cards/solid.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { PerforatedStampCards } from \"./PerforatedStampCards.solid\";\n\nexport default function App() {\n  return <PerforatedStampCards />;\n}",
+      "files": [
+        "PerforatedStampCards.solid.tsx",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/perforated-stamp-cards/preact.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { PerforatedStampCards } from \"./PerforatedStampCards.preact\";\n\nexport default function App() {\n  return <PerforatedStampCards />;\n}",
+      "files": [
+        "PerforatedStampCards.preact.tsx",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/perforated-stamp-cards/vanilla.json",
+      "component": "PerforatedStampCards",
+      "dependencies": [],
+      "usage": "import { mount } from \"./PerforatedStampCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "PerforatedStampCards.ts",
+        "PerforatedStampCardsEngine.js",
+        "motion-runtime.ts",
+        "PerforatedStampCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or focus a card to tilt the paper and move its sheen. Cards stack vertically on narrow screens.",
+    "zh": "悬停或聚焦卡片，可看到纸张倾斜与高光变化。窄屏下三张卡片纵向排列。"
+  }
+}

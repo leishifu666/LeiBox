@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "title": "LeiBox UI collection metadata",
-  "revision": "d875a98987f4ecc4435add76f30f12286a8b5d798b2a83e493a1e2f692a4d90a",
+  "revision": "243e3d9c2218197a91f87c00369f13224360cf3dc13dd58bbcc2d17292ef0e74",
   "siteOrigin": "https://leibox.pantoria.cn",
   "links": {
     "searchIndex": "/ai/search-index.json",
@@ -308,6 +308,814 @@
         "notice": {
           "en": "Complete source files from this project's existing framework package. Preserve included notices and reference attribution.",
           "zh": "提供本站已有框架代码包的完整文件，保留源码声明与设计参考署名。"
+        }
+      }
+    },
+    {
+      "slug": "window-shade-theme",
+      "name": {
+        "en": "Window Shade Theme Toggle",
+        "zh": "舷窗遮光板主题切换"
+      },
+      "description": {
+        "en": "Drag an airplane window shade to dim the cabin, hide drifting clouds and switch the surrounding profile between light and dark themes.",
+        "zh": "拖动舷窗遮光板，机舱随之变暗、云层被遮住，个人介绍同步切换明暗主题。"
+      },
+      "keywords": "舷窗 遮光板 明暗 暗色 主题 拖动 飞机 云层 弹簧 window shade airplane dark mode theme toggle cloud shader spring mjbarton_",
+      "docsPath": "/docs/animations/window-shade-theme",
+      "detailPath": "/ai/components/window-shade-theme.json",
+      "markdownPath": "/ai/components/window-shade-theme.md",
+      "previewPath": "/assets/components/window-shade-theme.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "拖动飞机舷窗遮光板切换明暗主题",
+          "An airplane shade control with continuous ambient dimming"
+        ],
+        "searchTerms": [
+          "舷窗",
+          "遮光板",
+          "主题",
+          "暗色",
+          "拖动",
+          "window shade",
+          "airplane",
+          "dark mode",
+          "theme toggle",
+          "clouds"
+        ],
+        "visualTags": [
+          "skeuomorphic",
+          "window",
+          "clouds",
+          "beige",
+          "dark mode"
+        ],
+        "interactions": [
+          "drag",
+          "click",
+          "keyboard",
+          "touch",
+          "pause"
+        ],
+        "caveat": "主题仅作用于组件，通过回调显式接入宿主。WebGL2云层有Canvas2D降级；原HTML许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML adapted to an isolated DOM/WebGL2 core with six native framework entries and the original Canvas2D sky fallback. Profile text remains demonstration content, and the component never changes the host document theme.",
+        "designReference": "https://x.com/mjbarton_/status/2093354383379399012/video/1",
+        "designAuthor": "@mjbarton_",
+        "license": "No separate source license was supplied or verified. Embedded Inter and JetBrains Mono fonts retain their SIL Open Font License notices."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-glass-navigation",
+      "name": {
+        "en": "Liquid Glass Navigation",
+        "zh": "玻璃折射导航"
+      },
+      "description": {
+        "en": "A rounded glass dropdown refracts a drifting flower landscape, springing between three menus with a sliding hover highlight.",
+        "zh": "圆角玻璃菜单折射缓慢移动的花景，在三组导航间弹簧变形，高光随选项滑动。"
+      },
+      "keywords": "玻璃 折射 导航 菜单 弹簧 色散 花景 液态 liquid glass navigation dropdown refraction Snell spectral spring jesse_vermeulen",
+      "docsPath": "/docs/animations/liquid-glass-navigation",
+      "detailPath": "/ai/components/liquid-glass-navigation.json",
+      "markdownPath": "/ai/components/liquid-glass-navigation.md",
+      "previewPath": "/assets/components/liquid-glass-navigation.png",
+      "discovery": {
+        "category": "navigation",
+        "useCases": [
+          "折射风景的玻璃导航与跨组弹簧菜单",
+          "A WebGL glass dropdown for three navigation groups"
+        ],
+        "searchTerms": [
+          "玻璃",
+          "折射",
+          "导航",
+          "色散",
+          "风景",
+          "液态",
+          "glass navigation",
+          "Snell refraction",
+          "spring dropdown"
+        ],
+        "visualTags": [
+          "glass",
+          "landscape",
+          "photo",
+          "refraction",
+          "spring"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard",
+          "touch",
+          "wheel",
+          "pause"
+        ],
+        "caveat": "菜单仅本地回调，不自行跳转。真实光学需要WebGL2，无GPU时保留CSS玻璃面板；HTML与照片许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML and embedded photograph adapted to an isolated DOM/WebGL2 core with six native framework entries. Menu items emit local callbacks and never navigate or call a service by themselves.",
+        "designReference": "https://x.com/jesse_vermeulen/status/2068672515077992636/video/1",
+        "designAuthor": "@jesse_vermeulen",
+        "license": "No separate source or photograph license was supplied or verified. Inter retains its SIL Open Font License notice."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "optical-glass-cards",
+      "name": {
+        "en": "3D Optical Cards",
+        "zh": "3D 光学卡片"
+      },
+      "description": {
+        "en": "A glass W-emblem disc and an eight-disc optical ring animate inside contrasting cards, each with an independent details overlay.",
+        "zh": "玻璃 W 徽标圆片与八片圆盘环分别在黑白卡片中转动，两张卡片各有独立详情层。"
+      },
+      "keywords": "3D 光学 玻璃 圆片 圆盘 W 徽标 旋转 光纤 双卡 详情 raymarch SDF glass coin optical fibers discs WebGL praveenisomer",
+      "docsPath": "/docs/animations/optical-glass-cards",
+      "detailPath": "/ai/components/optical-glass-cards.json",
+      "markdownPath": "/ai/components/optical-glass-cards.md",
+      "previewPath": "/assets/components/optical-glass-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "带SDF玻璃圆片与光学圆盘动画的双介绍卡",
+          "Two informational cards with raymarched glass and optical-disc scenes"
+        ],
+        "searchTerms": [
+          "3D",
+          "光学",
+          "圆片",
+          "玻璃",
+          "W徽标",
+          "圆盘环",
+          "光纤",
+          "详情层",
+          "optical cards",
+          "raymarch",
+          "SDF",
+          "glass coin",
+          "eight discs"
+        ],
+        "visualTags": [
+          "3d",
+          "glass",
+          "orange",
+          "peach",
+          "black white",
+          "disc"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch",
+          "pause",
+          "seek"
+        ],
+        "caveat": "详情为本地信息层，无AI或网络服务。支持WebGL2/WebGL1；无WebGL时静态2D示意。源码许可未核实，字体保留OFL。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML adapted to an instance-scoped DOM/WebGL2/WebGL1 core with six native framework entries. Canvas2D provides a static fallback; Learn More opens local informational details. Font subsets and full OFL notices are bundled.",
+        "designReference": "https://x.com/praveenisomer/status/2078472355723264480/video/1",
+        "designAuthor": "@praveenisomer",
+        "license": "No separate source license was supplied or verified. Plus Jakarta Sans and Space Mono are bundled with their SIL Open Font License notices."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "perforated-stamp-cards",
+      "name": {
+        "en": "Perforated Stamp Cards",
+        "zh": "齿孔邮票卡片"
+      },
+      "description": {
+        "en": "Three paper cards pair woodblock landscapes with real perforated edges, spring tilt and a pointer-following sheen.",
+        "zh": "三张纸质卡片搭配木刻风景，保留透明齿孔、弹簧倾斜和跟随指针的纸面高光。"
+      },
+      "keywords": "邮票 齿孔 卡片 纸张 木刻 浮世绘 插画 弹簧 倾斜 高光 perforated stamp cards paper woodblock illustration mask spring tilt devxnuj",
+      "docsPath": "/docs/animations/perforated-stamp-cards",
+      "detailPath": "/ai/components/perforated-stamp-cards.json",
+      "markdownPath": "/ai/components/perforated-stamp-cards.md",
+      "previewPath": "/assets/components/perforated-stamp-cards.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "带真实邮票齿孔与纸面弹簧倾斜的三张介绍卡",
+          "Three illustrated paper cards with transparent perforations and spring hover feedback"
+        ],
+        "searchTerms": [
+          "邮票",
+          "齿孔",
+          "纸张",
+          "卡片",
+          "浮世绘",
+          "木刻",
+          "插画",
+          "倾斜",
+          "stamp cards",
+          "perforation",
+          "paper",
+          "SVG mask",
+          "woodblock",
+          "spring tilt"
+        ],
+        "visualTags": [
+          "paper",
+          "cream",
+          "illustration",
+          "perforated",
+          "woodblock"
+        ],
+        "interactions": [
+          "hover",
+          "focus",
+          "keyboard",
+          "touch",
+          "pause"
+        ],
+        "caveat": "卡片用于展示内容，未添加虚构业务操作；原HTML与插画许可未核实，Inter保留OFL许可。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML and three illustrations adapted to an instance-scoped DOM/SVG core with six native framework entries and an existing licensed Inter subset. Cards remain informational articles with focus and hover feedback.",
+        "designReference": "https://x.com/devxnuj/status/2004205160231587851/photo/1",
+        "designAuthor": "@devxnuj",
+        "license": "No separate license was supplied or verified for the HTML or illustrations. The embedded Inter subset retains its SIL Open Font License notice."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "elemental-card-carousel",
+      "name": {
+        "en": "Elemental Card Carousel",
+        "zh": "元素卡片轮播"
+      },
+      "description": {
+        "en": "Four pill cards slide into fire, sun rays, flowing air and petals, with staged ignition, lingering particles and a glossy floor reflection.",
+        "zh": "四张胶囊卡滑到中央，依次展开火焰、日冕、气流和花瓣，退场时留下余粒子与地面反射。"
+      },
+      "keywords": "元素 卡片 轮播 火焰 日冕 气流 花瓣 胶囊 弹簧 反射 粒子 elemental card carousel ember solar breeze bloom WebGL2 FBM reflection kaolti",
+      "docsPath": "/docs/animations/elemental-card-carousel",
+      "detailPath": "/ai/components/elemental-card-carousel.json",
+      "markdownPath": "/ai/components/elemental-card-carousel.md",
+      "previewPath": "/assets/components/elemental-card-carousel.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "用火焰、日冕、气流和花瓣表达选中的主题卡",
+          "A spring carousel with four procedural elemental effects and floor reflection"
+        ],
+        "searchTerms": [
+          "元素",
+          "轮播",
+          "胶囊卡片",
+          "火焰",
+          "日冕",
+          "气流",
+          "花瓣",
+          "地面反射",
+          "elemental carousel",
+          "fire",
+          "solar rays",
+          "air flow",
+          "lotus",
+          "WebGL2"
+        ],
+        "visualTags": [
+          "dark",
+          "fire",
+          "glow",
+          "particles",
+          "reflection",
+          "spring"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "drag",
+          "swipe",
+          "wheel",
+          "pause"
+        ],
+        "caveat": "四套场与反射需要WebGL2；降级时保留原生卡和2D粒子。源码许可未核实，Inter字体保留OFL许可。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML adapted to an instance-scoped WebGL2/Canvas2D core with six native framework entries, existing licensed Inter subset, scoped pointer/keyboard/wheel input and GPU resource cleanup.",
+        "designReference": "https://x.com/kaolti/status/2110322552841056689/video/1",
+        "designAuthor": "@kaolti",
+        "license": "No separate source license was supplied or verified. The embedded Inter subset retains its SIL Open Font License notice."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "image-dust-disintegration",
+      "name": {
+        "en": "Image Dust Disintegration",
+        "zh": "图片卡片化尘"
+      },
+      "description": {
+        "en": "A portrait comes into focus after an aurora loader, then breaks into image-colored particles that drift upward and fade.",
+        "zh": "极光加载后，人像逐区域变清晰；删除时，原图化为彩色粒子，向上飘散。"
+      },
+      "keywords": "图片 卡片 化尘 粒子 消散 灰烬 极光 加载 对焦 模糊 人像 image card dust disintegration particles aurora rack focus Irakkkl",
+      "docsPath": "/docs/animations/image-dust-disintegration",
+      "detailPath": "/ai/components/image-dust-disintegration.json",
+      "markdownPath": "/ai/components/image-dust-disintegration.md",
+      "previewPath": "/assets/components/image-dust-disintegration.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "图片卡片的逐区域加载与粒子删除效果",
+          "A portrait card with an aurora loader, spatial focus reveal and sampled dust deletion"
+        ],
+        "searchTerms": [
+          "图片",
+          "化尘",
+          "粒子消散",
+          "灰烬",
+          "极光加载",
+          "逐区域对焦",
+          "image card",
+          "dust disintegration",
+          "pixel particles",
+          "aurora",
+          "rack focus"
+        ],
+        "visualTags": [
+          "dark",
+          "portrait",
+          "particles",
+          "glass",
+          "aurora"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard",
+          "touch",
+          "download",
+          "replay",
+          "pause"
+        ],
+        "caveat": "加载、收藏与删除为本地演示；无真实AI生成或文件删除。无WebGL时降级为CSS对焦；原HTML与照片许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML and portrait adapted to an instance-scoped DOM/WebGL/Canvas core with six native framework entries. Loading, replay, favorites and disappearance are local visual states; no AI generation or remote file deletion is performed.",
+        "designReference": "https://x.com/Irakkkl/status/2119512374218465683/video/1",
+        "designAuthor": "@Irakkkl",
+        "license": "No separate license was supplied or verified for the HTML or embedded portrait."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "glass-ripple-onboarding",
+      "name": {
+        "en": "Concentric Glass Ripple Onboarding",
+        "zh": "同心玻璃波纹引导页"
+      },
+      "description": {
+        "en": "Concentric glass waves refract a forest painting behind a rotating starburst. Get Started opens a three-goal onboarding sheet.",
+        "zh": "同心玻璃波纹折射松林油画，星芒缓缓旋转。点击开始，可进入三项目标选择。"
+      },
+      "keywords": "玻璃 同心 波纹 折射 引导 金融 油画 松林 星芒 旋转 目标 选择 onboarding concentric glass ripple refraction forest painting Fresnel budget moizarshi29",
+      "docsPath": "/docs/animations/glass-ripple-onboarding",
+      "detailPath": "/ai/components/glass-ripple-onboarding.json",
+      "markdownPath": "/ai/components/glass-ripple-onboarding.md",
+      "previewPath": "/assets/components/glass-ripple-onboarding.png",
+      "discovery": {
+        "category": "cards",
+        "useCases": [
+          "带玻璃折射背景与三项目标选择的产品引导卡片",
+          "An onboarding card with concentric refraction and local goal selection"
+        ],
+        "searchTerms": [
+          "引导页",
+          "玻璃",
+          "同心",
+          "波纹",
+          "折射",
+          "油画",
+          "星芒",
+          "目标选择",
+          "onboarding",
+          "concentric ripple",
+          "Fresnel",
+          "refraction",
+          "forest painting",
+          "budget goals"
+        ],
+        "visualTags": [
+          "glass",
+          "painting",
+          "ripple",
+          "forest",
+          "green"
+        ],
+        "interactions": [
+          "click",
+          "keyboard",
+          "touch",
+          "select",
+          "pause"
+        ],
+        "caveat": "选择与确认仅为本地演示，可用 onContinue 接入应用。无 WebGL 时使用圈层缩放降级；原 HTML 与画作许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML and painting adapted to an instance-scoped DOM/WebGL core with six native framework entries. Goal selection and confirmation remain local demo states; no account or financial data is created.",
+        "designReference": "https://x.com/moizarshi29",
+        "designAuthor": "@moizarshi29",
+        "license": "No separate license was supplied or verified for the HTML or embedded painting."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "liquid-call-cta",
+      "name": {
+        "en": "Liquid Call CTA",
+        "zh": "液态预约按钮"
+      },
+      "description": {
+        "en": "A capsule follows the pointer with an iridescent liquid edge, pinches off a droplet and springs back into shape.",
+        "zh": "胶囊边缘随指针拉出虹彩液态形状，断开一颗小液滴，再弹回原形。"
+      },
+      "keywords": "液态 预约 按钮 虹彩 黏球 拉伸 断开 液滴 回弹 高光 metaball liquid call CTA pill button smooth min SDF spring droplet val_soonafter",
+      "docsPath": "/docs/animations/liquid-call-cta",
+      "detailPath": "/ai/components/liquid-call-cta.json",
+      "markdownPath": "/ai/components/liquid-call-cta.md",
+      "previewPath": "/assets/components/liquid-call-cta.png",
+      "discovery": {
+        "category": "input",
+        "useCases": [
+          "带液态拉伸与断开回弹的主行动按钮",
+          "An iridescent CTA with a pointer-driven liquid meniscus and detached droplet"
+        ],
+        "searchTerms": [
+          "液态",
+          "预约",
+          "按钮",
+          "虹彩",
+          "黏球",
+          "拉伸",
+          "液滴",
+          "回弹",
+          "liquid CTA",
+          "book a call",
+          "metaball",
+          "smooth min",
+          "SDF",
+          "droplet"
+        ],
+        "visualTags": [
+          "liquid",
+          "iridescent",
+          "pill",
+          "spring",
+          "glow"
+        ],
+        "interactions": [
+          "hover",
+          "pointer",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "三个按钮默认只显示本地演示反馈，使用 onAction 接入实际操作。无 WebGL 时降级为 Canvas2D 静态轮廓；原 HTML 源码许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The user-supplied HTML adapted to an instance-scoped DOM/WebGL core with six native framework entries and an existing self-contained Inter subset. Buttons provide local demo feedback until an onAction handler connects them to an application.",
+        "designReference": "https://x.com/val_soonafter/status/2113254105238171837/video/1",
+        "designAuthor": "@val_soonafter",
+        "license": "No separate source license was supplied or verified. The embedded Inter font retains its SIL Open Font License notice."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "hanging-art-gallery",
+      "name": {
+        "en": "3D Hanging Art Gallery",
+        "zh": "3D 悬挂画廊"
+      },
+      "description": {
+        "en": "Five framed artworks hang from a chrome rail. Hover to turn one forward as the others reveal wood, lacquer, gold, terracotta and celadon backs.",
+        "zh": "五幅画沿金属横杆悬挂，悬停时翻到正面，其余画框露出木纹、黑漆、古金、红陶和青瓷背面。"
+      },
+      "keywords": "3D 悬挂 画廊 画框 翻面 悬停 名画 材质 木纹 黑漆 古金 红陶 青瓷 弹簧 3d hanging art gallery frame flip rail pendulum PBR gabriell_lab",
+      "docsPath": "/docs/animations/hanging-art-gallery",
+      "detailPath": "/ai/components/hanging-art-gallery.json",
+      "markdownPath": "/ai/components/hanging-art-gallery.md",
+      "previewPath": "/assets/components/hanging-art-gallery.png",
+      "discovery": {
+        "category": "media",
+        "useCases": [
+          "带真实前后材质与弹簧摆动的名画作品展示",
+          "A raycast-driven 3D artwork gallery with hanging frames and material backs"
+        ],
+        "searchTerms": [
+          "画廊",
+          "悬挂",
+          "画框",
+          "翻面",
+          "名画",
+          "木纹",
+          "青瓷",
+          "金属",
+          "3D gallery",
+          "hanging art",
+          "frame flip",
+          "PBR",
+          "pendulum"
+        ],
+        "visualTags": [
+          "3d",
+          "art",
+          "metal",
+          "ceramic",
+          "wood",
+          "spring"
+        ],
+        "interactions": [
+          "hover",
+          "click",
+          "keyboard",
+          "touch"
+        ],
+        "caveat": "固定使用独立的 Three.js r128 保持材质与光照。无 WebGL 时为静态图片选择器；原 HTML 与内嵌图片许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML, artwork and material maps adapted to an isolated Three.js r128 core with six native framework entries. The renderer is pinned separately to preserve the original lighting and colour response.",
+        "designReference": "https://x.com/gabriell_lab",
+        "designAuthor": "@gabriell_lab",
+        "license": "Three.js r128 uses the MIT license, included with the component. No separate source or embedded-image license was supplied or verified."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+        }
+      }
+    },
+    {
+      "slug": "account-burn",
+      "name": {
+        "en": "Hold-to-Burn Transition",
+        "zh": "长按燃烧转场"
+      },
+      "description": {
+        "en": "Hold to ignite a paper-burn transition with fluid fire and drifting ash. Restore to pull the burn back into the button.",
+        "zh": "长按点燃纸张，流体火焰和灰烬向外烧开画面。恢复时，燃烧边缘反向收回按钮。"
+      },
+      "keywords": "长按 燃烧 烧纸 纸张 焦边 火焰 烟雾 灰烬 恢复 转场 hold burn transition fire fluid smoke ash restore account WebGL2 kshvbgde",
+      "docsPath": "/docs/animations/account-burn",
+      "detailPath": "/ai/components/account-burn.json",
+      "markdownPath": "/ai/components/account-burn.md",
+      "previewPath": "/assets/components/account-burn.png",
+      "discovery": {
+        "category": "layout",
+        "useCases": [
+          "长按触发纸张燃烧转场并反向恢复",
+          "Reveal a second screen through fluid fire and a torn paper edge"
+        ],
+        "searchTerms": [
+          "长按",
+          "燃烧",
+          "烧纸",
+          "火焰",
+          "烟雾",
+          "灰烬",
+          "恢复",
+          "转场",
+          "hold to burn",
+          "paper burn",
+          "fluid fire",
+          "ash",
+          "WebGL2"
+        ],
+        "visualTags": [
+          "fire",
+          "fluid",
+          "paper",
+          "particles",
+          "monochrome"
+        ],
+        "interactions": [
+          "hold",
+          "keyboard",
+          "touch",
+          "restore"
+        ],
+        "caveat": "账号删除、恢复及登录都是本地演示，不发送网络请求。无浮点WebGL2时仅保留裁切降级效果；原HTML许可未核实。"
+      },
+      "frameworks": [
+        "react",
+        "vue",
+        "svelte",
+        "solid",
+        "preact",
+        "vanilla"
+      ],
+      "renderers": [
+        "webgl"
+      ],
+      "source": {
+        "kind": "project-source",
+        "provider": "LeiBox",
+        "implementation": "The supplied HTML adapted to an instance-scoped DOM/WebGL2 core with six native framework entries. All account actions remain local demonstration states.",
+        "designReference": "https://x.com/kshvbgde",
+        "designAuthor": "@kshvbgde",
+        "license": "No separate source license was supplied or verified. Preserve the author attribution."
+      },
+      "distribution": {
+        "canRedistributeSource": false,
+        "installFromThisSite": true,
+        "installProvider": "leibox",
+        "notice": {
+          "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+          "zh": "代码包保留提交的素材，再分发许可尚未核实。"
         }
       }
     },

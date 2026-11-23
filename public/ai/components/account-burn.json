@@ -1,0 +1,169 @@
+{
+  "slug": "account-burn",
+  "name": {
+    "en": "Hold-to-Burn Transition",
+    "zh": "长按燃烧转场"
+  },
+  "description": {
+    "en": "Hold to ignite a paper-burn transition with fluid fire and drifting ash. Restore to pull the burn back into the button.",
+    "zh": "长按点燃纸张，流体火焰和灰烬向外烧开画面。恢复时，燃烧边缘反向收回按钮。"
+  },
+  "keywords": "长按 燃烧 烧纸 纸张 焦边 火焰 烟雾 灰烬 恢复 转场 hold burn transition fire fluid smoke ash restore account WebGL2 kshvbgde",
+  "docsPath": "/docs/animations/account-burn",
+  "detailPath": "/ai/components/account-burn.json",
+  "markdownPath": "/ai/components/account-burn.md",
+  "previewPath": "/assets/components/account-burn.png",
+  "discovery": {
+    "category": "layout",
+    "useCases": [
+      "长按触发纸张燃烧转场并反向恢复",
+      "Reveal a second screen through fluid fire and a torn paper edge"
+    ],
+    "searchTerms": [
+      "长按",
+      "燃烧",
+      "烧纸",
+      "火焰",
+      "烟雾",
+      "灰烬",
+      "恢复",
+      "转场",
+      "hold to burn",
+      "paper burn",
+      "fluid fire",
+      "ash",
+      "WebGL2"
+    ],
+    "visualTags": [
+      "fire",
+      "fluid",
+      "paper",
+      "particles",
+      "monochrome"
+    ],
+    "interactions": [
+      "hold",
+      "keyboard",
+      "touch",
+      "restore"
+    ],
+    "caveat": "账号删除、恢复及登录都是本地演示，不发送网络请求。无浮点WebGL2时仅保留裁切降级效果；原HTML许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML adapted to an instance-scoped DOM/WebGL2 core with six native framework entries. All account actions remain local demonstration states.",
+    "designReference": "https://x.com/kshvbgde",
+    "designAuthor": "@kshvbgde",
+    "license": "No separate source license was supplied or verified. Preserve the author attribution."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/account-burn/react.json",
+      "component": "AccountBurn",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { AccountBurn } from \"./AccountBurn\";\n\nexport default function App() {\n  return <AccountBurn />;\n}",
+      "files": [
+        "AccountBurn.tsx",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/account-burn/vue.json",
+      "component": "AccountBurn",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport AccountBurn from \"./AccountBurn.vue\";\n</script>\n<template><AccountBurn /></template>",
+      "files": [
+        "AccountBurn.vue",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/account-burn/svelte.json",
+      "component": "AccountBurn",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport AccountBurn from \"./AccountBurn.svelte\";\n</script>\n<AccountBurn />",
+      "files": [
+        "AccountBurn.svelte",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/account-burn/solid.json",
+      "component": "AccountBurn",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { AccountBurn } from \"./AccountBurn.solid\";\n\nexport default function App() {\n  return <AccountBurn />;\n}",
+      "files": [
+        "AccountBurn.solid.tsx",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/account-burn/preact.json",
+      "component": "AccountBurn",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { AccountBurn } from \"./AccountBurn.preact\";\n\nexport default function App() {\n  return <AccountBurn />;\n}",
+      "files": [
+        "AccountBurn.preact.tsx",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/account-burn/vanilla.json",
+      "component": "AccountBurn",
+      "dependencies": [],
+      "usage": "import { mount } from \"./AccountBurn\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "AccountBurn.ts",
+        "AccountBurnEngine.js",
+        "motion-runtime.ts",
+        "AccountBurnEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hold the button for 2.2 seconds to burn through the screen. Release early to cancel. Use Restore to reverse the transition. Account actions are a local demo.",
+    "zh": "持续长按按钮 2.2 秒烧开画面，提前松手取消。点击 Restore 反向恢复，账号操作仅为本地演示。"
+  }
+}

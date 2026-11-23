@@ -1,0 +1,167 @@
+{
+  "slug": "liquid-glass-navigation",
+  "name": {
+    "en": "Liquid Glass Navigation",
+    "zh": "玻璃折射导航"
+  },
+  "description": {
+    "en": "A rounded glass dropdown refracts a drifting flower landscape, springing between three menus with a sliding hover highlight.",
+    "zh": "圆角玻璃菜单折射缓慢移动的花景，在三组导航间弹簧变形，高光随选项滑动。"
+  },
+  "keywords": "玻璃 折射 导航 菜单 弹簧 色散 花景 液态 liquid glass navigation dropdown refraction Snell spectral spring jesse_vermeulen",
+  "docsPath": "/docs/animations/liquid-glass-navigation",
+  "detailPath": "/ai/components/liquid-glass-navigation.json",
+  "markdownPath": "/ai/components/liquid-glass-navigation.md",
+  "previewPath": "/assets/components/liquid-glass-navigation.png",
+  "discovery": {
+    "category": "navigation",
+    "useCases": [
+      "折射风景的玻璃导航与跨组弹簧菜单",
+      "A WebGL glass dropdown for three navigation groups"
+    ],
+    "searchTerms": [
+      "玻璃",
+      "折射",
+      "导航",
+      "色散",
+      "风景",
+      "液态",
+      "glass navigation",
+      "Snell refraction",
+      "spring dropdown"
+    ],
+    "visualTags": [
+      "glass",
+      "landscape",
+      "photo",
+      "refraction",
+      "spring"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard",
+      "touch",
+      "wheel",
+      "pause"
+    ],
+    "caveat": "菜单仅本地回调，不自行跳转。真实光学需要WebGL2，无GPU时保留CSS玻璃面板；HTML与照片许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML and embedded photograph adapted to an isolated DOM/WebGL2 core with six native framework entries. Menu items emit local callbacks and never navigate or call a service by themselves.",
+    "designReference": "https://x.com/jesse_vermeulen/status/2068672515077992636/video/1",
+    "designAuthor": "@jesse_vermeulen",
+    "license": "No separate source or photograph license was supplied or verified. Inter retains its SIL Open Font License notice."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/liquid-glass-navigation/react.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { LiquidGlassNavigation } from \"./LiquidGlassNavigation\";\n\nexport default function App() {\n  return <LiquidGlassNavigation />;\n}",
+      "files": [
+        "LiquidGlassNavigation.tsx",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/liquid-glass-navigation/vue.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport LiquidGlassNavigation from \"./LiquidGlassNavigation.vue\";\n</script>\n<template><LiquidGlassNavigation /></template>",
+      "files": [
+        "LiquidGlassNavigation.vue",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/liquid-glass-navigation/svelte.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport LiquidGlassNavigation from \"./LiquidGlassNavigation.svelte\";\n</script>\n<LiquidGlassNavigation />",
+      "files": [
+        "LiquidGlassNavigation.svelte",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/liquid-glass-navigation/solid.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { LiquidGlassNavigation } from \"./LiquidGlassNavigation.solid\";\n\nexport default function App() {\n  return <LiquidGlassNavigation />;\n}",
+      "files": [
+        "LiquidGlassNavigation.solid.tsx",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/liquid-glass-navigation/preact.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { LiquidGlassNavigation } from \"./LiquidGlassNavigation.preact\";\n\nexport default function App() {\n  return <LiquidGlassNavigation />;\n}",
+      "files": [
+        "LiquidGlassNavigation.preact.tsx",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/liquid-glass-navigation/vanilla.json",
+      "component": "LiquidGlassNavigation",
+      "dependencies": [],
+      "usage": "import { mount } from \"./LiquidGlassNavigation\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "LiquidGlassNavigation.ts",
+        "LiquidGlassNavigationEngine.js",
+        "motion-runtime.ts",
+        "LiquidGlassNavigationEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or tap Product, Resources or Company. Use arrow keys to navigate and Escape to close. Menu actions remain local until connected to onAction.",
+    "zh": "悬停或点击三组导航，方向键切换选项，Esc 关闭。菜单操作为本地演示，可通过 onAction 接入业务。"
+  }
+}

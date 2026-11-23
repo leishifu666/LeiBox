@@ -1,3 +1,4 @@
+import {verifyGlassNavigationShade} from './test-glass-navigation-shade.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
@@ -47,6 +48,14 @@ import { verifyStackedMetadata } from './test-stacked-metadata.mjs';
 import { verifyMultiCursorBuilder } from './test-multi-cursor-builder.mjs';
 import { verifyAlbumCoverTunnel } from './test-album-cover-tunnel.mjs';
 import { verifyStatusPicker } from './test-status-picker.mjs';
+import {verifyOpticalGlassCards} from './test-optical-glass-cards.mjs';
+import {verifyPerforatedStampCards} from './test-perforated-stamp-cards.mjs';
+import {verifyElementalCardCarousel} from './test-elemental-card-carousel.mjs';
+import {verifyImageDustDisintegration} from './test-image-dust-disintegration.mjs';
+import { verifyGlassRippleOnboarding } from './test-glass-ripple-onboarding.mjs';
+import { verifyLiquidCallCta } from './test-liquid-call-cta.mjs';
+import { verifyHangingArtGallery } from './test-hanging-art-gallery.mjs';
+import { verifyAccountBurn } from './test-account-burn.mjs';
 import { verifyGenieMenu } from './test-genie-menu.mjs';
 
 const ROOT=process.cwd(),SOURCE=path.join(ROOT,'public/motion-frameworks'),OUT=path.join(ROOT,'outputs/motion-six-frameworks');
@@ -104,9 +113,118 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 let activePage,activeItem;
 try{
  for(const item of selected){
-  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='genie-menu'||item.slug==='status-picker'||item.slug==='multi-cursor-builder'||item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
+  const context=await browser.newContext({viewport:{width:1200,height:1000},permissions:['clipboard-read','clipboard-write'],hasTouch:item.slug==='liquid-glass-navigation'||item.slug==='window-shade-theme'||item.slug==='optical-glass-cards'||item.slug==='perforated-stamp-cards'||item.slug==='elemental-card-carousel'||item.slug==='image-dust-disintegration'||item.slug==='glass-ripple-onboarding'||item.slug==='liquid-call-cta'||item.slug==='hanging-art-gallery'||item.slug==='account-burn'||item.slug==='genie-menu'||item.slug==='status-picker'||item.slug==='multi-cursor-builder'||item.slug==='stacked-metadata'||item.slug==='transfer-glow'||item.slug==='shader-flood'||item.slug==='fluid-tooltip'||item.slug==='spider-music-player'||item.slug==='dot-matrix-trio'||item.slug==='notes-text-color'||item.slug==='selection-flower'||item.slug==='brand-poster-cards'});
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   activePage=page;activeItem=item;page.setDefaultTimeout(10000);
+  if(['liquid-glass-navigation','window-shade-theme'].includes(item.slug))await page.addInitScript(nav=>{
+   window.__testNav=nav;window.__glassContexts=[];
+   const request=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>request(time=>callback(time-5000));
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){if(window.__noGlassGpu&&type==='webgl2')return null;const context=getContext.call(this,type,...args);if(type==='webgl2'&&context&&!window.__glassContexts.includes(context))window.__glassContexts.push(context);return context;};
+  },item.slug==='liquid-glass-navigation');
+  if(item.slug==='optical-glass-cards')await page.addInitScript(()=>{
+   window.__opticalContexts=[];
+   const request=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>request(time=>callback(time-5000));
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if((window.__opticalMode==='2d'&&['webgl','webgl2'].includes(type))||(window.__opticalMode==='webgl1'&&type==='webgl2'))return null;
+    const context=getContext.call(this,type,...args);
+    if(['webgl','webgl2'].includes(type)&&context&&!window.__opticalContexts.includes(context))window.__opticalContexts.push(context);
+    return context;
+   };
+  });
+  if(item.slug==='perforated-stamp-cards')await page.addInitScript(()=>{
+   const request=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>request(time=>callback(time-5000));
+  });
+  if(item.slug==='elemental-card-carousel')await page.addInitScript(()=>{
+   window.__elementContexts=[];window.__elementSamples=[];window.__elementDraws=0;
+   const request=requestAnimationFrame.bind(window);
+   // Deliberately older than performance.now(): reproduces the supplied timeline failure.
+   window.requestAnimationFrame=callback=>request(time=>callback(time-5000));
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if(type==='webgl2'&&window.__elementNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(type==='webgl2'&&context&&!window.__elementContexts.includes(context)){
+      window.__elementContexts.push(context);const draw=context.drawArrays.bind(context);
+      context.drawArrays=(...values)=>{
+        const result=draw(...values);window.__elementDraws++;
+        if(!context.getParameter(context.FRAMEBUFFER_BINDING)){
+          const bytes=new Uint8Array(32*32*4),corner=new Uint8Array(4);
+          context.readPixels(Math.floor(context.canvas.width*.5),Math.floor(context.canvas.height*.7),32,32,context.RGBA,context.UNSIGNED_BYTE,bytes);
+          context.readPixels(4,context.canvas.height-5,1,1,context.RGBA,context.UNSIGNED_BYTE,corner);
+          let hash=2166136261;for(let i=0;i<bytes.length;i+=7)hash=Math.imul(hash^bytes[i],16777619);
+          window.__elementSamples.push({hash:hash>>>0,corner:Math.round((corner[0]+corner[1]+corner[2])/3)});
+          if(window.__elementSamples.length>600)window.__elementSamples.shift();
+        }
+        return result;
+      };
+    }
+    return context;
+   };
+  });
+  if(item.slug==='image-dust-disintegration')await page.addInitScript(()=>{
+   window.__dustContexts=[];window.__dustSamples={auroraCanvas:[],revealCanvas:[]};
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if(type==='webgl'&&window.__dustNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(type==='webgl'&&context&&!window.__dustContexts.includes(context)){
+      window.__dustContexts.push(context);const draw=context.drawArrays.bind(context);
+      context.drawArrays=(...values)=>{
+        const result=draw(...values),pixels=new Uint8Array(32*32*4);
+        context.readPixels(Math.max(0,Math.floor(context.canvas.width/2)-16),Math.max(0,Math.floor(context.canvas.height/2)-16),32,32,context.RGBA,context.UNSIGNED_BYTE,pixels);
+        let hash=2166136261;for(let i=0;i<pixels.length;i+=7)hash=Math.imul(hash^pixels[i],16777619);
+        const list=window.__dustSamples[context.canvas.id];list?.push(hash>>>0);if(list?.length>600)list.shift();return result;
+      };
+    }
+    return context;
+   };
+  });
+  if(item.slug==='glass-ripple-onboarding')await page.addInitScript(()=>{
+   window.__rippleContexts=[];
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if(type==='webgl'&&window.__rippleNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(type==='webgl'&&context&&!window.__rippleContexts.includes(context))window.__rippleContexts.push(context);
+    return context;
+   };
+  });
+  if(item.slug==='liquid-call-cta')await page.addInitScript(()=>{
+   window.__liquidContexts=[];window.__liquidDraws=0;
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if(type==='webgl'&&window.__liquidNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(type==='webgl'&&context&&!window.__liquidContexts.includes(context)){
+      window.__liquidContexts.push(context);const draw=context.drawArrays.bind(context);
+      context.drawArrays=(...values)=>{window.__liquidDraws++;return draw(...values);};
+    }
+    return context;
+   };
+  });
+  if(item.slug==='hanging-art-gallery')await page.addInitScript(()=>{
+   window.__galleryContexts=[];
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    const isGL=['webgl2','webgl','experimental-webgl'].includes(type);
+    if(isGL&&window.__galleryNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(isGL&&context&&!window.__galleryContexts.includes(context))window.__galleryContexts.push(context);
+    return context;
+   };
+  });
+  if(item.slug==='account-burn')await page.addInitScript(()=>{
+   window.__burnContexts=[];
+   const getContext=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+    if(type==='webgl2'&&window.__burnNoGL)return null;
+    const context=getContext.call(this,type,...args);
+    if(type==='webgl2'&&context&&!window.__burnContexts.includes(context))window.__burnContexts.push(context);
+    return context;
+   };
+  });
   if(item.slug==='inline-text-morph')await page.addInitScript(()=>{
    window.__inlineAnimations=[];const animate=Element.prototype.animate;
    Element.prototype.animate=function(...args){const animation=animate.apply(this,args);window.__inlineAnimations.push(animation);return animation;};
@@ -136,6 +254,15 @@ try{
   if(item.slug==='distortion-waves')await verifyDistortionWaves(page,item,OUT);
   if(item.slug==='blister-dropdown')await verifyBlisterDropdown(page);
   if (item.slug === 'status-picker') await verifyStatusPicker(page);
+  if (['liquid-glass-navigation','window-shade-theme'].includes(item.slug)) await verifyGlassNavigationShade(page,item,OUT);
+  if (item.slug === 'optical-glass-cards') await verifyOpticalGlassCards(page,item,OUT);
+  if (item.slug === 'perforated-stamp-cards') await verifyPerforatedStampCards(page,item,OUT);
+  if (item.slug === 'elemental-card-carousel') await verifyElementalCardCarousel(page,item,OUT);
+  if (item.slug === 'image-dust-disintegration') await verifyImageDustDisintegration(page,item,OUT);
+  if (item.slug === 'glass-ripple-onboarding') await verifyGlassRippleOnboarding(page,item,OUT);
+  if (item.slug === 'liquid-call-cta') await verifyLiquidCallCta(page,item,OUT);
+  if (item.slug === 'hanging-art-gallery') await verifyHangingArtGallery(page,item,OUT);
+  if (item.slug === 'account-burn') await verifyAccountBurn(page,item,OUT);
   if (item.slug === 'genie-menu') await verifyGenieMenu(page, item, OUT);
   if (item.slug === 'knoll-morph-menu') {
    const toggle = page.locator('#menuToggle');
@@ -433,6 +560,75 @@ try{
    await expect(page.locator('#second #pickerShell')).toHaveAttribute('data-status','online');
    await expect(page.locator('#second #pickerShell')).toHaveAttribute('data-open','false');
   }
+  if (item.slug === 'liquid-glass-navigation') {
+   await page.evaluate(()=>window.__update({menu:'company',reducedMotion:true}));
+   await expect(page.locator('#demo #glassNavigation')).toHaveAttribute('data-menu','company');
+   await expect(page.locator('#second #glassNavigation')).toHaveAttribute('data-menu','product');
+   await page.locator('#demo .nav-trigger[data-menu=company]').focus();
+  }
+  if (item.slug === 'window-shade-theme') {
+   await page.evaluate(()=>window.__update({theme:'dark',reducedMotion:true}));
+   await expect(page.locator('#demo #shadeTheme')).toHaveAttribute('data-theme','dark');
+   await expect(page.locator('#second #shadeTheme')).toHaveAttribute('data-theme','light');
+   assert.equal(await page.evaluate(()=>[...document.fonts].filter(f=>['ShadeThemeInter','ShadeThemeMono'].includes(f.family)).length),2);
+   await page.locator('#demo #windowWrap').focus();
+  }
+  if (item.slug === 'optical-glass-cards') {
+   await page.evaluate(()=>window.__update({open:['ai'],paused:true,time:1.25}));
+   await expect(page.locator('#demo #opticalGallery')).toHaveAttribute('data-open','ai');
+   await expect(page.locator('#second #opticalGallery')).toHaveAttribute('data-open','none');
+   assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>['OpticalJakarta','OpticalMono'].includes(face.family)).length),2,'both instances share font leases');
+   await page.locator('#demo [data-close]').first().focus();
+  }
+  if (item.slug === 'perforated-stamp-cards') {
+   await page.evaluate(()=>window.__update({cards:[{headline:'First instance only'}],reducedMotion:true}));
+   await expect(page.locator('#demo .headline').first()).toHaveText('First instance only');
+   await expect(page.locator('#second .headline').first()).toHaveText('Your calm,\nPersonal co-pilot.');
+   await expect(page.locator('#second #stampCards')).toHaveAttribute('data-holes','108');
+   await page.locator('#demo .card-slot').first().focus();
+  }
+  if (item.slug === 'elemental-card-carousel') {
+   await page.evaluate(()=>window.__update({active:3,reducedMotion:true,paused:true}));
+   await expect(page.locator('#demo #stage')).toHaveAttribute('data-active','bloom');
+   await expect(page.locator('#second #stage')).toHaveAttribute('data-active','ember');
+   await expect(page.locator('#second #stage')).toHaveAttribute('data-theme','dark');
+   await page.locator('#demo .card[data-id=bloom]').focus();
+  }
+  if (item.slug === 'image-dust-disintegration') {
+   await page.evaluate(()=>window.__update({phase:'ready',liked:true,reducedMotion:true}));
+   await expect(page.locator('#demo #btnLike')).toHaveAttribute('aria-pressed','true');
+   await expect(page.locator('#second #btnLike')).toHaveAttribute('aria-pressed','false');
+   const bounds=await page.locator('#demo #card').boundingBox();assert(Math.abs(bounds.width/bounds.height-900/1184)<.005);
+   await page.locator('#demo #card').focus();
+  }
+  if (item.slug === 'glass-ripple-onboarding') {
+   await page.evaluate(()=>window.__update({open:true,goal:'emergency',paused:true}));
+   await expect(page.locator('#demo #glassRippleOnboarding')).toHaveAttribute('data-goal','emergency');
+   await expect(page.locator('#second #glassRippleOnboarding')).toHaveAttribute('data-goal','spending');
+   await expect(page.locator('#second #glassRippleOnboarding')).toHaveAttribute('data-open','false');
+   const bounds=await page.locator('#demo #phoneCard').boundingBox();assert(Math.abs(bounds.width/bounds.height-219/460)<.005);
+   await page.locator('#demo #closeSheetBtn').focus();
+  }
+  if (item.slug === 'liquid-call-cta') {
+   await page.evaluate(()=>window.__update({label:'First only',reducedMotion:true}));
+   await expect(page.locator('#demo #bookBtn')).toHaveAccessibleName('First only');
+   await expect(page.locator('#second #bookBtn')).toHaveAccessibleName('Book a call');
+   assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>face.family==='LiquidCallInter').length),await page.evaluate(()=>window.__liquidFonts),'instances share leased fonts');
+   await page.locator('#demo #bookBtn').focus();
+  }
+  if (item.slug === 'hanging-art-gallery') {
+   await page.evaluate(()=>window.__update({active:4,reducedMotion:true}));
+   await expect(page.locator('#demo #gallery-scene')).toHaveAttribute('data-active','4');
+   await expect(page.locator('#second #gallery-scene')).toHaveAttribute('data-active','2');
+   await page.locator('#demo canvas').focus();
+   assert.equal(await page.locator('#demo canvas').evaluate(n=>n.height),620*await page.evaluate(()=>Math.min(devicePixelRatio,2)));
+  }
+  if (item.slug === 'account-burn') {
+   await page.evaluate(()=>window.__update({state:'signin',reducedMotion:true}));
+   await expect(page.locator('#demo #stage')).toHaveAttribute('data-state','signin');
+   await expect(page.locator('#second #stage')).toHaveAttribute('data-state','delete');
+   assert.equal(await page.locator('#demo #burn-canvas').evaluate(n=>n.height),620*await page.evaluate(()=>Math.min(devicePixelRatio,2)));
+  }
   if (item.slug === 'genie-menu') {
    await page.evaluate(() => window.__update({ open:true, reducedMotion:true }));
    await expect(page.locator('#demo #menuCard')).toHaveAttribute('data-state','open');
@@ -585,6 +781,15 @@ try{
    assert.equal(await page.locator('#demo .ao-scene').getAttribute('data-sharks'),'4');assert.equal(await page.locator('#demo .ao-input').inputValue(),'','remount starts with a fresh local draft');
    await page.evaluate(()=>window.__unmount());assert.equal(await page.locator('[data-motion-surface]').count(),0);
   }
+  if(['liquid-glass-navigation','window-shade-theme'].includes(item.slug)){assert(await page.evaluate(()=>window.__glassContexts.every(gl=>gl.isContextLost())));assert.equal(await page.evaluate(()=>[...document.fonts].filter(f=>['GlassNavigationInter','ShadeThemeInter','ShadeThemeMono'].includes(f.family)).length),0);}
+  if(item.slug==='optical-glass-cards'){assert(await page.evaluate(()=>window.__opticalContexts.every(gl=>gl.isContextLost())),'all optical shader contexts are released');assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>['OpticalJakarta','OpticalMono'].includes(face.family)).length),0);}
+  if(item.slug==='perforated-stamp-cards')assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>face.family==='StampInter').length),0,'the last card instance releases the embedded font');
+  if(item.slug==='elemental-card-carousel'){assert(await page.evaluate(()=>window.__elementContexts.every(gl=>gl.isContextLost())),'all carousel FBOs, VAOs and contexts are released');assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>face.family==='ElementalInter').length),0);}
+  if(item.slug==='image-dust-disintegration')assert(await page.evaluate(()=>window.__dustContexts.every(gl=>gl.isContextLost())),'all dust-card GPU resources are released');
+  if(item.slug==='glass-ripple-onboarding')assert(await page.evaluate(()=>window.__rippleContexts.every(gl=>gl.isContextLost())),'all ripple textures and contexts are released');
+  if(item.slug==='liquid-call-cta'){assert(await page.evaluate(()=>window.__liquidContexts.every(gl=>gl.isContextLost())),'liquid CTA GPU contexts are released');assert.equal(await page.evaluate(()=>[...document.fonts].filter(face=>face.family==='LiquidCallInter').length),0,'the last unmount releases the embedded font');}
+  if(item.slug==='hanging-art-gallery')assert(await page.evaluate(()=>window.__galleryContexts.every(gl=>gl.isContextLost())),'gallery GPU contexts are released on unmount');
+  if(item.slug==='account-burn')assert(await page.evaluate(()=>window.__burnContexts.every(gl=>gl.isContextLost())),'all owned WebGL contexts are released');
   assert.deepEqual(errors,[]);
   reports.push({slug:item.slug,framework:item.framework,compiled:true,native:true,interaction:true,update:true,multiInstance:true,unmount:true,pageErrors:errors});
   console.log(`PASS ${item.slug} ${item.framework}: interaction, update, multi-instance, cleanup`);

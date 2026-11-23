@@ -1,0 +1,171 @@
+{
+  "slug": "liquid-call-cta",
+  "name": {
+    "en": "Liquid Call CTA",
+    "zh": "液态预约按钮"
+  },
+  "description": {
+    "en": "A capsule follows the pointer with an iridescent liquid edge, pinches off a droplet and springs back into shape.",
+    "zh": "胶囊边缘随指针拉出虹彩液态形状，断开一颗小液滴，再弹回原形。"
+  },
+  "keywords": "液态 预约 按钮 虹彩 黏球 拉伸 断开 液滴 回弹 高光 metaball liquid call CTA pill button smooth min SDF spring droplet val_soonafter",
+  "docsPath": "/docs/animations/liquid-call-cta",
+  "detailPath": "/ai/components/liquid-call-cta.json",
+  "markdownPath": "/ai/components/liquid-call-cta.md",
+  "previewPath": "/assets/components/liquid-call-cta.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "带液态拉伸与断开回弹的主行动按钮",
+      "An iridescent CTA with a pointer-driven liquid meniscus and detached droplet"
+    ],
+    "searchTerms": [
+      "液态",
+      "预约",
+      "按钮",
+      "虹彩",
+      "黏球",
+      "拉伸",
+      "液滴",
+      "回弹",
+      "liquid CTA",
+      "book a call",
+      "metaball",
+      "smooth min",
+      "SDF",
+      "droplet"
+    ],
+    "visualTags": [
+      "liquid",
+      "iridescent",
+      "pill",
+      "spring",
+      "glow"
+    ],
+    "interactions": [
+      "hover",
+      "pointer",
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "三个按钮默认只显示本地演示反馈，使用 onAction 接入实际操作。无 WebGL 时降级为 Canvas2D 静态轮廓；原 HTML 源码许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The user-supplied HTML adapted to an instance-scoped DOM/WebGL core with six native framework entries and an existing self-contained Inter subset. Buttons provide local demo feedback until an onAction handler connects them to an application.",
+    "designReference": "https://x.com/val_soonafter/status/2113254105238171837/video/1",
+    "designAuthor": "@val_soonafter",
+    "license": "No separate source license was supplied or verified. The embedded Inter font retains its SIL Open Font License notice."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/liquid-call-cta/react.json",
+      "component": "LiquidCallCta",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { LiquidCallCta } from \"./LiquidCallCta\";\n\nexport default function App() {\n  return <LiquidCallCta />;\n}",
+      "files": [
+        "LiquidCallCta.tsx",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/liquid-call-cta/vue.json",
+      "component": "LiquidCallCta",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport LiquidCallCta from \"./LiquidCallCta.vue\";\n</script>\n<template><LiquidCallCta /></template>",
+      "files": [
+        "LiquidCallCta.vue",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/liquid-call-cta/svelte.json",
+      "component": "LiquidCallCta",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport LiquidCallCta from \"./LiquidCallCta.svelte\";\n</script>\n<LiquidCallCta />",
+      "files": [
+        "LiquidCallCta.svelte",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/liquid-call-cta/solid.json",
+      "component": "LiquidCallCta",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { LiquidCallCta } from \"./LiquidCallCta.solid\";\n\nexport default function App() {\n  return <LiquidCallCta />;\n}",
+      "files": [
+        "LiquidCallCta.solid.tsx",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/liquid-call-cta/preact.json",
+      "component": "LiquidCallCta",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { LiquidCallCta } from \"./LiquidCallCta.preact\";\n\nexport default function App() {\n  return <LiquidCallCta />;\n}",
+      "files": [
+        "LiquidCallCta.preact.tsx",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/liquid-call-cta/vanilla.json",
+      "component": "LiquidCallCta",
+      "dependencies": [],
+      "usage": "import { mount } from \"./LiquidCallCta\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "LiquidCallCta.ts",
+        "LiquidCallCtaEngine.js",
+        "motion-runtime.ts",
+        "LiquidCallCtaEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Move across the pill and pull beyond its edge to stretch and snap the liquid. Click any button for local demo feedback.",
+    "zh": "移动指针并拉过胶囊边缘，可看到液态拉伸与断开。点击按钮显示本地演示反馈。"
+  }
+}

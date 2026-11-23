@@ -7,6 +7,125 @@ const PLAYER = String.raw`
   const repeat = (fn, interval) => { fn(); window.setInterval(fn, interval); };
   const start = () => {
     document.documentElement.setAttribute('translate', 'no');
+    if (slug === 'liquid-glass-navigation' || slug === 'window-shade-theme') {
+      const isNav=slug==='liquid-glass-navigation',root=document.getElementById(isNav?'glassNavigation':'shadeTheme');
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          if(isNav){let index=0;later(()=>repeat(()=>{index=(index+1)%3;const key=['product','resources','company'][index];document.querySelector('.nav-trigger[data-menu="'+key+'"]').dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'}));later(()=>document.querySelector('#pane-'+key+' .menu-item:nth-child(2)').dispatchEvent(new PointerEvent('pointerenter',{pointerType:'mouse'})),600);},2200),1000);}
+          else {const control=document.getElementById('windowWrap');later(()=>repeat(()=>control.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})),2600),1200);}
+        }));
+      };begin();return;
+    }
+    if (slug === 'optical-glass-cards') {
+      const root=document.getElementById('opticalGallery');
+      const begin=()=>{if(root.dataset.ready!=='true'){later(begin,50);return;}requestAnimationFrame(()=>requestAnimationFrame(()=>parent.postMessage({type:'leibox-preview-ready',slug},'*')));};
+      begin();return;
+    }
+    if (slug === 'perforated-stamp-cards') {
+      const root=document.getElementById('stampCards'),cards=[...document.querySelectorAll('.card-slot')];
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          let start=null,previous=null;
+          const move=now=>{
+            if(start===null)start=now;
+            const elapsed=now-start,phase=elapsed%7200,index=Math.floor(phase/2400),local=phase%2400;
+            const card=local<1700?cards[index]:null;
+            if(previous&&previous!==card)previous.dispatchEvent(new PointerEvent('pointerleave',{pointerType:'mouse'}));
+            if(card){const r=card.getBoundingClientRect();card.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,pointerType:'mouse',clientX:r.left+r.width*(.5+Math.sin(elapsed*.003)*.28),clientY:r.top+r.height*(.5+Math.cos(elapsed*.0024)*.28)}));}
+            previous=card;root.dataset.previewTime=elapsed.toFixed(1);requestAnimationFrame(move);
+          };requestAnimationFrame(move);
+        }));
+      };begin();return;
+    }
+    if (slug === 'elemental-card-carousel') {
+      const root=document.getElementById('stage');
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          let index=0;later(()=>repeat(()=>{index=(index+1)%4;document.querySelector('.card[data-index="'+index+'"]').dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));},2600),1800);
+        }));
+      };begin();return;
+    }
+    if (slug === 'image-dust-disintegration') {
+      const root=document.getElementById('imageDustDisintegration');
+      const activate=id=>document.getElementById(id).dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          let previous='';
+          repeat(()=>{const phase=root.dataset.phase;if(phase===previous)return;previous=phase;
+            if(phase==='ready'){document.getElementById('card').classList.add('is-touch-open');later(()=>activate('btnDelete'),1000);}
+            if(phase==='gone')later(()=>activate('btnRestore'),650);
+          },120);
+        }));
+      };
+      begin();return;
+    }
+    if (slug === 'glass-ripple-onboarding') {
+      const root=document.getElementById('glassRippleOnboarding');
+      const pulse=document.getElementById('starburstBtn');
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          later(()=>repeat(()=>pulse.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1})),2200),500);
+        }));
+      };
+      begin();return;
+    }
+    if (slug === 'liquid-call-cta') {
+      const root=document.getElementById('liquidCta');
+      const book=document.getElementById('bookBtn');
+      const move=(x,y)=>{
+        const r=book.getBoundingClientRect(),s=r.width/287;
+        root.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,pointerType:'mouse',clientX:r.left+r.width*.5+x*s,clientY:r.top+r.height*.5+y*s}));
+      };
+      const begin=()=>{
+        if(root.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          const actions=[()=>move(-40,0),()=>move(30,0),()=>move(40,-72),()=>move(40,-155),()=>move(0,0),()=>move(-100,40),()=>move(-240,100),()=>root.dispatchEvent(new PointerEvent('pointerleave'))];
+          let step=0;later(()=>repeat(()=>actions[step++%actions.length](),650),400);
+        }));
+      };
+      begin();return;
+    }
+    if (slug === 'hanging-art-gallery') {
+      const gallery=document.getElementById('gallery-scene');
+      const buttons=[...document.querySelectorAll('.sr-controls button')];
+      const begin=()=>{
+        if(gallery.dataset.ready!=='true'){later(begin,50);return;}
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          parent.postMessage({type:'leibox-preview-ready',slug},'*');
+          const order=[1,0,3,4,2];let step=0;
+          later(()=>repeat(()=>buttons[order[step++%order.length]].dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1})),1400),500);
+        }));
+      };
+      begin();return;
+    }
+    if (slug === 'account-burn') {
+      const stage=document.getElementById('stage');
+      const button=document.getElementById('hold-btn');
+      let previous='';
+      const play=()=>{
+        const state=stage.dataset.state;
+        if(state===previous)return;
+        previous=state;
+        if(state==='delete')later(()=>button.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,pointerId:1,button:0,isPrimary:true})),450);
+        if(state==='signin')later(()=>document.getElementById('restore-btn').dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1})),1100);
+      };
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        parent.postMessage({type:'leibox-preview-ready',slug},'*');
+        play();setInterval(play,120);
+      }));
+      return;
+    }
     if (slug === 'genie-menu') {
       const trigger=document.getElementById('triggerBtn');
       const activate=()=>trigger.dispatchEvent(new MouseEvent('click',{bubbles:true,detail:1}));
@@ -530,6 +649,10 @@ export function interactionPreviewCss(slug: string) {
     html, body { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; }
     html, body { background: #f4f4f4 !important; }
     ${slug === 'focus-switch' ? '.stage { background: #f4f4f4 !important; }' : ''}
+    ${slug === 'glass-ripple-onboarding' ? ':root{--page-bg:#f4f4f4}.stage{background:#f4f4f4}' : ''}
+    ${slug === 'liquid-call-cta' ? ':root{--bg:#f4f4f4}.stage{background:#f4f4f4}.feedback-toast{display:none}' : ''}
+    ${slug === 'hanging-art-gallery' ? '.gallery-scene{--gallery-bg:#f4f4f4}.sr-controls{display:none!important}' : ''}
+    ${slug === 'account-burn' ? ':root{--bg-light:#f4f4f4}.stage,#screen-delete{background:#f4f4f4!important}' : ''}
     ${slug === 'status-picker' ? '.stage { --bg:#f4f4f4; background:#f4f4f4!important; }' : ''}
     ${slug === 'genie-menu' ? '.stage {background:#f4f4f4!important;background-image:none!important}.glass-frame{inset:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}.sheet{background:transparent;border-radius:0;box-shadow:none}.menu-anchor{top:calc(50% - 140px);right:calc(50% - 124px)}.speed-control,.action-toast{display:none}' : ''}
     ${slug === 'dot-matrix-trio' ? '.dm-scene { background:#f4f4f4!important; }' : ''}
@@ -539,6 +662,10 @@ export function interactionPreviewCss(slug: string) {
     ${slug === 'thinking-particles' ? '.thinking-demo { min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'crumpled-paper' ? '.crumple-demo { height:100%;min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'glass-tab-menu' ? '.glass-tab-demo { height:100%;min-height:100%;background:#f4f4f4!important; }' : ''}
+    ${slug === 'optical-glass-cards' ? 'html,body,.optical-gallery{background:#f4f4f4!important}' : ''}
+    ${slug === 'perforated-stamp-cards' ? 'html,body,.viewport{background:#f4f4f4!important}' : ''}
+    ${slug === 'elemental-card-carousel' ? ':root{--bg-base:#f4f4f4}html,body,.stage{background:#f4f4f4!important}' : ''}
+    ${slug === 'image-dust-disintegration' ? ':root {--bg-color:#f4f4f4;--dot-color:#dedede}html,body,.stage{background-color:#f4f4f4!important}' : ''}
     ${slug === 'staggered-radial-menu' || slug === 'soft-action-wheel' ? '.radial-menu-demo { height:100%;min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'galaxy-effort-slider' ? '.galaxy-effort-demo { height:100%;min-height:100%;background:#f4f4f4!important; }' : ''}
     ${slug === 'sailing-toc' ? '.st-demo { --st-surface:#f4f4f4; }' : ''}
@@ -551,7 +678,7 @@ export function interactionPreviewCss(slug: string) {
 
 export function interactionPreviewDocument(source: string, slug: string) {
   const library = source.includes("data-leibox-library");
-  if (library || slug === "retro-computer-cord" || slug === "distortion-waves" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
+  if (library || slug === "liquid-glass-navigation" || slug === "window-shade-theme" || slug === "optical-glass-cards" || slug === "perforated-stamp-cards" || slug === "elemental-card-carousel" || slug === "image-dust-disintegration" || slug === "retro-computer-cord" || slug === "distortion-waves" || slug === "pixel-toggle" || slug === "image-accordion" || slug === "image-compare" || slug === "card-swap" || slug === "multi-cursor-builder" || slug === "album-cover-tunnel" || slug === "stacked-metadata" || slug === "transfer-glow" || slug === "matcha-powder-reveal" || slug === "shader-flood") source = source.replace(/<html\b/i, "<html data-leibox-motion-preview");
   const script = library ? "" : slug === "focus-switch" ? `
     customElements.whenDefined('focus-switch').then(() => {
       const focusSwitch = document.querySelector('focus-switch');

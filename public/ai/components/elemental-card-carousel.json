@@ -1,0 +1,173 @@
+{
+  "slug": "elemental-card-carousel",
+  "name": {
+    "en": "Elemental Card Carousel",
+    "zh": "元素卡片轮播"
+  },
+  "description": {
+    "en": "Four pill cards slide into fire, sun rays, flowing air and petals, with staged ignition, lingering particles and a glossy floor reflection.",
+    "zh": "四张胶囊卡滑到中央，依次展开火焰、日冕、气流和花瓣，退场时留下余粒子与地面反射。"
+  },
+  "keywords": "元素 卡片 轮播 火焰 日冕 气流 花瓣 胶囊 弹簧 反射 粒子 elemental card carousel ember solar breeze bloom WebGL2 FBM reflection kaolti",
+  "docsPath": "/docs/animations/elemental-card-carousel",
+  "detailPath": "/ai/components/elemental-card-carousel.json",
+  "markdownPath": "/ai/components/elemental-card-carousel.md",
+  "previewPath": "/assets/components/elemental-card-carousel.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "用火焰、日冕、气流和花瓣表达选中的主题卡",
+      "A spring carousel with four procedural elemental effects and floor reflection"
+    ],
+    "searchTerms": [
+      "元素",
+      "轮播",
+      "胶囊卡片",
+      "火焰",
+      "日冕",
+      "气流",
+      "花瓣",
+      "地面反射",
+      "elemental carousel",
+      "fire",
+      "solar rays",
+      "air flow",
+      "lotus",
+      "WebGL2"
+    ],
+    "visualTags": [
+      "dark",
+      "fire",
+      "glow",
+      "particles",
+      "reflection",
+      "spring"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "drag",
+      "swipe",
+      "wheel",
+      "pause"
+    ],
+    "caveat": "四套场与反射需要WebGL2；降级时保留原生卡和2D粒子。源码许可未核实，Inter字体保留OFL许可。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML adapted to an instance-scoped WebGL2/Canvas2D core with six native framework entries, existing licensed Inter subset, scoped pointer/keyboard/wheel input and GPU resource cleanup.",
+    "designReference": "https://x.com/kaolti/status/2110322552841056689/video/1",
+    "designAuthor": "@kaolti",
+    "license": "No separate source license was supplied or verified. The embedded Inter subset retains its SIL Open Font License notice."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/elemental-card-carousel/react.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { ElementalCardCarousel } from \"./ElementalCardCarousel\";\n\nexport default function App() {\n  return <ElementalCardCarousel />;\n}",
+      "files": [
+        "ElementalCardCarousel.tsx",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/elemental-card-carousel/vue.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport ElementalCardCarousel from \"./ElementalCardCarousel.vue\";\n</script>\n<template><ElementalCardCarousel /></template>",
+      "files": [
+        "ElementalCardCarousel.vue",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/elemental-card-carousel/svelte.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport ElementalCardCarousel from \"./ElementalCardCarousel.svelte\";\n</script>\n<ElementalCardCarousel />",
+      "files": [
+        "ElementalCardCarousel.svelte",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/elemental-card-carousel/solid.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { ElementalCardCarousel } from \"./ElementalCardCarousel.solid\";\n\nexport default function App() {\n  return <ElementalCardCarousel />;\n}",
+      "files": [
+        "ElementalCardCarousel.solid.tsx",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/elemental-card-carousel/preact.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { ElementalCardCarousel } from \"./ElementalCardCarousel.preact\";\n\nexport default function App() {\n  return <ElementalCardCarousel />;\n}",
+      "files": [
+        "ElementalCardCarousel.preact.tsx",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/elemental-card-carousel/vanilla.json",
+      "component": "ElementalCardCarousel",
+      "dependencies": [],
+      "usage": "import { mount } from \"./ElementalCardCarousel\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "ElementalCardCarousel.ts",
+        "ElementalCardCarouselEngine.js",
+        "motion-runtime.ts",
+        "ElementalCardCarouselEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click a card, swipe horizontally or use Left, Right and keys 1–4. Horizontal wheel or Shift-wheel also switches elements.",
+    "zh": "点击卡片、横向滑动，或用左右方向键及数字 1–4 切换。也支持横向滚轮与 Shift 滚轮。"
+  }
+}

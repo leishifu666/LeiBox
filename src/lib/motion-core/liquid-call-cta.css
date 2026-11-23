@@ -1,0 +1,190 @@
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pill-w: 287px;
+      --pill-h: 99px;
+      --circle-d: 99px;
+      --gap: 47px;
+      --bleed: 160px;
+      --bg: #ffffff;
+      --pill-idle: #2a2829;
+      --circle-border: #e5e5e5;
+      --circle-border-hover: #bcbcbc;
+      --circle-bg-hover: #f4f4f4;
+      --icon-color: #111111;
+      --ui-scale: 1;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      font-family: 'LiquidCallInter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 24px;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap);
+      transform: scale(var(--ui-scale));
+      transform-origin: center center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Primary liquid pill button */
+    .liquid-btn {
+      position: relative;
+      width: var(--pill-w);
+      height: var(--pill-h);
+      border: none;
+      border-radius: 9999px;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+    }
+
+    .liquid-btn:focus-visible::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      border: 2px solid rgba(112, 82, 132, 0.55);
+      pointer-events: none;
+    }
+
+    .liquid-canvas {
+      position: absolute;
+      left: calc(var(--bleed) * -1);
+      top: calc(var(--bleed) * -1);
+      width: calc(var(--pill-w) + var(--bleed) * 2);
+      height: calc(var(--pill-h) + var(--bleed) * 2);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .liquid-label {
+      position: relative;
+      z-index: 2;
+      color: #ffffff;
+      font-size: 34px;
+      font-weight: 500;
+      letter-spacing: -0.014em;
+      line-height: 1;
+      pointer-events: none;
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+    }
+
+    .liquid-btn.is-pressed .liquid-label {
+      transform: scale(0.972);
+    }
+
+    /* Circular icon buttons */
+    .icon-btn {
+      position: relative;
+      width: var(--circle-d);
+      height: var(--circle-d);
+      border-radius: 50%;
+      border: 1.75px solid var(--circle-border);
+      background-color: #ffffff;
+      color: var(--icon-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      transition:
+        transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+      will-change: transform;
+    }
+
+    .icon-btn:hover {
+      transform: scale(1.07);
+      background-color: var(--circle-bg-hover);
+      border-color: var(--circle-border-hover);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.965);
+      transition-duration: 0.14s;
+    }
+
+    .icon-btn:focus-visible {
+      border-color: #666666;
+      box-shadow: 0 0 0 3px rgba(42, 40, 41, 0.14);
+    }
+
+    .icon-svg {
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Unobtrusive click feedback toast (only appears on click) */
+    .feedback-toast {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(14px);
+      background: #2a2829;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      padding: 9px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 20;
+      white-space: nowrap;
+    }
+
+    .feedback-toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  
+.stage {height:var(--motion-height,100dvh);overflow:hidden;}
+.cta-row {flex:none;width:579px;}
+.liquid-btn,.icon-btn {flex:none;}
+.liquid-label {max-width:88%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.liquid-btn:disabled,.icon-btn:disabled {cursor:not-allowed;opacity:.5;}
+.icon-btn:disabled:hover {transform:none;background:#fff;border-color:var(--circle-border);}
+.stage[data-reduced=true] *, .stage[data-reduced=true] *::after {transition-duration:0s!important;}
+.stage[data-reduced=true] .icon-btn:hover {transform:none;}
+.stage[data-reduced=true] .liquid-btn.is-pressed .liquid-label {transform:none;}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;}}
+
+.liquid-btn {font-family:Arial,Helvetica,sans-serif;}

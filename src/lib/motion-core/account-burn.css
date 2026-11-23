@@ -1,0 +1,424 @@
+
+    :root {
+      --bg-light: #ffffff;
+      --bg-dark: #000000;
+      --text-primary-light: #0e0e10;
+      --text-secondary-light: #5c5c60;
+      --text-handle-light: #636366;
+      --text-primary-dark: #ffffff;
+      --text-secondary-dark: #86868b;
+      --text-muted-dark: #78787d;
+      --input-dark-bg: #18181a;
+      --input-dark-border: rgba(255, 255, 255, 0.07);
+      --input-dark-focus: rgba(255, 255, 255, 0.24);
+      --btn-dark-bg: #111111;
+      --btn-light-bg: #ffffff;
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-light);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg-light);
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Layer 1: White Delete Account Screen */
+    #screen-delete {
+      z-index: 1;
+      background: var(--bg-light);
+      color: var(--text-primary-light);
+    }
+
+    .delete-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform: translateY(-4px);
+    }
+
+    .user-handle {
+      font-size: 13.5px;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text-handle-light);
+      letter-spacing: -0.005em;
+      margin-bottom: 14px;
+    }
+
+    .delete-title {
+      font-size: clamp(28px, 4.4vw, 37px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text-primary-light);
+      margin-bottom: 12px;
+    }
+
+    .delete-subtitle {
+      font-size: clamp(14px, 1.8vw, 15.5px);
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text-secondary-light);
+      letter-spacing: -0.008em;
+      margin-bottom: 26px;
+    }
+
+    .hold-btn-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      transition: opacity 0.18s ease;
+    }
+
+    .hold-btn-wrap.is-ignited {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hold-btn-ring {
+      position: absolute;
+      inset: -2px;
+      border-radius: 9999px;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(90deg, #b83b0a, #ff9924, #ffe699, #a468e6, #6d3da8);
+      filter: blur(1.4px);
+    }
+
+    .hold-btn {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 174px;
+      height: 45px;
+      padding: 0 28px;
+      border: none;
+      border-radius: 9999px;
+      background: var(--btn-dark-bg);
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none;
+      transition: transform 0.16s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.16s ease;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.09);
+    }
+
+    .hold-btn:hover {
+      background: #1a1a1d;
+    }
+
+    .hold-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.22);
+    }
+
+    .hold-btn.is-holding {
+      transform: scale(0.986);
+    }
+
+    .hold-btn-label {
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hold-btn-fill {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        90deg,
+        #3b0400 0%,
+        #6d0b00 22%,
+        #b01d00 54%,
+        #e84b00 78%,
+        #ff9a14 91%,
+        #ffe066 97%,
+        #fffbe0 100%
+      );
+      clip-path: inset(0 100% 0 0);
+      will-change: clip-path, opacity;
+    }
+
+    .hold-btn-fill::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 68%);
+      pointer-events: none;
+    }
+
+    .hold-btn-fill-label {
+      position: relative;
+      z-index: 1;
+      color: #120704;
+      font-size: 14.5px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    /* Post-restore molten cooldown glow on button (matches t=17.00s -> 17.50s) */
+    .hold-btn-cooldown {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(90deg, #6b1505 0%, #b83c10 55%, #e38c38 100%);
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    .hold-btn-spark {
+      position: absolute;
+      top: -6px;
+      bottom: -6px;
+      left: 0;
+      width: 12px;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 240, 1) 0%, rgba(255, 210, 95, 0.85) 40%, rgba(255, 90, 10, 0) 100%);
+      opacity: 0;
+      transform: translateX(-12px);
+      will-change: transform, opacity;
+    }
+
+    /* Layer 2: WebGL2 Base (Silky Navier-Stokes Smoke + Crisp Paper Burn Edge + Charcoal Cracks + Black Void) */
+    #burn-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Layer 3: Dark Sign In Screen */
+    #screen-signin {
+      z-index: 3;
+      background: transparent;
+      color: var(--text-primary-dark);
+      pointer-events: none;
+      opacity: 0;
+      will-change: clip-path, opacity;
+    }
+
+    #screen-signin.is-active {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    #screen-signin.is-burning {
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    .signin-content {
+      width: 100%;
+      max-width: 344px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform: translateY(-2px);
+    }
+
+    .signin-title {
+      font-size: clamp(28px, 4.4vw, 37px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text-primary-dark);
+      margin-bottom: 10px;
+    }
+
+    .signin-subtitle {
+      font-size: clamp(14px, 1.8vw, 15.5px);
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text-secondary-dark);
+      letter-spacing: -0.008em;
+      margin-bottom: 30px;
+    }
+
+    .signin-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .email-input {
+      width: 100%;
+      height: 46px;
+      padding: 0 22px;
+      border-radius: 9999px;
+      border: 1px solid var(--input-dark-border);
+      background: var(--input-dark-bg);
+      color: #f5f5f7;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 400;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .email-input::placeholder {
+      color: #6e6e73;
+    }
+
+    .email-input:focus {
+      border-color: var(--input-dark-focus);
+      background: #202024;
+    }
+
+    .continue-btn {
+      width: 100%;
+      height: 46px;
+      border: none;
+      border-radius: 9999px;
+      background: var(--btn-light-bg);
+      color: #111111;
+      font-family: inherit;
+      font-size: 14.5px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.15s ease, transform 0.14s ease;
+    }
+
+    .continue-btn:hover {
+      background: #ececef;
+    }
+
+    .continue-btn:active {
+      transform: scale(0.988);
+    }
+
+    .continue-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .signin-feedback {
+      min-height: 18px;
+      margin-top: 4px;
+      font-size: 12.5px;
+      color: #a1a1a6;
+      opacity: 0;
+      transform: translateY(-2px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .signin-feedback.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .restore-btn {
+      margin-top: 8px;
+      padding: 6px 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted-dark);
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.18s ease, transform 0.14s ease;
+    }
+
+    .restore-btn:hover {
+      color: #ffffff;
+    }
+
+    .restore-btn:active {
+      transform: scale(0.97);
+    }
+
+    .restore-btn:focus-visible {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    /* Layer 4: Foreground Crisp Multi-Pass HDR Fluid Fire Bloom */
+    #bloom-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Layer 5: Foreground Ash Flakes, Hollow Glowing Paper Scraps & Embers */
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      pointer-events: none;
+      display: block;
+    }
+  
+.stage {width:100%;height:var(--motion-height,100dvh);}
+.hold-btn {touch-action:none;}
+.email-input::placeholder {color:#929297;}
+.restore-btn {color:#a1a1a6;}
+@media (prefers-reduced-motion:reduce) {
+ *,*::before,*::after {animation-duration:0s!important;transition-duration:0s!important;}
+}

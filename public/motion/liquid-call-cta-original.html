@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Call — Liquid Metaball CTA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pill-w: 287px;
+      --pill-h: 99px;
+      --circle-d: 99px;
+      --gap: 47px;
+      --bleed: 160px;
+      --bg: #ffffff;
+      --pill-idle: #2a2829;
+      --circle-border: #e5e5e5;
+      --circle-border-hover: #bcbcbc;
+      --circle-bg-hover: #f4f4f4;
+      --icon-color: #111111;
+      --ui-scale: 1;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .stage {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 24px;
+    }
+
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: var(--gap);
+      transform: scale(var(--ui-scale));
+      transform-origin: center center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Primary liquid pill button */
+    .liquid-btn {
+      position: relative;
+      width: var(--pill-w);
+      height: var(--pill-h);
+      border: none;
+      border-radius: 9999px;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
+    }
+
+    .liquid-btn:focus-visible::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      border: 2px solid rgba(112, 82, 132, 0.55);
+      pointer-events: none;
+    }
+
+    .liquid-canvas {
+      position: absolute;
+      left: calc(var(--bleed) * -1);
+      top: calc(var(--bleed) * -1);
+      width: calc(var(--pill-w) + var(--bleed) * 2);
+      height: calc(var(--pill-h) + var(--bleed) * 2);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .liquid-label {
+      position: relative;
+      z-index: 2;
+      color: #ffffff;
+      font-size: 34px;
+      font-weight: 500;
+      letter-spacing: -0.014em;
+      line-height: 1;
+      pointer-events: none;
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+    }
+
+    .liquid-btn.is-pressed .liquid-label {
+      transform: scale(0.972);
+    }
+
+    /* Circular icon buttons */
+    .icon-btn {
+      position: relative;
+      width: var(--circle-d);
+      height: var(--circle-d);
+      border-radius: 50%;
+      border: 1.75px solid var(--circle-border);
+      background-color: #ffffff;
+      color: var(--icon-color);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      transition:
+        transform 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
+      will-change: transform;
+    }
+
+    .icon-btn:hover {
+      transform: scale(1.07);
+      background-color: var(--circle-bg-hover);
+      border-color: var(--circle-border-hover);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.965);
+      transition-duration: 0.14s;
+    }
+
+    .icon-btn:focus-visible {
+      border-color: #666666;
+      box-shadow: 0 0 0 3px rgba(42, 40, 41, 0.14);
+    }
+
+    .icon-svg {
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Unobtrusive click feedback toast (only appears on click) */
+    .feedback-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(14px);
+      background: #2a2829;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      padding: 9px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 20;
+      white-space: nowrap;
+    }
+
+    .feedback-toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <div class="cta-row" id="ctaRow">
+      <!-- Primary Liquid Pill Button -->
+      <button
+        type="button"
+        class="liquid-btn"
+        id="bookBtn"
+        aria-label="Book a call"
+      >
+        <canvas class="liquid-canvas" id="liquidCanvas" aria-hidden="true"></canvas>
+        <span class="liquid-label">Book a call</span>
+      </button>
+
+      <!-- Four-point Split Star Icon Button (43x43 exact proportion inside 99px circle) -->
+      <button
+        type="button"
+        class="icon-btn"
+        id="starBtn"
+        aria-label="Explore highlights"
+      >
+        <svg class="icon-svg" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Top-left concave quadrant -->
+          <path d="M20.1 2.2 C19.5 11.8 11.8 19.5 2.2 20.1 L20.1 20.1 Z" fill="currentColor" />
+          <!-- Top-right concave quadrant -->
+          <path d="M23.9 2.2 C24.5 11.8 32.2 19.5 41.8 20.1 L23.9 20.1 Z" fill="currentColor" />
+          <!-- Bottom-left concave quadrant -->
+          <path d="M20.1 41.8 C19.5 32.2 11.8 24.5 2.2 23.9 L20.1 23.9 Z" fill="currentColor" />
+          <!-- Bottom-right concave quadrant -->
+          <path d="M23.9 41.8 C24.5 32.2 32.2 24.5 41.8 23.9 L23.9 23.9 Z" fill="currentColor" />
+        </svg>
+      </button>
+
+      <!-- Refined Thin-Stroke X Icon Button (33x35 exact proportion inside 99px circle) -->
+      <button
+        type="button"
+        class="icon-btn"
+        id="xBtn"
+        aria-label="Visit X profile"
+      >
+        <svg class="icon-svg" width="35" height="35" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Crisp slender hollow diagonal bar (\) -->
+          <path
+            d="M4.6 3.5 H12.4 L31.4 32.5 H23.6 Z"
+            stroke="currentColor"
+            stroke-width="2.1"
+            stroke-linejoin="miter"
+          />
+          <!-- Thin counter-diagonal strokes (/) split cleanly at the hollow bar edges -->
+          <path
+            d="M30.2 3.5 L19.6 15.8 M16.4 19.5 L5.4 32.5"
+            stroke="currentColor"
+            stroke-width="2.15"
+            stroke-linecap="square"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="feedback-toast" id="feedbackToast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      const PILL_W = 287;
+      const PILL_H = 99;
+      const BLEED = 160;
+      const CANVAS_W = PILL_W + BLEED * 2;
+      const CANVAS_H = PILL_H + BLEED * 2;
+      const BASE_ROW_W = 287 + 47 + 99 + 47 + 99; // 579px
+
+      const bookBtn = document.getElementById('bookBtn');
+      const starBtn = document.getElementById('starBtn');
+      const xBtn = document.getElementById('xBtn');
+      const canvas = document.getElementById('liquidCanvas');
+      const feedbackToast = document.getElementById('feedbackToast');
+
+      // Responsive scale preserving exact 287:99:47:99:47:99 proportions
+      function updateResponsiveScale() {
+        const availW = Math.max(240, window.innerWidth - 64);
+        const availH = Math.max(180, window.innerHeight - 64);
+        const scaleW = availW / BASE_ROW_W;
+        const scaleH = availH / (PILL_H + 120);
+        const scale = Math.min(1, scaleW, scaleH);
+        document.documentElement.style.setProperty('--ui-scale', scale.toFixed(4));
+      }
+      updateResponsiveScale();
+      window.addEventListener('resize', updateResponsiveScale);
+
+      // Subtle click feedback toast
+      let toastTimer = null;
+      function showToast(message) {
+        feedbackToast.textContent = message;
+        feedbackToast.classList.add('is-visible');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          feedbackToast.classList.remove('is-visible');
+        }, 2000);
+      }
+
+      bookBtn.addEventListener('click', () => {
+        showToast('Call booking slot opened (demo)');
+      });
+      starBtn.addEventListener('click', () => {
+        showToast('Highlights view triggered (demo)');
+      });
+      xBtn.addEventListener('click', () => {
+        showToast('X profile link triggered (demo)');
+      });
+
+      // Signed distance to rounded capsule centered at (0, 0)
+      const halfW = PILL_W * 0.5;
+      const halfH = PILL_H * 0.5;
+      const cornerR = halfH;
+
+      function sdPill(x, y) {
+        const bx = halfW - cornerR;
+        const qx = Math.abs(x) - bx;
+        const qy = Math.abs(y);
+        const dx = Math.max(qx, 0);
+        const dy = Math.max(qy, 0);
+        return Math.hypot(dx, dy) + Math.min(Math.max(qx, qy), 0) - cornerR;
+      }
+
+      // Project an exterior point onto the closest point on the pill's spine/interior
+      function clampToPillInterior(x, y) {
+        const bx = halfW - cornerR;
+        const cx = Math.max(-bx, Math.min(bx, x));
+        const dx = x - cx;
+        const dy = y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const maxR = cornerR * 0.55;
+        if (dist <= maxR) return [x, y];
+        return [cx + (dx / dist) * maxR, (dy / dist) * maxR];
+      }
+
+      // WebGL shader setup: 2D SDF smooth-min metaball + detached snap-off droplet + iridescent mesh + dithered ambient glow
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(CANVAS_W * dpr);
+      canvas.height = Math.round(CANVAS_H * dpr);
+
+      const gl = canvas.getContext('webgl', {
+        alpha: true,
+        antialias: true,
+        premultipliedAlpha: true
+      });
+
+      let renderFrame = null;
+
+      if (gl) {
+        const vertSrc = `
+          attribute vec2 aPos;
+          varying vec2 vUv;
+          void main() {
+            vUv = aPos * 0.5 + 0.5;
+            gl_Position = vec4(aPos, 0.0, 1.0);
+          }
+        `;
+
+        const fragSrc = `
+          precision highp float;
+          varying vec2 vUv;
+
+          uniform vec2 uCanvasSize;
+          uniform vec2 uPillHalf;
+          uniform vec2 uBlobPos;
+          uniform float uBlobRadius;
+          uniform float uSmoothK;
+          uniform vec2 uDropPos;
+          uniform float uDropRadius;
+          uniform vec2 uLightPos;
+          uniform float uHoverMix;
+          uniform float uPressScale;
+          uniform float uTime;
+
+          // Polynomial smooth minimum for organic liquid metaball union
+          float smin(float a, float b, float k) {
+            float h = clamp(0.5 + 0.5 * (b - a) / max(k, 0.0001), 0.0, 1.0);
+            return mix(b, a, h) - k * h * (1.0 - h);
+          }
+
+          float sdRoundedPill(vec2 p, vec2 halfSize) {
+            float r = halfSize.y;
+            vec2 b = vec2(halfSize.x - r, 0.0);
+            vec2 q = abs(p) - b;
+            return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+          }
+
+          // Subtle screen-space dither to eliminate 8-bit banding in wide soft halos
+          float hash12(vec2 p) {
+            vec3 p3 = fract(vec3(p.xyx) * 0.1031);
+            p3 += dot(p3, p3.yzx + 33.33);
+            return fract((p3.x + p3.y) * p3.z);
+          }
+
+          // Multi-lobe editorial iridescent mesh matching reference frames
+          vec3 sampleIridescent(vec2 p, vec2 lightPos, float t) {
+            float nx = clamp((p.x + uPillHalf.x) / (uPillHalf.x * 2.0), 0.0, 1.0);
+            float ny = clamp((p.y + uPillHalf.y) / (uPillHalf.y * 2.0), 0.0, 1.0);
+
+            // Base velvety muted mesh stops
+            vec3 colTaupe  = vec3(0.518, 0.460, 0.428); // warm olive-taupe left edge
+            vec3 colRose   = vec3(0.560, 0.325, 0.440); // dusty berry-rose upper-mid
+            vec3 colPlum   = vec3(0.425, 0.295, 0.490); // muted plum-violet center-right
+            vec3 colSlate  = vec3(0.340, 0.402, 0.498); // cool slate-indigo right
+
+            float drift = sin(t * 0.6) * 0.03;
+            vec3 col = mix(colTaupe, colRose, smoothstep(0.04, 0.44 + drift, nx));
+            col = mix(col, colPlum, smoothstep(0.36, 0.67 - drift, nx));
+            col = mix(col, colSlate, smoothstep(0.58, 0.95, nx));
+
+            // Upper-mid berry depth and lower-left warmth
+            float upperBerry = exp(-pow((nx - 0.46) / 0.28, 2.0) - pow((ny - 0.18) / 0.45, 2.0));
+            col = mix(col, vec3(0.515, 0.290, 0.435), upperBerry * 0.32);
+
+            // Cursor-following luminous champagne-peach / sand highlight
+            float distLight = length(p - lightPos);
+            float warmCore = exp(-(distLight * distLight) / (86.0 * 86.0));
+            vec3 colChampagne = vec3(0.805, 0.680, 0.585);
+            col = mix(col, colChampagne, warmCore * 0.74);
+
+            // Soft rose-blush halo ring around the warm spotlight
+            float blushRing = exp(-pow(distLight - 46.0, 2.0) / (54.0 * 54.0));
+            col = mix(col, vec3(0.655, 0.410, 0.505), blushRing * 0.22 * (1.0 - nx * 0.4));
+
+            return col;
+          }
+
+          void main() {
+            vec2 p = (vUv - 0.5) * uCanvasSize;
+            p.y = -p.y;
+
+            vec2 pillHalf = uPillHalf * uPressScale;
+            float dPill = sdRoundedPill(p, pillHalf);
+
+            float d = dPill;
+            if (uBlobRadius > 0.25) {
+              float dBlob = length(p - uBlobPos) - uBlobRadius;
+              d = smin(dPill, dBlob, uSmoothK);
+            }
+
+            // Independent pinched-off droplet on snap-off (slight smooth union only when ultra-close)
+            if (uDropRadius > 0.2) {
+              float dDrop = length(p - uDropPos) - uDropRadius;
+              d = smin(d, dDrop, 5.5);
+            }
+
+            // Crisp sub-pixel anti-aliasing
+            float aa = 1.05;
+            float shapeAlpha = 1.0 - smoothstep(-aa * 0.5, aa * 0.5, d);
+
+            vec3 idleCol = vec3(0.165, 0.157, 0.161); // #2A2829
+            vec3 iridCol = sampleIridescent(p, uLightPos, uTime);
+
+            // Subtle velvety edge translucency when hovered
+            float innerRim = smoothstep(-22.0, -0.5, d) * shapeAlpha;
+            iridCol += vec3(0.036, 0.028, 0.040) * innerRim;
+
+            vec3 fillCol = mix(idleCol, iridCol, uHoverMix);
+
+            // Soft multi-toned ambient outer glow conforming to the deformed SDF
+            float nx = clamp((p.x + uPillHalf.x) / (uPillHalf.x * 2.0), 0.0, 1.0);
+            vec3 glowPink = vec3(1.00, 0.74, 0.85);
+            vec3 glowLav  = vec3(0.84, 0.75, 0.97);
+            vec3 glowBlue = vec3(0.75, 0.81, 0.99);
+            vec3 glowCol = mix(glowPink, glowLav, smoothstep(0.10, 0.55, nx));
+            glowCol = mix(glowCol, glowBlue, smoothstep(0.50, 0.94, nx));
+
+            float outerDist = max(d, 0.0);
+            float glowStrength = exp(-(outerDist * outerDist) / (40.0 * 40.0)) * 0.38
+                               + exp(-(outerDist * outerDist) / (88.0 * 88.0)) * 0.16;
+            float glowAlpha = glowStrength * uHoverMix * (1.0 - shapeAlpha);
+
+            // Tiny dither to keep outer halo silky smooth on 8-bit displays
+            float dither = (hash12(gl_FragCoord.xy) - 0.5) / 255.0;
+            glowAlpha = max(0.0, glowAlpha + dither * uHoverMix);
+
+            float outAlpha = shapeAlpha + glowAlpha;
+            vec3 outPremul = fillCol * shapeAlpha + glowCol * glowAlpha;
+
+            gl_FragColor = vec4(outPremul, outAlpha);
+          }
+        `;
+
+        function compile(type, src) {
+          const sh = gl.createShader(type);
+          gl.shaderSource(sh, src);
+          gl.compileShader(sh);
+          return sh;
+        }
+
+        const prog = gl.createProgram();
+        gl.attachShader(prog, compile(gl.VERTEX_SHADER, vertSrc));
+        gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fragSrc));
+        gl.linkProgram(prog);
+        gl.useProgram(prog);
+
+        const buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+          gl.STATIC_DRAW
+        );
+        const locPos = gl.getAttribLocation(prog, 'aPos');
+        gl.enableVertexAttribArray(locPos);
+        gl.vertexAttribPointer(locPos, 2, gl.FLOAT, false, 0, 0);
+
+        const uCanvasSize = gl.getUniformLocation(prog, 'uCanvasSize');
+        const uPillHalf = gl.getUniformLocation(prog, 'uPillHalf');
+        const uBlobPos = gl.getUniformLocation(prog, 'uBlobPos');
+        const uBlobRadius = gl.getUniformLocation(prog, 'uBlobRadius');
+        const uSmoothK = gl.getUniformLocation(prog, 'uSmoothK');
+        const uDropPos = gl.getUniformLocation(prog, 'uDropPos');
+        const uDropRadius = gl.getUniformLocation(prog, 'uDropRadius');
+        const uLightPos = gl.getUniformLocation(prog, 'uLightPos');
+        const uHoverMix = gl.getUniformLocation(prog, 'uHoverMix');
+        const uPressScale = gl.getUniformLocation(prog, 'uPressScale');
+        const uTime = gl.getUniformLocation(prog, 'uTime');
+
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.clearColor(0, 0, 0, 0);
+
+        renderFrame = function (st, nowSec) {
+          gl.clear(gl.COLOR_BUFFER_BIT);
+          gl.uniform2f(uCanvasSize, CANVAS_W, CANVAS_H);
+          gl.uniform2f(uPillHalf, halfW, halfH);
+          gl.uniform2f(uBlobPos, st.blobX, st.blobY);
+          gl.uniform1f(uBlobRadius, Math.max(0, st.blobR));
+          gl.uniform1f(uSmoothK, Math.max(1, st.smoothK));
+          gl.uniform2f(uDropPos, st.dropX, st.dropY);
+          gl.uniform1f(uDropRadius, Math.max(0, st.dropR));
+          gl.uniform2f(uLightPos, st.lightX, st.lightY);
+          gl.uniform1f(uHoverMix, st.hoverMix);
+          gl.uniform1f(uPressScale, st.pressScale);
+          gl.uniform1f(uTime, nowSec);
+          gl.drawArrays(gl.TRIANGLES, 0, 6);
+        };
+      } else {
+        const ctx = canvas.getContext('2d');
+        renderFrame = function (st) {
+          ctx.save();
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+          const cx = CANVAS_W * 0.5;
+          const cy = CANVAS_H * 0.5;
+          const r = halfH * st.pressScale;
+          const w = PILL_W * st.pressScale;
+          const h = PILL_H * st.pressScale;
+
+          if (st.hoverMix > 0.01) {
+            ctx.shadowColor = `rgba(170, 125, 195, ${(0.35 * st.hoverMix).toFixed(3)})`;
+            ctx.shadowBlur = 36;
+          }
+          const grad = ctx.createLinearGradient(cx - w * 0.5, cy, cx + w * 0.5, cy);
+          if (st.hoverMix > 0.05) {
+            grad.addColorStop(0, '#8d6d68');
+            grad.addColorStop(0.5, '#7c4d6e');
+            grad.addColorStop(1, '#58657c');
+            ctx.fillStyle = grad;
+          } else {
+            ctx.fillStyle = '#2a2829';
+          }
+          ctx.beginPath();
+          ctx.roundRect(cx - w * 0.5, cy - h * 0.5, w, h, r);
+          ctx.fill();
+          ctx.restore();
+        };
+      }
+
+      // Spring-damper physics state for gelatinous recoil & independent pinch-off droplet
+      const state = {
+        targetX: 0,
+        targetY: 0,
+        blobX: 0,
+        blobY: 0,
+        velX: 0,
+        velY: 0,
+        blobR: 0,
+        targetR: 0,
+        velR: 0,
+        smoothK: 44,
+        targetK: 44,
+        // Independent detached droplet spawned at snap-off
+        dropX: 0,
+        dropY: 0,
+        dropVx: 0,
+        dropVy: 0,
+        dropR: 0,
+        // Smooth spotlight position inside/around pill
+        lightX: -30,
+        lightY: 10,
+        hoverMix: 0,
+        targetHover: 0,
+        focusGlow: false,
+        pressScale: 1,
+        targetPress: 1,
+        engaged: false
+      };
+
+      function updatePointerFromClient(clientX, clientY) {
+        const rect = bookBtn.getBoundingClientRect();
+        const cx = rect.left + rect.width * 0.5;
+        const cy = rect.top + rect.height * 0.5;
+        const scale = rect.width / PILL_W || 1;
+        const lx = (clientX - cx) / scale;
+        const ly = (clientY - cy) / scale;
+
+        const d = sdPill(lx, ly);
+
+        // Meniscus hysteresis: grab near edge, allow elastic stretch up to ~86px before snapping off
+        if (!state.engaged) {
+          if (d < 22) {
+            state.engaged = true;
+            if (state.blobR < 2) {
+              const [sx, sy] = clampToPillInterior(lx, ly);
+              state.blobX = sx;
+              state.blobY = sy;
+              state.velX = 0;
+              state.velY = 0;
+            }
+          }
+        } else if (d > 86) {
+          // Snap-off! Spawn a small circular droplet right at the stretched tip while main blob recoils into the pill
+          state.engaged = false;
+          state.dropX = state.blobX;
+          state.dropY = state.blobY;
+          state.dropVx = state.velX * 0.12;
+          state.dropVy = state.velY * 0.12;
+          state.dropR = Math.max(7.5, Math.min(11.5, state.blobR * 0.62));
+
+          // Target main blob back inside the nearest pill edge so it recoils with elastic overshoot
+          const [rx, ry] = clampToPillInterior(state.blobX, state.blobY);
+          state.targetX = rx;
+          state.targetY = ry;
+        }
+
+        if (state.engaged) {
+          state.targetX = lx;
+          state.targetY = ly;
+
+          if (d <= 0) {
+            state.targetR = 39;
+            state.targetK = 48;
+            state.targetHover = 1;
+          } else {
+            const tOut = Math.min(d / 86, 1);
+            // Taper tendril tip from 37px down to 13px as cursor pulls outward
+            state.targetR = 37 - tOut * 24;
+            // Neck narrows organically as stretch increases
+            state.targetK = 46 - tOut * 18;
+            // Keep iridescent glow lit while stretching, gently beginning fade near extreme pull
+            state.targetHover = d < 56 ? 1 : Math.max(0.25, 1 - (d - 56) / 38);
+          }
+        } else {
+          state.targetHover = state.focusGlow ? 0.55 : 0;
+          state.targetR = 0;
+          state.targetK = 28;
+        }
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        updatePointerFromClient(e.clientX, e.clientY);
+      }, { passive: true });
+
+      window.addEventListener('pointerleave', () => {
+        if (state.engaged) {
+          const [rx, ry] = clampToPillInterior(state.blobX, state.blobY);
+          state.targetX = rx;
+          state.targetY = ry;
+        }
+        state.engaged = false;
+        state.targetHover = state.focusGlow ? 0.55 : 0;
+        state.targetR = 0;
+      });
+
+      bookBtn.addEventListener('focus', () => {
+        state.focusGlow = true;
+        if (!state.engaged) state.targetHover = 0.55;
+      });
+
+      bookBtn.addEventListener('blur', () => {
+        state.focusGlow = false;
+        if (!state.engaged) state.targetHover = 0;
+      });
+
+      bookBtn.addEventListener('pointerdown', (e) => {
+        updatePointerFromClient(e.clientX, e.clientY);
+        state.targetPress = 0.968;
+        bookBtn.classList.add('is-pressed');
+      });
+
+      window.addEventListener('pointerup', () => {
+        state.targetPress = 1;
+        bookBtn.classList.remove('is-pressed');
+      });
+
+      window.addEventListener('pointercancel', () => {
+        state.engaged = false;
+        state.targetHover = 0;
+        state.targetR = 0;
+        state.targetPress = 1;
+        bookBtn.classList.remove('is-pressed');
+      });
+
+      // Sub-stepped spring integration for silky 60-120Hz elastic liquid feel
+      let lastTime = performance.now();
+      function tick(now) {
+        const dt = Math.min((now - lastTime) * 0.001, 0.04);
+        lastTime = now;
+
+        // Slightly underdamped spring when recoiling for subtle gelatinous snap-back
+        const stiffnessPos = state.engaged ? 240 : 280;
+        const dampingPos = state.engaged ? 22 : 17;
+
+        const ax = (state.targetX - state.blobX) * stiffnessPos - state.velX * dampingPos;
+        const ay = (state.targetY - state.blobY) * stiffnessPos - state.velY * dampingPos;
+        state.velX += ax * dt;
+        state.velY += ay * dt;
+        state.blobX += state.velX * dt;
+        state.blobY += state.velY * dt;
+
+        // Radius spring
+        const stiffnessR = state.engaged ? 210 : 260;
+        const dampingR = state.engaged ? 23 : 20;
+        const ar = (state.targetR - state.blobR) * stiffnessR - state.velR * dampingR;
+        state.velR += ar * dt;
+        state.blobR = Math.max(0, state.blobR + state.velR * dt);
+
+        // Smooth-min blend k
+        const kLerp = 1 - Math.exp(-dt * 14);
+        state.smoothK += (state.targetK - state.smoothK) * kLerp;
+
+        // Detached droplet decays swiftly in place with light drift
+        if (state.dropR > 0.05) {
+          state.dropX += state.dropVx * dt;
+          state.dropY += state.dropVy * dt;
+          state.dropVx *= Math.exp(-dt * 10);
+          state.dropVy *= Math.exp(-dt * 10);
+          state.dropR *= Math.exp(-dt * 16);
+          if (state.dropR < 0.25) state.dropR = 0;
+        }
+
+        // Spotlight smoothly follows engaged blob (lags slightly behind shape for lush optical depth)
+        const lightLerp = 1 - Math.exp(-dt * 9.5);
+        if (state.engaged) {
+          state.lightX += (state.blobX - state.lightX) * lightLerp;
+          state.lightY += (state.blobY - state.lightY) * lightLerp;
+        }
+
+        // Color & ambient glow fade slightly behind initial shape deformation (matches video frames #02-#05)
+        const hoverRate = state.targetHover > state.hoverMix ? 4.6 : 6.4;
+        state.hoverMix += (state.targetHover - state.hoverMix) * (1 - Math.exp(-dt * hoverRate));
+
+        const pressLerp = 1 - Math.exp(-dt * 24);
+        state.pressScale += (state.targetPress - state.pressScale) * pressLerp;
+
+        if (renderFrame) {
+          renderFrame(state, now * 0.001);
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      if (renderFrame) renderFrame(state, 0);
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>

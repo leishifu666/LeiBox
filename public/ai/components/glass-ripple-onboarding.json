@@ -1,0 +1,171 @@
+{
+  "slug": "glass-ripple-onboarding",
+  "name": {
+    "en": "Concentric Glass Ripple Onboarding",
+    "zh": "同心玻璃波纹引导页"
+  },
+  "description": {
+    "en": "Concentric glass waves refract a forest painting behind a rotating starburst. Get Started opens a three-goal onboarding sheet.",
+    "zh": "同心玻璃波纹折射松林油画，星芒缓缓旋转。点击开始，可进入三项目标选择。"
+  },
+  "keywords": "玻璃 同心 波纹 折射 引导 金融 油画 松林 星芒 旋转 目标 选择 onboarding concentric glass ripple refraction forest painting Fresnel budget moizarshi29",
+  "docsPath": "/docs/animations/glass-ripple-onboarding",
+  "detailPath": "/ai/components/glass-ripple-onboarding.json",
+  "markdownPath": "/ai/components/glass-ripple-onboarding.md",
+  "previewPath": "/assets/components/glass-ripple-onboarding.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "带玻璃折射背景与三项目标选择的产品引导卡片",
+      "An onboarding card with concentric refraction and local goal selection"
+    ],
+    "searchTerms": [
+      "引导页",
+      "玻璃",
+      "同心",
+      "波纹",
+      "折射",
+      "油画",
+      "星芒",
+      "目标选择",
+      "onboarding",
+      "concentric ripple",
+      "Fresnel",
+      "refraction",
+      "forest painting",
+      "budget goals"
+    ],
+    "visualTags": [
+      "glass",
+      "painting",
+      "ripple",
+      "forest",
+      "green"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch",
+      "select",
+      "pause"
+    ],
+    "caveat": "选择与确认仅为本地演示，可用 onContinue 接入应用。无 WebGL 时使用圈层缩放降级；原 HTML 与画作许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML and painting adapted to an instance-scoped DOM/WebGL core with six native framework entries. Goal selection and confirmation remain local demo states; no account or financial data is created.",
+    "designReference": "https://x.com/moizarshi29",
+    "designAuthor": "@moizarshi29",
+    "license": "No separate license was supplied or verified for the HTML or embedded painting."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/glass-ripple-onboarding/react.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { GlassRippleOnboarding } from \"./GlassRippleOnboarding\";\n\nexport default function App() {\n  return <GlassRippleOnboarding />;\n}",
+      "files": [
+        "GlassRippleOnboarding.tsx",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/glass-ripple-onboarding/vue.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport GlassRippleOnboarding from \"./GlassRippleOnboarding.vue\";\n</script>\n<template><GlassRippleOnboarding /></template>",
+      "files": [
+        "GlassRippleOnboarding.vue",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/glass-ripple-onboarding/svelte.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport GlassRippleOnboarding from \"./GlassRippleOnboarding.svelte\";\n</script>\n<GlassRippleOnboarding />",
+      "files": [
+        "GlassRippleOnboarding.svelte",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/glass-ripple-onboarding/solid.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { GlassRippleOnboarding } from \"./GlassRippleOnboarding.solid\";\n\nexport default function App() {\n  return <GlassRippleOnboarding />;\n}",
+      "files": [
+        "GlassRippleOnboarding.solid.tsx",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/glass-ripple-onboarding/preact.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { GlassRippleOnboarding } from \"./GlassRippleOnboarding.preact\";\n\nexport default function App() {\n  return <GlassRippleOnboarding />;\n}",
+      "files": [
+        "GlassRippleOnboarding.preact.tsx",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/glass-ripple-onboarding/vanilla.json",
+      "component": "GlassRippleOnboarding",
+      "dependencies": [],
+      "usage": "import { mount } from \"./GlassRippleOnboarding\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "GlassRippleOnboarding.ts",
+        "GlassRippleOnboardingEngine.js",
+        "motion-runtime.ts",
+        "GlassRippleOnboardingEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click the starburst or painting for an extra ripple. Use Get Started to choose a local demo goal and Continue to confirm it.",
+    "zh": "点击星芒或画作可追加波纹。点击 Get Started 选择演示目标，再用 Continue 确认。"
+  }
+}

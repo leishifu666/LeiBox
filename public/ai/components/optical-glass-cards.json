@@ -1,0 +1,171 @@
+{
+  "slug": "optical-glass-cards",
+  "name": {
+    "en": "3D Optical Cards",
+    "zh": "3D 光学卡片"
+  },
+  "description": {
+    "en": "A glass W-emblem disc and an eight-disc optical ring animate inside contrasting cards, each with an independent details overlay.",
+    "zh": "玻璃 W 徽标圆片与八片圆盘环分别在黑白卡片中转动，两张卡片各有独立详情层。"
+  },
+  "keywords": "3D 光学 玻璃 圆片 圆盘 W 徽标 旋转 光纤 双卡 详情 raymarch SDF glass coin optical fibers discs WebGL praveenisomer",
+  "docsPath": "/docs/animations/optical-glass-cards",
+  "detailPath": "/ai/components/optical-glass-cards.json",
+  "markdownPath": "/ai/components/optical-glass-cards.md",
+  "previewPath": "/assets/components/optical-glass-cards.png",
+  "discovery": {
+    "category": "cards",
+    "useCases": [
+      "带SDF玻璃圆片与光学圆盘动画的双介绍卡",
+      "Two informational cards with raymarched glass and optical-disc scenes"
+    ],
+    "searchTerms": [
+      "3D",
+      "光学",
+      "圆片",
+      "玻璃",
+      "W徽标",
+      "圆盘环",
+      "光纤",
+      "详情层",
+      "optical cards",
+      "raymarch",
+      "SDF",
+      "glass coin",
+      "eight discs"
+    ],
+    "visualTags": [
+      "3d",
+      "glass",
+      "orange",
+      "peach",
+      "black white",
+      "disc"
+    ],
+    "interactions": [
+      "click",
+      "keyboard",
+      "touch",
+      "pause",
+      "seek"
+    ],
+    "caveat": "详情为本地信息层，无AI或网络服务。支持WebGL2/WebGL1；无WebGL时静态2D示意。源码许可未核实，字体保留OFL。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML adapted to an instance-scoped DOM/WebGL2/WebGL1 core with six native framework entries. Canvas2D provides a static fallback; Learn More opens local informational details. Font subsets and full OFL notices are bundled.",
+    "designReference": "https://x.com/praveenisomer/status/2078472355723264480/video/1",
+    "designAuthor": "@praveenisomer",
+    "license": "No separate source license was supplied or verified. Plus Jakarta Sans and Space Mono are bundled with their SIL Open Font License notices."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/optical-glass-cards/react.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { OpticalGlassCards } from \"./OpticalGlassCards\";\n\nexport default function App() {\n  return <OpticalGlassCards />;\n}",
+      "files": [
+        "OpticalGlassCards.tsx",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/optical-glass-cards/vue.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport OpticalGlassCards from \"./OpticalGlassCards.vue\";\n</script>\n<template><OpticalGlassCards /></template>",
+      "files": [
+        "OpticalGlassCards.vue",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/optical-glass-cards/svelte.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport OpticalGlassCards from \"./OpticalGlassCards.svelte\";\n</script>\n<OpticalGlassCards />",
+      "files": [
+        "OpticalGlassCards.svelte",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/optical-glass-cards/solid.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { OpticalGlassCards } from \"./OpticalGlassCards.solid\";\n\nexport default function App() {\n  return <OpticalGlassCards />;\n}",
+      "files": [
+        "OpticalGlassCards.solid.tsx",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/optical-glass-cards/preact.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { OpticalGlassCards } from \"./OpticalGlassCards.preact\";\n\nexport default function App() {\n  return <OpticalGlassCards />;\n}",
+      "files": [
+        "OpticalGlassCards.preact.tsx",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/optical-glass-cards/vanilla.json",
+      "component": "OpticalGlassCards",
+      "dependencies": [],
+      "usage": "import { mount } from \"./OpticalGlassCards\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "OpticalGlassCards.ts",
+        "OpticalGlassCardsEngine.js",
+        "motion-runtime.ts",
+        "OpticalGlassCardsEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Click Learn More for the card details, then use Close or Escape to return.",
+    "zh": "点击 Learn More 查看卡片详情，用 Close 或 Esc 返回。"
+  }
+}

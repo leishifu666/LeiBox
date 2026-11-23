@@ -1,0 +1,307 @@
+
+    :root {
+      --bg-base: #040405;
+      --card-w: clamp(148px, 16.4cqw, 240px);
+      --card-h: clamp(238px, 26.4cqw, 386px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-base);
+      font-family: 'ElementalInter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: var(--motion-height,100dvh);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #040405;
+      touch-action: pan-y;
+      perspective: 1200px;
+    }
+
+    #gl-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #fx-mid {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #fx-front {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    .carousel-layer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Pill Card — driven frame-by-frame by JS spring & --ignite (0..1) */
+    .card {
+      --ignite: 0;
+      --warmth: 0;
+      position: absolute;
+      left: 50%;
+      top: 46.5%;
+      width: var(--card-w);
+      height: var(--card-h);
+      margin-left: calc(var(--card-w) * -0.5);
+      margin-top: calc(var(--card-h) * -0.5);
+      border-radius: 999px;
+      pointer-events: auto;
+      cursor: pointer;
+      outline: none;
+      will-change: transform, opacity;
+      transform-style: preserve-3d;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(3, 3, 4, calc(1 - var(--warmth)));
+      border: 1px solid rgba(255, 255, 255, calc(0.13 * (1 - var(--warmth))));
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, calc(0.78 - 0.44 * var(--warmth))),
+        inset 0 1px 0 rgba(255, 255, 255, calc(0.08 * (1 - var(--warmth))));
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+    }
+
+    .card:not(.is-active):hover .card-shell {
+      border-color: rgba(255, 255, 255, 0.32);
+      transform: translateY(-2px) scale(1.015);
+    }
+
+    .card-dark-tint {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: calc(1 - var(--warmth));
+    }
+
+    .card[data-id="ember"] .card-dark-tint {
+      background: radial-gradient(ellipse 92% 58% at 50% 95%, rgba(128, 16, 22, 0.74) 0%, rgba(44, 6, 10, 0.34) 48%, rgba(3, 3, 4, 0) 82%);
+    }
+    .card[data-id="solar"] .card-dark-tint {
+      background: radial-gradient(ellipse 92% 58% at 50% 95%, rgba(124, 28, 14, 0.70) 0%, rgba(46, 12, 6, 0.32) 48%, rgba(3, 3, 4, 0) 82%);
+    }
+    .card[data-id="breeze"] .card-dark-tint {
+      background: radial-gradient(ellipse 92% 58% at 50% 95%, rgba(12, 104, 56, 0.72) 0%, rgba(5, 38, 20, 0.34) 48%, rgba(3, 3, 4, 0) 82%);
+    }
+    .card[data-id="bloom"] .card-dark-tint {
+      background: radial-gradient(ellipse 92% 58% at 50% 95%, rgba(122, 14, 34, 0.72) 0%, rgba(42, 6, 14, 0.32) 48%, rgba(3, 3, 4, 0) 82%);
+    }
+
+    .card-active-mesh {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: var(--warmth);
+      transform: scale(calc(1.08 - 0.08 * var(--warmth)));
+      filter: brightness(calc(0.65 + 0.35 * var(--ignite)));
+    }
+
+    .card[data-id="ember"] .card-active-mesh {
+      background:
+        radial-gradient(ellipse 84% 62% at 22% 28%, rgba(196, 86, 178, 0.94) 0%, rgba(196, 86, 178, 0) 68%),
+        radial-gradient(ellipse 78% 58% at 86% 30%, rgba(214, 152, 60, 0.95) 0%, rgba(214, 152, 60, 0) 68%),
+        radial-gradient(ellipse 80% 60% at 74% 72%, rgba(238, 114, 108, 0.94) 0%, rgba(238, 114, 108, 0) 70%),
+        radial-gradient(ellipse 95% 62% at 32% 86%, rgba(196, 30, 62, 0.98) 0%, rgba(145, 18, 42, 0.82) 58%, rgba(120, 20, 40, 0) 90%),
+        linear-gradient(155deg, #c26ea8 0%, #c84f6a 48%, #a61e34 100%);
+    }
+
+    .card[data-id="solar"] .card-active-mesh {
+      background:
+        radial-gradient(ellipse 82% 58% at 18% 26%, rgba(224, 142, 128, 0.94) 0%, rgba(224, 142, 128, 0) 68%),
+        radial-gradient(ellipse 80% 58% at 84% 26%, rgba(154, 194, 84, 0.94) 0%, rgba(154, 194, 84, 0) 68%),
+        radial-gradient(ellipse 82% 58% at 24% 82%, rgba(214, 108, 46, 0.96) 0%, rgba(214, 108, 46, 0) 72%),
+        radial-gradient(ellipse 80% 56% at 82% 84%, rgba(242, 210, 134, 0.96) 0%, rgba(242, 210, 134, 0) 72%),
+        linear-gradient(155deg, #d79c84 0%, #c98658 50%, #cc7b3b 100%);
+    }
+
+    .card[data-id="breeze"] .card-active-mesh {
+      background:
+        radial-gradient(ellipse 82% 58% at 22% 24%, rgba(146, 186, 124, 0.94) 0%, rgba(146, 186, 124, 0) 68%),
+        radial-gradient(ellipse 82% 60% at 82% 28%, rgba(152, 206, 218, 0.95) 0%, rgba(152, 206, 218, 0) 68%),
+        radial-gradient(ellipse 84% 62% at 22% 84%, rgba(54, 170, 92, 0.96) 0%, rgba(54, 170, 92, 0) 72%),
+        radial-gradient(ellipse 84% 60% at 82% 82%, rgba(134, 232, 198, 0.94) 0%, rgba(134, 232, 198, 0) 72%),
+        linear-gradient(160deg, #8fb89d 0%, #58b493 52%, #3ca674 100%);
+    }
+
+    .card[data-id="bloom"] .card-active-mesh {
+      background:
+        radial-gradient(ellipse 82% 60% at 20% 24%, rgba(164, 82, 228, 0.95) 0%, rgba(164, 82, 228, 0) 68%),
+        radial-gradient(ellipse 78% 58% at 84% 28%, rgba(210, 148, 118, 0.94) 0%, rgba(210, 148, 118, 0) 68%),
+        radial-gradient(ellipse 82% 62% at 76% 74%, rgba(228, 96, 148, 0.94) 0%, rgba(228, 96, 148, 0) 72%),
+        radial-gradient(ellipse 90% 62% at 30% 88%, rgba(158, 22, 98, 0.96) 0%, rgba(158, 22, 98, 0) 76%),
+        linear-gradient(155deg, #ab5cc4 0%, #c8448a 52%, #8e185b 100%);
+    }
+
+    .card-rim {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: var(--ignite);
+    }
+
+    .card[data-id="ember"] .card-rim {
+      box-shadow:
+        inset 0 2px 22px rgba(255, 228, 190, 0.74),
+        inset 0 -8px 22px rgba(255, 74, 40, 0.45);
+    }
+    .card[data-id="solar"] .card-rim {
+      box-shadow:
+        inset 0 0 24px rgba(255, 252, 224, 0.92),
+        inset 0 0 5px 2px rgba(255, 248, 212, 0.95);
+    }
+    .card[data-id="breeze"] .card-rim {
+      box-shadow:
+        inset 0 0 22px rgba(190, 255, 236, 0.78),
+        inset 0 0 4px 1.5px rgba(180, 255, 230, 0.82);
+    }
+    .card[data-id="bloom"] .card-rim {
+      box-shadow:
+        inset 0 2px 20px rgba(255, 220, 242, 0.72),
+        inset 0 -10px 26px rgba(255, 86, 168, 0.50);
+    }
+
+    .card-hover-glint {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      background: radial-gradient(
+        145px circle at var(--mx, 50%) var(--my, 18%),
+        rgba(255, 255, 255, 0.24),
+        rgba(255, 255, 255, 0) 68%
+      );
+    }
+    .card:not(.is-active):hover .card-hover-glint { opacity: 1; }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(18px, 2.2cqw, 30px) 16px clamp(26px, 3.1cqw, 44px);
+      text-align: center;
+    }
+
+    .card-index {
+      font-size: clamp(9px, 0.72cqw, 11px);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, calc(0.56 + 0.34 * var(--warmth)));
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-icon {
+      width: clamp(58px, 6.4cqw, 92px);
+      height: clamp(58px, 6.4cqw, 92px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: clamp(2px, 0.4cqw, 8px);
+      color: rgba(255, 255, 255, calc(0.78 + 0.22 * var(--warmth)));
+      transform: scale(calc(1 + 0.05 * var(--ignite)));
+      filter: drop-shadow(0 0 calc(14px * var(--ignite)) rgba(255, 255, 255, calc(0.42 * var(--ignite))));
+    }
+    .card-icon svg { width: 100%; height: 100%; overflow: visible; }
+
+    .card-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(4px, 0.48cqw, 7px);
+      margin-bottom: clamp(4px, 0.8cqw, 14px);
+    }
+
+    .card-title {
+      font-size: clamp(20px, 2.08cqw, 31px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: rgba(255, 255, 255, calc(0.80 + 0.20 * var(--warmth)));
+      text-shadow: 0 2px 14px rgba(0, 0, 0, calc(0.28 * var(--warmth)));
+    }
+
+    .card-subtitle {
+      font-size: clamp(7.5px, 0.62cqw, 9.5px);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: color 0.45s ease;
+    }
+    .card[data-id="ember"] .card-subtitle { color: rgba(235, 132, 132, 0.75); }
+    .card[data-id="solar"] .card-subtitle { color: rgba(236, 148, 120, 0.75); }
+    .card[data-id="breeze"] .card-subtitle { color: rgba(122, 214, 164, 0.78); }
+    .card[data-id="bloom"] .card-subtitle { color: rgba(232, 130, 152, 0.75); }
+    .card.is-ignited .card-subtitle { color: rgba(255, 255, 255, 0.90); }
+
+    .card:focus-visible .card-shell {
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.88), 0 24px 55px rgba(0, 0, 0, 0.72);
+    }
+
+    /* Tactile analog film grain overlay visible on both cards and dark stage */
+    .grain-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0.055;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+    }
+
+    .stage {container-type:inline-size;isolation:isolate;}
+    .card[aria-hidden=true] {pointer-events:none!important;}
+    [data-theme=light] {background:#f4f4f4;}
+    [data-theme=light] .grain-overlay {display:none;}
+    [data-reduced=true] * {transition:none!important;animation:none!important;}

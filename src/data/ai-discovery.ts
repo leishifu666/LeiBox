@@ -12,6 +12,139 @@ export type Discovery = {
 
 export const AI_DISCOVERY: Record<string, Discovery> = {
   ...librariesDevDiscovery,
+  "liquid-glass-navigation": {
+    "category": "navigation",
+    "useCases": [
+        "折射风景的玻璃导航与跨组弹簧菜单",
+        "A WebGL glass dropdown for three navigation groups"
+    ],
+    "searchTerms": [
+        "玻璃",
+        "折射",
+        "导航",
+        "色散",
+        "风景",
+        "液态",
+        "glass navigation",
+        "Snell refraction",
+        "spring dropdown"
+    ],
+    "visualTags": [
+        "glass",
+        "landscape",
+        "photo",
+        "refraction",
+        "spring"
+    ],
+    "interactions": [
+        "hover",
+        "click",
+        "keyboard",
+        "touch",
+        "wheel",
+        "pause"
+    ],
+    "caveat": "菜单仅本地回调，不自行跳转。真实光学需要WebGL2，无GPU时保留CSS玻璃面板；HTML与照片许可未核实。"
+},
+  "window-shade-theme": {
+    "category": "input",
+    "useCases": [
+        "拖动飞机舷窗遮光板切换明暗主题",
+        "An airplane shade control with continuous ambient dimming"
+    ],
+    "searchTerms": [
+        "舷窗",
+        "遮光板",
+        "主题",
+        "暗色",
+        "拖动",
+        "window shade",
+        "airplane",
+        "dark mode",
+        "theme toggle",
+        "clouds"
+    ],
+    "visualTags": [
+        "skeuomorphic",
+        "window",
+        "clouds",
+        "beige",
+        "dark mode"
+    ],
+    "interactions": [
+        "drag",
+        "click",
+        "keyboard",
+        "touch",
+        "pause"
+    ],
+    "caveat": "主题仅作用于组件，通过回调显式接入宿主。WebGL2云层有Canvas2D降级；原HTML许可未核实。"
+},
+
+  "optical-glass-cards": {
+    category: "cards",
+    useCases: ["带SDF玻璃圆片与光学圆盘动画的双介绍卡", "Two informational cards with raymarched glass and optical-disc scenes"],
+    searchTerms: ["3D", "光学", "圆片", "玻璃", "W徽标", "圆盘环", "光纤", "详情层", "optical cards", "raymarch", "SDF", "glass coin", "eight discs"],
+    visualTags: ["3d", "glass", "orange", "peach", "black white", "disc"],
+    interactions: ["click", "keyboard", "touch", "pause", "seek"],
+    caveat: "详情为本地信息层，无AI或网络服务。支持WebGL2/WebGL1；无WebGL时静态2D示意。源码许可未核实，字体保留OFL。",
+  },
+  "perforated-stamp-cards": {
+    category: "cards",
+    useCases: ["带真实邮票齿孔与纸面弹簧倾斜的三张介绍卡", "Three illustrated paper cards with transparent perforations and spring hover feedback"],
+    searchTerms: ["邮票", "齿孔", "纸张", "卡片", "浮世绘", "木刻", "插画", "倾斜", "stamp cards", "perforation", "paper", "SVG mask", "woodblock", "spring tilt"],
+    visualTags: ["paper", "cream", "illustration", "perforated", "woodblock"],
+    interactions: ["hover", "focus", "keyboard", "touch", "pause"],
+    caveat: "卡片用于展示内容，未添加虚构业务操作；原HTML与插画许可未核实，Inter保留OFL许可。",
+  },
+  "elemental-card-carousel": {
+    category: "cards",
+    useCases: ["用火焰、日冕、气流和花瓣表达选中的主题卡", "A spring carousel with four procedural elemental effects and floor reflection"],
+    searchTerms: ["元素", "轮播", "胶囊卡片", "火焰", "日冕", "气流", "花瓣", "地面反射", "elemental carousel", "fire", "solar rays", "air flow", "lotus", "WebGL2"],
+    visualTags: ["dark", "fire", "glow", "particles", "reflection", "spring"],
+    interactions: ["click", "keyboard", "drag", "swipe", "wheel", "pause"],
+    caveat: "四套场与反射需要WebGL2；降级时保留原生卡和2D粒子。源码许可未核实，Inter字体保留OFL许可。",
+  },
+  "image-dust-disintegration": {
+    category: "cards",
+    useCases: ["图片卡片的逐区域加载与粒子删除效果", "A portrait card with an aurora loader, spatial focus reveal and sampled dust deletion"],
+    searchTerms: ["图片", "化尘", "粒子消散", "灰烬", "极光加载", "逐区域对焦", "image card", "dust disintegration", "pixel particles", "aurora", "rack focus"],
+    visualTags: ["dark", "portrait", "particles", "glass", "aurora"],
+    interactions: ["hover", "click", "keyboard", "touch", "download", "replay", "pause"],
+    caveat: "加载、收藏与删除为本地演示；无真实AI生成或文件删除。无WebGL时降级为CSS对焦；原HTML与照片许可未核实。",
+  },
+  "glass-ripple-onboarding": {
+    category: "cards",
+    useCases: ["带玻璃折射背景与三项目标选择的产品引导卡片", "An onboarding card with concentric refraction and local goal selection"],
+    searchTerms: ["引导页", "玻璃", "同心", "波纹", "折射", "油画", "星芒", "目标选择", "onboarding", "concentric ripple", "Fresnel", "refraction", "forest painting", "budget goals"],
+    visualTags: ["glass", "painting", "ripple", "forest", "green"],
+    interactions: ["click", "keyboard", "touch", "select", "pause"],
+    caveat: "选择与确认仅为本地演示，可用 onContinue 接入应用。无 WebGL 时使用圈层缩放降级；原 HTML 与画作许可未核实。",
+  },
+  "liquid-call-cta": {
+    category: "input",
+    useCases: ["带液态拉伸与断开回弹的主行动按钮", "An iridescent CTA with a pointer-driven liquid meniscus and detached droplet"],
+    searchTerms: ["液态", "预约", "按钮", "虹彩", "黏球", "拉伸", "液滴", "回弹", "liquid CTA", "book a call", "metaball", "smooth min", "SDF", "droplet"],
+    visualTags: ["liquid", "iridescent", "pill", "spring", "glow"],
+    interactions: ["hover", "pointer", "click", "keyboard", "touch"],
+    caveat: "三个按钮默认只显示本地演示反馈，使用 onAction 接入实际操作。无 WebGL 时降级为 Canvas2D 静态轮廓；原 HTML 源码许可未核实。",
+  },
+  "hanging-art-gallery": {
+    category: "media",
+    useCases: ["带真实前后材质与弹簧摆动的名画作品展示", "A raycast-driven 3D artwork gallery with hanging frames and material backs"],
+    searchTerms: ["画廊", "悬挂", "画框", "翻面", "名画", "木纹", "青瓷", "金属", "3D gallery", "hanging art", "frame flip", "PBR", "pendulum"],
+    visualTags: ["3d", "art", "metal", "ceramic", "wood", "spring"],
+    interactions: ["hover", "click", "keyboard", "touch"],
+    caveat: "固定使用独立的 Three.js r128 保持材质与光照。无 WebGL 时为静态图片选择器；原 HTML 与内嵌图片许可未核实。",
+  },
+  "account-burn": {
+    category: "layout",
+    useCases: ["长按触发纸张燃烧转场并反向恢复", "Reveal a second screen through fluid fire and a torn paper edge"],
+    searchTerms: ["长按", "燃烧", "烧纸", "火焰", "烟雾", "灰烬", "恢复", "转场", "hold to burn", "paper burn", "fluid fire", "ash", "WebGL2"],
+    visualTags: ["fire", "fluid", "paper", "particles", "monochrome"],
+    interactions: ["hold", "keyboard", "touch", "restore"],
+    caveat: "账号删除、恢复及登录都是本地演示，不发送网络请求。无浮点WebGL2时仅保留裁切降级效果；原HTML许可未核实。",
+  },
   "genie-menu": {
     category: "navigation",
     useCases: ["圆钮展开四项快捷菜单", "A liquid button reveals a perspective action menu"],

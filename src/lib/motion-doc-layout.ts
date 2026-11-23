@@ -10,7 +10,7 @@ export type MotionDocLayout = {
 
 const fullWidthDemos = new Set([
   "multi-cursor-builder", "stacked-metadata", "shader-flood",
-  "ascii-sharks", "reasoning-effort-slider", "deep-agent-composer", "retro-computer-cord", "knoll-morph-menu", "status-picker", "genie-menu",
+  "ascii-sharks", "reasoning-effort-slider", "deep-agent-composer", "retro-computer-cord", "knoll-morph-menu", "status-picker", "genie-menu", "account-burn", "hanging-art-gallery", "liquid-call-cta", "liquid-glass-navigation", "window-shade-theme", "optical-glass-cards", "perforated-stamp-cards", "elemental-card-carousel", "image-dust-disintegration", "glass-ripple-onboarding",
 ]);
 
 export function motionDocLayout(entry: MotionEntry): MotionDocLayout {

@@ -1,5 +1,9 @@
 {
   "images": {
+    "/assets/components/account-burn.png": {
+      "src": "/assets/optimized/account-burn-37e3c0b1ad1c-720.webp",
+      "srcSet": "/assets/optimized/account-burn-37e3c0b1ad1c-320.webp 320w, /assets/optimized/account-burn-37e3c0b1ad1c-640.webp 640w, /assets/optimized/account-burn-37e3c0b1ad1c-720.webp 720w"
+    },
     "/assets/components/ai-brand-cover-cards.png": {
       "src": "/assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-1200.webp",
       "srcSet": "/assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-320.webp 320w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-640.webp 640w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-960.webp 960w, /assets/optimized/ai-brand-cover-cards-92b3dfd45ff2-1200.webp 1200w"
@@ -80,6 +84,10 @@
       "src": "/assets/optimized/elastic-panel-resize-9282c19c34b5-1200.webp",
       "srcSet": "/assets/optimized/elastic-panel-resize-9282c19c34b5-320.webp 320w, /assets/optimized/elastic-panel-resize-9282c19c34b5-640.webp 640w, /assets/optimized/elastic-panel-resize-9282c19c34b5-960.webp 960w, /assets/optimized/elastic-panel-resize-9282c19c34b5-1200.webp 1200w"
     },
+    "/assets/components/elemental-card-carousel.png": {
+      "src": "/assets/optimized/elemental-card-carousel-5712ae4c8086-720.webp",
+      "srcSet": "/assets/optimized/elemental-card-carousel-5712ae4c8086-320.webp 320w, /assets/optimized/elemental-card-carousel-5712ae4c8086-640.webp 640w, /assets/optimized/elemental-card-carousel-5712ae4c8086-720.webp 720w"
+    },
     "/assets/components/fluid-tooltip.png": {
       "src": "/assets/optimized/fluid-tooltip-06951f011c5d-960.webp",
       "srcSet": "/assets/optimized/fluid-tooltip-06951f011c5d-320.webp 320w, /assets/optimized/fluid-tooltip-06951f011c5d-640.webp 640w, /assets/optimized/fluid-tooltip-06951f011c5d-960.webp 960w"
@@ -104,6 +112,10 @@
       "src": "/assets/optimized/glass-folder-a237d1600d80-1200.webp",
       "srcSet": "/assets/optimized/glass-folder-a237d1600d80-320.webp 320w, /assets/optimized/glass-folder-a237d1600d80-640.webp 640w, /assets/optimized/glass-folder-a237d1600d80-960.webp 960w, /assets/optimized/glass-folder-a237d1600d80-1200.webp 1200w"
     },
+    "/assets/components/glass-ripple-onboarding.png": {
+      "src": "/assets/optimized/glass-ripple-onboarding-7d15b5aeaed4-720.webp",
+      "srcSet": "/assets/optimized/glass-ripple-onboarding-7d15b5aeaed4-320.webp 320w, /assets/optimized/glass-ripple-onboarding-7d15b5aeaed4-640.webp 640w, /assets/optimized/glass-ripple-onboarding-7d15b5aeaed4-720.webp 720w"
+    },
     "/assets/components/glass-tab-menu.png": {
       "src": "/assets/optimized/glass-tab-menu-57b8e6d1de24-1200.webp",
       "srcSet": "/assets/optimized/glass-tab-menu-57b8e6d1de24-320.webp 320w, /assets/optimized/glass-tab-menu-57b8e6d1de24-640.webp 640w, /assets/optimized/glass-tab-menu-57b8e6d1de24-960.webp 960w, /assets/optimized/glass-tab-menu-57b8e6d1de24-1200.webp 1200w"
@@ -120,6 +132,10 @@
       "src": "/assets/optimized/hammerhead-chart-55720a189153-1200.webp",
       "srcSet": "/assets/optimized/hammerhead-chart-55720a189153-320.webp 320w, /assets/optimized/hammerhead-chart-55720a189153-640.webp 640w, /assets/optimized/hammerhead-chart-55720a189153-960.webp 960w, /assets/optimized/hammerhead-chart-55720a189153-1200.webp 1200w"
     },
+    "/assets/components/hanging-art-gallery.png": {
+      "src": "/assets/optimized/hanging-art-gallery-a4b16ca3a32d-960.webp",
+      "srcSet": "/assets/optimized/hanging-art-gallery-a4b16ca3a32d-320.webp 320w, /assets/optimized/hanging-art-gallery-a4b16ca3a32d-640.webp 640w, /assets/optimized/hanging-art-gallery-a4b16ca3a32d-960.webp 960w"
+    },
     "/assets/components/image-accordion.png": {
       "src": "/assets/optimized/image-accordion-a1985b3b9151-1120.webp",
       "srcSet": "/assets/optimized/image-accordion-a1985b3b9151-320.webp 320w, /assets/optimized/image-accordion-a1985b3b9151-640.webp 640w, /assets/optimized/image-accordion-a1985b3b9151-960.webp 960w, /assets/optimized/image-accordion-a1985b3b9151-1120.webp 1120w"
@@ -127,6 +143,10 @@
     "/assets/components/image-compare.png": {
       "src": "/assets/optimized/image-compare-61ac6ab96cdb-1120.webp",
       "srcSet": "/assets/optimized/image-compare-61ac6ab96cdb-320.webp 320w, /assets/optimized/image-compare-61ac6ab96cdb-640.webp 640w, /assets/optimized/image-compare-61ac6ab96cdb-960.webp 960w, /assets/optimized/image-compare-61ac6ab96cdb-1120.webp 1120w"
+    },
+    "/assets/components/image-dust-disintegration.png": {
+      "src": "/assets/optimized/image-dust-disintegration-8ca65f1a33f0-720.webp",
+      "srcSet": "/assets/optimized/image-dust-disintegration-8ca65f1a33f0-320.webp 320w, /assets/optimized/image-dust-disintegration-8ca65f1a33f0-640.webp 640w, /assets/optimized/image-dust-disintegration-8ca65f1a33f0-720.webp 720w"
     },
     "/assets/components/ink-spread-carousel.png": {
       "src": "/assets/optimized/ink-spread-carousel-beadc3c131ba-1168.webp",
@@ -139,6 +159,14 @@
     "/assets/components/knoll-morph-menu.png": {
       "src": "/assets/optimized/knoll-morph-menu-a90e352795bb-850.webp",
       "srcSet": "/assets/optimized/knoll-morph-menu-a90e352795bb-320.webp 320w, /assets/optimized/knoll-morph-menu-a90e352795bb-640.webp 640w, /assets/optimized/knoll-morph-menu-a90e352795bb-850.webp 850w"
+    },
+    "/assets/components/liquid-call-cta.png": {
+      "src": "/assets/optimized/liquid-call-cta-c6b3ec7f4185-720.webp",
+      "srcSet": "/assets/optimized/liquid-call-cta-c6b3ec7f4185-320.webp 320w, /assets/optimized/liquid-call-cta-c6b3ec7f4185-640.webp 640w, /assets/optimized/liquid-call-cta-c6b3ec7f4185-720.webp 720w"
+    },
+    "/assets/components/liquid-glass-navigation.png": {
+      "src": "/assets/optimized/liquid-glass-navigation-9c409bc07fda-720.webp",
+      "srcSet": "/assets/optimized/liquid-glass-navigation-9c409bc07fda-320.webp 320w, /assets/optimized/liquid-glass-navigation-9c409bc07fda-640.webp 640w, /assets/optimized/liquid-glass-navigation-9c409bc07fda-720.webp 720w"
     },
     "/assets/components/liquid-metal.png": {
       "src": "/assets/optimized/liquid-metal-a612583e4ff3-820.webp",
@@ -163,6 +191,10 @@
     "/assets/components/notes-text-color.png": {
       "src": "/assets/optimized/notes-text-color-bed022555fe4-900.webp",
       "srcSet": "/assets/optimized/notes-text-color-bed022555fe4-320.webp 320w, /assets/optimized/notes-text-color-bed022555fe4-640.webp 640w, /assets/optimized/notes-text-color-bed022555fe4-900.webp 900w"
+    },
+    "/assets/components/optical-glass-cards.png": {
+      "src": "/assets/optimized/optical-glass-cards-9ac789065bf9-720.webp",
+      "srcSet": "/assets/optimized/optical-glass-cards-9ac789065bf9-320.webp 320w, /assets/optimized/optical-glass-cards-9ac789065bf9-640.webp 640w, /assets/optimized/optical-glass-cards-9ac789065bf9-720.webp 720w"
     },
     "/assets/components/orbit-not-found.png": {
       "src": "/assets/optimized/orbit-not-found-c6f8e7a3b066-960.webp",
@@ -211,6 +243,10 @@
     "/assets/components/particle-texture-trio.png": {
       "src": "/assets/optimized/particle-texture-trio-324731fc5f0b-960.webp",
       "srcSet": "/assets/optimized/particle-texture-trio-324731fc5f0b-320.webp 320w, /assets/optimized/particle-texture-trio-324731fc5f0b-640.webp 640w, /assets/optimized/particle-texture-trio-324731fc5f0b-960.webp 960w"
+    },
+    "/assets/components/perforated-stamp-cards.png": {
+      "src": "/assets/optimized/perforated-stamp-cards-43f9aa357c9f-720.webp",
+      "srcSet": "/assets/optimized/perforated-stamp-cards-43f9aa357c9f-320.webp 320w, /assets/optimized/perforated-stamp-cards-43f9aa357c9f-640.webp 640w, /assets/optimized/perforated-stamp-cards-43f9aa357c9f-720.webp 720w"
     },
     "/assets/components/pixel-toggle.png": {
       "src": "/assets/optimized/pixel-toggle-4371094f0015-720.webp",
@@ -291,6 +327,10 @@
     "/assets/components/voice-glow.png": {
       "src": "/assets/optimized/voice-glow-f9ce3ebe8fac-820.webp",
       "srcSet": "/assets/optimized/voice-glow-f9ce3ebe8fac-320.webp 320w, /assets/optimized/voice-glow-f9ce3ebe8fac-640.webp 640w, /assets/optimized/voice-glow-f9ce3ebe8fac-820.webp 820w"
+    },
+    "/assets/components/window-shade-theme.png": {
+      "src": "/assets/optimized/window-shade-theme-cffff0bb3e05-720.webp",
+      "srcSet": "/assets/optimized/window-shade-theme-cffff0bb3e05-320.webp 320w, /assets/optimized/window-shade-theme-cffff0bb3e05-640.webp 640w, /assets/optimized/window-shade-theme-cffff0bb3e05-720.webp 720w"
     },
     "/landing/agent-demo/alpine-lake.png": {
       "src": "/assets/optimized/alpine-lake-a6d766f87344-1200.webp",

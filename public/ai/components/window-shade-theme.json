@@ -1,0 +1,167 @@
+{
+  "slug": "window-shade-theme",
+  "name": {
+    "en": "Window Shade Theme Toggle",
+    "zh": "舷窗遮光板主题切换"
+  },
+  "description": {
+    "en": "Drag an airplane window shade to dim the cabin, hide drifting clouds and switch the surrounding profile between light and dark themes.",
+    "zh": "拖动舷窗遮光板，机舱随之变暗、云层被遮住，个人介绍同步切换明暗主题。"
+  },
+  "keywords": "舷窗 遮光板 明暗 暗色 主题 拖动 飞机 云层 弹簧 window shade airplane dark mode theme toggle cloud shader spring mjbarton_",
+  "docsPath": "/docs/animations/window-shade-theme",
+  "detailPath": "/ai/components/window-shade-theme.json",
+  "markdownPath": "/ai/components/window-shade-theme.md",
+  "previewPath": "/assets/components/window-shade-theme.png",
+  "discovery": {
+    "category": "input",
+    "useCases": [
+      "拖动飞机舷窗遮光板切换明暗主题",
+      "An airplane shade control with continuous ambient dimming"
+    ],
+    "searchTerms": [
+      "舷窗",
+      "遮光板",
+      "主题",
+      "暗色",
+      "拖动",
+      "window shade",
+      "airplane",
+      "dark mode",
+      "theme toggle",
+      "clouds"
+    ],
+    "visualTags": [
+      "skeuomorphic",
+      "window",
+      "clouds",
+      "beige",
+      "dark mode"
+    ],
+    "interactions": [
+      "drag",
+      "click",
+      "keyboard",
+      "touch",
+      "pause"
+    ],
+    "caveat": "主题仅作用于组件，通过回调显式接入宿主。WebGL2云层有Canvas2D降级；原HTML许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML adapted to an isolated DOM/WebGL2 core with six native framework entries and the original Canvas2D sky fallback. Profile text remains demonstration content, and the component never changes the host document theme.",
+    "designReference": "https://x.com/mjbarton_/status/2093354383379399012/video/1",
+    "designAuthor": "@mjbarton_",
+    "license": "No separate source license was supplied or verified. Embedded Inter and JetBrains Mono fonts retain their SIL Open Font License notices."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/window-shade-theme/react.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [
+        "react",
+        "react-dom"
+      ],
+      "usage": "import { WindowShadeTheme } from \"./WindowShadeTheme\";\n\nexport default function App() {\n  return <WindowShadeTheme />;\n}",
+      "files": [
+        "WindowShadeTheme.tsx",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/window-shade-theme/vue.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [
+        "vue"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport WindowShadeTheme from \"./WindowShadeTheme.vue\";\n</script>\n<template><WindowShadeTheme /></template>",
+      "files": [
+        "WindowShadeTheme.vue",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/window-shade-theme/svelte.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [
+        "svelte"
+      ],
+      "usage": "<script lang=\"ts\">\nimport WindowShadeTheme from \"./WindowShadeTheme.svelte\";\n</script>\n<WindowShadeTheme />",
+      "files": [
+        "WindowShadeTheme.svelte",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/window-shade-theme/solid.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [
+        "solid-js"
+      ],
+      "usage": "import { WindowShadeTheme } from \"./WindowShadeTheme.solid\";\n\nexport default function App() {\n  return <WindowShadeTheme />;\n}",
+      "files": [
+        "WindowShadeTheme.solid.tsx",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/window-shade-theme/preact.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [
+        "preact"
+      ],
+      "usage": "import { WindowShadeTheme } from \"./WindowShadeTheme.preact\";\n\nexport default function App() {\n  return <WindowShadeTheme />;\n}",
+      "files": [
+        "WindowShadeTheme.preact.tsx",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/window-shade-theme/vanilla.json",
+      "component": "WindowShadeTheme",
+      "dependencies": [],
+      "usage": "import { mount } from \"./WindowShadeTheme\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "WindowShadeTheme.ts",
+        "WindowShadeThemeEngine.js",
+        "motion-runtime.ts",
+        "WindowShadeThemeEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Drag the shade down or tap the window to toggle themes. Focus the window and use Up, Down, Home, End, Space or Enter.",
+    "zh": "下拉遮光板，或轻点舷窗切换主题。聚焦舷窗后，可用上下方向键、Home、End、空格或回车操作。"
+  }
+}

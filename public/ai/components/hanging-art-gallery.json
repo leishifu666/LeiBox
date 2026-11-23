@@ -1,0 +1,177 @@
+{
+  "slug": "hanging-art-gallery",
+  "name": {
+    "en": "3D Hanging Art Gallery",
+    "zh": "3D 悬挂画廊"
+  },
+  "description": {
+    "en": "Five framed artworks hang from a chrome rail. Hover to turn one forward as the others reveal wood, lacquer, gold, terracotta and celadon backs.",
+    "zh": "五幅画沿金属横杆悬挂，悬停时翻到正面，其余画框露出木纹、黑漆、古金、红陶和青瓷背面。"
+  },
+  "keywords": "3D 悬挂 画廊 画框 翻面 悬停 名画 材质 木纹 黑漆 古金 红陶 青瓷 弹簧 3d hanging art gallery frame flip rail pendulum PBR gabriell_lab",
+  "docsPath": "/docs/animations/hanging-art-gallery",
+  "detailPath": "/ai/components/hanging-art-gallery.json",
+  "markdownPath": "/ai/components/hanging-art-gallery.md",
+  "previewPath": "/assets/components/hanging-art-gallery.png",
+  "discovery": {
+    "category": "media",
+    "useCases": [
+      "带真实前后材质与弹簧摆动的名画作品展示",
+      "A raycast-driven 3D artwork gallery with hanging frames and material backs"
+    ],
+    "searchTerms": [
+      "画廊",
+      "悬挂",
+      "画框",
+      "翻面",
+      "名画",
+      "木纹",
+      "青瓷",
+      "金属",
+      "3D gallery",
+      "hanging art",
+      "frame flip",
+      "PBR",
+      "pendulum"
+    ],
+    "visualTags": [
+      "3d",
+      "art",
+      "metal",
+      "ceramic",
+      "wood",
+      "spring"
+    ],
+    "interactions": [
+      "hover",
+      "click",
+      "keyboard",
+      "touch"
+    ],
+    "caveat": "固定使用独立的 Three.js r128 保持材质与光照。无 WebGL 时为静态图片选择器；原 HTML 与内嵌图片许可未核实。"
+  },
+  "frameworks": [
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "preact",
+    "vanilla"
+  ],
+  "renderers": [
+    "webgl"
+  ],
+  "source": {
+    "kind": "project-source",
+    "provider": "LeiBox",
+    "implementation": "The supplied HTML, artwork and material maps adapted to an isolated Three.js r128 core with six native framework entries. The renderer is pinned separately to preserve the original lighting and colour response.",
+    "designReference": "https://x.com/gabriell_lab",
+    "designAuthor": "@gabriell_lab",
+    "license": "Three.js r128 uses the MIT license, included with the component. No separate source or embedded-image license was supplied or verified."
+  },
+  "distribution": {
+    "canRedistributeSource": false,
+    "installFromThisSite": true,
+    "installProvider": "leibox",
+    "notice": {
+      "en": "Source packages preserve the supplied material. Redistribution rights have not been verified.",
+      "zh": "代码包保留提交的素材，再分发许可尚未核实。"
+    }
+  },
+  "packages": {
+    "react": {
+      "url": "/ai/packages/hanging-art-gallery/react.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "react",
+        "react-dom",
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "import { HangingArtGallery } from \"./HangingArtGallery\";\n\nexport default function App() {\n  return <HangingArtGallery />;\n}",
+      "files": [
+        "HangingArtGallery.tsx",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    },
+    "vue": {
+      "url": "/ai/packages/hanging-art-gallery/vue.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "vue",
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "<script setup lang=\"ts\">\nimport HangingArtGallery from \"./HangingArtGallery.vue\";\n</script>\n<template><HangingArtGallery /></template>",
+      "files": [
+        "HangingArtGallery.vue",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    },
+    "svelte": {
+      "url": "/ai/packages/hanging-art-gallery/svelte.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "svelte",
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "<script lang=\"ts\">\nimport HangingArtGallery from \"./HangingArtGallery.svelte\";\n</script>\n<HangingArtGallery />",
+      "files": [
+        "HangingArtGallery.svelte",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    },
+    "solid": {
+      "url": "/ai/packages/hanging-art-gallery/solid.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "solid-js",
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "import { HangingArtGallery } from \"./HangingArtGallery.solid\";\n\nexport default function App() {\n  return <HangingArtGallery />;\n}",
+      "files": [
+        "HangingArtGallery.solid.tsx",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    },
+    "preact": {
+      "url": "/ai/packages/hanging-art-gallery/preact.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "preact",
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "import { HangingArtGallery } from \"./HangingArtGallery.preact\";\n\nexport default function App() {\n  return <HangingArtGallery />;\n}",
+      "files": [
+        "HangingArtGallery.preact.tsx",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    },
+    "vanilla": {
+      "url": "/ai/packages/hanging-art-gallery/vanilla.json",
+      "component": "HangingArtGallery",
+      "dependencies": [
+        "hanging-gallery-three@npm:three@0.128.0"
+      ],
+      "usage": "import { mount } from \"./HangingArtGallery\";\nconst target = document.querySelector<HTMLElement>(\"#demo\")!;\nconst component = mount(target);\n// When your page or route unmounts:\n// component.destroy();",
+      "files": [
+        "HangingArtGallery.ts",
+        "HangingArtGalleryEngine.js",
+        "motion-runtime.ts",
+        "HangingArtGalleryEngine.d.ts"
+      ]
+    }
+  },
+  "instructions": {
+    "en": "Hover or tap an artwork to turn it forward. Move across it to tilt the frame. Focus the gallery and use Left, Right, Home or End to select.",
+    "zh": "悬停或轻点画框翻到正面，移动指针可轻微倾斜。聚焦画廊后，可用左右方向键、Home 和 End 选择。"
+  }
+}

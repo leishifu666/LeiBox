@@ -1,19 +1,19 @@
 export const COMPONENT_CATEGORIES = [
   {
     id: "controls", label: "Buttons and Inputs",
-    components: ["status-picker", "upload-tile", "focus-switch", "pixel-toggle", "tactile-push-button", "folded-emoji-scroll", "spider-music-player", "galaxy-effort-slider", "reasoning-effort-slider", "deep-agent-composer", "otp-verification"],
+    components: ["window-shade-theme", "liquid-call-cta", "status-picker", "upload-tile", "focus-switch", "pixel-toggle", "tactile-push-button", "folded-emoji-scroll", "spider-music-player", "galaxy-effort-slider", "reasoning-effort-slider", "deep-agent-composer", "otp-verification"],
   },
   {
     id: "navigation", label: "Menus and Navigation",
-    components: ["metaball-menu", "genie-menu", "knoll-morph-menu", "blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
+    components: ["liquid-glass-navigation", "metaball-menu", "genie-menu", "knoll-morph-menu", "blister-dropdown", "soft-action-wheel", "staggered-radial-menu", "glass-tab-menu", "sailing-toc"],
   },
   {
     id: "galleries", label: "Galleries and Carousels",
-    components: ["image-accordion", "image-compare", "card-swap", "album-cover-tunnel", "ink-spread-carousel", "gradient-ring-cards"],
+    components: ["elemental-card-carousel", "hanging-art-gallery", "image-accordion", "image-compare", "card-swap", "album-cover-tunnel", "ink-spread-carousel", "gradient-ring-cards"],
   },
   {
     id: "cards", label: "Cards",
-    components: ["stacked-metadata", "shader-flood", "ai-brand-cover-cards", "collection-layout-morph", "brand-poster-cards", "hammerhead-chart", "glass-folder", "gradient-cover-wall", "brand-line-cards"],
+    components: ["optical-glass-cards", "perforated-stamp-cards", "image-dust-disintegration", "glass-ripple-onboarding", "stacked-metadata", "shader-flood", "ai-brand-cover-cards", "collection-layout-morph", "brand-poster-cards", "hammerhead-chart", "glass-folder", "gradient-cover-wall", "brand-line-cards"],
   },
   {
     id: "text", label: "Text Effects",
@@ -29,7 +29,7 @@ export const COMPONENT_CATEGORIES = [
   },
   {
     id: "transitions", label: "Pages and Transitions",
-    components: ["orbit-not-found", "distortion-waves", "crumpled-paper", "share-invite", "bouncy-access"],
+    components: ["account-burn", "orbit-not-found", "distortion-waves", "crumpled-paper", "share-invite", "bouncy-access"],
   },
   {
     id: "surfaces", label: "Surfaces and Materials",

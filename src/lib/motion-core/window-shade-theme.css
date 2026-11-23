@@ -1,0 +1,526 @@
+.shade-theme {
+      --bg-light: #ffffff;
+      --bg-dark: #161616;
+
+      /* Theme tokens (transitioned on theme commit) */
+      --text-title: #141414;
+      --text-sub: #6b6b6b;
+      --text-role: #141414;
+      --text-company: #000000;
+      --text-year: #888888;
+      --text-route: #a8a8a8;
+      --accent-blue: #3f38f8;
+      --accent-current: #4849d9;
+      --line-dash: #d0d0d0;
+      --node-ring: #c4c4c4;
+      --node-dot: #9e9e9e;
+      --content-opacity: 1;
+    }
+
+    .shade-theme[data-theme="dark"] {
+      --text-title: #d3d3d3;
+      --text-sub: #7c7c7c;
+      --text-role: #d3d3d3;
+      --text-company: #ffffff;
+      --text-year: #7c7c7c;
+      --text-route: #5a5a5a;
+      --accent-blue: #295cfd;
+      --accent-current: #3d5fdb;
+      --line-dash: #3a3a3a;
+      --node-ring: #4c4c4c;
+      --node-dot: #737373;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .shade-theme {
+      width: 100%;
+      min-height: var(--motion-height,780px);
+      overflow-x: hidden;
+      background-color: var(--bg-light);
+      font-family: 'ShadeThemeInter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Full-bleed stage (92px top on 720px viewport = 12.77vh) */
+    .stage {
+      position: relative;
+      width: 100%;
+      min-height: var(--motion-height,780px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: clamp(32px, calc(var(--motion-height,780px) * .127), 92px);
+      padding-bottom: 40px;
+    }
+
+    /* ============================================================
+       AIRPLANE WINDOW COMPONENT (226px x 301px outer visual frame)
+       ============================================================ */
+    .window-wrap {
+      position: relative;
+      width: 226px;
+      height: 301px;
+      flex-shrink: 0;
+      z-index: 20;
+      outline: none;
+    }
+
+    .window-wrap:focus-visible .window-outer {
+      box-shadow: 0 0 0 3px rgba(63, 56, 248, 0.35);
+    }
+
+    /* Soft ambient wall shadow behind bezel */
+    .window-ambient-shadow {
+      position: absolute;
+      inset: -6px -8px -10px -8px;
+      border-radius: 94px / 104px;
+      background: radial-gradient(ellipse at 50% 48%, rgba(65, 52, 44, 0.22) 55%, rgba(65, 52, 44, 0.08) 76%, transparent 94%);
+      filter: blur(8px);
+      pointer-events: none;
+      transition: opacity 0.1s linear;
+    }
+
+    /* Outer sculpted fuselage wall recess (squircle-oval contour matching reference) */
+    .window-outer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 86px / 96px;
+      padding: 15px 15px 17px 15px;
+      background:
+        linear-gradient(155deg, #d7d0c8 0%, #cfc7be 28%, #e4ddd5 62%, #d2c9c0 100%);
+      box-shadow:
+        0 2px 6px rgba(45, 36, 30, 0.12),
+        0 10px 24px rgba(45, 36, 30, 0.09),
+        inset 0 2px 3px rgba(255, 252, 248, 0.72),
+        inset 0 -3px 5px rgba(102, 91, 80, 0.34),
+        inset 2px 0 3px rgba(145, 134, 123, 0.28),
+        inset -2px 0 3px rgba(145, 134, 123, 0.28);
+    }
+
+    /* Crisp thin outer seam ring */
+    .window-outer::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 85px / 95px;
+      border: 1px solid rgba(118, 108, 98, 0.35);
+      pointer-events: none;
+    }
+
+    /* Middle recessed ivory plastic housing */
+    .window-mid {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 73px / 83px;
+      padding: 14px 13px 16px 13px;
+      background:
+        linear-gradient(162deg, #ebe6df 0%, #f5f1eb 45%, #e6e0d8 85%, #dcd5cc 100%);
+      box-shadow:
+        0 1px 2px rgba(255, 255, 255, 0.55),
+        inset 0 3px 7px rgba(84, 74, 64, 0.26),
+        inset 0 -2px 4px rgba(255, 252, 246, 0.78),
+        inset 3px 0 5px rgba(96, 86, 76, 0.16),
+        inset -3px 0 5px rgba(96, 86, 76, 0.16);
+    }
+
+    /* Specular diagonal sheen strictly on the middle bezel rim (behind inner ring, fades out in dark mode) */
+    .window-mid::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 73px / 83px;
+      background: linear-gradient(
+        130deg,
+        transparent 58%,
+        rgba(255, 255, 255, 0.38) 67%,
+        rgba(255, 255, 255, 0.12) 74%,
+        transparent 82%
+      );
+      opacity: var(--sheen-opacity, 1);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Innermost recessed track & glass seal */
+    .window-inner-ring {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      border-radius: 61px / 70px;
+      padding: 5.5px;
+      background: linear-gradient(180deg, #b4aca2 0%, #dcd6ce 35%, #f2ede7 100%);
+      box-shadow:
+        inset 0 2px 5px rgba(62, 54, 46, 0.44),
+        0 1px 1px rgba(255, 255, 255, 0.72);
+    }
+
+    /* Viewport glass aperture (clips sky & shade) */
+    .window-aperture {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 56px / 65px;
+      overflow: hidden;
+      background: #171514;
+      isolation: isolate;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .window-aperture.dragging {
+      cursor: grabbing;
+    }
+
+    /* WebGL2 Cloud & Sky Canvas — stays bright daylight while uncovered, fades out cleanly when fully sealed */
+    #skyCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Subtle glass inner reflection / white seal rim (fades to 0 as shade closes) */
+    .glass-glint {
+      position: absolute;
+      inset: 0;
+      border-radius: 56px / 65px;
+      box-shadow:
+        inset 0 0 0 2px rgba(255, 255, 255, 0.65),
+        inset 0 6px 14px rgba(20, 35, 55, 0.12),
+        inset 0 -8px 14px rgba(155, 175, 195, 0.16);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Cast shadow from shade onto glass below */
+    .shade-cast-shadow {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      height: 22px;
+      top: 0;
+      background: linear-gradient(180deg, rgba(24, 20, 18, 0.34) 0%, rgba(24, 20, 18, 0.08) 55%, transparent 100%);
+      pointer-events: none;
+      z-index: 3;
+      will-change: transform;
+    }
+
+    /* Draggable Window Shade — oversized width & height to guarantee zero edge or bottom light leak */
+    .window-shade {
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: -16px;
+      height: 274px;
+      z-index: 4;
+      will-change: transform;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .window-aperture.dragging .window-shade {
+      cursor: grabbing;
+    }
+
+    .shade-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    /* ============================================================
+       HERO COPY & FLIGHT PLAN SECTION
+       ============================================================ */
+    .content-shell {
+      position: relative;
+      width: 100%;
+      max-width: 856px;
+      margin-top: clamp(44px, 10.2vh, 75px);
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      transition: opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: var(--content-opacity);
+    }
+
+    .hero-block {
+      text-align: center;
+      max-width: 640px;
+    }
+
+    .hero-title {
+      font-size: 19px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--text-title);
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .hero-sub {
+      margin-top: 13px;
+      font-size: 18.5px;
+      font-weight: 400;
+      line-height: 1.72;
+      letter-spacing: -0.01em;
+      color: var(--text-sub);
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Flight Plan & Experience Block */
+    .flight-section {
+      position: relative;
+      width: 100%;
+      max-width: 856px;
+      margin-top: -6px;
+      min-height: 226px;
+    }
+
+    /* FLIGHT PLAN + Airplane header */
+    .flight-header {
+      position: absolute;
+      left: 84px;
+      top: -54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 68px;
+    }
+
+    .flight-label {
+      font-family: 'ShadeThemeInter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      white-space: nowrap;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .plane-icon {
+      margin-top: 9px;
+      width: 21px;
+      height: 21px;
+      color: var(--accent-blue);
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Dashed Flight Path SVG */
+    .flight-path-svg {
+      position: absolute;
+      left: 56px;
+      top: -12px;
+      width: 90px;
+      height: 210px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .flight-path-stroke {
+      fill: none;
+      stroke: var(--line-dash);
+      stroke-width: 1.25;
+      stroke-dasharray: 3.2 4.6;
+      stroke-linecap: round;
+      transition: stroke 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Experience Row */
+    .exp-row {
+      position: absolute;
+      left: 0;
+      top: 62px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    /* Left metadata column (NYC>MAN / 2025) */
+    .exp-date-col {
+      width: 44px;
+      margin-top: 48px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .exp-route {
+      font-family: 'ShadeThemeInter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 7px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-route);
+      line-height: 1.2;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .exp-year {
+      margin-top: 2px;
+      font-family: 'ShadeThemeMono', 'SF Mono', 'DejaVu Sans Mono', ui-monospace, monospace;
+      font-variant-numeric: slashed-zero tabular-nums;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text-year);
+      line-height: 1.2;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Concentric Timeline Node */
+    .exp-node-col {
+      width: 44px;
+      margin-top: 56px;
+      display: flex;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .exp-node {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1.35px solid var(--node-ring);
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .exp-node-dot {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background-color: var(--node-dot);
+      transition: background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Right Details Column (Badges + Studio CURRENT + Lead Product Designer) */
+    .exp-details {
+      margin-left: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .badges-stack {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .badge-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .badge-studio {
+      background: #e5e0cf;
+      color: #141414;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      padding-left: 2px;
+      padding-right: 3px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+    }
+
+    .badge-emblem {
+      background: #1f4b61;
+      margin-left: -10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
+      z-index: 2;
+    }
+
+    .exp-company-line {
+      display: flex;
+      align-items: baseline;
+      gap: 11px;
+    }
+
+    .exp-company {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-company);
+      line-height: 1.25;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .exp-current {
+      font-family: 'ShadeThemeInter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--accent-current);
+      line-height: 1;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .exp-role {
+      margin-top: 10px;
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text-role);
+      line-height: 1.3;
+      transition: color 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Responsive adjustments for narrower panels */
+    @container shade-theme (max-width: 780px) {
+      .stage {
+        padding-top: 32px;
+      }
+      .content-shell {
+        margin-top: 36px;
+      }
+      .hero-title {
+        font-size: 17px;
+      }
+      .hero-sub {
+        font-size: 15.5px;
+      }
+      .flight-section {
+        margin-top: 28px;
+      }
+      .flight-header {
+        left: 60px;
+        top: 0;
+      }
+      .flight-path-svg {
+        left: 32px;
+        top: 42px;
+      }
+      .exp-row {
+        top: 116px;
+        left: -24px;
+      }
+    }
+  
+html,body{margin:0;min-height:100%;background:#f4f4f4}.shade-theme{position:relative;container:shade-theme / inline-size;width:100%;min-height:var(--motion-height,780px);overflow:hidden}.window-wrap{touch-action:none}.shade-theme[data-reduced=true] *,.shade-theme[data-paused=true] *{transition:none!important}.shade-theme[data-preview=true][data-theme=light]{--bg-light:#f4f4f4}.shade-theme[data-theme=light]{--text-year:#737373;--text-route:#737373}.shade-theme[data-theme=dark]{--text-route:#909090;--accent-current:#829bff}.window-wrap:focus-visible{outline:3px solid #6575ff;outline-offset:5px;border-radius:100px}

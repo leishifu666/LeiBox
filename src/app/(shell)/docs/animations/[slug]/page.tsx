@@ -56,6 +56,66 @@ export default async function MotionPage({params}:Props){
         {entry.original?<span><T>Original by LeiShiFu</T></span>:entry.referenceSourceUrl?null:entry.referenceUrl?<a className="rounded py-1 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2" href={entry.referenceAuthorUrl??entry.referenceUrl} target="_blank" rel="noreferrer"><T>Author</T> · {entry.referenceAuthor}</a>:entry.referenceAuthor&&!entry.communitySubmission?<span><T>Reference</T> · <T>{entry.referenceAuthor}</T></span>:null}
       </div></>}
       apiReference={[
+        ...(slug === "liquid-glass-navigation" ? [
+          {"name":"options.menu","type":"\"product\" | \"resources\" | \"company\" | null","defaultValue":"\"product\"","description":"Open menu group. External updates do not emit onMenuChange."},
+          {"name":"options.paused","type":"boolean","defaultValue":"false","description":"Pause landscape motion, ripples and menu springs."},
+          {"name":"options.onMenuChange","type":"(menu: \"product\" | \"resources\" | \"company\" | null) => void","description":"Called when user input opens, switches or closes the menu."},
+          {"name":"options.onAction","type":"(menu: \"product\" | \"resources\" | \"company\", label: string) => void","description":"Handle a local menu action; no navigation is performed automatically."},
+        ] : []),
+        ...(slug === "window-shade-theme" ? [
+          {"name":"options.theme","type":"\"light\" | \"dark\"","defaultValue":"\"light\"","description":"Set the component theme without changing the host document."},
+          {"name":"options.progress","type":"number","defaultValue":"0","description":"Place the shade at a progress from 0 to 1 without emitting a theme callback."},
+          {"name":"options.paused","type":"boolean","defaultValue":"false","description":"Pause the clouds, shade spring and pending theme commit."},
+          {"name":"options.onThemeChange","type":"(theme: \"light\" | \"dark\") => void","description":"Called after a user-driven theme change is committed."},
+        ] : []),
+
+        ...(slug === "optical-glass-cards" ? [
+          {name:"options.open",type:'("ai" | "optical")[]',defaultValue:"[]",description:"Open detail overlays for ai, optical or both. External updates do not emit onOpenChange."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause both procedural 3D scenes at their current phase."},
+          {name:"options.time",type:"number",defaultValue:"0",description:"Seek the animation to a nonnegative time in seconds; it continues unless paused."},
+          {name:"options.onOpenChange",type:'(open: ("ai" | "optical")[]) => void',description:"Called when the user opens or closes a card detail overlay."},
+        ] : []),
+        ...(slug === "perforated-stamp-cards" ? [
+          {name:"options.cards",type:"{ headline?: string; body?: string; imageSrc?: string; imageAlt?: string }[]",description:"Content overrides for the three fixed cards. Newlines preserve the original text layout."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause the card springs at their current pose."},
+        ] : []),
+        ...(slug === "elemental-card-carousel" ? [
+          {name:"options.active",type:"number",defaultValue:"0",description:"Selected element index. External updates do not emit onActiveChange."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause the carousel, procedural effects and particle clock."},
+          {name:"options.theme",type:'"dark" | "light"',defaultValue:'"dark"',description:"Dark presentation or a light background composite."},
+          {name:"options.onActiveChange",type:"(index: number) => void",description:"Called when a user chooses a different element."},
+        ] : []),
+        ...(slug === "image-dust-disintegration" ? [
+          {name:"options.phase",type:'"loading" | "ready" | "gone"',defaultValue:'"loading"',description:"Reset to loading, ready or gone without emitting a callback for the reset itself."},
+          {name:"options.liked",type:"boolean",defaultValue:"false",description:"Local favorite state. External updates do not emit onLikeChange."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Freeze the current animation and loading shimmer."},
+          {name:"options.onPhaseChange",type:'(phase: "loading" | "revealing" | "ready" | "dusting" | "gone") => void',description:"Called on natural or user-triggered phase changes."},
+          {name:"options.onLikeChange",type:"(liked: boolean) => void",description:"Called when the user toggles the local favorite."},
+          {name:"options.onDownload",type:"(src: string) => void",description:"Override the default embedded-portrait download."},
+        ] : []),
+        ...(slug === "glass-ripple-onboarding" ? [
+          {name:"options.open",type:"boolean",defaultValue:"false",description:"Show or hide the local goal-selection sheet."},
+          {name:"options.goal",type:'"spending" | "emergency" | "milestone"',defaultValue:'"spending"',description:"Selected local demo goal. External updates do not emit onGoalChange."},
+          {name:"options.paused",type:"boolean",defaultValue:"false",description:"Pause both the glass waves and the starburst rotation."},
+          {name:"options.onOpenChange",type:"(open: boolean) => void",description:"Called when the user opens or closes the goal sheet."},
+          {name:"options.onGoalChange",type:'(goal: "spending" | "emergency" | "milestone") => void',description:"Called when the user chooses another goal."},
+          {name:"options.onContinue",type:'(goal: "spending" | "emergency" | "milestone") => void',description:"Called with the chosen local demo goal; no account or plan is created."},
+        ] : []),
+        ...(slug === "liquid-call-cta" ? [
+          {name:"options.label",type:"string",defaultValue:'"Book a call"',description:"Primary button text and accessible name."},
+          {name:"options.disabled",type:"boolean",defaultValue:"false",description:"Disable all three actions and their pointer interactions."},
+          {name:"options.onAction",type:'(action: "book" | "highlights" | "profile") => void',description:"Called with book, highlights or profile; no booking or navigation is performed automatically."},
+        ] : []),
+        ...(slug === "hanging-art-gallery" ? [
+          {name:"options.active",type:"number",defaultValue:"2",description:"Selected artwork index from 0 to 4. External updates do not emit onActiveChange."},
+          {name:"options.idleMotion",type:"boolean",defaultValue:"true",description:"Keep the subtle idle sway. Disable it to stop rendering after springs settle."},
+          {name:"options.onActiveChange",type:"(index: number) => void",description:"Called when a user selects a different artwork."},
+        ] : []),
+        ...(slug === "account-burn" ? [
+          {name:"options.state",type:'"delete" | "signin"',defaultValue:'"delete"',description:"Reset immediately to a local demo screen without emitting onStateChange."},
+          {name:"options.holdDuration",type:"number",defaultValue:"2.2",description:"Required continuous hold in seconds; minimum 0.3."},
+          {name:"options.onStateChange",type:'(state: "delete" | "signin") => void',description:"Called when a user-triggered burn or restore finishes; does not delete or restore an account."},
+        ] : []),
         ...(slug === "genie-menu" ? [
           {name:"options.open",type:"boolean",defaultValue:"false",description:"Open or close the pull-out menu."},
           {name:"options.speed",type:"1 | 0.3",defaultValue:"1",description:"Normal speed or 0.3× slow motion."},

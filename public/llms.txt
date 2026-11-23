@@ -7,7 +7,7 @@
 - [Task search index](https://leibox.pantoria.cn/ai/search-index.json): Compact use cases, bilingual intent terms, categories, visual tags, interactions, caveats, supported frameworks and detail links. Read this first.
 - [Index schema](https://leibox.pantoria.cn/ai/search-index.schema.json): Versioned field contract for agents and indexers.
 - [Agent guide](https://leibox.pantoria.cn/ai/README.md): Recommendation workflow, filters, source retrieval and static endpoint behavior.
-- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 72 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
+- [Catalog JSON](https://leibox.pantoria.cn/ai/catalog.json): All 82 entries, stable slugs, bilingual descriptions, frameworks, renderers, and provenance.
 - [Component list](https://leibox.pantoria.cn/components): Human-facing previews.
 - [Documentation](https://leibox.pantoria.cn/docs): Usage and browser capabilities.
 - [AI integration guide](https://leibox.pantoria.cn/docs/mcp): Skill installation, search and source downloads.
@@ -21,6 +21,16 @@ Paths beginning with / are relative to the origin serving this file. When only a
 - [SVG Metaball Menu / 黑白黏球菜单](https://leibox.pantoria.cn/ai/components/metaball-menu.md): Three quick actions peel away from a plus button and merge back into one monochrome shape.
 - [Dissolve Upload Tile / Dissolve 粒子上传](https://leibox.pantoria.cn/ai/components/upload-tile.md): An attachment assembles from grains as it uploads, then disintegrates on failure, cancellation or removal.
 - [Dissolve Thinking Orb / Dissolve 状态粒子球](https://leibox.pantoria.cn/ai/components/thinking-orb.md): A 180-dot orb morphs between six agent states and responds to the pointer.
+- [Window Shade Theme Toggle / 舷窗遮光板主题切换](https://leibox.pantoria.cn/ai/components/window-shade-theme.md): Drag an airplane window shade to dim the cabin, hide drifting clouds and switch the surrounding profile between light and dark themes.
+- [Liquid Glass Navigation / 玻璃折射导航](https://leibox.pantoria.cn/ai/components/liquid-glass-navigation.md): A rounded glass dropdown refracts a drifting flower landscape, springing between three menus with a sliding hover highlight.
+- [3D Optical Cards / 3D 光学卡片](https://leibox.pantoria.cn/ai/components/optical-glass-cards.md): A glass W-emblem disc and an eight-disc optical ring animate inside contrasting cards, each with an independent details overlay.
+- [Perforated Stamp Cards / 齿孔邮票卡片](https://leibox.pantoria.cn/ai/components/perforated-stamp-cards.md): Three paper cards pair woodblock landscapes with real perforated edges, spring tilt and a pointer-following sheen.
+- [Elemental Card Carousel / 元素卡片轮播](https://leibox.pantoria.cn/ai/components/elemental-card-carousel.md): Four pill cards slide into fire, sun rays, flowing air and petals, with staged ignition, lingering particles and a glossy floor reflection.
+- [Image Dust Disintegration / 图片卡片化尘](https://leibox.pantoria.cn/ai/components/image-dust-disintegration.md): A portrait comes into focus after an aurora loader, then breaks into image-colored particles that drift upward and fade.
+- [Concentric Glass Ripple Onboarding / 同心玻璃波纹引导页](https://leibox.pantoria.cn/ai/components/glass-ripple-onboarding.md): Concentric glass waves refract a forest painting behind a rotating starburst. Get Started opens a three-goal onboarding sheet.
+- [Liquid Call CTA / 液态预约按钮](https://leibox.pantoria.cn/ai/components/liquid-call-cta.md): A capsule follows the pointer with an iridescent liquid edge, pinches off a droplet and springs back into shape.
+- [3D Hanging Art Gallery / 3D 悬挂画廊](https://leibox.pantoria.cn/ai/components/hanging-art-gallery.md): Five framed artworks hang from a chrome rail. Hover to turn one forward as the others reveal wood, lacquer, gold, terracotta and celadon backs.
+- [Hold-to-Burn Transition / 长按燃烧转场](https://leibox.pantoria.cn/ai/components/account-burn.md): Hold to ignite a paper-burn transition with fluid fire and drifting ash. Restore to pull the burn back into the button.
 - [Liquid Pull-out Menu / 吸附展开菜单](https://leibox.pantoria.cn/ai/components/genie-menu.md): A liquid droplet pulls out of a round button and unfolds into a tilted menu, then snaps back into the button.
 - [Avatar Status Picker / 头像状态选择器](https://leibox.pantoria.cn/ai/components/status-picker.md): A glass status dot expands into three choices, with a springy tooltip that follows the active option.
 - [Knoll Morph Menu / Knoll 形变菜单](https://leibox.pantoria.cn/ai/components/knoll-morph-menu.md): A compact navigation button springs into a two-stage menu with photo previews for each destination.

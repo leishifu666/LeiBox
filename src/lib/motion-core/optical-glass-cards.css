@@ -1,0 +1,241 @@
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,body {width:100%;min-height:100%;margin:0;background:#c1c1c1;font-family:'OpticalJakarta','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    .optical-gallery {position:relative;width:100%;min-height:var(--motion-height,100dvh);display:flex;align-items:center;justify-content:center;background:#c1c1c1;overflow:hidden;container-type:inline-size;isolation:isolate;}
+    .stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 108px;
+      padding: 40px 32px;
+      transform-origin: center center;
+    }
+
+    .card {
+      width: 587px;
+      height: 774px;
+      border-radius: 28px;
+      padding: 12px 12px 36px 12px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .card--dark {
+      background-color: #000000;
+    }
+
+    .card--light {
+      background-color: #ffffff;
+    }
+
+    .card__visual {
+      width: 100%;
+      height: 421px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      background-color: #fae6d3;
+      flex-shrink: 0;
+    }
+
+    .card__canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .card__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 50px 20px 0 20px;
+    }
+
+    .card__title {
+      font-family: 'OpticalJakarta', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    .card--dark .card__title {
+      color: #ffffff;
+    }
+
+    .card--light .card__title {
+      color: #000000;
+    }
+
+    .card__desc {
+      margin-top: 26px;
+      font-family: 'OpticalMono', 'IBM Plex Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: 15.5px;
+      font-weight: 400;
+      line-height: 1.24;
+      letter-spacing: -0.015em;
+    }
+
+    .card--dark .card__desc {
+      color: #9e9e9e;
+      max-width: 492px;
+    }
+
+    .card--light .card__desc {
+      color: #727272;
+      max-width: 500px;
+    }
+
+    .card__btn {
+      margin-top: auto;
+      width: 127px;
+      height: 50px;
+      border: none;
+      border-radius: 12px;
+      background-color: #2c2c2c;
+      color: #f2f2f2;
+      font-family: 'OpticalJakarta', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14.5px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      user-select: none;
+    }
+
+    .card__btn:hover {
+      background-color: #3a3a3a;
+    }
+
+    .card__btn:active {
+      transform: scale(0.97);
+    }
+
+    .card__overlay {
+      position: absolute;
+      inset: 12px;
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.24s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 10;
+    }
+
+    .card--dark .card__overlay {
+      background: rgba(12, 12, 12, 0.94);
+      backdrop-filter: blur(12px);
+      color: #ffffff;
+    }
+
+    .card--light .card__overlay {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      color: #000000;
+    }
+
+    .card__overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .card__overlay-title {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .card__overlay-text {
+      font-family: 'OpticalMono', monospace;
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0.78;
+    }
+
+    .card__overlay-close {
+      align-self: flex-start;
+      height: 44px;
+      padding: 0 22px;
+      border: none;
+      border-radius: 10px;
+      background-color: #2c2c2c;
+      color: #f2f2f2;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .card__overlay-close:hover {
+      background-color: #3d3d3d;
+    }
+
+    @container (max-width: 1360px) and (min-width: 760px) {
+      .stage {
+        gap: 48px;
+        transform: scale(0.76);
+      }
+    }
+
+    @container (max-width: 1020px) and (min-width: 760px) {
+      .stage {
+        gap: 28px;
+        transform: scale(0.60);
+      }
+    }
+
+    @container (max-width: 759px) {
+      .stage {
+        flex-direction: column;
+        gap: 28px;
+        padding: 20px 16px;
+        transform: none;
+        width: 100%;
+      }
+      .card {
+        width: min(587px, 100%);
+        height: auto;
+        min-height: 620px;
+      }
+      .card__visual {
+        height: auto;
+        aspect-ratio: 563 / 421;
+      }
+      .card__content {
+        padding: 32px 16px 0 16px;
+      }
+      .card__title {
+        font-size: clamp(28px, 6cqw, 42px);
+      }
+      .card__desc {
+        font-size: clamp(13px, 3.2cqw, 15.5px);
+        margin-bottom: 32px;
+      }
+    }
+  
+    .optical-gallery[data-preview=true] {background:#f4f4f4;}
+    .card--dark button:focus-visible {outline:3px solid #ffe0c4;outline-offset:4px;}
+    .card--light button:focus-visible {outline:3px solid #a84312;outline-offset:4px;}
+    .card__overlay {transition:opacity .24s ease,transform .24s cubic-bezier(.22,1,.36,1),visibility 0s .24s;}
+    .card__overlay[aria-hidden=true] {visibility:hidden;}
+    .card__overlay.is-open {visibility:visible;transition-delay:0s;}
+    [data-reduced=true] * {transition:none!important;animation:none!important;}
+
+    .card__btn,.card__overlay-close {position:relative;}
+    .card__btn::before {content:"";position:absolute;inset:-12px -8px;}
+    .card__overlay-close::before {content:"";position:absolute;inset:-15px -8px;}

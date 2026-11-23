@@ -1,3 +1,4 @@
+import {verifyGlassNavigationShadePreviews} from './test-glass-navigation-shade.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -12,6 +13,14 @@ import {verifySailingBoat} from './test-sailing-boat.mjs';
 import {verifyHammerheadChartDoc} from './test-hammerhead-chart.mjs';
 import {verifyDotMatrixTrioDoc} from './test-dot-matrix-trio.mjs';
 import {verifyStatusPickerPreviews} from './test-status-picker.mjs';
+import {verifyOpticalGlassCardsPreviews} from './test-optical-glass-cards.mjs';
+import {verifyPerforatedStampCardsPreviews} from './test-perforated-stamp-cards.mjs';
+import {verifyElementalCardCarouselPreviews} from './test-elemental-card-carousel.mjs';
+import {verifyImageDustDisintegrationPreviews} from './test-image-dust-disintegration.mjs';
+import {verifyGlassRippleOnboardingPreviews} from './test-glass-ripple-onboarding.mjs';
+import {verifyLiquidCallCtaPreviews} from './test-liquid-call-cta.mjs';
+import {verifyHangingArtGalleryPreviews} from './test-hanging-art-gallery.mjs';
+import {verifyAccountBurnPreviews} from './test-account-burn.mjs';
 import {verifyGenieMenuPreviews} from './test-genie-menu.mjs';
 
 const ROOT=process.cwd(),base=process.env.BASE_URL||'http://127.0.0.1:3000',out=path.join(ROOT,'outputs/motion-six-frameworks/site');
@@ -134,6 +143,15 @@ try{
  if(slugs.includes('ink-spread-carousel'))await verifyInkSpreadPreviews(page,base,out);
  if(slugs.includes('ascii-sharks'))await verifyAsciiSharksPreviews(page,base,out);
  if(slugs.includes('status-picker'))await verifyStatusPickerPreviews(page,base);
+ for(const slug of ['liquid-glass-navigation','window-shade-theme'])if(slugs.includes(slug))await verifyGlassNavigationShadePreviews(page,base,slug);
+ if(slugs.includes('optical-glass-cards'))await verifyOpticalGlassCardsPreviews(page,base);
+ if(slugs.includes('perforated-stamp-cards'))await verifyPerforatedStampCardsPreviews(page,base);
+ if(slugs.includes('elemental-card-carousel'))await verifyElementalCardCarouselPreviews(page,base);
+ if(slugs.includes('image-dust-disintegration'))await verifyImageDustDisintegrationPreviews(page,base);
+ if(slugs.includes('glass-ripple-onboarding'))await verifyGlassRippleOnboardingPreviews(page,base);
+ if(slugs.includes('liquid-call-cta'))await verifyLiquidCallCtaPreviews(page,base);
+ if(slugs.includes('hanging-art-gallery'))await verifyHangingArtGalleryPreviews(page,base);
+ if(slugs.includes('account-burn'))await verifyAccountBurnPreviews(page,base);
  if(slugs.includes('genie-menu'))await verifyGenieMenuPreviews(page,base);
  assert.deepEqual(errors,[]);
  await fs.writeFile(path.join(out,filters.length?'partial-results.json':'results.json'),JSON.stringify({checks,previewHover:true,pageErrors:errors},null,2));
