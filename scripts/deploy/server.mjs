@@ -5,8 +5,13 @@ import os from 'node:os';
 import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {deploymentGitOptions} from './git-options.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
-const args=process.argv.slice(2),dry=args.includes('--prepare-only');
+const args=process.argv.slice(2),dry=args.includes('--prepare-only'),checkOnly=args.includes('--check');
+if(args.length===1&&args[0]==='--help'){
+ console.log('Usage: npm run deploy:server | npm run deploy:server:check | npm run deploy:server:prepare\n--check: verify GitHub, SSH and the live catalog without building or publishing.\n--prepare-only: build, test and package without pushing or uploading.\nNo flags: build, test, push, upload and verify the committed main revision.\nHelp: node scripts/deploy/server.mjs --help');
+ process.exit(0);
+}
 const catalogPath='/ai/catalog.json';
 const detailPattern=/^out\/docs\/animations\/([a-z0-9-]+)\.html$/;
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
@@ -26,17 +31,29 @@ const run=(command,args,options={})=>new Promise((resolve,reject)=>{
  child.on('error',reject);child.on('close',code=>code===0?resolve(stdout.trim()):reject(new Error(`${command} failed (${code}) ${stderr}`)));
  if(options.input){child.stdin.on('error',reject);options.input.pipe(child.stdin);options.input.on('error',reject);}
 });
+async function main(){
 try{
+ if(args.some(arg=>!['--prepare-only','--check'].includes(arg))||(dry&&checkOnly))throw new Error('Use --check or --prepare-only, or no flags. See --help.');
  const config=JSON.parse(await fs.readFile(path.join(root,'.deploy/server.json'),'utf8'));
  if(!/^[a-zA-Z0-9._-]+$/.test(config.host)||!/^\w[\w-]*$/.test(config.user)||!Number.isInteger(config.port)||config.port<1||config.port>65535)throw new Error('Invalid SSH target');
  const key=path.resolve(config.key.replace(/^~(?=[/\\])/,os.homedir())),known=path.resolve(config.knownHosts.replace(/^~(?=[/\\])/,os.homedir()));
  await fs.access(key);await fs.access(known);
  const ssh=['-T','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','IdentitiesOnly=yes','-o','ConnectTimeout=20',...(process.platform==='win32'?['-o','KexAlgorithms=curve25519-sha256']:[]),'-o',`UserKnownHostsFile="${known.replaceAll('\\','/')}"`,'-i',key,'-p',String(config.port),`${config.user}@${config.host}`];
- const git=config.directGitHub?['-c','http.proxy=','-c','http.https://github.com.proxy=','-c','http.version=HTTP/1.1']:[];
+ const git=deploymentGitOptions(config);
+ const remoteRevision=async()=>{
+  const ref=await run('git',[...git,'-c','http.lowSpeedLimit=1','-c','http.lowSpeedTime=15','ls-remote','--exit-code','origin','refs/heads/main'],{capture:true,signal:AbortSignal.timeout(20000)});
+  const revision=ref.split(/\s+/)[0];
+  if(!/^[a-f0-9]{40}$/.test(revision))throw new Error('GitHub returned an invalid main revision');
+  return revision;
+ };
  const commit=await run('git',['rev-parse','HEAD'],{capture:true});
  if(!/^[a-f0-9]{40}$/.test(commit))throw new Error('Invalid Git revision');
  const branch=await run('git',['branch','--show-current'],{capture:true});if(branch!=='main')throw new Error('Run deployment from main');
  const dirty=await run('git',['diff','--name-only','HEAD'],{capture:true});
+ if(!dry){
+  await remoteRevision().catch(error=>{throw new Error(`GitHub preflight failed before building. Check gitProxy / directGitHub / gitSslBackend in .deploy/server.json. ${error.message}`);});
+  console.log('GitHub connection verified.');
+ }
  const baseline=await run(config.ssh||'ssh',[...ssh,'manifest'],{capture:true});
  const current=JSON.parse(baseline);
  const currentCatalog=current.liveCatalogSha256??current.files.find(item=>item.path==='out'+catalogPath)?.sha256;
@@ -44,6 +61,10 @@ try{
   throw new Error('SSH target does not match the live LeiBox catalog. Check the production origin and .deploy/server.json before publishing.');
  }
  if(current.retirementProtocol!==1)throw new Error('The production deployment receiver must be upgraded to support route retirement.');
+ if(checkOnly){
+  console.log(JSON.stringify({connectionsVerified:true,localCommit:commit,serverCommit:current.commit??null,siteUrl:config.siteUrl},null,2));
+  return;
+ }
  console.log(`Deploying committed revision ${commit}. ${dirty?'Uncommitted edits are excluded.':''}`);
  const release=commit.slice(0,12)+'-'+Date.now().toString(16),folder=path.join(root,'outputs/deploy-server',release),source=path.join(folder,'source');await fs.mkdir(source,{recursive:true});
  await run('git',['archive','--format=tar',`--output=${path.join(folder,'source.tar')}`,commit]);
@@ -51,16 +72,15 @@ try{
  await fs.symlink(path.join(root,'node_modules'),path.join(source,'node_modules'),process.platform==='win32'?'junction':'dir');
  const npm=process.env.npm_execpath;if(!npm)throw new Error('Use npm run deploy:server');
  await run(process.execPath,[npm,'run','build'],{cwd:source,env:{...process.env,NEXT_PUBLIC_SITE_URL:config.siteUrl}});
- await run(process.execPath,['--test','scripts/performance-budget.test.mjs','scripts/leibox-skill.test.mjs','scripts/collection-cli.test.mjs'],{cwd:source});
+ await run(process.execPath,['--test','scripts/performance-budget.test.mjs','scripts/leibox-skill.test.mjs','scripts/collection-cli.test.mjs','scripts/deploy/test_server.mjs'],{cwd:source});
  await run(config.python||'python',['-m','unittest','discover','-s','scripts/deploy','-p','test_*.py']);
  await fs.writeFile(path.join(folder,'baseline.json'),baseline);
  // Read site files from the commit and use the publisher paired with the installed receiver.
  await run(config.python||'python',['scripts/deploy/package.py',source,folder,commit,release]);
  const manifest=JSON.parse(await fs.readFile(path.join(folder,'release-manifest.json'),'utf8'));
- if(dry){console.log(`Prepared and checked: ${folder}`);process.exit(0);}
+ if(dry){console.log(`Prepared and checked: ${folder}`);return;}
  if(await run('git',['rev-parse','HEAD'],{capture:true})!==commit)throw new Error('HEAD changed during the build; rerun deployment');
- const remoteRef=await run('git',[...git,'ls-remote','origin','refs/heads/main'],{capture:true,signal:AbortSignal.timeout(20000)}).catch(()=>null);
- if(remoteRef?.split(/\s+/)[0]===commit)console.log('GitHub main already contains this revision.');
+ if(await remoteRevision()===commit)console.log('GitHub main already contains this revision.');
  else await run('git',[...git,'push','origin','main']);
  const output=await run(config.ssh||'ssh',[...ssh,'deploy'],{capture:true,input:createReadStream(path.join(folder,'release.tar.gz'))});
  const receipt=JSON.parse(output);if(receipt.commit!==commit)throw new Error('Server returned the wrong revision');
@@ -83,3 +103,5 @@ try{
  }
  console.log(JSON.stringify({...receipt,publicVerified:true,retiredDetails,receipt:path.join(folder,'receipt.json')},null,2));
 }catch(error){console.error(error.message);process.exitCode=1;}
+}
+await main();

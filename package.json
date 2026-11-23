@@ -35,7 +35,9 @@
     "test:ai": "node --test scripts/collection-cli.test.mjs scripts/leibox-skill.test.mjs",
     "test:actions": "node scripts/test-ai-actions.cjs",
     "test:locale": "node scripts/test-localization.cjs",
-    "deploy:server": "node scripts/deploy/server.mjs"
+    "deploy:server": "node scripts/deploy/server.mjs",
+    "deploy:server:check": "node scripts/deploy/server.mjs --check",
+    "deploy:server:prepare": "node scripts/deploy/server.mjs --prepare-only"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -48,6 +50,7 @@
     "fflate": "^0.8.3",
     "geist": "^1.7.2",
     "gsap": "3.12.7",
+    "hanging-gallery-three": "npm:three@0.128.0",
     "lucide-react": "^1.24.0",
     "metal-fx": "2.0.11",
     "motion": "^12.42.2",

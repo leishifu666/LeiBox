@@ -260,11 +260,14 @@ def clean(root=ROOT, *, apply=False, now=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', type=pathlib.Path,
+                        default=pathlib.Path(os.environ.get('LEIBOX_DEPLOY_ROOT', str(ROOT))),
+                        help='Resolved absolute project directory; defaults to LEIBOX_DEPLOY_ROOT or the legacy root')
     parser.add_argument('--apply', action='store_true', help='Delete the reported expired files')
+    parser.add_argument('--list', action='store_true', help='Include every candidate path in the JSON report')
     args = parser.parse_args()
-    if ROOT.resolve() != ROOT:
-        raise ValueError('Unexpected production root')
-    result = clean(apply=args.apply)
+    result = clean(args.root, apply=args.apply)
     print(json.dumps({**result, 'assetCount': len(result['assets']),
                       'backupCount': len(result['expiredBackups']),
-                      'assets': None, 'expiredBackups': None}))
+                      'assets': result['assets'] if args.list else None,
+                      'expiredBackups': result['expiredBackups'] if args.list else None}))

@@ -1,5 +1,21 @@
 # 腾讯云宝塔部署记录
 
+## 当前生产环境（2026-11-23）
+
+- 站点：`https://leibox.pantoria.cn`；源站：`43.160.239.22`。
+- 实际项目目录：`/opt/ProJect/leibox`，Linux 路径区分大小写。
+- 发布命令：`npm run deploy:server`；快速连接检查：`npm run deploy:server:check`。
+- 机器配置：本地 `.deploy/server.json`；宝塔完整安全入口：本地 `.deploy/admin.json`，均被 Git 忽略。
+- 当前已验证的站点版本：`cab1cf33531c34654d16100a30b8fb9a6e1957e6`。此后部署脚本维护提交不代表网站重新发布。
+
+本次一键发布校验 3,441 个文件、更新 1,096 个文件，GitHub 推送与公网摘要核对通过，保留服务端环境配置。发布回执为 `outputs/deploy-server/cab1cf33531c-1a2044fac8a/receipt.json`，服务器备份为 `/opt/ProJect/leibox/backups/cab1cf33531c-1a2044fac8a`。线上实测侧栏收起、展开与回弹，通用下拉浮层及演示图片均正常。
+
+管理员按已有 24 小时宽限和两份回滚备份规则清理 889 个过期资源文件、7 份旧发布备份，共 554,432,438 字节。保留本次与上一版发布备份，未知来源的管理备份保留。服务器完成记录为 `.releases/cleanup-completed-20261123.json`。历史资源中有 root 所有的目录，清理由管理员执行。
+
+日常操作、Git 代理与 Windows TLS 设置、清理命令见 [部署说明](../scripts/deploy/README.md)。以下为旧源站历史记录，里面的旧 IP、路径和当时的 HTTPS 状态不作为当前操作依据。
+
+## 历史记录：首次部署（2026-10-29）
+
 部署日期：2026-10-29。部署的是当前本地工作树，包含组件列表「无界留白」及本地已有的组件修改，未创建 Git 提交。
 
 ## 运行位置

@@ -7,6 +7,8 @@
   "python": "python",
   "ssh": "ssh",
   "directGitHub": false,
+  "gitProxy": "",
+  "gitSslBackend": "schannel",
   "siteUrl": "https://leibox.pantoria.cn",
   "verifyRoutes": ["/components", "/ai/catalog.json", "/docs/animations/ai-brand-cover-cards"]
 }

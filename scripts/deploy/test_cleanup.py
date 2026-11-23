@@ -3,6 +3,8 @@ import hashlib
 import json
 import os
 import pathlib
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -72,6 +74,31 @@ class CleanupTests(unittest.TestCase):
         self.assertIn(self.stale, [x['path'] for x in report['assets']])
         self.assertTrue((self.root / self.stale).exists())
         self.assertFalse((self.root / '.releases/cleanup-last.json').exists())
+
+    def test_cli_root_overrides_environment_and_apply_preserves_current_release(self):
+        script = pathlib.Path(__file__).with_name('cleanup.py')
+        command = [sys.executable, str(script), '--root', str(self.root)]
+        environment = {**os.environ, 'LEIBOX_DEPLOY_ROOT': str(self.root / 'wrong-root')}
+        os.utime(self.root / self.stale, (0, 0))
+        os.utime(self.root / '.releases/current-manifest.json', (0, 0))
+        preview = subprocess.run(command + ['--list'], env=environment, capture_output=True, text=True, check=True)
+        plan = json.loads(preview.stdout)
+        self.assertFalse(plan['applied'])
+        self.assertIn(self.stale, [item['path'] for item in plan['assets']])
+        self.assertTrue((self.root / self.stale).exists())
+        applied = subprocess.run(command + ['--apply'], env=environment, capture_output=True, text=True, check=True)
+        self.assertTrue(json.loads(applied.stdout)['applied'])
+        self.assertFalse((self.root / self.stale).exists())
+        self.assertTrue((self.root / self.current).exists())
+        self.assertFalse((self.root / 'wrong-root').exists())
+
+    def test_cli_accepts_receiver_root_environment_without_deleting_on_preview(self):
+        script = pathlib.Path(__file__).with_name('cleanup.py')
+        environment = {**os.environ, 'LEIBOX_DEPLOY_ROOT': str(self.root)}
+        result = subprocess.run([sys.executable, str(script)], env=environment,
+                                capture_output=True, text=True, check=True)
+        self.assertFalse(json.loads(result.stdout)['applied'])
+        self.assertTrue((self.root / self.stale).exists())
 
     def test_expired_files_removed_current_recent_and_private_files_preserved(self):
         self.backup('new', 1)
